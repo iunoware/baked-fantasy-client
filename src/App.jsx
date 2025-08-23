@@ -5,12 +5,10 @@ import {
   BrowserRouter,
 } from "react-router-dom";
 function App() {
-  let naee = "umar";
-  let age = 20;
-  let isGood = true;
+  let text = "Umar";
   return (
     <>
-      <h1 className="text-3xl font-bold underline">Umar</h1>
+      <h1 className="text-3xl font-bold underline">{text}</h1>
     </>
   );
 }
