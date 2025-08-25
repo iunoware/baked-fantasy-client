@@ -7,18 +7,21 @@ function Navbar() {
 
   return (
     <>
-      <header className="bg-[#ffffffa2] backdrop-blur-sm fixed w-full top-0 shadow-lg">
-        <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
+      <header className="w-full top-3 absolute">
+        <div className="mx-auto max-w-screen-xl p-4 sm:px-6 lg:px-8">
           <div className="flex h-16 items-center justify-between">
-            <div className="md:flex md:items-center md:gap-12">
-              <Link to="/" className="block text-sky-600 text-lg ">
-                THE BACKED FANTASY
+            <div className="md:flex md:items-center md:gap-12 absolute">
+              <Link
+                to="/"
+                className="block text-pink-500 text-2xl font-bold brand-name"
+              >
+                The Backed Fantasy
               </Link>
             </div>
 
-            <div className="hidden md:block">
+            <div className="hidden md:block p-4 bg-rose-200 rounded-xl px-[8px] fixed left-[34%]">
               <nav aria-label="Global">
-                <ul className="flex items-center gap-6 text-sm">
+                <ul className="flex items-center gap-6 text-sm text-black">
                   {/* Home */}
                   <li>
                     <NavLink
@@ -26,8 +29,8 @@ function Navbar() {
                       className={({ isActive }) =>
                         `text-lg rounded-lg p-3 transition ${
                           isActive
-                            ? "bg-sky-500 text-white font-semibold"
-                            : "hover:text-black text-gray-500 hover:bg-sky-200"
+                            ? "bg-sky-500 font-semibold text-white"
+                            : "hover:text-white hover:bg-sky-500 hover:font-semibold"
                         } `
                       }
                     >
@@ -102,7 +105,7 @@ function Navbar() {
               </nav>
             </div>
 
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-4 lg:absolute right-[12%]">
               <div className="sm:flex sm:gap-4">
                 <a
                   className="rounded-md bg-sky-500 px-5 py-2.5 text-sm font-medium text-white shadow-sm"
@@ -113,7 +116,7 @@ function Navbar() {
 
                 <div className="hidden sm:flex">
                   <a
-                    className="rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-sky-600"
+                    className="rounded-md bg-pink-500 px-5 py-2.5 text-sm font-medium text-white"
                     href="#"
                   >
                     Register
