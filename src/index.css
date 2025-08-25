@@ -1,1 +1,9 @@
+@import url("https://fonts.googleapis.com/css2?family=Edu+NSW+ACT+Cursive:wght@400..700&display=swap");
 @import "tailwindcss";
+
+.redText {
+  color: red;
+}
+.brand-name {
+  font-family: "Edu NSW ACT Cursive", cursive !important;
+}

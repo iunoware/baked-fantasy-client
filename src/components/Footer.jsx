@@ -7,8 +7,8 @@ function Footer() {
         <div className="mx-auto max-w-screen-xl space-y-8 px-4 py-16 sm:px-6 lg:space-y-16 lg:px-8 grid gird-cols-3">
           <div className="grid grid-cols-1 lg:grid-cols-3 ">
             <div>
-              <div className="text-zinc-900 font-black text-2xl">
-                <h3>The Baked Fantasy</h3>
+              <div className="text-zinc-900 font-black text-2xl ">
+                <h3 className="brand-name">The Baked Fantasy</h3>
               </div>
               <p className="mt-4 max-w-xs text-gray-900">
                 Your premier destination for professional baking education and
