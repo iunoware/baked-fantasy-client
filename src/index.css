@@ -7,3 +7,9 @@
 .brand-name {
   font-family: "Edu NSW ACT Cursive", cursive !important;
 }
+@media (max-width: 1830px) {
+  html,
+  body {
+    overflow-x: hidden !important;
+  }
+}
