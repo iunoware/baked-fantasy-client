@@ -33,7 +33,7 @@ function Navbar() {
                       className={({ isActive }) =>
                         `text-lg rounded-lg p-3 transition ${
                           isActive
-                            ? "bg-sky-500 font-semibold text-white"
+                            ? "bg-cyan-500 font-semibold text-white"
                             : "hover:text-white hover:bg-sky-500 hover:font-semibold"
                         } `
                       }
@@ -49,7 +49,7 @@ function Navbar() {
                       className={({ isActive }) =>
                         `text-lg rounded-lg p-3 transition ${
                           isActive
-                            ? "bg-sky-500 text-white font-semibold"
+                            ? "bg-cyan-500 text-white font-semibold"
                             : "hover:text-black text-gray-500 hover:bg-sky-200"
                         } `
                       }
@@ -65,7 +65,7 @@ function Navbar() {
                       className={({ isActive }) =>
                         `text-lg rounded-lg p-3 transition ${
                           isActive
-                            ? "bg-sky-500 text-white font-semibold"
+                            ? "bg-cyan-500 text-white font-semibold"
                             : "hover:text-black text-gray-500 hover:bg-sky-200"
                         } `
                       }
@@ -81,7 +81,7 @@ function Navbar() {
                       className={({ isActive }) =>
                         `text-lg rounded-lg p-3 transition ${
                           isActive
-                            ? "bg-sky-500 text-white font-semibold"
+                            ? "bg-cyan-500 text-white font-semibold"
                             : "hover:text-black text-gray-500 hover:bg-sky-200"
                         } `
                       }
@@ -97,7 +97,7 @@ function Navbar() {
                       className={({ isActive }) =>
                         `text-lg rounded-lg p-3 transition ${
                           isActive
-                            ? "bg-sky-500 text-white font-semibold"
+                            ? "bg-cyan-500 text-white font-semibold"
                             : "hover:text-black text-gray-500 hover:bg-sky-200"
                         } `
                       }
@@ -112,7 +112,7 @@ function Navbar() {
             <div className="flex items-center gap-4 m-5">
               <div className="sm:flex sm:gap-4 hover:scale-105 ">
                 <a
-                  className="rounded-md bg-sky-500 px-5 py-2.5 text-sm font-medium text-white shadow-sm hover:bg-sky-700 "
+                  className="rounded-md bg-cyan-500 px-5 py-2.5 text-sm font-medium text-white shadow-sm hover:bg-sky-700 "
                   href="#"
                 >
                   Login
