@@ -8,7 +8,7 @@ function Navbar() {
   return (
     <>
       <header className="w-full absolute">
-        <div className="mx-auto max-w-screen-xl p-4 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-screen-xl p-4 sm:px-6 lg:px-8 mt-[-10px]">
           <div className="flex h-16 items-center justify-between w-full ">
             {/* brand name */}
             <div className="md:flex md:items-center md:gap-12">
@@ -21,7 +21,7 @@ function Navbar() {
             </div>
             {/* navbar */}
             <div
-              className="hidden lg:block fixed top-5 left-1/2 transform -translate-x-1/2 
+              className="hidden lg:block fixed top left-1/2 transform -translate-x-1/2 
                 bg-rose-200 rounded-xl p-4 px-[8px] shadow-md z-40 w-[90%] sm:w-[80%] md:w-auto"
             >
               <nav aria-label="Global">
