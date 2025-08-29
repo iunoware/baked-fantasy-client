@@ -13,3 +13,7 @@
     overflow-x: hidden !important;
   }
 }
+
+.subHeading {
+  @apply text-center text-xl pt-5;
+}
