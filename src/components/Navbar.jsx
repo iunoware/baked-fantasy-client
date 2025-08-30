@@ -11,11 +11,8 @@ function Navbar() {
         <div className="mx-auto max-w-screen-xl p-4 sm:px-6 lg:px-8 mt-[-10px]">
           <div className="flex h-16 items-center justify-between w-full ">
             {/* brand name */}
-            <div className="md:flex md:items-center md:gap-12">
-              <Link
-                to="/"
-                className="text-pink-500 text-2xl font-bold brand-name"
-              >
+            <div className="md:flex md:items-center md:gap-12 z-50">
+              <Link to="/" className="text-pink-500 text-2xl font-bold brand-name">
                 The Backed Fantasy
               </Link>
             </div>
@@ -34,7 +31,7 @@ function Navbar() {
                         `text-lg rounded-lg p-3 transition ${
                           isActive
                             ? "bg-cyan-500 font-semibold text-white"
-                            : "hover:text-white hover:bg-sky-500 hover:font-semibold"
+                            : "hover:text-black text-gray-500 hover:bg-sky-400/50"
                         } `
                       }
                     >
@@ -50,7 +47,7 @@ function Navbar() {
                         `text-lg rounded-lg p-3 transition ${
                           isActive
                             ? "bg-cyan-500 text-white font-semibold"
-                            : "hover:text-black text-gray-500 hover:bg-cyan-300"
+                            : "hover:text-black text-gray-500 hover:bg-sky-400/50"
                         } `
                       }
                     >
@@ -66,7 +63,7 @@ function Navbar() {
                         `text-lg rounded-lg p-3 transition ${
                           isActive
                             ? "bg-cyan-500 text-white font-semibold"
-                            : "hover:text-black text-gray-500 hover:bg-cyan-300"
+                            : "hover:text-black text-gray-500 hover:bg-sky-400/50"
                         } `
                       }
                     >
@@ -82,7 +79,7 @@ function Navbar() {
                         `text-lg rounded-lg p-3 transition ${
                           isActive
                             ? "bg-cyan-500 text-white font-semibold"
-                            : "hover:text-black text-gray-500 hover:bg-cyan-300"
+                            : "hover:text-black text-gray-500 hover:bg-sky-400/50"
                         } `
                       }
                     >
@@ -98,7 +95,7 @@ function Navbar() {
                         `text-lg rounded-lg p-3 transition ${
                           isActive
                             ? "bg-cyan-500 text-white font-semibold"
-                            : "hover:text-black text-gray-500 hover:bg-cyan-300"
+                            : "hover:text-black text-gray-500 hover:bg-sky-400/50"
                         } `
                       }
                     >
@@ -109,7 +106,7 @@ function Navbar() {
               </nav>
             </div>
             {/* login and Register */}
-            <div className="flex items-center gap-4 m-5">
+            <div className="flex items-center gap-4 m-5 z-50">
               <div className="sm:flex sm:gap-4 ">
                 <a
                   className="group relative inline-flex items-center overflow-hidden rounded-full bg-cyan-500 px-8 py-3 text-white focus:ring-3 focus:outline-hidden mr-3"
