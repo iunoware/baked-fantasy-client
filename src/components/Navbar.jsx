@@ -50,7 +50,7 @@ function Navbar() {
                         `text-lg rounded-lg p-3 transition ${
                           isActive
                             ? "bg-cyan-500 text-white font-semibold"
-                            : "hover:text-black text-gray-500 hover:bg-sky-200"
+                            : "hover:text-black text-gray-500 hover:bg-cyan-300"
                         } `
                       }
                     >
@@ -66,7 +66,7 @@ function Navbar() {
                         `text-lg rounded-lg p-3 transition ${
                           isActive
                             ? "bg-cyan-500 text-white font-semibold"
-                            : "hover:text-black text-gray-500 hover:bg-sky-200"
+                            : "hover:text-black text-gray-500 hover:bg-cyan-300"
                         } `
                       }
                     >
@@ -82,7 +82,7 @@ function Navbar() {
                         `text-lg rounded-lg p-3 transition ${
                           isActive
                             ? "bg-cyan-500 text-white font-semibold"
-                            : "hover:text-black text-gray-500 hover:bg-sky-200"
+                            : "hover:text-black text-gray-500 hover:bg-cyan-300"
                         } `
                       }
                     >
@@ -98,7 +98,7 @@ function Navbar() {
                         `text-lg rounded-lg p-3 transition ${
                           isActive
                             ? "bg-cyan-500 text-white font-semibold"
-                            : "hover:text-black text-gray-500 hover:bg-sky-200"
+                            : "hover:text-black text-gray-500 hover:bg-cyan-300"
                         } `
                       }
                     >
@@ -110,20 +110,70 @@ function Navbar() {
             </div>
             {/* login and Register */}
             <div className="flex items-center gap-4 m-5">
-              <div className="sm:flex sm:gap-4 hover:scale-105 ">
+              <div className="sm:flex sm:gap-4 ">
                 <a
-                  className="rounded-md bg-cyan-500 px-5 py-2.5 text-sm font-medium text-white shadow-sm hover:bg-sky-700 "
+                  className="group relative inline-flex items-center overflow-hidden rounded-full bg-cyan-500 px-8 py-3 text-white focus:ring-3 focus:outline-hidden mr-3"
                   href="#"
                 >
-                  Login
+                  <span className="absolute -start-full transition-all group-hover:start-4">
+                    <svg
+                      className="size-5 rtl:rotate-180"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                      <g
+                        id="SVGRepo_tracerCarrier"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      ></g>
+                      <g id="SVGRepo_iconCarrier">
+                        {" "}
+                        <path
+                          d="M15 4H18C19.1046 4 20 4.89543 20 6V18C20 19.1046 19.1046 20 18 20H15M11 16L15 12M15 12L11 8M15 12H3"
+                          stroke="#fff"
+                          stroke-width="1.5"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        ></path>{" "}
+                      </g>
+                    </svg>
+                  </span>
+
+                  <span className="text-sm font-medium transition-all group-hover:ms-4">
+                    Log in
+                  </span>
                 </a>
 
                 <div className="hidden sm:flex">
                   <a
-                    className="rounded-md bg-pink-500 px-5 py-2.5 text-sm font-medium text-white hover:bg-pink-700 hover:scale-105"
+                    className="group relative inline-flex items-center overflow-hidden rounded-full bg-pink-500 px-8 py-3 text-white focus:ring-3 focus:outline-hidden mr-3"
                     href="#"
                   >
-                    Register
+                    <span className="absolute -start-full transition-all group-hover:start-4">
+                      <svg
+                        className="size-5 rtl:rotate-180"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="#ffffff"
+                      >
+                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                        <g
+                          id="SVGRepo_tracerCarrier"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        ></g>
+                        <g id="SVGRepo_iconCarrier">
+                          <path d="M18 9H4V8h14zm-5 3H4v1h9zm8-8v9h-1V5H2v13h9v1H1V4zm2.07 11.637l-.707-.707-5.863 5.863-2.863-2.863-.707.707 3.57 3.57z"></path>
+                          <path fill="none" d="M0 0h24v24H0z"></path>
+                        </g>
+                      </svg>
+                    </span>
+
+                    <span className="text-sm font-medium transition-all group-hover:ms-4">
+                      Register
+                    </span>
                   </a>
                 </div>
               </div>

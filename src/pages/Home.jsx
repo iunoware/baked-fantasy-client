@@ -10,6 +10,10 @@ import Course1 from "../assets/images/onlineCourse.jpg";
 import Course2 from "../assets/images/offlineCourse.jpg";
 import review from "../assets/videos/review.mp4";
 import Background from "../assets/images/bg-test.jpg";
+import TestBG from "../assets/images/bulkOrder.png";
+import Pattern from "../assets/images/scribble.png";
+import Online from "../assets/images/onlineCourse.png";
+import Offline from "../assets/images/offlineCourse.png";
 
 function Home() {
   return (
@@ -58,8 +62,8 @@ function Home() {
       </section>
 
       {/* card section */}
-      <div className="flex justify-around py-10 [@media(max-width:768px)]:flex-col">
-        <div className="card-1 text-center flex flex-col items-center">
+      <div className="flex justify-around py-15 [@media(max-width:768px)]:flex-col">
+        <div className="card-1 text-center flex flex-col items-center card-hover hover:animate-wiggle">
           <svg
             width="100px"
             height="100px"
@@ -101,12 +105,12 @@ function Home() {
               <path
                 fill="var(--ci-primary-color, #ffffff)"
                 d="M462.541,316.3l-64.344-42.1,24.774-45.418A79.124,79.124,0,0,0,432.093,192V120A103.941,103.941,0,0,0,257.484,43.523L279.232,67a71.989,71.989,0,0,1,120.861,53v72a46.809,46.809,0,0,1-5.215,21.452L355.962,284.8l89.058,58.274a42.16,42.16,0,0,1,19.073,35.421V432h-72v32h104V378.494A74.061,74.061,0,0,0,462.541,316.3Z"
-                class="ci-primary"
+                className="ci-primary"
               ></path>{" "}
               <path
                 fill="var(--ci-primary-color, #ffffff)"
                 d="M318.541,348.3l-64.343-42.1,24.773-45.418A79.124,79.124,0,0,0,288.093,224V152A104.212,104.212,0,0,0,184.04,47.866C126.723,47.866,80.093,94.581,80.093,152v72a78,78,0,0,0,9.015,36.775l24.908,45.664L50.047,348.3A74.022,74.022,0,0,0,16.5,410.4L16,496H352.093V410.494A74.061,74.061,0,0,0,318.541,348.3ZM320.093,464H48.186l.31-53.506a42.158,42.158,0,0,1,19.073-35.421l88.682-58.029L117.2,245.452A46.838,46.838,0,0,1,112.093,224V152a72,72,0,1,1,144,0v72a46.809,46.809,0,0,1-5.215,21.452L211.962,316.8l89.058,58.274a42.16,42.16,0,0,1,19.073,35.421Z"
-                class="ci-primary"
+                className="ci-primary"
               ></path>{" "}
             </g>
           </svg>
@@ -116,7 +120,7 @@ function Home() {
             <p className="text-lg">Happy Students</p>
           </div>
         </div>
-        <div className="card-2 text-center flex flex-col items-center">
+        <div className="card-2 text-center flex flex-col items-center card-hover hover:animate-wiggle">
           <svg
             width="100px"
             height="100px"
@@ -168,7 +172,7 @@ function Home() {
             <p className="text-lg">Experience</p>
           </div>
         </div>
-        <div className="card-3 text-center flex flex-col items-center">
+        <div className="card-3 text-center flex flex-col items-center card-hover hover:animate-wiggle">
           <svg
             width="100px"
             height="100px"
@@ -216,7 +220,7 @@ function Home() {
             <p className="text-lg">Awards</p>
           </div>
         </div>
-        <div className="card-4 text-center flex flex-col items-center ">
+        <div className="card-4 text-center flex flex-col items-center card-hover hover:animate-wiggle">
           <svg
             className="flex justify-center"
             width="100px"
@@ -896,17 +900,42 @@ function Home() {
                   <span className="absolute -start-full transition-all group-hover:start-4">
                     <svg
                       className="size-5 rtl:rotate-180"
+                      version="1.1"
                       xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
+                      xmlnsXlink="http://www.w3.org/1999/xlink"
+                      viewBox="0 0 512 512"
+                      xmlSpace="preserve"
+                      fill="#ffffff"
+                      style={{ transform: "rotate(90deg)" }}
                     >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M17 8l4 4m0 0l-4 4m4-4H3"
-                      />
+                      <g>
+                        <path
+                          style={{ fill: "#ffffff" }}
+                          d="M408.387,512H159.603c-8.313,0-15.054-6.741-15.054-15.054v-71.829
+        c0-8.313,6.741-15.054,15.054-15.054h132.043c8.313,0,15.054,6.741,15.054,15.054c0,8.313-6.741,15.054-15.054,15.054H174.657
+        v41.722h218.676v-41.722h-28.605c-8.313,0-15.054-6.741-15.054-15.054c0-8.313,6.741-15.054,15.054-15.054h43.659
+        c8.313,0,15.054,6.741,15.054,15.054v71.829C423.441,505.26,416.7,512,408.387,512z"
+                        />
+                        <path
+                          style={{ fill: "#ffffff" }}
+                          d="M302.481,198.013v-15.951c0-15.948-13.009-29.53-29.728-30.096
+        c-17.553-0.595-31.979,12.793-31.979,29.391v17.213l-0.333-154.106c0-16.243-13.813-29.411-30.854-29.411H208.4
+        c-17.039,0-30.854,13.168-30.854,29.411v110.671v25.447v76.908l-30.02-73.097c-5.281-15.769-22.984-24.465-39.527-19.431
+        c-16.543,5.043-25.665,21.909-20.384,37.684l65.918,135.745c8.141,16.765,25.756,27.5,45.137,27.509l177.423,0.077
+        c27.491,0.012,49.783-21.226,49.786-47.432l0.018-116.556c0-16.243-13.813-29.411-30.854-29.411l0,0
+        c-17.039,0-30.854,13.168-30.854,29.411v-6.989c0-16.243-13.813-29.411-30.854-29.411l0,0c-17.039,0-30.854,13.168-30.854,29.411"
+                        />
+                        <path
+                          style={{ fill: "#ffffff" }}
+                          d="M376.115,381.032c-0.011,0-0.02,0-0.03,0l-177.421-0.077c-25.033-0.012-48.062-14.139-58.672-35.988
+        L74.073,209.223c-0.283-0.583-0.528-1.182-0.733-1.796c-3.788-11.308-2.854-23.391,2.625-34.022
+        c5.684-11.03,15.502-19.142,27.643-22.843c24.074-7.325,49.967,5.457,58.011,28.529l0.872,2.121V44.463
+        C162.492,19.946,183.087,0,208.4,0h1.186c25.313,0,45.907,19.946,45.907,44.464l0.206,95.206c5.564-1.993,11.525-2.958,17.56-2.75
+        c15.338,0.521,28.625,8.286,36.537,19.916c6.886-3.998,14.939-6.3,23.537-6.3c13.886,0,26.35,6,34.776,15.465
+        c7.569-5.329,16.88-8.475,26.933-8.475c25.313,0,45.908,19.946,45.908,44.464l-0.02,116.557
+        c-0.001,16.832-6.84,32.616-19.255,44.442C409.465,374.625,393.285,381.032,376.115,381.032z"
+                        />
+                      </g>
                     </svg>
                   </span>
 
@@ -929,122 +958,499 @@ function Home() {
       </section>
 
       {/* course section */}
-      <section className="courses">
-        <Heading title="Featured Courses" />
-        <div className="subHeading">
-          Learn from industry experts with our comprehensive online and offline
-          baking courses
-        </div>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 my-10 mx-15">
-          <div className="course-1 overflow-hidden transition-all ease-in-out duration-200 rounded-xl">
-            <article className="relative overflow-hidden rounded-xl shadow-sm transition hover:shadow-lg hover:scale-103">
-              <img
-                alt=""
-                src={Course1}
-                className="absolute inset-0 h-full w-full object-cover"
-              />
-
-              <div className="relative bg-gradient-to-t from-gray-900/40 to-gray-900/25 pt-32 sm:pt-48 lg:pt-64 ">
-                <div className="p-4 sm:p-6 ">
-                  <a href="#" className="">
-                    <h3 className="mt-0.5 text-3xl font-bold text-cyan-200 absolute top-5 right-5">
-                      Online Baking courses
-                    </h3>
-                  </a>
-                  <p className="mt-2 line-clamp-3 text-lg text-white">
-                    Learn baking anytime, anywhere with our interactive online
-                    classes. From cakes and pastries to artisan breads, our
-                    step-by-step video lessons and live sessions make it easy to
-                    master baking from home. Perfect for beginners and advanced
-                    learners who want flexible learning with expert guidance.
-                  </p>
-                  <a
-                    className="group relative inline-flex items-center overflow-hidden rounded-sm bg-cyan-500 px-8 py-3 text-white focus:ring-3 focus:outline-hidden mr-3 mt-4"
-                    href="#"
-                  >
-                    <span className="absolute -start-full transition-all group-hover:start-4">
-                      <svg
-                        className="size-5 rtl:rotate-180"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          d="M17 8l4 4m0 0l-4 4m4-4H3"
-                        />
-                      </svg>
-                    </span>
-
-                    <span className="text-sm font-medium transition-all group-hover:ms-4">
-                      Browse Courses
-                    </span>
-                  </a>
-                </div>
-              </div>
-            </article>
+      <section id="cement" className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <Heading title="Featured Courses" />
+            <p className="subHeading">
+              Learn from industry experts with our comprehensive online and
+              offline baking courses
+            </p>
           </div>
-          <div className="course-2 transition-all ease-in-out duration-200 rounded-xl overflow-hidden">
-            <article className="relative overflow-hidden rounded-xl shadow-lg transition hover:shadow-lg hover:scale-103">
-              <img
-                alt=""
-                src={Course2}
-                className="absolute inset-0 h-full w-full object-cover"
-              />
 
-              <div className="relative bg-gradient-to-t from-gray-900/50 to-gray-900/25 pt-32 sm:pt-48 lg:pt-64 ">
-                <div className="p-4 sm:p-6 ">
-                  <a href="#" className="">
-                    <h3 className="mt-0.5 text-3xl font-bold text-pink-200 absolute top-5 right-5">
-                      Offline Baking courses
-                    </h3>
-                  </a>
-                  <p className="mt-2 line-clamp-3 text-lg text-white">
-                    Get hands-on training in our professional kitchen with our
-                    offline baking course. Learn directly from expert chefs,
-                    practice baking techniques in real time, and experience the
-                    joy of creating bakery-style treats. Ideal for those who
-                    prefer classroom learning, personal mentorship, and
-                    practical experience.
-                  </p>
-                  <a
-                    className="group relative inline-flex items-center overflow-hidden rounded-sm bg-rose-500 px-8 py-3 text-white focus:ring-3 focus:outline-hidden mr-3 mt-4"
-                    href="#"
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {/* online Course */}
+            <div
+              className="mt-[70px] relative !p-8 !rounded-lg hover:!shadow-lg hover:-translate-y-1 transition-all !duration-300"
+              style={{ backgroundImage: `url(${Pattern})` }}
+            >
+              {/* online image */}
+              <div className="absolute z-[0] left-0 top-[-180px] flex justify-center w-full">
+                <img
+                  src={Online}
+                  alt="Online Chef"
+                  className="!max-h-[400px] !drop-shadow-xl !drop-shadow-black"
+                />
+              </div>
+
+              <div className="!z-5 !mt-[220px]">
+                <div className="flex items-center mb-6">
+                  <svg
+                    width="48px"
+                    viewBox="0 0 64 64"
+                    xmlns="http://www.w3.org/2000/svg"
+                    stroke-width="3"
+                    stroke="#00B8DB"
+                    fill="none"
+                    className="pr-3"
                   >
-                    <span className="absolute -start-full transition-all group-hover:start-4">
-                      <svg
-                        className="size-5 rtl:rotate-180"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          d="M17 8l4 4m0 0l-4 4m4-4H3"
-                        />
-                      </svg>
-                    </span>
+                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                    <g
+                      id="SVGRepo_tracerCarrier"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    ></g>
+                    <g id="SVGRepo_iconCarrier">
+                      <rect
+                        x="8.33"
+                        y="10.82"
+                        width="47.34"
+                        height="34.38"
+                        rx="2.02"
+                      ></rect>
+                      <line x1="8.33" y1="38.66" x2="55.67" y2="38.66"></line>
+                      <path d="M23.05,53.18a6.67,6.67,0,0,0,3.55-8"></path>
+                      <path d="M41.84,53.18a6.66,6.66,0,0,1-3.55-8"></path>
+                      <line
+                        x1="17.5"
+                        y1="53.18"
+                        x2="46.5"
+                        y2="53.18"
+                        stroke-linecap="round"
+                      ></line>
+                      <polyline points="16.8 19.18 19.7 21.21 23.29 16.16"></polyline>
+                      <polyline points="16.38 28.98 19.27 31 22.86 25.95"></polyline>
+                      <line x1="28.6" y1="19.48" x2="49.42" y2="19.48"></line>
+                      <line x1="28.6" y1="29.66" x2="49.42" y2="29.66"></line>
+                    </g>
+                  </svg>
+                  <h3 className="!text-2xl text-black font-bold ">
+                    Online Baking Course – Learn Anytime, Anywhere
+                  </h3>
+                </div>
+                <p className="text-gray-600 mb-6 leading-relaxed">
+                  Our online baking course is designed for beginners and
+                  enthusiasts who want to master baking from the comfort of
+                  home. With step-by-step video lessons and expert guidance, you
+                  can learn at your own pace.
+                </p>
 
-                    <span className="text-sm font-medium transition-all group-hover:ms-4">
-                      Browse Courses
+                <div className="space-y-4 my-6">
+                  <div className="flex items-start">
+                    <svg
+                      width="24px"
+                      className="mr-3"
+                      viewBox="0 0 48 48"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      stroke="#00B8DB"
+                      stroke-width="1.7759999999999998"
+                    >
+                      <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                      <g
+                        id="SVGRepo_tracerCarrier"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      ></g>
+                      <g id="SVGRepo_iconCarrier">
+                        <g id="tick">
+                          <g id="tick_2">
+                            <path
+                              id="Combined Shape"
+                              fill-rule="evenodd"
+                              clip-rule="evenodd"
+                              d="M43.8679 21.6919C44.6935 28.8058 41.6741 35.704 36.0728 39.952C35.6328 40.2857 35.0055 40.1995 34.6718 39.7595C34.338 39.3194 34.4242 38.6921 34.8643 38.3584C39.9074 34.5338 42.6244 28.3263 41.8812 21.9225C41.671 20.1113 41.1986 18.3944 40.5065 16.8051L26.1673 31.1443C25.5822 31.7294 24.7948 32.0363 23.9994 32.0271C23.1815 32.0363 22.3941 31.7294 21.809 31.1443L14.359 23.6943C13.9685 23.3038 13.9685 22.6706 14.359 22.2801C14.7496 21.8896 15.3827 21.8896 15.7733 22.2801L23.2233 29.7301C23.4197 29.9265 23.6865 30.0305 23.9994 30.0273C24.2898 30.0305 24.5566 29.9265 24.753 29.7301L39.5542 14.9289C36.0589 8.94407 29.2496 5.2706 21.924 6.12251C12.0492 7.27066 4.97548 16.2058 6.12186 26.0817C7.06163 34.1648 13.2925 40.5543 21.232 41.7937C21.4211 41.8262 21.7587 41.8766 22.187 41.9273C22.5257 41.9674 22.8658 42.0003 23.1985 42.0236C23.7495 42.0623 24.1647 42.5402 24.1261 43.0912C24.0875 43.6421 23.6095 44.0574 23.0586 44.0187C22.6921 43.993 22.3207 43.9571 21.9519 43.9134C21.4857 43.8582 21.1145 43.8028 20.9083 43.7672C12.1017 42.3926 5.17946 35.2942 4.13522 26.3125C2.86149 15.3394 10.7211 5.4116 21.693 4.13589C29.6475 3.21084 37.0542 7.08801 41.0117 13.4715L42.279 12.2041C42.6696 11.8136 43.3027 11.8136 43.6933 12.2041C44.0838 12.5946 44.0838 13.2278 43.6933 13.6183L42.0149 15.2967C42.9621 17.2572 43.6027 19.4071 43.8679 21.6919Z"
+                              fill="#D4AF37"
+                            ></path>
+                          </g>
+                        </g>
+                      </g>
+                    </svg>
+                    <span className="text-gray-600">
+                      Access lessons anytime, anywhere on your device
                     </span>
-                  </a>
+                  </div>
+
+                  <div className="flex items-start">
+                    <svg
+                      width="24px"
+                      className="mr-3"
+                      viewBox="0 0 48 48"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      stroke="#00B8DB"
+                      stroke-width="1.7759999999999998"
+                    >
+                      <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                      <g
+                        id="SVGRepo_tracerCarrier"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      ></g>
+                      <g id="SVGRepo_iconCarrier">
+                        <g id="tick">
+                          <g id="tick_2">
+                            <path
+                              id="Combined Shape"
+                              fill-rule="evenodd"
+                              clip-rule="evenodd"
+                              d="M43.8679 21.6919C44.6935 28.8058 41.6741 35.704 36.0728 39.952C35.6328 40.2857 35.0055 40.1995 34.6718 39.7595C34.338 39.3194 34.4242 38.6921 34.8643 38.3584C39.9074 34.5338 42.6244 28.3263 41.8812 21.9225C41.671 20.1113 41.1986 18.3944 40.5065 16.8051L26.1673 31.1443C25.5822 31.7294 24.7948 32.0363 23.9994 32.0271C23.1815 32.0363 22.3941 31.7294 21.809 31.1443L14.359 23.6943C13.9685 23.3038 13.9685 22.6706 14.359 22.2801C14.7496 21.8896 15.3827 21.8896 15.7733 22.2801L23.2233 29.7301C23.4197 29.9265 23.6865 30.0305 23.9994 30.0273C24.2898 30.0305 24.5566 29.9265 24.753 29.7301L39.5542 14.9289C36.0589 8.94407 29.2496 5.2706 21.924 6.12251C12.0492 7.27066 4.97548 16.2058 6.12186 26.0817C7.06163 34.1648 13.2925 40.5543 21.232 41.7937C21.4211 41.8262 21.7587 41.8766 22.187 41.9273C22.5257 41.9674 22.8658 42.0003 23.1985 42.0236C23.7495 42.0623 24.1647 42.5402 24.1261 43.0912C24.0875 43.6421 23.6095 44.0574 23.0586 44.0187C22.6921 43.993 22.3207 43.9571 21.9519 43.9134C21.4857 43.8582 21.1145 43.8028 20.9083 43.7672C12.1017 42.3926 5.17946 35.2942 4.13522 26.3125C2.86149 15.3394 10.7211 5.4116 21.693 4.13589C29.6475 3.21084 37.0542 7.08801 41.0117 13.4715L42.279 12.2041C42.6696 11.8136 43.3027 11.8136 43.6933 12.2041C44.0838 12.5946 44.0838 13.2278 43.6933 13.6183L42.0149 15.2967C42.9621 17.2572 43.6027 19.4071 43.8679 21.6919Z"
+                              fill="#D4AF37"
+                            ></path>
+                          </g>
+                        </g>
+                      </g>
+                    </svg>
+                    <span className="text-gray-600">
+                      Learn cakes, pastries, cookies, and artisan breads
+                    </span>
+                  </div>
+
+                  <div className="flex items-start">
+                    <svg
+                      width="24px"
+                      className="mr-3"
+                      viewBox="0 0 48 48"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      stroke="#00B8DB"
+                      stroke-width="1.7759999999999998"
+                    >
+                      <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                      <g
+                        id="SVGRepo_tracerCarrier"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      ></g>
+                      <g id="SVGRepo_iconCarrier">
+                        <g id="tick">
+                          <g id="tick_2">
+                            <path
+                              id="Combined Shape"
+                              fill-rule="evenodd"
+                              clip-rule="evenodd"
+                              d="M43.8679 21.6919C44.6935 28.8058 41.6741 35.704 36.0728 39.952C35.6328 40.2857 35.0055 40.1995 34.6718 39.7595C34.338 39.3194 34.4242 38.6921 34.8643 38.3584C39.9074 34.5338 42.6244 28.3263 41.8812 21.9225C41.671 20.1113 41.1986 18.3944 40.5065 16.8051L26.1673 31.1443C25.5822 31.7294 24.7948 32.0363 23.9994 32.0271C23.1815 32.0363 22.3941 31.7294 21.809 31.1443L14.359 23.6943C13.9685 23.3038 13.9685 22.6706 14.359 22.2801C14.7496 21.8896 15.3827 21.8896 15.7733 22.2801L23.2233 29.7301C23.4197 29.9265 23.6865 30.0305 23.9994 30.0273C24.2898 30.0305 24.5566 29.9265 24.753 29.7301L39.5542 14.9289C36.0589 8.94407 29.2496 5.2706 21.924 6.12251C12.0492 7.27066 4.97548 16.2058 6.12186 26.0817C7.06163 34.1648 13.2925 40.5543 21.232 41.7937C21.4211 41.8262 21.7587 41.8766 22.187 41.9273C22.5257 41.9674 22.8658 42.0003 23.1985 42.0236C23.7495 42.0623 24.1647 42.5402 24.1261 43.0912C24.0875 43.6421 23.6095 44.0574 23.0586 44.0187C22.6921 43.993 22.3207 43.9571 21.9519 43.9134C21.4857 43.8582 21.1145 43.8028 20.9083 43.7672C12.1017 42.3926 5.17946 35.2942 4.13522 26.3125C2.86149 15.3394 10.7211 5.4116 21.693 4.13589C29.6475 3.21084 37.0542 7.08801 41.0117 13.4715L42.279 12.2041C42.6696 11.8136 43.3027 11.8136 43.6933 12.2041C44.0838 12.5946 44.0838 13.2278 43.6933 13.6183L42.0149 15.2967C42.9621 17.2572 43.6027 19.4071 43.8679 21.6919Z"
+                              fill="#D4AF37"
+                            ></path>
+                          </g>
+                        </g>
+                      </g>
+                    </svg>
+                    <span className="text-gray-600">
+                      Get lifetime access to recipes and class recordings
+                    </span>
+                  </div>
+
+                  <div className="flex items-start">
+                    <svg
+                      width="24px"
+                      className="mr-3"
+                      viewBox="0 0 48 48"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      stroke="#00B8DB"
+                      stroke-width="1.7759999999999998"
+                    >
+                      <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                      <g
+                        id="SVGRepo_tracerCarrier"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      ></g>
+                      <g id="SVGRepo_iconCarrier">
+                        <g id="tick">
+                          <g id="tick_2">
+                            <path
+                              id="Combined Shape"
+                              fill-rule="evenodd"
+                              clip-rule="evenodd"
+                              d="M43.8679 21.6919C44.6935 28.8058 41.6741 35.704 36.0728 39.952C35.6328 40.2857 35.0055 40.1995 34.6718 39.7595C34.338 39.3194 34.4242 38.6921 34.8643 38.3584C39.9074 34.5338 42.6244 28.3263 41.8812 21.9225C41.671 20.1113 41.1986 18.3944 40.5065 16.8051L26.1673 31.1443C25.5822 31.7294 24.7948 32.0363 23.9994 32.0271C23.1815 32.0363 22.3941 31.7294 21.809 31.1443L14.359 23.6943C13.9685 23.3038 13.9685 22.6706 14.359 22.2801C14.7496 21.8896 15.3827 21.8896 15.7733 22.2801L23.2233 29.7301C23.4197 29.9265 23.6865 30.0305 23.9994 30.0273C24.2898 30.0305 24.5566 29.9265 24.753 29.7301L39.5542 14.9289C36.0589 8.94407 29.2496 5.2706 21.924 6.12251C12.0492 7.27066 4.97548 16.2058 6.12186 26.0817C7.06163 34.1648 13.2925 40.5543 21.232 41.7937C21.4211 41.8262 21.7587 41.8766 22.187 41.9273C22.5257 41.9674 22.8658 42.0003 23.1985 42.0236C23.7495 42.0623 24.1647 42.5402 24.1261 43.0912C24.0875 43.6421 23.6095 44.0574 23.0586 44.0187C22.6921 43.993 22.3207 43.9571 21.9519 43.9134C21.4857 43.8582 21.1145 43.8028 20.9083 43.7672C12.1017 42.3926 5.17946 35.2942 4.13522 26.3125C2.86149 15.3394 10.7211 5.4116 21.693 4.13589C29.6475 3.21084 37.0542 7.08801 41.0117 13.4715L42.279 12.2041C42.6696 11.8136 43.3027 11.8136 43.6933 12.2041C44.0838 12.5946 44.0838 13.2278 43.6933 13.6183L42.0149 15.2967C42.9621 17.2572 43.6027 19.4071 43.8679 21.6919Z"
+                              fill="#D4AF37"
+                            ></path>
+                          </g>
+                        </g>
+                      </g>
+                    </svg>
+                    <span className="text-gray-600">
+                      Direct support from professional bakers
+                    </span>
+                  </div>
                 </div>
               </div>
-            </article>
+
+              <div className="p-4">
+                <a
+                  className="group relative inline-flex items-center overflow-hidden rounded-sm bg-cyan-500 px-8 py-3 text-white focus:ring-3 focus:outline-hidden mr-3"
+                  href="#"
+                >
+                  <span className="absolute -start-full transition-all group-hover:start-4">
+                    <svg
+                      fill="#ffffff"
+                      className="size-5 rtl:rotate-180"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                      stroke="#ffffff"
+                      stroke-width="0.00024000000000000003"
+                    >
+                      <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                      <g
+                        id="SVGRepo_tracerCarrier"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      ></g>
+                      <g id="SVGRepo_iconCarrier">
+                        <path d="M15.716,4.354a8.031,8.031,0,1,0-2.7,13.138l3.58,3.581A3.164,3.164,0,0,0,21.073,16.6l-3.58-3.58A8.046,8.046,0,0,0,15.716,4.354ZM10.034,16.069A6.033,6.033,0,1,1,14.3,14.3,6,6,0,0,1,10.034,16.069Zm9.625,1.943a1.165,1.165,0,0,1-1.647,1.647l-3.186-3.186a8.214,8.214,0,0,0,.89-.757,8.214,8.214,0,0,0,.757-.89ZM11.035,14a1,1,0,0,1-1,1,4.972,4.972,0,0,1-4.966-4.965,1.014,1.014,0,0,1,1-1.017.984.984,0,0,1,1,.982v.035A2.968,2.968,0,0,0,10.035,13,1,1,0,0,1,11.035,14Z"></path>
+                      </g>
+                    </svg>
+                  </span>
+
+                  <span className="text-sm font-medium transition-all group-hover:ms-4">
+                    Browse Courses
+                  </span>
+                </a>
+              </div>
+            </div>
+
+            {/* Offline Course */}
+            <div
+              className="mt-[70px] relative !p-8 !rounded-lg hover:!shadow-lg hover:-translate-y-1 transition-all !duration-300"
+              style={{ backgroundImage: `url(${Pattern})` }}
+            >
+              {/* offline image  */}
+              <div className="absolute z-[0] left-0 top-[-180px] flex w-full justify-center">
+                <img
+                  src={Offline}
+                  alt="Offline Chef"
+                  className="!h-[400px] !drop-shadow-xl !drop-shadow-black"
+                />
+              </div>
+
+              <div className="!z-5 !mt-[220px]">
+                <div className="flex items-center mb-6">
+                  <svg
+                    fill="oklch(59.2% 0.249 0.584)"
+                    width="48px"
+                    viewBox="0 0 50 50"
+                    xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink"
+                    stroke="oklch(59.2% 0.249 0.584)"
+                    stroke-width="0.0005"
+                    className="pr-3"
+                  >
+                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                    <g
+                      id="SVGRepo_tracerCarrier"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke="#CCCCCC"
+                      stroke-width="0.1"
+                    ></g>
+                    <g id="SVGRepo_iconCarrier">
+                      <path d="M12 2C10.906937 2 10 2.9069372 10 4L7 4C5.3550302 4 4 5.3550302 4 7L4 42C4 43.644459 5.3544268 45 7 45L9 45L9 46C9 47.093063 9.9069372 48 11 48L14 48C15.093063 48 16 47.093063 16 46L16 45L34 45L34 46C34 47.093063 34.906937 48 36 48L39 48C40.093063 48 41 47.093063 41 46L41 45L43 45C44.645063 45 46 43.645063 46 42L46 15.167969 A 1.0001 1.0001 0 0 0 46 14.841797L46 7C46 5.3544268 44.644459 4 43 4L40 4C40 2.9069372 39.093063 2 38 2L32 2C30.906937 2 30 2.9069372 30 4L21 4C21 2.9069372 20.093063 2 19 2L12 2 z M 7 6L10.832031 6 A 1.0001 1.0001 0 0 0 11.158203 6L19.832031 6 A 1.0001 1.0001 0 0 0 20.158203 6L30.832031 6 A 1.0001 1.0001 0 0 0 31.158203 6L38.832031 6 A 1.0001 1.0001 0 0 0 39.158203 6L43 6C43.563541 6 44 6.4355732 44 7L44 14L6 14L6 7C6 6.4349698 6.4349698 6 7 6 z M 10 8 A 2 2 0 0 0 8 10 A 2 2 0 0 0 10 12 A 2 2 0 0 0 12 10 A 2 2 0 0 0 10 8 z M 16 8 A 2 2 0 0 0 14 10 A 2 2 0 0 0 16 12 A 2 2 0 0 0 18 10 A 2 2 0 0 0 16 8 z M 22 8 A 2 2 0 0 0 20 10 A 2 2 0 0 0 22 12 A 2 2 0 0 0 24 10 A 2 2 0 0 0 22 8 z M 28 8 A 2 2 0 0 0 26 10 A 2 2 0 0 0 28 12 A 2 2 0 0 0 30 10 A 2 2 0 0 0 28 8 z M 40 8 A 2 2 0 0 0 38 10 A 2 2 0 0 0 40 12 A 2 2 0 0 0 42 10 A 2 2 0 0 0 40 8 z M 6 16L44 16L44 42C44 42.562937 43.562937 43 43 43L40.167969 43 A 1.0001 1.0001 0 0 0 39.841797 43L35.154297 43 A 1.0001 1.0001 0 0 0 34.984375 42.986328 A 1.0001 1.0001 0 0 0 34.839844 43L15.167969 43 A 1.0001 1.0001 0 0 0 14.841797 43L10.154297 43 A 1.0001 1.0001 0 0 0 9.984375 42.986328 A 1.0001 1.0001 0 0 0 9.8398438 43L7 43C6.4355732 43 6 42.563541 6 42L6 16 z M 9 19L9 20L9 40L41 40L41 19L9 19 z M 11 21L39 21L39 38L11 38L11 21 z M 11 45L14 45L14 46L11 46L11 45 z M 36 45L39 45L39 46L36 46L36 45 z"></path>
+                    </g>
+                  </svg>
+                  <h3 className="!text-2xl text-black font-bold">
+                    Offline Baking Course – Learn Hands-On with Experts
+                  </h3>
+                </div>
+                <p className="text-gray-600 !mb-6 leading-relaxed">
+                  Master baking in our in-person classes guided by professional
+                  chefs. Get practical experience, real-time feedback, and learn
+                  advanced techniques in a fully equipped kitchen.
+                </p>
+
+                <div className="space-y-4 mb-6">
+                  <div className="flex items-start">
+                    <svg
+                      width="24px"
+                      className="mr-3"
+                      viewBox="0 0 48 48"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      stroke="oklch(59.2% 0.249 0.584)"
+                      stroke-width="1.7759999999999998"
+                    >
+                      <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                      <g
+                        id="SVGRepo_tracerCarrier"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      ></g>
+                      <g id="SVGRepo_iconCarrier">
+                        <g id="tick">
+                          <g id="tick_2">
+                            <path
+                              id="Combined Shape"
+                              fill-rule="evenodd"
+                              clip-rule="evenodd"
+                              d="M43.8679 21.6919C44.6935 28.8058 41.6741 35.704 36.0728 39.952C35.6328 40.2857 35.0055 40.1995 34.6718 39.7595C34.338 39.3194 34.4242 38.6921 34.8643 38.3584C39.9074 34.5338 42.6244 28.3263 41.8812 21.9225C41.671 20.1113 41.1986 18.3944 40.5065 16.8051L26.1673 31.1443C25.5822 31.7294 24.7948 32.0363 23.9994 32.0271C23.1815 32.0363 22.3941 31.7294 21.809 31.1443L14.359 23.6943C13.9685 23.3038 13.9685 22.6706 14.359 22.2801C14.7496 21.8896 15.3827 21.8896 15.7733 22.2801L23.2233 29.7301C23.4197 29.9265 23.6865 30.0305 23.9994 30.0273C24.2898 30.0305 24.5566 29.9265 24.753 29.7301L39.5542 14.9289C36.0589 8.94407 29.2496 5.2706 21.924 6.12251C12.0492 7.27066 4.97548 16.2058 6.12186 26.0817C7.06163 34.1648 13.2925 40.5543 21.232 41.7937C21.4211 41.8262 21.7587 41.8766 22.187 41.9273C22.5257 41.9674 22.8658 42.0003 23.1985 42.0236C23.7495 42.0623 24.1647 42.5402 24.1261 43.0912C24.0875 43.6421 23.6095 44.0574 23.0586 44.0187C22.6921 43.993 22.3207 43.9571 21.9519 43.9134C21.4857 43.8582 21.1145 43.8028 20.9083 43.7672C12.1017 42.3926 5.17946 35.2942 4.13522 26.3125C2.86149 15.3394 10.7211 5.4116 21.693 4.13589C29.6475 3.21084 37.0542 7.08801 41.0117 13.4715L42.279 12.2041C42.6696 11.8136 43.3027 11.8136 43.6933 12.2041C44.0838 12.5946 44.0838 13.2278 43.6933 13.6183L42.0149 15.2967C42.9621 17.2572 43.6027 19.4071 43.8679 21.6919Z"
+                              fill="#D4AF37"
+                            ></path>
+                          </g>
+                        </g>
+                      </g>
+                    </svg>
+                    <span className="text-gray-600">
+                      Learn step-by-step with expert instructors
+                    </span>
+                  </div>
+
+                  <div className="flex items-start">
+                    <svg
+                      width="24px"
+                      className="mr-3"
+                      viewBox="0 0 48 48"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      stroke="oklch(59.2% 0.249 0.584)"
+                      stroke-width="1.7759999999999998"
+                    >
+                      <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                      <g
+                        id="SVGRepo_tracerCarrier"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      ></g>
+                      <g id="SVGRepo_iconCarrier">
+                        <g id="tick">
+                          <g id="tick_2">
+                            <path
+                              id="Combined Shape"
+                              fill-rule="evenodd"
+                              clip-rule="evenodd"
+                              d="M43.8679 21.6919C44.6935 28.8058 41.6741 35.704 36.0728 39.952C35.6328 40.2857 35.0055 40.1995 34.6718 39.7595C34.338 39.3194 34.4242 38.6921 34.8643 38.3584C39.9074 34.5338 42.6244 28.3263 41.8812 21.9225C41.671 20.1113 41.1986 18.3944 40.5065 16.8051L26.1673 31.1443C25.5822 31.7294 24.7948 32.0363 23.9994 32.0271C23.1815 32.0363 22.3941 31.7294 21.809 31.1443L14.359 23.6943C13.9685 23.3038 13.9685 22.6706 14.359 22.2801C14.7496 21.8896 15.3827 21.8896 15.7733 22.2801L23.2233 29.7301C23.4197 29.9265 23.6865 30.0305 23.9994 30.0273C24.2898 30.0305 24.5566 29.9265 24.753 29.7301L39.5542 14.9289C36.0589 8.94407 29.2496 5.2706 21.924 6.12251C12.0492 7.27066 4.97548 16.2058 6.12186 26.0817C7.06163 34.1648 13.2925 40.5543 21.232 41.7937C21.4211 41.8262 21.7587 41.8766 22.187 41.9273C22.5257 41.9674 22.8658 42.0003 23.1985 42.0236C23.7495 42.0623 24.1647 42.5402 24.1261 43.0912C24.0875 43.6421 23.6095 44.0574 23.0586 44.0187C22.6921 43.993 22.3207 43.9571 21.9519 43.9134C21.4857 43.8582 21.1145 43.8028 20.9083 43.7672C12.1017 42.3926 5.17946 35.2942 4.13522 26.3125C2.86149 15.3394 10.7211 5.4116 21.693 4.13589C29.6475 3.21084 37.0542 7.08801 41.0117 13.4715L42.279 12.2041C42.6696 11.8136 43.3027 11.8136 43.6933 12.2041C44.0838 12.5946 44.0838 13.2278 43.6933 13.6183L42.0149 15.2967C42.9621 17.2572 43.6027 19.4071 43.8679 21.6919Z"
+                              fill="#D4AF37"
+                            ></path>
+                          </g>
+                        </g>
+                      </g>
+                    </svg>
+                    <span className="text-gray-600">
+                      Get hands-on training in cakes, pastries, and bread making
+                    </span>
+                  </div>
+
+                  <div className="flex items-start">
+                    <svg
+                      width="24px"
+                      className="mr-3"
+                      viewBox="0 0 48 48"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      stroke="oklch(59.2% 0.249 0.584)"
+                      stroke-width="1.7759999999999998"
+                    >
+                      <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                      <g
+                        id="SVGRepo_tracerCarrier"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      ></g>
+                      <g id="SVGRepo_iconCarrier">
+                        <g id="tick">
+                          <g id="tick_2">
+                            <path
+                              id="Combined Shape"
+                              fill-rule="evenodd"
+                              clip-rule="evenodd"
+                              d="M43.8679 21.6919C44.6935 28.8058 41.6741 35.704 36.0728 39.952C35.6328 40.2857 35.0055 40.1995 34.6718 39.7595C34.338 39.3194 34.4242 38.6921 34.8643 38.3584C39.9074 34.5338 42.6244 28.3263 41.8812 21.9225C41.671 20.1113 41.1986 18.3944 40.5065 16.8051L26.1673 31.1443C25.5822 31.7294 24.7948 32.0363 23.9994 32.0271C23.1815 32.0363 22.3941 31.7294 21.809 31.1443L14.359 23.6943C13.9685 23.3038 13.9685 22.6706 14.359 22.2801C14.7496 21.8896 15.3827 21.8896 15.7733 22.2801L23.2233 29.7301C23.4197 29.9265 23.6865 30.0305 23.9994 30.0273C24.2898 30.0305 24.5566 29.9265 24.753 29.7301L39.5542 14.9289C36.0589 8.94407 29.2496 5.2706 21.924 6.12251C12.0492 7.27066 4.97548 16.2058 6.12186 26.0817C7.06163 34.1648 13.2925 40.5543 21.232 41.7937C21.4211 41.8262 21.7587 41.8766 22.187 41.9273C22.5257 41.9674 22.8658 42.0003 23.1985 42.0236C23.7495 42.0623 24.1647 42.5402 24.1261 43.0912C24.0875 43.6421 23.6095 44.0574 23.0586 44.0187C22.6921 43.993 22.3207 43.9571 21.9519 43.9134C21.4857 43.8582 21.1145 43.8028 20.9083 43.7672C12.1017 42.3926 5.17946 35.2942 4.13522 26.3125C2.86149 15.3394 10.7211 5.4116 21.693 4.13589C29.6475 3.21084 37.0542 7.08801 41.0117 13.4715L42.279 12.2041C42.6696 11.8136 43.3027 11.8136 43.6933 12.2041C44.0838 12.5946 44.0838 13.2278 43.6933 13.6183L42.0149 15.2967C42.9621 17.2572 43.6027 19.4071 43.8679 21.6919Z"
+                              fill="#D4AF37"
+                            ></path>
+                          </g>
+                        </g>
+                      </g>
+                    </svg>
+                    <span className="text-gray-600">
+                      Practice with professional tools and bakery equipment
+                    </span>
+                  </div>
+
+                  <div className="flex items-start">
+                    <svg
+                      width="24px"
+                      className="mr-3"
+                      viewBox="0 0 48 48"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      stroke="oklch(59.2% 0.249 0.584)"
+                      stroke-width="1.7759999999999998"
+                    >
+                      <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                      <g
+                        id="SVGRepo_tracerCarrier"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      ></g>
+                      <g id="SVGRepo_iconCarrier">
+                        <g id="tick">
+                          <g id="tick_2">
+                            <path
+                              id="Combined Shape"
+                              fill-rule="evenodd"
+                              clip-rule="evenodd"
+                              d="M43.8679 21.6919C44.6935 28.8058 41.6741 35.704 36.0728 39.952C35.6328 40.2857 35.0055 40.1995 34.6718 39.7595C34.338 39.3194 34.4242 38.6921 34.8643 38.3584C39.9074 34.5338 42.6244 28.3263 41.8812 21.9225C41.671 20.1113 41.1986 18.3944 40.5065 16.8051L26.1673 31.1443C25.5822 31.7294 24.7948 32.0363 23.9994 32.0271C23.1815 32.0363 22.3941 31.7294 21.809 31.1443L14.359 23.6943C13.9685 23.3038 13.9685 22.6706 14.359 22.2801C14.7496 21.8896 15.3827 21.8896 15.7733 22.2801L23.2233 29.7301C23.4197 29.9265 23.6865 30.0305 23.9994 30.0273C24.2898 30.0305 24.5566 29.9265 24.753 29.7301L39.5542 14.9289C36.0589 8.94407 29.2496 5.2706 21.924 6.12251C12.0492 7.27066 4.97548 16.2058 6.12186 26.0817C7.06163 34.1648 13.2925 40.5543 21.232 41.7937C21.4211 41.8262 21.7587 41.8766 22.187 41.9273C22.5257 41.9674 22.8658 42.0003 23.1985 42.0236C23.7495 42.0623 24.1647 42.5402 24.1261 43.0912C24.0875 43.6421 23.6095 44.0574 23.0586 44.0187C22.6921 43.993 22.3207 43.9571 21.9519 43.9134C21.4857 43.8582 21.1145 43.8028 20.9083 43.7672C12.1017 42.3926 5.17946 35.2942 4.13522 26.3125C2.86149 15.3394 10.7211 5.4116 21.693 4.13589C29.6475 3.21084 37.0542 7.08801 41.0117 13.4715L42.279 12.2041C42.6696 11.8136 43.3027 11.8136 43.6933 12.2041C44.0838 12.5946 44.0838 13.2278 43.6933 13.6183L42.0149 15.2967C42.9621 17.2572 43.6027 19.4071 43.8679 21.6919Z"
+                              fill="#D4AF37"
+                            ></path>
+                          </g>
+                        </g>
+                      </g>
+                    </svg>
+                    <span className="text-gray-600">
+                      Build confidence to bake for home, business, or cafés
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <div className=" p-4">
+                <a
+                  className="group relative inline-flex items-center overflow-hidden rounded-sm bg-pink-500 px-8 py-3 text-white focus:ring-3 focus:outline-hidden mr-3"
+                  href="#"
+                >
+                  <span className="absolute -start-full transition-all group-hover:start-4">
+                    <svg
+                      className="size-5 rtl:rotate-180"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                      <g
+                        id="SVGRepo_tracerCarrier"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      ></g>
+                      <g id="SVGRepo_iconCarrier">
+                        {" "}
+                        <path
+                          d="M10.3341 4.77929C9.91482 3.15159 8.66759 1.97843 7.21305 2.0003C5.44093 2.02694 4.03217 3.81732 4.06648 5.99923L4.03433 9.34056C4.02705 10.0967 4.02341 10.4748 3.88968 10.8109C3.75595 11.1471 3.46036 11.4685 2.86916 12.1112C2.28972 12.7412 2 13.2089 2 13.7454C2 14.563 2.67293 15.221 4.0188 16.5368L7.58758 20.0262C8.93345 21.3421 9.60638 22 10.4426 22C11.2788 22 11.9518 21.342 13.2976 20.0262L20.0783 13.3965C22.6406 10.8913 22.6406 6.82951 20.0783 4.32429C17.516 1.81908 13.3618 1.81908 10.7995 4.32429L10.3341 4.77929ZM10.3341 4.77929L9.37197 5.72001"
+                          stroke="#ffffff"
+                          stroke-width="1.5"
+                          stroke-linecap="round"
+                        ></path>{" "}
+                        <path
+                          opacity="0.5"
+                          d="M13.2974 20.0263L4.01855 10.9541"
+                          stroke="#ffffff"
+                          stroke-width="1.5"
+                        ></path>{" "}
+                      </g>
+                    </svg>
+                  </span>
+
+                  <span className="text-sm font-medium transition-all group-hover:ms-4">
+                    Start Learning Now
+                  </span>
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
       {/* testimonial section */}
       <div className="bg-rose-50">
-        <section className="my-10 mx-15 pt-10">
+        <section className="mt-10 mx-15 pt-10">
           <Heading title="What Our Students Say" />
           <p className="subHeading">
             Join thousands of satisfied students and customers who trust Sweet
@@ -1055,7 +1461,7 @@ function Home() {
               <video
                 src={review}
                 controls
-                autoplay
+                autoPlay
                 muted
                 loop
                 className="rounded-xl h-130"
@@ -1176,80 +1582,93 @@ function Home() {
       </div>
 
       {/* final section */}
-      <section className="my-10">
-        <section className="overflow-hidden sm:grid sm:grid-cols-2 sm:items-center">
-          <div className="p-8 md:p-12 lg:px-16 lg:py-24">
-            <div className="mx-auto max-w-xl text-center ltr:sm:text-left rtl:sm:text-right">
-              <Heading title="Learn, Shop & Order with The Baked Fantasy" />
 
-              <p className="hidden text-gray-500 md:mt-4 md:block">
-                Join our baking courses, shop eco-friendly products, or place
-                bulk orders with ease. Whether you’re a beginner, home baker, or
-                café owner, we’ve got the perfect solution for your baking
-                needs.
-              </p>
+      <section
+        className=" lg:grid lg:h-[80vh] place-content-center lg:bg-cover lg:bg-center md:bg-center md:bg-cover relative bg-none "
+        style={{ backgroundImage: `url(${TestBG})` }}
+      >
+        <div className="lg:absolute lg:left-0 lg:top-[3vh] mx-auto w-screen max-w-screen-xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8 lg:py-32">
+          <div className="max-w-prose text-left">
+            <h1 className="lg:text-4xl font-bold text-gray-900 text-xl text-left">
+              <strong className="text-rose-400"> Learn, Shop & Order </strong>
+              with The Baked Fantasy
+            </h1>
 
-              <div className="mt-4 md:mt-8">
-                <a
-                  className="group relative inline-flex items-center overflow-hidden rounded-sm bg-cyan-500 px-8 py-3 text-white focus:ring-3 focus:outline-hidden mr-3"
-                  href="#"
-                >
-                  <span className="absolute -start-full transition-all group-hover:start-4">
-                    <svg
-                      className="size-5 rtl:rotate-180"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
+            <p className="mt-4 text-base text-pretty text-gray-700 sm:text-lg/relaxed">
+              Join our baking courses, shop eco-friendly products, or place bulk
+              orders with ease. From beginners to café owners, we have the
+              perfect baking solutions for you.
+            </p>
+
+            <div className="mt-4 flex gap-4 sm:mt-6">
+              <a
+                className="group relative inline-flex items-center overflow-hidden rounded-sm bg-cyan-500 px-8 py-3 text-white focus:ring-3 focus:outline-hidden mr-3"
+                href="#"
+              >
+                <span className="absolute -start-full transition-all group-hover:start-4">
+                  <svg
+                    className="size-5 rtl:rotate-180"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                    <g
+                      id="SVGRepo_tracerCarrier"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    ></g>
+                    <g id="SVGRepo_iconCarrier">
+                      {" "}
                       <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M17 8l4 4m0 0l-4 4m4-4H3"
-                      />
-                    </svg>
-                  </span>
+                        d="M16.1007 13.359L15.5719 12.8272H15.5719L16.1007 13.359ZM16.5562 12.9062L17.085 13.438H17.085L16.5562 12.9062ZM18.9728 12.5894L18.6146 13.2483L18.9728 12.5894ZM20.8833 13.628L20.5251 14.2869L20.8833 13.628ZM21.4217 16.883L21.9505 17.4148L21.4217 16.883ZM20.0011 18.2954L19.4723 17.7636L20.0011 18.2954ZM18.6763 18.9651L18.7459 19.7119H18.7459L18.6763 18.9651ZM8.81536 14.7266L9.34418 14.1947L8.81536 14.7266ZM4.00289 5.74561L3.2541 5.78816L3.2541 5.78816L4.00289 5.74561ZM10.4775 7.19738L11.0063 7.72922H11.0063L10.4775 7.19738ZM10.6342 4.54348L11.2346 4.09401L10.6342 4.54348ZM9.37326 2.85908L8.77286 3.30855V3.30855L9.37326 2.85908ZM6.26145 2.57483L6.79027 3.10667H6.79027L6.26145 2.57483ZM4.69185 4.13552L4.16303 3.60368H4.16303L4.69185 4.13552ZM12.0631 11.4972L12.5919 10.9654L12.0631 11.4972ZM16.6295 13.8909L17.085 13.438L16.0273 12.3743L15.5719 12.8272L16.6295 13.8909ZM18.6146 13.2483L20.5251 14.2869L21.2415 12.9691L19.331 11.9305L18.6146 13.2483ZM20.8929 16.3511L19.4723 17.7636L20.5299 18.8273L21.9505 17.4148L20.8929 16.3511ZM18.6067 18.2184C17.1568 18.3535 13.4056 18.2331 9.34418 14.1947L8.28654 15.2584C12.7186 19.6653 16.9369 19.8805 18.7459 19.7119L18.6067 18.2184ZM9.34418 14.1947C5.4728 10.3453 4.83151 7.10765 4.75168 5.70305L3.2541 5.78816C3.35456 7.55599 4.14863 11.144 8.28654 15.2584L9.34418 14.1947ZM10.7195 8.01441L11.0063 7.72922L9.9487 6.66555L9.66189 6.95073L10.7195 8.01441ZM11.2346 4.09401L9.97365 2.40961L8.77286 3.30855L10.0338 4.99296L11.2346 4.09401ZM5.73263 2.04299L4.16303 3.60368L5.22067 4.66736L6.79027 3.10667L5.73263 2.04299ZM10.1907 7.48257C9.66189 6.95073 9.66117 6.95144 9.66045 6.95216C9.66021 6.9524 9.65949 6.95313 9.659 6.95362C9.65802 6.95461 9.65702 6.95561 9.65601 6.95664C9.65398 6.95871 9.65188 6.96086 9.64972 6.9631C9.64539 6.96759 9.64081 6.97245 9.63599 6.97769C9.62634 6.98816 9.61575 7.00014 9.60441 7.01367C9.58174 7.04072 9.55605 7.07403 9.52905 7.11388C9.47492 7.19377 9.41594 7.2994 9.36589 7.43224C9.26376 7.70329 9.20901 8.0606 9.27765 8.50305C9.41189 9.36833 10.0078 10.5113 11.5343 12.0291L12.5919 10.9654C11.1634 9.54499 10.8231 8.68059 10.7599 8.27309C10.7298 8.07916 10.761 7.98371 10.7696 7.96111C10.7748 7.94713 10.7773 7.9457 10.7709 7.95525C10.7677 7.95992 10.7624 7.96723 10.7541 7.97708C10.75 7.98201 10.7451 7.98759 10.7394 7.99381C10.7365 7.99692 10.7335 8.00019 10.7301 8.00362C10.7285 8.00534 10.7268 8.00709 10.725 8.00889C10.7241 8.00979 10.7232 8.0107 10.7223 8.01162C10.7219 8.01208 10.7212 8.01278 10.7209 8.01301C10.7202 8.01371 10.7195 8.01441 10.1907 7.48257ZM11.5343 12.0291C13.0613 13.5474 14.2096 14.1383 15.0763 14.2713C15.5192 14.3392 15.8763 14.285 16.1472 14.1841C16.28 14.1346 16.3858 14.0763 16.4658 14.0227C16.5058 13.9959 16.5392 13.9704 16.5663 13.9479C16.5799 13.9367 16.5919 13.9262 16.6024 13.9166C16.6077 13.9118 16.6126 13.9073 16.6171 13.903C16.6194 13.9008 16.6215 13.8987 16.6236 13.8967C16.6246 13.8957 16.6256 13.8947 16.6266 13.8937C16.6271 13.8932 16.6279 13.8925 16.6281 13.8923C16.6288 13.8916 16.6295 13.8909 16.1007 13.359C15.5719 12.8272 15.5726 12.8265 15.5733 12.8258C15.5735 12.8256 15.5742 12.8249 15.5747 12.8244C15.5756 12.8235 15.5765 12.8226 15.5774 12.8217C15.5793 12.82 15.581 12.8183 15.5827 12.8166C15.5862 12.8133 15.5895 12.8103 15.5926 12.8074C15.5988 12.8018 15.6044 12.7969 15.6094 12.7929C15.6192 12.7847 15.6265 12.7795 15.631 12.7764C15.6403 12.7702 15.6384 12.773 15.6236 12.7785C15.5991 12.7876 15.501 12.8189 15.3038 12.7886C14.8905 12.7253 14.02 12.3853 12.5919 10.9654L11.5343 12.0291ZM9.97365 2.40961C8.95434 1.04802 6.94996 0.83257 5.73263 2.04299L6.79027 3.10667C7.32195 2.578 8.26623 2.63181 8.77286 3.30855L9.97365 2.40961ZM4.75168 5.70305C4.73201 5.35694 4.89075 4.9954 5.22067 4.66736L4.16303 3.60368C3.62571 4.13795 3.20329 4.89425 3.2541 5.78816L4.75168 5.70305ZM19.4723 17.7636C19.1975 18.0369 18.9029 18.1908 18.6067 18.2184L18.7459 19.7119C19.4805 19.6434 20.0824 19.2723 20.5299 18.8273L19.4723 17.7636ZM11.0063 7.72922C11.9908 6.7503 12.064 5.2019 11.2346 4.09401L10.0338 4.99295C10.4373 5.53193 10.3773 6.23938 9.9487 6.66555L11.0063 7.72922ZM20.5251 14.2869C21.3429 14.7315 21.4703 15.7769 20.8929 16.3511L21.9505 17.4148C23.2908 16.0821 22.8775 13.8584 21.2415 12.9691L20.5251 14.2869ZM17.085 13.438C17.469 13.0562 18.0871 12.9616 18.6146 13.2483L19.331 11.9305C18.2474 11.3414 16.9026 11.5041 16.0273 12.3743L17.085 13.438Z"
+                        fill="#ffffff"
+                      ></path>{" "}
+                    </g>
+                  </svg>
+                </span>
 
-                  <span className="text-sm font-medium transition-all group-hover:ms-4">
-                    Contact Us
-                  </span>
-                </a>
-                <a
-                  className="group relative inline-flex items-center overflow-hidden rounded-sm border border-current px-3 py-3 text-pink-600 focus:ring-3 focus:outline-hidden"
-                  href="#"
-                >
-                  <span className="absolute -start-full transition-all group-hover:start-1">
-                    <svg
-                      className="size-5 rtl:rotate-180"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
+                <span className="text-sm font-medium transition-all group-hover:ms-4">
+                  Contact Us
+                </span>
+              </a>
+              <a
+                className="group relative inline-flex items-center overflow-hidden rounded-sm border border-current px-3 py-3 text-pink-600 focus:ring-3 focus:outline-hidden"
+                href="#"
+              >
+                <span className="absolute -start-full transition-all group-hover:start-1">
+                  <svg
+                    className="size-5 rtl:rotate-180"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                    <g
+                      id="SVGRepo_tracerCarrier"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    ></g>
+                    <g id="SVGRepo_iconCarrier">
+                      {" "}
                       <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M17 8l4 4m0 0l-4 4m4-4H3"
-                      />
-                    </svg>
-                  </span>
+                        d="M7.2998 5H22L20 12H8.37675M21 16H9L7 3H4M4 8H2M5 11H2M6 14H2M10 20C10 20.5523 9.55228 21 9 21C8.44772 21 8 20.5523 8 20C8 19.4477 8.44772 19 9 19C9.55228 19 10 19.4477 10 20ZM21 20C21 20.5523 20.5523 21 20 21C19.4477 21 19 20.5523 19 20C19 19.4477 19.4477 19 20 19C20.5523 19 21 19.4477 21 20Z"
+                        stroke="#dc0c7c"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      ></path>{" "}
+                    </g>
+                  </svg>
+                </span>
 
-                  <span className="text-sm font-medium transition-all group-hover:ms-4">
-                    Shop Products
-                  </span>
-                </a>
-              </div>
+                <span className="text-sm font-medium transition-all group-hover:ms-4">
+                  Shop Products
+                </span>
+              </a>
             </div>
           </div>
-
-          <img
-            alt=""
-            src="https://images.unsplash.com/photo-1484959014842-cd1d967a39cf?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
-            className="h-full w-full object-cover sm:h-[calc(100%_-_2rem)] sm:self-end sm:rounded-ss-[30px] md:h-[calc(100%_-_4rem)] md:rounded-ss-[60px]"
-          />
-        </section>
+        </div>
       </section>
     </>
   );
