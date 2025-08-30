@@ -3,17 +3,16 @@ import { Link } from "react-router-dom";
 function Footer() {
   return (
     <>
-      <footer className="bg-rose-50 block ">
+      <footer className="bg-rose-200 block ">
         <div className="mx-auto max-w-screen-xl space-y-8 px-4 py-16 sm:px-6 lg:space-y-16 lg:px-8 grid gird-cols-3">
           <div className="grid grid-cols-1 lg:grid-cols-3 ">
             <div>
-              <div className="text-zinc-900 font-black text-2xl ">
+              <div className="text-pink-600 font-black text-2xl ">
                 <h3 className="brand-name">The Baked Fantasy</h3>
               </div>
               <p className="mt-4 max-w-xs text-gray-900">
-                Your premier destination for professional baking education and
-                artisanal bakery products. Learn from experts and savor the
-                finest baked goods.
+                Your premier destination for professional baking education and artisanal
+                bakery products. Learn from experts and savor the finest baked goods.
               </p>
 
               <ul className="mt-8 flex gap-6">
@@ -27,7 +26,7 @@ function Footer() {
                     <span className="sr-only">Facebook</span>
 
                     <svg
-                      className="size-6"
+                      className="size-8"
                       fill="currentColor"
                       viewBox="0 0 24 24"
                       aria-hidden="true"
@@ -46,12 +45,12 @@ function Footer() {
                     href="#"
                     rel="noreferrer"
                     target="_blank"
-                    className="text-pink-500 transition hover:opacity-75"
+                    className="text-pink-500 transition hover:!translate-y-1"
                   >
                     <span className="sr-only">Instagram</span>
 
                     <svg
-                      className="size-6"
+                      className="size-8"
                       fill="currentColor"
                       viewBox="0 0 24 24"
                       aria-hidden="true"
@@ -65,7 +64,7 @@ function Footer() {
                   </a>
                 </li>
 
-                <li>
+                {/* <li>
                   <a
                     href="#"
                     rel="noreferrer"
@@ -83,9 +82,9 @@ function Footer() {
                       <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" />
                     </svg>
                   </a>
-                </li>
+                </li> */}
 
-                <li>
+                {/* <li>
                   <a
                     href="#"
                     rel="noreferrer"
@@ -107,7 +106,7 @@ function Footer() {
                       />
                     </svg>
                   </a>
-                </li>
+                </li> */}
               </ul>
             </div>
 
@@ -117,19 +116,13 @@ function Footer() {
 
               <ul className="mt-6 space-y-4 text-sm">
                 <li>
-                  <Link
-                    to="/"
-                    className="text-gray-700 transition hover:opacity-75"
-                  >
+                  <Link to="/" className="text-gray-700 transition hover:opacity-75">
                     Home
                   </Link>
                 </li>
 
                 <li>
-                  <Link
-                    to="/about"
-                    className="text-gray-700 transition hover:opacity-75"
-                  >
+                  <Link to="/about" className="text-gray-700 transition hover:opacity-75">
                     About Us
                   </Link>
                 </li>
@@ -168,28 +161,19 @@ function Footer() {
 
               <ul className="mt-6 space-y-4 text-sm">
                 <li>
-                  <a
-                    href="#"
-                    className="text-gray-700 transition hover:opacity-75"
-                  >
+                  <a href="#" className="text-gray-700 transition hover:opacity-75">
                     123 Baker Street, Culinary District New York, NY 10001
                   </a>
                 </li>
 
                 <li>
-                  <a
-                    href="#"
-                    className="text-gray-700 transition hover:opacity-75"
-                  >
+                  <a href="#" className="text-gray-700 transition hover:opacity-75">
                     (555) 123-BAKE
                   </a>
                 </li>
 
                 <li>
-                  <a
-                    href="#"
-                    className="text-gray-700 transition hover:opacity-75"
-                  >
+                  <a href="#" className="text-gray-700 transition hover:opacity-75">
                     info@sweetdreamsbaking.com
                   </a>
                 </li>

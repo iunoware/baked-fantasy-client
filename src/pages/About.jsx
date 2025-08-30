@@ -1,76 +1,67 @@
+import { useState, useEffect } from "react";
+
+const images = ["../../public/cake-bg-1.png", "../../public/cake-bg-2.png"];
+
 function About() {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const delay = 5000; // 3 seconds
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % images.length);
+    }, delay);
+    return () => clearInterval(timer);
+  }, []);
+
+  const goToSlide = (index) => setCurrentIndex(index);
+
   return (
     <>
-      <h1 className="text-7xl flex justify-center m-30">About us</h1>
+      <div className="relative w-full h-170 overflow-hidden rounded-lg">
+        {/* Slides */}
+        <div
+          className="flex transition-transform duration-700 ease-in-out"
+          style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+        >
+          {images.map((src, index) => (
+            <img
+              key={index}
+              src={src}
+              alt={`Slide ${index}`}
+              className="w-full h-170 object-cover flex-shrink-0"
+            />
+          ))}
+        </div>
 
-      <p className="text-2xl mt-20">
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Odit pariatur minus
-        velit dolore. Pariatur doloremque id ex saepe nulla. Ullam esse, nesciunt mollitia
-        odit fugit inventore accusantium quaerat, excepturi maxime, accusamus velit nobis.
-        Aut molestias inventore laudantium repudiandae atque tempora rerum praesentium
-        excepturi, quae est, consectetur fugiat necessitatibus laborum ullam vitae
-        blanditiis asperiores modi dicta doloribus sit, eligendi cupiditate. Ullam earum
-        ab maxime laudantium alias vel reiciendis mollitia quas. Sequi suscipit beatae
-        dicta reprehenderit impedit, facilis doloribus vel harum architecto quam similique
-        esse temporibus rem nostrum. Earum voluptatum consequuntur id et, ullam aut?
-        Perferendis animi odio odit. Eum sapiente ducimus tempora magnam ad harum incidunt
-        aspernatur, eos earum ea numquam, aliquam voluptatem officia! Reiciendis
-        temporibus saepe, rem minus velit eligendi? Architecto dolorum quasi dicta eum
-        inventore, sunt aut quisquam officiis consequuntur, voluptatum eveniet illo
-        molestias at obcaecati! Enim hic consectetur labore mollitia! Reiciendis nostrum
-        distinctio porro doloremque quaerat dolorem enim. Corrupti rem facilis possimus
-        neque vitae maiores esse voluptatem assumenda ad beatae? Consequuntur minus
-        delectus sequi hic fugiat quos nisi et ut. Animi laudantium odit sit iusto,
-        molestiae officia cumque provident aspernatur praesentium numquam rerum ratione.
-        Error vel odio atque ad accusantium, delectus porro nihil illo minima ipsum non
-        doloremque?
-      </p>
+        {/* Dots */}
+        <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2">
+          {images.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => goToSlide(index)}
+              className={`w-3 h-3 rounded-full ${
+                currentIndex === index ? "bg-white" : "bg-gray-400"
+              }`}
+            />
+          ))}
+        </div>
 
-      <p className="text-2xl mt-20">
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Odit pariatur minus
-        velit dolore. Pariatur doloremque id ex saepe nulla. Ullam esse, nesciunt mollitia
-        odit fugit inventore accusantium quaerat, excepturi maxime, accusamus velit nobis.
-        Aut molestias inventore laudantium repudiandae atque tempora rerum praesentium
-        excepturi, quae est, consectetur fugiat necessitatibus laborum ullam vitae
-        blanditiis asperiores modi dicta doloribus sit, eligendi cupiditate. Ullam earum
-        ab maxime laudantium alias vel reiciendis mollitia quas. Sequi suscipit beatae
-        dicta reprehenderit impedit, facilis doloribus vel harum architecto quam similique
-        esse temporibus rem nostrum. Earum voluptatum consequuntur id et, ullam aut?
-        Perferendis animi odio odit. Eum sapiente ducimus tempora magnam ad harum incidunt
-        aspernatur, eos earum ea numquam, aliquam voluptatem officia! Reiciendis
-        temporibus saepe, rem minus velit eligendi? Architecto dolorum quasi dicta eum
-        inventore, sunt aut quisquam officiis consequuntur, voluptatum eveniet illo
-        molestias at obcaecati! Enim hic consectetur labore mollitia! Reiciendis nostrum
-        distinctio porro doloremque quaerat dolorem enim. Corrupti rem facilis possimus
-        neque vitae maiores esse voluptatem assumenda ad beatae? Consequuntur minus
-        delectus sequi hic fugiat quos nisi et ut. Animi laudantium odit sit iusto,
-        molestiae officia cumque provident aspernatur praesentium numquam rerum ratione.
-        Error vel odio atque ad accusantium, delectus porro nihil illo minima ipsum non
-        doloremque?
-      </p>
-
-      <p className="text-2xl mt-20">
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Odit pariatur minus
-        velit dolore. Pariatur doloremque id ex saepe nulla. Ullam esse, nesciunt mollitia
-        odit fugit inventore accusantium quaerat, excepturi maxime, accusamus velit nobis.
-        Aut molestias inventore laudantium repudiandae atque tempora rerum praesentium
-        excepturi, quae est, consectetur fugiat necessitatibus laborum ullam vitae
-        blanditiis asperiores modi dicta doloribus sit, eligendi cupiditate. Ullam earum
-        ab maxime laudantium alias vel reiciendis mollitia quas. Sequi suscipit beatae
-        dicta reprehenderit impedit, facilis doloribus vel harum architecto quam similique
-        esse temporibus rem nostrum. Earum voluptatum consequuntur id et, ullam aut?
-        Perferendis animi odio odit. Eum sapiente ducimus tempora magnam ad harum incidunt
-        aspernatur, eos earum ea numquam, aliquam voluptatem officia! Reiciendis
-        temporibus saepe, rem minus velit eligendi? Architecto dolorum quasi dicta eum
-        inventore, sunt aut quisquam officiis consequuntur, voluptatum eveniet illo
-        molestias at obcaecati! Enim hic consectetur labore mollitia! Reiciendis nostrum
-        distinctio porro doloremque quaerat dolorem enim. Corrupti rem facilis possimus
-        neque vitae maiores esse voluptatem assumenda ad beatae? Consequuntur minus
-        delectus sequi hic fugiat quos nisi et ut. Animi laudantium odit sit iusto,
-        molestiae officia cumque provident aspernatur praesentium numquam rerum ratione.
-        Error vel odio atque ad accusantium, delectus porro nihil illo minima ipsum non
-        doloremque?
-      </p>
+        {/* Optional: Previous/Next buttons */}
+        <button
+          onClick={() =>
+            setCurrentIndex((prev) => (prev - 1 + images.length) % images.length)
+          }
+          className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/30 text-white p-2 rounded-full"
+        >
+          ‹
+        </button>
+        <button
+          onClick={() => setCurrentIndex((prev) => (prev + 1) % images.length)}
+          className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/30 text-white p-2 rounded-full"
+        >
+          ›
+        </button>
+      </div>
     </>
   );
 }
