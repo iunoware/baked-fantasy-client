@@ -1,28 +1,11 @@
-import heroImage from "../assets/images/bfHero.png";
-import ambassador from "../assets/images/BakedMamImage.png";
-import cake1 from "../assets/images/cake-1.jpg";
-import cake2 from "../assets/images/cake-2.jpg";
-import cake3 from "../assets/images/cake-3.jpg";
 import Card from "../components/ProductCard.jsx";
-import event from "../assets/images/event.jpg";
 import Heading from "../components/Heading.jsx";
-import Course1 from "../assets/images/onlineCourse.jpg";
-import Course2 from "../assets/images/offlineCourse.jpg";
-import review from "../assets/videos/review.mp4";
-import Background from "../assets/images/bg-test.jpg";
-import TestBG from "../assets/images/bulkOrder.png";
-import Pattern from "../assets/images/scribble.png";
-import Online from "../assets/images/onlineCourse.png";
-import Offline from "../assets/images/offlineCourse.png";
 
 function Home() {
   return (
     <>
       {/* hero section */}
-      <section
-        className="overflow-hidden bg-cover bg-no-repeat h-screen grid grid-cols-1 md:grid-cols-2"
-        style={{ backgroundImage: `url(${heroImage})` }}
-      >
+      <section className="overflow-hidden bg-cover bg-no-repeat h-screen grid grid-cols-1 md:grid-cols-2 bg-[url('../public/images/bfHero.png')]">
         {/* left column */}
         <div className="p-8 md:p-12 lg:px-16 lg:py-24 mt-35">
           <div className="text-start ltr:sm:text-left rtl:sm:text-right">
@@ -57,7 +40,7 @@ function Home() {
         </div>
         {/* right column */}
         <div>
-          <img src={ambassador} alt="" />
+          <img src="../public/images/BakedMamImage.png" alt="" />
         </div>
       </section>
 
@@ -281,13 +264,23 @@ function Home() {
         {/* products section */}
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-3 lg:gap-8 pt-8 px-10">
           <Card
-            img={cake1}
+            img="../public/images/cake-1.jpg"
             name="Chocolate Truffle Cake"
             price="120"
             discount="200"
           />
-          <Card img={cake2} name="Chocolate Cake" price="150" discount="300" />
-          <Card img={cake3} name="Truffle Cake" price="250" discount="500" />
+          <Card
+            img="../public/images/cake-2.jpg"
+            name="Chocolate Cake"
+            price="150"
+            discount="300"
+          />
+          <Card
+            img="../public/images/cake-3.jpg"
+            name="Truffle Cake"
+            price="250"
+            discount="500"
+          />
         </div>
         <div className="see-all-products pt-5 flex justify-center">
           <a
@@ -949,7 +942,7 @@ function Home() {
 
           <div className="rounded-xl h-[400px] overflow-hidden">
             <img
-              src={event}
+              src="../public/images/event.jpg"
               alt="Birthday Event"
               className="rounded-xl h-[400px]  object-cover hover:scale-108 transition-all duration-200"
             />
@@ -970,14 +963,11 @@ function Home() {
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {/* online Course */}
-            <div
-              className="mt-[70px] relative !p-8 !rounded-lg hover:!shadow-lg hover:-translate-y-1 transition-all !duration-300"
-              style={{ backgroundImage: `url(${Pattern})` }}
-            >
+            <div className="mt-[70px] relative !p-8 !rounded-lg hover:!shadow-lg hover:-translate-y-1 transition-all !duration-300 bg-[url('../public/images/scribble.png')]">
               {/* online image */}
               <div className="absolute z-[0] left-0 top-[-180px] flex justify-center w-full">
                 <img
-                  src={Online}
+                  src="../public/images/onlineCourse.png"
                   alt="Online Chef"
                   className="!max-h-[400px] !drop-shadow-xl !drop-shadow-black"
                 />
@@ -1212,14 +1202,11 @@ function Home() {
             </div>
 
             {/* Offline Course */}
-            <div
-              className="mt-[70px] relative !p-8 !rounded-lg hover:!shadow-lg hover:-translate-y-1 transition-all !duration-300"
-              style={{ backgroundImage: `url(${Pattern})` }}
-            >
+            <div className="mt-[70px] relative !p-8 !rounded-lg hover:!shadow-lg hover:-translate-y-1 transition-all !duration-300 bg-[url('../public/images/scribble.png')]">
               {/* offline image  */}
               <div className="absolute z-[0] left-0 top-[-180px] flex w-full justify-center">
                 <img
-                  src={Offline}
+                  src="../public/images/offlineCourse.png"
                   alt="Offline Chef"
                   className="!h-[400px] !drop-shadow-xl !drop-shadow-black"
                 />
@@ -1459,7 +1446,7 @@ function Home() {
           <div className="flex lg:flex-row flex-col gap-5 py-10 place-content-between items-center">
             <div className="video lg:w-3/12 md:w-5/12 w-full">
               <video
-                src={review}
+                src="../public/videos/review.mp4"
                 controls
                 autoPlay
                 muted
@@ -1583,10 +1570,7 @@ function Home() {
 
       {/* final section */}
 
-      <section
-        className=" lg:grid lg:h-[80vh] place-content-center lg:bg-cover lg:bg-center md:bg-center md:bg-cover relative bg-none "
-        style={{ backgroundImage: `url(${TestBG})` }}
-      >
+      <section className=" lg:grid lg:h-[80vh] place-content-center lg:bg-cover lg:bg-center md:bg-center md:bg-cover relative sm:bg-none lg:bg-[url('../public/images/bulkOrder.png')] md:bg-[url('../public/images/bulkOrder.png')]">
         <div className="lg:absolute lg:left-0 lg:top-[3vh] mx-auto w-screen max-w-screen-xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8 lg:py-32">
           <div className="max-w-prose text-left">
             <h1 className="lg:text-4xl font-bold text-gray-900 text-xl text-left">
