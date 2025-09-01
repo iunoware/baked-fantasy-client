@@ -12,14 +12,17 @@ function Navbar() {
           <div className="flex h-16 items-center justify-between w-full ">
             {/* brand name */}
             <div className="md:flex md:items-center md:gap-12 z-50">
-              <Link to="/" className="text-pink-500 text-2xl font-bold brand-name">
+              <Link
+                to="/"
+                className="text-pink-500 text-2xl font-bold brand-name"
+              >
                 The Backed Fantasy
               </Link>
             </div>
             {/* navbar */}
             <div
               className="hidden lg:block fixed top left-1/2 transform -translate-x-1/2 
-                bg-rose-200 rounded-xl p-4 px-[8px] shadow-md z-40 w-[90%] sm:w-[80%] md:w-auto"
+                bg-[#f1e5ff] rounded-xl p-4 px-[8px] shadow-md z-40 w-[90%] sm:w-[80%] md:w-auto"
             >
               <nav aria-label="Global">
                 <ul className="flex items-center gap-6 text-sm text-black">
@@ -119,20 +122,20 @@ function Navbar() {
                       fill="none"
                       xmlns="http://www.w3.org/2000/svg"
                     >
-                      <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                      <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
                       <g
                         id="SVGRepo_tracerCarrier"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
                       ></g>
                       <g id="SVGRepo_iconCarrier">
                         {" "}
                         <path
                           d="M15 4H18C19.1046 4 20 4.89543 20 6V18C20 19.1046 19.1046 20 18 20H15M11 16L15 12M15 12L11 8M15 12H3"
                           stroke="#fff"
-                          stroke-width="1.5"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
+                          strokeWidth="1.5"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
                         ></path>{" "}
                       </g>
                     </svg>
@@ -155,11 +158,11 @@ function Navbar() {
                         xmlns="http://www.w3.org/2000/svg"
                         fill="#ffffff"
                       >
-                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                        <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
                         <g
                           id="SVGRepo_tracerCarrier"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
                         ></g>
                         <g id="SVGRepo_iconCarrier">
                           <path d="M18 9H4V8h14zm-5 3H4v1h9zm8-8v9h-1V5H2v13h9v1H1V4zm2.07 11.637l-.707-.707-5.863 5.863-2.863-2.863-.707.707 3.57 3.57z"></path>
