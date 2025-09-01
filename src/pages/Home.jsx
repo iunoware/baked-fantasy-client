@@ -980,7 +980,7 @@ function Home() {
                     viewBox="0 0 64 64"
                     xmlns="http://www.w3.org/2000/svg"
                     stroke-width="3"
-                    stroke="#00B8DB"
+                    stroke="#fb637b"
                     fill="none"
                     className="pr-3"
                   >
@@ -1033,7 +1033,7 @@ function Home() {
                       viewBox="0 0 48 48"
                       fill="none"
                       xmlns="http://www.w3.org/2000/svg"
-                      stroke="#00B8DB"
+                      stroke="#fb637b"
                       stroke-width="1.7759999999999998"
                     >
                       <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -1068,7 +1068,7 @@ function Home() {
                       viewBox="0 0 48 48"
                       fill="none"
                       xmlns="http://www.w3.org/2000/svg"
-                      stroke="#00B8DB"
+                      stroke="#fb637b"
                       stroke-width="1.7759999999999998"
                     >
                       <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -1103,7 +1103,7 @@ function Home() {
                       viewBox="0 0 48 48"
                       fill="none"
                       xmlns="http://www.w3.org/2000/svg"
-                      stroke="#00B8DB"
+                      stroke="#fb637b"
                       stroke-width="1.7759999999999998"
                     >
                       <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -1138,7 +1138,7 @@ function Home() {
                       viewBox="0 0 48 48"
                       fill="none"
                       xmlns="http://www.w3.org/2000/svg"
-                      stroke="#00B8DB"
+                      stroke="#fb637b"
                       stroke-width="1.7759999999999998"
                     >
                       <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -1170,7 +1170,7 @@ function Home() {
 
               <div className="p-4">
                 <a
-                  className="group relative inline-flex items-center overflow-hidden rounded-sm bg-cyan-500 px-8 py-3 text-white focus:ring-3 focus:outline-hidden mr-3"
+                  className="group relative inline-flex items-center overflow-hidden rounded-sm bg-pink-500 px-8 py-3 text-white focus:ring-3 focus:outline-hidden mr-3"
                   href="#"
                 >
                   <span className="absolute -start-full transition-all group-hover:start-4">
@@ -1215,12 +1215,12 @@ function Home() {
               <div className="!z-5 !mt-[220px]">
                 <div className="flex items-center mb-6">
                   <svg
-                    fill="oklch(59.2% 0.249 0.584)"
+                    fill="#fb637b"
                     width="48px"
                     viewBox="0 0 50 50"
                     xmlns="http://www.w3.org/2000/svg"
                     xmlns:xlink="http://www.w3.org/1999/xlink"
-                    stroke="oklch(59.2% 0.249 0.584)"
+                    stroke="#fb637b"
                     stroke-width="0.0005"
                     className="pr-3"
                   >
@@ -1254,7 +1254,7 @@ function Home() {
                       viewBox="0 0 48 48"
                       fill="none"
                       xmlns="http://www.w3.org/2000/svg"
-                      stroke="oklch(59.2% 0.249 0.584)"
+                      stroke="#fb637b"
                       stroke-width="1.7759999999999998"
                     >
                       <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -1289,7 +1289,7 @@ function Home() {
                       viewBox="0 0 48 48"
                       fill="none"
                       xmlns="http://www.w3.org/2000/svg"
-                      stroke="oklch(59.2% 0.249 0.584)"
+                      stroke="#fb637b"
                       stroke-width="1.7759999999999998"
                     >
                       <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -1324,7 +1324,7 @@ function Home() {
                       viewBox="0 0 48 48"
                       fill="none"
                       xmlns="http://www.w3.org/2000/svg"
-                      stroke="oklch(59.2% 0.249 0.584)"
+                      stroke="#fb637b"
                       stroke-width="1.7759999999999998"
                     >
                       <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -1359,7 +1359,7 @@ function Home() {
                       viewBox="0 0 48 48"
                       fill="none"
                       xmlns="http://www.w3.org/2000/svg"
-                      stroke="oklch(59.2% 0.249 0.584)"
+                      stroke="#fb637b"
                       stroke-width="1.7759999999999998"
                     >
                       <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
