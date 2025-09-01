@@ -1,28 +1,50 @@
-function Card(props) {
+import { Link } from "react-router-dom";
+
+function Product(props) {
+  const colors = {
+    pink: "bg-pink-400/50",
+    blue: "bg-cyan-400/50",
+    yellow: "bg-yellow-300/50",
+    red: "bg-red-400/50",
+  };
   return (
     <>
-      <div className=" rounded bg-gray-300">
-        <article className="overflow-hidden rounded-lg shadow-sm transition hover:shadow-lg">
-          <img
-            alt="cakes"
-            src={props.img}
-            className="h-56 w-full object-cover hover:scale-105 transition-all duration-200 ease-in-out"
-            loading="lazy"
-          />
+      <Link to={`/products/${props.title}`} className="card">
+        <article className="cat-card overflow-hidden rounded-lg shadow-sm hover:-translate-y-2 transition-all duration-200 ">
+          <div className="relative h-56">
+            <img
+              alt="Cake"
+              src={props.img}
+              className="h-full w-full object-cover cat-img"
+            />
+
+            {/* <div className={`absolute inset-0 ${colors[props.color]}`}></div> */}
+
+            {/* Centered hover button */}
+            <div className="hover-content">
+              <a
+                href="#"
+                className="bg-white rounded-lg px-4 py-2 font-bold shadow"
+              >
+                View details
+              </a>
+            </div>
+          </div>
+
+          {/* Bottom white content */}
           <div className="bg-white p-4 sm:p-6">
-            <a href="#">
-              <h3 className="mt-0.5 text-lg text-gray-900 font-bold">
-                {props.name}
-              </h3>
-            </a>
-            <p className="mt-2 line-clamp-3 text-xl/relaxed text-blue-500 font-extrabold">
-              ₹{props.price}
-              <span className="text-[15px] strike line-through text-gray-500 font-medium pl-2">
-                ₹{props.discount}
-              </span>
-            </p>
-            {/* primary buttons */}
-            <div className="buttons pt-5">
+            <div className="text-black flex">
+              <div className="flex items-center gap-2 w-10/12">
+                <div>
+                  <h3 className="font-bold text-xl">{props.title}</h3>
+                  <p className="text-md pt-2">{props.subject}</p>
+                </div>
+              </div>
+              <p className="mt-2 pb-3 font-extrabold text-3xl text-blue-500">
+                ₹{props.price}
+              </p>
+            </div>
+            <div className="pt-3">
               <a
                 className="group relative inline-flex items-center overflow-hidden rounded-sm bg-cyan-500 px-8 py-3 text-white focus:ring-3 focus:outline-hidden mr-3"
                 href="#"
@@ -41,14 +63,13 @@ function Card(props) {
                       strokeLinejoin="round"
                     ></g>
                     <g id="SVGRepo_iconCarrier">
-                      {" "}
                       <path
                         d="M7.2998 5H22L20 12H8.37675M21 16H9L7 3H4M4 8H2M5 11H2M6 14H2M10 20C10 20.5523 9.55228 21 9 21C8.44772 21 8 20.5523 8 20C8 19.4477 8.44772 19 9 19C9.55228 19 10 19.4477 10 20ZM21 20C21 20.5523 20.5523 21 20 21C19.4477 21 19 20.5523 19 20C19 19.4477 19.4477 19 20 19C20.5523 19 21 19.4477 21 20Z"
                         stroke="#fff"
                         strokeWidth="2"
                         strokeLinecap="round"
                         strokeLinejoin="round"
-                      ></path>{" "}
+                      ></path>
                     </g>
                   </svg>
                 </span>
@@ -79,14 +100,14 @@ function Card(props) {
                 </span>
 
                 <span className="text-sm font-medium transition-all group-hover:ms-4">
-                  view more
+                  Buy Now
                 </span>
               </a>
             </div>
           </div>
         </article>
-      </div>
+      </Link>
     </>
   );
 }
-export default Card;
+export default Product;

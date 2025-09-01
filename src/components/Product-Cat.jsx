@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 function Category(props) {
   const colors = {
     pink: "bg-pink-400/50",
@@ -7,23 +9,30 @@ function Category(props) {
   };
   return (
     <>
-      <div className="card">
-        <article className="overflow-hidden rounded-lg shadow-sm hover:-translate-y-2 transition-all duration-200 ">
-          {/* Image section with overlay */}
+      <Link to={`/products/${props.title}`} className="card">
+        <article className="cat-card overflow-hidden rounded-lg shadow-sm hover:-translate-y-2 transition-all duration-200 ">
           <div className="relative h-56">
             <img
               alt="Cake"
               src={props.img}
-              className="h-full w-full object-cover"
+              className="h-full w-full object-cover cat-img"
             />
-            {/* Pink overlay */}
+
             <div className={`absolute inset-0 ${colors[props.color]}`}></div>
 
-            {/* Text inside overlay */}
+            {/* Centered hover button */}
+            <div className="hover-content">
+              <a
+                href="#"
+                className="bg-white rounded-lg px-4 py-2 font-bold shadow"
+              >
+                Explore {props.title}
+              </a>
+            </div>
+
             <div className="absolute bottom-4 left-4 text-white">
               <div className="flex items-center gap-2">
                 <span className="text-xl">{props.emoji}</span>
-                {/* You can replace with an SVG icon */}
                 <div>
                   <h3 className="font-bold text-lg">{props.title}</h3>
                   <p className="text-sm">15 products</p>
@@ -37,7 +46,7 @@ function Category(props) {
             <p className="mt-2 text-sm text-gray-600">{props.subject}</p>
           </div>
         </article>
-      </div>
+      </Link>
     </>
   );
 }
