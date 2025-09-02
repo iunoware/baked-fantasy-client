@@ -3,6 +3,7 @@ import Product from "../../components/Products.jsx";
 function Cake() {
   return (
     <>
+      {/* <Link to={`/products/cake/cake-1`} className="card"> */}
       <div className="cakes">
         {/* hero section */}
         <div className="hero bg-[url(/images/cake-hero.png)] bg-cover bg-center h-[80vh] flex justify-baseline items-center ps-10 ">
@@ -13,11 +14,12 @@ function Cake() {
           <Product
             img="/images/cake-2.jpg"
             subject="Rich chocolate cake with truffle filling and ganache topping"
-            title="Chocolate Cake"
+            title="ChocolateCake"
             price="45"
           />
         </div>
       </div>
+      {/* </Link> */}
     </>
   );
 }
