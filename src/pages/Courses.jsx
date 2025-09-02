@@ -1,7 +1,7 @@
 function Courses() {
   return (
     <>
-      <h1 className="text-7xl flex justify-center m-30">Courses</h1>
+      <h1 className="text-7xl flex justify-center p-30">Courses</h1>
 
       <p className="text-2xl mt-20">
         Lorem ipsum dolor sit amet consectetur, adipisicing elit. Odit pariatur minus

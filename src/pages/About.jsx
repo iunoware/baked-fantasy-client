@@ -347,8 +347,8 @@ function About() {
 
           {/* Timeline */}
           <div className="relative">
-            {/* Vertical line */}
-            <div className="absolute left-1/2 transform -translate-x-1/2 w-40 rounded-lg bg-[url(/images/candle-bg-3.png)] bg-center bg-cover bg-no-repeat h-full hidden lg:block"></div>
+            {/* candle */}
+            <div className="absolute left-1/2 transform -translate-x-1/2 w-25 rounded-bl-2xl rounded-br-4xl bg-[url(/images/candle-bg-3.png)] bg-center bg-cover bg-no-repeat h-full hidden lg:block"></div>
 
             <div className="space-y-12">
               {milestones.map((milestone, index) => (
@@ -494,7 +494,7 @@ function About() {
       </div>
 
       {/* award section */}
-      <section className="awards py-16 md:py-24 bg-sky-100">
+      <section className="awards py-16 md:py-24 bg-rose-100">
         <div className="container mx-auto px-6 max-w-7xl">
           <h2 className="text-3xl md:text-4xl font-bold text-orange-900 text-center mb-18">
             Awards & Recognition
@@ -553,7 +553,7 @@ function About() {
       </section>
 
       {/* testimonial */}
-      <section className="py-12 px-12 bg-rose-100">
+      <section className="py-12 px-12 bg-sky-100">
         <div>
           <h2 className="text-5xl text-orange-900 font-semibold text-center mb-6">
             Sweet words from our customers
@@ -581,6 +581,35 @@ function About() {
               </div>
             );
           })}
+        </div>
+
+        <div className="text-center mt-8">
+          <a
+            class="group relative inline-flex items-center overflow-hidden rounded-sm px-8 py-3 text-blue-600"
+            target="_blank"
+            href="https://www.google.com/search?sca_esv=2522d5777cdbdc58&hl=en-IN&sxsrf=AE3TifM5O43bpWbi0h4G7E4CC6revb5kUw:1756809251615&si=AMgyJEtREmoPL4P1I5IDCfuA8gybfVI2d5Uj7QMwYCZHKDZ-EyA5slTbW5eqP8ucakgreX9x5iS9IjevVKjBh3MoISwnxvEXSJrMtaQHVVz68EGLEUFcXSqJuheZ6Pgqck4By3xgI21U9ATN03pkW79iZnC_AWvL4saAap8ttk0zFqIEHFMdl2o%3D&q=The+Baked+Fantasy+%7C+Baking+Academy+in+Madurai+Reviews&sa=X&ved=2ahUKEwjHyoW78LmPAxVWT2wGHdG9OG0Q0bkNegQIHxAD&biw=1536&bih=695&dpr=1.25"
+          >
+            <span class="absolute -start-full transition-all group-hover:start-4">
+              <svg
+                class="size-5 rtl:rotate-180"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M17 8l4 4m0 0l-4 4m4-4H3"
+                />
+              </svg>
+            </span>
+
+            <span class="text-lg hover:underline font-medium transition-all group-hover:ms-4">
+              See more Reviews
+            </span>
+          </a>
         </div>
       </section>
     </>
