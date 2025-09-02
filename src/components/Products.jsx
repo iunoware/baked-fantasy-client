@@ -1,12 +1,6 @@
 import { Link } from "react-router-dom";
 
 function Product(props) {
-  const colors = {
-    pink: "bg-pink-400/50",
-    blue: "bg-cyan-400/50",
-    yellow: "bg-yellow-300/50",
-    red: "bg-red-400/50",
-  };
   return (
     <>
       <Link to={`/products/${props.title}`} className="card">
