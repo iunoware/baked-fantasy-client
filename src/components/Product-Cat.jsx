@@ -22,12 +22,12 @@ function Category(props) {
 
             {/* Centered hover button */}
             <div className="hover-content">
-              <a
+              <div
                 href="#"
                 className="bg-white rounded-lg px-4 py-2 font-bold shadow"
               >
                 Explore {props.title}
-              </a>
+              </div>
             </div>
 
             <div className="absolute bottom-4 left-4 text-white">
