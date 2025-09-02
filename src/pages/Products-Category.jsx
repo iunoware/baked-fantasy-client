@@ -1,7 +1,21 @@
 import Heading from "../components/Heading.jsx";
 import Category from "../components/Product-Cat.jsx";
+import { useEffect, useState } from "react";
 
 function Products() {
+  const [products, setProducts] = useState([]);
+  useEffect(() => {
+    fetch("https://localhost:5000/api/products")
+      .then((res) => res.json())
+      .then((data) => setProducts(data))
+      .catch((err) => console.error("Error fetching products:", err));
+  }, []);
+  const colors = {
+    pink: "bg-pink-400/50",
+    blue: "bg-cyan-400/50",
+    yellow: "bg-yellow-300/50",
+    red: "bg-red-400/50",
+  };
   return (
     <>
       <div className="product bg-purple-100">
@@ -13,41 +27,16 @@ function Products() {
             generations.
           </p>
           <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5 px-20 py-10">
-            <Category
-              img="/images/cake-1.jpg"
-              color="pink"
-              emoji="🍩"
-              title="Donuts"
-              subject="many varieties of donuts avail, grab now before its gone"
-            />
-            <Category
-              img="/images/cake-2.jpg"
-              color="blue"
-              emoji="🍰"
-              title="Cake"
-              subject="many varieties of Cakes avail, grab now before its gone"
-            />
-            <Category
-              img="/images/cake-3.jpg"
-              color="red"
-              emoji="🍨"
-              title="Desserts"
-              subject="many varieties of Ice creams avail, grab now before its gone"
-            />
-            <Category
-              img="/images/cake-3.jpg"
-              color="yellow"
-              emoji="🍨"
-              title="Desserts"
-              subject="many varieties of Ice creams avail, grab now before its gone"
-            />
-            <Category
-              img="/images/cake-3.jpg"
-              color="blue"
-              emoji="🍨"
-              title="Desserts"
-              subject="many varieties of Ice creams avail, grab now before its gone"
-            />
+            {products.map((p) => {
+              <Category
+                key={p.id}
+                img={p.image}
+                color="pink"
+                emoji="🍩"
+                title="Donuts"
+                subject="many varieties of donuts avail, grab now before its gone"
+              />;
+            })}
           </div>
         </section>
         {/* why choose us section */}

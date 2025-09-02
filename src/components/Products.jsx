@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 function Product(props) {
   return (
     <>
-      <Link to={`/products/${props.title}`} className="card">
+      <Link to={"/products/cake/cake-1"} className="card">
         <article className="cat-card overflow-hidden rounded-lg shadow-sm hover:-translate-y-2 transition-all duration-200 ">
           <div className="relative h-56">
             <img

@@ -1501,7 +1501,7 @@ function Home() {
                     <p className="mt-1 text-sm text-gray-700">By Ram</p>
 
                     <p className="mt-4 line-clamp-2 text-sm text-pretty text-gray-700">
-                      "Sweet Dreams Baking Institute offers the most
+                      "The Baked Fantasy Baking Institute offers the most
                       comprehensive baking education. Highly recommended!"
                     </p>
                   </div>
