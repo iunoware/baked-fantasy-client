@@ -9,6 +9,8 @@ import Footer from "./components/Footer.jsx";
 import Cake from "../src/pages/products/Cake.jsx";
 import ProductDetail from "../src/pages/ProductDetail.jsx";
 import ScrollToTop from "./components/ScrollToTop.jsx";
+import OnlineCourse from "./pages/OnlineCourse.jsx";
+import OfflineCourse from "./pages/OfflineCourse.jsx";
 
 function App() {
   return (
@@ -23,6 +25,8 @@ function App() {
           <Route path="/products/cake" element={<Cake />} />
           <Route path="/products/cake/cake-1" element={<ProductDetail />} />
           <Route path="/courses" element={<Courses />} />
+          <Route path="/courses/online-course" element={<OnlineCourse />} />
+          <Route path="/courses/offline-course" element={<OfflineCourse />} />
           <Route path="/contact" element={<Contact />} />
         </Routes>
         <Footer />
