@@ -3,12 +3,12 @@ import Category from "../components/Product-Cat.jsx";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-function Products() {
+function Categories() {
   const [products, setProducts] = useState([]);
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/products");
+        const res = await axios.get("http://localhost:5000/categories");
         setProducts(res.data);
       } catch (err) {
         console.error("Error fetching products:", err);
@@ -17,13 +17,6 @@ function Products() {
 
     fetchProducts();
   }, []);
-  const colors = {
-    pink: "bg-pink-400/50",
-    blue: "bg-cyan-400/50",
-    yellow: "bg-yellow-300/50",
-    red: "bg-red-400/50",
-  };
-  const colorKeys = Object.keys(colors);
 
   return (
     <>
@@ -37,14 +30,13 @@ function Products() {
           </p>
           <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5 px-20 py-10">
             {products.map((p, i) => {
-              const randomColor = colors[colorKeys[i % colorKeys.length]]; // cycle colors
               return (
                 <Category
                   key={p._id}
                   img={p.imageUrl}
                   emoji="🍩"
-                  title={p.name}
-                  subject={p.description}
+                  title={p.title}
+                  subject={p.subject}
                 />
               );
             })}
@@ -192,4 +184,4 @@ function Products() {
   );
 }
 
-export default Products;
+export default Categories;

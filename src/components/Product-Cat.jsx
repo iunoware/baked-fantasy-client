@@ -49,9 +49,8 @@ function Category(props) {
 
           <div className="absolute bottom-4 left-4 text-white">
             <div className="flex items-center gap-2">
-              <span className="text-xl">{props.emoji}</span>
               <div>
-                <h3 className="font-bold text-lg">{props.title}</h3>
+                <h3 className="font-bold text-2xl">{props.title}</h3>
                 <p className="text-sm">15 products</p>
               </div>
             </div>
