@@ -6,10 +6,16 @@ import axios from "axios";
 function Products() {
   const [products, setProducts] = useState([]);
   useEffect(() => {
-    axios
-      .get("http://localhost:5000/api/products")
-      .then((res) => setProducts(res.data))
-      .catch((err) => console.error(err));
+    const fetchProducts = async () => {
+      try {
+        const res = await axios.get("http://localhost:5000/api/products");
+        setProducts(res.data);
+      } catch (err) {
+        console.error("Error fetching products:", err);
+      }
+    };
+
+    fetchProducts();
   }, []);
   const colors = {
     pink: "bg-pink-400/50",
@@ -17,7 +23,8 @@ function Products() {
     yellow: "bg-yellow-300/50",
     red: "bg-red-400/50",
   };
-  const randomColor = colors[Math.floor(Math.random() * colors.length)];
+  const colorKeys = Object.keys(colors);
+
   return (
     <>
       <div className="product bg-purple-100">
@@ -29,15 +36,17 @@ function Products() {
             generations.
           </p>
           <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5 px-20 py-10">
-            {products.map((p) => {
-              <Category
-                key={p.id}
-                img={p.imageUrl}
-                color={randomColor}
-                emoji="🍩"
-                title={p.name}
-                subject={p.description}
-              />;
+            {products.map((p, i) => {
+              const randomColor = colors[colorKeys[i % colorKeys.length]]; // cycle colors
+              return (
+                <Category
+                  key={p._id}
+                  img={p.imageUrl}
+                  emoji="🍩"
+                  title={p.name}
+                  subject={p.description}
+                />
+              );
             })}
           </div>
         </section>
