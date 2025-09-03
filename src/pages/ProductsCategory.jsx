@@ -1,21 +1,23 @@
 import Heading from "../components/Heading.jsx";
 import Category from "../components/Product-Cat.jsx";
 import { useEffect, useState } from "react";
+import axios from "axios";
 
-function Products() {
+function Categories() {
   const [products, setProducts] = useState([]);
   useEffect(() => {
-    fetch("https://localhost:5000/api/products")
-      .then((res) => res.json())
-      .then((data) => setProducts(data))
-      .catch((err) => console.error("Error fetching products:", err));
+    const fetchProducts = async () => {
+      try {
+        const res = await axios.get("http://localhost:5000/categories");
+        setProducts(res.data);
+      } catch (err) {
+        console.error("Error fetching products:", err);
+      }
+    };
+
+    fetchProducts();
   }, []);
-  const colors = {
-    pink: "bg-pink-400/50",
-    blue: "bg-cyan-400/50",
-    yellow: "bg-yellow-300/50",
-    red: "bg-red-400/50",
-  };
+
   return (
     <>
       <div className="product bg-purple-100">
@@ -27,15 +29,16 @@ function Products() {
             generations.
           </p>
           <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5 px-20 py-10">
-            {products.map((p) => {
-              <Category
-                key={p.id}
-                img={p.image}
-                color="pink"
-                emoji="🍩"
-                title="Donuts"
-                subject="many varieties of donuts avail, grab now before its gone"
-              />;
+            {products.map((p, i) => {
+              return (
+                <Category
+                  key={p._id}
+                  img={p.imageUrl}
+                  emoji="🍩"
+                  title={p.title}
+                  subject={p.subject}
+                />
+              );
             })}
           </div>
         </section>
@@ -129,7 +132,7 @@ function Products() {
                       fill="none"
                       xmlns="http://www.w3.org/2000/svg"
                     >
-                      <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                      <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
                       <g
                         id="SVGRepo_tracerCarrier"
                         strokeLinecap="round"
@@ -137,8 +140,8 @@ function Products() {
                       ></g>
                       <g id="SVGRepo_iconCarrier">
                         <path
-                          fill-rule="evenodd"
-                          clip-rule="evenodd"
+                          fillRule="evenodd"
+                          clipRule="evenodd"
                           d="M12.31 16.826C12.2864 17.9963 11.3464 18.9278 10.2052 18.9118C9.06401 18.8957 8.14927 17.9382 8.15697 16.7676C8.16467 15.5971 9.09191 14.6522 10.2332 14.652C10.7897 14.6578 11.3212 14.8901 11.7106 15.2978C12.1001 15.7055 12.3157 16.2552 12.31 16.826V16.826Z"
                           stroke="#fff"
                           strokeWidth="1.5"
@@ -146,8 +149,8 @@ function Products() {
                           strokeLinejoin="round"
                         ></path>
                         <path
-                          fill-rule="evenodd"
-                          clip-rule="evenodd"
+                          fillRule="evenodd"
+                          clipRule="evenodd"
                           d="M22.2014 16.826C22.1778 17.9963 21.2378 18.9278 20.0966 18.9118C18.9554 18.8957 18.0407 17.9382 18.0484 16.7676C18.0561 15.5971 18.9833 14.6522 20.1246 14.652C20.6811 14.6578 21.2126 14.8901 21.602 15.2978C21.9915 15.7055 22.2071 16.2552 22.2014 16.826V16.826Z"
                           stroke="#fff"
                           strokeWidth="1.5"
@@ -181,4 +184,4 @@ function Products() {
   );
 }
 
-export default Products;
+export default Categories;

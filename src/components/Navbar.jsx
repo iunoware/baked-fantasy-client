@@ -61,7 +61,7 @@ function Navbar() {
                   {/* products */}
                   <li>
                     <NavLink
-                      to="/products"
+                      to="/categories"
                       className={({ isActive }) =>
                         `text-lg rounded-lg p-3 transition ${
                           isActive
