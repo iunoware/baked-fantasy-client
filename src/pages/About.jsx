@@ -569,7 +569,7 @@ function About() {
             return (
               <div
                 key={index}
-                className="bg-white p-5 rounded-xl gap-2 w-[80%] place-items-center hover:scale-102 hover:shadow-lg transition-all duration-200"
+                className="bg-white/70 backdrop-blur-2xl p-5 rounded-xl gap-2 w-[80%] place-items-center hover:scale-102 hover:shadow-lg transition-all duration-200"
               >
                 <div>
                   <h4 className="text-orange-900 text-xl pl-1 font-semibold">
