@@ -188,6 +188,13 @@ function ProductInfo({
             ))}
           </SelectContent>
         </Select>
+        <label className="text-lg font-medium text-gray-900">
+          Enter Message on the cake
+        </label>
+        <input
+          type="text"
+          className="border-1 mt-0.5 w-full rounded-xl !border-black shadow-sm sm:text-sm h-12 md:text-lg lg:text-lg pl-3"
+        />
       </div>
 
       {/* Quantity Selector */}
