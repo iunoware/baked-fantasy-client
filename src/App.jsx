@@ -6,11 +6,11 @@ import Courses from "../src/pages/Courses.jsx";
 import Contact from "../src/pages/Contact.jsx";
 import Navbar from "./components/Navbar.jsx";
 import Footer from "./components/Footer.jsx";
-import CategoryPage from "./pages/products/specificCat.jsx";
 import ProductDetail from "../src/pages/ProductDetail.jsx";
 import ScrollToTop from "./components/ScrollToTop.jsx";
 import OnlineCourse from "./pages/OnlineCourse.jsx";
 import OfflineCourse from "./pages/OfflineCourse.jsx";
+import SpecificCategory from "./pages/products/specificCat.jsx";
 
 function App() {
   return (
@@ -24,7 +24,10 @@ function App() {
           {/* for category page */}
           <Route path="/categories" element={<Categories />} />
           {/* for specific category */}
-          <Route path="/products/:categoryName" element={<CategoryPage />} />
+          <Route
+            path="/products/:categoryName"
+            element={<SpecificCategory />}
+          />
           {/* for products details */}
           <Route
             path="/products/:categoryName/:productId"
