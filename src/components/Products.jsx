@@ -3,12 +3,12 @@ import { Link } from "react-router-dom";
 function Product(props) {
   return (
     <>
-      <Link to={`/products/cake/cake-1`} className="card">
+      <Link to={`/products/${props.category}/${props.id}`} className="card">
         <article className="cat-card overflow-hidden rounded-lg shadow-sm hover:-translate-y-2 transition-all duration-200 ">
           <div className="relative h-56">
             <img
               alt="Cake"
-              src={`http://localhost:5000${props.img}`}
+              src={props.img} // first image only
               className="h-full w-full object-cover cat-img"
             />
 
@@ -16,12 +16,12 @@ function Product(props) {
 
             {/* Centered hover button */}
             <div className="hover-content">
-              <a
+              <button
                 href="#"
                 className="bg-white rounded-lg px-4 py-2 font-bold shadow"
               >
                 View details
-              </a>
+              </button>
             </div>
           </div>
 
@@ -39,7 +39,7 @@ function Product(props) {
               </p>
             </div>
             <div className="pt-3">
-              <a
+              <button
                 className="group relative inline-flex items-center overflow-hidden rounded-sm bg-cyan-500 px-8 py-3 text-white focus:ring-3 focus:outline-hidden mr-3"
                 href="#"
               >
@@ -71,8 +71,8 @@ function Product(props) {
                 <span className="text-sm font-medium transition-all group-hover:ms-4">
                   Add to cart
                 </span>
-              </a>
-              <a
+              </button>
+              <button
                 className="group relative inline-flex items-center overflow-hidden rounded-sm border border-current px-3 py-3 text-pink-600 focus:ring-3 focus:outline-hidden"
                 href="#"
               >
@@ -96,7 +96,7 @@ function Product(props) {
                 <span className="text-sm font-medium transition-all group-hover:ms-4">
                   Buy Now
                 </span>
-              </a>
+              </button>
             </div>
           </div>
         </article>
