@@ -34,7 +34,9 @@ function SpecificCategory() {
         {products.map((p) => (
           <Product
             key={p._id}
-            img={p.imageUrl}
+            id={p._id} // ✅ pass id
+            category={categoryName}
+            img={`http://localhost:5000${p.images?.[0]}`} // 👈 thumbnail only
             price={p.price}
             title={p.title}
             subject={p.subject}
