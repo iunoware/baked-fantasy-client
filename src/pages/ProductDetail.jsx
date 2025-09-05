@@ -4,6 +4,7 @@ import { Card, CardContent } from "../components/ui/card.jsx";
 import { Badge } from "../components/ui/badge.jsx";
 import { Separator } from "../components/ui/separator.jsx";
 // import { ImageWithFallback } from "../figma/ImageWithFallback";
+
 import {
   Star,
   ShoppingCart,
