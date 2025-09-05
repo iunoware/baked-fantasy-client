@@ -1,9 +1,11 @@
-import React, { useState } from "react";
-import { Button } from "../components/ui/button.jsx";
-import { Card, CardContent } from "../components/ui/card.jsx";
-import { Badge } from "../components/ui/badge.jsx";
-import { Separator } from "../components/ui/separator.jsx";
-// import { ImageWithFallback } from "../figma/ImageWithFallback";
+import { Button } from "../components/ui/button";
+import { Card, CardContent } from "../components/ui/card";
+import { Badge } from "../components/ui/badge";
+import { Separator } from "../components/ui/separator";
+import Product from "../components/Products.jsx";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import axios from "axios";
 
 import {
   Star,
@@ -18,58 +20,52 @@ import {
   Shield,
 } from "lucide-react";
 
-function ProductDetailPage({ productId, onNavigate, onAddToCart }) {
+function ProductDetailPage({ onNavigate, onAddToCart }) {
+  const { productId } = useParams(); // comes from URL /products/:categoryName
+  const [product, setProduct] = useState(null);
   const [selectedImage, setSelectedImage] = useState(0);
   const [quantity, setQuantity] = useState(1);
   const [isWishlisted, setIsWishlisted] = useState(false);
 
+  useEffect(() => {
+    const fetchProduct = async () => {
+      try {
+        const res = await axios.get(
+          `http://localhost:5000/products/${productId}`
+        );
+        setProduct(res.data);
+      } catch (err) {
+        console.error("Error fetching product:", err);
+      }
+    };
+
+    fetchProduct();
+  }, [productId]);
+
   // Mock product data - in real app, this would come from props or API
-  const product = {
-    id: 1,
-    name: "Chocolate Truffle Cake",
-    category: "cakes",
-    price: 45.99,
-    originalPrice: 52.99,
-    images: [
-      "https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=600&h=600&fit=crop",
-      "https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?w=600&h=600&fit=crop",
-      "https://images.unsplash.com/photo-1571115764595-644a1f56a55c?w=600&h=600&fit=crop",
-      "https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=600&h=600&fit=crop",
-    ],
-    rating: 4.9,
-    reviews: 124,
-    description:
-      "Indulge in our signature Chocolate Truffle Cake, a masterpiece of rich Belgian chocolate and silky smooth truffle filling. Each layer is carefully crafted with premium cocoa and finished with a luxurious ganache topping that melts in your mouth.",
-    longDescription:
-      "Our Chocolate Truffle Cake is the perfect centerpiece for any celebration. Made with finest Belgian chocolate, farm-fresh eggs, and pure vanilla extract, this cake delivers an unforgettable chocolate experience. The cake features three layers of moist chocolate sponge, filled with our signature truffle cream, and topped with a glossy chocolate ganache that's decorated with hand-piped rosettes and chocolate shavings.",
-    isPopular: true,
-    preparationTime: "2-3 hours",
-    servings: "8-10 people",
-    ingredients: [
-      "Belgian Dark Chocolate (70% cocoa)",
-      "Farm-fresh eggs",
-      "Organic butter",
-      "Pure vanilla extract",
-      "Premium cocoa powder",
-      "Fresh cream",
-      "Cane sugar",
-    ],
-    nutritionalInfo: {
-      calories: 450,
-      protein: "6g",
-      carbs: "52g",
-      fat: "24g",
-      sugar: "38g",
-    },
-    allergens: ["Eggs", "Dairy", "Gluten"],
-    storage: "Refrigerate for up to 5 days",
-    features: [
-      { icon: Award, text: "Award-winning recipe" },
-      { icon: Shield, text: "Made with premium ingredients" },
-      { icon: Clock, text: "Fresh baked daily" },
-      { icon: Users, text: "Perfect for sharing" },
-    ],
-  };
+  // const product = {
+  //   id: 1,
+  //   name: `${products.name}`,
+  //   category: `${products.category}`,
+  //   price: `${products.price}`,
+  //   originalPrice: `${products.ogPrice}`,
+  //   images: [
+  //     products.images.map((p) => {
+  //       p.image;
+  //     }),
+  //   ],
+  //   rating: 4.9,
+  //   reviews: 124,
+  //   description: `${products.description}`,
+  //   allergens: ["Eggs", "Dairy", "Gluten"],
+  //   storage: "Refrigerate for up to 5 days",
+  //   features: [
+  //     { icon: Award, text: "Award-winning recipe" },
+  //     { icon: Shield, text: "Made with premium ingredients" },
+  //     { icon: Clock, text: "Fresh baked daily" },
+  //     { icon: Users, text: "Perfect for sharing" },
+  //   ],
+  // };
 
   const relatedProducts = [
     {
@@ -114,7 +110,7 @@ function ProductDetailPage({ productId, onNavigate, onAddToCart }) {
   };
 
   return (
-    <div className="min-h-screen bg-[#FFF5E1] page-transition">
+    <div className="min-h-screen bg-[#FFF5E1] page-transition py-15">
       <div className="container mx-auto px-4 py-8">
         {/* Breadcrumb */}
         <div className="flex items-center space-x-2 mb-8 fade-in">
@@ -137,18 +133,14 @@ function ProductDetailPage({ productId, onNavigate, onAddToCart }) {
           <div className="space-y-4 fade-in">
             <div className="relative bg-white rounded-2xl p-4 shadow-card overflow-hidden group">
               <img
-                src={product.images[selectedImage]}
+                src={`http://localhost:5000${product.images[selectedImage]}`}
                 alt={product.name}
                 className="w-full h-96 md:h-[500px] object-cover rounded-xl group-hover:scale-105 transition-transform duration-500"
               />
-              {product.isPopular && (
-                <Badge className="absolute top-6 left-6 bg-[#FF80AB] text-white scale-in">
-                  Popular Choice
-                </Badge>
-              )}
+
               {product.originalPrice && (
                 <Badge className="absolute top-6 right-6 bg-[#00BCD4] text-white scale-in">
-                  Save ${(product.originalPrice - product.price).toFixed(2)}
+                  Save ₹{(product.originalPrice - product.price).toFixed(2)}
                 </Badge>
               )}
             </div>
@@ -166,7 +158,7 @@ function ProductDetailPage({ productId, onNavigate, onAddToCart }) {
                   }`}
                 >
                   <img
-                    src={image}
+                    src={`http://localhost:5000${image}`} // 👈 prepend backend URL
                     alt={`${product.name} view ${index + 1}`}
                     className="w-full h-20 object-cover rounded"
                   />
@@ -189,14 +181,6 @@ function ProductDetailPage({ productId, onNavigate, onAddToCart }) {
                     ({product.reviews} reviews)
                   </span>
                 </div>
-                <div className="flex items-center space-x-2 text-sm text-muted-foreground">
-                  <Clock className="h-4 w-4" />
-                  <span>{product.preparationTime}</span>
-                </div>
-                <div className="flex items-center space-x-2 text-sm text-muted-foreground">
-                  <Users className="h-4 w-4" />
-                  <span>Serves {product.servings}</span>
-                </div>
               </div>
             </div>
 
@@ -204,11 +188,11 @@ function ProductDetailPage({ productId, onNavigate, onAddToCart }) {
             <div className="flex items-center space-x-4">
               <div className="flex items-center space-x-3">
                 <span className="text-3xl font-bold text-[#00BCD4]">
-                  ${product.price}
+                  ₹{product.price}
                 </span>
                 {product.originalPrice && (
                   <span className="text-xl text-muted-foreground line-through">
-                    ${product.originalPrice}
+                    ₹{product.originalPrice}
                   </span>
                 )}
               </div>
@@ -278,7 +262,7 @@ function ProductDetailPage({ productId, onNavigate, onAddToCart }) {
                 <span className="text-sm text-muted-foreground">
                   Total:{" "}
                   <span className="font-bold text-[#00BCD4]">
-                    ${(product.price * quantity).toFixed(2)}
+                    ₹{(product.price * quantity).toFixed(2)}
                   </span>
                 </span>
               </div>
@@ -318,11 +302,11 @@ function ProductDetailPage({ productId, onNavigate, onAddToCart }) {
         </div>
 
         {/* Product Details */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
-          <Card className="shadow-card fade-in">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16 ">
+          <Card className="shadow-card fade-in shadow-lg rounded-2xl bg-white border-none">
             <CardContent className="p-6">
               <h3 className="text-xl font-semibold text-foreground mb-4">
-                Ingredients
+                Description
               </h3>
               <ul className="space-y-2">
                 {product.ingredients.map((ingredient, index) => (
@@ -338,25 +322,7 @@ function ProductDetailPage({ productId, onNavigate, onAddToCart }) {
             </CardContent>
           </Card>
 
-          <Card className="shadow-card fade-in-delay-1">
-            <CardContent className="p-6">
-              <h3 className="text-xl font-semibold text-foreground mb-4">
-                Nutrition (per serving)
-              </h3>
-              <div className="space-y-3">
-                {Object.entries(product.nutritionalInfo).map(([key, value]) => (
-                  <div key={key} className="flex justify-between">
-                    <span className="text-muted-foreground capitalize">
-                      {key}:
-                    </span>
-                    <span className="font-medium">{value}</span>
-                  </div>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card className="shadow-card fade-in-delay-2">
+          <Card className="shadow-card fade-in-delay-2 shadow-lg rounded-2xl bg-white border-none">
             <CardContent className="p-6">
               <h3 className="text-xl font-semibold text-foreground mb-4">
                 Product Info
@@ -388,34 +354,18 @@ function ProductDetailPage({ productId, onNavigate, onAddToCart }) {
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {relatedProducts.map((relatedProduct, index) => (
-              <Card
+              <Product
                 key={relatedProduct.id}
-                className="overflow-hidden card-hover cursor-pointer fade-in"
-                style={{ animationDelay: `${index * 0.1}s` }}
+                img={
+                  "https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?w=600&h=600&fit=crop"
+                }
+                price={499}
+                title={"strawberry cake"}
+                subject={"THis is strawberry cake"}
                 onClick={() =>
                   onNavigate("product-detail", { productId: relatedProduct.id })
                 }
-              >
-                <img
-                  src={relatedProduct.image}
-                  alt={relatedProduct.name}
-                  className="w-full h-48 object-cover"
-                />
-                <CardContent className="p-4">
-                  <h3 className="font-semibold text-foreground mb-2">
-                    {relatedProduct.name}
-                  </h3>
-                  <div className="flex items-center justify-between">
-                    <span className="text-lg font-bold text-[#00BCD4]">
-                      ${relatedProduct.price}
-                    </span>
-                    <div className="flex items-center space-x-1">
-                      <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-                      <span className="text-sm">{relatedProduct.rating}</span>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
+              />
             ))}
           </div>
         </div>
