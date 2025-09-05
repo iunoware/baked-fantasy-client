@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Button } from "../components/ui/button.jsx";
-import { Card, CardContent } from "..components/ui/card.jsx";
-import { Badge } from "..components/ui/badge.jsx";
-import { Separator } from "..components/ui/separator.jsx";
-import { ImageWithFallback } from "../figma/ImageWithFallback";
+import { Card, CardContent } from "../components/ui/card.jsx";
+import { Badge } from "../components/ui/badge.jsx";
+import { Separator } from "../components/ui/separator.jsx";
+// import { ImageWithFallback } from "../figma/ImageWithFallback";
 import {
   Star,
   ShoppingCart,
@@ -135,7 +135,7 @@ export function ProductDetailPage({ productId, onNavigate, onAddToCart }) {
           {/* Images */}
           <div className="space-y-4 fade-in">
             <div className="relative bg-white rounded-2xl p-4 shadow-card overflow-hidden group">
-              <ImageWithFallback
+              <img
                 src={product.images[selectedImage]}
                 alt={product.name}
                 className="w-full h-96 md:h-[500px] object-cover rounded-xl group-hover:scale-105 transition-transform duration-500"
@@ -164,7 +164,7 @@ export function ProductDetailPage({ productId, onNavigate, onAddToCart }) {
                       : "shadow-soft hover:shadow-card"
                   }`}
                 >
-                  <ImageWithFallback
+                  <img
                     src={image}
                     alt={`${product.name} view ${index + 1}`}
                     className="w-full h-20 object-cover rounded"
@@ -395,7 +395,7 @@ export function ProductDetailPage({ productId, onNavigate, onAddToCart }) {
                   onNavigate("product-detail", { productId: relatedProduct.id })
                 }
               >
-                <ImageWithFallback
+                <img
                   src={relatedProduct.image}
                   alt={relatedProduct.name}
                   className="w-full h-48 object-cover"
