@@ -17,7 +17,7 @@ import {
   Shield,
 } from "lucide-react";
 
-export function ProductDetailPage({ productId, onNavigate, onAddToCart }) {
+function ProductDetailPage({ productId, onNavigate, onAddToCart }) {
   const [selectedImage, setSelectedImage] = useState(0);
   const [quantity, setQuantity] = useState(1);
   const [isWishlisted, setIsWishlisted] = useState(false);
@@ -422,3 +422,4 @@ export function ProductDetailPage({ productId, onNavigate, onAddToCart }) {
     </div>
   );
 }
+export default ProductDetailPage;
