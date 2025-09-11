@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import CourseCard from "@/components/CourseCard";
 import { Link } from "react-router-dom";
 
@@ -31,7 +30,7 @@ function Courses() {
           </g>
         </svg>
       ),
-      bgColor: "bg-blue-100",
+      bgColor: "bg-white",
       textColor: "text-blue-500",
       heading: "Flexible Online & Offline Learning",
       content: "Join in-person or attend interactive online courses from anywhere.",
@@ -61,7 +60,7 @@ function Courses() {
           </g>
         </svg>
       ),
-      bgColor: "bg-pink-100",
+      bgColor: "bg-white",
       textColor: "text-pink-500",
       heading: "Expert Chefs",
       content:
@@ -131,7 +130,7 @@ function Courses() {
           </g>
         </svg>
       ),
-      bgColor: "bg-blue-100",
+      bgColor: "bg-white",
       textColor: "text-blue-500",
       heading: "Certificate of Completion",
       content:
@@ -171,7 +170,7 @@ function Courses() {
           </g>
         </svg>
       ),
-      bgColor: "bg-pink-100",
+      bgColor: "bg-white",
       textColor: "text-pink-500",
       heading: "Hands-on Learning",
       content:
@@ -180,7 +179,7 @@ function Courses() {
   ];
 
   return (
-    <>
+    <div className="bg-rose-50">
       {/* hero section */}
       <div>
         <h1 className="lg:text-6xl md:text-5xl sm:text-4xl text-3xl flex font-semibold justify-center pt-30">
@@ -256,7 +255,7 @@ function Courses() {
           })}
         </div>
       </div>
-    </>
+    </div>
   );
 }
 
