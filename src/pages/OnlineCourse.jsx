@@ -19,7 +19,7 @@ function OnlineCourse() {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
         });
-        console.log(localStorage.getItem("token"));
+        // console.log(localStorage.getItem("token"));
         setCourses(response.data.courses);
         // console.log("Course image value:", courses.image);
         console.log("Course image value:", response.data.courses[0].ImageUrl);
@@ -38,11 +38,11 @@ function OnlineCourse() {
       <div className="pt-30 grid grid-cols-1 lg:grid-cols-2">
         {courses.length > 0 ? (
           courses.map((course, index) => {
-            return (  
+            return (
               <div key={index}>
                 <Link>
                   <OnlineCourseCard
-                    image={`http://localhost:5000${course.ImageUrl}`}
+                    image={course.ImageUrl}
                     rating={course.rating}
                     reviews={course.reviews}
                     students={course.students}
