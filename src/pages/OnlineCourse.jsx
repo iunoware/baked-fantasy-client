@@ -38,7 +38,7 @@ function OnlineCourse() {
       <div className="pt-30 grid grid-cols-1 lg:grid-cols-2">
         {courses.length > 0 ? (
           courses.map((course, index) => {
-            return (
+            return (  
               <div key={index}>
                 <Link>
                   <OnlineCourseCard
