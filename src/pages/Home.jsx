@@ -5,7 +5,7 @@ function Home() {
   return (
     <>
       {/* hero section */}
-      <section className="overflow-hidden bg-cover bg-no-repeat h-screen grid grid-cols-1 md:grid-cols-2 bg-[url('../public/images/bfHero.png')]">
+      <section className="overflow-hidden bg-cover bg-no-repeat h-screen grid grid-cols-1 md:grid-cols-2 bg-[url('/images/bfHero.png')]">
         {/* left column */}
         <div className="p-8 md:p-12 lg:px-16 lg:py-24 mt-35">
           <div className="text-start ltr:sm:text-left rtl:sm:text-right">
@@ -40,7 +40,7 @@ function Home() {
         </div>
         {/* right column */}
         <div>
-          <img src="../public/images/BakedMamImage.png" alt="" />
+          <img src="/images/BakedMamImage.png" alt="" />
         </div>
       </section>
 
@@ -264,19 +264,19 @@ function Home() {
         {/* products section */}
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-3 lg:gap-8 pt-8 px-10">
           <Card
-            img="../public/images/cake-1.jpg"
+            img="/images/cake-1.jpg"
             name="Chocolate Truffle Cake"
             price="120"
             discount="200"
           />
           <Card
-            img="../public/images/cake-2.jpg"
+            img="/images/cake-2.jpg"
             name="Chocolate Cake"
             price="150"
             discount="300"
           />
           <Card
-            img="../public/images/cake-3.jpg"
+            img="/images/cake-3.jpg"
             name="Truffle Cake"
             price="250"
             discount="500"
@@ -942,7 +942,7 @@ function Home() {
 
           <div className="rounded-xl h-[400px] overflow-hidden">
             <img
-              src="../public/images/event.jpg"
+              src="/images/event.jpg"
               alt="Birthday Event"
               className="rounded-xl h-[400px]  object-cover hover:scale-108 transition-all duration-200"
             />
@@ -963,11 +963,11 @@ function Home() {
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {/* online Course */}
-            <div className="mt-[70px] relative !p-8 !rounded-lg hover:!shadow-lg hover:-translate-y-1 transition-all !duration-300 bg-[url('../public/images/scribble.png')]">
+            <div className="mt-[70px] relative !p-8 !rounded-lg hover:!shadow-lg hover:-translate-y-1 transition-all !duration-300 bg-[url('/images/scribble.png')]">
               {/* online image */}
               <div className="absolute z-[0] left-0 top-[-180px] flex justify-center w-full">
                 <img
-                  src="../public/images/onlineCourse.png"
+                  src="/images/onlineCourse.png"
                   alt="Online Chef"
                   className="!max-h-[400px] !drop-shadow-xl !drop-shadow-black"
                 />
@@ -1202,11 +1202,11 @@ function Home() {
             </div>
 
             {/* Offline Course */}
-            <div className="mt-[70px] relative !p-8 !rounded-lg hover:!shadow-lg hover:-translate-y-1 transition-all !duration-300 bg-[url('../public/images/scribble.png')]">
+            <div className="mt-[70px] relative !p-8 !rounded-lg hover:!shadow-lg hover:-translate-y-1 transition-all !duration-300 bg-[url('/images/scribble.png')]">
               {/* offline image  */}
               <div className="absolute z-[0] left-0 top-[-180px] flex w-full justify-center">
                 <img
-                  src="../public/images/offlineCourse.png"
+                  src="/images/offlineCourse.png"
                   alt="Offline Chef"
                   className="!h-[400px] !drop-shadow-xl !drop-shadow-black"
                 />
@@ -1446,7 +1446,7 @@ function Home() {
           <div className="flex lg:flex-row flex-col gap-5 py-10 place-content-between items-center">
             <div className="video lg:w-3/12 md:w-5/12 w-full">
               <video
-                src="../public/videos/review.mp4"
+                src="/videos/review.mp4"
                 controls
                 autoPlay
                 muted
@@ -1570,7 +1570,7 @@ function Home() {
 
       {/* final section */}
 
-      <section className=" lg:grid lg:h-[80vh] place-content-center lg:bg-cover lg:bg-center md:bg-center md:bg-cover relative sm:bg-none lg:bg-[url('../public/images/bulkOrder.png')] md:bg-[url('../public/images/bulkOrder.png')]">
+      <section className=" lg:grid lg:h-[80vh] place-content-center lg:bg-cover lg:bg-center md:bg-center md:bg-cover relative sm:bg-none lg:bg-[url('/images/bulkOrder.png')] md:bg-[url('/images/bulkOrder.png')]">
         <div className="lg:absolute lg:left-0 lg:top-[3vh] mx-auto w-screen max-w-screen-xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8 lg:py-32">
           <div className="max-w-prose text-left">
             <h1 className="lg:text-4xl font-bold text-gray-900 text-xl text-left">

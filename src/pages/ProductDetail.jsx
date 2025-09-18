@@ -5,6 +5,7 @@ import { Separator } from "../components/ui/separator";
 import Product from "../components/Products.jsx";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "axios";
 
 import {
@@ -19,11 +20,13 @@ import {
 function ProductDetailPage({ onNavigate, onAddToCart }) {
   const { productId } = useParams();
   const [product, setProduct] = useState(null);
+  const [relatedProducts, setRelatedProducts] = useState([]);
   const [selectedImage, setSelectedImage] = useState(0);
   const [quantity, setQuantity] = useState(1);
   const [isWishlisted, setIsWishlisted] = useState(false);
   const [loading, setLoading] = useState(true);
 
+  // for fetching the product
   useEffect(() => {
     const fetchProduct = async () => {
       try {
@@ -39,6 +42,24 @@ function ProductDetailPage({ onNavigate, onAddToCart }) {
     };
 
     fetchProduct();
+  }, [productId]);
+
+  // for fetching the related product
+  useEffect(() => {
+    const fetchRelated = async () => {
+      try {
+        const res = await axios.get(
+          `http://localhost:5000/products/${productId}/related`
+        );
+        setRelatedProducts(res.data);
+      } catch (err) {
+        console.error("Error fetching related products:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    if (productId) fetchRelated();
   }, [productId]);
 
   if (loading) {
@@ -72,30 +93,25 @@ function ProductDetailPage({ onNavigate, onAddToCart }) {
     onNavigate("checkout", { productId: product._id, quantity });
   };
 
-  const relatedProducts = [
-    { id: 2, name: "Red Velvet Cake", price: 42.99 },
-    { id: 3, name: "Vanilla Bean Cake", price: 38.99 },
-    { id: 4, name: "Lemon Drizzle Cake", price: 35.99 },
-  ];
-
   return (
     <div className="min-h-screen bg-[#FFF5E1] py-15">
       <div className="container mx-auto px-4 py-8">
         {/* Back Button */}
         <div className="flex items-center space-x-2 mb-8">
-          <Button
+          <Link
             variant="ghost"
             size="sm"
-            onClick={() =>
-              onNavigate("category-products", {
-                category: product.category?.title || "Products",
-              })
-            }
-            className="text-muted-foreground hover:text-[#00BCD4]"
+            // onClick={() =>
+            //   onNavigate("category-products", {
+            //     category: product.category?.title || "Products",
+            //   })
+            // }
+            to={`/products/${product.category?.title}`}
+            className="flex items-center text-muted-foreground hover:text-[#00BCD4]"
           >
             <ArrowLeft className="h-4 w-4 mr-2" />
             Back to {product.category?.title || "Products"}
-          </Button>
+          </Link>
         </div>
 
         {/* Product Grid */}
@@ -242,14 +258,13 @@ function ProductDetailPage({ onNavigate, onAddToCart }) {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {relatedProducts.map((related) => (
             <Product
-              key={related.id}
-              img="https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?w=600&h=600&fit=crop"
+              key={related._id}
+              id={related._id}
+              category={related.category?.title}
+              img={`http://localhost:5000${related.images?.[0]}`}
               price={related.price}
-              title={related.name}
-              subject="Delicious treat"
-              onClick={() =>
-                onNavigate("product-detail", { productId: related.id })
-              }
+              title={related.title}
+              subject={related.subject}
             />
           ))}
         </div>
