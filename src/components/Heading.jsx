@@ -5,7 +5,7 @@ function Heading(props) {
         <span className="h-px flex-1 bg-gradient-to-r from-transparent to-blue-300"></span>
 
         <span
-          className={`px-4 lg:text-5xl text-4xl font-bold text-center text-orange-900`}
+          className={`px-4 lg:text-5xl text-4xl font-bold text-center text-black`}
         >
           {props.title}
         </span>

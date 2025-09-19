@@ -3,7 +3,7 @@ import Heading from "../components/Heading.jsx";
 
 function Home() {
   return (
-    <>
+    <div className="bg-[#f1faee]">
       {/* hero section */}
       <section className="overflow-hidden bg-cover bg-no-repeat h-screen grid grid-cols-1 md:grid-cols-2 bg-[url('/images/bfHero.png')]">
         {/* left column */}
@@ -45,7 +45,7 @@ function Home() {
       </section>
 
       {/* card section */}
-      <div className="flex justify-around py-15 [@media(max-width:768px)]:flex-col">
+      <div className="flex justify-around py-15 [@media(max-width:768px)]:flex-col bg-[#f1faee]">
         <div className="card-1 text-center flex flex-col items-center card-hover hover:animate-wiggle">
           <svg
             width="100px"
@@ -103,6 +103,7 @@ function Home() {
             <p className="text-lg">Happy Students</p>
           </div>
         </div>
+
         <div className="card-2 text-center flex flex-col items-center card-hover hover:animate-wiggle">
           <svg
             width="100px"
@@ -155,6 +156,7 @@ function Home() {
             <p className="text-lg">Experience</p>
           </div>
         </div>
+
         <div className="card-3 text-center flex flex-col items-center card-hover hover:animate-wiggle">
           <svg
             width="100px"
@@ -203,6 +205,7 @@ function Home() {
             <p className="text-lg">Awards</p>
           </div>
         </div>
+        
         <div className="card-4 text-center flex flex-col items-center card-hover hover:animate-wiggle">
           <svg
             className="flex justify-center"
@@ -255,7 +258,7 @@ function Home() {
       </div>
 
       {/* featured products */}
-      <section className="feature-section bg-rose-50 py-8 pb-12">
+      <section className="feature-section bg-[#f1faee] py-8 pb-12">
         <Heading title="Featured Products" />
         <p className="subHeading">
           Handcrafted with love using premium ingredients and traditional
@@ -312,20 +315,20 @@ function Home() {
       </section>
 
       {/* why choose us section */}
-      <section className="why-choose-us my-5">
+      <section className="why-choose-us my-5 ">
         <Heading title="Why Choose Backed Fantasy?" />
         <p className="text-center text-xl py-5">
           Discover what makes us the premier choice for baking education and
           premium baked goods.
         </p>
         {/* main cards */}
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 lg:grid-cols-4 lg:gap-8 px-10 pt-5">
+        <div className="w-1/2 grid grid-cols-2 grid-rows-2 gap-6 px-10 pt-5">
           {/* card-1 */}
-          <div className="rounded bg-rose-300">
+          <div className="rounded bg-pink-300">
             <div href="#" className="group relative block h-64 sm:h-80 lg:h-70">
               <span className="absolute inset-0 border-2 border-dashed border-black"></span>
 
-              <div className="relative flex h-full transform items-end border-2 border-black bg-cyan-200 transition-transform group-hover:-translate-x-2 group-hover:-translate-y-2">
+              <div className="relative flex h-full transform items-end border-2 border-black bg-pink-200 transition-transform group-hover:-translate-x-2 group-hover:-translate-y-2">
                 <div className="p-4 !pt-0 transition-opacity group-hover:absolute group-hover:opacity-0 sm:p-6 lg:p-8 lg:opacity-100 [@media(max-width:600px)]:opacity-0 ">
                   <svg
                     fill="#000000"
@@ -636,15 +639,16 @@ function Home() {
               </div>
             </div>
           </div>
+
           {/* card-2 */}
-          <div className="rounded bg-cyan-300">
+          <div className="rounded bg-pink-300">
             <div
               href="#"
               className="group relative block h-64 sm:h-80 lg:h-70 "
             >
               <span className="absolute inset-0 border-2 border-dashed border-black"></span>
 
-              <div className="relative flex h-full transform items-end border-2 border-black bg-rose-200 transition-transform group-hover:-translate-x-2 group-hover:-translate-y-2">
+              <div className="relative flex h-full transform items-end border-2 border-black bg-pink-200 transition-transform group-hover:-translate-x-2 group-hover:-translate-y-2">
                 <div className="p-4 !pt-0 transition-opacity group-hover:absolute group-hover:opacity-0 sm:p-6 lg:p-8 lg:opacity-100 [@media(max-width:600px)]:opacity-0 ">
                   <svg
                     width="60px"
@@ -721,12 +725,13 @@ function Home() {
               </div>
             </div>
           </div>
+
           {/* card-3 */}
-          <div className="rounded bg-rose-300">
+          <div className="rounded bg-pink-300">
             <div href="#" className="group relative block h-64 sm:h-80 lg:h-70">
               <span className="absolute inset-0 border-2 border-dashed border-black"></span>
 
-              <div className="relative flex h-full transform items-end border-2 border-black bg-cyan-200 transition-transform group-hover:-translate-x-2 group-hover:-translate-y-2">
+              <div className="relative flex h-full transform items-end border-2 border-black bg-pink-200 transition-transform group-hover:-translate-x-2 group-hover:-translate-y-2">
                 <div className="p-4 !pt-0 transition-opacity group-hover:absolute group-hover:opacity-0 sm:p-6 lg:p-8 lg:opacity-100 [@media(max-width:600px)]:opacity-0 ">
                   <svg
                     width="64px"
@@ -788,12 +793,13 @@ function Home() {
               </div>
             </div>
           </div>
+
           {/* card-4 */}
-          <div className="rounded bg-cyan-300">
+          <div className="rounded bg-pink-300">
             <div href="#" className="group relative block h-64 sm:h-80 lg:h-70">
               <span className="absolute inset-0 border-2 border-dashed border-black"></span>
 
-              <div className="relative flex h-full transform items-end border-2 border-black bg-rose-200 transition-transform group-hover:-translate-x-2 group-hover:-translate-y-2">
+              <div className="relative flex h-full transform items-end border-2 border-black bg-pink-200 transition-transform group-hover:-translate-x-2 group-hover:-translate-y-2">
                 <div className="p-4 !pt-0 transition-opacity group-hover:absolute group-hover:opacity-0 sm:p-6 lg:p-8 lg:opacity-100 [@media(max-width:600px)]:opacity-0 ">
                   <svg
                     fill="#000000"
@@ -866,6 +872,10 @@ function Home() {
               </div>
             </div>
           </div>
+        </div>
+        <div className="w-1/2 inline-block">
+          <img src="https://plus.unsplash.com/premium_photo-1667428602819-3c806f41aa4f?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8YmFrZXJ5JTIwaW1hZ2VzfGVufDB8fDB8fHww"
+          className="h-[300px]"/>
         </div>
       </section>
 
@@ -951,7 +961,7 @@ function Home() {
       </section>
 
       {/* course section */}
-      <section id="cement" className="py-20 bg-white">
+      <section id="cement" className="py-20 bg">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <Heading title="Featured Courses" />
@@ -963,7 +973,7 @@ function Home() {
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {/* online Course */}
-            <div className="mt-[70px] relative !p-8 !rounded-lg hover:!shadow-lg hover:-translate-y-1 transition-all !duration-300 bg-[url('/images/scribble.png')]">
+            <div className="mt-[70px] relative !p-8 !rounded-lg hover:!shadow-lg hover:-translate-y-1 transition-all !duration-300 bg-white">
               {/* online image */}
               <div className="absolute z-[0] left-0 top-[-180px] flex justify-center w-full">
                 <img
@@ -1014,7 +1024,7 @@ function Home() {
                       <line x1="28.6" y1="29.66" x2="49.42" y2="29.66"></line>
                     </g>
                   </svg>
-                  <h3 className="!text-2xl text-amber-800 font-bold ">
+                  <h3 className="!text-2xl text-black font-bold ">
                     Online Baking Course – Learn Anytime, Anywhere
                   </h3>
                 </div>
@@ -1202,7 +1212,7 @@ function Home() {
             </div>
 
             {/* Offline Course */}
-            <div className="mt-[70px] relative !p-8 !rounded-lg hover:!shadow-lg hover:-translate-y-1 transition-all !duration-300 bg-[url('/images/scribble.png')]">
+            <div className="mt-[70px] relative !p-8 !rounded-lg hover:!shadow-lg hover:-translate-y-1 transition-all !duration-300 bg-white">
               {/* offline image  */}
               <div className="absolute z-[0] left-0 top-[-180px] flex w-full justify-center">
                 <img
@@ -1236,8 +1246,8 @@ function Home() {
                       <path d="M12 2C10.906937 2 10 2.9069372 10 4L7 4C5.3550302 4 4 5.3550302 4 7L4 42C4 43.644459 5.3544268 45 7 45L9 45L9 46C9 47.093063 9.9069372 48 11 48L14 48C15.093063 48 16 47.093063 16 46L16 45L34 45L34 46C34 47.093063 34.906937 48 36 48L39 48C40.093063 48 41 47.093063 41 46L41 45L43 45C44.645063 45 46 43.645063 46 42L46 15.167969 A 1.0001 1.0001 0 0 0 46 14.841797L46 7C46 5.3544268 44.644459 4 43 4L40 4C40 2.9069372 39.093063 2 38 2L32 2C30.906937 2 30 2.9069372 30 4L21 4C21 2.9069372 20.093063 2 19 2L12 2 z M 7 6L10.832031 6 A 1.0001 1.0001 0 0 0 11.158203 6L19.832031 6 A 1.0001 1.0001 0 0 0 20.158203 6L30.832031 6 A 1.0001 1.0001 0 0 0 31.158203 6L38.832031 6 A 1.0001 1.0001 0 0 0 39.158203 6L43 6C43.563541 6 44 6.4355732 44 7L44 14L6 14L6 7C6 6.4349698 6.4349698 6 7 6 z M 10 8 A 2 2 0 0 0 8 10 A 2 2 0 0 0 10 12 A 2 2 0 0 0 12 10 A 2 2 0 0 0 10 8 z M 16 8 A 2 2 0 0 0 14 10 A 2 2 0 0 0 16 12 A 2 2 0 0 0 18 10 A 2 2 0 0 0 16 8 z M 22 8 A 2 2 0 0 0 20 10 A 2 2 0 0 0 22 12 A 2 2 0 0 0 24 10 A 2 2 0 0 0 22 8 z M 28 8 A 2 2 0 0 0 26 10 A 2 2 0 0 0 28 12 A 2 2 0 0 0 30 10 A 2 2 0 0 0 28 8 z M 40 8 A 2 2 0 0 0 38 10 A 2 2 0 0 0 40 12 A 2 2 0 0 0 42 10 A 2 2 0 0 0 40 8 z M 6 16L44 16L44 42C44 42.562937 43.562937 43 43 43L40.167969 43 A 1.0001 1.0001 0 0 0 39.841797 43L35.154297 43 A 1.0001 1.0001 0 0 0 34.984375 42.986328 A 1.0001 1.0001 0 0 0 34.839844 43L15.167969 43 A 1.0001 1.0001 0 0 0 14.841797 43L10.154297 43 A 1.0001 1.0001 0 0 0 9.984375 42.986328 A 1.0001 1.0001 0 0 0 9.8398438 43L7 43C6.4355732 43 6 42.563541 6 42L6 16 z M 9 19L9 20L9 40L41 40L41 19L9 19 z M 11 21L39 21L39 38L11 38L11 21 z M 11 45L14 45L14 46L11 46L11 45 z M 36 45L39 45L39 46L36 46L36 45 z"></path>
                     </g>
                   </svg>
-                  <h3 className="!text-2xl text-amber-800 font-bold">
-                    Offline Baking Course – Learn Hands-On with Experts
+                  <h3 className="!text-2xl text-black font-bold">
+                    Offline Baking Course - Learn Hands-On with Experts
                   </h3>
                 </div>
                 <p className="text-gray-600 !mb-6 leading-relaxed">
@@ -1436,7 +1446,7 @@ function Home() {
       </section>
 
       {/* testimonial section */}
-      <div className="bg-rose-50">
+      <div className="bg">
         <section className="mt-10 mx-15 pt-10">
           <Heading title="What Our Students Say" />
           <p className="subHeading">
@@ -1457,7 +1467,7 @@ function Home() {
             <div className="cards lg:w-9/12 md:w-7/12 w-full grid lg:grid-cols-2 grid-cols-1 gap-4">
               <a
                 href="#"
-                className="block rounded-md border bg-cyan-100 border-gray-500 p-4 shadow-sm sm:p-6 lg:h-45 text-white hover:scale-102 transition-all duration-200 ease-in-out "
+                className="block rounded-md bg-cyan-100 bop-4 shadow-sm sm:p-6 lg:h-45 text-white hover:scale-102 transition-all duration-200 ease-in-out "
               >
                 <div className="sm:flex sm:justify-between sm:gap-4 lg:gap-6">
                   <div className="sm:order-last sm:shrink-0">
@@ -1483,7 +1493,7 @@ function Home() {
               </a>
               <a
                 href="#"
-                className="block rounded-md border border-gray-500 p-4 shadow-sm sm:p-6 lg:h-45 hover:scale-102 transition-all duration-200 ease-in-out bg-cyan-100 "
+                className="block rounded-md p-4 shadow-sm sm:p-6 lg:h-45 hover:scale-102 transition-all duration-200 ease-in-out bg-cyan-100 "
               >
                 <div className="sm:flex sm:justify-between sm:gap-4 lg:gap-6">
                   <div className="sm:order-last sm:shrink-0">
@@ -1509,7 +1519,7 @@ function Home() {
               </a>
               <a
                 href="#"
-                className="block rounded-md border border-gray-500 p-4 shadow-sm sm:p-6 lg:h-45 hover:scale-102 transition-all duration-200 ease-in-out bg-cyan-100"
+                className="block rounded-m p-4 shadow-sm sm:p-6 lg:h-45 hover:scale-102 transition-all duration-200 ease-in-out bg-cyan-100"
               >
                 <div className="sm:flex sm:justify-between sm:gap-4 lg:gap-6">
                   <div className="sm:order-last sm:shrink-0">
@@ -1537,7 +1547,7 @@ function Home() {
               </a>
               <a
                 href="#"
-                className="block rounded-md border border-gray-500 p-4 shadow-sm sm:p-6 lg:h-45 hover:scale-102 transition-all duration-200 ease-in-out bg-cyan-100"
+                className="block rounded-md p-4 shadow-sm sm:p-6 lg:h-45 hover:scale-102 transition-all duration-200 ease-in-out bg-cyan-100"
               >
                 <div className="sm:flex sm:justify-between sm:gap-4 lg:gap-6">
                   <div className="sm:order-last sm:shrink-0">
@@ -1569,8 +1579,7 @@ function Home() {
       </div>
 
       {/* final section */}
-
-      <section className=" lg:grid lg:h-[80vh] place-content-center lg:bg-cover lg:bg-center md:bg-center md:bg-cover relative sm:bg-none lg:bg-[url('/images/bulkOrder.png')] md:bg-[url('/images/bulkOrder.png')]">
+      <section className="lg:grid lg:h-[80vh] place-content-center lg:bg-cover lg:bg-center md:bg-center md:bg-cover relative sm:bg-none lg:bg-[url('/images/bulkOrder.png')] md:bg-[url('/images/bulkOrder.png')]">
         <div className="lg:absolute lg:left-0 lg:top-[3vh] mx-auto w-screen max-w-screen-xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8 lg:py-32">
           <div className="max-w-prose text-left">
             <h1 className="lg:text-4xl font-bold text-gray-900 text-xl text-left">
@@ -1654,7 +1663,7 @@ function Home() {
           </div>
         </div>
       </section>
-    </>
+    </div>
   );
 }
 
