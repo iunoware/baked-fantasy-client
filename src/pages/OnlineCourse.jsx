@@ -32,10 +32,24 @@ function OnlineCourse() {
   }, []);
 
   return (
-    <div className="bg-rose-50">
+    <div className="bg-[#f1faee]">
+      {/* hero section */}
+      <div className="pt-30">
+        <h1 className="lg:text-6xl md:text-5xl sm:text-4xl text-3xl flex font-semibold justify-center">
+          Choose our <span className="text-black">&nbsp;Learning path</span>
+        </h1>
+        <div className="flex justify-center">
+          <p className="text-center lg:text-2xl md:text-xl sm:text-lg max-w-[600px] mx-3 pt-10 text-gray-700">
+            Master the art of baking with our expert-led courses designed for all skill
+            levels. Whether you prefer learning online or in-person, we have the perfect
+            program for you.
+          </p>
+        </div>
+      </div>
+
       {/* <h1 className="pt-40 text-5xl font-bold text-center">Online course</h1> */}
 
-      <div className="pt-30 grid grid-cols-1 lg:grid-cols-2">
+      <div className="py-20 grid grid-cols-1 lg:grid-cols-2">
         {courses.length > 0 ? (
           courses.map((course, index) => {
             return (

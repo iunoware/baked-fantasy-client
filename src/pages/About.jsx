@@ -3,13 +3,13 @@ import { Link } from "react-router-dom";
 
 const images = [
   {
-    img: "/images/cake-bg-1.png",
+    img: "/images/cake-bg-3.jpg",
     heading: "Baking Happiness, One Slice at a Time",
     content:
       "Delight in our freshly baked cakes, cupcakes, and custom creations—crafted with love to make every occasion unforgettable.",
   },
   {
-    img: "/images/cake-bg-2.png",
+    img: "/images/cake-bg-4.jpg",
     heading: "Where Every Bite is a Celebration",
     content:
       "From classic cakes to custom creations, we bake joy for every special moment.",
@@ -19,7 +19,7 @@ const images = [
 function About() {
   // for hero section slider
   const [currentIndex, setCurrentIndex] = useState(0);
-  const delay = 5000; // 3 seconds
+  const delay = 10000; 
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -274,7 +274,7 @@ function About() {
   return (
     <>
       {/* hero section */}
-      <div className="relative w-full h-170 overflow-hidden">
+      <div className="relative w-full h-[700px] -z-1   overflow-hidden">
         {/* Slides */}
         <div
           className="flex transition-transform duration-700 ease-in-out "
@@ -286,13 +286,13 @@ function About() {
                 <img
                   src={image.img}
                   alt={`Slide ${index}`}
-                  className="w-full h-170 brightness-50 object-cover flex-shrink-0"
+                  className="w-full h-[700px] brightness-50 object-cover flex-shrink-0"
                 />
-                <div className="absolute inset-0 w-full flex justify-center items-center flex-col">
-                  <h1 className="lg:text-7xl md:text-5xl p-2 sm:text-3xl text-2xl text-center text-fuchsia-300  mb-5 font-semibold">
+                <div className="absolute inset-0 w-full pr-20 flex justify-center items-end flex-col">
+                  <h1 className="lg:text-6xl w-[750px] md:text-5xl p-2 sm:text-3xl text-2xl text-end text-violet-300  mb-5 font-semibold">
                     {image.heading}
                   </h1>
-                  <p className="lg:text-2xl md:text-xl p-2 sm:text-lg max-w-[900px] text-center text-sky-200">
+                  <p className="lg:text-xl w-[750px] md:text-lg p-2 sm:text-md max-w-[900px] text-end text-white">
                     {image.content}
                   </p>
                 </div>
@@ -302,7 +302,7 @@ function About() {
         </div>
 
         {/* Dots */}
-        <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2">
+        <div className="absolute bottom-4 left-1/2  transform -translate-x-1/2 flex gap-2">
           {images.map((_, index) => (
             <button
               key={index}
@@ -319,20 +319,20 @@ function About() {
           onClick={() =>
             setCurrentIndex((prev) => (prev - 1 + images.length) % images.length)
           }
-          className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/30 text-white p-2 rounded-full"
+          className="absolute left-2 top-1/2 -translate-y-1/2 bg-sky-300 text-white text-4xl p-2 px-6 rounded-full"
         >
           ‹
         </button>
         <button
           onClick={() => setCurrentIndex((prev) => (prev + 1) % images.length)}
-          className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/30 text-white p-2 rounded-full"
+          className="absolute right-2 top-1/2 -translate-y-1/2 bg-sky-300 text-white text-4xl p-2 px-6 rounded-full"
         >
           ›
         </button>
       </div>
 
       {/* time line section */}
-      <section className="pt-16  bg-blue-500/60 bg-[url('/images/swirl.png')]">
+      <section className="pt-16 bg-violet-200 bg-[url('/images/swirl.png')]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-black mb-4">
@@ -364,7 +364,8 @@ function About() {
                       index % 2 === 0 ? "lg:pr-8" : "lg:pl-8"
                     }`}
                   >
-                    <div className="border-2 rounded-xl hover:shadow-xl bg-white/70 bg-cover border-transparent hover:scale-105 hover:border-amber-800 transition-all duration-300">
+                    {/* cards */}
+                    <div className="border-2 rounded-xl hover:shadow-xl bg-white bg-cover border-transparent hover:scale-105 hover:border-sky-400 transition-all duration-300">
                       <div className="p-6">
                         <div className="flex items-center mb-4">
                           <div className="w-12 h-12 bg-blue-300 rounded-full flex items-center justify-center mr-4">
@@ -377,7 +378,7 @@ function About() {
                             </div> */}
 
                             {/* title */}
-                            <h3 className="text-xl font-bold text-amber-800">
+                            <h3 className="text-xl font-bold text-black">
                               {milestone.title}
                             </h3>
                           </div>
@@ -402,13 +403,13 @@ function About() {
       </section>
 
       {/* CTA section */}
-      <div className="bg-blue-500/60 bg-[url('/images/swirl.png')]">
+      <div className="bg-violet-200 bg-[url('/images/swirl.png')]">
         <section className="overflow-hidden bg-[url(/images/cta-cake-bg-3.png)] pt-40 bg-center sm:grid sm:grid-cols-2 sm:items-center">
           <div className="p-8 md:p-12 lg:px-16 lg:py-24">
             <div className="mx-auto max-w-xl text-center ltr:sm:text-left rtl:sm:text-right">
               <h2 className="!text-4xl font-bold mb-5 text-gray-900 pt-60 md:text-3xl">
-                Turn Your Passion for <span className="text-rose-500">Baking</span> Into{" "}
-                <span className="text-rose-500">Perfection</span>
+                Turn Your Passion for <span className="text-sky-500">Baking</span> Into{" "}
+                <span className="text-sky-500">Perfection</span>
               </h2>
 
               <p className="hidden text-xl mb-5 text-gray-800 md:mt-4 md:block">
@@ -449,7 +450,7 @@ function About() {
                 </Link>
 
                 <Link
-                  className="group relative bg-rose-500 inline-flex items-center overflow-hidden rounded-sm border border-current px-3 py-3 text-pink-600 focus:ring-3 focus:outline-hidden"
+                  className="group relative bg-white inline-flex items-center overflow-hidden rounded-sm border border-current px-3 py-3 text-sky-500 focus:ring-3 focus:outline-hidden"
                   to="/products"
                 >
                   <span className="absolute -start-full transition-all group-hover:start-1">
@@ -468,7 +469,7 @@ function About() {
                       <g id="SVGRepo_iconCarrier">
                         <path
                           d="M7.2998 5H22L20 12H8.37675M21 16H9L7 3H4M4 8H2M5 11H2M6 14H2M10 20C10 20.5523 9.55228 21 9 21C8.44772 21 8 20.5523 8 20C8 19.4477 8.44772 19 9 19C9.55228 19 10 19.4477 10 20ZM21 20C21 20.5523 20.5523 21 20 21C19.4477 21 19 20.5523 19 20C19 19.4477 19.4477 19 20 19C20.5523 19 21 19.4477 21 20Z"
-                          stroke="#ffffff"
+                          stroke="#0EA5E9"
                           strokeWidth="2"
                           strokeLinecap="round"
                           strokeLinejoin="round"
@@ -477,7 +478,7 @@ function About() {
                     </svg>
                   </span>
 
-                  <span className="text-sm text-white font-medium transition-all group-hover:ms-4">
+                  <span className="text-sm text-sky-500 font-medium transition-all group-hover:ms-4">
                     Our Products
                   </span>
                 </Link>
@@ -494,9 +495,9 @@ function About() {
       </div>
 
       {/* award section */}
-      <section className="awards py-16 md:py-24 bg-rose-100">
+      <section className="awards py-16 md:py-24 bg">
         <div className="container mx-auto px-6 max-w-7xl">
-          <h2 className="text-3xl md:text-4xl font-bold text-orange-900 text-center mb-18">
+          <h2 className="text-3xl md:text-4xl font-bold text-black text-center mb-18">
             Awards & Recognition
           </h2>
 
@@ -521,7 +522,7 @@ function About() {
 
             {/* Content - Bottom-left */}
             <div>
-              <h3 className="!text-4xl font-bold text-blue-400 mb-7">
+              <h3 className="!text-4xl font-bold text-black mb-7">
                 Recognized Excellence
               </h3>
               <p className="text-lg text-black/80 leading-relaxed">
@@ -542,8 +543,8 @@ function About() {
 
                   {/* Award info */}
                   <div className="flex-1">
-                    <h4 className="font-semibold text-pink-600">Rising star</h4>
-                    <p className="text-sm text-orange-900 font-medium">2023</p>
+                    <h4 className="font-semibold text-black">Rising star</h4>
+                    <p className="text-sm text-black font-medium">2023</p>
                   </div>
                 </div>
               </div>
@@ -553,9 +554,9 @@ function About() {
       </section>
 
       {/* testimonial */}
-      <section className="py-12 px-12 bg-sky-100">
+      <section className="py-12 px-12 bg">
         <div>
-          <h2 className="text-5xl text-orange-900 font-semibold text-center mb-6">
+          <h2 className="text-5xl text-black font-semibold text-center mb-6">
             Sweet words from our customers
           </h2>
           <p className="text-xl text-gray-800/80 text-center">
@@ -569,7 +570,7 @@ function About() {
             return (
               <div
                 key={index}
-                className="bg-white/70 backdrop-blur-2xl p-5 rounded-xl gap-2 w-[80%] place-items-center hover:scale-102 hover:shadow-lg transition-all duration-200"
+                className="bg-white shadow-lg backdrop-blur-2xl p-5 rounded-xl gap-2 w-[70%] place-items-center hover:scale-102 hover:shadow-xl transition-all duration-200"
               >
                 <div>
                   <h4 className="text-orange-900 text-xl pl-1 font-semibold">
