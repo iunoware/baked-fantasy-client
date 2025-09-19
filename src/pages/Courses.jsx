@@ -179,11 +179,11 @@ function Courses() {
   ];
 
   return (
-    <div className="bg-[#fefae0]/50">
+    <div className="bg-[#f1faee]">
       {/* hero section */}
       <div>
         <h1 className="lg:text-6xl md:text-5xl sm:text-4xl text-3xl flex font-semibold justify-center pt-30">
-          Choose our <span className="text-orange-900">&nbsp;Learning path</span>
+          Choose our <span className="text-black">&nbsp;Learning path</span>
         </h1>
         <div className="flex justify-center">
           <p className="text-center lg:text-2xl md:text-xl sm:text-lg max-w-[600px] mx-3 text-gray-700 py-10">
