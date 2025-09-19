@@ -2,6 +2,8 @@ import Product from "../../components/Products.jsx";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { ShoppingCart, ArrowLeft } from "lucide-react";
 
 function SpecificCategory() {
   const { categoryName } = useParams(); // comes from URL /products/:categoryName
@@ -25,7 +27,19 @@ function SpecificCategory() {
   return (
     <div className="category-page">
       {/* hero section */}
-      <div className="hero bg-[url(/images/cake-hero.png)] bg-cover bg-center h-[80vh] flex justify-baseline items-center ps-10 ">
+
+      <div className="hero relative bg-[url(/images/cake-hero.png)] bg-cover bg-center h-[80vh] flex justify-baseline items-center ps-10 ">
+        <div className="absolute inset-0 top-23 left-5 space-x-2 mb-8">
+          <Link
+            variant="ghost"
+            size="sm"
+            to={`/categories`}
+            className="flex items-center text-muted-foreground hover:text-[#00BCD4]"
+          >
+            <ArrowLeft className="h-4 w-4 mr-2" />
+            Back to Products
+          </Link>
+        </div>
         <h1 className="w-4/12 text-9xl font-extrabold">{categoryName}</h1>
       </div>
 
