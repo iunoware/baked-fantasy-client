@@ -72,7 +72,7 @@ function Product(props) {
               </span>
             </button>
             <button
-              className="group relative inline-flex items-center overflow-hidden rounded-sm border border-current px-3 py-3 text-pink-600 focus:ring-3 focus:outline-hidden"
+              className="group relative inline-flex items-center overflow-hidden rounded-sm border border-current px-3 py-3 text-sky-600 focus:ring-3 focus:outline-hidden"
               href="#"
             >
               <span className="absolute -start-full transition-all group-hover:start-1">
