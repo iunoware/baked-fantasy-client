@@ -1,16 +1,38 @@
-import Card from "../components/ProductCard.jsx";
+import Product from "../components/Products.jsx";
 import Heading from "../components/Heading.jsx";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function Home() {
+  const { categoryName } = useParams();
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        await axios.get(`http://localhost:5000/products`).then((res) => {
+          const shuffled = res.data.sort(() => 0.5 - Math.random());
+          setProducts(shuffled.slice(0, 3));
+        });
+      } catch (err) {
+        console.error("Error fetching Products:", err);
+      }
+    };
+    fetchProducts();
+  }, []);
+
   return (
     <div className="bg-[#f1faee]">
       {/* hero section */}
       <section className="overflow-hidden bg-cover bg-no-repeat h-screen grid grid-cols-1 md:grid-cols-2 bg-[url('/images/bfHero.png')]">
         {/* left column */}
-        <div className="p-8 md:p-12 lg:px-16 lg:py-24 mt-35">
+        <div className="p-8 md:p-12 lg:px-16 lg:py-24 mt-38">
           <div className="text-start ltr:sm:text-left rtl:sm:text-right">
             <h2 className="text-2xl font-bold text-white sm:text-3xl md:text-5xl">
-              From Oven to Heart - and From Us to Your Kitchen.
+              From <span className="text-violet-300">Oven to Heart</span> - and
+              From Us to Your Kitchen.
             </h2>
 
             <p className="hidden max-w-lg text-white/90 md:mt-6 md:block md:text-lg md:leading-relaxed">
@@ -20,20 +42,20 @@ function Home() {
             </p>
             <div className="flex gap-10 items-center">
               <div className="mt-4 sm:mt-8">
-                <a
-                  href="#"
+                <Link
+                  to={`/categories`}
                   className="bg-sky-500 inline-block rounded-full px-12 py-3 text-sm font-medium text-white transition hover:bg-sky-700 focus:ring-3  focus:outline-hidden"
                 >
                   Shop products
-                </a>
+                </Link>
               </div>
               <div className="mt-4 sm:mt-8">
-                <a
-                  href="#"
-                  className="border-2 border-pink-500 inline-block rounded-full px-12 py-3 text-sm font-medium text-white transition hover:bg-pink-500 focus:ring-3  focus:outline-hidden"
+                <Link
+                  to={`/courses`}
+                  className="border-2 border-sky-500 inline-block rounded-full px-12 py-3 text-sm font-medium text-white transition hover:bg-sky-500 focus:ring-3  focus:outline-hidden"
                 >
                   Explore course
-                </a>
+                </Link>
               </div>
             </div>
           </div>
@@ -52,17 +74,10 @@ function Home() {
             height="100px"
             viewBox="-128 -128 768.00 768.00"
             xmlns="http://www.w3.org/2000/svg"
-            fill="url(#myGradient)"
+            // fill="#9984A3"
             stroke="#ffffff"
+            className="fill-violet-300"
           >
-            <defs>
-              {/* Gradient definition */}
-              <linearGradient id="myGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stopColor="hsla(199, 100%, 68%, 1.00)" />
-                <stop offset="50%" stopColor="hsla(332, 100%, 69%, 1.00)" />
-                <stop offset="100%" stopColor="hsla(329, 31%, 75%, 1.00)" />
-              </linearGradient>
-            </defs>
             <g
               id="SVGRepo_bgCarrier"
               strokeWidth="0"
@@ -74,7 +89,7 @@ function Home() {
                 width="768.00"
                 height="768.00"
                 rx="384"
-                fill="url(#myGradient)"
+                // fill="#9984A3"
                 strokeWidth="0"
               ></rect>
             </g>
@@ -112,14 +127,6 @@ function Home() {
             fill="white"
             xmlns="http://www.w3.org/2000/svg"
           >
-            <defs>
-              {/* Gradient definition */}
-              <linearGradient id="myGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stopColor="hsla(199, 100%, 68%, 1.00)" />
-                <stop offset="50%" stopColor="hsla(332, 100%, 69%, 1.00)" />
-                <stop offset="100%" stopColor="hsla(329, 31%, 75%, 1.00)" />
-              </linearGradient>
-            </defs>
             <g id="SVGRepo_bgCarrier" strokeWidth="0">
               <rect
                 x="-5.76"
@@ -127,7 +134,8 @@ function Home() {
                 width="35.52"
                 height="35.52"
                 rx="17.76"
-                fill="url(#myGradient)"
+                // fill="#D1C9D8"
+                className="fill-violet-300"
                 strokeWidth="0"
               ></rect>
             </g>
@@ -165,14 +173,6 @@ function Home() {
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
           >
-            <defs>
-              {/* Gradient definition */}
-              <linearGradient id="myGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stopColor="hsla(199, 100%, 68%, 1.00)" />
-                <stop offset="50%" stopColor="hsla(332, 100%, 69%, 1.00)" />
-                <stop offset="100%" stopColor="hsla(329, 31%, 75%, 1.00)" />
-              </linearGradient>
-            </defs>
             <g id="SVGRepo_bgCarrier" strokeWidth="0">
               <rect
                 x="-5.76"
@@ -180,7 +180,8 @@ function Home() {
                 width="35.52"
                 height="35.52"
                 rx="17.76"
-                fill="url(#myGradient)"
+                // fill="#D1C9D8"
+                className="fill-violet-300"
                 strokeWidth="0"
               ></rect>
             </g>
@@ -205,7 +206,7 @@ function Home() {
             <p className="text-lg">Awards</p>
           </div>
         </div>
-        
+
         <div className="card-4 text-center flex flex-col items-center card-hover hover:animate-wiggle">
           <svg
             className="flex justify-center"
@@ -215,14 +216,6 @@ function Home() {
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
           >
-            <defs>
-              {/* Gradient definition */}
-              <linearGradient id="myGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stopColor="hsla(199, 100%, 68%, 1.00)" />
-                <stop offset="50%" stopColor="hsla(332, 100%, 69%, 1.00)" />
-                <stop offset="100%" stopColor="hsla(329, 31%, 75%, 1.00)" />
-              </linearGradient>
-            </defs>
             <g id="SVGRepo_bgCarrier" strokeWidth="0">
               <rect
                 x="-5.76"
@@ -230,7 +223,8 @@ function Home() {
                 width="35.52"
                 height="35.52"
                 rx="17.76"
-                fill="url(#myGradient)"
+                // fill="#D1C9D8"
+                className="fill-violet-300"
                 strokeWidth="0"
               ></rect>
             </g>
@@ -265,30 +259,23 @@ function Home() {
           techniques
         </p>
         {/* products section */}
-        <div className="grid grid-cols-1 gap-4 lg:grid-cols-3 lg:gap-8 pt-8 px-10">
-          <Card
-            img="/images/cake-1.jpg"
-            name="Chocolate Truffle Cake"
-            price="120"
-            discount="200"
-          />
-          <Card
-            img="/images/cake-2.jpg"
-            name="Chocolate Cake"
-            price="150"
-            discount="300"
-          />
-          <Card
-            img="/images/cake-3.jpg"
-            name="Truffle Cake"
-            price="250"
-            discount="500"
-          />
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 py-15 px-10">
+          {products.map((p) => (
+            <Product
+              key={p._id}
+              id={p._id}
+              category={categoryName}
+              img={`http://localhost:5000${p.images?.[0]}`}
+              price={p.price}
+              title={p.title}
+              subject={p.subject}
+            />
+          ))}
         </div>
         <div className="see-all-products pt-5 flex justify-center">
-          <a
-            className="group relative inline-flex items-center overflow-hidden rounded-sm border border-current px-3 py-3 text-pink-600 focus:ring-3 focus:outline-hidden"
-            href="#"
+          <Link
+            className="group relative inline-flex items-center overflow-hidden rounded-sm border border-current px-3 py-3 text-sky-600 "
+            to={`/categories`}
           >
             <span className="absolute -start-full transition-all group-hover:start-1">
               <svg
@@ -310,7 +297,7 @@ function Home() {
             <span className="text-sm font-medium transition-all group-hover:ms-4">
               View All Products
             </span>
-          </a>
+          </Link>
         </div>
       </section>
 
@@ -322,13 +309,13 @@ function Home() {
           premium baked goods.
         </p>
         {/* main cards */}
-        <div className="w-1/2 grid grid-cols-2 grid-rows-2 gap-6 px-10 pt-5">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 px-10 pt-5">
           {/* card-1 */}
-          <div className="rounded bg-pink-300">
+          <div className="rounded-2xl bg-violet-400">
             <div href="#" className="group relative block h-64 sm:h-80 lg:h-70">
-              <span className="absolute inset-0 border-2 border-dashed border-black"></span>
+              <span className="absolute rounded-2xl inset-0 border-2 border-dashed border-violet-900"></span>
 
-              <div className="relative flex h-full transform items-end border-2 border-black bg-pink-200 transition-transform group-hover:-translate-x-2 group-hover:-translate-y-2">
+              <div className="relative rounded-2xl flex h-full transform items-end border-2 border-violet-900 bg-violet-300 transition-transform group-hover:-translate-x-2 group-hover:-translate-y-2">
                 <div className="p-4 !pt-0 transition-opacity group-hover:absolute group-hover:opacity-0 sm:p-6 lg:p-8 lg:opacity-100 [@media(max-width:600px)]:opacity-0 ">
                   <svg
                     fill="#000000"
@@ -641,14 +628,14 @@ function Home() {
           </div>
 
           {/* card-2 */}
-          <div className="rounded bg-pink-300">
+          <div className="rounded-2xl bg-sky-200">
             <div
               href="#"
               className="group relative block h-64 sm:h-80 lg:h-70 "
             >
-              <span className="absolute inset-0 border-2 border-dashed border-black"></span>
+              <span className="absolute rounded-2xl inset-0 border-2 border-dashed border-violet-900"></span>
 
-              <div className="relative flex h-full transform items-end border-2 border-black bg-pink-200 transition-transform group-hover:-translate-x-2 group-hover:-translate-y-2">
+              <div className="relative rounded-2xl flex h-full transform items-end border-2 border-violet-900 bg-violet-300 transition-transform group-hover:-translate-x-2 group-hover:-translate-y-2">
                 <div className="p-4 !pt-0 transition-opacity group-hover:absolute group-hover:opacity-0 sm:p-6 lg:p-8 lg:opacity-100 [@media(max-width:600px)]:opacity-0 ">
                   <svg
                     width="60px"
@@ -727,11 +714,11 @@ function Home() {
           </div>
 
           {/* card-3 */}
-          <div className="rounded bg-pink-300">
+          <div className="rounded-2xl bg-sky-300">
             <div href="#" className="group relative block h-64 sm:h-80 lg:h-70">
-              <span className="absolute inset-0 border-2 border-dashed border-black"></span>
+              <span className="absolute rounded-2xl inset-0 border-2 border-dashed border-black"></span>
 
-              <div className="relative flex h-full transform items-end border-2 border-black bg-pink-200 transition-transform group-hover:-translate-x-2 group-hover:-translate-y-2">
+              <div className="relative rounded-2xl flex h-full transform items-end border-2 border-black bg-violet-300 transition-transform group-hover:-translate-x-2 group-hover:-translate-y-2">
                 <div className="p-4 !pt-0 transition-opacity group-hover:absolute group-hover:opacity-0 sm:p-6 lg:p-8 lg:opacity-100 [@media(max-width:600px)]:opacity-0 ">
                   <svg
                     width="64px"
@@ -795,11 +782,11 @@ function Home() {
           </div>
 
           {/* card-4 */}
-          <div className="rounded bg-pink-300">
+          <div className="rounded-2xl bg-sky-300">
             <div href="#" className="group relative block h-64 sm:h-80 lg:h-70">
-              <span className="absolute inset-0 border-2 border-dashed border-black"></span>
+              <span className="absolute rounded-2xl inset-0 border-2 border-dashed border-black"></span>
 
-              <div className="relative flex h-full transform items-end border-2 border-black bg-pink-200 transition-transform group-hover:-translate-x-2 group-hover:-translate-y-2">
+              <div className="relative rounded-2xl flex h-full transform items-end border-2 border-black bg-violet-300 transition-transform group-hover:-translate-x-2 group-hover:-translate-y-2">
                 <div className="p-4 !pt-0 transition-opacity group-hover:absolute group-hover:opacity-0 sm:p-6 lg:p-8 lg:opacity-100 [@media(max-width:600px)]:opacity-0 ">
                   <svg
                     fill="#000000"
@@ -873,10 +860,6 @@ function Home() {
             </div>
           </div>
         </div>
-        <div className="w-1/2 inline-block">
-          <img src="https://plus.unsplash.com/premium_photo-1667428602819-3c806f41aa4f?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8YmFrZXJ5JTIwaW1hZ2VzfGVufDB8fDB8fHww"
-          className="h-[300px]"/>
-        </div>
       </section>
 
       {/* event section */}
@@ -885,8 +868,8 @@ function Home() {
           <div className="textSide flex items-center">
             <div className="max-w-prose text-left">
               <h1 className="text-4xl font-bold text-gray-900 sm:text-5xl">
-                <strong className="text-rose-400">Bulk Orders</strong> for Every
-                Occasion increase
+                <strong className="text-violet-400">Bulk Orders</strong> for
+                Every Occasion increase
               </h1>
 
               <p className="mt-4 text-base text-pretty text-gray-700 sm:text-lg/relaxed">
@@ -973,7 +956,7 @@ function Home() {
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {/* online Course */}
-            <div className="mt-[70px] relative !p-8 !rounded-lg hover:!shadow-lg hover:-translate-y-1 transition-all !duration-300 bg-white">
+            <div className="mt-[70px] relative !p-8 !rounded-lg hover:!shadow-lg hover:-translate-y-1 transition-all !duration-300 bg-violet-100">
               {/* online image */}
               <div className="absolute z-[0] left-0 top-[-180px] flex justify-center w-full">
                 <img
@@ -990,9 +973,9 @@ function Home() {
                     viewBox="0 0 64 64"
                     xmlns="http://www.w3.org/2000/svg"
                     strokeWidth="3"
-                    stroke="#fb637b"
+                    // stroke="#fb637b"
                     fill="none"
-                    className="pr-3"
+                    className="pr-3 stroke-violet-800"
                   >
                     <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
                     <g
@@ -1039,11 +1022,11 @@ function Home() {
                   <div className="flex items-start">
                     <svg
                       width="24px"
-                      className="mr-3"
+                      className="mr-3 stroke-violet-500"
                       viewBox="0 0 48 48"
                       fill="none"
                       xmlns="http://www.w3.org/2000/svg"
-                      stroke="#fb637b"
+                      // stroke="#fb637b"
                       strokeWidth="1.7759999999999998"
                     >
                       <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
@@ -1074,7 +1057,7 @@ function Home() {
                   <div className="flex items-start">
                     <svg
                       width="24px"
-                      className="mr-3"
+                      className="mr-3 stroke-violet-500"
                       viewBox="0 0 48 48"
                       fill="none"
                       xmlns="http://www.w3.org/2000/svg"
@@ -1109,11 +1092,11 @@ function Home() {
                   <div className="flex items-start">
                     <svg
                       width="24px"
-                      className="mr-3"
+                      className="mr-3 stroke-violet-500"
                       viewBox="0 0 48 48"
                       fill="none"
                       xmlns="http://www.w3.org/2000/svg"
-                      stroke="#fb637b"
+                      // stroke="#fb637b"
                       strokeWidth="1.7759999999999998"
                     >
                       <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
@@ -1144,11 +1127,11 @@ function Home() {
                   <div className="flex items-start">
                     <svg
                       width="24px"
-                      className="mr-3"
+                      className="mr-3 stroke-violet-500"
                       viewBox="0 0 48 48"
                       fill="none"
                       xmlns="http://www.w3.org/2000/svg"
-                      stroke="#fb637b"
+                      // stroke="#fb637b"
                       strokeWidth="1.7759999999999998"
                     >
                       <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
@@ -1180,7 +1163,7 @@ function Home() {
 
               <div className="p-4">
                 <a
-                  className="group relative inline-flex items-center overflow-hidden rounded-sm bg-pink-500 px-8 py-3 text-white focus:ring-3 focus:outline-hidden mr-3"
+                  className="group relative inline-flex items-center overflow-hidden rounded-sm bg-sky-500 px-8 py-3 text-white focus:ring-3 focus:outline-hidden mr-3"
                   href="#"
                 >
                   <span className="absolute -start-full transition-all group-hover:start-4">
@@ -1212,7 +1195,7 @@ function Home() {
             </div>
 
             {/* Offline Course */}
-            <div className="mt-[70px] relative !p-8 !rounded-lg hover:!shadow-lg hover:-translate-y-1 transition-all !duration-300 bg-white">
+            <div className="mt-[70px] relative !p-8 !rounded-lg hover:!shadow-lg hover:-translate-y-1 transition-all !duration-300 bg-violet-100">
               {/* offline image  */}
               <div className="absolute z-[0] left-0 top-[-180px] flex w-full justify-center">
                 <img
@@ -1225,14 +1208,14 @@ function Home() {
               <div className="!z-5 !mt-[220px]">
                 <div className="flex items-center mb-6">
                   <svg
-                    fill="#fb637b"
+                    // fill="#fb637b"
                     width="48px"
                     viewBox="0 0 50 50"
                     xmlns="http://www.w3.org/2000/svg"
                     xmlnsXlink="http://www.w3.org/1999/xlink"
-                    stroke="#fb637b"
+                    // stroke="#fb637b"
                     strokeWidth="0.0005"
-                    className="pr-3"
+                    className="pr-3 fill-violet-700"
                   >
                     <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
                     <g
@@ -1260,11 +1243,11 @@ function Home() {
                   <div className="flex items-start">
                     <svg
                       width="24px"
-                      className="mr-3"
+                      className="mr-3 stroke-violet-500"
                       viewBox="0 0 48 48"
                       fill="none"
                       xmlns="http://www.w3.org/2000/svg"
-                      stroke="#fb637b"
+                      // stroke="#fb637b"
                       strokeWidth="1.7759999999999998"
                     >
                       <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
@@ -1295,11 +1278,11 @@ function Home() {
                   <div className="flex items-start">
                     <svg
                       width="24px"
-                      className="mr-3"
+                      className="mr-3 stroke-violet-500"
                       viewBox="0 0 48 48"
                       fill="none"
                       xmlns="http://www.w3.org/2000/svg"
-                      stroke="#fb637b"
+                      // stroke="#fb637b"
                       strokeWidth="1.7759999999999998"
                     >
                       <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
@@ -1330,11 +1313,11 @@ function Home() {
                   <div className="flex items-start">
                     <svg
                       width="24px"
-                      className="mr-3"
+                      className="mr-3 stroke-violet-500"
                       viewBox="0 0 48 48"
                       fill="none"
                       xmlns="http://www.w3.org/2000/svg"
-                      stroke="#fb637b"
+                      // stroke="#fb637b"
                       strokeWidth="1.7759999999999998"
                     >
                       <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
@@ -1365,11 +1348,11 @@ function Home() {
                   <div className="flex items-start">
                     <svg
                       width="24px"
-                      className="mr-3"
+                      className="mr-3 stroke-violet-500"
                       viewBox="0 0 48 48"
                       fill="none"
                       xmlns="http://www.w3.org/2000/svg"
-                      stroke="#fb637b"
+                      // stroke="#fb637b"
                       strokeWidth="1.7759999999999998"
                     >
                       <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
@@ -1400,9 +1383,9 @@ function Home() {
               </div>
 
               <div className=" p-4">
-                <a
-                  className="group relative inline-flex items-center overflow-hidden rounded-sm bg-pink-500 px-8 py-3 text-white focus:ring-3 focus:outline-hidden mr-3"
-                  href="#"
+                <Link
+                  className="group relative inline-flex items-center overflow-hidden rounded-sm bg-sky-500 px-8 py-3 text-white focus:ring-3 focus:outline-hidden mr-3"
+                  to="#"
                 >
                   <span className="absolute -start-full transition-all group-hover:start-4">
                     <svg
@@ -1438,7 +1421,7 @@ function Home() {
                   <span className="text-sm font-medium transition-all group-hover:ms-4">
                     Start Learning Now
                   </span>
-                </a>
+                </Link>
               </div>
             </div>
           </div>
@@ -1453,8 +1436,8 @@ function Home() {
             Join thousands of satisfied students and customers who trust Sweet
             Dreams
           </p>
-          <div className="flex lg:flex-row flex-col gap-5 py-10 place-content-between items-center">
-            <div className="video lg:w-3/12 md:w-5/12 w-full">
+          <div className="flex lg:flex-row flex-col gap-5 py-10  items-center">
+            <div className="video flex justify-center lg:w-4/12 md:w-6/12 w-full">
               <video
                 src="/videos/review.mp4"
                 controls
@@ -1464,11 +1447,8 @@ function Home() {
                 className="rounded-xl h-130"
               ></video>
             </div>
-            <div className="cards lg:w-9/12 md:w-7/12 w-full grid lg:grid-cols-2 grid-cols-1 gap-4">
-              <a
-                href="#"
-                className="block rounded-md bg-cyan-100 bop-4 shadow-sm sm:p-6 lg:h-45 text-white hover:scale-102 transition-all duration-200 ease-in-out "
-              >
+            <div className="cards lg:w-8/12 md:w-6/12 w-full grid lg:grid-cols-2 grid-cols-1 gap-4 pr-8">
+              <div className="block rounded-md bg-violet-300 bop-4 shadow-sm sm:p-6 lg:h-45 text-white hover:scale-102 transition-all duration-200 ease-in-out ">
                 <div className="sm:flex sm:justify-between sm:gap-4 lg:gap-6">
                   <div className="sm:order-last sm:shrink-0">
                     <div className="size-16 rounded-full object-cover sm:size-[72px] bg-rose-300 flex justify-center items-center text-xl font-bold">
@@ -1480,21 +1460,18 @@ function Home() {
                       <div className="star flex"> ⭐⭐⭐⭐⭐</div>
                     </h3>
 
-                    <p className="mt-1 text-sm text-gray-700">
+                    <p className="mt-1 text-sm font-bold text-gray-900">
                       By Nikitha (Home Baker)
                     </p>
 
-                    <p className="mt-4 line-clamp-2 text-sm text-pretty text-gray-700">
+                    <p className="mt-4 line-clamp-2 text-sm text-pretty text-gray-900">
                       "The online cake decorating course transformed my hobby
                       into a thriving business. The instructors are amazing!"
                     </p>
                   </div>
                 </div>
-              </a>
-              <a
-                href="#"
-                className="block rounded-md p-4 shadow-sm sm:p-6 lg:h-45 hover:scale-102 transition-all duration-200 ease-in-out bg-cyan-100 "
-              >
+              </div>
+              <div className="block rounded-md p-4 shadow-sm sm:p-6 lg:h-45 hover:scale-102 transition-all duration-200 ease-in-out bg-violet-300 ">
                 <div className="sm:flex sm:justify-between sm:gap-4 lg:gap-6">
                   <div className="sm:order-last sm:shrink-0">
                     <img
@@ -1508,19 +1485,18 @@ function Home() {
                       <div className="stars">⭐⭐⭐⭐</div>
                     </h3>
 
-                    <p className="mt-1 text-sm text-gray-700">By Ram</p>
+                    <p className="mt-1 text-sm font-bold text-gray-900">
+                      By Ram
+                    </p>
 
-                    <p className="mt-4 line-clamp-2 text-sm text-pretty text-gray-700">
+                    <p className="mt-4 line-clamp-2 text-sm text-pretty text-gray-900">
                       "The Baked Fantasy Baking Institute offers the most
                       comprehensive baking education. Highly recommended!"
                     </p>
                   </div>
                 </div>
-              </a>
-              <a
-                href="#"
-                className="block rounded-m p-4 shadow-sm sm:p-6 lg:h-45 hover:scale-102 transition-all duration-200 ease-in-out bg-cyan-100"
-              >
+              </div>
+              <div className="block rounded-md p-4 shadow-sm sm:p-6 lg:h-45 hover:scale-102 transition-all duration-200 ease-in-out bg-violet-300">
                 <div className="sm:flex sm:justify-between sm:gap-4 lg:gap-6">
                   <div className="sm:order-last sm:shrink-0">
                     <img
@@ -1534,21 +1510,18 @@ function Home() {
                       <div className="stars">⭐⭐⭐⭐</div>
                     </h3>
 
-                    <p className="mt-1 text-sm text-gray-700">
+                    <p className="mt-1 text-sm font-bold text-gray-900">
                       By Raja (customer)
                     </p>
 
-                    <p className="mt-4 line-clamp-2 text-sm text-pretty text-gray-700">
+                    <p className="mt-4 line-clamp-2 text-sm text-pretty text-gray-900">
                       "Their bulk order service is exceptional. Quality products
                       delivered on time, every time."
                     </p>
                   </div>
                 </div>
-              </a>
-              <a
-                href="#"
-                className="block rounded-md p-4 shadow-sm sm:p-6 lg:h-45 hover:scale-102 transition-all duration-200 ease-in-out bg-cyan-100"
-              >
+              </div>
+              <div className="block rounded-md p-4 shadow-sm sm:p-6 lg:h-45 hover:scale-102 transition-all duration-200 ease-in-out bg-violet-300">
                 <div className="sm:flex sm:justify-between sm:gap-4 lg:gap-6">
                   <div className="sm:order-last sm:shrink-0">
                     <img
@@ -1562,25 +1535,53 @@ function Home() {
                       <div className="stars">⭐⭐⭐⭐⭐</div>
                     </h3>
 
-                    <p className="mt-1 text-sm text-gray-700">
+                    <p className="mt-1 text-sm font-bold text-gray-900">
                       By Parveen (Home Baker)
                     </p>
 
-                    <p className="mt-4 line-clamp-2 text-sm text-pretty text-gray-700">
+                    <p className="mt-4 line-clamp-2 text-sm text-pretty text-gray-900">
                       Baked Fantasy helped us launch our dessert menu with
                       professional training and ongoing support.
                     </p>
                   </div>
                 </div>
-              </a>
+              </div>
+              <div className="btn col-span-2 flex justify-center">
+                <a
+                  className="group relative inline-flex items-center overflow-hidden rounded-sm border border-current px-3 py-3 text-sky-600 "
+                  href="https://www.google.com/search?sca_esv=2522d5777cdbdc58&hl=en-IN&sxsrf=AE3TifM5O43bpWbi0h4G7E4CC6revb5kUw:1756809251615&si=AMgyJEtREmoPL4P1I5IDCfuA8gybfVI2d5Uj7QMwYCZHKDZ-EyA5slTbW5eqP8ucakgreX9x5iS9IjevVKjBh3MoISwnxvEXSJrMtaQHVVz68EGLEUFcXSqJuheZ6Pgqck4By3xgI21U9ATN03pkW79iZnC_AWvL4saAap8ttk0zFqIEHFMdl2o%3D&q=The+Baked+Fantasy+%7C+Baking+Academy+in+Madurai+Reviews&sa=X&ved=2ahUKEwjHyoW78LmPAxVWT2wGHdG9OG0Q0bkNegQIHxAD&biw=1536&bih=695&dpr=1.25"
+                  target="blank"
+                >
+                  <span className="absolute -start-full transition-all group-hover:start-1">
+                    <svg
+                      className="size-5 rtl:rotate-180"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M17 8l4 4m0 0l-4 4m4-4H3"
+                      />
+                    </svg>
+                  </span>
+
+                  <span className="text-sm font-medium transition-all group-hover:ms-4">
+                    View All Reviews
+                  </span>
+                </a>
+              </div>
             </div>
           </div>
         </section>
       </div>
 
-      {/* final section */}
-      <section className="lg:grid lg:h-[80vh] place-content-center lg:bg-cover lg:bg-center md:bg-center md:bg-cover relative sm:bg-none lg:bg-[url('/images/bulkOrder.png')] md:bg-[url('/images/bulkOrder.png')]">
-        <div className="lg:absolute lg:left-0 lg:top-[3vh] mx-auto w-screen max-w-screen-xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8 lg:py-32">
+      {/* CTA section */}
+      <section className="lg:grid lg:h-[80vh]  lg:bg-cover lg:bg-center md:bg-center md:bg-cover relative bg-violet-300 lg:bg-[url('/images/bulkOrder.png')] md:bg-[url('/images/bulkOrder.png')]">
+        <div className="lg:absolute lg:left-0 lg:top-[3vh] mt-18 w-screen max-w-screen-xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8 lg:py-32">
           <div className="max-w-prose text-left">
             <h1 className="lg:text-4xl font-bold text-gray-900 text-xl text-left">
               <strong className="text-rose-400"> Learn, Shop & Order </strong>
@@ -1626,7 +1627,7 @@ function Home() {
                 </span>
               </a>
               <a
-                className="group relative inline-flex items-center overflow-hidden rounded-sm border border-current px-3 py-3 text-pink-600 focus:ring-3 focus:outline-hidden"
+                className="group relative inline-flex items-center overflow-hidden rounded-sm border border-current px-3 py-3 text-sky-600 focus:ring-3 focus:outline-hidden"
                 href="#"
               >
                 <span className="absolute -start-full transition-all group-hover:start-1">
@@ -1646,7 +1647,8 @@ function Home() {
                       {" "}
                       <path
                         d="M7.2998 5H22L20 12H8.37675M21 16H9L7 3H4M4 8H2M5 11H2M6 14H2M10 20C10 20.5523 9.55228 21 9 21C8.44772 21 8 20.5523 8 20C8 19.4477 8.44772 19 9 19C9.55228 19 10 19.4477 10 20ZM21 20C21 20.5523 20.5523 21 20 21C19.4477 21 19 20.5523 19 20C19 19.4477 19.4477 19 20 19C20.5523 19 21 19.4477 21 20Z"
-                        stroke="#dc0c7c"
+                        // stroke="#dc0c7c"
+                        className="stroke-sky-600"
                         strokeWidth="2"
                         strokeLinecap="round"
                         strokeLinejoin="round"
