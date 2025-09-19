@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 function Footer() {
   return (
     <>
-      <footer className="bg-rose-200 block ">
+      <footer className="bg-violet-100 block ">
         <div className="mx-auto max-w-screen-xl space-y-8 px-4 py-16 sm:px-6 lg:space-y-16 lg:px-8 grid gird-cols-3">
           <div className="grid grid-cols-1 lg:grid-cols-3 ">
             <div>
@@ -15,6 +15,7 @@ function Footer() {
                 bakery products. Learn from experts and savor the finest baked goods.
               </p>
 
+              {/* social links */}
               <ul className="mt-8 flex gap-6">
                 <li>
                   <a
@@ -110,19 +111,20 @@ function Footer() {
               </ul>
             </div>
 
+            {/* quick links */}
             {/* <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:col-span-2 lg:grid-cols-4"> */}
             <div>
-              <p className="font-medium text-gray-900">Quick Links</p>
+              <p className="font-semibold text-xl text-gray-900">Quick Links</p>
 
-              <ul className="mt-6 space-y-4 text-sm">
+              <ul className="mt-6 space-y-4 text-lg">
                 <li>
-                  <Link to="/" className="text-gray-700 transition hover:opacity-75">
+                  <Link to="/" className="text-gray-700 transition-all duration-200 hover:font-bold">
                     Home
                   </Link>
                 </li>
 
                 <li>
-                  <Link to="/about" className="text-gray-700 transition hover:opacity-75">
+                  <Link to="/about" className="text-gray-700 transition-all duration-200 hover:font-bold">
                     About Us
                   </Link>
                 </li>
@@ -130,7 +132,7 @@ function Footer() {
                 <li>
                   <Link
                     to="/products"
-                    className="text-gray-700 transition hover:opacity-75"
+                    className="text-gray-700 transition-all duration-200 hover:font-bold"
                   >
                     Products
                   </Link>
@@ -139,7 +141,7 @@ function Footer() {
                 <li>
                   <Link
                     to="/courses"
-                    className="text-gray-700 transition hover:opacity-75"
+                    className="text-gray-700 transition-all duration-200 hover:font-bold"
                   >
                     Courses
                   </Link>
@@ -148,7 +150,7 @@ function Footer() {
                 <li>
                   <Link
                     to="/contact"
-                    className="text-gray-700 transition hover:opacity-75"
+                    className="text-gray-700 transition-all duration-200 hover:font-bold"
                   >
                     Contact us
                   </Link>
@@ -157,23 +159,23 @@ function Footer() {
             </div>
 
             <div>
-              <p className="font-medium text-gray-900">Contact Info</p>
+              <p className="font-semibold text-xl text-gray-900">Contact Info</p>
 
-              <ul className="mt-6 space-y-4 text-sm">
+              <ul className="mt-6 space-y-4 text-lg">
                 <li>
-                  <a href="#" className="text-gray-700 transition hover:opacity-75">
+                  <a href="#" className="text-gray-700 transition-all duration-200 hover:font-semibold">
                     123 Baker Street, Culinary District New York, NY 10001
                   </a>
                 </li>
 
                 <li>
-                  <a href="#" className="text-gray-700 transition hover:opacity-75">
+                  <a href="#" className="text-gray-700 transition-all duration-200 hover:font-bold">
                     (555) 123-BAKE
                   </a>
                 </li>
 
                 <li>
-                  <a href="#" className="text-gray-700 transition hover:opacity-75">
+                  <a href="#" className="text-gray-700 transition-all duration-200 hover:font-bold">
                     info@sweetdreamsbaking.com
                   </a>
                 </li>

@@ -78,7 +78,7 @@ function OnlineCourseCard(props) {
           </h2>
         </div> */}
 
-      <div className="px-1 m-12">
+      <div className="px-10 m-10">
         {/* {courses.map((course, index) => ( */}
         <div
           className={`overflow-hidden group card-hover cursor-pointer relative fade-in bg-white rounded-xl`}
