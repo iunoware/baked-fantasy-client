@@ -289,10 +289,10 @@ function About() {
                   className="w-full h-[700px] brightness-50 object-cover flex-shrink-0"
                 />
                 <div className="absolute inset-0 w-full pr-20 flex justify-center items-end flex-col">
-                  <h1 className="lg:text-6xl w-[750px] md:text-5xl p-2 sm:text-3xl text-2xl text-end text-sky-400  mb-5 font-semibold">
+                  <h1 className=" max-w-[750px] md:text-5xl p-2 sm:text-4xl text-3xl text-end text-sky-400  mb-5 font-semibold">
                     {image.heading}
                   </h1>
-                  <p className="lg:text-xl w-[750px] md:text-lg p-2 sm:text-md max-w-[900px] text-end text-white">
+                  <p className="lg:text-xl max-w-[750px] md:text-lg p-2 sm:text-md text-end text-white">
                     {image.content}
                   </p>
                 </div>
@@ -332,7 +332,7 @@ function About() {
       </div>
 
       {/* time line section */}
-      <section className="pt-16 bg-pink-50 bg-[url('/images/swirl.png')]">
+      <section className="pt-16 bg-pink-100 bg-[url('/images/swirl.png')]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-black mb-4">
@@ -403,7 +403,7 @@ function About() {
       </section>
 
       {/* CTA section */}
-      <div className="bg-pink-50 bg-[url('/images/swirl.png')]">
+      <div className="bg-pink-100 bg-[url('/images/swirl.png')]">
         <section className="overflow-hidden bg-[url(/images/cta-cake-bg-3.png)] pt-40 bg-center sm:grid sm:grid-cols-2 sm:items-center">
           <div className="p-8 md:p-12 lg:px-16 lg:py-24">
             <div className="mx-auto max-w-xl text-center ltr:sm:text-left rtl:sm:text-right">
@@ -573,7 +573,7 @@ function About() {
                 className="bg-white shadow-lg backdrop-blur-2xl p-5 rounded-xl gap-2 w-[70%] place-items-center hover:scale-102 hover:shadow-xl transition-all duration-200"
               >
                 <div>
-                  <h4 className="text-orange-900 text-xl pl-1 font-semibold">
+                  <h4 className="text-black text-xl pl-1 font-semibold">
                     {testimonial.name}
                   </h4>
                   <p className="mb-5">{testimonial.stars}</p>

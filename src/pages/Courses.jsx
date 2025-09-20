@@ -179,7 +179,7 @@ function Courses() {
   ];
 
   return (
-    <div className="bg-[#f1faee]">
+    <div className="bg">
       {/* hero section */}
       <div>
         <h1 className="lg:text-6xl md:text-5xl sm:text-4xl text-3xl flex font-semibold justify-center pt-30">
@@ -199,35 +199,35 @@ function Courses() {
         {/* online course */}
         <Link to="/courses/online-course" className="m-4 lg:ml-20">
           <CourseCard
-            img="onlineCourse.png"
-            courseGenre="Online Courses"
-            courseCount="3"
-            description="Learn at your own pace with our comprehensive video library taught by industry professionals."
-            list1="24/7 Access"
-            list2="Certificate of Completion"
-            list3="Lifetime Updates"
-            list4="Expert Support"
+            // img="onlineCourse.png"
+            // courseGenre="Online Courses"
+            // courseCount="3"
+            // description="Learn at your own pace with our comprehensive video library taught by industry professionals."
+            // list1="24/7 Access"
+            // list2="Certificate of Completion"
+            // list3="Lifetime Updates"
+            // list4="Expert Support"
           />
         </Link>
 
         {/* offline course */}
         <Link to="/courses/offline-course" className="m-4 lg:mr-20">
           <CourseCard
-            img="offlineCourse.png"
-            courseGenre="Offline Courses"
-            courseCount="4"
-            description="Join our hands-on classes at our state-of-the-art facility with expert instructors."
-            list1="Small class sizes"
-            list2="Professional Equipment"
-            list3="Hands-on practice"
-            list4="Take home goodies"
+            // img="offlineCourse.png"
+            // courseGenre="Offline Courses"
+            // courseCount="4"
+            // description="Join our hands-on classes at our state-of-the-art facility with expert instructors."
+            // list1="Small class sizes"
+            // list2="Professional Equipment"
+            // list3="Hands-on practice"
+            // list4="Take home goodies"
           />
         </Link>
       </div>
 
       {/* why choose our courses */}
-      <div className="py-10">
-        <h2 className="text-center text-4xl font-bold mb-4 text-orange-900">
+      <div className="py-20">
+        <h2 className="text-center text-4xl font-bold mb-4 text-black">
           Why Choose Our Delightful Courses?
         </h2>
         <p className="text-center text-xl text-gray-600">
