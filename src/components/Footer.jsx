@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 function Footer() {
   return (
     <>
-      <footer className="bg-violet-100 block ">
+      <footer className="bg-pink-50 block ">
         <div className="mx-auto max-w-screen-xl space-y-8 px-4 py-16 sm:px-6 lg:space-y-16 lg:px-8 grid gird-cols-3">
           <div className="grid grid-cols-1 lg:grid-cols-3 ">
             <div>
@@ -114,7 +114,7 @@ function Footer() {
             {/* quick links */}
             {/* <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:col-span-2 lg:grid-cols-4"> */}
             <div>
-              <p className="font-semibold text-xl text-gray-900">Quick Links</p>
+              <p className="font-semibold text-xl pt-10 lg:pt-0 text-gray-900">Quick Links</p>
 
               <ul className="mt-6 space-y-4 text-lg">
                 <li>
@@ -159,7 +159,7 @@ function Footer() {
             </div>
 
             <div>
-              <p className="font-semibold text-xl text-gray-900">Contact Info</p>
+              <p className="font-semibold text-xl pt-10 lg:pt-0 text-gray-900">Contact Info</p>
 
               <ul className="mt-6 space-y-4 text-lg">
                 <li>
