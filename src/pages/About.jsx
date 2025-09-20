@@ -19,7 +19,7 @@ const images = [
 function About() {
   // for hero section slider
   const [currentIndex, setCurrentIndex] = useState(0);
-  const delay = 10000; 
+  const delay = 10000;
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -39,14 +39,14 @@ function About() {
         "Started our journey as a small home bakery, baking fresh cakes and treats with love.",
       icon: (
         <svg
-          fill="#B45309"
+          fill="#ffffff"
           width="35px"
           className="pl-[3px]"
           viewBox="0 0 32 32"
           xmlns="http://www.w3.org/2000/svg"
           id="Layer_1"
           data-name="Layer 1"
-          stroke="#B45309"
+          stroke="#ffffff"
           strokeWidth="0.00032"
         >
           <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
@@ -64,7 +64,7 @@ function About() {
         "Opened our first bakery shop and welcomed our very first walk-in customers.",
       icon: (
         <svg
-          fill="#B45309"
+          fill="#ffffff"
           width="30px"
           viewBox="0 0 60 60"
           id="Capa_1"
@@ -111,67 +111,67 @@ function About() {
           viewBox="0 0 24 24"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
-          stroke="#B45309"
+          stroke="#ffffff"
         >
           <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
           <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
           <g id="SVGRepo_iconCarrier">
             <path
               d="M3 15.9248C3 13.5162 3.51623 13 5.9248 13H18.0752C20.4838 13 21 13.5162 21 15.9248V18.0752C21 20.4838 20.4838 21 18.0752 21H5.9248C3.51623 21 3 20.4838 3 18.0752V15.9248Z"
-              stroke="#B45309"
+              stroke="#ffffff"
               strokeWidth="1.152"
             ></path>
             <path
               d="M6 13V11.656C6 9.46878 6.46878 9 8.656 9H15.344C17.5312 9 18 9.46878 18 11.656V13"
-              stroke="#B45309"
+              stroke="#ffffff"
               strokeWidth="1.152"
               strokeLinecap="round"
             ></path>
             <path
               d="M9 9V7"
-              stroke="#B45309"
+              stroke="#ffffff"
               strokeWidth="1.152"
               strokeLinecap="round"
               strokeLinejoin="round"
             ></path>
             <path
               d="M9 3.5V3"
-              stroke="#B45309"
+              stroke="#ffffff"
               strokeWidth="1.152"
               strokeLinecap="round"
               strokeLinejoin="round"
             ></path>
             <path
               d="M15 9V7"
-              stroke="#B45309"
+              stroke="#ffffff"
               strokeWidth="1.152"
               strokeLinecap="round"
               strokeLinejoin="round"
             ></path>
             <path
               d="M15 3.5V3"
-              stroke="#B45309"
+              stroke="#ffffff"
               strokeWidth="1.152"
               strokeLinecap="round"
               strokeLinejoin="round"
             ></path>
             <path
               d="M12 9V7"
-              stroke="#B45309"
+              stroke="#ffffff"
               strokeWidth="1.152"
               strokeLinecap="round"
               strokeLinejoin="round"
             ></path>
             <path
               d="M12 3.5V3"
-              stroke="#B45309"
+              stroke="#ffffff"
               strokeWidth="1.152"
               strokeLinecap="round"
               strokeLinejoin="round"
             ></path>
             <path
               d="M3 16.0397C3.30926 16.0122 3.63847 16 4 16C5.61017 16 6.38983 17 8 17C9.61017 17 10.3898 16 12 16C13.6102 16 14.3898 17 16 17C17.6102 17 18.3898 16 20 16C20.3615 16 20.6907 16.0122 21 16.0397"
-              stroke="#B45309"
+              stroke="#ffffff"
               strokeWidth="1.152"
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -191,7 +191,7 @@ function About() {
           viewBox="0 0 64 64"
           xmlns="http://www.w3.org/2000/svg"
           strokeWidth="2.112"
-          stroke="#B45309"
+          stroke="#ffffff"
           fill="none"
         >
           <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
@@ -224,7 +224,7 @@ function About() {
           viewBox="0 0 64 64"
           xmlns="http://www.w3.org/2000/svg"
           strokeWidth="1.984"
-          stroke="#B45309"
+          stroke="#ffffff"
           fill="none"
         >
           <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
@@ -274,7 +274,7 @@ function About() {
   return (
     <>
       {/* hero section */}
-      <div className="relative w-full h-[700px] -z-1   overflow-hidden">
+      <div className="relative w-full h-[700px] -z-1 overflow-hidden">
         {/* Slides */}
         <div
           className="flex transition-transform duration-700 ease-in-out "
@@ -289,7 +289,7 @@ function About() {
                   className="w-full h-[700px] brightness-50 object-cover flex-shrink-0"
                 />
                 <div className="absolute inset-0 w-full pr-20 flex justify-center items-end flex-col">
-                  <h1 className="lg:text-6xl w-[750px] md:text-5xl p-2 sm:text-3xl text-2xl text-end text-violet-300  mb-5 font-semibold">
+                  <h1 className="lg:text-6xl w-[750px] md:text-5xl p-2 sm:text-3xl text-2xl text-end text-sky-400  mb-5 font-semibold">
                     {image.heading}
                   </h1>
                   <p className="lg:text-xl w-[750px] md:text-lg p-2 sm:text-md max-w-[900px] text-end text-white">
@@ -332,7 +332,7 @@ function About() {
       </div>
 
       {/* time line section */}
-      <section className="pt-16 bg-violet-200 bg-[url('/images/swirl.png')]">
+      <section className="pt-16 bg-pink-50 bg-[url('/images/swirl.png')]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-black mb-4">
@@ -365,10 +365,10 @@ function About() {
                     }`}
                   >
                     {/* cards */}
-                    <div className="border-2 rounded-xl hover:shadow-xl bg-white bg-cover border-transparent hover:scale-105 hover:border-sky-400 transition-all duration-300">
+                    <div className="border-2 rounded-xl shadow-lg hover:shadow-xl bg-white bg-cover border-transparent hover:scale-105 hover:border-sky-400 transition-all duration-300">
                       <div className="p-6">
                         <div className="flex items-center mb-4">
-                          <div className="w-12 h-12 bg-blue-300 rounded-full flex items-center justify-center mr-4">
+                          <div className="w-12 h-12 bg-blue-400 rounded-full flex items-center justify-center mr-4">
                             {milestone.icon}
                           </div>
                           <div>
@@ -403,7 +403,7 @@ function About() {
       </section>
 
       {/* CTA section */}
-      <div className="bg-violet-200 bg-[url('/images/swirl.png')]">
+      <div className="bg-pink-50 bg-[url('/images/swirl.png')]">
         <section className="overflow-hidden bg-[url(/images/cta-cake-bg-3.png)] pt-40 bg-center sm:grid sm:grid-cols-2 sm:items-center">
           <div className="p-8 md:p-12 lg:px-16 lg:py-24">
             <div className="mx-auto max-w-xl text-center ltr:sm:text-left rtl:sm:text-right">
@@ -554,7 +554,7 @@ function About() {
       </section>
 
       {/* testimonial */}
-      <section className="py-12 px-12 bg">
+      <section className="py-12 lg:px-12 md:px-8 px-3 bg">
         <div>
           <h2 className="text-5xl text-black font-semibold text-center mb-6">
             Sweet words from our customers
