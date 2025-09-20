@@ -7,16 +7,17 @@ function Navbar() {
 
   return (
     <>
-      <header className="w-full fixed z-50">
-        <div className="mx-auto max-w-screen-xl p-4 sm:px-6 lg:px-8 mt-[-10px]">
+      <header className="w-full absolute z-50">
+        <div className="mx-auto max-w-screen-xl flex justify-center p-4 sm:px-6 lg:px-8 mt-[-10px]">
           {/* brand name */}
-          <div className=" -left-10 md:gap-12">
-            <Link to="/" className="text-pink-500 text-2xl font-bold brand-name">
+          <div className="mr-10 absolute left-10 top-4 z-50 md:gap-12">
+            <Link to="/" className="text-pink-500 text-3xl font-bold brand-name">
               The Backed Fantasy
             </Link>
           </div>
-          <div className="flex h-16 md:items-center md:justify-center pb-5 w-full ">
-            {/* navbar */}
+
+          {/* navbar */}
+          <div className="flex h-16 fixed top-4 md:items-center md:justify-center pb-5 w-full ">
             <div className="hidden lg:block top-2 left-1/2 transform-all duration-200  bg-white rounded-xl p-2 px-[8px] shadow-xl z-40 sm:w-[80%] md:w-auto">
               <nav aria-label="Global">
                 <ul className="flex items-center justify-center gap-6 text-sm text-black">
@@ -193,7 +194,7 @@ function Navbar() {
               <div className="block lg:hidden">
                 <button
                   onClick={() => setIsMenuOpen(!isMenuOpen)}
-                  className="rounded-sm bg-gray-100 p-2 text-gray-600 transition hover:text-gray-600/75"
+                  className="rounded-sm translate-y-5 bg-gray-100 p-2 text-gray-600 transition hover:text-gray-600/75"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -213,12 +214,14 @@ function Navbar() {
               </div>
             </div>
           </div>
+
+          {/* <div></div> */}
         </div>
       </header>
 
       {isMenuOpen && (
         <div className="">
-          <nav className="fixed top-16 left-0 w-full mt-10 bg-[#ffffffa2] backdrop-blur-sm shadow-md lg:hidden transition-all duration-200">
+          <nav className="fixed z-50 top-16 left-0 w-full mt-10 bg-[#ffffffa2] backdrop-blur-sm shadow-md lg:hidden transition-all duration-200">
             <ul className="flex flex-col items-start p-4 space-y-4">
               {/* home */}
               <li>
