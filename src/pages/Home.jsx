@@ -76,7 +76,7 @@ function Home() {
             xmlns="http://www.w3.org/2000/svg"
             // fill="#9984A3"
             stroke="#ffffff"
-            className="fill-violet-300"
+            className="fill-sky-300"
           >
             <g
               id="SVGRepo_bgCarrier"
@@ -135,7 +135,7 @@ function Home() {
                 height="35.52"
                 rx="17.76"
                 // fill="#D1C9D8"
-                className="fill-violet-300"
+                className="fill-sky-300"
                 strokeWidth="0"
               ></rect>
             </g>
@@ -181,7 +181,7 @@ function Home() {
                 height="35.52"
                 rx="17.76"
                 // fill="#D1C9D8"
-                className="fill-violet-300"
+                className="fill-sky-300"
                 strokeWidth="0"
               ></rect>
             </g>
@@ -224,7 +224,7 @@ function Home() {
                 height="35.52"
                 rx="17.76"
                 // fill="#D1C9D8"
-                className="fill-violet-300"
+                className="fill-sky-300"
                 strokeWidth="0"
               ></rect>
             </g>
@@ -312,7 +312,7 @@ function Home() {
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 px-10 pt-5">
           {/* card-1 */}
           <div className="rounded-2xl bg-violet-400">
-            <div href="#" className="group relative block h-64 sm:h-80 lg:h-70">
+            <div className="group relative block h-64 sm:h-80 lg:h-70">
               <span className="absolute rounded-2xl inset-0 border-2 border-dashed border-violet-900"></span>
 
               <div className="relative rounded-2xl flex h-full transform items-end border-2 border-violet-900 bg-violet-300 transition-transform group-hover:-translate-x-2 group-hover:-translate-y-2">
@@ -628,7 +628,7 @@ function Home() {
           </div>
 
           {/* card-2 */}
-          <div className="rounded-2xl bg-sky-200">
+          <div className="rounded-2xl bg-violet-400">
             <div
               href="#"
               className="group relative block h-64 sm:h-80 lg:h-70 "
@@ -714,11 +714,11 @@ function Home() {
           </div>
 
           {/* card-3 */}
-          <div className="rounded-2xl bg-sky-300">
+          <div className="rounded-2xl bg-violet-400">
             <div href="#" className="group relative block h-64 sm:h-80 lg:h-70">
-              <span className="absolute rounded-2xl inset-0 border-2 border-dashed border-black"></span>
+              <span className="absolute rounded-2xl inset-0 border-2 border-dashed border-violet-900"></span>
 
-              <div className="relative rounded-2xl flex h-full transform items-end border-2 border-black bg-violet-300 transition-transform group-hover:-translate-x-2 group-hover:-translate-y-2">
+              <div className="relative rounded-2xl flex h-full transform items-end border-2 border-violet-900 bg-violet-300 transition-transform group-hover:-translate-x-2 group-hover:-translate-y-2">
                 <div className="p-4 !pt-0 transition-opacity group-hover:absolute group-hover:opacity-0 sm:p-6 lg:p-8 lg:opacity-100 [@media(max-width:600px)]:opacity-0 ">
                   <svg
                     width="64px"
@@ -782,11 +782,11 @@ function Home() {
           </div>
 
           {/* card-4 */}
-          <div className="rounded-2xl bg-sky-300">
+          <div className="rounded-2xl bg-violet-400">
             <div href="#" className="group relative block h-64 sm:h-80 lg:h-70">
-              <span className="absolute rounded-2xl inset-0 border-2 border-dashed border-black"></span>
+              <span className="absolute rounded-2xl inset-0 border-2 border-dashed border-violet-900"></span>
 
-              <div className="relative rounded-2xl flex h-full transform items-end border-2 border-black bg-violet-300 transition-transform group-hover:-translate-x-2 group-hover:-translate-y-2">
+              <div className="relative rounded-2xl flex h-full transform items-end border-2 border-violet-900 bg-violet-300 transition-transform group-hover:-translate-x-2 group-hover:-translate-y-2">
                 <div className="p-4 !pt-0 transition-opacity group-hover:absolute group-hover:opacity-0 sm:p-6 lg:p-8 lg:opacity-100 [@media(max-width:600px)]:opacity-0 ">
                   <svg
                     fill="#000000"
