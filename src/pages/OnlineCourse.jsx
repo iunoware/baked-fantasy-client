@@ -9,7 +9,7 @@ function OnlineCourse() {
   useEffect(() => {
     localStorage.setItem(
       "token",
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4YTk3ZDYxOTdlMjcxMDM0OWUwNmI0MyIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc1ODE5MjY1MiwiZXhwIjoxNzU4Mjc5MDUyfQ.vNjJ6WDN1cBjCmNN_gQWqr6GR69YWai7tI8MQ5q-Ib0"
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4YTk3ZDYxOTdlMjcxMDM0OWUwNmI0MyIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc1ODM1NjIxMywiZXhwIjoxNzU4NDQyNjEzfQ.Mvpn44IT2DlGuleVdRK5JoZh2yEv5TN7qUJbyYpmNqM"
     );
 
     async function fetchCourse() {

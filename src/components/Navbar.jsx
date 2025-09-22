@@ -1,6 +1,15 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+
+function Navbar() {
+  let [isMenuOpen, setIsMenuOpen] = useState(false);
+  let location = useLocation();
+
+  useEffect(() => {
+    setIsMenuOpen(false);
+  }, [location]);
 // import gsap from "gsap";
 // import { useGSAP } from "@gsap/react";
 // import { ScrollTrigger } from "gsap/all";
@@ -41,11 +50,17 @@ function Navbar() {
       <header className="w-full absolute z-50">
         <div className="mx-auto max-w-screen-xl flex justify-center p-4 sm:px-6 lg:px-8 mt-[-10px]">
           {/* brand name */}
+          <div className="mr-10 lg:absolute md:fixed sm:fixed fixed left-10 top-4 z-50 md:gap-12">
+            <Link
+              to="/"
+              className="text-pink-500 inline-block [@media(max-width:1120px)]:text-md [@media(max-width:1220px)]:text-xl text-2xl font-bold brand-name"
+
           <div className="mr-10 absolute left-10 top-4 z-50 md:gap-12">
             <Link
               to="/"
               className="text-pink-500 text-3xl font-bold brand-name"
               id="brand"
+
             >
               The Backed Fantasy
             </Link>
@@ -226,10 +241,11 @@ function Navbar() {
             <div className="flex items-center p-4 px-2 rounded-2xl gap-4 m-5 z-50">
               {/* <div className="sm:flex sm:gap-4 "></div> */}
 
+              {/* burger button */}
               <div className="block lg:hidden">
                 <button
                   onClick={() => setIsMenuOpen(!isMenuOpen)}
-                  className="rounded-sm translate-y-5 bg-gray-100 p-2 text-gray-600 transition hover:text-gray-600/75"
+                  className="rounded-sm sm:-translate-y-9 -translate-y-10 md:-translate-y-7 [@media(max-width:1017px)]:absolute [@media(max-width:1017px)]:right-3 bg-sky-500 p-2 text-white "
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -254,11 +270,11 @@ function Navbar() {
         </div>
       </header>
 
-      {isMenuOpen && (
+      {/* {isMenuOpen && (
         <div className="">
           <nav className="fixed z-50 top-16 left-0 w-full mt-10 bg-[#ffffffa2] backdrop-blur-sm shadow-md lg:hidden transition-all duration-200">
             <ul className="flex flex-col items-start p-4 space-y-4">
-              {/* home */}
+              
               <li>
                 <NavLink
                   to="/"
@@ -274,7 +290,7 @@ function Navbar() {
                 </NavLink>
               </li>
 
-              {/* about */}
+              
               <li>
                 <NavLink
                   to="/about"
@@ -290,7 +306,7 @@ function Navbar() {
                 </NavLink>
               </li>
 
-              {/* products */}
+              
               <li>
                 <NavLink
                   to="/products"
@@ -306,7 +322,7 @@ function Navbar() {
                 </NavLink>
               </li>
 
-              {/* courses */}
+              
               <li>
                 <NavLink
                   to="/courses"
@@ -322,7 +338,7 @@ function Navbar() {
                 </NavLink>
               </li>
 
-              {/* contact */}
+              
               <li>
                 <NavLink
                   to="/contact"
@@ -335,6 +351,137 @@ function Navbar() {
                   }
                 >
                   Contact
+                </NavLink>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      )} */}
+
+      {isMenuOpen && (
+        <div>
+          {/* Overlay */}
+          <div
+            onClick={() => setIsMenuOpen(false)}
+            className="fixed inset-0 z-50 bg-black/30 backdrop-blur-sm"
+          ></div>
+
+          <nav
+            className={`fixed flex flex-col justify-between z-50 top-0 right-0 h-screen w-64 bg-[#f7f7f7] backdrop-blur-md shadow-lg transform transition-transform duration-300 lg:hidden ${
+              isMenuOpen ? "translate-x-0" : "-translate-x-full"
+            }`}
+          >
+            <ul className="flex flex-col items-start p-6 space-y-4">
+              {/* home */}
+              <li>
+                <NavLink
+                  to="/"
+                  className={({ isActive }) =>
+                    `text-lg rounded-lg p-3 w-full transition ${
+                      isActive
+                        ? "text-sky-500 font-bold"
+                        : "hover:text-black text-black hover:bg-sky-200"
+                    }`
+                  }
+                >
+                  Home
+                </NavLink>
+              </li>
+
+              {/* about */}
+              <li>
+                <NavLink
+                  to="/about"
+                  className={({ isActive }) =>
+                    `text-lg rounded-lg p-3 w-full transition ${
+                      isActive
+                        ? "text-sky-500 font-bold"
+                        : "hover:text-black text-black hover:bg-sky-200"
+                    }`
+                  }
+                >
+                  About
+                </NavLink>
+              </li>
+
+              {/* products */}
+              <li>
+                <NavLink
+                  to="/products"
+                  className={({ isActive }) =>
+                    `text-lg rounded-lg p-3 w-full transition ${
+                      isActive
+                        ? "text-sky-500 font-bold"
+                        : "hover:text-black text-black hover:bg-sky-200"
+                    }`
+                  }
+                >
+                  Products
+                </NavLink>
+              </li>
+
+              {/* courses */}
+              <li>
+                <NavLink
+                  to="/courses"
+                  className={({ isActive }) =>
+                    `text-lg rounded-lg p-3 w-full transition ${
+                      isActive
+                        ? "text-sky-500 font-bold"
+                        : "hover:text-black text-black hover:bg-sky-200"
+                    }`
+                  }
+                >
+                  Courses
+                </NavLink>
+              </li>
+
+              {/* contact */}
+              <li>
+                <NavLink
+                  to="/contact"
+                  className={({ isActive }) =>
+                    `text-lg rounded-lg p-3 w-full transition ${
+                      isActive
+                        ? "text-sky-500 font-bold"
+                        : "hover:text-black text-black hover:bg-sky-200"
+                    }`
+                  }
+                >
+                  Contact
+                </NavLink>
+              </li>
+            </ul>
+            <ul className="flex flex-col items-start p-6 space-y-4">
+              {/* login */}
+              <li>
+                <NavLink
+                  to="/login"
+                  className={({ isActive }) =>
+                    `text-lg rounded-lg p-3 w-full transition ${
+                      isActive
+                        ? "text-sky-500 font-bold"
+                        : "hover:text-black text-black hover:bg-sky-200"
+                    }`
+                  }
+                >
+                  Login
+                </NavLink>
+              </li>
+
+              {/* cart */}
+              <li>
+                <NavLink
+                  to="/cart"
+                  className={({ isActive }) =>
+                    `text-lg rounded-lg p-3 w-full transition ${
+                      isActive
+                        ? "text-sky-500 font-bold"
+                        : "hover:text-black text-black hover:bg-sky-200"
+                    }`
+                  }
+                >
+                  My Cart
                 </NavLink>
               </li>
             </ul>
