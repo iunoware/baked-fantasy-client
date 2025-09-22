@@ -144,9 +144,9 @@ function Navbar() {
 
                   {/* login */}
                   <li>
-                    <a
+                    <Link
                       className="group relative inline-flex items-center overflow-hidden rounded-full bg-pink-400 px-8 py-3 text-white focus:ring-3 focus:outline-hidden"
-                      href="#"
+                      to="/login"
                     >
                       <span className="absolute -start-full transition-all group-hover:start-4">
                         <svg
@@ -177,7 +177,7 @@ function Navbar() {
                       <span className="text-sm font-medium transition-all group-hover:ms-4">
                         Log in
                       </span>
-                    </a>
+                    </Link>
                   </li>
 
                   {/* cart */}
