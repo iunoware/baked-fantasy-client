@@ -11,6 +11,7 @@ import ScrollToTop from "./components/ScrollToTop.jsx";
 import OnlineCourse from "./pages/OnlineCourse.jsx";
 import OfflineCourse from "./pages/OfflineCourse.jsx";
 import SpecificCategory from "./pages/products/specificCat.jsx";
+import OnlineCourseDetails from "./pages/OnlineCourseDetails.jsx";
 
 function App() {
   return (
@@ -24,20 +25,20 @@ function App() {
           {/* for category page */}
           <Route path="/categories" element={<Categories />} />
           {/* for specific category */}
-          <Route
-            path="/products/:categoryName"
-            element={<SpecificCategory />}
-          />
+          <Route path="/products/:categoryName" element={<SpecificCategory />} />
           {/* for products details */}
-          <Route
-            path="/products/:categoryName/:productId"
-            element={<ProductDetail />}
-          />
+          <Route path="/products/:categoryName/:productId" element={<ProductDetail />} />
           {/* <Route path="/products/cake/cake-1" element={<ProductDetail />} /> */}
 
           {/* for courses */}
           <Route path="/courses" element={<Courses />} />
+          {/* for all online courses */}
           <Route path="/courses/online-course" element={<OnlineCourse />} />
+          {/* for online course details */}
+          <Route
+            path="/course/online-course/:courseId"
+            element={<OnlineCourseDetails />}
+          />
           <Route path="/courses/offline-course" element={<OfflineCourse />} />
           <Route path="/contact" element={<Contact />} />
         </Routes>

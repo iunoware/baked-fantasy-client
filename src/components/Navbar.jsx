@@ -1,16 +1,11 @@
-/* eslint-disable no-unused-vars */
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { Link } from "react-router-dom";
-// import { useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 // function Navbar() {
 //   let [isMenuOpen, setIsMenuOpen] = useState(false);
-//   let location = useLocation();
 
-//   useEffect(() => {
-//     setIsMenuOpen(false);
-//   }, [location]);
 //   // import gsap from "gsap";
 //   // import { useGSAP } from "@gsap/react";
 //   // import { ScrollTrigger } from "gsap/all";
@@ -21,6 +16,11 @@ import { Link } from "react-router-dom";
 
 function Navbar() {
   let [isMenuOpen, setIsMenuOpen] = useState(false);
+  let location = useLocation();
+
+  useEffect(() => {
+    setIsMenuOpen(false);
+  }, [location]);
   // const scrollRef = useRef();
 
   // useGSAP(() => {
@@ -154,7 +154,7 @@ function Navbar() {
 
                   {/* login */}
                   <li>
-                    <NavLink
+                    <Link
                       to="/login"
                       className="group relative inline-flex items-center overflow-hidden rounded-full bg-pink-400 px-8 py-3 text-white focus:ring-3 focus:outline-hidden"
                     >
@@ -187,7 +187,7 @@ function Navbar() {
                       <span className="text-sm font-medium transition-all group-hover:ms-4">
                         Log in
                       </span>
-                    </NavLink>
+                    </Link>
                   </li>
 
                   {/* cart */}
@@ -281,7 +281,7 @@ function Navbar() {
                   </li>
 
                   <li>
-                    <NavLink
+                    <Link
                       to="/login"
                       className="group relative inline-flex items-center overflow-hidden [@media-(max-width:450px)]:px-6 [@media-(max-width:450px)]:p-2 rounded-full bg-pink-400 px-8 py-3 text-white focus:ring-3 focus:outline-hidden"
                     >
@@ -314,7 +314,7 @@ function Navbar() {
                       <span className="text-sm font-medium transition-all group-hover:ms-4">
                         Log in
                       </span>
-                    </NavLink>
+                    </Link>
                   </li>
                 </ul>
                 {/* login */}

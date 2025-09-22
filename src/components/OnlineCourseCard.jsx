@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 function OnlineCourseCard(props) {
   // const courses = [
   //   {
@@ -110,7 +112,10 @@ function OnlineCourseCard(props) {
             <div className="card-button-reveal opacity-0 group-hover:opacity-100 group-hover:-translate-y-3 translate-y-3 absolute top-1/2 left-1/2 transform -translate-x-1/2 transition-all duration-400">
               <div className="bg-white text-foreground px-6 py-3 rounded-full font-semibold shadow-lg flex items-center space-x-2">
                 <div className="">
-                  <span className="text-xl">
+                  <Link
+                    to={`/course/online-course/${props.endPoint}`}
+                    className="text-xl"
+                  >
                     <svg
                       width="24px"
                       className="inline-block mr-5"
@@ -154,7 +159,7 @@ function OnlineCourseCard(props) {
                       </g>
                     </svg>
                     View Course
-                  </span>
+                  </Link>
                 </div>
               </div>
             </div>
