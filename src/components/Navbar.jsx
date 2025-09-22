@@ -10,6 +10,40 @@ function Navbar() {
   useEffect(() => {
     setIsMenuOpen(false);
   }, [location]);
+// import gsap from "gsap";
+// import { useGSAP } from "@gsap/react";
+// import { ScrollTrigger } from "gsap/all";
+// import { useRef } from "react";
+
+// gsap.registerPlugin(ScrollTrigger);
+
+function Navbar() {
+  let [isMenuOpen, setIsMenuOpen] = useState(false);
+  // const scrollRef = useRef();
+
+  // useGSAP(() => {
+  //   gsap.fromTo(
+  //     "#brand",
+  //     {
+  //       x: 1550,
+  //       y: 500,
+  //       borderRadius: "0%",
+  //       rotation: 0,
+  //       fontSize: "3800%",
+  //       // color: "red",
+  //     },
+  //     {
+  //       rotation: 360,
+  //       duration: 3,
+  //       fontSize: "200%",
+  //       borderRadius: "100%",
+  //       ease: "slow",
+  //       // repeat: -1,
+  //       // yoyo: true,
+  //       // color: "blue",
+  //     }
+  //   );
+  // }, []);
 
   return (
     <>
@@ -20,6 +54,13 @@ function Navbar() {
             <Link
               to="/"
               className="text-pink-500 inline-block [@media(max-width:1120px)]:text-md [@media(max-width:1220px)]:text-xl text-2xl font-bold brand-name"
+
+          <div className="mr-10 absolute left-10 top-4 z-50 md:gap-12">
+            <Link
+              to="/"
+              className="text-pink-500 text-3xl font-bold brand-name"
+              id="brand"
+
             >
               The Backed Fantasy
             </Link>
