@@ -10,6 +10,40 @@ function Navbar() {
   useEffect(() => {
     setIsMenuOpen(false);
   }, [location]);
+// import gsap from "gsap";
+// import { useGSAP } from "@gsap/react";
+// import { ScrollTrigger } from "gsap/all";
+// import { useRef } from "react";
+
+// gsap.registerPlugin(ScrollTrigger);
+
+function Navbar() {
+  let [isMenuOpen, setIsMenuOpen] = useState(false);
+  // const scrollRef = useRef();
+
+  // useGSAP(() => {
+  //   gsap.fromTo(
+  //     "#brand",
+  //     {
+  //       x: 1550,
+  //       y: 500,
+  //       borderRadius: "0%",
+  //       rotation: 0,
+  //       fontSize: "3800%",
+  //       // color: "red",
+  //     },
+  //     {
+  //       rotation: 360,
+  //       duration: 3,
+  //       fontSize: "200%",
+  //       borderRadius: "100%",
+  //       ease: "slow",
+  //       // repeat: -1,
+  //       // yoyo: true,
+  //       // color: "blue",
+  //     }
+  //   );
+  // }, []);
 
   return (
     <>
