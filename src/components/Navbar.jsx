@@ -1,21 +1,23 @@
+/* eslint-disable no-unused-vars */
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { useLocation } from "react-router-dom";
+// import { useLocation } from "react-router-dom";
 
-function Navbar() {
-  let [isMenuOpen, setIsMenuOpen] = useState(false);
-  let location = useLocation();
+// function Navbar() {
+//   let [isMenuOpen, setIsMenuOpen] = useState(false);
+//   let location = useLocation();
 
-  useEffect(() => {
-    setIsMenuOpen(false);
-  }, [location]);
-// import gsap from "gsap";
-// import { useGSAP } from "@gsap/react";
-// import { ScrollTrigger } from "gsap/all";
-// import { useRef } from "react";
+//   useEffect(() => {
+//     setIsMenuOpen(false);
+//   }, [location]);
+//   // import gsap from "gsap";
+//   // import { useGSAP } from "@gsap/react";
+//   // import { ScrollTrigger } from "gsap/all";
+//   // import { useRef } from "react";
 
-// gsap.registerPlugin(ScrollTrigger);
+//   // gsap.registerPlugin(ScrollTrigger);
+// }
 
 function Navbar() {
   let [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -50,10 +52,10 @@ function Navbar() {
       <header className="w-full absolute z-50">
         <div className="mx-auto max-w-screen-xl flex justify-center p-4 sm:px-6 lg:px-8 mt-[-10px]">
           {/* brand name */}
-          <div className="mr-10 absolute left-10 top-4 z-50 md:gap-12">
+          <div className="mr-10 absolute [@media(max-width:440px)]:left-7 left-10 top-4 z-50 md:gap-12">
             <Link
               to="/"
-              className="text-pink-500 inline-block [@media(max-width:440px)]:text-sm [@media(max-width:1120px)]:text-md [@media(max-width:1220px)]:text-xl text-2xl font-bold brand-name"
+              className="text-pink-500 inline-block [@media(max-width:440px)]:text-xs [@media(max-width:1120px)]:text-md [@media(max-width:1220px)]:text-xl text-2xl font-bold brand-name"
             >
               The Backed Fantasy
             </Link>
