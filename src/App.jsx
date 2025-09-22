@@ -11,7 +11,7 @@ import ScrollToTop from "./components/ScrollToTop.jsx";
 import OnlineCourse from "./pages/OnlineCourse.jsx";
 import OfflineCourse from "./pages/OfflineCourse.jsx";
 import SpecificCategory from "./pages/products/specificCat.jsx";
-import Login from "./pages/Login.jsx";
+import Login from "./components/Login.jsx";
 
 function App() {
   return (

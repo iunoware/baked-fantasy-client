@@ -1,8 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Edu+NSW+ACT+Cursive:wght@400..700&display=swap");
 @import "tailwindcss";
-@import "tw-animate-css";
-
-@custom-variant dark (&:is(.dark *));
 
 body {
   font-family: "Quicksand";
@@ -69,7 +66,7 @@ body {
 }
 
 @media (min-width: 1024px) and (max-width: 1150px) {
-  .brand-name{
+  .brand-name {
     display: none;
   }
 }

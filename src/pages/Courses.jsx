@@ -12,7 +12,7 @@ function Courses() {
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
         >
-          <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+          <g id="SVGRepo_bgCarrier" strokewidth="0"></g>
           <g
             id="SVGRepo_tracerCarrier"
             stroke-linecap="round"
@@ -23,7 +23,7 @@ function Courses() {
             <path
               d="M16 10L18.5768 8.45392C19.3699 7.97803 19.7665 7.74009 20.0928 7.77051C20.3773 7.79703 20.6369 7.944 20.806 8.17433C21 8.43848 21 8.90095 21 9.8259V14.1741C21 15.099 21 15.5615 20.806 15.8257C20.6369 16.056 20.3773 16.203 20.0928 16.2295C19.7665 16.2599 19.3699 16.022 18.5768 15.5461L16 14M6.2 18H12.8C13.9201 18 14.4802 18 14.908 17.782C15.2843 17.5903 15.5903 17.2843 15.782 16.908C16 16.4802 16 15.9201 16 14.8V9.2C16 8.0799 16 7.51984 15.782 7.09202C15.5903 6.71569 15.2843 6.40973 14.908 6.21799C14.4802 6 13.9201 6 12.8 6H6.2C5.0799 6 4.51984 6 4.09202 6.21799C3.71569 6.40973 3.40973 6.71569 3.21799 7.09202C3 7.51984 3 8.07989 3 9.2V14.8C3 15.9201 3 16.4802 3.21799 16.908C3.40973 17.2843 3.71569 17.5903 4.09202 17.782C4.51984 18 5.07989 18 6.2 18Z"
               stroke="#EC407A"
-              stroke-width="2"
+              strokewidth="2"
               stroke-linecap="round"
               stroke-linejoin="round"
             ></path>{" "}
@@ -33,7 +33,8 @@ function Courses() {
       bgColor: "bg-white",
       textColor: "text-gray-800",
       heading: "Flexible Online & Offline Learning",
-      content: "Join in-person or attend interactive online courses from anywhere.",
+      content:
+        "Join in-person or attend interactive online courses from anywhere.",
     },
     {
       svg: (
@@ -44,7 +45,7 @@ function Courses() {
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
         >
-          <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+          <g id="SVGRepo_bgCarrier" strokewidth="0"></g>
           <g
             id="SVGRepo_tracerCarrier"
             stroke-linecap="round"
@@ -75,39 +76,44 @@ function Courses() {
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
         >
-          <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+          <g id="SVGRepo_bgCarrier" strokewidth="0"></g>
           <g
             id="SVGRepo_tracerCarrier"
             stroke-linecap="round"
             stroke-linejoin="round"
           ></g>
           <g id="SVGRepo_iconCarrier">
-            <rect width="48" height="48" fill="white" fill-opacity="0.01"></rect>{" "}
+            <rect
+              width="48"
+              height="48"
+              fill="white"
+              fill-opacity="0.01"
+            ></rect>{" "}
             <path
               d="M42 6H6C4.89543 6 4 6.89543 4 8V34C4 35.1046 4.89543 36 6 36H42C43.1046 36 44 35.1046 44 34V8C44 6.89543 43.1046 6 42 6Z"
               stroke="#EC407A"
-              stroke-width="2.688"
+              strokewidth="2.688"
               stroke-linecap="round"
               stroke-linejoin="round"
             ></path>
             <path
               d="M12 14L36 14"
               stroke="#EC407A"
-              stroke-width="2.688"
+              strokewidth="2.688"
               stroke-linecap="round"
               stroke-linejoin="round"
             ></path>
             <path
               d="M12 21H18"
               stroke="#EC407A"
-              stroke-width="2.688"
+              strokewidth="2.688"
               stroke-linecap="round"
               stroke-linejoin="round"
             ></path>
             <path
               d="M12 28H16"
               stroke="#EC407A"
-              stroke-width="2.688"
+              strokewidth="2.688"
               stroke-linecap="round"
               stroke-linejoin="round"
             ></path>
@@ -117,13 +123,13 @@ function Courses() {
               r="6"
               fill="#"
               stroke="#EC407A"
-              stroke-width="2.688"
+              strokewidth="2.688"
             ></circle>
             <path
               d="M30 40L34 42V31.4722C34 31.4722 32.8594 33 30 33C27.1406 33 26 31.5 26 31.5V42L30 40Z"
               fill="#"
               stroke="#EC407A"
-              stroke-width="2.688"
+              strokewidth="2.688"
               stroke-linecap="round"
               stroke-linejoin="round"
             ></path>
@@ -145,9 +151,9 @@ function Courses() {
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
           stroke="#000000"
-          stroke-width="0.00024000000000000003"
+          strokewidth="0.00024000000000000003"
         >
-          <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+          <g id="SVGRepo_bgCarrier" strokewidth="0"></g>
           <g
             id="SVGRepo_tracerCarrier"
             stroke-linecap="round"
@@ -187,9 +193,9 @@ function Courses() {
         </h1>
         <div className="flex justify-center">
           <p className="text-center lg:text-2xl md:text-xl sm:text-lg max-w-[600px] mx-3 text-gray-700 py-10">
-            Master the art of baking with our expert-led courses designed for all skill
-            levels. Whether you prefer learning online or in-person, we have the perfect
-            program for you.
+            Master the art of baking with our expert-led courses designed for
+            all skill levels. Whether you prefer learning online or in-person,
+            we have the perfect program for you.
           </p>
         </div>
       </div>
@@ -199,28 +205,28 @@ function Courses() {
         {/* online course */}
         <Link to="/courses/online-course" className="m-4 lg:ml-20">
           <CourseCard
-            // img="onlineCourse.png"
-            // courseGenre="Online Courses"
-            // courseCount="3"
-            // description="Learn at your own pace with our comprehensive video library taught by industry professionals."
-            // list1="24/7 Access"
-            // list2="Certificate of Completion"
-            // list3="Lifetime Updates"
-            // list4="Expert Support"
+          // img="onlineCourse.png"
+          // courseGenre="Online Courses"
+          // courseCount="3"
+          // description="Learn at your own pace with our comprehensive video library taught by industry professionals."
+          // list1="24/7 Access"
+          // list2="Certificate of Completion"
+          // list3="Lifetime Updates"
+          // list4="Expert Support"
           />
         </Link>
 
         {/* offline course */}
         <Link to="/courses/offline-course" className="m-4 lg:mr-20">
           <CourseCard
-            // img="offlineCourse.png"
-            // courseGenre="Offline Courses"
-            // courseCount="4"
-            // description="Join our hands-on classes at our state-of-the-art facility with expert instructors."
-            // list1="Small class sizes"
-            // list2="Professional Equipment"
-            // list3="Hands-on practice"
-            // list4="Take home goodies"
+          // img="offlineCourse.png"
+          // courseGenre="Offline Courses"
+          // courseCount="4"
+          // description="Join our hands-on classes at our state-of-the-art facility with expert instructors."
+          // list1="Small class sizes"
+          // list2="Professional Equipment"
+          // list3="Hands-on practice"
+          // list4="Take home goodies"
           />
         </Link>
       </div>
@@ -241,7 +247,9 @@ function Courses() {
                 key={index}
                 className={` rounded-2xl flex flex-col place-items-center shadow-md hover:shadow-xl hover:-translate-y-2 transition-all duration-200 ${detail.bgColor}`}
               >
-                <div className="flex justify-center w-full pt-5">{detail.svg}</div>
+                <div className="flex justify-center w-full pt-5">
+                  {detail.svg}
+                </div>
                 <h3
                   className={`text-2xl text-center w-full px-8 pt-5 ${detail.textColor} font-bold pb-4`}
                 >

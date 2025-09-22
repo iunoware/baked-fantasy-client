@@ -50,7 +50,11 @@ function About() {
           strokeWidth="0.00032"
         >
           <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
-          <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
+          <g
+            id="SVGRepo_tracerCarrier"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          ></g>
           <g id="SVGRepo_iconCarrier">
             <path d="M6.33,18.45v8.59c0,.41,.34,.75,.75,.75h15.13c.41,0,.75-.34,.75-.75v-8.6c1.91-.75,3.27-2.6,3.27-4.77,0-2.83-2.3-5.13-5.13-5.13-.56,0-1.13,.1-1.67,.28-1.2-1.87-3.24-3.01-5.49-3.01s-4.09,1.02-5.31,2.75c-3.06-.27-5.56,2.14-5.56,5.11,0,2.17,1.36,4.02,3.27,4.77Zm1.5,7.84v-1.87h13.63v1.87H7.83Zm13.63-7.48v4.11H7.83v-4.11h13.63ZM8.19,10.05c.18,0,.36,.02,.56,.05,0,0,.01,0,.02,0,1.72,.33,2.97,1.83,2.97,3.57,0,.41,.34,.75,.75,.75s.75-.34,.75-.75c0-2.05-1.23-3.85-3.04-4.67,.94-1.07,2.29-1.7,3.74-1.7,1.91,0,3.64,1.07,4.5,2.79,.09,.18,.25,.31,.43,.38,.19,.06,.39,.05,.57-.04,.52-.26,1.09-.4,1.65-.4,2,0,3.63,1.63,3.63,3.63s-1.63,3.63-3.63,3.63H8.19c-2,0-3.63-1.63-3.63-3.63s1.63-3.63,3.63-3.63Z"></path>
           </g>
@@ -74,7 +78,11 @@ function About() {
           xmlnsXlink="http://www.w3.org/1999/xlink"
         >
           <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
-          <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
+          <g
+            id="SVGRepo_tracerCarrier"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          ></g>
           <g id="SVGRepo_iconCarrier">
             <g>
               <path d="M59.909,11.709c-0.002-0.109-0.014-0.218-0.044-0.324l-0.146,0.042c-0.002-0.003-0.003-0.006-0.006-0.008l0.149-0.044 C58.225,5.361,53.122,0.946,47,0.14V0L31,0v0h-0.181h-1.639H29v0.001l-14.002,0C8.069,0.013,1.959,4.689,0.142,11.362 C0.11,11.473,0.099,11.586,0.097,11.7C0.036,11.841,0,11.996,0,12.16V14v46h39h17h4V14v-1.84C60,12,59.967,11.848,59.909,11.709z M45.93,2.04c5.371,0.381,9.974,3.94,11.724,8.96H45h-0.204c-0.938-3.868-3.391-7.069-6.661-9h6.841L45.93,2.04z M43,14 c0,3.309-2.691,6-6,6s-6-2.691-6-6v-1h12V14z M17,13h12v1c0,3.309-2.691,6-6,6s-6-2.691-6-6V13z M31,2.001 C36.511,2.08,41.259,5.776,42.742,11H31V2.001z M29,11H17.258C18.741,5.776,23.489,2.08,29,2.001V11z M15.023,2h6.841 c-3.27,1.931-5.723,5.132-6.661,9H15H2.348C4.212,5.666,9.288,2.011,15.023,2z M2,13h12.802H15v1c0,3.309-2.691,6-6,6H8 c-3.309,0-6-2.691-6-6V13z M54,44H41V33.5c0-3.584,2.916-6.5,6.5-6.5s6.5,2.916,6.5,6.5V44z M41,58V46h13v12H41z M58,19.286V58h-2 V33.5c0-4.687-3.813-8.5-8.5-8.5S39,28.813,39,33.5V54c-0.553,0-1,0.447-1,1s0.447,1,1,1v1h-1c-0.553,0-1,0.447-1,1h-1 c0-0.553-0.447-1-1-1h-1c-0.553,0-1,0.447-1,1h-1c0-0.553-0.447-1-1-1h-1c-0.553,0-1,0.447-1,1h-1c0-0.553-0.447-1-1-1h-1 c-0.553,0-1,0.447-1,1h-1c0-0.553-0.447-1-1-1h-1c-0.553,0-1,0.447-1,1h-1c0-0.553-0.447-1-1-1h-1c-0.553,0-1,0.447-1,1h-1 c0-0.553-0.447-1-1-1h-1c-0.553,0-1,0.447-1,1h-1c0-0.553-0.447-1-1-1h-1c-0.553,0-1,0.447-1,1H8c0-0.553-0.447-1-1-1H6 c-0.553,0-1,0.447-1,1H4c0-0.553-0.447-1-1-1H2v-2V19.286c0.05,0.057,0.108,0.108,0.16,0.163c0.102,0.109,0.206,0.217,0.314,0.321 c0.086,0.083,0.175,0.162,0.265,0.241c0.112,0.098,0.226,0.193,0.343,0.285c0.094,0.074,0.19,0.145,0.287,0.215 c0.121,0.087,0.246,0.169,0.372,0.249c0.101,0.064,0.202,0.127,0.306,0.186c0.132,0.075,0.267,0.145,0.403,0.213 c0.105,0.053,0.21,0.106,0.318,0.154c0.143,0.063,0.289,0.119,0.435,0.174c0.108,0.041,0.215,0.083,0.325,0.119 c0.157,0.051,0.317,0.092,0.477,0.133c0.106,0.027,0.21,0.059,0.318,0.082c0.181,0.039,0.365,0.065,0.55,0.091 c0.092,0.013,0.182,0.032,0.275,0.042C7.429,21.983,7.712,22,8,22h1c0.338,0,0.669-0.028,0.996-0.069 c0.094-0.012,0.187-0.028,0.28-0.043c0.247-0.04,0.489-0.091,0.728-0.153c0.083-0.021,0.166-0.04,0.248-0.064 c0.307-0.09,0.607-0.195,0.898-0.32c0.045-0.019,0.086-0.043,0.13-0.063c0.247-0.112,0.487-0.236,0.721-0.372 c0.081-0.047,0.159-0.095,0.238-0.145c0.212-0.133,0.416-0.275,0.614-0.427c0.055-0.042,0.113-0.081,0.167-0.125 c0.243-0.196,0.474-0.406,0.692-0.629c0.049-0.05,0.094-0.104,0.142-0.156c0.169-0.182,0.329-0.371,0.481-0.567 c0.057-0.074,0.113-0.148,0.167-0.224c0.157-0.219,0.303-0.445,0.437-0.679c0.019-0.033,0.043-0.063,0.062-0.096 c0.019,0.033,0.043,0.063,0.062,0.096c0.134,0.234,0.281,0.46,0.437,0.679c0.054,0.076,0.11,0.15,0.167,0.224 c0.152,0.197,0.312,0.386,0.481,0.567c0.048,0.052,0.092,0.106,0.142,0.156c0.218,0.223,0.449,0.433,0.692,0.629 c0.054,0.044,0.112,0.083,0.167,0.125c0.198,0.152,0.402,0.294,0.614,0.427c0.079,0.049,0.157,0.098,0.238,0.145 c0.233,0.135,0.473,0.26,0.721,0.372c0.044,0.02,0.086,0.044,0.13,0.063c0.29,0.125,0.591,0.23,0.898,0.32 c0.082,0.024,0.165,0.042,0.248,0.064c0.239,0.062,0.481,0.113,0.728,0.153c0.093,0.015,0.186,0.031,0.28,0.043 C22.331,21.972,22.662,22,23,22s0.669-0.028,0.996-0.069c0.094-0.012,0.187-0.028,0.28-0.043c0.247-0.04,0.489-0.091,0.728-0.153 c0.083-0.021,0.166-0.04,0.248-0.064c0.307-0.09,0.607-0.195,0.898-0.32c0.045-0.019,0.086-0.043,0.13-0.063 c0.247-0.112,0.487-0.236,0.721-0.372c0.081-0.047,0.159-0.095,0.238-0.145c0.212-0.133,0.416-0.275,0.614-0.427 c0.055-0.042,0.113-0.081,0.167-0.125c0.243-0.196,0.474-0.406,0.692-0.629c0.049-0.05,0.094-0.104,0.142-0.156 c0.169-0.182,0.329-0.371,0.481-0.567c0.057-0.074,0.113-0.148,0.167-0.224c0.157-0.219,0.303-0.445,0.437-0.679 c0.019-0.033,0.043-0.063,0.062-0.096c0.019,0.033,0.043,0.063,0.062,0.096c0.134,0.234,0.281,0.46,0.437,0.679 c0.054,0.076,0.11,0.15,0.167,0.224c0.152,0.197,0.312,0.386,0.481,0.567c0.048,0.052,0.092,0.106,0.142,0.156 c0.218,0.223,0.449,0.433,0.692,0.629c0.054,0.044,0.112,0.083,0.167,0.125c0.198,0.152,0.402,0.294,0.614,0.427 c0.079,0.049,0.157,0.098,0.238,0.145c0.233,0.135,0.473,0.26,0.721,0.372c0.044,0.02,0.086,0.044,0.13,0.063 c0.29,0.125,0.591,0.23,0.898,0.32c0.082,0.024,0.165,0.042,0.248,0.064c0.239,0.062,0.481,0.113,0.728,0.153 c0.093,0.015,0.186,0.031,0.28,0.043C36.331,21.972,36.662,22,37,22s0.669-0.028,0.996-0.069c0.094-0.012,0.187-0.028,0.28-0.043 c0.247-0.04,0.489-0.091,0.728-0.153c0.083-0.021,0.166-0.04,0.248-0.064c0.307-0.09,0.607-0.195,0.898-0.32 c0.045-0.019,0.086-0.043,0.13-0.063c0.247-0.112,0.487-0.236,0.721-0.372c0.081-0.047,0.159-0.095,0.238-0.145 c0.212-0.133,0.416-0.275,0.614-0.427c0.055-0.042,0.113-0.081,0.167-0.125c0.243-0.196,0.474-0.406,0.692-0.629 c0.049-0.05,0.094-0.104,0.142-0.156c0.169-0.182,0.329-0.371,0.481-0.567c0.057-0.074,0.113-0.148,0.167-0.224 c0.157-0.219,0.303-0.445,0.437-0.679c0.019-0.033,0.043-0.063,0.062-0.096c0.019,0.033,0.043,0.063,0.062,0.096 c0.134,0.234,0.281,0.46,0.437,0.679c0.054,0.076,0.11,0.15,0.167,0.224c0.152,0.197,0.312,0.386,0.481,0.567 c0.048,0.052,0.092,0.106,0.142,0.156c0.218,0.223,0.449,0.433,0.692,0.629c0.054,0.044,0.112,0.083,0.167,0.125 c0.198,0.152,0.402,0.294,0.614,0.427c0.079,0.049,0.157,0.098,0.238,0.145c0.233,0.135,0.473,0.26,0.721,0.372 c0.044,0.02,0.086,0.044,0.13,0.063c0.29,0.125,0.591,0.23,0.898,0.32c0.082,0.024,0.165,0.042,0.248,0.064 c0.239,0.062,0.481,0.113,0.728,0.153c0.093,0.015,0.186,0.031,0.28,0.043C50.331,21.972,50.662,22,51,22h1 c0.288,0,0.571-0.017,0.851-0.047c0.093-0.01,0.183-0.029,0.276-0.042c0.185-0.026,0.369-0.053,0.55-0.091 c0.108-0.023,0.212-0.055,0.318-0.082c0.16-0.041,0.321-0.082,0.477-0.133c0.11-0.036,0.217-0.079,0.325-0.119 c0.147-0.055,0.293-0.111,0.435-0.174c0.108-0.048,0.213-0.101,0.318-0.154c0.136-0.068,0.271-0.137,0.403-0.213 c0.104-0.059,0.205-0.122,0.306-0.186c0.126-0.08,0.25-0.162,0.371-0.249c0.098-0.07,0.194-0.142,0.288-0.216 c0.117-0.092,0.23-0.186,0.342-0.284c0.09-0.079,0.179-0.158,0.265-0.241c0.108-0.104,0.211-0.211,0.314-0.321 C57.892,19.394,57.95,19.343,58,19.286z M52,20h-1c-3.309,0-6-2.691-6-6v-1h0.198H58v1C58,17.309,55.309,20,52,20z"></path>{" "}
@@ -95,8 +103,8 @@ function About() {
               <path d="M28,54h-1c-0.553,0-1,0.447-1,1s0.447,1,1,1h1c0.553,0,1-0.447,1-1S28.553,54,28,54z"></path>{" "}
               <path d="M36,54h-1c-0.553,0-1,0.447-1,1s0.447,1,1,1h1c0.553,0,1-0.447,1-1S36.553,54,36,54z"></path>{" "}
             </g>{" "}
-            <g></g> <g></g> <g></g> <g></g> <g></g> <g></g> <g></g> <g></g> <g></g>{" "}
-            <g></g> <g></g> <g></g> <g></g> <g></g> <g></g>{" "}
+            <g></g> <g></g> <g></g> <g></g> <g></g> <g></g> <g></g> <g></g>{" "}
+            <g></g> <g></g> <g></g> <g></g> <g></g> <g></g> <g></g>{" "}
           </g>
         </svg>
       ),
@@ -104,7 +112,8 @@ function About() {
     {
       year: "2022",
       title: "Signature Cakes Launched",
-      description: "Introduced our signature customized cakes and special dessert menu.",
+      description:
+        "Introduced our signature customized cakes and special dessert menu.",
       icon: (
         <svg
           width="35px"
@@ -114,7 +123,11 @@ function About() {
           stroke="#ffffff"
         >
           <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
-          <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
+          <g
+            id="SVGRepo_tracerCarrier"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          ></g>
           <g id="SVGRepo_iconCarrier">
             <path
               d="M3 15.9248C3 13.5162 3.51623 13 5.9248 13H18.0752C20.4838 13 21 13.5162 21 15.9248V18.0752C21 20.4838 20.4838 21 18.0752 21H5.9248C3.51623 21 3 20.4838 3 18.0752V15.9248Z"
@@ -228,15 +241,37 @@ function About() {
           fill="none"
         >
           <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
-          <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
+          <g
+            id="SVGRepo_tracerCarrier"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          ></g>
           <g id="SVGRepo_iconCarrier">
             <path d="M21.68,42.22H37.17a1.68,1.68,0,0,0,1.68-1.68L44.7,19.12A1.68,1.68,0,0,0,43,17.44H17.61a1.69,1.69,0,0,0-1.69,1.68l-5,21.42a1.68,1.68,0,0,0,1.68,1.68h2.18"></path>
             <path d="M41.66,42.22H38.19l5-17.29h8.22a.85.85,0,0,1,.65.3l3.58,6.3a.81.81,0,0,1,.2.53L52.51,42.22h-3.6"></path>
             <ellipse cx="18.31" cy="43.31" rx="3.71" ry="3.76"></ellipse>
             <ellipse cx="45.35" cy="43.31" rx="3.71" ry="3.76"></ellipse>
-            <line x1="23.25" y1="22.36" x2="6.87" y2="22.36" strokeLinecap="round"></line>
-            <line x1="20.02" y1="27.6" x2="8.45" y2="27.6" strokeLinecap="round"></line>
-            <line x1="21.19" y1="33.5" x2="3.21" y2="33.5" strokeLinecap="round"></line>
+            <line
+              x1="23.25"
+              y1="22.36"
+              x2="6.87"
+              y2="22.36"
+              strokeLinecap="round"
+            ></line>
+            <line
+              x1="20.02"
+              y1="27.6"
+              x2="8.45"
+              y2="27.6"
+              strokeLinecap="round"
+            ></line>
+            <line
+              x1="21.19"
+              y1="33.5"
+              x2="3.21"
+              y2="33.5"
+              strokeLinecap="round"
+            ></line>
           </g>
         </svg>
       ),
@@ -317,7 +352,9 @@ function About() {
         {/* Optional: Previous/Next buttons */}
         <button
           onClick={() =>
-            setCurrentIndex((prev) => (prev - 1 + images.length) % images.length)
+            setCurrentIndex(
+              (prev) => (prev - 1 + images.length) % images.length
+            )
           }
           className="absolute left-2 top-1/2 -translate-y-1/2 bg-sky-300 text-white text-4xl p-2 px-6 rounded-full"
         >
@@ -339,9 +376,9 @@ function About() {
               Our Journey
             </h2>
             <p className="text-lg text-black/70 max-w-3xl mx-auto">
-              From a passionate home baker to a skilled academy instructor and a thriving
-              large-scale home bakery, our journey is driven by love for the craft and
-              dedication to sharing it with others.
+              From a passionate home baker to a skilled academy instructor and a
+              thriving large-scale home bakery, our journey is driven by love
+              for the craft and dedication to sharing it with others.
             </p>
           </div>
 
@@ -408,13 +445,15 @@ function About() {
           <div className="p-8 md:p-12 lg:px-16 lg:py-24">
             <div className="mx-auto max-w-xl text-center ltr:sm:text-left rtl:sm:text-right">
               <h2 className="!text-4xl font-bold mb-5 text-gray-900 pt-60 md:text-3xl">
-                Turn Your Passion for <span className="text-sky-500">Baking</span> Into{" "}
+                Turn Your Passion for{" "}
+                <span className="text-sky-500">Baking</span> Into{" "}
                 <span className="text-sky-500">Perfection</span>
               </h2>
 
               <p className="hidden text-xl mb-5 text-gray-800 md:mt-4 md:block">
-                Join our academy and transform your home baking skills into professional
-                expertise - from homemade treats to large-scale success!
+                Join our academy and transform your home baking skills into
+                professional expertise - from homemade treats to large-scale
+                success!
               </p>
 
               <div className="mt-4 flex md:mt-8">
@@ -526,17 +565,21 @@ function About() {
                 Recognized Excellence
               </h3>
               <p className="text-lg text-black/80 leading-relaxed">
-                Our commitment to quality craftsmanship and exceptional customer service
-                has been recognized by industry leaders and our community. These awards
-                reflect our dedication to traditional baking methods and innovative
-                approaches to creating memorable experiences.
+                Our commitment to quality craftsmanship and exceptional customer
+                service has been recognized by industry leaders and our
+                community. These awards reflect our dedication to traditional
+                baking methods and innovative approaches to creating memorable
+                experiences.
               </p>
 
               <div className="space-y-4 mt-7 hover:scale-105 hover:shadow-lg transition-all duration-200">
                 <div className="bg-white rounded-lg p-4 shadow-sm flex items-start gap-4">
                   {/* Award icon */}
                   <div className="w-8 h-8 text-blue-400 flex items-center justify-center flex-shrink-0 mt-1">
-                    <svg className="w-full h-full fill-current" viewBox="0 0 24 24">
+                    <svg
+                      className="w-full h-full fill-current"
+                      viewBox="0 0 24 24"
+                    >
                       <path d="M12 2L15.09 8.26L22 9L17 14L18.18 21L12 17.77L5.82 21L7 14L2 9L8.91 8.26L12 2Z" />
                     </svg>
                   </div>
@@ -560,8 +603,8 @@ function About() {
             Sweet words from our customers
           </h2>
           <p className="text-xl text-gray-800/80 text-center">
-            Discover what makes our bakery special through the heartfelt stories of our
-            beloved customers
+            Discover what makes our bakery special through the heartfelt stories
+            of our beloved customers
           </p>
         </div>
 
@@ -599,9 +642,9 @@ function About() {
                 stroke="currentColor"
               >
                 <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokewidth="2"
                   d="M17 8l4 4m0 0l-4 4m4-4H3"
                 />
               </svg>
