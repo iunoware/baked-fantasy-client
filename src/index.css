@@ -70,8 +70,6 @@ body {
     display: none;
   }
 }
-<<<<<<< HEAD
-=======
 
 @font-face {
   font-family: "Gliker";
@@ -88,4 +86,3 @@ h2 {
 .new-btn {
   @apply shadow-[3px_3px_1px_#000000] active:shadow-none active:scale-92 transition-all duration-50;
 }
->>>>>>> 1edfcbaf4ef7e7e00b5fe66e96bbd29f2fd2bd93

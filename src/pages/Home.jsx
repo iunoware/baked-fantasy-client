@@ -958,7 +958,7 @@ function Home() {
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {/* online Course */}
-            <div className="mt-[70px] shadow-2xl relative !p-8 !rounded-lg hover:!shadow-lg hover:-translate-y-1 transition-all !duration-30">
+            <div className="mt-[70px] bg-[url(/images/scribble.png)] shadow-2xl relative !p-8 !rounded-lg hover:!shadow-lg hover:-translate-y-1 transition-all !duration-30">
               {/* online image */}
               <div className="absolute z-[0] left-0 top-[-180px] flex justify-center w-full">
                 <img
@@ -1197,7 +1197,7 @@ function Home() {
             </div>
 
             {/* Offline Course */}
-            <div className="mt-[70px] relative shadow-2xl !p-8 !rounded-lg hover:!shadow-lg hover:-translate-y-1 transition-all !duration-300 ">
+            <div className="mt-[70px] bg-[url(/images/scribble.png)] relative shadow-2xl !p-8 !rounded-lg hover:!shadow-lg hover:-translate-y-1 transition-all !duration-300 ">
               {/* offline image  */}
               <div className="absolute z-[0] left-0 top-[-180px] flex w-full justify-center">
                 <img
