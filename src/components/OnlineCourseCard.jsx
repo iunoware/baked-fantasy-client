@@ -99,7 +99,7 @@ function OnlineCourseCard(props) {
               <div className="flex items-center space-x-4 mb-2">
                 <div className="flex items-center space-x-1">
                   <div className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-                  <span className="text-sm font-medium">{props.rating}</span>
+                  <span className="text-sm font-medium">⭐{props.rating}</span>
                   <span className="text-xs opacity-75">({props.reviews})</span>
                 </div>
                 <div className="flex items-center space-x-1 text-sm">

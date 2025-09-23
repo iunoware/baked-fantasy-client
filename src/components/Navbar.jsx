@@ -194,7 +194,7 @@ function Navbar() {
                   <li>
                     <div className="hidden sm:flex">
                       <a
-                        className="inline-flex items-center overflow-hidden rounded-full px-8 py-3 border-2 text-pink-500 new-btn mr-1"
+                        className="inline-flex items-center overflow-hidden rounded-full px-8 py-3 border shadow-[3px_3px_1px_#e91e63] active:scale-92 active:shadow-none transition-all duration-50 text-pink-500 mr-1"
                         href="#"
                       >
                         <span className="absolute -start-full transition-all group-hover:start-4"></span>
