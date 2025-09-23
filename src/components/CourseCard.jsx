@@ -1,3 +1,14 @@
+// not useful !
+// not useful !
+// not useful !
+// not useful !
+// not useful !
+// not useful !
+// not useful !
+// not useful !
+// not useful !
+
+
 function CourseCard() {
   // const colors = [
   //   "bg-pink-500/70",
@@ -9,27 +20,6 @@ function CourseCard() {
 
   return (
     <>
-      <div>
-        <div
-          to="/courses/online"
-          className="group relative block rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-transform duration-500 hover:scale-[1.02] bg-white"
-        >
-          <img
-            src="https://images.unsplash.com/photo-1606788075761-37733be66d11"
-            alt="Online Baking Course"
-            className="h-72 w-full object-cover"
-          />
-          <div className="absolute inset-0 bg-gray-800 transition duration-500"></div>
-
-          <div className="absolute bottom-0 p-6 text-white">
-            <h2 className="text-2xl font-bold drop-shadow-lg">Online Courses</h2>
-            <p className="text-sm mt-2 drop-shadow-md">
-              Learn baking at your own pace, from anywhere in the world.
-            </p>
-          </div>
-        </div>
-      </div>
-
       {/* <div className="bg-gray-200 hover:ring-blue-400 hover:ring-2 hover:ring-offset-2 rounded-2xl group hover:scale-101 shadow-lg hover:shadow-2xl transition-all duration-200 my-10">
         <div className="relative">
           <div className="overflow-hidden rounded-2xl">

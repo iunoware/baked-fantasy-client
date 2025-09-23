@@ -1,34 +1,34 @@
-import { useState, useEffect } from "react";
+// import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-const images = [
-  {
-    img: "/images/cake-bg-3.jpg",
-    heading: "Baking Happiness, One Slice at a Time",
-    content:
-      "Delight in our freshly baked cakes, cupcakes, and custom creations—crafted with love to make every occasion unforgettable.",
-  },
-  {
-    img: "/images/cake-bg-4.jpg",
-    heading: "Where Every Bite is a Celebration",
-    content:
-      "From classic cakes to custom creations, we bake joy for every special moment.",
-  },
-];
+// const images = [
+//   {
+//     img: "/images/cake-bg-3.jpg",
+//     heading: "Baking Happiness, One Slice at a Time",
+//     content:
+//       "Delight in our freshly baked cakes, cupcakes, and custom creations—crafted with love to make every occasion unforgettable.",
+//   },
+//   {
+//     img: "/images/cake-bg-4.jpg",
+//     heading: "Where Every Bite is a Celebration",
+//     content:
+//       "From classic cakes to custom creations, we bake joy for every special moment.",
+//   },
+// ];
 
 function About() {
   // for hero section slider
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const delay = 10000;
+  // const [currentIndex, setCurrentIndex] = useState(0);
+  // const delay = 5000;
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % images.length);
-    }, delay);
-    return () => clearInterval(timer);
-  }, []);
+  // useEffect(() => {
+  //   const timer = setInterval(() => {
+  //     setCurrentIndex((prev) => (prev + 1) % images.length);
+  //   }, delay);
+  //   return () => clearInterval(timer);
+  // }, [currentIndex]);
 
-  const goToSlide = (index) => setCurrentIndex(index);
+  // const goToSlide = (index) => setCurrentIndex(index);
 
   // timeline milestones
   const milestones = [
@@ -309,8 +309,7 @@ function About() {
   return (
     <>
       {/* hero section */}
-      <div className="relative w-full h-[700px] -z-1 overflow-hidden">
-        {/* Slides */}
+      {/* <div className="relative w-full h-[700px] z-1 overflow-hidden">
         <div
           className="flex transition-transform duration-700 ease-in-out "
           style={{ transform: `translateX(-${currentIndex * 100}%)` }}
@@ -336,7 +335,6 @@ function About() {
           })}
         </div>
 
-        {/* Dots */}
         <div className="absolute bottom-4 left-1/2  transform -translate-x-1/2 flex gap-2">
           {images.map((_, index) => (
             <button
@@ -349,23 +347,41 @@ function About() {
           ))}
         </div>
 
-        {/* Optional: Previous/Next buttons */}
         <button
           onClick={() =>
             setCurrentIndex(
               (prev) => (prev - 1 + images.length) % images.length
             )
           }
-          className="absolute left-2 top-1/2 -translate-y-1/2 bg-sky-300 text-white text-4xl p-2 px-6 rounded-full"
+          className="absolute hover:cursor-pointer z-50 left-2 top-1/2 -translate-y-1/2 bg-sky-300 text-white text-4xl p-2 px-6 rounded-full"
         >
           ‹
         </button>
         <button
           onClick={() => setCurrentIndex((prev) => (prev + 1) % images.length)}
-          className="absolute right-2 top-1/2 -translate-y-1/2 bg-sky-300 text-white text-4xl p-2 px-6 rounded-full"
+          className="absolute hover:cursor-pointer z-50 right-2 top-1/2 -translate-y-1/2 bg-sky-300 text-white text-4xl p-2 px-6 rounded-full"
         >
           ›
         </button>
+      </div> */}
+
+      {/* hero section */}
+      <div className="h-[700px] w-full relative flex flex-col justify-center items-center">
+        <img
+          src="/images/bakery-bg-2.png"
+          alt=""
+          className="h-full w-full object-cover brightness-50 z-[-3]"
+        />
+        <div className="absolute flex flex-col justify-center items-center">
+          <h1 className="text-5xl md:text-6xl font-semibold lg:text-7xl z-[-1] text-center text-[#cd8158]">
+            About Our Bakery - Freshly Baked Happiness Every Day
+          </h1>
+          <p className="text-lg md:text-lg lg:text-xl text-white mt-5 mx-5 z-[-1] max-w-[750px] text-center">
+            We bake fresh breads, cakes, and pastries daily using quality
+            ingredients and timeless recipes—bringing sweetness and warmth to
+            our community.
+          </p>
+        </div>
       </div>
 
       {/* time line section */}
@@ -629,13 +645,13 @@ function About() {
 
         <div className="text-center mt-8">
           <a
-            class="group relative inline-flex items-center overflow-hidden rounded-sm px-8 py-3 text-blue-600"
+            className="group relative inline-flex items-center overflow-hidden rounded-sm px-8 py-3 text-blue-600"
             target="_blank"
             href="https://www.google.com/search?sca_esv=2522d5777cdbdc58&hl=en-IN&sxsrf=AE3TifM5O43bpWbi0h4G7E4CC6revb5kUw:1756809251615&si=AMgyJEtREmoPL4P1I5IDCfuA8gybfVI2d5Uj7QMwYCZHKDZ-EyA5slTbW5eqP8ucakgreX9x5iS9IjevVKjBh3MoISwnxvEXSJrMtaQHVVz68EGLEUFcXSqJuheZ6Pgqck4By3xgI21U9ATN03pkW79iZnC_AWvL4saAap8ttk0zFqIEHFMdl2o%3D&q=The+Baked+Fantasy+%7C+Baking+Academy+in+Madurai+Reviews&sa=X&ved=2ahUKEwjHyoW78LmPAxVWT2wGHdG9OG0Q0bkNegQIHxAD&biw=1536&bih=695&dpr=1.25"
           >
-            <span class="absolute -start-full transition-all group-hover:start-4">
+            <span className="absolute -start-full transition-all group-hover:start-4">
               <svg
-                class="size-5 rtl:rotate-180"
+                className="size-5 rtl:rotate-180"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
@@ -644,13 +660,13 @@ function About() {
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  strokewidth="2"
+                  strokeWidth="2"
                   d="M17 8l4 4m0 0l-4 4m4-4H3"
                 />
               </svg>
             </span>
 
-            <span class="text-lg hover:underline font-medium transition-all group-hover:ms-4">
+            <span className="text-lg hover:underline font-medium transition-all group-hover:ms-4">
               See more Reviews
             </span>
           </a>
