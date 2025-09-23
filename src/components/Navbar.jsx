@@ -63,7 +63,7 @@ function Navbar() {
 
           {/* navbar */}
           <div className="flex h-16 fixed top-4 md:items-center md:justify-center pb-5 w-full ">
-            <div className="hidden lg:block top-2 left-1/2 transform-all duration-200  bg-white rounded-xl p-2 px-[8px] shadow-xl z-40 sm:w-[80%] md:w-auto">
+            <div className="hidden lg:block top-2 left-1/2 transform-all duration-200 bg-white border-2 border-black shadow-[4px_4px_1px_#000000] rounded-xl p-2 px-[8px] z-40 sm:w-[80%] md:w-auto">
               <nav aria-label="Global">
                 <ul className="flex items-center justify-center gap-6 text-sm text-black">
                   {/* Home */}
@@ -73,8 +73,8 @@ function Navbar() {
                       className={({ isActive }) =>
                         `text-lg relative group rounded-lg p-3 transition ${
                           isActive
-                            ? "bg-sky-500 font-semibold text-white"
-                            : "hover:text-black text-gray-800 "
+                            ? "bg-sky-500 shadow-[3px_3px_1px_#000000] font-semibold text-white"
+                            : "hover:text-sky-500 text-gray-800 "
                         } `
                       }
                     >
@@ -90,8 +90,8 @@ function Navbar() {
                       className={({ isActive }) =>
                         `text-lg relative group rounded-lg p-3 transition ${
                           isActive
-                            ? "bg-sky-500 text-white font-semibold"
-                            : "hover:text-black text-gray-800 "
+                            ? "bg-sky-500 shadow-[3px_3px_1px_#000000] text-white font-semibold"
+                            : "hover:text-sky-500 text-gray-800 "
                         } `
                       }
                     >
@@ -108,8 +108,8 @@ function Navbar() {
                       className={({ isActive }) =>
                         `text-lg relative group rounded-lg p-3 transition ${
                           isActive
-                            ? "bg-sky-500 text-white font-semibold"
-                            : "hover:text-black text-gray-800 "
+                            ? "bg-sky-500 shadow-[3px_3px_1px_#000000] text-white font-semibold"
+                            : "hover:text-sky-500 text-gray-800 "
                         } `
                       }
                     >
@@ -125,8 +125,8 @@ function Navbar() {
                       className={({ isActive }) =>
                         `text-lg relative group rounded-lg p-3 transition ${
                           isActive
-                            ? "bg-sky-500 text-white font-semibold"
-                            : "hover:text-black text-gray-800 "
+                            ? "bg-sky-500 shadow-[3px_3px_1px_#000000] text-white font-semibold"
+                            : "hover:text-sky-500 text-gray-800 "
                         } `
                       }
                     >
@@ -142,8 +142,8 @@ function Navbar() {
                       className={({ isActive }) =>
                         `text-lg relative group rounded-lg p-3 transition ${
                           isActive
-                            ? "bg-sky-500 text-white font-semibold"
-                            : "hover:text-black text-gray-800 "
+                            ? "bg-sky-500 shadow-[3px_3px_1px_#000000] text-white font-semibold"
+                            : "hover:text-sky-500 text-gray-800 "
                         } `
                       }
                     >
@@ -156,7 +156,7 @@ function Navbar() {
                   <li>
                     <Link
                       to="/login"
-                      className="group relative inline-flex items-center overflow-hidden rounded-full bg-pink-400 px-8 py-3 text-white focus:ring-3 focus:outline-hidden"
+                      className="group relative inline-flex items-center overflow-hidden new-btn rounded-full bg-pink-400 px-8 py-3 text-white"
                     >
                       <span className="absolute -start-full transition-all group-hover:start-4">
                         <svg
@@ -194,7 +194,7 @@ function Navbar() {
                   <li>
                     <div className="hidden sm:flex">
                       <a
-                        className="inline-flex items-center overflow-hidden rounded-full px-8 py-3 border-2 text-pink-500 focus:ring-3 focus:outline-hidden mr-1"
+                        className="inline-flex items-center overflow-hidden rounded-full px-8 py-3 border shadow-[3px_3px_1px_#e91e63] active:scale-92 active:shadow-none transition-all duration-50 text-pink-500 mr-1"
                         href="#"
                       >
                         <span className="absolute -start-full transition-all group-hover:start-4"></span>
@@ -283,7 +283,7 @@ function Navbar() {
                   <li>
                     <Link
                       to="/login"
-                      className="group relative inline-flex items-center overflow-hidden [@media-(max-width:450px)]:px-6 [@media-(max-width:450px)]:p-2 rounded-full bg-pink-400 px-8 py-3 text-white focus:ring-3 focus:outline-hidden"
+                      className="group new-btn relative inline-flex items-center overflow-hidden [@media-(max-width:450px)]:px-6 [@media-(max-width:450px)]:p-2 rounded-full bg-pink-400 px-8 py-3 text-white"
                     >
                       <span className="absolute -start-full transition-all group-hover:start-4">
                         <svg
@@ -324,7 +324,7 @@ function Navbar() {
               <div className="block lg:hidden">
                 <button
                   onClick={() => setIsMenuOpen(!isMenuOpen)}
-                  className="rounded-sm sm:-translate-y-9 -translate-y-10 md:-translate-y-7 [@media(max-width:1017px)]:absolute [@media(max-width:1017px)]:right-3 bg-sky-500 p-2 text-white "
+                  className="rounded-sm sm:-translate-y-9 shadow-[3px_3px_1px_#000000] active:shadow-none active:scale-95 -translate-y-10 md:-translate-y-7 [@media(max-width:1017px)]:absolute [@media(max-width:1017px)]:right-3 bg-sky-500 p-2 text-white "
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
