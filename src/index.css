@@ -81,11 +81,11 @@ body {
   font-size: normal;
 }
 
-h1,
+/* h1,
 h2 {
   font-family: "Gliker";
-}
+} */
 
 .new-btn {
-  @apply shadow-[3px_3px_1px_#000000] active:shadow-none active:scale-92 transition-all duration-50;
+  @apply shadow-[0px_3px_1px_#000000] active:shadow-none active:translate-y-[3px] transition-all duration-200 hover:-translate-y-[2px] hover:shadow-[0px_5px_1px_#000000];
 }

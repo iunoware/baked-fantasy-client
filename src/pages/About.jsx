@@ -38,7 +38,7 @@ function About() {
   // const goToSlide = (index) => setCurrentIndex(index);
 
   // timeline milestones
-  
+
   const milestones = [
     {
       year: "2020",
@@ -169,7 +169,7 @@ function About() {
           className="h-full w-full object-cover brightness-50 z-[-3]"
         />
         <div className="absolute flex flex-col justify-center items-center">
-          <h1 className="text-5xl md:text-6xl lg:text-7xl z-[-1] text-center text-[#cd8158]">
+          <h1 className="text-5xl md:text-6xl lg:text-7xl z-[-1] font-semibold text-center text-[#cd8158]">
             About Our Bakery - Freshly Baked Happiness Every Day
           </h1>
           <p className="text-lg md:text-lg lg:text-xl text-white mt-5 mx-5 z-[-1] max-w-[750px] text-center">
@@ -183,7 +183,7 @@ function About() {
       <section className="pt-16 bg-pink-100 bg-[url('/images/swirl.png')]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl text-black mb-4">Our Journey</h2>
+            <h2 className="text-3xl md:text-4xl text-black font-semibold mb-4">Our Journey</h2>
             <p className="text-lg text-black/70 max-w-3xl mx-auto">
               From a passionate home baker to a skilled academy instructor and a thriving
               large-scale home bakery, our journey is driven by love for the craft and
@@ -211,7 +211,7 @@ function About() {
                     }`}
                   >
                     {/* cards */}
-                    <div className="border-2 rounded-xl shadow-lg hover:shadow-xl bg-white bg-cover border-transparent hover:scale-105 hover:border-sky-400 transition-all duration-300">
+                    <div className="border-2 border-transparent rounded-xl hover:border-sky-500 shadow-lg hover:shadow-xl bg-white bg-cover transition-all duration-300">
                       <div className="p-6">
                         <div className="flex items-center mb-4">
                           <div className="w-12 h-12 bg-blue-400 rounded-full flex items-center justify-center mr-4">
@@ -253,7 +253,7 @@ function About() {
         <section className="overflow-hidden bg-[url(/images/cta-cake-bg-3.png)] pt-40 bg-center sm:grid sm:grid-cols-2 sm:items-center">
           <div className="p-8 md:p-12 lg:px-16 lg:py-24">
             <div className="mx-auto max-w-xl text-center ltr:sm:text-left rtl:sm:text-right">
-              <h2 className="!text-4xl mb-5 text-gray-900 pt-60 md:text-3xl">
+              <h2 className="!text-4xl font-semibold mb-5 text-gray-900 pt-60 md:text-3xl">
                 Turn Your Passion for <span className="text-sky-500">Baking</span> Into{" "}
                 <span className="text-sky-500">Perfection</span>
               </h2>
@@ -265,7 +265,7 @@ function About() {
 
               <div className="mt-4 flex md:mt-8">
                 <Link
-                  className="group new-btn relative inline-flex items-center overflow-hidden rounded-sm bg-cyan-500 px-8 py-3 text-white mr-3"
+                  className="group relative inline-flex items-center overflow-hidden rounded-full bg-cyan-500 px-8 py-3 text-white mr-3"
                   to="/courses"
                 >
                   <span className="absolute -start-full transition-all group-hover:start-4">
@@ -278,8 +278,8 @@ function About() {
                 </Link>
 
                 <Link
-                  className="group new-btn relative bg-white inline-flex items-center overflow-hidden rounded-sm border border-current px-3 py-3 text-sky-500"
-                  to="/products"
+                  className="group relative bg-white inline-flex items-center overflow-hidden rounded-full border border-current px-3 py-3 text-sky-500"
+                  to="/categories"
                 >
                   <span className="absolute -start-full transition-all group-hover:start-1">
                     <ShoppingCart size={20} />
@@ -304,13 +304,13 @@ function About() {
       {/* award section */}
       <section className="awards py-16 md:py-24 bg">
         <div className="container mx-auto px-6 max-w-7xl">
-          <h2 className="text-3xl md:text-4xl font-bold text-black text-center mb-18">
+          <h2 className="text-3xl font-semibold md:text-4xl text-black text-center mb-18">
             Awards & Recognition
           </h2>
 
           <div className="lg:grid md:flex md:flex-col grid md:mx-20 sm:mx-10 lg:grid-cols-2 lg:grid-rows-2 gap-7 md:gap-9 lg:gap-12">
             {/* First image - Top-left */}
-            <div className="overflow-hidden h-72 rounded-xl">
+            <div className="overflow-hidden shadow-lg h-72 rounded-xl">
               <img
                 src="/images/award-img-1.jpg"
                 alt="Award ceremony trophy"
@@ -319,7 +319,7 @@ function About() {
             </div>
 
             {/* Second image - Top-right */}
-            <div className="overflow-hidden rounded-xl lg:row-span-2">
+            <div className="overflow-hidden shadow-lg rounded-xl lg:row-span-2">
               <img
                 src="/images/award-img-2.jpg"
                 alt="Bakery recognition certificate"
@@ -339,8 +339,8 @@ function About() {
                 approaches to creating memorable experiences.
               </p>
 
-              <div className="space-y-4 mt-7 hover:scale-105 hover:shadow-lg transition-all duration-200">
-                <div className="bg-white rounded-lg p-4 shadow-sm flex items-start gap-4">
+              <div className="space-y-4 mt-7 transition-all duration-200">
+                <div className="bg-white shadow-lg rounded-lg p-4 flex items-start gap-4">
                   {/* Award icon */}
                   <div className="w-8 h-8 text-blue-400 flex items-center justify-center flex-shrink-0 mt-1">
                     <svg className="w-full h-full fill-current" viewBox="0 0 24 24">
@@ -350,7 +350,7 @@ function About() {
 
                   {/* Award info */}
                   <div className="flex-1">
-                    <h4 className="font-semibold text-black">Rising star</h4>
+                    <h2 className="text-black font-bold">Rising star</h2>
                     <p className="text-sm text-black font-medium">2023</p>
                   </div>
                 </div>
@@ -363,7 +363,7 @@ function About() {
       {/* testimonial */}
       <section className="py-12 lg:px-12 md:px-8 px-3 bg">
         <div>
-          <h2 className="text-5xl text-black font-semibold text-center mb-6">
+          <h2 className="text-5xl font-semibold text-black text-center mb-6">
             Sweet words from our customers
           </h2>
           <p className="text-xl text-gray-800/80 text-center">
@@ -377,7 +377,7 @@ function About() {
             return (
               <div
                 key={index}
-                className="bg-white shadow-lg backdrop-blur-2xl p-5 rounded-xl gap-2 w-[70%] place-items-center hover:scale-102 hover:shadow-xl transition-all duration-200"
+                className="bg-white shadow-lg backdrop-blur-2xl p-5 rounded-xl gap-2 w-[70%] place-items-center transition-all duration-200"
               >
                 <div>
                   <h4 className="text-black text-xl pl-1 font-semibold">
@@ -393,7 +393,7 @@ function About() {
 
         <div className="text-center mt-8">
           <a
-            className="group relative inline-flex items-center overflow-hidden rounded-sm px-8 py-3 text-blue-600"
+            className="group border-1 border-sky-500 relative inline-flex items-center overflow-hidden rounded-full px-8 py-3 text-blue-600"
             target="_blank"
             href="https://www.google.com/search?sca_esv=2522d5777cdbdc58&hl=en-IN&sxsrf=AE3TifM5O43bpWbi0h4G7E4CC6revb5kUw:1756809251615&si=AMgyJEtREmoPL4P1I5IDCfuA8gybfVI2d5Uj7QMwYCZHKDZ-EyA5slTbW5eqP8ucakgreX9x5iS9IjevVKjBh3MoISwnxvEXSJrMtaQHVVz68EGLEUFcXSqJuheZ6Pgqck4By3xgI21U9ATN03pkW79iZnC_AWvL4saAap8ttk0zFqIEHFMdl2o%3D&q=The+Baked+Fantasy+%7C+Baking+Academy+in+Madurai+Reviews&sa=X&ved=2ahUKEwjHyoW78LmPAxVWT2wGHdG9OG0Q0bkNegQIHxAD&biw=1536&bih=695&dpr=1.25"
           >
@@ -414,7 +414,7 @@ function About() {
               </svg>
             </span>
 
-            <span className="text-lg hover:underline font-medium transition-all group-hover:ms-4">
+            <span className="text-lg font-medium transition-all group-hover:ms-4">
               See more Reviews
             </span>
           </a>
