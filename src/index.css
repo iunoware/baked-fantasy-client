@@ -69,7 +69,23 @@ body {
 }
 
 @media (min-width: 1024px) and (max-width: 1150px) {
-  .brand-name{
+  .brand-name {
     display: none;
   }
+}
+
+@font-face {
+  font-family: "Gliker";
+  src: url("/fonts/gliker-regular.ttf") format("truetype");
+  font-weight: normal;
+  font-size: normal;
+}
+
+h1,
+h2 {
+  font-family: "Gliker";
+}
+
+.new-btn {
+  @apply shadow-[3px_3px_1px_#000000] active:shadow-none active:scale-92 transition-all duration-50;
 }
