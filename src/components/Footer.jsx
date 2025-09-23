@@ -17,8 +17,9 @@ function Footer() {
                 <h3 className="brand-name">The Baked Fantasy</h3>
               </div>
               <p className="mt-4 max-w-xs text-white">
-                Your premier destination for professional baking education and artisanal
-                bakery products. Learn from experts and savor the finest baked goods.
+                Your premier destination for professional baking education and
+                artisanal bakery products. Learn from experts and savor the
+                finest baked goods.
               </p>
 
               {/* social links */}

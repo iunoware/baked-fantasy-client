@@ -39,6 +39,7 @@ function About() {
 
   // timeline milestones
 
+
   const milestones = [
     {
       year: "2020",
@@ -57,7 +58,8 @@ function About() {
     {
       year: "2022",
       title: "Signature Cakes Launched",
-      description: "Introduced our signature customized cakes and special dessert menu.",
+      description:
+        "Introduced our signature customized cakes and special dessert menu.",
       icon: <Cake color="#ffffff" size={27} />,
     },
     {
@@ -147,7 +149,9 @@ function About() {
 
         <button
           onClick={() =>
-            setCurrentIndex((prev) => (prev - 1 + images.length) % images.length)
+            setCurrentIndex(
+              (prev) => (prev - 1 + images.length) % images.length
+            )
           }
           className="absolute hover:cursor-pointer z-50 left-2 top-1/2 -translate-y-1/2 bg-sky-300 text-white text-4xl p-2 px-6 rounded-full"
         >
@@ -173,8 +177,9 @@ function About() {
             About Our Bakery - Freshly Baked Happiness Every Day
           </h1>
           <p className="text-lg md:text-lg lg:text-xl text-white mt-5 mx-5 z-[-1] max-w-[750px] text-center">
-            We bake fresh breads, cakes, and pastries daily using quality ingredients and
-            timeless recipes—bringing sweetness and warmth to our community.
+            We bake fresh breads, cakes, and pastries daily using quality
+            ingredients and timeless recipes—bringing sweetness and warmth to
+            our community.
           </p>
         </div>
       </div>
@@ -184,10 +189,13 @@ function About() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl text-black font-semibold mb-4">Our Journey</h2>
+            <h2 className="text-3xl md:text-4xl text-black mb-4">
+              Our Journey
+            </h2>
             <p className="text-lg text-black/70 max-w-3xl mx-auto">
-              From a passionate home baker to a skilled academy instructor and a thriving
-              large-scale home bakery, our journey is driven by love for the craft and
-              dedication to sharing it with others.
+              From a passionate home baker to a skilled academy instructor and a
+              thriving large-scale home bakery, our journey is driven by love
+              for the craft and dedication to sharing it with others.
             </p>
           </div>
 
@@ -259,8 +267,9 @@ function About() {
               </h2>
 
               <p className="hidden text-xl mb-5 text-gray-800 md:mt-4 md:block">
-                Join our academy and transform your home baking skills into professional
-                expertise - from homemade treats to large-scale success!
+                Join our academy and transform your home baking skills into
+                professional expertise - from homemade treats to large-scale
+                success!
               </p>
 
               <div className="mt-4 flex md:mt-8">
@@ -333,17 +342,21 @@ function About() {
                 Recognized Excellence
               </h3>
               <p className="text-lg text-black/80 leading-relaxed">
-                Our commitment to quality craftsmanship and exceptional customer service
-                has been recognized by industry leaders and our community. These awards
-                reflect our dedication to traditional baking methods and innovative
-                approaches to creating memorable experiences.
+                Our commitment to quality craftsmanship and exceptional customer
+                service has been recognized by industry leaders and our
+                community. These awards reflect our dedication to traditional
+                baking methods and innovative approaches to creating memorable
+                experiences.
               </p>
 
               <div className="space-y-4 mt-7 transition-all duration-200">
                 <div className="bg-white shadow-lg rounded-lg p-4 flex items-start gap-4">
                   {/* Award icon */}
                   <div className="w-8 h-8 text-blue-400 flex items-center justify-center flex-shrink-0 mt-1">
-                    <svg className="w-full h-full fill-current" viewBox="0 0 24 24">
+                    <svg
+                      className="w-full h-full fill-current"
+                      viewBox="0 0 24 24"
+                    >
                       <path d="M12 2L15.09 8.26L22 9L17 14L18.18 21L12 17.77L5.82 21L7 14L2 9L8.91 8.26L12 2Z" />
                     </svg>
                   </div>
@@ -367,8 +380,8 @@ function About() {
             Sweet words from our customers
           </h2>
           <p className="text-xl text-gray-800/80 text-center">
-            Discover what makes our bakery special through the heartfelt stories of our
-            beloved customers
+            Discover what makes our bakery special through the heartfelt stories
+            of our beloved customers
           </p>
         </div>
 

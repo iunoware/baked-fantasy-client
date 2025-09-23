@@ -11,7 +11,9 @@ import ScrollToTop from "./components/ScrollToTop.jsx";
 import OnlineCourse from "./pages/OnlineCourse.jsx";
 import OfflineCourse from "./pages/OfflineCourse.jsx";
 import SpecificCategory from "./pages/products/specificCat.jsx";
+import Login from "./components/Login.jsx";
 import OnlineCourseDetails from "./pages/OnlineCourseDetails.jsx";
+import Cart from "./components/cart.jsx";
 
 function App() {
   return (
@@ -20,14 +22,21 @@ function App() {
         <Navbar />
         <ScrollToTop />
         <Routes>
+          <Route path="/login" element={<Login />} />
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           {/* for category page */}
           <Route path="/categories" element={<Categories />} />
           {/* for specific category */}
-          <Route path="/products/:categoryName" element={<SpecificCategory />} />
+          <Route
+            path="/products/:categoryName"
+            element={<SpecificCategory />}
+          />
           {/* for products details */}
-          <Route path="/products/:categoryName/:productId" element={<ProductDetail />} />
+          <Route
+            path="/products/:categoryName/:productId"
+            element={<ProductDetail />}
+          />
           {/* <Route path="/products/cake/cake-1" element={<ProductDetail />} /> */}
 
           {/* for courses */}
@@ -41,6 +50,7 @@ function App() {
           />
           <Route path="/courses/offline-course" element={<OfflineCourse />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/cart" element={<Cart />} />
         </Routes>
         <Footer />
       </Router>

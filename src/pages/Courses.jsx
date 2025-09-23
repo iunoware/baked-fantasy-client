@@ -13,7 +13,11 @@ function Courses() {
           xmlns="http://www.w3.org/2000/svg"
         >
           <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
-          <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
+          <g
+            id="SVGRepo_tracerCarrier"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          ></g>
           <g id="SVGRepo_iconCarrier">
             {" "}
             <path
@@ -29,7 +33,8 @@ function Courses() {
       bgColor: "bg-white",
       textColor: "text-gray-800",
       heading: "Flexible Online & Offline Learning",
-      content: "Join in-person or attend interactive online courses from anywhere.",
+      content:
+        "Join in-person or attend interactive online courses from anywhere.",
     },
     {
       svg: (
@@ -41,7 +46,11 @@ function Courses() {
           xmlns="http://www.w3.org/2000/svg"
         >
           <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
-          <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
+          <g
+            id="SVGRepo_tracerCarrier"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          ></g>
           <g id="SVGRepo_iconCarrier">
             <path
               fillRule="evenodd"
@@ -68,7 +77,11 @@ function Courses() {
           xmlns="http://www.w3.org/2000/svg"
         >
           <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
-          <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
+          <g
+            id="SVGRepo_tracerCarrier"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          ></g>
           <g id="SVGRepo_iconCarrier">
             <rect width="48" height="48" fill="white" fillOpacity="0.01"></rect>{" "}
             <path
@@ -136,7 +149,11 @@ function Courses() {
           strokeWidth="0.00024000000000000003"
         >
           <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
-          <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
+          <g
+            id="SVGRepo_tracerCarrier"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          ></g>
           <g id="SVGRepo_iconCarrier">
             {" "}
             <path
@@ -171,9 +188,9 @@ function Courses() {
         </h1>
         <div className="flex justify-center">
           <p className="text-center lg:text-2xl md:text-xl sm:text-lg max-w-[600px] mx-3 text-gray-700 py-10">
-            Master the art of baking with our expert-led courses designed for all skill
-            levels. Whether you prefer learning online or in-person, we have the perfect
-            program for you.
+            Master the art of baking with our expert-led courses designed for
+            all skill levels. Whether you prefer learning online or in-person,
+            we have the perfect program for you.
           </p>
         </div>
       </div>
@@ -343,7 +360,9 @@ function Courses() {
                 key={index}
                 className={` rounded-2xl flex flex-col place-items-center shadow-md hover:shadow-xl hover:-translate-y-2 transition-all duration-200 ${detail.bgColor}`}
               >
-                <div className="flex justify-center w-full pt-5">{detail.svg}</div>
+                <div className="flex justify-center w-full pt-5">
+                  {detail.svg}
+                </div>
                 <h3
                   className={`text-2xl text-center w-full px-8 pt-5 ${detail.textColor} font-bold pb-4`}
                 >
