@@ -2,6 +2,9 @@ import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
+import Login from "./Login.jsx";
+import Cart from "./Cart.jsx";
+import { ShoppingCart } from "lucide-react";
 
 // function Navbar() {
 //   let [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -16,6 +19,7 @@ import { useLocation } from "react-router-dom";
 
 function Navbar() {
   let [isMenuOpen, setIsMenuOpen] = useState(false);
+
   let location = useLocation();
 
   useEffect(() => {
@@ -46,7 +50,7 @@ function Navbar() {
   //     }
   //   );
   // }, []);
-
+  const [isLoginOpen, setIsLoginOpen] = useState(false);
   return (
     <>
       <header className="w-full absolute z-50">
@@ -63,7 +67,7 @@ function Navbar() {
 
           {/* navbar */}
           <div className="flex h-16 fixed top-4 md:items-center md:justify-center pb-5 w-full ">
-            <div className="hidden lg:block top-2 left-1/2 transform-all duration-200 bg-white border-2 border-black shadow-[4px_4px_1px_#000000] rounded-xl p-2 px-[8px] z-40 sm:w-[80%] md:w-auto">
+            <div className="hidden lg:block top-2 left-1/2 transform-all duration-200  bg-white rounded-xl p-2 px-[8px] shadow-xl z-40 sm:w-[80%] md:w-auto">
               <nav aria-label="Global">
                 <ul className="flex items-center justify-center gap-6 text-sm text-black">
                   {/* Home */}
@@ -73,8 +77,8 @@ function Navbar() {
                       className={({ isActive }) =>
                         `text-lg relative group rounded-lg p-3 transition ${
                           isActive
-                            ? "bg-sky-500 shadow-[3px_3px_1px_#000000] font-semibold text-white"
-                            : "hover:text-sky-500 text-gray-800 "
+                            ? "bg-sky-500 font-semibold text-white"
+                            : "hover:text-black text-gray-800 "
                         } `
                       }
                     >
@@ -90,8 +94,8 @@ function Navbar() {
                       className={({ isActive }) =>
                         `text-lg relative group rounded-lg p-3 transition ${
                           isActive
-                            ? "bg-sky-500 shadow-[3px_3px_1px_#000000] text-white font-semibold"
-                            : "hover:text-sky-500 text-gray-800 "
+                            ? "bg-sky-500 text-white font-semibold"
+                            : "hover:text-black text-gray-800 "
                         } `
                       }
                     >
@@ -108,8 +112,8 @@ function Navbar() {
                       className={({ isActive }) =>
                         `text-lg relative group rounded-lg p-3 transition ${
                           isActive
-                            ? "bg-sky-500 shadow-[3px_3px_1px_#000000] text-white font-semibold"
-                            : "hover:text-sky-500 text-gray-800 "
+                            ? "bg-sky-500 text-white font-semibold"
+                            : "hover:text-black text-gray-800 "
                         } `
                       }
                     >
@@ -125,8 +129,8 @@ function Navbar() {
                       className={({ isActive }) =>
                         `text-lg relative group rounded-lg p-3 transition ${
                           isActive
-                            ? "bg-sky-500 shadow-[3px_3px_1px_#000000] text-white font-semibold"
-                            : "hover:text-sky-500 text-gray-800 "
+                            ? "bg-sky-500 text-white font-semibold"
+                            : "hover:text-black text-gray-800 "
                         } `
                       }
                     >
@@ -142,8 +146,8 @@ function Navbar() {
                       className={({ isActive }) =>
                         `text-lg relative group rounded-lg p-3 transition ${
                           isActive
-                            ? "bg-sky-500 shadow-[3px_3px_1px_#000000] text-white font-semibold"
-                            : "hover:text-sky-500 text-gray-800 "
+                            ? "bg-sky-500 text-white font-semibold"
+                            : "hover:text-black text-gray-800 "
                         } `
                       }
                     >
@@ -154,9 +158,9 @@ function Navbar() {
 
                   {/* login */}
                   <li>
-                    <Link
-                      to="/login"
-                      className="group relative inline-flex items-center overflow-hidden new-btn rounded-full bg-pink-400 px-8 py-3 text-white"
+                    <button
+                      className="group relative inline-flex items-center overflow-hidden rounded-full bg-pink-400 px-8 py-3 text-white focus:ring-3 focus:outline-hidden"
+                      onClick={() => setIsLoginOpen(true)}
                     >
                       <span className="absolute -start-full transition-all group-hover:start-4">
                         <svg
@@ -172,14 +176,13 @@ function Navbar() {
                             strokeLinejoin="round"
                           ></g>
                           <g id="SVGRepo_iconCarrier">
-                            {" "}
                             <path
                               d="M15 4H18C19.1046 4 20 4.89543 20 6V18C20 19.1046 19.1046 20 18 20H15M11 16L15 12M15 12L11 8M15 12H3"
                               stroke="#fff"
                               strokeWidth="1.5"
                               strokeLinecap="round"
                               strokeLinejoin="round"
-                            ></path>{" "}
+                            ></path>
                           </g>
                         </svg>
                       </span>
@@ -187,46 +190,26 @@ function Navbar() {
                       <span className="text-sm font-medium transition-all group-hover:ms-4">
                         Log in
                       </span>
-                    </Link>
+                    </button>
                   </li>
 
                   {/* cart */}
                   <li>
                     <div className="hidden sm:flex">
-                      <a
-                        className="inline-flex items-center overflow-hidden rounded-full px-8 py-3 border shadow-[3px_3px_1px_#e91e63] active:scale-92 active:shadow-none transition-all duration-50 text-pink-500 mr-1"
-                        href="#"
+                      <NavLink
+                        className="inline-flex items-center overflow-hidden rounded-full px-8 py-3 border-2 text-pink-500 focus:ring-3 focus:outline-hidden mr-1"
+                        to="/cart"
                       >
                         <span className="absolute -start-full transition-all group-hover:start-4"></span>
 
                         <span className="text-sm font-medium transition-all group-hover:ms-4">
-                          <svg
-                            className="size-5 rtl:rotate-180"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
-                            <g
-                              id="SVGRepo_tracerCarrier"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            ></g>
-                            <g id="SVGRepo_iconCarrier">
-                              <path
-                                d="M7.2998 5H22L20 12H8.37675M21 16H9L7 3H4M4 8H2M5 11H2M6 14H2M10 20C10 20.5523 9.55228 21 9 21C8.44772 21 8 20.5523 8 20C8 19.4477 8.44772 19 9 19C9.55228 19 10 19.4477 10 20ZM21 20C21 20.5523 20.5523 21 20 21C19.4477 21 19 20.5523 19 20C19 19.4477 19.4477 19 20 19C20.5523 19 21 19.4477 21 20Z"
-                                // stroke="#7DD3FC" //light blue
-                                // stroke="#0EA5E9" //dark blue
-                                stroke="#EC407A"
-                                // stroke="#000000"
-                                strokeWidth="2"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                              ></path>
-                            </g>
-                          </svg>
+                          <ShoppingCart
+                            strokeWidth={1.75}
+                            absoluteStrokeWidth
+                            size={15}
+                          />
                         </span>
-                      </a>
+                      </NavLink>
                     </div>
                   </li>
                 </ul>
@@ -239,51 +222,24 @@ function Navbar() {
 
               {/* login and cart button for mobile screen */}
               <div className="inline-block absolute right-15 top-0 -translate-y-2 sm:inline-block md:inline-block lg:hidden">
-                <ul className="flex ">
+                <ul className="flex">
                   {/* cart */}
                   <li>
                     <div className="">
-                      <a
-                        className="inline-flex items-center overflow-hidden rounded-full px-8 py-3 border-2 text-pink-500 focus:ring-3 focus:outline-hidden mr-1"
-                        href="#"
-                      >
+                      <button className="inline-flex items-center overflow-hidden rounded-full px-8 py-3 border-2 text-pink-500 focus:ring-3 focus:outline-hidden mr-1">
                         <span className="absolute -start-full transition-all group-hover:start-4"></span>
 
                         <span className="text-sm font-medium transition-all group-hover:ms-4">
-                          <svg
-                            className="size-5 rtl:rotate-180"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
-                            <g
-                              id="SVGRepo_tracerCarrier"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            ></g>
-                            <g id="SVGRepo_iconCarrier">
-                              <path
-                                d="M7.2998 5H22L20 12H8.37675M21 16H9L7 3H4M4 8H2M5 11H2M6 14H2M10 20C10 20.5523 9.55228 21 9 21C8.44772 21 8 20.5523 8 20C8 19.4477 8.44772 19 9 19C9.55228 19 10 19.4477 10 20ZM21 20C21 20.5523 20.5523 21 20 21C19.4477 21 19 20.5523 19 20C19 19.4477 19.4477 19 20 19C20.5523 19 21 19.4477 21 20Z"
-                                // stroke="#7DD3FC" //light blue
-                                // stroke="#0EA5E9" //dark blue
-                                stroke="#EC407A"
-                                // stroke="#000000"
-                                strokeWidth="2"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                              ></path>
-                            </g>
-                          </svg>
+                          <ShoppingCart size={15} />
                         </span>
-                      </a>
+                      </button>
                     </div>
                   </li>
 
                   <li>
-                    <Link
-                      to="/login"
-                      className="group new-btn relative inline-flex items-center overflow-hidden [@media-(max-width:450px)]:px-6 [@media-(max-width:450px)]:p-2 rounded-full bg-pink-400 px-8 py-3 text-white"
+                    <a
+                      onClick={() => setIsLoginOpen(true)}
+                      className="group relative inline-flex items-center overflow-hidden [@media-(max-width:450px)]:px-6 [@media-(max-width:450px)]:p-2 rounded-full bg-pink-400 px-8 py-3 text-white focus:ring-3 focus:outline-hidden"
                     >
                       <span className="absolute -start-full transition-all group-hover:start-4">
                         <svg
@@ -299,14 +255,13 @@ function Navbar() {
                             strokeLinejoin="round"
                           ></g>
                           <g id="SVGRepo_iconCarrier">
-                            {" "}
                             <path
                               d="M15 4H18C19.1046 4 20 4.89543 20 6V18C20 19.1046 19.1046 20 18 20H15M11 16L15 12M15 12L11 8M15 12H3"
                               stroke="#fff"
                               strokeWidth="1.5"
                               strokeLinecap="round"
                               strokeLinejoin="round"
-                            ></path>{" "}
+                            ></path>
                           </g>
                         </svg>
                       </span>
@@ -314,9 +269,10 @@ function Navbar() {
                       <span className="text-sm font-medium transition-all group-hover:ms-4">
                         Log in
                       </span>
-                    </Link>
+                    </a>
                   </li>
                 </ul>
+
                 {/* login */}
               </div>
 
@@ -324,7 +280,7 @@ function Navbar() {
               <div className="block lg:hidden">
                 <button
                   onClick={() => setIsMenuOpen(!isMenuOpen)}
-                  className="rounded-sm sm:-translate-y-9 shadow-[3px_3px_1px_#000000] active:shadow-none active:scale-95 -translate-y-10 md:-translate-y-7 [@media(max-width:1017px)]:absolute [@media(max-width:1017px)]:right-3 bg-sky-500 p-2 text-white "
+                  className="rounded-sm sm:-translate-y-9 -translate-y-10 md:-translate-y-7 [@media(max-width:1017px)]:absolute [@media(max-width:1017px)]:right-3 bg-sky-500 p-2 text-white "
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -534,6 +490,8 @@ function Navbar() {
           </nav>
         </div>
       )}
+      <Login isOpen={isLoginOpen} onClose={() => setIsLoginOpen(false)} />
+      <Cart />
     </>
   );
 }
