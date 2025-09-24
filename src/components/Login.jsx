@@ -208,8 +208,12 @@ function Login({ isOpen, onClose }) {
               </div>
             </div>
             {/* images side */}
-            <div className="img lg:inline-block  md:hidden">
-              <img src="/images/login-mascot.png" alt="mascot" />
+            <div className="img w-full flex justify-center lg:inline-block  md:hidden">
+              <img
+                src="/images/login-mascot.png"
+                alt="mascot"
+                onContextMenu={(e) => e.preventDefault()}
+              />
             </div>
           </div>
         </div>
