@@ -491,7 +491,6 @@ function Navbar() {
         </div>
       )}
       <Login isOpen={isLoginOpen} onClose={() => setIsLoginOpen(false)} />
-      <Cart />
     </>
   );
 }
