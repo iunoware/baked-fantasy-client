@@ -1,4 +1,4 @@
-// import { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { LaptopMinimal } from "lucide-react";
 import { ShoppingCart } from "lucide-react";
@@ -8,37 +8,42 @@ import { Cake } from "lucide-react";
 import { Rocket } from "lucide-react";
 import { Truck } from "lucide-react";
 
-// const images = [
-//   {
-//     img: "/images/cake-bg-3.jpg",
-//     heading: "Baking Happiness, One Slice at a Time",
-//     content:
-//       "Delight in our freshly baked cakes, cupcakes, and custom creations—crafted with love to make every occasion unforgettable.",
-//   },
-//   {
-//     img: "/images/cake-bg-4.jpg",
-//     heading: "Where Every Bite is a Celebration",
-//     content:
-//       "From classic cakes to custom creations, we bake joy for every special moment.",
-//   },
-// ];
+const images = [
+  {
+    img: "/images/cake-bg-3.jpg",
+    heading: "Crafting Sweet Memories",
+    content:
+      "We create beautifully customized cakes that turn every celebration into a memorable experience.",
+  },
+  {
+    img: "/images/cake-bg-5.jpg",
+    heading: "Personalized Designs for Every Occasion",
+    content:
+      "From birthdays to weddings, each cake is designed to match your vision and style.",
+  },
+  {
+    img: "/images/cake-bg-6.jpg",
+    heading: "Fresh Ingredients, Delicious Taste",
+    content:
+      "Our cakes are made with high-quality ingredients, ensuring every bite is as delightful as it looks.",
+  },
+];
 
 function About() {
   // for hero section slider
-  // const [currentIndex, setCurrentIndex] = useState(0);
-  // const delay = 5000;
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const delay = 5000;
 
-  // useEffect(() => {
-  //   const timer = setInterval(() => {
-  //     setCurrentIndex((prev) => (prev + 1) % images.length);
-  //   }, delay);
-  //   return () => clearInterval(timer);
-  // }, [currentIndex]);
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % images.length);
+    }, delay);
+    return () => clearInterval(timer);
+  }, [currentIndex]);
 
-  // const goToSlide = (index) => setCurrentIndex(index);
+  const goToSlide = (index) => setCurrentIndex(index);
 
   // timeline milestones
-
 
   const milestones = [
     {
@@ -58,8 +63,7 @@ function About() {
     {
       year: "2022",
       title: "Signature Cakes Launched",
-      description:
-        "Introduced our signature customized cakes and special dessert menu.",
+      description: "Introduced our signature customized cakes and special dessert menu.",
       icon: <Cake color="#ffffff" size={27} />,
     },
     {
@@ -109,7 +113,7 @@ function About() {
   return (
     <>
       {/* hero section */}
-      {/* <div className="relative w-full h-[700px] z-1 overflow-hidden">
+      <div className="relative w-full h-[700px] z-1 overflow-hidden">
         <div
           className="flex transition-transform duration-700 ease-in-out "
           style={{ transform: `translateX(-${currentIndex * 100}%)` }}
@@ -120,10 +124,11 @@ function About() {
                 <img
                   src={image.img}
                   alt={`Slide ${index}`}
-                  className="w-full h-[700px] brightness-50 object-cover flex-shrink-0"
+                  className="w-full h-[700px] object-cover flex-shrink-0"
                 />
-                <div className="absolute inset-0 w-full pr-20 flex justify-center items-end flex-col">
-                  <h1 className=" max-w-[750px] md:text-5xl p-2 sm:text-4xl text-3xl text-end text-sky-400  mb-5 font-semibold">
+                <div className="absolute inset-0 w-full h-full bg-pink-500 opacity-30"></div>
+                <div className="absolute inset-0 w-full z-20 pr-20 flex justify-center items-end flex-col">
+                  <h1 className=" max-w-[750px] md:text-5xl p-2 sm:text-4xl text-3xl text-end text-sky-500  mb-5 font-semibold">
                     {image.heading}
                   </h1>
                   <p className="lg:text-xl max-w-[750px] md:text-lg p-2 sm:text-md text-end text-white">
@@ -149,9 +154,7 @@ function About() {
 
         <button
           onClick={() =>
-            setCurrentIndex(
-              (prev) => (prev - 1 + images.length) % images.length
-            )
+            setCurrentIndex((prev) => (prev - 1 + images.length) % images.length)
           }
           className="absolute hover:cursor-pointer z-50 left-2 top-1/2 -translate-y-1/2 bg-sky-300 text-white text-4xl p-2 px-6 rounded-full"
         >
@@ -163,10 +166,10 @@ function About() {
         >
           ›
         </button>
-      </div> */}
+      </div>
 
       {/* hero section */}
-      <div className="h-[700px] w-full relative flex flex-col justify-center items-center">
+      {/* <div className="h-[700px] w-full relative flex flex-col justify-center items-center">
         <img
           src="/images/bakery-bg-2.png"
           alt=""
@@ -177,25 +180,23 @@ function About() {
             About Our Bakery - Freshly Baked Happiness Every Day
           </h1>
           <p className="text-lg md:text-lg lg:text-xl text-white mt-5 mx-5 z-[-1] max-w-[750px] text-center">
-            We bake fresh breads, cakes, and pastries daily using quality
-            ingredients and timeless recipes—bringing sweetness and warmth to
-            our community.
+            We bake fresh breads, cakes, and pastries daily using quality ingredients and
+            timeless recipes—bringing sweetness and warmth to our community.
           </p>
         </div>
-      </div>
+      </div> */}
 
       {/* time line section */}
       <section className="pt-16 bg-pink-100 bg-[url('/images/swirl.png')]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl text-black font-semibold mb-4">Our Journey</h2>
-            <h2 className="text-3xl md:text-4xl text-black mb-4">
+            <h2 className="text-3xl md:text-4xl text-black font-semibold mb-4">
               Our Journey
             </h2>
             <p className="text-lg text-black/70 max-w-3xl mx-auto">
-              From a passionate home baker to a skilled academy instructor and a
-              thriving large-scale home bakery, our journey is driven by love
-              for the craft and dedication to sharing it with others.
+              From a passionate home baker to a skilled academy instructor and a thriving
+              large-scale home bakery, our journey is driven by love for the craft and
+              dedication to sharing it with others.
             </p>
           </div>
 
@@ -267,9 +268,8 @@ function About() {
               </h2>
 
               <p className="hidden text-xl mb-5 text-gray-800 md:mt-4 md:block">
-                Join our academy and transform your home baking skills into
-                professional expertise - from homemade treats to large-scale
-                success!
+                Join our academy and transform your home baking skills into professional
+                expertise - from homemade treats to large-scale success!
               </p>
 
               <div className="mt-4 flex md:mt-8">
@@ -342,21 +342,17 @@ function About() {
                 Recognized Excellence
               </h3>
               <p className="text-lg text-black/80 leading-relaxed">
-                Our commitment to quality craftsmanship and exceptional customer
-                service has been recognized by industry leaders and our
-                community. These awards reflect our dedication to traditional
-                baking methods and innovative approaches to creating memorable
-                experiences.
+                Our commitment to quality craftsmanship and exceptional customer service
+                has been recognized by industry leaders and our community. These awards
+                reflect our dedication to traditional baking methods and innovative
+                approaches to creating memorable experiences.
               </p>
 
               <div className="space-y-4 mt-7 transition-all duration-200">
                 <div className="bg-white shadow-lg rounded-lg p-4 flex items-start gap-4">
                   {/* Award icon */}
                   <div className="w-8 h-8 text-blue-400 flex items-center justify-center flex-shrink-0 mt-1">
-                    <svg
-                      className="w-full h-full fill-current"
-                      viewBox="0 0 24 24"
-                    >
+                    <svg className="w-full h-full fill-current" viewBox="0 0 24 24">
                       <path d="M12 2L15.09 8.26L22 9L17 14L18.18 21L12 17.77L5.82 21L7 14L2 9L8.91 8.26L12 2Z" />
                     </svg>
                   </div>
@@ -380,8 +376,8 @@ function About() {
             Sweet words from our customers
           </h2>
           <p className="text-xl text-gray-800/80 text-center">
-            Discover what makes our bakery special through the heartfelt stories
-            of our beloved customers
+            Discover what makes our bakery special through the heartfelt stories of our
+            beloved customers
           </p>
         </div>
 

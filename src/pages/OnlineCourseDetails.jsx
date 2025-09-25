@@ -6,8 +6,15 @@ import { ArrowLeft } from "lucide-react";
 
 function OnlineCourseDetails() {
   let [videos, setVideos] = useState([]);
-  let [videoDetails, setVideoDetails] = useState([]);
+  let [videoDetails, setVideoDetails] = useState();
   const { courseId } = useParams();
+
+  // window.addEventListener("DOMContentLoaded", () => {
+  //   const courseVideo = document.querySelector(".course-video");
+  //   if (courseVideo) {
+  //     courseVideo.addEventListener("contextmenu", (e) => e.preventDefault());
+  //   }
+  // });
 
   useEffect(() => {
     async function fetchVideos() {
@@ -21,19 +28,30 @@ function OnlineCourseDetails() {
         console.error(error.message);
       }
     }
-    fetchVideos();
 
     async function fetchCourseName() {
       try {
         const details = await axios.get(`http://localhost:5000/course/${courseId}`);
-        setVideoDetails(details); 
-        console.log("video details", videoDetails);
+        setVideoDetails(details.data);
+        console.log("course details: ", details.data);
+        // console.log("course details 2:", videoDetails);
       } catch (error) {
         console.error(error.message);
       }
     }
+
+    fetchVideos();
     fetchCourseName();
   }, [courseId]);
+
+  // useEffect(() => {
+  //   if (videoDetails) {
+  //     console.log("course Details 3: ", videoDetails);
+  //   } else {
+  //     console.log("video details has not been uploaded yet");
+  //   }
+  // }, [videoDetails]);
+
   // console.log("course ID:", courseId);
 
   return (
@@ -50,21 +68,33 @@ function OnlineCourseDetails() {
         </Link>
       </div>
 
-      <div className="p-30 text-2xl">
+      <div className="p-10 pt-25 sm:p-20 md:p-30 text-2xl">
+        <div className="my-10">
+          <h2 className="font-bold text-4xl">
+            {videoDetails ? videoDetails.title : "Loading..."}
+          </h2>
+          <p className="text-sky-500 mt-3">
+            {videoDetails ? videoDetails.description : "Loading..."}
+          </p>
+        </div>
+
+        {/* video thing */}
         <div>
           {videos.map((video, index) => {
             return (
               <div key={video._id}>
                 Video ID {index + 1}: {video._id}
-                <h2>{video.title}</h2>
+                <h2 className="text-3xl font-semibold">{video.title}</h2>
                 <p>{video.description}</p>
                 <video
+                  onContextMenu={(e) => e.preventDefault()}
                   src={`http://localhost:5000${video.videoUrl}`}
                   width="320"
                   height="240"
                   controls
                   type="video/mp4"
-                  className="rounded-xl"
+                  className="rounded-xl course-video"
+                  controlsList="nodownload"
                 ></video>
                 <br />
               </div>
