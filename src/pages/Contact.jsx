@@ -10,7 +10,8 @@ function Contact() {
   return (
     <>
       <div className="bg">
-        <div className="min-h-screen bg-[#FFF5E1] py-16 page-transition">
+        <div className="pt-10"></div>
+        <div className="min-h-screen py-16 page-transition">
           <div className="container mx-auto px-4">
             <div className="text-center mb-12 fade-in">
               <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
@@ -22,7 +23,7 @@ function Contact() {
               </p>
             </div>
 
-            <div className="max-w-4xl mx-auto">
+            <div className="max-w-[80vw] shadow-2xl mx-auto">
               <div className="bg-white rounded-xl shadow-card p-8 fade-in-delay-1">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   <div>
