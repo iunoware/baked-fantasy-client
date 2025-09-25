@@ -3,16 +3,16 @@ import { Button } from "./ui/button.jsx";
 import { Input } from "./ui/input.jsx";
 import { Card, CardContent } from "./ui/card.jsx";
 import { Separator } from "./ui/separator.jsx";
-import { Eye, EyeOff, Mail, Lock, ArrowLeft, X } from "lucide-react";
-import Register from "./Register.jsx";
+import { Eye, EyeOff, Mail, Lock, User, X } from "lucide-react";
 
-function Login({ isOpen, onClose, onOpenRegister }) {
+function Login({ isOpen, onClose, onOpenLogin }) {
+  const [isLoginOpen, setLoginOpen] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  if (!isOpen) return null;
+  if (!isOpen) return null; // don’t render if closed
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -34,13 +34,13 @@ function Login({ isOpen, onClose, onOpenRegister }) {
         aria-modal="true"
         aria-labelledby="modalTitle"
       >
-        <div className="lg:w-[60vw] lg:h-[85vh] md:w-[60vw] md:h-[68.2vh] w-screen h-screen  rounded-2xl bg-[url(/images/padded.png)] bg-pink-400 p-6 shadow-lg">
+        <div className="lg:w-[60vw] lg:h-[90vh] md:w-[60vw] md:h-[68.2vh] w-screen h-screen  rounded-2xl bg-[url(/images/padded.png)] bg-pink-400 p-6 shadow-lg">
           <div className="flex items-start justify-between">
             <h2
               id="modalTitle"
               className="lg:text-3xl md:text-xl text-lg font-bold text-white "
             >
-              Login
+              Register
             </h2>
 
             <button
@@ -54,18 +54,40 @@ function Login({ isOpen, onClose, onOpenRegister }) {
 
           <div className="grid grid-cols-1 h-screen md:h-fit items-center lg:grid-cols-2 gap-0">
             {/* login form */}
-            <div className="flex-1 flex items-center justify-center p-8">
+            <div className="flex-1 flex items-center justify-center pt-5 order-2">
               <div className="w-full max-w-md border-1 rounded-2xl  border-white backdrop-blur-sm backdrop-saturate-[182%] bg-[rgba(188,90,150,0.90)] inset-shadow-white inset-shadow-sm  ">
                 <Card className="shadow-card fade-in-delay-1">
                   <CardContent className="p-8">
-                    <div className="text-center mb-8">
-                      <h1 className="text-2xl text-white mb-2">Welcome Back</h1>
+                    <div className="text-center mb-3">
+                      <h1 className="text-2xl text-white mb-2">
+                        Create Account
+                      </h1>
                       <p className="text-white">
-                        Sign in to your Baked Fantasy account
+                        Enroll your Baked Fantasy account
                       </p>
                     </div>
 
                     <form className="space-y-6">
+                      <div className="space-ys-2">
+                        <label
+                          htmlFor="name"
+                          className="text-white font-medium"
+                        >
+                          Full Name
+                        </label>
+                        <div className="relative">
+                          <User className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-white" />
+                          <Input
+                            id="name"
+                            type="text"
+                            placeholder="Enter your email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            className="pl-10 bg-input-background border-white text-white focus:ring-2 focus:ring-[#00BCD4] transition-all"
+                            required
+                          />
+                        </div>
+                      </div>
                       <div className="space-ys-2">
                         <label
                           htmlFor="email"
@@ -86,7 +108,6 @@ function Login({ isOpen, onClose, onOpenRegister }) {
                           />
                         </div>
                       </div>
-
                       <div className="space-y-2">
                         <label
                           htmlFor="password"
@@ -98,6 +119,37 @@ function Login({ isOpen, onClose, onOpenRegister }) {
                           <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-white" />
                           <Input
                             id="password"
+                            type={showPassword ? "text" : "password"}
+                            placeholder="Enter your password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            className="pl-10 pr-10 bg-input-background border-white text-white  focus:ring-2 focus:ring-[#00BCD4] transition-all"
+                            required
+                          />
+                          <button
+                            type="button"
+                            onClick={() => setShowPassword(!showPassword)}
+                            className="absolute right-3 top-1/2 transform -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
+                          >
+                            {showPassword ? (
+                              <EyeOff className="h-5 w-5 text-white" />
+                            ) : (
+                              <Eye className="h-5 w-5 text-white" />
+                            )}
+                          </button>
+                        </div>
+                      </div>
+                      <div className="space-y-2">
+                        <label
+                          htmlFor="con-pass"
+                          className="text-white font-medium"
+                        >
+                          Confirm Password
+                        </label>
+                        <div className="relative">
+                          <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-white" />
+                          <Input
+                            id="con-pass"
                             type={showPassword ? "text" : "password"}
                             placeholder="Enter your password"
                             value={password}
@@ -153,13 +205,15 @@ function Login({ isOpen, onClose, onOpenRegister }) {
                             <span>Signing in...</span>
                           </div>
                         ) : (
-                          "Sign In"
+                          "Create Account"
                         )}
                       </Button>
                     </form>
 
-                    <div className="mt-3">
-                      <div className="space-y-3">
+                    <div className="mt-6">
+                      {/* <Separator className="my-6" /> */}
+
+                      <div className="google-button">
                         <Button
                           variant="outline"
                           size="lg"
@@ -191,15 +245,14 @@ function Login({ isOpen, onClose, onOpenRegister }) {
                       </div>
                     </div>
 
-                    <div className="mt-8 text-center">
+                    <div className="mt-3 text-center">
                       <p className="text-muted-foreground">
-                        Don't have an account?
+                        Already have an account?{" "}
                         <button
-                          onClick={onOpenRegister}
-                          className="text-sky-400 hover:text-[#00ACC1] pl-2 font-bold
-                          text-lg transition-colors cursor-pointer"
+                          onClick={onOpenLogin}
+                          className="text-[#00BCD4] cursor-pointer hover:text-[#00ACC1] font-medium transition-colors"
                         >
-                          Sign up
+                          LogIn
                         </button>
                       </p>
                     </div>
@@ -208,9 +261,9 @@ function Login({ isOpen, onClose, onOpenRegister }) {
               </div>
             </div>
             {/* images side */}
-            <div className="img w-full flex justify-center lg:inline-block  md:hidden">
+            <div className="img w-full flex justify-center lg:inline-block  md:hidden order-1">
               <img
-                src="/images/login-mascot.png"
+                src="/images/register-mascot.png"
                 alt="mascot"
                 onContextMenu={(e) => e.preventDefault()}
               />
@@ -218,7 +271,7 @@ function Login({ isOpen, onClose, onOpenRegister }) {
           </div>
         </div>
       </div>
-      {/* <Register isOpen={isSignupOpen} onClose={() => setSignUpOpen(false)} /> */}
+      {/* <Login isOpen={isLoginOpen} onClose={() => setLoginOpen(false)} /> */}
     </>
   );
 }
