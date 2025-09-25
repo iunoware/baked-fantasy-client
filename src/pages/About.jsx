@@ -274,7 +274,7 @@ function About() {
 
               <div className="mt-4 flex md:mt-8">
                 <Link
-                  className="group relative inline-flex items-center overflow-hidden rounded-full bg-cyan-500 px-8 py-3 text-white mr-3"
+                  className="group relative inline-flex items-center overflow-hidden rounded-lg bg-cyan-500 px-8 py-3 text-white mr-3"
                   to="/courses"
                 >
                   <span className="absolute -start-full transition-all group-hover:start-4">
@@ -287,11 +287,11 @@ function About() {
                 </Link>
 
                 <Link
-                  className="group relative bg-white inline-flex items-center overflow-hidden rounded-full border border-current px-3 py-3 text-sky-500"
+                  className="group relative bg-white inline-flex items-center overflow-hidden rounded-lg border border-current px-3 py-3 text-sky-500"
                   to="/categories"
                 >
                   <span className="absolute -start-full transition-all group-hover:start-1">
-                    <ShoppingCart size={20} />
+                    <ShoppingCart size={36} className="pr-5"/>
                   </span>
 
                   <span className="text-sm text-sky-500 font-medium transition-all group-hover:ms-4">
