@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import Login from "./Login.jsx";
-import Cart from "./Cart.jsx";
+import Register from "./Register.jsx";
 import { ShoppingCart } from "lucide-react";
 
 // function Navbar() {
@@ -19,12 +19,22 @@ import { ShoppingCart } from "lucide-react";
 
 function Navbar() {
   let [isMenuOpen, setIsMenuOpen] = useState(false);
-
+  const [isLoginOpen, setLoginOpen] = useState(false);
+  const [isRegisterOpen, setRegisterOpen] = useState(false);
   let location = useLocation();
 
   useEffect(() => {
     setIsMenuOpen(false);
   }, [location]);
+  const openRegisterFromLogin = () => {
+    setLoginOpen(false);
+    setRegisterOpen(true);
+  };
+  const openLoginFromRegister = () => {
+    setLoginOpen(true);
+    setRegisterOpen(false);
+  };
+
   // const scrollRef = useRef();
 
   // useGSAP(() => {
@@ -50,7 +60,7 @@ function Navbar() {
   //     }
   //   );
   // }, []);
-  const [isLoginOpen, setIsLoginOpen] = useState(false);
+
   return (
     <>
       <header className="w-full absolute z-50">
@@ -160,7 +170,7 @@ function Navbar() {
                   <li>
                     <button
                       className="group relative inline-flex items-center overflow-hidden rounded-full bg-pink-400 px-8 py-3 text-white focus:ring-3 focus:outline-hidden"
-                      onClick={() => setIsLoginOpen(true)}
+                      onClick={() => setLoginOpen(true)}
                     >
                       <span className="absolute -start-full transition-all group-hover:start-4">
                         <svg
@@ -238,7 +248,7 @@ function Navbar() {
 
                   <li>
                     <a
-                      onClick={() => setIsLoginOpen(true)}
+                      onClick={() => setLoginOpen(true)}
                       className="group relative inline-flex items-center overflow-hidden [@media-(max-width:450px)]:px-6 [@media-(max-width:450px)]:p-2 rounded-full bg-pink-400 px-8 py-3 text-white focus:ring-3 focus:outline-hidden"
                     >
                       <span className="absolute -start-full transition-all group-hover:start-4">
@@ -490,7 +500,16 @@ function Navbar() {
           </nav>
         </div>
       )}
-      <Login isOpen={isLoginOpen} onClose={() => setIsLoginOpen(false)} />
+      <Login
+        isOpen={isLoginOpen}
+        onClose={() => setLoginOpen(false)}
+        onOpenRegister={openRegisterFromLogin}
+      />
+      <Register
+        isOpen={isRegisterOpen}
+        onClose={() => setRegisterOpen(false)}
+        onOpenLogin={openLoginFromRegister}
+      />
     </>
   );
 }
