@@ -7,6 +7,8 @@ import { ArrowLeft } from "lucide-react";
 import { Users } from "lucide-react";
 import { Clock10 } from "lucide-react";
 import { ChevronDown } from "lucide-react";
+import { Lock } from "lucide-react";
+import { LockOpen } from "lucide-react";
 
 function OnlineCourseDetails() {
   let [videos, setVideos] = useState([]);
@@ -124,7 +126,7 @@ function OnlineCourseDetails() {
       </div>
 
       {/* course curriculum */}
-      <div className="my-10 flex flex-col bg-pink-100 p-5 rounded-xl gap-3">
+      <div className="my-10 flex flex-col bg-[url('/images/scribble.png')] p-5 rounded-xl gap-3">
         <h2 className="text-center mb-4 text-5xl font-bold">Course Curriculum</h2>
         <div className="text-center">
           <div className="text-3xl mb-3 font-extrabold text-sky-500">
@@ -160,119 +162,41 @@ function OnlineCourseDetails() {
             {videosBySection[sectionName].map((video) => (
               <div
                 key={video._id}
-                className="my-4 bg-pink-100 p-4 flex justify-start items-center rounded-xl shadow-md hover:shadow-xl hover:scale-102 transition-all duration-200"
+                className="my-4 bg-[url('/images/scribble.png')] p-4 flex justify-between items-center rounded-xl shadow-md hover:shadow-xl hover:scale-102 transition-all duration-200"
               >
-                <div className="inline-block mr-7">
-                  {/* <img
+                <div className="flex justify-start">
+                  <div className="inline-block mr-7">
+                    {/* <img
                     src={video.thumbnail}
                     alt="thumbnail"
                     className="h-20 w-20 object-center object-cover"
                   /> */}
-                  <img
-                    src="https://i.pinimg.com/1200x/ad/9d/17/ad9d179d29a1c33978878e544f5f9b1f.jpg"
-                    alt="thumbnail"
-                    className="h-20 w-20 object-center object-cover rounded-lg"
-                  />
+                    <img
+                      src="https://i.pinimg.com/1200x/ad/9d/17/ad9d179d29a1c33978878e544f5f9b1f.jpg"
+                      alt="thumbnail"
+                      className="h-20 w-20 object-center object-cover rounded-lg"
+                    />
+                  </div>
+
+                  <div className="inline-block h-fit w-fit">
+                    <p key={video._id}>{video.title}</p>
+                    <p>
+                      <Clock10 size={15} color="#454545" className="inline-block" />{" "}
+                      {video.duration}
+                    </p>
+                    <div className="inline-block mt-2 font-semibold">
+                      <Lock size={18} className=" inline-block" /> Locked
+                      {/* <LockOpen /> */}
+                    </div>
+                  </div>
                 </div>
 
-                <div className="inline-block h-fit w-fit">
-                  <p key={video._id}>{video.title}</p>
-                  <p>
-                    <Clock10 size={15} color="#454545" className="inline-block" />{" "}
-                    {video.duration}
-                  </p>
-                </div>
+                {/* <div></div> */}
               </div>
             ))}
           </div>
         </div>
       ))}
-
-      {/* Sections */}
-      {/* <div className="space-y-8">
-        {videos.map((video, idx) => (
-          <div key={video.id} className="bg-white rounded-2xl p-6 shadow-md">
-            <div className="flex items-start gap-4">
-              <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-sky-300 flex items-center justify-center text-lg font-semibold text-white">
-                {idx + 1}
-              </div>
-              <div className="flex-1">
-                <h2 className="text-xl font-semibold text-[#2b1f12]">{video.title}</h2>
-                <p className="text-sm text-gray-500 mt-1">{video.description}</p>
-              </div>
-            </div>
-
-            <div className="mt-6 space-y-3">
-              {video.lessons.map((lesson, i) => (
-                <div
-                  key={lesson.id}
-                  className="flex bg items-center flex-col sm:flex-row gap-4 rounded-lg border border-gray-100 p-3 hover:shadow-lg hover:scale-102 transition-all duration-200"
-                >
-                  <div className="relative w-36 h-20 flex-shrink-0 rounded-md overflow-hidden">
-                    <img
-                      src={lesson.thumb}
-                      alt="thumb"
-                      className="w-full h-full object-cover"
-                    />
-                    
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="w-10 h-10 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 24 24"
-                          className="w-5 h-5"
-                        >
-                          <path d="M8 5v14l11-7z" fill="#111827" />
-                        </svg>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="flex-1">
-                    <div className="flex items-start justify-between">
-                      <div>
-                        <h3 className="text-base font-medium text-[#2b1f12]">
-                          {lesson.title}
-                        </h3>
-                        <p className="text-sm text-gray-500 mt-1">{lesson.description}</p>
-                      </div>
-
-                      <div className="text-right">
-                        <div className="text-sm text-gray-500">{lesson.duration}</div>
-                        <div className="mt-2">
-                          {lesson.unlocked ? (
-                            <span className="inline-flex items-center gap-2 text-xs font-medium bg-green-50 text-green-600 px-2 py-1 rounded-full border border-green-100">
-                              <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                className="w-3 h-3"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                              >
-                                <path
-                                  d="M12 2a3 3 0 00-3 3v2H7a2 2 0 00-2 2v7a2 2 0 002 2h10a2 2 0 002-2v-7a2 2 0 00-2-2h-2V5a3 3 0 00-3-3z"
-                                  strokeWidth="1.5"
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                />
-                              </svg>
-                              Unlocked
-                            </span>
-                          ) : (
-                            <span className="inline-flex items-center gap-2 text-xs font-medium bg-gray-100 text-gray-600 px-2 py-1 rounded-full border border-gray-200">
-                              Locked
-                            </span>
-                          )}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        ))}
-      </div> */}
     </div>
   );
 }
