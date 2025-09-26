@@ -13,7 +13,7 @@ import OfflineCourse from "./pages/OfflineCourse.jsx";
 import SpecificCategory from "./pages/products/specificCat.jsx";
 import Login from "./components/Login.jsx";
 import OnlineCourseDetails from "./pages/OnlineCourseDetails.jsx";
-import Cart from "./components/Cart.jsx";
+import Cart from "./pages/Cart.jsx";
 
 function App() {
   return (
