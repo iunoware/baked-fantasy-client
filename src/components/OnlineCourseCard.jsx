@@ -1,73 +1,10 @@
 import { Link } from "react-router-dom";
 
 function OnlineCourseCard(props) {
-  // const courses = [
-  //   {
-  //     id: "intensive-15-day",
-  //     title: "15-Day Intensive Baking Course",
-  //     subtitle: "Complete Professional Baking Mastery",
-  //     price: 299.99,
-  //     originalPrice: 399.99,
-  //     duration: "15 Days",
-  //     students: 2847,
-  //     rating: 4.9,
-  //     reviews: 423,
-  //     image: "/images/bulkOrder.png",
-  //     description:
-  //       "Master the fundamentals and advanced techniques of professional baking in our comprehensive 15-day program.",
-  //     highlights: [
-  //       "Complete curriculum from basics to advanced",
-  //       "Professional techniques and recipes",
-  //       "Business setup guidance",
-  //       "Lifetime course access",
-  //       "Certificate of completion",
-  //       "Expert instructor support",
-  //     ],
-  //     modules: [
-  //       "Basic Baking Fundamentals",
-  //       "Bread Making Mastery",
-  //       "Pastry & Croissant Techniques",
-  //       "Cake Decoration & Design",
-  //       "Advanced Chocolate Work",
-  //       "Business & Marketing",
-  //     ],
-  //     totalVideos: 45,
-  //     totalHours: "18 hours",
-  //     level: "All Levels",
-  //     isPopular: true,
-  //   },
-  //   {
-  //     id: "quick-3-day",
-  //     title: "3-Day Quick Start Course",
-  //     subtitle: "Essential Baking Skills Fast Track",
-  //     price: 99.99,
-  //     originalPrice: 149.99,
-  //     duration: "3 Days",
-  //     students: 1245,
-  //     rating: 4.7,
-  //     reviews: 189,
-  //     image: "/images/bulkOrder.png",
-  //     description:
-  //       "Learn essential baking skills quickly with our focused 3-day intensive program perfect for beginners.",
-  //     highlights: [
-  //       "Quick start for beginners",
-  //       "Essential recipes and techniques",
-  //       "Perfect for home bakers",
-  //       "Lifetime course access",
-  //       "Certificate of completion",
-  //       "Community support",
-  //     ],
-  //     modules: [
-  //       "Baking Basics & Equipment",
-  //       "Essential Bread & Muffins",
-  //       "Classic Cakes & Cookies",
-  //     ],
-  //     totalVideos: 18,
-  //     totalHours: "6 hours",
-  //     level: "Beginner",
-  //     isPopular: false,
-  //   },
-  // ];
+
+  async function checkUser() {
+    
+  }
 
   return (
     <>
@@ -115,6 +52,7 @@ function OnlineCourseCard(props) {
                   <Link
                     to={`/course/online-course/${props.endPoint}`}
                     className="text-xl"
+                    onClick={checkUser}
                   >
                     <svg
                       width="24px"
