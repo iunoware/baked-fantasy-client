@@ -143,7 +143,7 @@ function OnlineCourseDetails() {
       </div>
 
       <div className="grid grid-cols-4 h-dvh">
-        <div className=" p-5 col-span-3 h-100 border-1">
+        <div className=" p-5 col-span-3 h-150 border-1">
           {currentVideo ? (
             <video
               className="rounded-xl w-full"
@@ -151,7 +151,7 @@ function OnlineCourseDetails() {
             ></video>
           ) : (
             <div className="flex items-center justify-center h-full">
-              <Loading height="150px" width="150px"/>
+              <Loading height="150px" width="150px" />
             </div>
           )}
         </div>
