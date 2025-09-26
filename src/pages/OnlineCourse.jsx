@@ -48,7 +48,7 @@ function OnlineCourse() {
           variant="ghost"
           size="sm"
           to="/courses"
-          className="flex hover:underline hover:underline-offset-3 items-center text-muted-foreground hover:text-[#00BCD4]"
+          className="flex w-fit hover:underline hover:underline-offset-3 items-center text-muted-foreground hover:text-[#00BCD4]"
         >
           <ArrowLeft className="h-4 w-4 mr-2" />
           Back to Courses
