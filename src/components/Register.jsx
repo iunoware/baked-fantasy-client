@@ -55,7 +55,7 @@ function Login({ isOpen, onClose, onOpenLogin }) {
           <div className="grid grid-cols-1 h-screen md:h-fit items-center lg:grid-cols-2 gap-0">
             {/* login form */}
             <div className="flex-1 flex items-center justify-center pt-5 order-2">
-              <div className="w-full max-w-md border-1 rounded-2xl  border-white backdrop-blur-sm backdrop-saturate-[182%] bg-[rgba(188,90,150,0.90)] inset-shadow-white inset-shadow-sm  ">
+              <div className="w-full max-h-160 max-w-md border-1 rounded-2xl  border-white backdrop-blur-sm backdrop-saturate-[182%] bg-[rgba(188,90,150,0.90)] inset-shadow-white inset-shadow-sm  ">
                 <Card className="shadow-card fade-in-delay-1">
                   <CardContent className="p-8">
                     <div className="text-center mb-3">
@@ -121,7 +121,7 @@ function Login({ isOpen, onClose, onOpenLogin }) {
                             id="password"
                             type={showPassword ? "text" : "password"}
                             placeholder="Enter your password"
-                            value={password}
+                            // value={password}
                             onChange={(e) => setPassword(e.target.value)}
                             className="pl-10 pr-10 bg-input-background border-white text-white  focus:ring-2 focus:ring-[#00BCD4] transition-all"
                             required
@@ -152,7 +152,7 @@ function Login({ isOpen, onClose, onOpenLogin }) {
                             id="con-pass"
                             type={showPassword ? "text" : "password"}
                             placeholder="Enter your password"
-                            value={password}
+                            // value={password}
                             onChange={(e) => setPassword(e.target.value)}
                             className="pl-10 pr-10 bg-input-background border-white text-white  focus:ring-2 focus:ring-[#00BCD4] transition-all"
                             required

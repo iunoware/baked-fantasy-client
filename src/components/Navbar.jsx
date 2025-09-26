@@ -169,7 +169,7 @@ function Navbar() {
                   {/* login */}
                   <li>
                     <button
-                      className="group relative inline-flex items-center overflow-hidden rounded-full bg-pink-400 px-8 py-3 text-white focus:ring-3 focus:outline-hidden"
+                      className="group relative inline-flex items-center overflow-hidden cursor-pointer rounded-full bg-pink-400 px-8 py-3 text-white focus:ring-3 focus:outline-hidden"
                       onClick={() => setLoginOpen(true)}
                     >
                       <span className="absolute -start-full transition-all group-hover:start-4">
