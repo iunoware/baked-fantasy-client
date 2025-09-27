@@ -6,6 +6,7 @@ import {
   ShoppingCart,
   Tag,
   ArrowRight,
+  Cake,
 } from "lucide-react";
 import { Button } from "./ui/button";
 import { Card, CardContent } from "./ui/card";
@@ -59,6 +60,18 @@ export function CartPage({
                   Your cart is empty, but the oven is ready. Pick your
                   favorites!
                 </p>
+                <button
+                  onClick={onNext}
+                  className="group relative justify-center mt-6 inline-flex items-center overflow-hidden rounded-sm bg-cyan-500 px-8 py-3 text-white focus:ring-3 focus:outline-hidden mr-3"
+                >
+                  <span className="absolute -start-full transition-all group-hover:start-4">
+                    <Cake size="18" />
+                  </span>
+
+                  <span className="text-sm font-medium text-center transition-all group-hover:ms-4">
+                    Browse Products
+                  </span>
+                </button>
               </CardContent>
             </Card>
           ) : (

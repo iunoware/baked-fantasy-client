@@ -61,7 +61,7 @@ function Categories() {
                   autoplay
                   loop
                 ></dotlottie-wc>
-                <h2 className="text-2xl font-bold text-amber-700">
+                <h2 className="text-3xl font-bold text-amber-700">
                   Premium ingredients
                 </h2>
                 <p className="text-md pt-5">
@@ -77,7 +77,7 @@ function Categories() {
                   autoplay
                   loop
                 ></dotlottie-wc>
-                <h2 className="text-2xl font-bold text-amber-700">
+                <h2 className="text-3xl font-bold text-amber-700">
                   Expert Craftsmanship
                 </h2>
                 <p className="text-md pt-5">
@@ -92,7 +92,7 @@ function Categories() {
                   autoplay
                   loop
                 ></dotlottie-wc>
-                <h2 className="text-2xl font-bold text-amber-700">
+                <h2 className="text-3xl font-bold text-amber-700">
                   Fresh Delivery
                 </h2>
                 <p className="text-md pt-5">
