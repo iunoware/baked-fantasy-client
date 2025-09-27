@@ -21,7 +21,6 @@ function Login({ isOpen, onClose, onOpenLogin }) {
     // Simulate login process
     setTimeout(() => {
       setIsLoading(false);
-      // In real app, handle authentication here
       onNavigate("home");
     }, 1500);
   };
@@ -34,7 +33,7 @@ function Login({ isOpen, onClose, onOpenLogin }) {
         aria-modal="true"
         aria-labelledby="modalTitle"
       >
-        <div className="lg:w-[60vw] lg:h-[90vh] md:w-[60vw] md:h-[68.2vh] w-screen h-screen  rounded-2xl bg-[url(/images/padded.png)] bg-pink-400 p-6 shadow-lg">
+        <div className="lg:w-[60vw] md:w-[60vw]  w-screen h-full  rounded-2xl bg-[url(/images/padded.png)] bg-pink-400 p-6 shadow-lg">
           <div className="flex items-start justify-between">
             <h2
               id="modalTitle"
@@ -55,7 +54,7 @@ function Login({ isOpen, onClose, onOpenLogin }) {
           <div className="grid grid-cols-1 h-screen md:h-fit items-center lg:grid-cols-2 gap-0">
             {/* login form */}
             <div className="flex-1 flex items-center justify-center pt-5 order-2">
-              <div className="w-full max-h-160 max-w-md border-1 rounded-2xl  border-white backdrop-blur-sm backdrop-saturate-[182%] bg-[rgba(188,90,150,0.90)] inset-shadow-white inset-shadow-sm  ">
+              <div className="w-full max-h-190 max-w-md border-1 rounded-2xl  border-white backdrop-blur-sm backdrop-saturate-[182%] bg-[rgba(188,90,150,0.90)] inset-shadow-white inset-shadow-sm  ">
                 <Card className="shadow-card fade-in-delay-1">
                   <CardContent className="p-8">
                     <div className="text-center mb-3">

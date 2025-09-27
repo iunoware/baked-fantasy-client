@@ -864,24 +864,27 @@ function Home() {
       </section>
 
       {/* event section */}
-      <section className="lg:grid lg:place-content-center mt-18 py-10">
+      <section className="lg:grid lg:h-[80vh]  lg:bg-cover lg:bg-center md:bg-center md:bg-cover relative bg-violet-300  md:bg-[url('/images/bulk-2.jpg')] mt-18 py-10">
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-2 lg:gap-8 px-8">
-          <div className="textSide flex items-center">
-            <div className="max-w-prose text-left">
-              <h1 className="text-4xl font-bold text-gray-900 sm:text-5xl">
-                <strong className="text-pink-400">Bulk Orders</strong> for Every
-                Occasion increase
+          <div className="textSide flex space-y-15 ">
+            <div className="max-w-prose flex flex-col space-y-5 ">
+              <h1 className="text-8xl font-bold text-white sm:text-5xl">
+                <strong className="text-8xl text-white  mb-5 font-extrabold">
+                  Bulk Orders
+                </strong>
+                <br />
+                <span>for Every Occasion</span>
               </h1>
 
-              <p className="mt-4 text-base text-pretty text-gray-700 sm:text-lg/relaxed">
-                Order bulk cakes and desserts for birthdays, weddings, or
-                corporate events. We deliver fresh, delicious treats in large
-                quantities—perfect for making every celebration memorable.
+              <p className="mt-4 text-base text-pretty text-white sm:text-lg/relaxed">
+                Order bulk cakes & desserts for birthdays, weddings, or events.
+                Fresh, delicious treats delivered to make every celebration
+                memorable.
               </p>
 
               <div className="mt-4 flex gap-4 sm:mt-6">
                 <a
-                  className="group relative inline-flex items-center overflow-hidden rounded-sm bg-cyan-500 px-8 py-3 text-white focus:ring-3 focus:outline-hidden mr-3"
+                  className="group relative inline-flex items-center overflow-hidden rounded-sm bg-pink-600 px-8 py-3 text-white focus:ring-3 focus:outline-hidden mr-3"
                   href="#"
                 >
                   <span className="absolute -start-full transition-all group-hover:start-4">
@@ -935,11 +938,11 @@ function Home() {
           </div>
 
           <div className="rounded-xl h-[400px] overflow-hidden">
-            <img
+            {/* <img
               src="/images/event.jpg"
               alt="Birthday Event"
               className="rounded-xl h-[400px]  object-cover hover:scale-108 transition-all duration-200"
-            />
+            /> */}
           </div>
         </div>
       </section>
@@ -1581,7 +1584,7 @@ function Home() {
       </div>
 
       {/* CTA section */}
-      <section className="lg:grid lg:h-[80vh]  lg:bg-cover lg:bg-center md:bg-center md:bg-cover relative bg-violet-300 lg:bg-[url('/images/bulkOrder.png')] md:bg-[url('/images/bulkOrder.png')]">
+      <section className="lg:grid lg:h-[80vh]  lg:bg-cover lg:bg-center md:bg-center md:bg-cover relative bg-violet-300 lg:bg-[url('/images/bulkorder-2.png')] md:bg-[url('/images/bulkOrder.png')]">
         <div className="lg:absolute lg:left-0 lg:top-[3vh] mt-18 w-screen max-w-screen-xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8 lg:py-32">
           <div className="max-w-prose text-left">
             <h1 className="lg:text-4xl font-bold text-gray-900 text-xl text-left">
@@ -1653,7 +1656,7 @@ function Home() {
                         strokeWidth="2"
                         strokeLinecap="round"
                         strokeLinejoin="round"
-                      ></path>{" "}
+                      ></path>
                     </g>
                   </svg>
                 </span>
