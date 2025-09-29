@@ -24,7 +24,6 @@ import {
 import { Label } from "./ui/label";
 
 export function DeliveryPage({
-  addresses,
   selectedAddress,
   setSelectedAddress,
   deliveryInstructions,
@@ -41,7 +40,8 @@ export function DeliveryPage({
   });
 
   const addNewAddress = () => {
-    // In a real app, this would save to the backend
+    if (!newAddress.type || !newAddress.address) return;
+    setAddresses([...addresses, { id: Date.now().toString(), ...newAddress }]);
     setIsAddingAddress(false);
     setNewAddress({ type: "", address: "", landmark: "" });
   };
@@ -49,6 +49,22 @@ export function DeliveryPage({
   const getAddressIcon = (type) => {
     return type.toLowerCase() === "home" ? Home : Building;
   };
+  const [addresses, setAddresses] = useState([
+    {
+      id: "1",
+      type: "Home",
+      address: "123 Main Street, Apartment 4B, Downtown Area",
+      landmark: "Near Central Park",
+    },
+    {
+      id: "2",
+      type: "Work",
+      address: "456 Business District, Office Tower 2, Floor 15",
+      landmark: "Opposite Metro Station",
+    },
+  ]);
+
+  // function newAddress() {}
 
   return (
     <div className="container mx-auto px-4 py-8 max-w-7xl">
@@ -75,12 +91,19 @@ export function DeliveryPage({
                   open={isAddingAddress}
                   onOpenChange={setIsAddingAddress}
                 >
-                  <DialogTrigger asChild>
-                    <Button variant="outline" size="sm">
-                      <Plus className="h-4 w-4 mr-2" />
-                      Add New
-                    </Button>
-                  </DialogTrigger>
+                  {/* <DialogTrigger asChild> */}
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="cursor-pointer"
+                    onClick={() => {
+                      setIsAddingAddress(true);
+                    }}
+                  >
+                    <Plus className="h-4 w-4 mr-2" />
+                    Add New
+                  </Button>
+                  {/* </DialogTrigger> */}
                   <DialogContent className="bg-pink-50">
                     <DialogHeader>
                       <DialogTitle>Add New Address</DialogTitle>

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import {
   Minus,
   Plus,
@@ -60,8 +61,8 @@ export function CartPage({
                   Your cart is empty, but the oven is ready. Pick your
                   favorites!
                 </p>
-                <button
-                  onClick={onNext}
+                <Link
+                  to={`/categories`}
                   className="group relative justify-center mt-6 inline-flex items-center overflow-hidden rounded-sm bg-cyan-500 px-8 py-3 text-white focus:ring-3 focus:outline-hidden mr-3"
                 >
                   <span className="absolute -start-full transition-all group-hover:start-4">
@@ -71,7 +72,7 @@ export function CartPage({
                   <span className="text-sm font-medium text-center transition-all group-hover:ms-4">
                     Browse Products
                   </span>
-                </button>
+                </Link>
               </CardContent>
             </Card>
           ) : (
@@ -106,7 +107,7 @@ export function CartPage({
                           variant="ghost"
                           size="sm"
                           onClick={() => removeCartItem(item.id)}
-                          className="text-red-500 hover:text-bold hover:size-lg hover:bg-red-50"
+                          className="text-red-500 hover:text-bold hover:size-lg hover:bg-red-50 cursor-pointer"
                         >
                           <Trash2 className="h-4 w-4" />
                         </Button>

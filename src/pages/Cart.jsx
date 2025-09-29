@@ -53,21 +53,6 @@ export default function App() {
   const [selectedPayment, setSelectedPayment] = useState(null);
   const [deliveryInstructions, setDeliveryInstructions] = useState("");
 
-  const addresses = [
-    {
-      id: "1",
-      type: "Home",
-      address: "123 Main Street, Apartment 4B, Downtown Area",
-      landmark: "Near Central Park",
-    },
-    {
-      id: "2",
-      type: "Work",
-      address: "456 Business District, Office Tower 2, Floor 15",
-      landmark: "Opposite Metro Station",
-    },
-  ];
-
   const paymentMethods = [
     {
       id: "1",
@@ -157,7 +142,7 @@ export default function App() {
       )}
       {currentStep === "delivery" && (
         <DeliveryPage
-          addresses={addresses}
+          // addresses={addresses}
           selectedAddress={selectedAddress}
           setSelectedAddress={setSelectedAddress}
           deliveryInstructions={deliveryInstructions}
