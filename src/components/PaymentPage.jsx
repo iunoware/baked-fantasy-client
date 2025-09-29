@@ -153,9 +153,9 @@ export function PaymentPage({
                       Cardholder Name
                     </Label>
                     <Input
-                      id="cardName focus:ring-1 focus:ring-black/70 focus:border-none"
+                      id="cardName "
                       placeholder="John Doe"
-                      className="mt-1"
+                      className="mt-1 focus:ring-1 focus:ring-black/70 focus:border-none"
                     />
                   </div>
                 </div>
@@ -175,7 +175,7 @@ export function PaymentPage({
                   <Input
                     id="upiId"
                     placeholder="yourname@paytm"
-                    className="mt-1 focus:ring-1 focus:ring-black/70 focus:border-none"
+                    className="mt-1 focus:ring-1 focus:ring-black/60 focus:border-none"
                   />
                 </div>
               </CardContent>
