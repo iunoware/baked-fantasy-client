@@ -4,7 +4,7 @@ import About from "../src/pages/About.jsx";
 import Categories from "./pages/ProductsCategory.jsx";
 import Courses from "../src/pages/Courses.jsx";
 import Contact from "../src/pages/Contact.jsx";
-import Navbar from "./components/newNav.jsx";
+import Navbar from "./components/NewNav.jsx";
 import Footer from "./components/Footer.jsx";
 import ProductDetail from "../src/pages/ProductDetail.jsx";
 import ScrollToTop from "./components/ScrollToTop.jsx";
