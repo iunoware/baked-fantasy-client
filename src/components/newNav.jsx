@@ -4,17 +4,38 @@ import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import Login from "./Login.jsx";
 import Register from "./Register.jsx";
-import { ShoppingCart, User, Search, ChevronDown } from "lucide-react";
+import {
+  ShoppingCart,
+  User,
+  Search,
+  ChevronDown,
+  NotebookText,
+  GraduationCap,
+} from "lucide-react";
 
-export default function newNav() {
-  function openCourse() {
-    let menu = document.getElementById("menu");
-    menu.classList.toggle("hidden");
-  }
+export default function NewNav() {
+  let [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isLoginOpen, setLoginOpen] = useState(false);
+  const [isRegisterOpen, setRegisterOpen] = useState(false);
+  let location = useLocation();
+
+  useEffect(() => {
+    setIsMenuOpen(false);
+  }, [location]);
+  const openRegisterFromLogin = () => {
+    setLoginOpen(false);
+    setRegisterOpen(true);
+  };
+  const openLoginFromRegister = () => {
+    setLoginOpen(true);
+    setRegisterOpen(false);
+  };
+  const [open, setOpen] = useState(false);
+
   return (
     <>
-      <header className="bg-white h-18 fixed top-0 left-0 w-screen z-50">
-        <div className="mx-13">
+      <header className="w-screen">
+        <nav className="bg-white h-18 fixed top-0 left-0 w-screen z-50 px-15 hidden md:block ">
           <div className="flex h-18 items-center justify-between">
             {/* logo */}
             <div className="md:flex md:items-center md:gap-12">
@@ -47,7 +68,7 @@ export default function newNav() {
                   </li>
 
                   {/* about us */}
-                  <li className="w-fit">
+                  <li className="">
                     <NavLink
                       to="/about"
                       className={({ isActive }) =>
@@ -81,29 +102,18 @@ export default function newNav() {
                     </NavLink>
                   </li>
 
-                  {/* courses */}
                   <li>
-                    {/* <NavLink
-                      to="/courses"
-                      className={({ isActive }) =>
-                        `text-lg relative group rounded-lg p-3 transition ${
-                          isActive
-                            ? "bg-sky-500 text-white font-semibold"
-                            : "hover:text-black text-gray-800 "
-                        } `
-                      }
+                    <div
+                      className="relative inline-flex"
+                      onMouseEnter={() => setOpen(true)}
+                      onMouseLeave={() => setOpen(false)}
                     >
-                      Courses
-                      <span className="absolute left-1 bottom-0 h-[3px] rounded-xl w-0 bg-sky-500 transition-all duration-300 group-hover:w-[90%]"></span>
-                    </NavLink> */}
-                    <div className="relative inline-flex">
                       <span className="inline-flex overflow-hidden ">
                         <NavLink
+                          id="parent-container"
                           to="/courses"
-                          onClick={openCourse}
-                          // className="text-lg relative group rounded-lg p-3 transition focus:relative"
                           className={({ isActive }) =>
-                            `text-lg relative group rounded-lg p-3 transition focus:relative ${
+                            `flex items-center gap-2 text-lg relative group rounded-lg p-3 transition focus:relative ${
                               isActive
                                 ? "bg-sky-500 text-white font-semibold"
                                 : "hover:text-black text-gray-800 "
@@ -112,51 +122,36 @@ export default function newNav() {
                         >
                           Course <ChevronDown size={15} />
                         </NavLink>
-
-                        {/* <button
-                          type="button"
-                          className=" text-sm font-medium text-gray-700 transition-colors hover:text-gray-900 focus:relative"
-                          aria-label="Menu"
-                          onClick={openCourse}
-                        >
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            strokeWidth="1.5"
-                            stroke="currentColor"
-                            className="size-4"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              d="m19.5 8.25-7.5 7.5-7.5-7.5"
-                            />
-                          </svg>
-                        </button> */}
                       </span>
-
-                      <div
-                        id="menu"
-                        role="menu"
-                        className="hidden absolute end-0 top-12 z-auto w-56 overflow-hidden rounded border border-gray-300 bg-white shadow-sm"
-                      >
-                        <a
-                          href="#"
-                          className="block px-3 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-50 hover:text-gray-900"
-                          role="menuitem"
+                      {open && (
+                        <div
+                          id="menu"
+                          role="menu"
+                          className="absolute end-0 top-12 z-auto w-45 rounded-2xl overflow-hidden border border-gray-300 bg-white shadow-sm"
                         >
-                          Courses
-                        </a>
+                          <Link
+                            to="/courses"
+                            className="block text-center px-3 py-2 text-lg font-medium text-gray-700 transition-colors hover:bg-sky-50 hover:text-gray-900"
+                            role="menuitem"
+                          >
+                            <div className="flex items-center gap-2">
+                              <NotebookText size={19} />
+                              Courses
+                            </div>
+                          </Link>
 
-                        <a
-                          href="#"
-                          className="block px-3 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-50 hover:text-gray-900"
-                          role="menuitem"
-                        >
-                          My Learnings
-                        </a>
-                      </div>
+                          <a
+                            href="#"
+                            className="block text-center px-3 py-2 text-lg font-medium text-gray-700 transition-colors hover:bg-sky-50 hover:text-gray-900"
+                            role="menuitem"
+                          >
+                            <div className="flex items-center gap-2">
+                              <GraduationCap size={19} />
+                              My Learnings
+                            </div>
+                          </a>
+                        </div>
+                      )}
                     </div>
                   </li>
 
@@ -179,27 +174,32 @@ export default function newNav() {
                 </ul>
               </nav>
             </div>
-
+            <div className="searchBar">
+              <search className="px-5 py-2.5 w-full font-medium text-pink-600 bg-pink-100 rounded-2xl  flex items-center">
+                <label htmlFor="search">
+                  <Search size={20} />
+                </label>
+                <input
+                  type="search"
+                  id="search"
+                  placeholder="search cakes"
+                  className="border-none focus:outline-none pl-3 "
+                />
+              </search>
+            </div>
             <div className="flex items-center gap-4">
               <div className="sm:flex rounded-2xl p-1 bg-pink-100 sm:gap-4">
-                <a
-                  className=" px-5 py-2.5   font-medium text-pink-600 "
-                  href="#"
-                >
-                  <Search size={20} />
-                </a>
-
                 <div className="hidden sm:flex">
-                  <a
-                    className=" px-5 py-2.5 text-sm font-medium text-pink-600"
-                    href="#"
+                  <Link
+                    className=" px-5 cursor-pointer py-2.5 text-sm font-medium text-pink-600"
+                    to="/cart"
                   >
                     <ShoppingCart size={20} />
-                  </a>
+                  </Link>
                 </div>
                 <a
-                  className=" px-5 py-2.5 text-sm font-medium text-pink-600"
-                  href="#"
+                  className=" px-5 py-2.5 cursor-pointer text-sm font-medium text-pink-600"
+                  onClick={() => setLoginOpen(true)}
                 >
                   <User size={20} />
                 </a>
@@ -225,8 +225,36 @@ export default function newNav() {
               </div>
             </div>
           </div>
-        </div>
+        </nav>
+        <nav className="block md:hidden fixed top-0 left-0 w-full h-30 bg-pink-50">
+          <div className="flex justify-between pt-4 pl-3">
+            <div className="logo">
+              <Link
+                to="/"
+                className="text-pink-500 text-xl font-bold brand-name"
+              >
+                The Backed Fantasy
+              </Link>
+            </div>
+            <div className="search">
+              <div className="svg flex items-center gap-4 p-2">
+                <ShoppingCart size={20} />
+                <User size={20} />
+              </div>
+            </div>
+          </div>
+        </nav>
       </header>
+      <Login
+        isOpen={isLoginOpen}
+        onClose={() => setLoginOpen(false)}
+        onOpenRegister={openRegisterFromLogin}
+      />
+      <Register
+        isOpen={isRegisterOpen}
+        onClose={() => setRegisterOpen(false)}
+        onOpenLogin={openLoginFromRegister}
+      />
     </>
   );
 }
