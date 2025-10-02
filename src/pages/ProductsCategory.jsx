@@ -21,7 +21,7 @@ function Categories() {
   return (
     <>
       <div className="product bg-purple-100">
-        <section className="pt-30">
+        <section className="lg:pt-30 md:pt-20 pt-40">
           <Heading title="Explore Our Product Categories" />
           <p className="subHeading">
             Discover our wide range of handcrafted baked goods, made with

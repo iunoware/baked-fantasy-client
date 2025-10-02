@@ -864,12 +864,12 @@ function Home() {
       </section>
 
       {/* event section */}
-      <section className="lg:grid lg:h-[80vh]  lg:bg-cover lg:bg-center md:bg-center md:bg-cover relative bg-violet-300  md:bg-[url('/images/bulk-2.jpg')] mt-18 py-10">
+      <section className="lg:grid lg:h-[80vh] md:h-[45vh] h-[42vh] lg:bg-cover lg:bg-center md:bg-center md:bg-cover relative md:bg-violet-300 bg-violet-300  lg:bg-[url('/images/bulk-2.jpg')] mt-18 py-10">
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-2 lg:gap-8 px-8">
           <div className="textSide flex space-y-15 ">
             <div className="max-w-prose flex flex-col space-y-5 ">
-              <h1 className="text-8xl font-bold text-white sm:text-5xl">
-                <strong className="text-8xl text-white  mb-5 font-extrabold">
+              <h1 className="lg:text-8xl md:text-5xl text-2xl font-bold text-white sm:text-5xl">
+                <strong className=" text-white  mb-5 font-extrabold">
                   Bulk Orders
                 </strong>
                 <br />

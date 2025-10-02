@@ -2,27 +2,43 @@ import { useState } from "react";
 import { Button } from "./ui/button.jsx";
 import { Input } from "./ui/input.jsx";
 import { Card, CardContent } from "./ui/card.jsx";
-import { Separator } from "./ui/separator.jsx";
+import axios from "axios";
 import { Eye, EyeOff, Mail, Lock, User, X } from "lucide-react";
 
-function Login({ isOpen, onClose, onOpenLogin }) {
+function Register({ isOpen, onClose, onOpenLogin }) {
+  const [form, setForm] = useState({ name: "", email: "", password: "" });
+  const [message, setMessage] = useState("");
+
   const [isLoginOpen, setLoginOpen] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  if (!isOpen) return null; // don’t render if closed
+  if (!isOpen) return null;
 
-  const handleLogin = async (e) => {
+  // const handleLogin = async (e) => {
+  //   e.preventDefault();
+  //   setIsLoading(true);
+
+  //   // Simulate login process
+  //   setTimeout(() => {
+  //     setIsLoading(false);
+  //     onNavigate("home");
+  //   }, 1500);
+  // };
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsLoading(true);
-
-    // Simulate login process
-    setTimeout(() => {
-      setIsLoading(false);
-      onNavigate("home");
-    }, 1500);
+    try {
+      const res = await axios.post("http://localhost:5000/register", form);
+      setMessage(res.data.msg);
+    } catch (err) {
+      setMessage(err.response?.data?.msg || "Something went wrong");
+    }
   };
 
   return (
@@ -66,7 +82,7 @@ function Login({ isOpen, onClose, onOpenLogin }) {
                       </p>
                     </div>
 
-                    <form className="space-y-6">
+                    <form className="space-y-6" onSubmit={handleSubmit}>
                       <div className="space-ys-2">
                         <label
                           htmlFor="name"
@@ -80,7 +96,7 @@ function Login({ isOpen, onClose, onOpenLogin }) {
                             id="name"
                             type="text"
                             placeholder="Enter your email"
-                            value={email}
+                            value={name}
                             onChange={(e) => setEmail(e.target.value)}
                             className="pl-10 bg-input-background border-white text-white focus:ring-2 focus:ring-[#00BCD4] transition-all"
                             required
@@ -246,7 +262,7 @@ function Login({ isOpen, onClose, onOpenLogin }) {
 
                     <div className="mt-3 text-center">
                       <p className="text-muted-foreground">
-                        Already have an account?{" "}
+                        Already have an account?
                         <button
                           onClick={onOpenLogin}
                           className="text-[#00BCD4] cursor-pointer hover:text-[#00ACC1] font-medium transition-colors"
@@ -274,4 +290,4 @@ function Login({ isOpen, onClose, onOpenLogin }) {
     </>
   );
 }
-export default Login;
+export default Register;

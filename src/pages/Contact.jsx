@@ -8,7 +8,7 @@ function Contact() {
   return (
     <>
       <div className="bg">
-        <div className="pt-10"></div>
+        <div className="pt-40 md:pt-10"></div>
         <div className="min-h-screen md:pt-16 pb-10 page-transition">
           <div className="container mx-auto px-4">
             <div className="text-center mb-12 fade-in">

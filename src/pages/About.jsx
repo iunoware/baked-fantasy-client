@@ -63,7 +63,8 @@ function About() {
     {
       year: "2022",
       title: "Signature Cakes Launched",
-      description: "Introduced our signature customized cakes and special dessert menu.",
+      description:
+        "Introduced our signature customized cakes and special dessert menu.",
       icon: <Cake color="#ffffff" size={27} />,
     },
     {
@@ -113,7 +114,7 @@ function About() {
   return (
     <>
       {/* hero section */}
-      <div className="relative w-full h-[700px] z-1 overflow-hidden">
+      <div className="relative pt-35 md:pt-15 w-full h-[700px] z-1 overflow-hidden">
         <div
           className="flex transition-transform duration-700 ease-in-out "
           style={{ transform: `translateX(-${currentIndex * 100}%)` }}
@@ -154,7 +155,9 @@ function About() {
 
         <button
           onClick={() =>
-            setCurrentIndex((prev) => (prev - 1 + images.length) % images.length)
+            setCurrentIndex(
+              (prev) => (prev - 1 + images.length) % images.length
+            )
           }
           className="absolute hover:cursor-pointer z-50 left-2 top-1/2 -translate-y-1/2 bg-sky-300 text-white text-4xl p-2 px-6 rounded-full"
         >
@@ -194,9 +197,9 @@ function About() {
               Our Journey
             </h2>
             <p className="text-lg text-black/70 max-w-3xl mx-auto">
-              From a passionate home baker to a skilled academy instructor and a thriving
-              large-scale home bakery, our journey is driven by love for the craft and
-              dedication to sharing it with others.
+              From a passionate home baker to a skilled academy instructor and a
+              thriving large-scale home bakery, our journey is driven by love
+              for the craft and dedication to sharing it with others.
             </p>
           </div>
 
@@ -263,13 +266,15 @@ function About() {
           <div className="p-8 md:p-12 lg:px-16 lg:py-24">
             <div className="mx-auto max-w-xl text-center ltr:sm:text-left rtl:sm:text-right">
               <h2 className="!text-4xl font-semibold mb-5 text-gray-900 pt-60 md:text-3xl">
-                Turn Your Passion for <span className="text-sky-500">Baking</span> Into{" "}
+                Turn Your Passion for{" "}
+                <span className="text-sky-500">Baking</span> Into{" "}
                 <span className="text-sky-500">Perfection</span>
               </h2>
 
               <p className="hidden text-xl mb-5 text-gray-800 md:mt-4 md:block">
-                Join our academy and transform your home baking skills into professional
-                expertise - from homemade treats to large-scale success!
+                Join our academy and transform your home baking skills into
+                professional expertise - from homemade treats to large-scale
+                success!
               </p>
 
               <div className="mt-4 flex md:mt-8">
@@ -291,7 +296,7 @@ function About() {
                   to="/categories"
                 >
                   <span className="absolute -start-full transition-all group-hover:start-1">
-                    <ShoppingCart size={36} className="pr-5"/>
+                    <ShoppingCart size={36} className="pr-5" />
                   </span>
 
                   <span className="text-sm text-sky-500 font-medium transition-all group-hover:ms-4">
@@ -342,17 +347,21 @@ function About() {
                 Recognized Excellence
               </h3>
               <p className="text-lg text-black/80 leading-relaxed">
-                Our commitment to quality craftsmanship and exceptional customer service
-                has been recognized by industry leaders and our community. These awards
-                reflect our dedication to traditional baking methods and innovative
-                approaches to creating memorable experiences.
+                Our commitment to quality craftsmanship and exceptional customer
+                service has been recognized by industry leaders and our
+                community. These awards reflect our dedication to traditional
+                baking methods and innovative approaches to creating memorable
+                experiences.
               </p>
 
               <div className="space-y-4 mt-7 transition-all duration-200">
                 <div className="bg-white shadow-lg rounded-lg p-4 flex items-start gap-4">
                   {/* Award icon */}
                   <div className="w-8 h-8 text-blue-400 flex items-center justify-center flex-shrink-0 mt-1">
-                    <svg className="w-full h-full fill-current" viewBox="0 0 24 24">
+                    <svg
+                      className="w-full h-full fill-current"
+                      viewBox="0 0 24 24"
+                    >
                       <path d="M12 2L15.09 8.26L22 9L17 14L18.18 21L12 17.77L5.82 21L7 14L2 9L8.91 8.26L12 2Z" />
                     </svg>
                   </div>
@@ -376,8 +385,8 @@ function About() {
             Sweet words from our customers
           </h2>
           <p className="text-xl text-gray-800/80 text-center">
-            Discover what makes our bakery special through the heartfelt stories of our
-            beloved customers
+            Discover what makes our bakery special through the heartfelt stories
+            of our beloved customers
           </p>
         </div>
 

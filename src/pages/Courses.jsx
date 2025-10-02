@@ -182,7 +182,7 @@ function Courses() {
   return (
     <div className="bg">
       {/* hero section */}
-      <div>
+      <div className="pt-15 md:pt-5">
         <h1 className="lg:text-6xl md:text-5xl sm:text-4xl text-3xl flex font-semibold justify-center pt-30">
           Choose our <span className="text-black">&nbsp;Learning path</span>
         </h1>
