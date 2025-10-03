@@ -18,11 +18,25 @@ function OnlineCourseDetails() {
   let [totalSections, setTotalSections] = useState();
 
   useEffect(() => {
+    localStorage.setItem(
+      "token",
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGY4NDIxZTU3MTFmOTYyYzMyZTQyMiIsImlhdCI6MTc1OTQ3OTU4NywiZXhwIjoxNzU5NTY1OTg3fQ.nmVQcr3gO4U96q3GP5wZGgVs1r3TGriA-xaaAshrftU"
+    );
+
     async function fetchVideos() {
       try {
+        // const response = await axios.get(
+        //   `http://localhost:5000/course/online-course/${courseId}`
+        // );
         const response = await axios.get(
-          `http://localhost:5000/course/online-course/${courseId}`
+          `http://localhost:5000/course/online-course/${courseId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
         );
+
         setVideos(response.data.videos);
         console.log("total video: ", response.data.videos);
         // console.log("1st video: ", response.data.videos[0]);
@@ -55,7 +69,7 @@ function OnlineCourseDetails() {
   }, [courseId]);
 
   return (
-    <div className="bg pt-10">
+    <div className="bg pt-20">
       {/* Top Banner */}
       <div className="py-10 px-8">
         <Link
@@ -145,7 +159,7 @@ function OnlineCourseDetails() {
                       <div
                         key={video._id}
                         onClick={() => setCurrentVideo(video)}
-                        className="flex items-center justify-between py-2 px-3 rounded-md hover:bg-gray-100 cursor-pointer"
+                        className="flex items-center justify-between py-2 px-3 rounded-md hover:bg-pink-100 transition-all duration-200 cursor-pointer"
                       >
                         <div>
                           <p className="font-medium">{video.title}</p>
