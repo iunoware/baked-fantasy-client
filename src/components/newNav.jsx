@@ -37,7 +37,7 @@ export default function NewNav() {
   return (
     <>
       <header className="w-screen">
-        <nav className="bg-white h-18 fixed top-0 left-0 w-screen z-50 px-15 hidden lg:block md:hidden ">
+        <nav className="bg-white shadow-xl h-18 fixed top-0 left-0 w-screen z-50 px-15 hidden lg:block md:hidden ">
           <div className="flex h-18 items-center justify-between">
             {/* logo */}
             <div className="md:flex md:items-center md:gap-12">
@@ -142,8 +142,8 @@ export default function NewNav() {
                             </div>
                           </Link>
 
-                          <a
-                            href="#"
+                          <Link
+                            to="/purchasedCourses"
                             className="block text-center px-3 py-2 text-lg font-medium text-gray-700 transition-colors hover:bg-sky-50 hover:text-gray-900"
                             role="menuitem"
                           >
@@ -151,7 +151,7 @@ export default function NewNav() {
                               <GraduationCap size={19} />
                               My Learnings
                             </div>
-                          </a>
+                          </Link>
                         </div>
                       )}
                     </div>
@@ -231,10 +231,7 @@ export default function NewNav() {
         <nav className="block md:block lg:hidden z-50 fixed top-0 left-0 w-full h-35 bg-pink-50">
           <div className="flex justify-between pt-4 pl-3">
             <div className="logo flex items-center">
-              <Link
-                to="/"
-                className="text-pink-500 text-xl font-bold brand-name"
-              >
+              <Link to="/" className="text-pink-500 text-xl font-bold brand-name">
                 The Backed Fantasy
               </Link>
             </div>

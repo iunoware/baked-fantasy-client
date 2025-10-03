@@ -37,25 +37,20 @@ function OnlineCourse() {
         console.error(error.message);
       }
     }
-
     fetchCourse();
   }, []);
 
   return (
-    <div className="bg-[#f1faee]">
-      <div className="absolute inset-0 top-23 left-3 sm:left-10 space-x-2 mb-8">
-        <Link
-          variant="ghost"
-          size="sm"
-          to="/courses"
-          className="flex w-fit hover:underline hover:underline-offset-3 items-center text-muted-foreground hover:text-[#00BCD4]"
-        >
-          <ArrowLeft className="h-4 w-4 mr-2" />
-          Back to Courses
-        </Link>
-      </div>
+    <div className="bg-[#f1faee] pt-20">
+      <Link
+        to="/courses"
+        className="flex pt-10 pl-10 items-center text-sm text-gray-600 hover:text-sky-500 mb-3"
+      >
+        <ArrowLeft className="h-4 w-4 mr-2" /> Back to Online Courses
+      </Link>
+
       {/* hero section */}
-      <div className="pt-30">
+      <div className="pt-15">
         <h1 className="lg:text-6xl md:text-5xl sm:text-4xl text-3xl flex font-semibold justify-center">
           Choose our <span className="text-black">&nbsp;Learning path</span>
         </h1>

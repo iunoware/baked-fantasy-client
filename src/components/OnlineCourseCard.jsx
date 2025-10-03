@@ -1,13 +1,101 @@
+/* eslint-disable no-unused-vars */
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function OnlineCourseCard(props) {
+  const paymentMethods = [
+    {
+      id: "1",
+      type: "card",
+      label: "Credit/Debit Card",
+      details: "**** **** **** 1234",
+    },
+    { id: "2", type: "upi", label: "UPI", details: "user@paytm" },
+    {
+      id: "3",
+      type: "wallet",
+      label: "Paytm Wallet",
+      details: "₹2,450 available",
+    },
+    { id: "4", type: "cod", label: "Cash on Delivery" },
+  ];
+  const [orderNumber, setOrderNumber] = useState("");
+  const [currentStep, setCurrentStep] = useState("payment");
 
-  async function checkUser() {
-    
+  const calculateOrderSummary = () => {
+    const subtotal = props.price;
+    const discount = 10;
+    // const taxes = (subtotal - discount) * 0.18; // 18% GST
+    const total = subtotal - discount;
+
+    return {
+      subtotal,
+      discount,
+      total,
+    };
+  };
+
+  const handleNextStep = () => {
+    // Generate order number
+    const orderNum = "OD" + Date.now().toString().slice(-6);
+    setOrderNumber(orderNum);
+    setCurrentStep("confirmation");
+  };
+
+  let orderSummary = calculateOrderSummary();
+
+  const [selectedAddress, setSelectedAddress] = useState(null);
+  const [selectedPayment, setSelectedPayment] = useState(null);
+  const [deliveryInstructions, setDeliveryInstructions] = useState("");
+
+  let [purchasedCourses, setPurchasedCourses] = useState([]);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    localStorage.setItem(
+      "token",
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGY4NDIxZTU3MTFmOTYyYzMyZTQyMiIsImlhdCI6MTc1OTQ3OTU4NywiZXhwIjoxNzU5NTY1OTg3fQ.nmVQcr3gO4U96q3GP5wZGgVs1r3TGriA-xaaAshrftU"
+    );
+
+    const fetchPurchasedCourses = async () => {
+      const token = localStorage.getItem("token");
+      if (!token) return; // maybe redirect to login
+
+      // const res = await axios.get("http://localhost:5000/user-verification", {
+      //   headers: { Authorization: `Bearer ${token}` },
+      // });
+      // setPurchasedCourses(res.data.purchasedCourses.map((c) => c.courseId));
+
+      const response = await axios.get("http://localhost:5000/user-verification", {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      setPurchasedCourses(
+        response.data.currentUser.purchasedCourses.map((c) => c.courseId)
+      );
+    };
+
+    fetchPurchasedCourses();
+  }, []);
+
+  async function checkUser(courseId) {
+    if (purchasedCourses.some((pc) => pc === courseId)) {
+      navigate(`/course/online-course/${courseId}`);
+    } else {
+      <PaymentPage
+        paymentMethods={paymentMethods}
+        selectedPayment={selectedPayment}
+        setSelectedPayment={setSelectedPayment}
+        orderSummary={orderSummary}
+        onNext={handleNextStep}
+        onPrevious={`/courses/online-course`}
+      />;
+    }
   }
 
   return (
-    <>
+    <div className="">
       {/* <h1 className="text-5xl text-center font-bold mt-5">online course card</h1> */}
 
       {/* <div className="container mx-auto px-20 py-16"> */}
@@ -49,11 +137,7 @@ function OnlineCourseCard(props) {
             <div className="card-button-reveal opacity-0 group-hover:opacity-100 group-hover:-translate-y-3 translate-y-3 absolute top-1/2 left-1/2 transform -translate-x-1/2 transition-all duration-400">
               <div className="bg-white text-foreground px-6 py-3 rounded-full font-semibold shadow-lg flex items-center space-x-2">
                 <div className="">
-                  <Link
-                    to={`/course/online-course/${props.endPoint}`}
-                    className="text-xl"
-                    onClick={checkUser}
-                  >
+                  <Link className="text-xl" onClick={() => checkUser(props._id)}>
                     <svg
                       width="24px"
                       className="inline-block mr-5"
@@ -254,7 +338,7 @@ function OnlineCourseCard(props) {
         {/* ))} */}
       </div>
       {/* </div> */}
-    </>
+    </div>
   );
 }
 
