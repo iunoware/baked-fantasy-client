@@ -6,38 +6,48 @@ import axios from "axios";
 import { Eye, EyeOff, Mail, Lock, User, X } from "lucide-react";
 
 function Register({ isOpen, onClose, onOpenLogin }) {
-  const [form, setForm] = useState({ name: "", email: "", password: "" });
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
   const [message, setMessage] = useState("");
 
   const [isLoginOpen, setLoginOpen] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  // const [email, setEmail] = useState("");
+  // const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   if (!isOpen) return null;
 
-  // const handleLogin = async (e) => {
-  //   e.preventDefault();
-  //   setIsLoading(true);
-
-  //   // Simulate login process
-  //   setTimeout(() => {
-  //     setIsLoading(false);
-  //     onNavigate("home");
-  //   }, 1500);
-  // };
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (form.password !== form.confirmPassword) {
+      setMessage("Passwords do not match!");
+      return;
+    }
     try {
-      const res = await axios.post("http://localhost:5000/register", form);
+      const { name, email, password } = form;
+
+      setIsLoading(true);
+
+      const res = await axios.post("http://localhost:5000/register", {
+        name,
+        email,
+        password,
+      });
       setMessage(res.data.msg);
+      onClose();
     } catch (err) {
       setMessage(err.response?.data?.msg || "Something went wrong");
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -81,7 +91,6 @@ function Register({ isOpen, onClose, onOpenLogin }) {
                         Enroll your Baked Fantasy account
                       </p>
                     </div>
-
                     <form className="space-y-6" onSubmit={handleSubmit}>
                       <div className="space-ys-2">
                         <label
@@ -94,10 +103,11 @@ function Register({ isOpen, onClose, onOpenLogin }) {
                           <User className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-white" />
                           <Input
                             id="name"
+                            name="name"
                             type="text"
-                            placeholder="Enter your email"
-                            value={name}
-                            onChange={(e) => setEmail(e.target.value)}
+                            placeholder="Enter your Full Name"
+                            // value={name}
+                            onChange={handleChange}
                             className="pl-10 bg-input-background border-white text-white focus:ring-2 focus:ring-[#00BCD4] transition-all"
                             required
                           />
@@ -115,9 +125,10 @@ function Register({ isOpen, onClose, onOpenLogin }) {
                           <Input
                             id="email"
                             type="email"
+                            name="email"
                             placeholder="Enter your email"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
+                            // value={email}
+                            onChange={handleChange}
                             className="pl-10 bg-input-background border-white text-white focus:ring-2 focus:ring-[#00BCD4] transition-all"
                             required
                           />
@@ -136,8 +147,9 @@ function Register({ isOpen, onClose, onOpenLogin }) {
                             id="password"
                             type={showPassword ? "text" : "password"}
                             placeholder="Enter your password"
+                            name="password"
                             // value={password}
-                            onChange={(e) => setPassword(e.target.value)}
+                            onChange={handleChange}
                             className="pl-10 pr-10 bg-input-background border-white text-white  focus:ring-2 focus:ring-[#00BCD4] transition-all"
                             required
                           />
@@ -168,7 +180,8 @@ function Register({ isOpen, onClose, onOpenLogin }) {
                             type={showPassword ? "text" : "password"}
                             placeholder="Enter your password"
                             // value={password}
-                            onChange={(e) => setPassword(e.target.value)}
+                            name="confirmPassword"
+                            onChange={handleChange}
                             className="pl-10 pr-10 bg-input-background border-white text-white  focus:ring-2 focus:ring-[#00BCD4] transition-all"
                             required
                           />
@@ -207,7 +220,7 @@ function Register({ isOpen, onClose, onOpenLogin }) {
                           Forgot password?
                         </button>
                       </div>
-
+                      <p className="text-center text-lime-500">{message}</p>
                       <Button
                         type="submit"
                         size="lg"
@@ -265,7 +278,7 @@ function Register({ isOpen, onClose, onOpenLogin }) {
                         Already have an account?
                         <button
                           onClick={onOpenLogin}
-                          className="text-[#00BCD4] cursor-pointer hover:text-[#00ACC1] font-medium transition-colors"
+                          className="text-[#00BCD4] ps-3 cursor-pointer hover:text-[#00ACC1] font-medium transition-colors"
                         >
                           LogIn
                         </button>

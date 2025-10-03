@@ -14,46 +14,49 @@ import SpecificCategory from "./pages/products/specificCat.jsx";
 import Login from "./components/Login.jsx";
 import OnlineCourseDetails from "./pages/OnlineCourseDetails.jsx";
 import Cart from "./pages/Cart.jsx";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 
 function App() {
   return (
     <>
-      <Router>
-        <Navbar />
-        <ScrollToTop />
-        <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          {/* for category page */}
-          <Route path="/categories" element={<Categories />} />
-          {/* for specific category */}
-          <Route
-            path="/products/:categoryName"
-            element={<SpecificCategory />}
-          />
-          {/* for products details */}
-          <Route
-            path="/products/:categoryName/:productId"
-            element={<ProductDetail />}
-          />
-          {/* <Route path="/products/cake/cake-1" element={<ProductDetail />} /> */}
+      <GoogleOAuthProvider clientId="YOUR_GOOGLE_CLIENT_ID">
+        <Router>
+          <Navbar />
+          <ScrollToTop />
+          <Routes>
+            <Route path="/login" element={<Login />} />
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            {/* for category page */}
+            <Route path="/categories" element={<Categories />} />
+            {/* for specific category */}
+            <Route
+              path="/products/:categoryName"
+              element={<SpecificCategory />}
+            />
+            {/* for products details */}
+            <Route
+              path="/products/:categoryName/:productId"
+              element={<ProductDetail />}
+            />
+            {/* <Route path="/products/cake/cake-1" element={<ProductDetail />} /> */}
 
-          {/* for courses */}
-          <Route path="/courses" element={<Courses />} />
-          {/* for all online courses */}
-          <Route path="/courses/online-course" element={<OnlineCourse />} />
-          {/* for online course details */}
-          <Route
-            path="/course/online-course/:courseId"
-            element={<OnlineCourseDetails />}
-          />
-          <Route path="/courses/offline-course" element={<OfflineCourse />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/cart" element={<Cart />} />
-        </Routes>
-        <Footer />
-      </Router>
+            {/* for courses */}
+            <Route path="/courses" element={<Courses />} />
+            {/* for all online courses */}
+            <Route path="/courses/online-course" element={<OnlineCourse />} />
+            {/* for online course details */}
+            <Route
+              path="/course/online-course/:courseId"
+              element={<OnlineCourseDetails />}
+            />
+            <Route path="/courses/offline-course" element={<OfflineCourse />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/cart" element={<Cart />} />
+          </Routes>
+          <Footer />
+        </Router>
+      </GoogleOAuthProvider>
     </>
   );
 }

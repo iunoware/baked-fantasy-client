@@ -37,7 +37,7 @@ export default function NewNav() {
   return (
     <>
       <header className="w-screen">
-        <nav className="bg-white h-18 fixed top-0 left-0 w-screen z-50 px-15 hidden lg:block md:hidden ">
+        <nav className="bg-white shadow-xl h-18 fixed top-0 left-0 w-screen z-50 px-15 hidden lg:block md:hidden ">
           <div className="flex h-18 items-center justify-between">
             {/* logo */}
             <div className="md:flex md:items-center md:gap-12">

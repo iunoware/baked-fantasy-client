@@ -2,29 +2,75 @@ import { useState } from "react";
 import { Button } from "./ui/button.jsx";
 import { Input } from "./ui/input.jsx";
 import { Card, CardContent } from "./ui/card.jsx";
-import { Separator } from "./ui/separator.jsx";
-import { Eye, EyeOff, Mail, Lock, ArrowLeft, X } from "lucide-react";
-import Register from "./Register.jsx";
+import { useNavigate } from "react-router-dom";
+import { GoogleLogin } from "@react-oauth/google";
+import { Eye, EyeOff, Mail, Lock, X } from "lucide-react";
+import axios from "axios";
 
 function Login({ isOpen, onClose, onOpenRegister }) {
-  const [showPassword, setShowPassword] = useState(false);
-
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  if (!isOpen) return null;
+  const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
+  const [form, setForm] = useState({ email: "", password: "" });
+  const [message, setMessage] = useState("");
 
-  const handleLogin = async (e) => {
+  const handleSuccess = async (credentialResponse) => {
+    try {
+      // Send Google token to backend for verification
+      const res = await axios.post("http://localhost:5000/auth/google", {
+        token: credentialResponse.credential,
+      });
+
+      // Save your backend JWT
+      localStorage.setItem("token", res.data.token);
+
+      // Close modal or redirect
+      console.log("Login success", res.data);
+    } catch (err) {
+      console.error("Login failed:", err);
+    }
+  };
+
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
+    try {
+      const { email, password } = form;
 
-    // Simulate login process
-    setTimeout(() => {
+      const res = await axios.post("http://localhost:5000/login", {
+        email,
+        password,
+      });
+
+      localStorage.setItem("token", res.data.token);
+      localStorage.setItem("user", JSON.stringify(res.data.user));
+
+      setMessage(res.data.msg);
+
+      onClose();
+    } catch (err) {
+      setMessage(err.response?.data?.msg || "Something went wrong");
+    } finally {
       setIsLoading(false);
-      // In real app, handle authentication here
-      onNavigate("home");
-    }, 1500);
+    }
   };
+
+  if (!isOpen) return null;
+
+  // const handleLogin = async (e) => {
+  //   e.preventDefault();
+  //   setIsLoading(true);
+
+  //   // Simulate login process
+  //   setTimeout(() => {
+  //     setIsLoading(false);
+  //     // In real app, handle authentication here
+  //     onNavigate("home");
+  //   }, 1500);
+  // };
 
   return (
     <>
@@ -65,7 +111,7 @@ function Login({ isOpen, onClose, onOpenRegister }) {
                       </p>
                     </div>
 
-                    <form className="space-y-6">
+                    <form className="space-y-6" onSubmit={handleSubmit}>
                       <div className="space-ys-2">
                         <label
                           htmlFor="email"
@@ -76,11 +122,12 @@ function Login({ isOpen, onClose, onOpenRegister }) {
                         <div className="relative">
                           <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-white" />
                           <Input
+                            name="email"
                             id="email"
                             type="email"
                             placeholder="Enter your email"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
+                            // value={email}
+                            onChange={handleChange}
                             className="pl-10 bg-input-background border-white text-white focus:ring-2 focus:ring-[#00BCD4] transition-all"
                             required
                           />
@@ -97,11 +144,12 @@ function Login({ isOpen, onClose, onOpenRegister }) {
                         <div className="relative">
                           <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-white" />
                           <Input
+                            name="password"
                             id="password"
                             type={showPassword ? "text" : "password"}
                             placeholder="Enter your password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
+                            // value={password}
+                            onChange={handleChange}
                             className="pl-10 pr-10 bg-input-background border-white text-white  focus:ring-2 focus:ring-[#00BCD4] transition-all"
                             required
                           />
@@ -140,6 +188,7 @@ function Login({ isOpen, onClose, onOpenRegister }) {
                           Forgot password?
                         </button>
                       </div>
+                      <p className="text-center text-lime-300">{message}</p>
 
                       <Button
                         type="submit"
