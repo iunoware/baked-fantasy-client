@@ -231,7 +231,10 @@ export default function NewNav() {
         <nav className="block md:block lg:hidden z-50 fixed top-0 left-0 w-full h-35 bg-pink-50">
           <div className="flex justify-between pt-4 pl-3">
             <div className="logo flex items-center">
-              <Link to="/" className="text-pink-500 text-xl font-bold brand-name">
+              <Link
+                to="/"
+                className="text-pink-500 text-xl font-bold brand-name"
+              >
                 The Backed Fantasy
               </Link>
             </div>
