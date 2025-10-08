@@ -3,6 +3,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
+import Heading from "@/components/Heading";
 
 function OnlineCourse() {
   let [courses, setCourses] = useState([]);
@@ -34,7 +35,7 @@ function OnlineCourse() {
       </Link>
 
       {/* hero section */}
-      <div className="pt-15">
+      {/* <div className="pt-15">
         <h1 className="lg:text-6xl md:text-5xl sm:text-4xl text-3xl flex font-semibold justify-center">
           Choose our <span className="text-black">&nbsp;Learning path</span>
         </h1>
@@ -45,11 +46,20 @@ function OnlineCourse() {
             program for you.
           </p>
         </div>
+      </div> */}
+
+      <div className="pb-10">
+        <Heading title="Learn Anytime, Bake Anywhere" />
+        <p className="text-center text-xl mt-4 px-5">
+          Join our online baking courses and master your favorite recipes from the comfort
+          of your home - step by step, guided by our expert chefs.
+        </p>
       </div>
 
       {/* <h1 className="pt-40 text-5xl font-bold text-center">Online course</h1> */}
 
-      <div className="py-20 grid grid-cols-1 lg:grid-cols-2">
+      {/* <div className="py-20 grid grid-cols-1 lg:grid-cols-2"> */}
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 lg:gap-8">
         {courses.length > 0 ? (
           courses.map((course, index) => {
             return (
@@ -61,6 +71,7 @@ function OnlineCourse() {
                     rating={course.rating}
                     reviews={course.reviews}
                     students={course.students}
+                    description={course.description}
                     title={course.title}
                     subtitle={course.subtitle}
                     duration={course.duration}

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useState } from "react";
 import { Button } from "./ui/button.jsx";
 import { Input } from "./ui/input.jsx";
@@ -13,7 +14,7 @@ import {
 } from "../fireBaseConfig.js";
 
 function Register({ isOpen, onClose, onOpenLogin }) {
-  console.log(auth);
+  // console.log(auth);
 
   // Google Registration
   const handleSuccess = async (credentialResponse) => {
