@@ -3,11 +3,18 @@ import { Button } from "./ui/button.jsx";
 import { Input } from "./ui/input.jsx";
 import { Card, CardContent } from "./ui/card.jsx";
 import axios from "axios";
-import { Eye, EyeOff, Mail, Lock, User, X } from "lucide-react";
+import { Eye, EyeOff, Mail, Lock, User, X, Phone } from "lucide-react";
 import { GoogleLogin } from "@react-oauth/google";
 import toast from "react-hot-toast";
+import {
+  auth,
+  RecaptchaVerifier,
+  signInWithPhoneNumber,
+} from "../fireBaseConfig.js";
 
 function Register({ isOpen, onClose, onOpenLogin }) {
+  console.log(auth);
+
   // Google Registration
   const handleSuccess = async (credentialResponse) => {
     try {
@@ -29,10 +36,11 @@ function Register({ isOpen, onClose, onOpenLogin }) {
     name: "",
     email: "",
     password: "",
-    confirmPassword: "",
+    phoneNumber: "",
   });
   const [message, setMessage] = useState("");
 
+  // const [showOtp, setShowOtp] = useState(false);
   const [isLoginOpen, setLoginOpen] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
@@ -47,19 +55,15 @@ function Register({ isOpen, onClose, onOpenLogin }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (form.password !== form.confirmPassword) {
-      setMessage("Passwords do not match!");
-      return;
-    }
     try {
-      const { name, email, password } = form;
+      const { name, email, password, phoneNumber } = form;
 
       setIsLoading(true);
-
       const res = await axios.post("http://localhost:5000/register", {
         name,
         email,
         password,
+        phoneNumber,
       });
       setMessage(res.data.msg);
       onClose();
@@ -74,12 +78,18 @@ function Register({ isOpen, onClose, onOpenLogin }) {
   return (
     <>
       <div
-        className="fixed inset-0 z-50 grid place-content-center bg-black/50 p-4"
+        className="fixed inset-0 z-50 grid place-content-center  p-4"
         role="dialog"
         aria-modal="true"
         aria-labelledby="modalTitle"
       >
-        <div className="lg:w-[60vw] md:w-[60vw]  w-screen h-full  rounded-2xl bg-[url(/images/padded.png)] bg-pink-400 p-6 shadow-lg">
+        {isOpen && (
+          <div
+            className="fixed inset-0 bg-black/50 backdrop-blur-sm"
+            onClick={onClose}
+          ></div>
+        )}
+        <div className="z-10 lg:w-[60vw] md:w-[60vw]  w-screen h-full rounded-2xl bg-[url(/images/padded.png)] bg-pink-400 p-6 shadow-lg">
           <div className="flex items-start justify-between">
             <h2
               id="modalTitle"
@@ -192,38 +202,56 @@ function Register({ isOpen, onClose, onOpenLogin }) {
                           htmlFor="con-pass"
                           className="text-white font-medium"
                         >
-                          Confirm Password
+                          Mobile Number
                         </label>
                         <div className="relative">
-                          <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-white" />
+                          <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-white" />
                           <Input
                             id="con-pass"
                             title="Password must be at least 6 characters long, include uppercase, lowercase, and a number."
-                            type={showPassword ? "text" : "password"}
-                            placeholder="Enter your password"
+                            type="tel"
+                            placeholder="Enter Phone Number"
                             // value={password}
-                            name="confirmPassword"
+                            name="phoneNumber"
                             onChange={handleChange}
                             className="pl-10 pr-10 bg-input-background border-white text-white  focus:ring-2 focus:ring-[#00BCD4] transition-all"
                             required
                           />
                           <button
                             type="button"
-                            onClick={() => setShowPassword(!showPassword)}
+                            // onClick={() => setShowPassword(!showPassword)}
                             className="absolute right-3 top-1/2 transform -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
-                          >
-                            {showPassword ? (
-                              <EyeOff className="h-5 w-5 text-white" />
-                            ) : (
-                              <Eye className="h-5 w-5 text-white" />
-                            )}
-                          </button>
+                          ></button>
                         </div>
                       </div>
+                      {showOtp && (
+                        <div className="space-y-2">
+                          <label
+                            htmlFor="con-pass"
+                            className="text-white font-medium"
+                          >
+                            Enter OTP
+                          </label>
+                          <div className="relative">
+                            <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-white" />
+                            <Input
+                              id="otp"
+                              // title="Password must be at least 6 characters long, include uppercase, lowercase, and a number."
+                              type="tel"
+                              placeholder="Enter 4 Digit OTP"
+                              // value={password}
+                              name="phoneNumber"
+                              onChange={handleChange}
+                              className="pl-10 pr-10 bg-input-background border-white text-white  focus:ring-2 focus:ring-[#00BCD4] transition-all"
+                              required
+                            />
+                          </div>
+                        </div>
+                      )}
 
                       <div className="flex items-center justify-between">
                         <div className="flex items-center space-x-2">
-                          <input
+                          {/* <input
                             type="checkbox"
                             id="remember"
                             className="w-4 h-4 text-[#00BCD4] bg-input-background border-border rounded focus:ring-[#00BCD4] focus:ring-2"
@@ -233,7 +261,7 @@ function Register({ isOpen, onClose, onOpenLogin }) {
                             className="text-sm text-white cursor-pointer"
                           >
                             Remember me
-                          </label>
+                          </label> */}
                         </div>
                         <button
                           type="button"
@@ -247,6 +275,7 @@ function Register({ isOpen, onClose, onOpenLogin }) {
                         type="submit"
                         size="lg"
                         className="w-full bg-sky-500 hover:bg-[#00ACC1] text-white btn-hover"
+                        // onClick={setShowOtp(true)}
                         // disabled={isLoading}
                       >
                         {isLoading ? (
@@ -255,7 +284,7 @@ function Register({ isOpen, onClose, onOpenLogin }) {
                             <span>Signing in...</span>
                           </div>
                         ) : (
-                          "Create Account"
+                          "Send OTP"
                         )}
                       </Button>
                     </form>
@@ -279,7 +308,7 @@ function Register({ isOpen, onClose, onOpenLogin }) {
                         Already have an account?
                         <button
                           onClick={onOpenLogin}
-                          className="text-[#00BCD4] ps-3 cursor-pointer hover:text-[#00ACC1] font-medium transition-colors"
+                          className="text-[#00BCD4] ps-3 text-lg font-bold cursor-pointer hover:text-[#00ACC1]  transition-colors"
                         >
                           LogIn
                         </button>
@@ -289,6 +318,7 @@ function Register({ isOpen, onClose, onOpenLogin }) {
                 </Card>
               </div>
             </div>
+
             {/* images side */}
             <div className="img w-full flex justify-center lg:inline-block  md:hidden order-1">
               <img

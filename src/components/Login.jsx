@@ -69,12 +69,18 @@ function Login({ isOpen, onClose, onOpenRegister }) {
   return (
     <>
       <div
-        className="fixed inset-0 z-50 grid place-content-center bg-black/50 p-4"
+        className="fixed inset-0 z-50 grid place-content-center p-4"
         role="dialog"
         aria-modal="true"
         aria-labelledby="modalTitle"
       >
-        <div className="lg:w-[60vw] lg:h-[85vh] md:w-[60vw] md:h-[68.2vh] w-screen h-screen  rounded-2xl bg-[url(/images/padded.png)] bg-pink-400 p-6 shadow-lg">
+        {isOpen && (
+          <div
+            className="fixed inset-0 bg-black/50 backdrop-blur-sm"
+            onClick={onClose}
+          ></div>
+        )}
+        <div className="z-10 lg:w-[60vw] lg:h-[85vh] md:w-[60vw] md:h-[68.2vh] w-screen h-screen  rounded-2xl bg-[url(/images/padded.png)] bg-pink-400 p-6 shadow-lg">
           <div className="flex items-start justify-between">
             <h2
               id="modalTitle"
@@ -162,7 +168,7 @@ function Login({ isOpen, onClose, onOpenRegister }) {
 
                       <div className="flex items-center justify-between">
                         <div className="flex items-center space-x-2">
-                          <input
+                          {/* <input
                             type="checkbox"
                             id="remember"
                             className="w-4 h-4 text-[#00BCD4] bg-input-background border-border rounded focus:ring-[#00BCD4] focus:ring-2"
@@ -172,7 +178,7 @@ function Login({ isOpen, onClose, onOpenRegister }) {
                             className="text-sm text-white cursor-pointer"
                           >
                             Remember me
-                          </label>
+                          </label> */}
                         </div>
                         <button
                           type="button"
@@ -239,7 +245,6 @@ function Login({ isOpen, onClose, onOpenRegister }) {
           </div>
         </div>
       </div>
-      {/* <Register isOpen={isSignupOpen} onClose={() => setSignUpOpen(false)} /> */}
     </>
   );
 }
