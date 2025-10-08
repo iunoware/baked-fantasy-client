@@ -16,23 +16,7 @@ function OnlineCourse() {
     async function fetchCourse() {
       try {
         const response = await axios.get("http://localhost:5000/course");
-
-        // const response = await axios.get("http://localhost:5000/course", {
-        //   headers: {
-        //     Authorization: `Bearer ${localStorage.getItem("token")}`,
-        //   },
-        // });
-        // console.log(localStorage.getItem("token"));
         setCourses(response.data.courses);
-        // console.log("course details:", response.data.courses);
-
-        // let ids = response.data.courses.map((course) => {
-        //   return course._id;
-        // });
-
-        // console.log("course id: ", ids);
-
-        // console.log("Course image value:", response.data.courses[0].ImageUrl);
       } catch (error) {
         console.error(error.message);
       }
