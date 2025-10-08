@@ -13,7 +13,66 @@ import {
 } from "../fireBaseConfig.js";
 
 function Register({ isOpen, onClose, onOpenLogin }) {
-  console.log(auth);
+  // for otp
+  // const [showOtp, setShowOtp] = useState(false);
+  const [showVerify, setVerify] = useState(false);
+  const [confirmationResult, setConfirmation] = useState(null);
+  const [otp, setOtp] = useState("");
+
+  const sendOtp = async () => {
+    if (!form.phoneNumber) {
+      toast.error("Please enter your phone number first");
+      return;
+    }
+
+    try {
+      const recaptcha = new RecaptchaVerifier(auth, "recaptcha-container", {
+        size: "invisible",
+      });
+
+      const confirmation = await signInWithPhoneNumber(
+        auth,
+        "+91" + form.phoneNumber,
+        recaptcha
+      );
+
+      setConfirmation(confirmation);
+      setVerify(true);
+      toast.success("OTP sent successfully!");
+    } catch (error) {
+      console.error("Failed to send OTP", error);
+      toast.error("Failed to send OTP");
+    }
+  };
+
+  const verifyOtp = async () => {
+    try {
+      await confirmationResult.confirm(otp);
+      await registerUser(); // separate registration logic
+      toast.success("OTP verified & user registered!");
+    } catch (error) {
+      console.error(error);
+      toast.error("Invalid OTP, please try again.");
+    }
+  };
+  const registerUser = async () => {
+    try {
+      const { name, email, password, phoneNumber } = form;
+      setIsLoading(true);
+      const res = await axios.post("http://localhost:5000/register", {
+        name,
+        email,
+        password,
+        phoneNumber,
+      });
+      onClose();
+      toast.success("User Registered Successfully 🍰");
+    } catch (err) {
+      toast.error(err.response?.data?.msg || "Something went wrong");
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   // Google Registration
   const handleSuccess = async (credentialResponse) => {
@@ -40,7 +99,6 @@ function Register({ isOpen, onClose, onOpenLogin }) {
   });
   const [message, setMessage] = useState("");
 
-  // const [showOtp, setShowOtp] = useState(false);
   const [isLoginOpen, setLoginOpen] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
@@ -65,6 +123,7 @@ function Register({ isOpen, onClose, onOpenLogin }) {
         password,
         phoneNumber,
       });
+
       setMessage(res.data.msg);
       onClose();
       toast.success("User Registered Successfully 🍰");
@@ -121,7 +180,10 @@ function Register({ isOpen, onClose, onOpenLogin }) {
                         Enroll your Baked Fantasy account
                       </p>
                     </div>
-                    <form className="space-y-6" onSubmit={handleSubmit}>
+                    <form
+                      className="space-y-6"
+                      onSubmit={(e) => e.preventDefault()}
+                    >
                       <div className="space-ys-2">
                         <label
                           htmlFor="name"
@@ -224,10 +286,10 @@ function Register({ isOpen, onClose, onOpenLogin }) {
                           ></button>
                         </div>
                       </div>
-                      {showOtp && (
+                      {showVerify && (
                         <div className="space-y-2">
                           <label
-                            htmlFor="con-pass"
+                            htmlFor="otp"
                             className="text-white font-medium"
                           >
                             Enter OTP
@@ -237,56 +299,49 @@ function Register({ isOpen, onClose, onOpenLogin }) {
                             <Input
                               id="otp"
                               // title="Password must be at least 6 characters long, include uppercase, lowercase, and a number."
-                              type="tel"
+                              type="text"
                               placeholder="Enter 4 Digit OTP"
-                              // value={password}
-                              name="phoneNumber"
-                              onChange={handleChange}
+                              value={otp}
+                              name="otp"
+                              onChange={(e) => setOtp(e.target.value)}
                               className="pl-10 pr-10 bg-input-background border-white text-white  focus:ring-2 focus:ring-[#00BCD4] transition-all"
                               required
                             />
+                            {/* <Button onClick={verifyOtp}>Verify OTP</Button> */}
                           </div>
                         </div>
                       )}
 
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-2">
-                          {/* <input
-                            type="checkbox"
-                            id="remember"
-                            className="w-4 h-4 text-[#00BCD4] bg-input-background border-border rounded focus:ring-[#00BCD4] focus:ring-2"
-                          />
-                          <label
-                            htmlFor="remember"
-                            className="text-sm text-white cursor-pointer"
-                          >
-                            Remember me
-                          </label> */}
-                        </div>
+                      {/* <div className="flex items-center justify-between">
+                        <div className="flex items-center space-x-2"></div>
                         <button
                           type="button"
                           className="text-sm text-white font-bold hover:text-white transition-colors"
                         >
                           Forgot password?
                         </button>
-                      </div>
+                      </div> */}
                       {/* <p className="text-center text-lime-500">{message}</p> */}
-                      <Button
-                        type="submit"
-                        size="lg"
-                        className="w-full bg-sky-500 hover:bg-[#00ACC1] text-white btn-hover"
-                        // onClick={setShowOtp(true)}
-                        // disabled={isLoading}
-                      >
-                        {isLoading ? (
-                          <div className="flex items-center space-x-2">
-                            <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                            <span>Signing in...</span>
-                          </div>
-                        ) : (
-                          "Send OTP"
-                        )}
-                      </Button>
+
+                      {!showVerify ? (
+                        <Button
+                          type="button"
+                          onClick={sendOtp}
+                          size="lg"
+                          className="w-full bg-sky-500 hover:bg-[#00ACC1] text-white btn-hover"
+                        >
+                          Send OTP
+                        </Button>
+                      ) : (
+                        <Button
+                          type="button"
+                          onClick={verifyOtp}
+                          size="lg"
+                          className="w-full bg-green-500 hover:bg-green-600 text-white btn-hover"
+                        >
+                          Verify OTP
+                        </Button>
+                      )}
                     </form>
 
                     <div className="mt-6">
@@ -314,6 +369,7 @@ function Register({ isOpen, onClose, onOpenLogin }) {
                         </button>
                       </p>
                     </div>
+                    <div id="recaptcha-container"></div>
                   </CardContent>
                 </Card>
               </div>
