@@ -3,110 +3,101 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { GraduationCap } from "lucide-react";
 
 function OnlineCourseCard(props) {
-  const paymentMethods = [
-    {
-      id: "1",
-      type: "card",
-      label: "Credit/Debit Card",
-      details: "**** **** **** 1234",
-    },
-    { id: "2", type: "upi", label: "UPI", details: "user@paytm" },
-    {
-      id: "3",
-      type: "wallet",
-      label: "Paytm Wallet",
-      details: "₹2,450 available",
-    },
-    { id: "4", type: "cod", label: "Cash on Delivery" },
-  ];
-  const [orderNumber, setOrderNumber] = useState("");
-  const [currentStep, setCurrentStep] = useState("payment");
+  // const paymentMethods = [
+  //   {
+  //     id: "1",
+  //     type: "card",
+  //     label: "Credit/Debit Card",
+  //     details: "**** **** **** 1234",
+  //   },
+  //   { id: "2", type: "upi", label: "UPI", details: "user@paytm" },
+  //   {
+  //     id: "3",
+  //     type: "wallet",
+  //     label: "Paytm Wallet",
+  //     details: "₹2,450 available",
+  //   },
+  //   { id: "4", type: "cod", label: "Cash on Delivery" },
+  // ];
+  // const [orderNumber, setOrderNumber] = useState("");
+  // const [currentStep, setCurrentStep] = useState("payment");
 
-  const calculateOrderSummary = () => {
-    const subtotal = props.price;
-    const discount = 10;
-    // const taxes = (subtotal - discount) * 0.18; // 18% GST
-    const total = subtotal - discount;
+  // const calculateOrderSummary = () => {
+  //   const subtotal = props.price;
+  //   const discount = 10;
+  //   // const taxes = (subtotal - discount) * 0.18; // 18% GST
+  //   const total = subtotal - discount;
 
-    return {
-      subtotal,
-      discount,
-      total,
-    };
-  };
+  //   return {
+  //     subtotal,
+  //     discount,
+  //     total,
+  //   };
+  // };
 
-  const handleNextStep = () => {
-    // Generate order number
-    const orderNum = "OD" + Date.now().toString().slice(-6);
-    setOrderNumber(orderNum);
-    setCurrentStep("confirmation");
-  };
+  // const handleNextStep = () => {
+  //   // Generate order number
+  //   const orderNum = "OD" + Date.now().toString().slice(-6);
+  //   setOrderNumber(orderNum);
+  //   setCurrentStep("confirmation");
+  // };
 
-  let orderSummary = calculateOrderSummary();
+  // let orderSummary = calculateOrderSummary();
 
-  const [selectedAddress, setSelectedAddress] = useState(null);
-  const [selectedPayment, setSelectedPayment] = useState(null);
-  const [deliveryInstructions, setDeliveryInstructions] = useState("");
+  // const [selectedAddress, setSelectedAddress] = useState(null);
+  // const [selectedPayment, setSelectedPayment] = useState(null);
+  // const [deliveryInstructions, setDeliveryInstructions] = useState("");
 
-  let [purchasedCourses, setPurchasedCourses] = useState([]);
-  const navigate = useNavigate();
+  // let [purchasedCourses, setPurchasedCourses] = useState([]);
+  // const navigate = useNavigate();
 
-  useEffect(() => {
-    localStorage.setItem(
-      "token",
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGY4NDIxZTU3MTFmOTYyYzMyZTQyMiIsImlhdCI6MTc1OTQ3OTU4NywiZXhwIjoxNzU5NTY1OTg3fQ.nmVQcr3gO4U96q3GP5wZGgVs1r3TGriA-xaaAshrftU"
-    );
+  // useEffect(() => {
+  //   localStorage.setItem(
+  //     "token",
+  //     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGY4NDIxZTU3MTFmOTYyYzMyZTQyMiIsImlhdCI6MTc1OTQ3OTU4NywiZXhwIjoxNzU5NTY1OTg3fQ.nmVQcr3gO4U96q3GP5wZGgVs1r3TGriA-xaaAshrftU"
+  //   );
 
-    const fetchPurchasedCourses = async () => {
-      const token = localStorage.getItem("token");
-      if (!token) return; // maybe redirect to login
+  //   const fetchPurchasedCourses = async () => {
+  //     const token = localStorage.getItem("token");
+  //     if (!token) return; // maybe redirect to login
 
-      // const res = await axios.get("http://localhost:5000/user-verification", {
-      //   headers: { Authorization: `Bearer ${token}` },
-      // });
-      // setPurchasedCourses(res.data.purchasedCourses.map((c) => c.courseId));
+  //     // const res = await axios.get("http://localhost:5000/user-verification", {
+  //     //   headers: { Authorization: `Bearer ${token}` },
+  //     // });
+  //     // setPurchasedCourses(res.data.purchasedCourses.map((c) => c.courseId));
 
-      const response = await axios.get("http://localhost:5000/user-verification", {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      setPurchasedCourses(
-        response.data.currentUser.purchasedCourses.map((c) => c.courseId)
-      );
-    };
+  //     const response = await axios.get("http://localhost:5000/user-verification", {
+  //       headers: { Authorization: `Bearer ${token}` },
+  //     });
+  //     setPurchasedCourses(
+  //       response.data.currentUser.purchasedCourses.map((c) => c.courseId)
+  //     );
+  //   };
 
-    fetchPurchasedCourses();
-  }, []);
+  //   fetchPurchasedCourses();
+  // }, []);
 
-  async function checkUser(courseId) {
-    if (purchasedCourses.some((pc) => pc === courseId)) {
-      navigate(`/course/online-course/${courseId}`);
-    } else {
-      <PaymentPage
-        paymentMethods={paymentMethods}
-        selectedPayment={selectedPayment}
-        setSelectedPayment={setSelectedPayment}
-        orderSummary={orderSummary}
-        onNext={handleNextStep}
-        onPrevious={`/courses/online-course`}
-      />;
-    }
-  }
+  // async function checkUser(courseId) {
+  //   if (purchasedCourses.some((pc) => pc === courseId)) {
+  //     navigate(`/course/online-course/${courseId}`);
+  //   } else {
+  //     <PaymentPage
+  //       paymentMethods={paymentMethods}
+  //       selectedPayment={selectedPayment}
+  //       setSelectedPayment={setSelectedPayment}
+  //       orderSummary={orderSummary}
+  //       onNext={handleNextStep}
+  //       onPrevious={`/courses/online-course`}
+  //     />;
+  //   }
+  // }
 
   return (
     <div className="">
-      {/* <h1 className="text-5xl text-center font-bold mt-5">online course card</h1> */}
-
-      {/* <div className="container mx-auto px-20 py-16"> */}
-      {/* <div className="mb-16 fade-in">
-          <h2 className="text-3xl font-bold text-foreground text-center mb-12">
-            Choose Your Learning Journey
-          </h2>
-        </div> */}
-
-      <div className="px-10 m-10">
-        {/* {courses.map((course, index) => ( */}
+      {/* <div className="px-10 m-10">
         <div
           className={`overflow-hidden group card-hover cursor-pointer relative fade-in bg-white rounded-xl`}
         >
@@ -309,8 +300,7 @@ function OnlineCourseCard(props) {
                     key={idx}
                     className="flex items-center space-x-2 text-sm text-muted-foreground"
                   >
-                    {/* <div className="h-4 w-4 text-green-500 flex-shrink-0"></div> */}
-                    <span className={`before:content-['\\2713'] ml-2`}>
+                    <span className={`before:content-['•'] ml-2`}>
                       &nbsp;&nbsp;{highlight}
                     </span>
                   </div>
@@ -325,18 +315,81 @@ function OnlineCourseCard(props) {
                 <span className="text-lg text-muted-foreground line-through">
                   ₹{props.originalPrice}
                 </span>
-
-                {/* {course.originalPrice && (
-                      <div className="bg-green-100 text-green-800">
-                        Save ₹{(course.originalPrice - props.price).toFixed(2)}
-                      </div>
-                    )} */}
               </div>
             </div>
           </div>
         </div>
-        {/* ))} */}
+      </div> */}
+
+      {/* <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 lg:gap-8"> */}
+      {/* {[...Array(10)].map((_, i) => ( */}
+      <div className="rounded-2xl bg-white shadow-2xl m-10">
+        <div className="rounded-xl !m-2 translate-y-2 flex align-bottom overflow-hidden">
+          <img
+            src={
+              props.image ? `http://localhost:5000${props.image}` : "/images/cake-2.jpg"
+            }
+            alt="course-img"
+            onError={(e) => {
+              e.target.onError = null;
+              e.target.src = "/images/cake-2.jpg";
+            }}
+            className="rounded-xl hover:scale-104 transition-all duration-200"
+          />
+        </div>
+        <div className="p-5 rounded-bl-[2.7rem] rounded-br-[2.7rem] w-full">
+          <h2 className="font-semibold text-2xl ">{props.title}</h2>
+          <p className="">{props.description}</p>
+          <div className="space-y-2 my-5">
+            <div className="flex items-center ">
+              <div className="w-2 h-2 rounded-full bg-sky-500 mr-3"></div>
+              <span className="">
+                {props.highlights[0] ? props.highlights[0] : "Course highlight"}
+              </span>
+            </div>
+            <div className="flex items-center ">
+              <div className="w-2 h-2 rounded-full bg-sky-500 mr-3"></div>
+              <span className="">
+                {props.highlights[1] ? props.highlights[1] : "Course highlight"}
+              </span>
+            </div>
+            <div className="flex items-center ">
+              <div className="w-2 h-2 rounded-full bg-sky-500 mr-3"></div>
+              <span className="">
+                {props.highlights[2] ? props.highlights[2] : "Course highlight"}
+              </span>
+            </div>
+            <div className="flex items-center ">
+              <div className="w-2 h-2 rounded-full bg-sky-500 mr-3"></div>
+              <span className="">
+                {props.highlights[3] ? props.highlights[3] : "Course highlight"}
+              </span>
+            </div>
+            <div className="flex items-center ">
+              <div className="w-2 h-2 rounded-full bg-sky-500 mr-3"></div>
+              <span className="">
+                {props.highlights[4] ? props.highlights[4] : "Course highlight"}
+              </span>
+            </div>
+          </div>
+
+          <Link
+            className="group mt-3 w-full relative inline-flex items-center overflow-hidden rounded-xl bg-sky-500 px-8 py-4 text-white"
+            href="#"
+          >
+            <span className="absolute -start-full transition-all group-hover:start-4">
+              <GraduationCap size={25} />
+            </span>
+
+            <span className="text-lg w-full text-center font-medium transition-all group-hover:ms-4">
+              <span>Buy now</span>&nbsp;&nbsp;
+              <span>₹{props.price}</span>&nbsp;&nbsp;
+              <span className="line-through">₹{props.originalPrice}</span>
+            </span>
+          </Link>
+        </div>
       </div>
+      {/* ))} */}
       {/* </div> */}
     </div>
   );

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useState } from "react";
 import { Button } from "./ui/button.jsx";
 import { Input } from "./ui/input.jsx";
@@ -6,11 +7,7 @@ import axios from "axios";
 import { Eye, EyeOff, Mail, Lock, User, X, Phone } from "lucide-react";
 import { GoogleLogin } from "@react-oauth/google";
 import toast from "react-hot-toast";
-import {
-  auth,
-  RecaptchaVerifier,
-  signInWithPhoneNumber,
-} from "../fireBaseConfig.js";
+import { auth, RecaptchaVerifier, signInWithPhoneNumber } from "../fireBaseConfig.js";
 
 function Register({ isOpen, onClose, onOpenLogin }) {
   // for otp
@@ -173,22 +170,12 @@ function Register({ isOpen, onClose, onOpenLogin }) {
                 <Card className="shadow-card fade-in-delay-1">
                   <CardContent className="p-8">
                     <div className="text-center mb-3">
-                      <h1 className="text-2xl text-white mb-2">
-                        Create Account
-                      </h1>
-                      <p className="text-white">
-                        Enroll your Baked Fantasy account
-                      </p>
+                      <h1 className="text-2xl text-white mb-2">Create Account</h1>
+                      <p className="text-white">Enroll your Baked Fantasy account</p>
                     </div>
-                    <form
-                      className="space-y-6"
-                      onSubmit={(e) => e.preventDefault()}
-                    >
+                    <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
                       <div className="space-ys-2">
-                        <label
-                          htmlFor="name"
-                          className="text-white font-medium"
-                        >
+                        <label htmlFor="name" className="text-white font-medium">
                           Full Name
                         </label>
                         <div className="relative">
@@ -206,10 +193,7 @@ function Register({ isOpen, onClose, onOpenLogin }) {
                         </div>
                       </div>
                       <div className="space-ys-2">
-                        <label
-                          htmlFor="email"
-                          className="text-white font-medium"
-                        >
+                        <label htmlFor="email" className="text-white font-medium">
                           Email Address
                         </label>
                         <div className="relative">
@@ -227,10 +211,7 @@ function Register({ isOpen, onClose, onOpenLogin }) {
                         </div>
                       </div>
                       <div className="space-y-2">
-                        <label
-                          htmlFor="password"
-                          className="text-white font-medium"
-                        >
+                        <label htmlFor="password" className="text-white font-medium">
                           Password
                         </label>
                         <div className="relative">
@@ -260,10 +241,7 @@ function Register({ isOpen, onClose, onOpenLogin }) {
                         </div>
                       </div>
                       <div className="space-y-2">
-                        <label
-                          htmlFor="con-pass"
-                          className="text-white font-medium"
-                        >
+                        <label htmlFor="con-pass" className="text-white font-medium">
                           Mobile Number
                         </label>
                         <div className="relative">
@@ -288,10 +266,7 @@ function Register({ isOpen, onClose, onOpenLogin }) {
                       </div>
                       {showVerify && (
                         <div className="space-y-2">
-                          <label
-                            htmlFor="otp"
-                            className="text-white font-medium"
-                          >
+                          <label htmlFor="otp" className="text-white font-medium">
                             Enter OTP
                           </label>
                           <div className="relative">
