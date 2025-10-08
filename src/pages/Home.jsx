@@ -868,8 +868,8 @@ function Home() {
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-2 lg:gap-8 px-8">
           <div className="textSide flex space-y-15 ">
             <div className="max-w-prose flex flex-col space-y-5 ">
-              <h1 className="lg:text-8xl md:text-5xl text-2xl font-bold text-white sm:text-5xl">
-                <strong className=" text-white  mb-5 font-extrabold">
+              <h1 className="lg:text-6xl text-white md:text-5xl text-2xl font-bold sm:text-5xl">
+                <strong className="text-pink-600  mb-5 font-extrabold">
                   Bulk Orders
                 </strong>
                 <br />
