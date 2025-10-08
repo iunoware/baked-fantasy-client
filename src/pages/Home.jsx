@@ -24,7 +24,7 @@ function Home() {
   }, []);
 
   return (
-    <div className="bg-[#f1faee]">
+    <div className="bg-[#f1faee] ">
       {/* hero section */}
       <section className="overflow-hidden bg-cover bg-no-repeat h-screen grid grid-cols-1 md:grid-cols-2 bg-[url('/images/bfHero.png')]">
         {/* left column */}

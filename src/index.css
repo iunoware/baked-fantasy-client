@@ -3,6 +3,7 @@
 
 body {
   font-family: "Quicksand";
+  overflow-y: hidden;
 }
 
 .redText {
