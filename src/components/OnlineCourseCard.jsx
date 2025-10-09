@@ -337,7 +337,7 @@ function OnlineCourseCard(props) {
             className="rounded-xl hover:scale-104 transition-all duration-200"
           />
         </div>
-        <div className="p-5 rounded-bl-[2.7rem] rounded-br-[2.7rem] w-full">
+        <div className="p-5 w-full">
           <h2 className="font-semibold text-2xl ">{props.title}</h2>
           <p className="">{props.description}</p>
           <div className="space-y-2 my-5">
