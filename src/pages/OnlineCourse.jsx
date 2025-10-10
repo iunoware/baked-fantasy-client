@@ -5,6 +5,12 @@ import { Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import Heading from "@/components/Heading";
 
+// let coursePrices = [];
+
+// export function getCoursePrices() {
+//   return coursePrices;
+// }
+
 function OnlineCourse() {
   let [courses, setCourses] = useState([]);
 
@@ -18,6 +24,7 @@ function OnlineCourse() {
       try {
         const response = await axios.get("http://localhost:5000/course");
         setCourses(response.data.courses);
+        // coursePrices = response.data.courses.map((c) => c.price);
       } catch (error) {
         console.error(error.message);
       }
@@ -31,7 +38,7 @@ function OnlineCourse() {
         to="/courses"
         className="flex pt-10 pl-10 items-center text-sm text-gray-600 hover:text-sky-500 mb-3"
       >
-        <ArrowLeft className="h-4 w-4 mr-2" /> Back to Online Courses
+        <ArrowLeft className="h-4 w-4 mr-2" /> Back to Courses
       </Link>
 
       {/* hero section */}

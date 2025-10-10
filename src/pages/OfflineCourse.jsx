@@ -1,10 +1,17 @@
-import { GraduationCap } from "lucide-react";
+import { GraduationCap, ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
 import Heading from "../components/Heading.jsx";
 
 function OfflineCourse() {
   return (
-    <div className="bg pt-40">
+    <div className="bg pt-20">
+      <Link
+        to="/courses"
+        className="flex pt-10 pl-10 items-center text-sm text-gray-600 hover:text-sky-500 mb-3"
+      >
+        <ArrowLeft className="h-4 w-4 mr-2" /> Back to Courses
+      </Link>
+
       <div className="pb-10">
         <Heading title="Learn the Art of Baking" />
         <p className="text-center text-xl mt-4 px-5">
@@ -16,7 +23,7 @@ function OfflineCourse() {
       {/* bg-[url('/images/cake-2.jpg')] bg-cover bg-center */}
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 lg:gap-8">
         {[...Array(10)].map((_, i) => (
-          <div key={i} className="rounded-2xl bg-white shadow-2xl m-10">
+          <div key={i} className="rounded-2xl bg-white shadow-xl m-10">
             <div className="rounded-xl m-2 flex align-bottom overflow-hidden">
               <img
                 src="/images/cake-2.jpg"

@@ -323,7 +323,7 @@ function OnlineCourseCard(props) {
 
       {/* <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 lg:gap-8"> */}
       {/* {[...Array(10)].map((_, i) => ( */}
-      <div className="rounded-2xl bg-white shadow-2xl m-10">
+      <div className="rounded-2xl bg-white shadow-xl m-10">
         <div className="rounded-xl !m-2 translate-y-2 flex align-bottom overflow-hidden">
           <img
             src={
@@ -374,8 +374,9 @@ function OnlineCourseCard(props) {
           </div>
 
           <Link
+            to={`/courses/course-payment-page/${props.id}`}
+            state={{ price: props.price, courseId: props.id }}
             className="group mt-3 w-full relative inline-flex items-center overflow-hidden rounded-xl bg-sky-500 px-8 py-4 text-white"
-            href="#"
           >
             <span className="absolute -start-full transition-all group-hover:start-4">
               <GraduationCap size={25} />
@@ -385,6 +386,7 @@ function OnlineCourseCard(props) {
               <span>Buy now</span>&nbsp;&nbsp;
               <span>₹{props.price}</span>&nbsp;&nbsp;
               <span className="line-through">₹{props.originalPrice}</span>
+              {/* {export let price = props.price} */}
             </span>
           </Link>
         </div>
@@ -394,5 +396,4 @@ function OnlineCourseCard(props) {
     </div>
   );
 }
-
 export default OnlineCourseCard;

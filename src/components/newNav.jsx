@@ -60,13 +60,13 @@ export default function NewNav() {
                       className={({ isActive }) =>
                         `text-lg relative group rounded-lg p-3 transition ${
                           isActive
-                            ? "bg-sky-500 font-semibold text-white"
+                            ? "bg-pink-500 font-semibold text-white"
                             : "hover:text-black text-gray-800 "
                         } `
                       }
                     >
                       Home
-                      <span className=" absolute left-1 bottom-0 h-[3px] rounded-xl w-0 bg-sky-500 transition-all duration-300 group-hover:w-[90%]"></span>
+                      <span className=" absolute left-1 bottom-0 h-[3px] rounded-xl w-0 bg-pink-500 transition-all duration-300 group-hover:w-[90%]"></span>
                     </NavLink>
                   </li>
 
@@ -77,13 +77,13 @@ export default function NewNav() {
                       className={({ isActive }) =>
                         `text-lg relative group rounded-lg p-3 transition ${
                           isActive
-                            ? "bg-sky-500 text-white font-semibold"
+                            ? "bg-pink-500 text-white font-semibold"
                             : "hover:text-black text-gray-800 "
                         } `
                       }
                     >
                       About
-                      <span className="absolute left-1 bottom-0 h-[3px] rounded-xl w-0 bg-sky-500 transition-all duration-300 group-hover:w-[90%]"></span>
+                      <span className="absolute left-1 bottom-0 h-[3px] rounded-xl w-0 bg-pink-500 transition-all duration-300 group-hover:w-[90%]"></span>
                       {/* <span className="absolute bottom-0 left-1/2 h-[2px] w-0 -translate-x-1/2 origin-center rounded-xl bg-sky-500 transition-all duration-300 group-hover:w-[90%]"></span> */}
                     </NavLink>
                   </li>
@@ -95,13 +95,13 @@ export default function NewNav() {
                       className={({ isActive }) =>
                         `text-lg relative group rounded-lg p-3 transition ${
                           isActive
-                            ? "bg-sky-500 text-white font-semibold"
+                            ? "bg-pink-500 text-white font-semibold"
                             : "hover:text-black text-gray-800 "
                         } `
                       }
                     >
                       Products
-                      <span className="absolute left-1 bottom-0 h-[3px] rounded-xl w-0 bg-sky-500 transition-all duration-300 group-hover:w-[90%]"></span>
+                      <span className="absolute left-1 bottom-0 h-[3px] rounded-xl w-0 bg-pink-500 transition-all duration-300 group-hover:w-[90%]"></span>
                     </NavLink>
                   </li>
 
@@ -118,7 +118,7 @@ export default function NewNav() {
                           className={({ isActive }) =>
                             `flex items-center gap-2 text-lg relative group rounded-lg p-3 transition focus:relative ${
                               isActive
-                                ? "bg-sky-500 text-white font-semibold"
+                                ? "bg-pink-500 text-white font-semibold"
                                 : "hover:text-black text-gray-800 "
                             } `
                           }
@@ -134,7 +134,7 @@ export default function NewNav() {
                         >
                           <Link
                             to="/courses"
-                            className="block text-center px-3 py-2 text-lg font-medium text-gray-700 transition-colors hover:bg-sky-50 hover:text-gray-900"
+                            className="block text-center px-3 py-2 text-lg font-medium text-gray-700 transition-colors hover:bg-pink-50 hover:text-gray-900"
                             role="menuitem"
                           >
                             <div className="flex items-center gap-2">
@@ -145,7 +145,7 @@ export default function NewNav() {
 
                           <Link
                             to="/purchasedCourses"
-                            className="block text-center px-3 py-2 text-lg font-medium text-gray-700 transition-colors hover:bg-sky-50 hover:text-gray-900"
+                            className="block text-center px-3 py-2 text-lg font-medium text-gray-700 transition-colors hover:bg-pink-50 hover:text-gray-900"
                             role="menuitem"
                           >
                             <div className="flex items-center gap-2">
@@ -165,13 +165,13 @@ export default function NewNav() {
                       className={({ isActive }) =>
                         `text-lg relative group rounded-lg p-3 transition ${
                           isActive
-                            ? "bg-sky-500 text-white font-semibold"
+                            ? "bg-pink-500 text-white font-semibold"
                             : "hover:text-black text-gray-800 "
                         } `
                       }
                     >
                       Contact
-                      <span className="absolute left-1 bottom-0 h-[3px] rounded-xl w-0 bg-sky-500 transition-all duration-300 group-hover:w-[90%]"></span>
+                      <span className="absolute left-1 bottom-0 h-[3px] rounded-xl w-0 bg-pink-500 transition-all duration-300 group-hover:w-[90%]"></span>
                     </NavLink>
                   </li>
                 </ul>
