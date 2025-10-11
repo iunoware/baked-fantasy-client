@@ -15,6 +15,7 @@ import SpecificCategory from "./pages/products/specificCat.jsx";
 import Login from "./components/Login.jsx";
 import OnlineCourseDetails from "./pages/OnlineCourseDetails.jsx";
 import Cart from "./pages/Cart.jsx";
+import CoursePaymentPage from "./pages/CoursePaymentPage.jsx";
 
 function App() {
   return (
@@ -30,15 +31,9 @@ function App() {
           {/* for category page */}
           <Route path="/categories" element={<Categories />} />
           {/* for specific category */}
-          <Route
-            path="/products/:categoryName"
-            element={<SpecificCategory />}
-          />
+          <Route path="/products/:categoryName" element={<SpecificCategory />} />
           {/* for products details */}
-          <Route
-            path="/products/:categoryName/:productId"
-            element={<ProductDetail />}
-          />
+          <Route path="/products/:categoryName/:productId" element={<ProductDetail />} />
           {/* <Route path="/products/cake/cake-1" element={<ProductDetail />} /> */}
 
           {/* for courses */}
@@ -53,6 +48,9 @@ function App() {
           <Route path="/courses/offline-course" element={<OfflineCourse />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/cart" element={<Cart />} />
+
+          {/* payment page for courses */}
+          <Route path="/courses/course-payment-page/:courseId" element={<CoursePaymentPage />} />
         </Routes>
         <Footer />
       </Router>

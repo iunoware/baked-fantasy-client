@@ -10,13 +10,14 @@ import { Truck } from "lucide-react";
 
 const images = [
   {
-    img: "/images/cake-bg-3.jpg",
+    img: "/images/cake-bg-5(3).jpg",
     heading: "Crafting Sweet Memories",
     content:
       "We create beautifully customized cakes that turn every celebration into a memorable experience.",
   },
   {
-    img: "/images/cake-bg-5.jpg",
+    // img: "/images/cake-bg-5(3).jpg",
+    img: "/images/cake-bg-3.jpg",
     heading: "Personalized Designs for Every Occasion",
     content:
       "From birthdays to weddings, each cake is designed to match your vision and style.",
@@ -63,8 +64,7 @@ function About() {
     {
       year: "2022",
       title: "Signature Cakes Launched",
-      description:
-        "Introduced our signature customized cakes and special dessert menu.",
+      description: "Introduced our signature customized cakes and special dessert menu.",
       icon: <Cake color="#ffffff" size={27} />,
     },
     {
@@ -127,12 +127,12 @@ function About() {
                   alt={`Slide ${index}`}
                   className="w-full h-[700px] object-cover flex-shrink-0"
                 />
-                <div className="absolute inset-0 w-full h-full bg-pink-500 opacity-30"></div>
+                <div className="absolute inset-0 w-full h-full opacity-30"></div>
                 <div className="absolute inset-0 w-full z-20 pr-20 flex justify-center items-end flex-col">
-                  <h1 className=" max-w-[750px] md:text-5xl p-2 sm:text-4xl text-3xl text-end text-sky-500  mb-5 font-semibold">
+                  <h1 className=" max-w-[750px] md:text-5xl p-2 sm:text-4xl text-3xl text-end text-pink-500 mb-5 font-bold">
                     {image.heading}
                   </h1>
-                  <p className="lg:text-xl max-w-[750px] md:text-lg p-2 sm:text-md text-end text-white">
+                  <p className="lg:text-xl max-w-[750px] md:text-lg p-2 sm:text-md text-end text-gray-800">
                     {image.content}
                   </p>
                 </div>
@@ -146,49 +146,30 @@ function About() {
             <button
               key={index}
               onClick={() => goToSlide(index)}
-              className={`w-3 h-3 rounded-full ${
-                currentIndex === index ? "bg-white" : "bg-gray-400"
+              className={`w-3 h-3 shadow-[inset_.5px_.5px_2px_#404040] rounded-full ${
+                currentIndex === index ? "bg-pink-400" : "bg-pink-300"
               }`}
             />
           ))}
         </div>
 
-        <button
+        {/* <button
           onClick={() =>
-            setCurrentIndex(
-              (prev) => (prev - 1 + images.length) % images.length
-            )
+            setCurrentIndex((prev) => (prev - 1 + images.length) % images.length)
           }
-          className="absolute hover:cursor-pointer z-50 left-2 top-1/2 -translate-y-1/2 bg-sky-300 text-white text-4xl p-2 px-6 rounded-full"
+          className="absolute hover:cursor-pointer z-50 left-2 top-1/2 -translate-y-1/2 text-white text-7xl p-2 px-6 rounded-full"
         >
           ‹
         </button>
         <button
           onClick={() => setCurrentIndex((prev) => (prev + 1) % images.length)}
-          className="absolute hover:cursor-pointer z-50 right-2 top-1/2 -translate-y-1/2 bg-sky-300 text-white text-4xl p-2 px-6 rounded-full"
+          className="absolute hover:cursor-pointer z-50 right-2 top-1/2 -translate-y-1/2 text-white text-7xl p-2 px-6 rounded-full"
         >
           ›
-        </button>
+        </button> */}
       </div>
 
       {/* hero section */}
-      {/* <div className="h-[700px] w-full relative flex flex-col justify-center items-center">
-        <img
-          src="/images/bakery-bg-2.png"
-          alt=""
-          className="h-full w-full object-cover brightness-50 z-[-3]"
-        />
-        <div className="absolute flex flex-col justify-center items-center">
-          <h1 className="text-5xl md:text-6xl lg:text-7xl z-[-1] font-semibold text-center text-[#cd8158]">
-            About Our Bakery - Freshly Baked Happiness Every Day
-          </h1>
-          <p className="text-lg md:text-lg lg:text-xl text-white mt-5 mx-5 z-[-1] max-w-[750px] text-center">
-            We bake fresh breads, cakes, and pastries daily using quality ingredients and
-            timeless recipes—bringing sweetness and warmth to our community.
-          </p>
-        </div>
-      </div> */}
-
       {/* time line section */}
       <section className="pt-16 bg-pink-100 bg-[url('/images/swirl.png')]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -197,9 +178,9 @@ function About() {
               Our Journey
             </h2>
             <p className="text-lg text-black/70 max-w-3xl mx-auto">
-              From a passionate home baker to a skilled academy instructor and a
-              thriving large-scale home bakery, our journey is driven by love
-              for the craft and dedication to sharing it with others.
+              From a passionate home baker to a skilled academy instructor and a thriving
+              large-scale home bakery, our journey is driven by love for the craft and
+              dedication to sharing it with others.
             </p>
           </div>
 
@@ -266,15 +247,13 @@ function About() {
           <div className="p-8 md:p-12 lg:px-16 lg:py-24">
             <div className="mx-auto max-w-xl text-center ltr:sm:text-left rtl:sm:text-right">
               <h2 className="!text-4xl font-semibold mb-5 text-gray-900 pt-60 md:text-3xl">
-                Turn Your Passion for{" "}
-                <span className="text-sky-500">Baking</span> Into{" "}
-                <span className="text-sky-500">Perfection</span>
+                Turn Your Passion for <span className="text-pink-600">Baking</span> Into{" "}
+                <span className="text-pink-600">Perfection</span>
               </h2>
 
               <p className="hidden text-xl mb-5 text-gray-800 md:mt-4 md:block">
-                Join our academy and transform your home baking skills into
-                professional expertise - from homemade treats to large-scale
-                success!
+                Join our academy and transform your home baking skills into professional
+                expertise - from homemade treats to large-scale success!
               </p>
 
               <div className="mt-4 flex md:mt-8">
@@ -347,21 +326,17 @@ function About() {
                 Recognized Excellence
               </h3>
               <p className="text-lg text-black/80 leading-relaxed">
-                Our commitment to quality craftsmanship and exceptional customer
-                service has been recognized by industry leaders and our
-                community. These awards reflect our dedication to traditional
-                baking methods and innovative approaches to creating memorable
-                experiences.
+                Our commitment to quality craftsmanship and exceptional customer service
+                has been recognized by industry leaders and our community. These awards
+                reflect our dedication to traditional baking methods and innovative
+                approaches to creating memorable experiences.
               </p>
 
               <div className="space-y-4 mt-7 transition-all duration-200">
                 <div className="bg-white shadow-lg rounded-lg p-4 flex items-start gap-4">
                   {/* Award icon */}
                   <div className="w-8 h-8 text-blue-400 flex items-center justify-center flex-shrink-0 mt-1">
-                    <svg
-                      className="w-full h-full fill-current"
-                      viewBox="0 0 24 24"
-                    >
+                    <svg className="w-full h-full fill-current" viewBox="0 0 24 24">
                       <path d="M12 2L15.09 8.26L22 9L17 14L18.18 21L12 17.77L5.82 21L7 14L2 9L8.91 8.26L12 2Z" />
                     </svg>
                   </div>
@@ -385,8 +360,8 @@ function About() {
             Sweet words from our customers
           </h2>
           <p className="text-xl text-gray-800/80 text-center">
-            Discover what makes our bakery special through the heartfelt stories
-            of our beloved customers
+            Discover what makes our bakery special through the heartfelt stories of our
+            beloved customers
           </p>
         </div>
 
