@@ -16,6 +16,7 @@ import Login from "./components/Login.jsx";
 import OnlineCourseDetails from "./pages/OnlineCourseDetails.jsx";
 import Cart from "./pages/Cart.jsx";
 import CoursePaymentPage from "./pages/CoursePaymentPage.jsx";
+import MyLearning from "./pages/MyLearning.jsx";
 
 function App() {
   return (
@@ -48,9 +49,14 @@ function App() {
           <Route path="/courses/offline-course" element={<OfflineCourse />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/cart" element={<Cart />} />
+          {/* my learning courses */}
+          <Route path="/courses/my-learning/" element={<MyLearning />} />
 
           {/* payment page for courses */}
-          <Route path="/courses/course-payment-page/:courseId" element={<CoursePaymentPage />} />
+          <Route
+            path="/courses/course-payment-page/:courseId"
+            element={<CoursePaymentPage />}
+          />
         </Routes>
         <Footer />
       </Router>

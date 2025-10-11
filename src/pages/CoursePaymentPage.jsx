@@ -1,11 +1,4 @@
-import {
-  CreditCard,
-  Shield,
-  Smartphone,
-  Wallet,
-  Banknote,
-  Proportions,
-} from "lucide-react";
+import { CreditCard, Shield, Smartphone, Banknote, Proportions } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { cn } from "@/lib/utils";
@@ -18,8 +11,20 @@ function CoursePaymentPage() {
 
   const [paymentMethod, setPaymentMethod] = useState();
 
+  // tax calculation
+  let newPrice = Number(price.replace(/,/g, ""));
+  // console.log("price type: ", typeof price);
+  console.log("new price type: ", typeof newPrice);
+
+  let tax = (newPrice * 18) / 100;
+  console.log("tax: ", typeof tax);
+  console.log("tax: ", tax);
+
+  let totalPrice = tax + newPrice;
+  console.log("total Price: ", totalPrice);
+
   return (
-    <div className="bg pt-20">
+    <div className="bg pt-30 sm:pt-30 ">
       <div className="container mx-auto px-4 py-8 max-w-7xl">
         <div className="">
           <div className="flex items-center gap-3 mb-2">
@@ -46,7 +51,7 @@ function CoursePaymentPage() {
                 <CreditCard size={22} color="#0ea5e9" className="ml-4" />
                 <div className="ml-3">
                   <h5 className="font-semibold">Credit/Debit Card</h5>
-                  <p className="text-xs text-gray-700">**** **** **** 1234</p>
+                  {/* <p className="text-xs text-gray-700">**** **** **** 1234</p> */}
                 </div>
               </div>
 
@@ -78,6 +83,74 @@ function CoursePaymentPage() {
                 </div>
               </div>
             </div>
+
+            {/* card details */}
+            <div className={`px-6 mt-20 ${paymentMethod === "card" ? "show" : "hidden"}`}>
+              <h4 className="font-semibold text-lg mb-4">Card Details</h4>
+              <div>
+                <label htmlFor="cardNumber">Card number</label>
+                <input
+                  type="text"
+                  id="cardNumber"
+                  className="border border-black w-full p-1 pl-3 mt-2 rounded-lg focus:outline-2 focus:outline-black/70"
+                  placeholder="1234 5678 9012 3456"
+                />
+
+                <div className="flex w-full justify-between items-center my-5">
+                  <div className="w-full md:mr-5">
+                    <label htmlFor="">Expiry Date</label>
+                    <input
+                      type="text"
+                      placeholder="MM/YY"
+                      className="border border-black w-full p-1 pl-3 mt-2 rounded-lg focus:outline-2 focus:outline-black/70"
+                    />
+                  </div>
+                  <div className="w-full">
+                    <label htmlFor="">CVV</label>
+                    <input
+                      type="text"
+                      placeholder="123"
+                      className="border border-black w-full p-1 pl-3 mt-2 rounded-lg focus:outline-2 focus:outline-black/70"
+                    />
+                  </div>
+                </div>
+
+                <label htmlFor="cardNumber">Card holder name</label>
+                <input
+                  type="text"
+                  id="cardNumber"
+                  className="border border-black w-full p-1 pl-3 mt-2 rounded-lg focus:outline-2 focus:outline-black/70"
+                  placeholder="John Doe"
+                />
+              </div>
+            </div>
+
+            {/* upi details */}
+            <div className={`px-6 mt-20 ${paymentMethod === "upi" ? "show" : "hidden"}`}>
+              <h4 className="font-semibold text-lg mb-4">UPI Details</h4>
+              <div>
+                <label htmlFor="upiId">UPI ID</label>
+                <input
+                  type="text"
+                  id="upiId"
+                  className="border border-black w-full p-1 pl-3 mt-2 rounded-lg focus:outline-2 focus:outline-black/70"
+                  placeholder="you UPI ID"
+                />
+              </div>
+            </div>
+
+            {/* secure payment tag */}
+            <div className="px-6 mt-10 py-5 flex gap-3 justify-start items-center rounded-xl">
+              <div>
+                <Shield color="#66BB6A" size={18} />
+              </div>
+              <div>
+                <h4>Secure payment method</h4>
+                <p className="text-sm text-green-600">
+                  Your payment information is encrypted and secure
+                </p>
+              </div>
+            </div>
           </div>
 
           <div className="lg:col-span-1 space-y-6">
@@ -91,13 +164,13 @@ function CoursePaymentPage() {
 
                 <div className="flex justify-between">
                   <p>Subtotal</p>
-                  <p>{price}</p>
+                  <p>₹{price}</p>
                   {/* <p>{getCoursePrices()}</p> */}
                 </div>
 
                 <div className="flex justify-between">
                   <p>Taxes & Fees</p>
-                  <p>₹195.12</p>
+                  <p>₹{tax}</p>
                 </div>
 
                 <div className="flex justify-between">
@@ -107,14 +180,14 @@ function CoursePaymentPage() {
 
                 <div className="flex justify-between">
                   <h5 className="font-semibold text-lg mb-4">Total Amount</h5>
-                  <p className="font-semibold text-lg text-sky-500">₹1,279.12</p>
+                  <p className="font-semibold text-lg text-sky-500">₹{totalPrice}</p>
                 </div>
               </div>
             </div>
 
             <div className="px-10 w-full text-center space-y-5">
               <button className="bg-sky-400 hover:bg-sky-500 transition-all duration-200 focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 text-white px-5 py-3 w-full rounded-lg hover:cursor-pointer">
-                Place Order <span className="font-bold text-lg">₹1,279.12</span>
+                Place Order <span className="font-bold text-lg">₹{totalPrice}</span>
               </button>
               <Link to="/courses/online-course" className="">
                 <button className="border border-sky-500 hover:cursor-pointer text-sky-500 px-5 py-3 w-full rounded-lg">
