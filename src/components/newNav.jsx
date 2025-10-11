@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { Link } from "react-router-dom";
@@ -44,7 +45,7 @@ export default function NewNav() {
             <div className="md:flex md:items-center md:gap-12">
               <Link
                 to="/"
-                className="text-pink-500 inline-block [@media(max-width:440px)]:text-xs [@media(max-width:1120px)]:text-md [@media(max-width:1220px)]:text-xl text-2xl font-bold brand-name"
+                className="text-pink-500 inline-block [@media(max-width:440px)]:text-xs [@media(max-width:1180px)]:text-md [@media(max-width:1220px)]:text-xl text-2xl font-bold brand-name"
               >
                 The Backed Fantasy
               </Link>
@@ -144,7 +145,7 @@ export default function NewNav() {
                           </Link>
 
                           <Link
-                            to="/purchasedCourses"
+                            to="/courses/my-learning/"
                             className="block text-center px-3 py-2 text-lg font-medium text-gray-700 transition-colors hover:bg-pink-50 hover:text-gray-900"
                             role="menuitem"
                           >
