@@ -7,7 +7,7 @@ function OfflineCourse() {
     <div className="bg pt-20">
       <Link
         to="/courses"
-        className="flex pt-10 pl-10 items-center text-sm text-gray-600 hover:text-sky-500 mb-3"
+        className="flex pt-10 pl-10 w-fit items-center text-sm text-gray-600 hover:text-sky-500 mb-3"
       >
         <ArrowLeft className="h-4 w-4 mr-2" /> Back to Courses
       </Link>

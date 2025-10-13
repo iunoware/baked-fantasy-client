@@ -23,7 +23,6 @@ function OnlineCourseCard(props) {
             }}
             className="rounded-xl hover:scale-104 transition-all duration-200"
           />
-          
         </div>
         <div className="p-5 w-full">
           <h2 className="font-semibold text-2xl ">{props.title}</h2>
@@ -62,7 +61,7 @@ function OnlineCourseCard(props) {
           </div>
 
           <Link
-            to={`/courses/course-payment-page/${props.endPoint}`}
+            to={`${props.path}${props.endPoint}`}
             state={{ price: props.price, courseId: props.endPoint }}
             className="group mt-3 w-full relative inline-flex items-center overflow-hidden rounded-xl bg-sky-500 px-8 py-4 text-white"
           >
@@ -71,9 +70,12 @@ function OnlineCourseCard(props) {
             </span>
 
             <span className="text-lg w-full text-center font-medium transition-all group-hover:ms-4">
-              <span>Buy now</span>&nbsp;&nbsp;
-              <span>₹{props.price}</span>&nbsp;&nbsp;
-              <span className="line-through">₹{props.originalPrice}</span>
+              <span>{props.price ? `Buy now` : ""}</span>&nbsp;&nbsp;
+              <span>{props.price ? `₹${props.price}` : "Continue Learning"}</span>
+              &nbsp;&nbsp;
+              <span className="line-through">
+                {props.originalPrice ? `₹${props.originalPrice}` : ""}
+              </span>
               {/* {export let price = props.price} */}
             </span>
           </Link>

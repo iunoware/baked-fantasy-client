@@ -43,11 +43,8 @@ function App() {
           <Route path="/courses" element={<Courses />} />
           {/* for all online courses */}
           <Route path="/courses/online-course" element={<OnlineCourse />} />
-          {/* for online course details */}
-          <Route
-            path="/course/online-course/:courseId"
-            element={<OnlineCourseDetails />}
-          />
+          {/* for online course video */}
+          <Route path="/course/my-learning/:courseId" element={<OnlineCourseDetails />} />
           <Route path="/courses/offline-course" element={<OfflineCourse />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/cart" element={<Cart />} />

@@ -3,7 +3,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
-import Heading from "@/components/Heading";
+import Heading from "../components/Heading.jsx";
 
 // let coursePrices = [];
 
@@ -33,10 +33,10 @@ function OnlineCourse() {
   }, []);
 
   return (
-    <div className="bg-[#f1faee] pt-20">
+    <div className="bg pt-20">
       <Link
         to="/courses"
-        className="flex pt-10 pl-10 items-center text-sm text-gray-600 hover:text-sky-500 mb-3"
+        className="flex pt-10 pl-10 w-fit items-center text-sm text-gray-600 hover:text-sky-500 mb-3"
       >
         <ArrowLeft className="h-4 w-4 mr-2" /> Back to Courses
       </Link>
@@ -73,6 +73,7 @@ function OnlineCourse() {
               <div key={index}>
                 <div>
                   <OnlineCourseCard
+                    path={`/courses/course-payment-page/`}
                     endPoint={course._id}
                     image={course.ImageUrl}
                     rating={course.rating}
