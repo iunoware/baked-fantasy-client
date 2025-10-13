@@ -1,10 +1,14 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import OnlineCourseCard from "../components/OnlineCourseCard.jsx";
+import { Link } from "react-router-dom";
+import { ArrowLeft } from "lucide-react";
+import Heading from "../components/Heading.jsx";
 
 function MyLearning() {
   // use the localstorage's getItem  and setItem
   const token =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGY4NDIxZTU3MTFmOTYyYzMyZTQyMiIsImlhdCI6MTc2MDE3OTQ4NCwiZXhwIjoxNzYwMjY1ODg0fQ.RUVBaRUq_lF8aB3TyuQptdFKLG-_yIIpNYblEO-faVI";
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGY4NDIxZTU3MTFmOTYyYzMyZTQyMiIsImlhdCI6MTc2MDM1OTYwMSwiZXhwIjoxNzYwNDQ2MDAxfQ.a1q_GItgXRXbFa9si8rDmxAvU2re9S-_n-ISPryN-PU";
 
   let [courses, setCourses] = useState([]);
 
@@ -15,38 +19,81 @@ function MyLearning() {
           Authorization: `Bearer ${token}`,
         },
       });
-      setCourses(response.data.courses);
-      console.log("response: ", response.data.courses);
+      // setCourses(response.data.courses);
+      // console.log("response: ", response.data.courses);
+      // console.log("purchased course: ", response.data.courses[0].courseId._id);
+      let coursesList = response.data.courses.map((c) => c.courseId);
+      setCourses(coursesList);
+      // console.log("courses list: ", coursesList);
     }
     fetchingPurchasedCourses();
-
-    async function fetchingCourseData() {
-      const courseData = await axios.get(`http://localhost:5000/course`);
-      console.log("total courses:", courseData.data.courses);
-
-      courseData.data.courses.foreach((c) => {
-        const isPurchased = courses.some((purchased) => purchased.courseId === c._id);
-        if (isPurchased) {
-          console.log("purchased: ", c._id || c.title);
-        } else {
-          console.log("not purchased", c._id || c.title);
-        }
-      });
-    }
-    fetchingCourseData();
-    // need to work on this...
   }, []);
 
   return (
-    <div className="bg">
-      <h2 className="pt-40 text-center text-3xl font-semibold">My Learning page</h2>
-      <ul className="px-30 mt-10">
-        {courses.map((c, i) => (
-          <li key={i}>
-            {i + 1}. Purchased course: <span className="font-semibold">{c.courseId}</span>
-          </li>
-        ))}
-      </ul>
+    <div className="bg pt-20">
+      <Link
+        to="/courses"
+        className="flex pt-10 pl-10 items-center w-fit text-sm text-gray-600 hover:text-sky-500 mb-3"
+      >
+        <ArrowLeft className="h-4 w-4 mr-2" /> Back to Courses
+      </Link>
+
+      <div className="pb-10">
+        <Heading title="Your Learning Journey" />
+        <p className="text-center text-xl mt-4 px-5">
+          All the courses you've purchased in one place. Track your progress, continue
+          learning, and access course materials anytime, anywhere.
+        </p>
+      </div>
+      {/* <ul className="px-30 pt-30 mt-10">
+        {courses.length === 0 ? (
+          <p>No courses found</p>
+        ) : (
+          courses.map((c, i) => (
+            <li key={c._id} className="text-xl">
+              {i + 1}. Purchased course: <span className="font-semibold">{c.title}</span>
+              <br />
+              <span className="pl-4">
+                Course Id: <span className="font-semibold">{c._id}</span>
+              </span>
+            </li>
+          ))
+        )}
+      </ul> */}
+
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 lg:gap-8">
+        {courses.length > 0 ? (
+          courses.map((course, index) => {
+            return (
+              <div key={index}>
+                <div>
+                  <OnlineCourseCard
+                    path={`/course/my-learning/`}
+                    endPoint={course._id}
+                    image={course.ImageUrl}
+                    rating={course.rating}
+                    reviews={course.reviews}
+                    students={course.students}
+                    description={course.description}
+                    title={course.title}
+                    subtitle={course.subtitle}
+                    duration={course.duration}
+                    totalHours={course.totalHours}
+                    totalVideos={course.totalVideos}
+                    highlights={course.highlights}
+                    // price={course.price}
+                    // originalPrice={course.originalPrice}
+                  />
+                </div>
+              </div>
+            );
+          })
+        ) : (
+          <div className="w-screen">
+            <p className="text-2xl text-center w-full">no courses found</p>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

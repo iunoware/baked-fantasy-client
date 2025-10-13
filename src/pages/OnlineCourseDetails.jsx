@@ -18,27 +18,22 @@ function OnlineCourseDetails() {
   let [totalSections, setTotalSections] = useState();
 
   useEffect(() => {
-    localStorage.setItem(
-      "token",
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGY4NDIxZTU3MTFmOTYyYzMyZTQyMiIsImlhdCI6MTc1OTQ3OTU4NywiZXhwIjoxNzU5NTY1OTg3fQ.nmVQcr3gO4U96q3GP5wZGgVs1r3TGriA-xaaAshrftU"
-    );
+    // const token =
+    //   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGY4NDIxZTU3MTFmOTYyYzMyZTQyMiIsImlhdCI6MTc1OTQ3OTU4NywiZXhwIjoxNzU5NTY1OTg3fQ.nmVQcr3gO4U96q3GP5wZGgVs1r3TGriA-xaaAshrftU";
 
     async function fetchVideos() {
       try {
-        // const response = await axios.get(
-        //   `http://localhost:5000/course/online-course/${courseId}`
-        // );
         const response = await axios.get(
-          `http://localhost:5000/course/online-course/${courseId}`,
-          {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("token")}`,
-            },
-          }
+          `http://localhost:5000/course/online-course/${courseId}`
+          // {
+          //   headers: {
+          //     Authorization: `Bearer ${token}`,
+          //   },
+          // }
         );
 
         setVideos(response.data.videos);
-        console.log("total video: ", response.data.videos);
+        // console.log("total video: ", response.data.videos);
         // console.log("1st video: ", response.data.videos[0]);
         setCurrentVideo(response.data.videos[0]); // to set the 1st video
 
@@ -49,7 +44,7 @@ function OnlineCourseDetails() {
           return groups;
         }, {});
         setVideosBySection(grouped);
-        console.log("grouped videos", grouped);
+        // console.log("grouped videos", grouped);
       } catch (error) {
         console.error(error.message);
       }
@@ -73,10 +68,10 @@ function OnlineCourseDetails() {
       {/* Top Banner */}
       <div className="py-10 px-8">
         <Link
-          to="/courses/online-course"
-          className="flex items-center text-sm text-gray-600 hover:text-sky-500 mb-3"
+          to="/courses/my-learning"
+          className="flex items-center w-fit text-sm text-gray-600 hover:text-sky-500 mb-3"
         >
-          <ArrowLeft className="h-4 w-4 mr-2" /> Back to Online Courses
+          <ArrowLeft className="h-4 w-4 mr-2" /> Back to My Learning
         </Link>
 
         <h1 className="text-4xl font-bold">
@@ -101,7 +96,7 @@ function OnlineCourseDetails() {
         <div className="col-span-1 md:col-span-3 items-start">
           {currentVideo ? (
             <video
-              className="rounded-2xl w-full shadow-lg h-[200px] sm:h-[300px] md:h-[500px]"
+              className="rounded-xl object-center object-cover w-full shadow-lg h-[200px] sm:h-[300px] md:h-[500px]"
               controls
               src={`http://localhost:5000${encodeURI(currentVideo.videoUrl)}`}
               // style={{ height: "500px", width: "100%" }}
