@@ -3,12 +3,12 @@ import { Link } from "react-router-dom";
 function Product(props) {
   return (
     <>
-      <article className="cat-card overflow-hidden rounded-lg shadow-sm hover:-translate-y-2 transition-all duration-200 ">
-        <div className="relative h-56">
+      <article className="cat-card overflow-hidden rounded-lg shadow-xl hover:-translate-y-2 transition-all duration-200">
+        <div className="relative p-2 h-56">
           <img
             alt="Cake"
             src={props.img} // first image only
-            className="h-full w-full object-cover cat-img"
+            className="h-full w-full rounded-2xl object-cover cat-img"
           />
 
           {/* <div className={`absolute inset-0 ${colors[props.color]}`}></div> */}
@@ -25,7 +25,7 @@ function Product(props) {
         </div>
 
         {/* Bottom white content */}
-        <div className="bg-white p-4 sm:p-6">
+        <div className="bg-gray-100 p-4 sm:p-6">
           <div className="text-black flex">
             <div className="flex items-center gap-2 w-10/12">
               <div>
