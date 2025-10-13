@@ -3,6 +3,7 @@ import { Toaster } from "react-hot-toast";
 import Home from "../src/pages/Home.jsx";
 import About from "../src/pages/About.jsx";
 import Categories from "./pages/ProductsCategory.jsx";
+import EssCategories from "./pages/EssCategory.jsx";
 import Courses from "../src/pages/Courses.jsx";
 import Contact from "../src/pages/Contact.jsx";
 import Navbar from "./components/NewNav.jsx";
@@ -31,6 +32,7 @@ function App() {
           <Route path="/about" element={<About />} />
           {/* for category page */}
           <Route path="/categories" element={<Categories />} />
+          <Route path="/ess-categories" element={<EssCategories />} />
           {/* for specific category */}
           <Route path="/products/:categoryName" element={<SpecificCategory />} />
           {/* for products details */}

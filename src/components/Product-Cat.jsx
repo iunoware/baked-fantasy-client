@@ -30,7 +30,7 @@ function Category(props) {
 
   return (
     <Link to={`/products/${props.title}`} className="card">
-      <article className="cat-card overflow-hidden rounded-lg shadow-sm hover:-translate-y-2 transition-all duration-200 ">
+      <article className="cat-card overflow-hidden rounded-lg shadow-lg hover:-translate-y-2 transition-all duration-200 ">
         <div className="relative h-56">
           <img
             alt={props.title}
