@@ -10,6 +10,7 @@ function OnlineCourseDetails() {
   let [videos, setVideos] = useState([]);
   let [videoDetails, setVideoDetails] = useState();
   let [videosBySection, setVideosBySection] = useState({});
+  let [videoSrc, setVideoSrc] = useState();
   const { courseId } = useParams();
 
   let [visible, setVisible] = useState(null);
@@ -17,10 +18,10 @@ function OnlineCourseDetails() {
   let [currentVideo, setCurrentVideo] = useState();
   let [totalSections, setTotalSections] = useState();
 
-  useEffect(() => {
-    // const token =
-    //   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGY4NDIxZTU3MTFmOTYyYzMyZTQyMiIsImlhdCI6MTc1OTQ3OTU4NywiZXhwIjoxNzU5NTY1OTg3fQ.nmVQcr3gO4U96q3GP5wZGgVs1r3TGriA-xaaAshrftU";
+  var token =
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGY4NDIxZTU3MTFmOTYyYzMyZTQyMiIsImlhdCI6MTc1OTQ3OTU4NywiZXhwIjoxNzU5NTY1OTg3fQ.nmVQcr3gO4U96q3GP5wZGgVs1r3TGriA-xaaAshrftU";
 
+  useEffect(() => {
     async function fetchVideos() {
       try {
         const response = await axios.get(
@@ -63,6 +64,36 @@ function OnlineCourseDetails() {
     fetchCourseName();
   }, [courseId]);
 
+  // new code
+  async function fetchVideoUrl(currentVideoUrl) {
+    try {
+      const response = await axios.get(
+        `http://localhost:5000${encodeURI(currentVideoUrl)}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          responseType: "blob",
+        }
+      );
+
+      const videoBlob = new Blob([response.data], { type: "video/mp4" });
+      const videoObjectUrl = URL.createObjectURL(videoBlob);
+      setVideoSrc(videoObjectUrl);
+    } catch (error) {
+      console.log("error: ", error.message);
+    }
+  }
+
+  useEffect(() => {
+    if (currentVideo?.videoUrl) {
+      console.log("fetching video: ", currentVideo.videoUrl);
+      fetchVideoUrl(currentVideo.videoUrl);
+    }
+  }, [currentVideo]);
+  // new code
+  // CURRENTLY NEED TO WORK ON THIS
+
   return (
     <div className="bg pt-20">
       {/* Top Banner */}
@@ -98,7 +129,8 @@ function OnlineCourseDetails() {
             <video
               className="rounded-xl object-center object-cover w-full shadow-lg h-[200px] sm:h-[300px] md:h-[500px]"
               controls
-              src={`http://localhost:5000${encodeURI(currentVideo.videoUrl)}`}
+              // src={`http://localhost:5000${encodeURI(currentVideo.videoUrl)}`}
+              src={videoSrc}
               // style={{ height: "500px", width: "100%" }}
               onContextMenu={(e) => e.preventDefault()}
               controlsList="nodownload"
