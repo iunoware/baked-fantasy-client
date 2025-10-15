@@ -62,7 +62,7 @@ function Home() {
         </div>
         {/* right column */}
         <div>
-          <img src="/images/BakedMamImage.png" alt="" />
+          <img src="/images/BakedMam-2.png" alt="Brand Ambassodor" />
         </div>
       </section>
 
@@ -299,6 +299,14 @@ function Home() {
           </Link>
         </div>
       </section>
+
+      {/* banner */}
+      <div className="flex mx-auto rounded-4xl bg-[url('/images/banner.jpg')] bg-center bg-cover w-[80vw] h-[60vh]">
+        <h1 className="flex mx-auto luckyGuy justify-center text-5xl/15 items-center text-pink-400 font-bold">
+          Still thinking about dessert? <br />
+          Your cravings won’t wait! 🤤
+        </h1>
+      </div>
 
       {/* why choose us section */}
       <section className="why-choose-us my-5 ">
