@@ -1,10 +1,17 @@
-import { GraduationCap } from "lucide-react";
+import { GraduationCap, ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
 import Heading from "../components/Heading.jsx";
 
 function OfflineCourse() {
   return (
-    <div className="bg pt-40">
+    <div className="bg pt-20">
+      <Link
+        to="/courses"
+        className="flex pt-10 pl-10 w-fit items-center text-sm text-gray-600 hover:text-sky-500 mb-3"
+      >
+        <ArrowLeft className="h-4 w-4 mr-2" /> Back to Courses
+      </Link>
+
       <div className="pb-10">
         <Heading title="Learn the Art of Baking" />
         <p className="text-center text-xl mt-4 px-5">
@@ -16,34 +23,34 @@ function OfflineCourse() {
       {/* bg-[url('/images/cake-2.jpg')] bg-cover bg-center */}
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 lg:gap-8">
         {[...Array(10)].map((_, i) => (
-          <div key={i} className="rounded-[3rem] bg-gray-300 m-10">
-            <div className="rounded-[2.7rem] m-2 flex align-bottom overflow-hidden">
+          <div key={i} className="rounded-2xl bg-white shadow-xl m-10">
+            <div className="rounded-xl m-2 flex align-bottom overflow-hidden">
               <img
                 src="/images/cake-2.jpg"
                 alt="course-img"
-                className="rounded-[2.7rem] hover:scale-104 transition-all duration-200"
+                className="rounded-xl hover:scale-104 transition-all duration-200"
               />
             </div>
-            <div className="p-5 rounded-bl-[2.7rem] rounded-br-[2.7rem] w-full">
-              <h2 className="font-semibold text-2xl ">Course title goes here</h2>
+            <div className="p-5 w-full">
+              <h2 className="font-semibold text-2xl ">Offline course {i + 1}</h2>
               <p className="">course description goes here</p>
               <div className="space-y-4 my-5">
                 <div className="flex items-center ">
                   <div className="w-2 h-2 rounded-full bg-sky-500 mr-3"></div>
-                  <span className="">Face-to-face interaction</span>
+                  <span className="">Face-to-face interaction {i + 1}</span>
                 </div>
                 <div className="flex items-center ">
                   <div className="w-2 h-2 rounded-full bg-sky-500 mr-3"></div>
-                  <span className="">Hands-on practical sessions</span>
+                  <span className="">Hands-on practical sessions {i + 1}</span>
                 </div>
                 <div className="flex items-center ">
                   <div className="w-2 h-2 rounded-full bg-sky-500 mr-3"></div>
-                  <span className="">Networking opportunities</span>
+                  <span className="">Networking opportunities {i + 1}</span>
                 </div>
               </div>
 
               <Link
-                className="group mt-3 w-full relative inline-flex items-center overflow-hidden rounded-full bg-sky-500 px-8 py-4 text-white"
+                className="group mt-3 w-full relative inline-flex items-center overflow-hidden rounded-xl bg-sky-500 px-8 py-4 text-white"
                 href="#"
               >
                 <span className="absolute -start-full transition-all group-hover:start-4">
