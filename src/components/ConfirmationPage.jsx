@@ -21,7 +21,7 @@ export function ConfirmationPage({
   return (
     <div className="container mx-auto px-4 py-8 max-w-4xl">
       {/* Success Header */}
-      <div className="text-center mb-8">
+      <div className="text-center mb-8 pt-12 md:pt-0">
         <div className="inline-flex items-center justify-center w-20 h-20 bg-green-100 rounded-full mb-4">
           <CheckCircle className="h-10 w-10 text-green-600" />
         </div>

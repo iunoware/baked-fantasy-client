@@ -39,8 +39,8 @@ export function CartPage({
   return (
     <div className="container mx-auto px-4 py-8 max-w-7xl">
       {/* Header */}
-      <div className="mb-8">
-        <div className="flex items-center gap-3 mb-2">
+      <div className="mb-8 ">
+        <div className="flex pt-12 md:pt-0 items-center gap-3 mb-2">
           <ShoppingCart className="h-8 w-8 text-pink-500" />
           <h1 className="text-3xl font-bold">Your Cart</h1>
         </div>
