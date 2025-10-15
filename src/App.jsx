@@ -20,6 +20,7 @@ import EssSpeciCategory from "./pages/specifiCategories/EssentialCat.jsx";
 import EssDetailPage from "./pages/ProductDetails/EssentialDetail.jsx";
 import MyLearning from "./pages/MyLearning.jsx";
 import CoursePaymentPage from "./pages/CoursePaymentPage.jsx";
+import Profile from "./pages/Profile.jsx";
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
+          <Route path="/profile" element={<Profile />} />
           {/* for category page */}
           <Route path="/categories" element={<Categories />} />
           <Route path="/ess-categories" element={<EssCategories />} />

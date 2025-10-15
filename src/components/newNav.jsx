@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { Link, useLocation } from "react-router-dom";
@@ -298,12 +297,13 @@ export default function NewNav() {
                     <ShoppingCart size={20} />
                   </Link>
                 </div>
-                <a
+                <Link
                   className=" px-5 py-2.5 cursor-pointer text-sm font-medium text-pink-600"
-                  onClick={() => setLoginOpen(true)}
+                  // onClick={() => setLoginOpen(true)}
+                  to="/profile"
                 >
                   <User size={20} />
-                </a>
+                </Link>
               </div>
 
               {/* Overlay
