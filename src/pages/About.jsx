@@ -112,11 +112,11 @@ function About() {
   ];
 
   return (
-    <>
+    <div className="bg">
       {/* hero section */}
-      <div className="relative pt-35 md:pt-15 w-full h-[700px] z-1 overflow-hidden">
+      {/* <div className="relative pt-35 md:pt-15 w-full h-[700px] z-1 overflow-hidden">
         <div
-          className="flex transition-transform duration-700 ease-in-out "
+          className="flex transition-transform duration-700 ease-in-out"
           style={{ transform: `translateX(-${currentIndex * 100}%)` }}
         >
           {images.map((image, index) => {
@@ -125,14 +125,14 @@ function About() {
                 <img
                   src={image.img}
                   alt={`Slide ${index}`}
-                  className="w-full h-[700px] object-cover flex-shrink-0"
+                  className="w-full h-[700px] object-cover lg:object-center object-left flex-shrink-0"
                 />
                 <div className="absolute inset-0 w-full h-full opacity-30"></div>
-                <div className="absolute inset-0 w-full z-20 pr-20 flex justify-center items-end flex-col">
-                  <h1 className=" max-w-[750px] md:text-5xl p-2 sm:text-4xl text-3xl text-end text-pink-500 mb-5 font-bold">
+                <div className="absolute inset-0 w-full z-20 lg:pr-20 flex md:justify-center justify-start items-end flex-col">
+                  <h1 className=" max-w-[750px] md:text-5xl p-2 sm:text-4xl text-3xl text-end text-pink-600 mb-5 font-bold">
                     {image.heading}
                   </h1>
-                  <p className="lg:text-xl max-w-[750px] md:text-lg p-2 sm:text-md text-end text-gray-800">
+                  <p className="lg:text-xl max-w-[750px] md:text-lg p-2 sm:text-md text-end text-pink-600">
                     {image.content}
                   </p>
                 </div>
@@ -152,8 +152,9 @@ function About() {
             />
           ))}
         </div>
-
-        {/* <button
+      </div> */}
+      {/* button for hero section */}
+      {/* <button
           onClick={() =>
             setCurrentIndex((prev) => (prev - 1 + images.length) % images.length)
           }
@@ -167,9 +168,24 @@ function About() {
         >
           ›
         </button> */}
+
+      {/* hero section 2 */}
+      <div className="pt-35 md:pt-15 h-[100vh] bg-pink-100 flex justify-center items-center">
+        <div className=" ">
+          <div className="flex flex-col gap-2 justify-center items-center">
+            <h2 className="text-3xl md:text-4xl px-2 text-center">
+              Made to
+              <span className="text-pink-500 font-semibold">&nbsp;Melt Hearts</span> and
+              <span className="text-pink-500 font-semibold">&nbsp;Taste Buds</span>
+            </h2>
+            <h2 className="text-3xl md:text-4xl px-2 text-center">
+              Where Every Spoonful is
+              <span className="text-pink-500 font-semibold">&nbsp;Pure Indulgence.</span>
+            </h2>
+          </div>
+        </div>
       </div>
 
-      {/* hero section */}
       {/* time line section */}
       <section className="pt-16 bg-pink-100 bg-[url('/images/swirl.png')]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -413,7 +429,7 @@ function About() {
           </a>
         </div>
       </section>
-    </>
+    </div>
   );
 }
 
