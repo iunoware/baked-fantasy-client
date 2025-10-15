@@ -80,8 +80,8 @@ function Login({ isOpen, onClose, onOpenRegister }) {
             onClick={onClose}
           ></div>
         )}
-        <div className="z-10 lg:w-[60vw] lg:h-[85vh] md:w-[60vw] md:h-[68.2vh] w-screen h-screen  rounded-2xl bg-[url(/images/padded.png)] bg-pink-400 p-6 shadow-lg">
-          <div className="flex items-start justify-between">
+        <div className="z-10 lg:w-[60vw] lg:h-[85vh] md:w-[60vw] md:h-[68.2vh] w-screen h-screen  md:rounded-2xl bg-[url(/images/padded.png)] bg-pink-400 p-6 shadow-lg">
+          <div className="flex top-box items-end justify-between">
             <h2
               id="modalTitle"
               className="lg:text-3xl md:text-xl text-lg font-bold text-white "
@@ -101,7 +101,7 @@ function Login({ isOpen, onClose, onOpenRegister }) {
           <div className="grid grid-cols-1 h-screen md:h-fit items-center lg:grid-cols-2 gap-0">
             {/* login form */}
             <div className="flex-1 flex items-center justify-center p-8">
-              <div className="w-full max-w-md border-1 rounded-2xl  border-white backdrop-blur-sm backdrop-saturate-[182%] bg-[rgba(188,90,150,0.90)] inset-shadow-white inset-shadow-sm  ">
+              <div className="w-full max-w-md border-1 items-center rounded-2xl  border-white backdrop-blur-sm backdrop-saturate-[182%] bg-[rgba(188,90,150,0.90)] inset-shadow-white inset-shadow-sm  ">
                 <Card className="shadow-card fade-in-delay-1">
                   <CardContent className="p-8">
                     <div className="text-center mb-8">
@@ -235,7 +235,7 @@ function Login({ isOpen, onClose, onOpenRegister }) {
               </div>
             </div>
             {/* images side */}
-            <div className="img w-full flex justify-center lg:inline-block  md:hidden">
+            <div className="img w-full justify-center lg:inline-block hidden  md:hidden">
               <img
                 src="/images/login-mascot.png"
                 alt="mascot"
