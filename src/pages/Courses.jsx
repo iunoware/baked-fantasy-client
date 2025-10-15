@@ -182,7 +182,7 @@ function Courses() {
       {/* courses online and offline */}
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-12">
         {/* online course */}
-        <div className="m-12 lg:ml-40">
+        {/* <div className="m-12 lg:ml-40">
           <div className="relative overflow-hidden bg-white shadow-lg hover:shadow-xl transition-all duration-300 rounded-2xl border-0 group">
             <div className="absolute top-0 left-0 w-full h-2 bg-sky-500"></div>
             <div className="p-8 pb-6">
@@ -219,10 +219,10 @@ function Courses() {
               </Link>
             </div>
           </div>
-        </div>
+        </div> */}
 
         {/* offline course */}
-        <div className="m-12 lg:mr-40">
+        {/* <div className="m-12 lg:mr-40">
           <div className="relative overflow-hidden bg-white shadow-lg hover:shadow-xl transition-all duration-300 rounded-2xl border-0 group">
             <div className="absolute top-0 left-0 w-full h-2 bg-sky-500"></div>
             <div className="p-8 pb-6">
@@ -258,6 +258,92 @@ function Courses() {
                 Join Offline
               </Link>
             </div>
+          </div>
+        </div> */}
+
+        {/* new online courses */}
+        <div className="rounded-2xl bg-white shadow-xl m-12 lg:ml-40">
+          <div className="rounded-xl m-2 flex align-bottom overflow-hidden">
+            <img
+              src="/images/online-course.png"
+              alt="course-img"
+              className="rounded-xl w-full h-100 object-cover object-center hover:scale-104 transition-all duration-200"
+            />
+          </div>
+          <div className="p-5 w-full">
+            <h2 className="font-semibold text-2xl ">Online Courses</h2>
+            <p className="">
+              Learn anytime, anywhere with our interactive online classes.
+            </p>
+            <div className="space-y-4 my-5">
+              <div className="flex items-center ">
+                <div className="w-2 h-2 rounded-full bg-sky-500 mr-3"></div>
+                <span className="">Self-paced learning</span>
+              </div>
+              <div className="flex items-center ">
+                <div className="w-2 h-2 rounded-full bg-sky-500 mr-3"></div>
+                <span className="">24/7 access to materials</span>
+              </div>
+              <div className="flex items-center ">
+                <div className="w-2 h-2 rounded-full bg-sky-500 mr-3"></div>
+                <span className="">Interactive assignments</span>
+              </div>
+            </div>
+
+            <Link
+              className="group mt-3 w-full relative inline-flex items-center overflow-hidden rounded-xl bg-sky-500 px-8 py-4 text-white"
+              to="/courses/online-course"
+            >
+              <span className="absolute -start-full transition-all group-hover:start-4">
+                <GraduationCap size={25} />
+              </span>
+
+              <span className="text-lg w-full text-center font-medium transition-all group-hover:ms-4">
+                Explore online courses
+              </span>
+            </Link>
+          </div>
+        </div>
+
+        {/* new offline courses */}
+        <div className="rounded-2xl bg-white shadow-xl m-12 lg:mr-40">
+          <div className="rounded-xl m-2 flex align-bottom overflow-hidden">
+            <img
+              src="/images/offline-course.png"
+              alt="course-img"
+              className="rounded-xl w-full h-100 object-cover object-center hover:scale-104 transition-all duration-200"
+            />
+          </div>
+          <div className="p-5 w-full">
+            <h2 className="font-semibold text-2xl ">Offline Courses</h2>
+            <p className="">Experience in-person training with expert instructors.</p>
+            <div className="space-y-4 my-5">
+              <div className="flex items-center ">
+                <div className="w-2 h-2 rounded-full bg-sky-500 mr-3"></div>
+                <span className="">Face-to-face interaction</span>
+              </div>
+              <div className="flex items-center ">
+                <div className="w-2 h-2 rounded-full bg-sky-500 mr-3"></div>
+                <span className="">Hands-on practical sessions</span>
+              </div>
+              <div className="flex items-center ">
+                <div className="w-2 h-2 rounded-full bg-sky-500 mr-3"></div>
+                <span className="">Networking opportunities</span>
+              </div>
+            </div>
+
+            <Link
+              className="group mt-3 w-full relative inline-flex items-center overflow-hidden rounded-xl bg-sky-500 px-8 py-4 text-white"
+              to="/courses/offline-course"
+            >
+              <span className="absolute -start-full transition-all group-hover:start-4">
+                <GraduationCap size={25} />
+              </span>
+
+              <span className="text-lg w-full text-center font-medium transition-all group-hover:ms-4">
+                Explore online courses
+              </span>
+            </Link>
           </div>
         </div>
       </div>

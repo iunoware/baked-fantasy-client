@@ -1,8 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
-import { Link } from "react-router-dom";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Login from "./Login.jsx";
 import Register from "./Register.jsx";
 import {
@@ -14,6 +13,10 @@ import {
   GraduationCap,
   Menu,
   CakeSlice,
+  House,
+  Users,
+  Book,
+  Phone,
 } from "lucide-react";
 
 export default function NewNav() {
@@ -24,7 +27,10 @@ export default function NewNav() {
 
   useEffect(() => {
     setIsMenuOpen(false);
+    setOpen(false);
+    setOpen2(false);
   }, [location]);
+
   const openRegisterFromLogin = () => {
     setLoginOpen(false);
     setRegisterOpen(true);
@@ -116,10 +122,14 @@ export default function NewNav() {
                         <NavLink
                           id="parent-container"
                           to="/categories"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            setOpen2((prev) => !prev);
+                          }}
                           className={({ isActive }) =>
                             `flex items-center gap-2 text-lg relative group rounded-lg p-3 transition focus:relative ${
                               isActive
-                                ? "bg-sky-500 text-white font-semibold"
+                                ? "bg-pink-500 text-white font-semibold"
                                 : "hover:text-black text-gray-800 "
                             } `
                           }
@@ -192,11 +202,16 @@ export default function NewNav() {
                       className="relative inline-flex"
                       onMouseEnter={() => setOpen(true)}
                       onMouseLeave={() => setOpen(false)}
+                      // onClick={() => setOpen((prev) => !prev)}
                     >
                       <span className="inline-flex overflow-hidden ">
                         <NavLink
                           id="parent-container"
                           to="/courses"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            setOpen((prev) => !prev);
+                          }}
                           className={({ isActive }) =>
                             `flex items-center gap-2 text-lg relative group rounded-lg p-3 transition focus:relative ${
                               isActive
@@ -205,7 +220,8 @@ export default function NewNav() {
                             } `
                           }
                         >
-                          Course <ChevronDown size={15} />
+                          Course
+                          <ChevronDown size={15} />
                         </NavLink>
                       </span>
                       {open && (
@@ -303,10 +319,7 @@ export default function NewNav() {
         <nav className="block md:block shadow-lg lg:hidden z-50 fixed top-0 left-0 w-full h-35 bg-pink-50">
           <div className="flex justify-between pt-4 pl-3">
             <div className="logo flex items-center">
-              <Link
-                to="/"
-                className="text-pink-500 text-xl font-bold brand-name"
-              >
+              <Link to="/" className="text-pink-500 text-xl font-bold brand-name">
                 The Backed Fantasy
               </Link>
             </div>
@@ -348,28 +361,86 @@ export default function NewNav() {
           </button>
           <nav className="p-4">
             <ul className="space-y-4">
+              {/* #0084d1 sky-600 color */}
               <li>
-                <Link to="/" onClick={() => setMenuOpen(false)}>
+                <Link
+                  to="/"
+                  onClick={() => setMenuOpen(false)}
+                  className="flex gap-1 justify-start items-center"
+                >
+                  <House color="#0084d1" size={15} />
                   Home
                 </Link>
               </li>
               <li>
-                <Link to="/about" onClick={() => setMenuOpen(false)}>
+                <Link
+                  to="/about"
+                  onClick={() => setMenuOpen(false)}
+                  className="flex gap-1 justify-start items-center"
+                >
+                  <Users color="#0084d1" size={15} />
                   About
                 </Link>
               </li>
               <li>
-                <Link to="/categories" onClick={() => setMenuOpen(false)}>
-                  Products
+                <Link
+                  to="/categories"
+                  onClick={() => setMenuOpen(false)}
+                  className="flex gap-1 justify-start items-center"
+                >
+                  <ShoppingCart size={15} color="#0084d1" />
+                  Shop
+                </Link>
+              </li>
+              <li className="rounded-lg">
+                <Link
+                  to="/categories"
+                  onClick={() => setMenuOpen(false)}
+                  className="ml-4"
+                >
+                  • Bakery
+                </Link>
+              </li>
+              <li className="rounded-lg">
+                <Link
+                  to="/ess-categories"
+                  onClick={() => setMenuOpen(false)}
+                  className="ml-4"
+                >
+                  • Equipments
                 </Link>
               </li>
               <li>
-                <Link to="/courses" onClick={() => setMenuOpen(false)}>
+                <Link
+                  to="/courses"
+                  onClick={() => setMenuOpen(false)}
+                  className="flex gap-1 justify-start items-center"
+                >
+                  <Book size={15} color="#0084d1" />
                   Course
                 </Link>
               </li>
+              <li className="rounded-lg">
+                <Link to="/courses" onClick={() => setMenuOpen(false)} className="ml-4">
+                  • Courses
+                </Link>
+              </li>
+              <li className="rounded-lg">
+                <Link
+                  to="/courses/my-learning/"
+                  onClick={() => setMenuOpen(false)}
+                  className="ml-4"
+                >
+                  • My Learning
+                </Link>
+              </li>
               <li>
-                <Link to="/contact" onClick={() => setMenuOpen(false)}>
+                <Link
+                  to="/contact"
+                  onClick={() => setMenuOpen(false)}
+                  className="flex gap-1 justify-start items-center"
+                >
+                  <Phone size={15} color="#0084d1" />
                   Contact
                 </Link>
               </li>

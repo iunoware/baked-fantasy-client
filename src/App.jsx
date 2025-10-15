@@ -18,6 +18,8 @@ import OnlineCourseDetails from "./pages/OnlineCourseDetails.jsx";
 import Cart from "./pages/Cart.jsx";
 import EssSpeciCategory from "./pages/specifiCategories/EssentialCat.jsx";
 import EssDetailPage from "./pages/ProductDetails/EssentialDetail.jsx";
+import MyLearning from "./pages/MyLearning.jsx";
+import CoursePaymentPage from "./pages/CoursePaymentPage.jsx";
 
 function App() {
   return (
@@ -34,20 +36,11 @@ function App() {
           <Route path="/categories" element={<Categories />} />
           <Route path="/ess-categories" element={<EssCategories />} />
           {/* for specific category */}
-          <Route
-            path="/products/:categoryName"
-            element={<SpecificCategory />}
-          />
+          <Route path="/products/:categoryName" element={<SpecificCategory />} />
           {/* for specific essential category */}
-          <Route
-            path="/essentials/:categoryName"
-            element={<EssSpeciCategory />}
-          />
+          <Route path="/essentials/:categoryName" element={<EssSpeciCategory />} />
           {/* for products details */}
-          <Route
-            path="/products/:categoryName/:productId"
-            element={<ProductDetail />}
-          />
+          <Route path="/products/:categoryName/:productId" element={<ProductDetail />} />
           <Route
             path="/essentials/:categoryName/:productId"
             element={<EssDetailPage />}
@@ -59,10 +52,7 @@ function App() {
           {/* for all online courses */}
           <Route path="/courses/online-course" element={<OnlineCourse />} />
           {/* for online course video */}
-          <Route
-            path="/course/my-learning/:courseId"
-            element={<OnlineCourseDetails />}
-          />
+          <Route path="/course/my-learning/:courseId" element={<OnlineCourseDetails />} />
           <Route path="/courses/offline-course" element={<OfflineCourse />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/cart" element={<Cart />} />
