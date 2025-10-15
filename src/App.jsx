@@ -2,22 +2,22 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import Home from "../src/pages/Home.jsx";
 import About from "../src/pages/About.jsx";
-import Categories from "./pages/ProductsCategory.jsx";
-import EssCategories from "./pages/EssCategory.jsx";
+import Categories from "./pages/Category/ProductsCategory.jsx";
+import EssCategories from "./pages/Category/EssCategory.jsx";
 import Courses from "../src/pages/Courses.jsx";
 import Contact from "../src/pages/Contact.jsx";
 import Navbar from "./components/NewNav.jsx";
 import Footer from "./components/Footer.jsx";
-import ProductDetail from "../src/pages/ProductDetail.jsx";
+import ProductDetail from "./pages/ProductDetails/ProductDetail.jsx";
 import ScrollToTop from "./components/ScrollToTop.jsx";
 import OnlineCourse from "./pages/OnlineCourse.jsx";
 import OfflineCourse from "./pages/OfflineCourse.jsx";
-import SpecificCategory from "./pages/products/specificCat.jsx";
+import SpecificCategory from "./pages/specifiCategories/specificCat.jsx";
 import Login from "./components/Login.jsx";
 import OnlineCourseDetails from "./pages/OnlineCourseDetails.jsx";
 import Cart from "./pages/Cart.jsx";
-import CoursePaymentPage from "./pages/CoursePaymentPage.jsx";
-import MyLearning from "./pages/MyLearning.jsx";
+import EssSpeciCategory from "./pages/specifiCategories/EssentialCat.jsx";
+import EssDetailPage from "./pages/ProductDetails/EssentialDetail.jsx";
 
 function App() {
   return (
@@ -34,9 +34,24 @@ function App() {
           <Route path="/categories" element={<Categories />} />
           <Route path="/ess-categories" element={<EssCategories />} />
           {/* for specific category */}
-          <Route path="/products/:categoryName" element={<SpecificCategory />} />
+          <Route
+            path="/products/:categoryName"
+            element={<SpecificCategory />}
+          />
+          {/* for specific essential category */}
+          <Route
+            path="/essentials/:categoryName"
+            element={<EssSpeciCategory />}
+          />
           {/* for products details */}
-          <Route path="/products/:categoryName/:productId" element={<ProductDetail />} />
+          <Route
+            path="/products/:categoryName/:productId"
+            element={<ProductDetail />}
+          />
+          <Route
+            path="/essentials/:categoryName/:productId"
+            element={<EssDetailPage />}
+          />
           {/* <Route path="/products/cake/cake-1" element={<ProductDetail />} /> */}
 
           {/* for courses */}
@@ -44,7 +59,10 @@ function App() {
           {/* for all online courses */}
           <Route path="/courses/online-course" element={<OnlineCourse />} />
           {/* for online course video */}
-          <Route path="/course/my-learning/:courseId" element={<OnlineCourseDetails />} />
+          <Route
+            path="/course/my-learning/:courseId"
+            element={<OnlineCourseDetails />}
+          />
           <Route path="/courses/offline-course" element={<OfflineCourse />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/cart" element={<Cart />} />

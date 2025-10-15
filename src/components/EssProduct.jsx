@@ -17,7 +17,7 @@ function Product(props) {
           {/* Centered hover button */}
           <div className="hover-content">
             <Link
-              to={`/products/${props.category}/${props.id}`}
+              to={`/essentials/${props.category}/${props.id}`}
               className="bg-white rounded-lg px-4 py-2 font-bold shadow"
             >
               View details

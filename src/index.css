@@ -1,11 +1,17 @@
 @import url("https://fonts.googleapis.com/css2?family=Edu+NSW+ACT+Cursive:wght@400..700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Poppins&display=swap");
+
 @import "tailwindcss";
 
 body {
   font-family: "Quicksand";
   overflow-y: hidden;
 }
-
+.luckyGuy {
+  font-family: "Luckiest Guy", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
 .redText {
   color: red;
 }

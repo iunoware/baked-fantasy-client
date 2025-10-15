@@ -1,47 +1,43 @@
-import Heading from "../components/Heading.jsx";
-import Category from "../components/Product-Cat.jsx";
+import Heading from "../../components/Heading.jsx";
 import { useEffect, useState } from "react";
+import Category from "../../components/Essential-cat";
 import axios from "axios";
 
-function Categories() {
+function EssCategories() {
   const [products, setProducts] = useState([]);
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/categories");
+        const res = await axios.get("http://localhost:5000/ess-categories");
         setProducts(res.data);
       } catch (err) {
-        console.error("Error fetching products:", err);
+        console.error("Error Fetching Products", err);
       }
     };
-
     fetchProducts();
   }, []);
 
   return (
     <>
-      <div className="product bg-purple-100">
-        <section className="lg:pt-30 md:pt-20 pt-40">
-          <Heading title="Explore Our Product Categories" />
-          <p className="subHeading">
-            Discover our wide range of handcrafted baked goods, made with
-            premium ingredients and traditional techniques passed down through
-            generations.
-          </p>
-          <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5 px-20 py-10">
-            {products.map((p, i) => {
-              return (
-                <Category
-                  key={p._id}
-                  img={p.imageUrl}
-                  emoji="🍩"
-                  title={p.title}
-                  subject={p.subject}
-                />
-              );
-            })}
-          </div>
-        </section>
+      <section className="lg:pt-30 md:pt-20 pt-40 bg-purple-100">
+        <Heading title="Sustainable Baking Essentials" />
+        <p className="subHeading">
+          All the essentials you need — bowls, spoons, molds, and premium flour
+          — built to make your baking effortless and your results extraordinary.
+        </p>
+        <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5 px-20 py-10">
+          {products.map((p, i) => {
+            return (
+              <Category
+                key={p._id}
+                img={p.imageUrl}
+                emoji="🍩"
+                title={p.title}
+                subject={p.subject}
+              />
+            );
+          })}
+        </div>
         {/* why choose us section */}
         <section className="whyChooseUs flex justify-center pb-8">
           <div className="bg-white rounded-2xl w-9/12">
@@ -179,9 +175,9 @@ function Categories() {
             className="h-full w-full object-cover sm:h-[calc(100%_-_2rem)] sm:self-end sm:rounded-ss-[30px] md:h-[calc(100%_-_4rem)] md:rounded-ss-[60px]"
           />
         </section>
-      </div>
+      </section>
     </>
   );
 }
 
-export default Categories;
+export default EssCategories;
