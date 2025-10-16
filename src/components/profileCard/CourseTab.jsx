@@ -32,7 +32,7 @@ export function CoursesTab() {
   return (
     <div className="grid grid-cols-1 gap-4">
       {courses.map((course, index) => (
-        <motion.div
+        <div
           key={course.id}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -54,7 +54,7 @@ export function CoursesTab() {
             <div className="space-y-2">
               <div className="flex items-center justify-between">
                 <span className="text-sm text-muted-foreground">Progress</span>
-                <span className="text-sm" style={{ color: "#C9A962" }}>
+                <span className="text-sm text-pink-700">
                   {course.progress}%
                 </span>
               </div>
@@ -69,15 +69,12 @@ export function CoursesTab() {
           </div>
 
           <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.98 }}>
-            <Button
-              className="rounded-xl gap-2 shadow-md"
-              style={{ backgroundColor: "#C9A962" }}
-            >
+            <Button className="rounded-xl gap-2 shadow-md bg-pink-300">
               <PlayCircle className="w-4 h-4" />
               Continue
             </Button>
           </motion.div>
-        </motion.div>
+        </div>
       ))}
     </div>
   );
