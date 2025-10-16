@@ -8,7 +8,7 @@ import Heading from "../components/Heading.jsx";
 function MyLearning() {
   // use the localstorage's getItem  and setItem
   const token =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGY4NDIxZTU3MTFmOTYyYzMyZTQyMiIsImlhdCI6MTc2MDQxNzg3MCwiZXhwIjoxNzYwNTA0MjcwfQ.83GgWWTJC6lEXd6l_ZcsK19JNHsIeFJj5IFsS99tae0";
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGY4NDIxZTU3MTFmOTYyYzMyZTQyMiIsImlhdCI6MTc2MDU4OTg4NSwiZXhwIjoxNzYwNjc2Mjg1fQ.fsJ35mQTi4mY4zdl2jJXT9OXyslub6fnXmyNt30t32c";
 
   let [courses, setCourses] = useState([]);
 

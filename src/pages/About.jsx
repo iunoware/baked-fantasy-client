@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { LaptopMinimal } from "lucide-react";
@@ -169,28 +170,56 @@ function About() {
           ›
         </button> */}
 
-      {/* hero section 2 */}
-      <div className="pt-35 md:pt-15 h-[100vh] bg-pink-100 flex justify-center items-center">
-        <div className=" ">
-          <div className="flex flex-col gap-2 justify-center items-center">
-            <h2 className="text-3xl md:text-4xl px-2 text-center">
-              Made to
-              <span className="text-pink-500 font-semibold">&nbsp;Melt Hearts</span> and
-              <span className="text-pink-500 font-semibold">&nbsp;Taste Buds</span>
+      {/* hero section 3 */}
+      <section className="overflow-hidden bg-cover bg-no-repeat h-screen grid grid-cols-1 md:grid-cols-2  bg-[url('/images/bfHero.png')]">
+        {/* left column */}
+        <div className="p-8 md:p-12 lg:px-16 lg:py-24 mt-38">
+          <div className="text-start ltr:sm:text-left rtl:sm:text-right">
+            <h2 className="text-2xl font-bold text-white sm:text-3xl md:text-5xl">
+              From <span className="text-pink-500">Oven to Heart</span> - and From Us to
+              Your Kitchen.
             </h2>
-            <h2 className="text-3xl md:text-4xl px-2 text-center">
-              Where Every Spoonful is
-              <span className="text-pink-500 font-semibold">&nbsp;Pure Indulgence.</span>
-            </h2>
+
+            <p className="hidden max-w-lg text-white/90 md:mt-6 md:block md:text-lg md:leading-relaxed">
+              The Baked Fantasy brings you fresh cakes, pastries, and desserts made with
+              love. Celebrate life’s moments with us-or join our baking courses to create
+              your own oven-fresh treats at home.
+            </p>
+            <div className="flex gap-10 items-center">
+              <div className="mt-4 sm:mt-8">
+                <Link
+                  to={`/categories`}
+                  className="bg-sky-500 inline-block rounded-full px-12 py-3 text-sm font-medium text-white transition hover:bg-sky-700 focus:ring-3  focus:outline-hidden"
+                >
+                  Shop products
+                </Link>
+              </div>
+              <div className="mt-4 sm:mt-8">
+                <Link
+                  to={`/courses`}
+                  className="border-2 border-sky-500 inline-block rounded-full px-12 py-3 text-sm font-medium text-white transition hover:bg-sky-500 focus:ring-3  focus:outline-hidden"
+                >
+                  Explore course
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
+        {/* right column */}
+        <div className="h-full flex flex-end">
+          <img
+            src="/images/BakedMam-2.png"
+            alt="Brand Ambassador"
+            className="max-h-full object-center object-cover"
+          />
+        </div>
+      </section>
 
       {/* time line section */}
-      <section className="pt-16 bg-pink-100 bg-[url('/images/swirl.png')]">
+      <section className="pt-46 bg-pink-100 bg-[url('/images/swirl.png')]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl text-black font-semibold mb-4">
+            <h2 className="text-3xl md:text-4xl luckyGuy text-black font-semibold mb-4">
               Our Journey
             </h2>
             <p className="text-lg text-black/70 max-w-3xl mx-auto">
@@ -203,7 +232,7 @@ function About() {
           {/* Timeline */}
           <div className="relative">
             {/* candle */}
-            <div className="absolute left-1/2 transform -translate-x-1/2 w-25 rounded-bl-2xl rounded-br-4xl bg-[url(/images/candle-bg-3.png)] bg-center bg-cover bg-no-repeat h-full hidden lg:block"></div>
+            <div className="absolute left-1/2 transform -translate-x-1/2 w-2 rounded-bl-2xl rounded-br-4xl bg-sky-500 bg-center bg-cover bg-no-repeat h-full hidden lg:block"></div>
 
             <div className="space-y-12">
               {milestones.map((milestone, index) => (
@@ -313,7 +342,7 @@ function About() {
       {/* award section */}
       <section className="awards py-16 md:py-24 bg">
         <div className="container mx-auto px-6 max-w-7xl">
-          <h2 className="text-3xl font-semibold md:text-4xl text-black text-center mb-18">
+          <h2 className="text-3xl luckyGuy font-semibold md:text-4xl text-black text-center mb-18">
             Awards & Recognition
           </h2>
 
@@ -338,7 +367,7 @@ function About() {
 
             {/* Content - Bottom-left */}
             <div>
-              <h3 className="!text-4xl font-bold text-black mb-7">
+              <h3 className="!text-4xl font-semibold luckyGuy text-black mb-7">
                 Recognized Excellence
               </h3>
               <p className="text-lg text-black/80 leading-relaxed">
@@ -372,7 +401,7 @@ function About() {
       {/* testimonial */}
       <section className="py-12 lg:px-12 md:px-8 px-3 bg">
         <div>
-          <h2 className="text-5xl font-semibold text-black text-center mb-6">
+          <h2 className="text-5xl luckyGuy font-semibold text-black text-center mb-6">
             Sweet words from our customers
           </h2>
           <p className="text-xl text-gray-800/80 text-center">
