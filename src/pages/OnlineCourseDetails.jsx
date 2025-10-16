@@ -68,7 +68,7 @@ function OnlineCourseDetails() {
   async function fetchVideoUrl(currentVideoUrl) {
     try {
       const response = await axios.get(
-        `http://localhost:5000${encodeURI(currentVideoUrl)}`,
+        `http://localhost:5000${encodeURIComponent(currentVideoUrl)}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
