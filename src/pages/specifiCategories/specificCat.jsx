@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { ShoppingCart, ArrowLeft } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 
 function SpecificCategory() {
   const { categoryName } = useParams(); // comes from URL /products/:categoryName
