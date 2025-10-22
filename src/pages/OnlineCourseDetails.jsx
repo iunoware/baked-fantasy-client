@@ -19,7 +19,7 @@ function OnlineCourseDetails() {
   let [totalSections, setTotalSections] = useState();
 
   var token =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGY4NDIxZTU3MTFmOTYyYzMyZTQyMiIsImlhdCI6MTc1OTQ3OTU4NywiZXhwIjoxNzU5NTY1OTg3fQ.nmVQcr3gO4U96q3GP5wZGgVs1r3TGriA-xaaAshrftU";
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGY4NDIxZTU3MTFmOTYyYzMyZTQyMiIsImlhdCI6MTc2MTEzNDE0OSwiZXhwIjoxNzYxMjIwNTQ5fQ.4ynFbupTiXUP7VrWQftX6MFCuBkfj5W0w1N4JB0z3JM";
 
   useEffect(() => {
     async function fetchVideos() {
@@ -65,32 +65,32 @@ function OnlineCourseDetails() {
   }, [courseId]);
 
   // new code
-  async function fetchVideoUrl(currentVideoUrl) {
-    try {
-      const response = await axios.get(
-        `http://localhost:5000${encodeURIComponent(currentVideoUrl)}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-          responseType: "blob",
-        }
-      );
+  // async function fetchVideoUrl(currentVideoUrl) {
+  //   try {
+  //     const response = await axios.get(
+  //       `http://localhost:5000${encodeURIComponent(currentVideoUrl)}`,
+  //       {
+  //         headers: {
+  //           Authorization: `Bearer ${token}`,
+  //         },
+  //         responseType: "blob",
+  //       }
+  //     );
 
-      const videoBlob = new Blob([response.data], { type: "video/mp4" });
-      const videoObjectUrl = URL.createObjectURL(videoBlob);
-      setVideoSrc(videoObjectUrl);
-    } catch (error) {
-      console.log("error: ", error.message);
-    }
-  }
+  //     const videoBlob = new Blob([response.data], { type: "video/mp4" });
+  //     const videoObjectUrl = URL.createObjectURL(videoBlob);
+  //     setVideoSrc(videoObjectUrl);
+  //   } catch (error) {
+  //     console.log("error: ", error.message);
+  //   }
+  // }
 
-  useEffect(() => {
-    if (currentVideo?.videoUrl) {
-      console.log("fetching video: ", currentVideo.videoUrl);
-      fetchVideoUrl(currentVideo.videoUrl);
-    }
-  }, [currentVideo]);
+  // useEffect(() => {
+  //   if (currentVideo?.videoUrl) {
+  //     console.log("fetching video: ", currentVideo.videoUrl);
+  //     fetchVideoUrl(currentVideo.videoUrl);
+  //   }
+  // }, [currentVideo]);
   // new code
   // CURRENTLY NEED TO WORK ON THIS
 
