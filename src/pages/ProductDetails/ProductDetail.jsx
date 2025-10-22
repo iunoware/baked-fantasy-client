@@ -78,10 +78,21 @@ function ProductDetailPage({ onNavigate, onAddToCart }) {
     );
   }
 
-  const handleQuantityChange = (change) => {
+  const handleQuantityChange = async (change) => {
     const newQuantity = quantity + change;
     if (newQuantity >= 1 && newQuantity <= 10) {
       setQuantity(newQuantity);
+      try {
+        await axios.put("http://localhost:5000/cart", {
+          userId,
+          productId: props.id,
+          quantity: newQuantity,
+        });
+        toast.success(`Quantity updated to ${newQuantity}`);
+      } catch (err) {
+        console.error("Error Updating Cart", error);
+        toast.error("Failed to update quantity");
+      }
     }
   };
 

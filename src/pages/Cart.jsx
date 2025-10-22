@@ -1,52 +1,39 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CartPage } from "../components/CartPage.jsx";
 import { DeliveryPage } from "../components/DeliveryPage.jsx";
 import { PaymentPage } from "../components/PaymentPage.jsx";
 import { ConfirmationPage } from "../components/ConfirmationPage.jsx";
+import axios from "axios";
 
 export default function App() {
   const [currentStep, setCurrentStep] = useState("cart");
   const [orderNumber, setOrderNumber] = useState("");
+  const [cartItems, setCartItems] = useState([]);
 
-  const [cartItems, setCartItems] = useState([
-    {
-      id: "1",
-      name: "Chicken Biryani",
-      image:
-        "https://images.unsplash.com/photo-1734770931927-6410f9a64832?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxkZWxpY2lvdXMlMjBpbmRpYW4lMjBmb29kJTIwYmlyeWFuaXxlbnwxfHx8fDE3NTg4Nzk1NTl8MA&ixlib=rb-4.1.0&q=80&w=1080",
-      price: 299,
-      quantity: 2,
-      description:
-        "Aromatic basmati rice with tender chicken pieces and traditional spices",
-    },
-    {
-      id: "2",
-      name: "Chicken Tikka Masala",
-      image:
-        "https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjaGlja2VuJTIwdGlra2ElMjBtYXNhbGElMjBjdXJyeXxlbnwxfHx8fDE3NTg4Nzk1NjB8MA&ixlib=rb-4.1.0&q=80&w=1080",
-      price: 249,
-      quantity: 1,
-      description: "Grilled chicken in rich tomato-based curry sauce",
-    },
-    {
-      id: "3",
-      name: "Samosa (2 pcs)",
-      image:
-        "https://images.unsplash.com/photo-1748765968997-ba9bae9cfd7b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjcmlzcHklMjBzYW1vc2ElMjBzbmFja3xlbnwxfHx8fDE3NTg4Nzk1NjB8MA&ixlib=rb-4.1.0&q=80&w=1080",
-      price: 59,
-      quantity: 1,
-      description: "Crispy golden pastries filled with spiced potatoes",
-    },
-    {
-      id: "4",
-      name: "Garlic Naan",
-      image:
-        "https://images.unsplash.com/photo-1697155406014-04dc649b0953?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxnYXJsaWMlMjBuYWFuJTIwYnJlYWR8ZW58MXx8fHwxNzU4NzgzNDc3fDA&ixlib=rb-4.1.0&q=80&w=1080",
-      price: 89,
-      quantity: 2,
-      description: "Fresh baked bread with garlic and herbs",
-    },
-  ]);
+  const userId = "670e2f1cf9a0b3142b12b70c";
+
+  useEffect(() => {
+    const fetchCart = async () => {
+      try {
+        const res = await axios.get(`http://localhost:5000/cart/${userId}`);
+        const cartData = res.data;
+        console.log(cartData);
+
+        const formattedItems = cartData.items.map((item) => ({
+          id: item.productId._id,
+          name: item.productId.title,
+          image: `http://localhost:5000${item.productId.images?.[0]}`,
+          price: item.productId.price,
+          quantity: item.quantity,
+          description: item.productId.subject || "No description available",
+        }));
+        setCartItems(formattedItems);
+      } catch (err) {
+        console.error("Error Fetching Cart", err);
+      }
+    };
+    fetchCart();
+  }, [userId]);
 
   const [promoCode, setPromoCode] = useState("");
   const [selectedAddress, setSelectedAddress] = useState(null);
