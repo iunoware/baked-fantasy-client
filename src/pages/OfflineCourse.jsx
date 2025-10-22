@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { GraduationCap, ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
 import Heading from "../components/Heading.jsx";
