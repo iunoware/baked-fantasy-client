@@ -1,7 +1,22 @@
-import { Heading } from "lucide-react";
+import axios from "axios";
+import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 
 function Product(props) {
+  const handleCart = async () => {
+    try {
+      const userId = "670e2f1cf9a0b3142b12b69c";
+      await axios.post("http://localhost:5000/cart", {
+        userId,
+        productId: props.id,
+        quantity: 1,
+      });
+      toast.success(`${props.title} added to cart!`);
+    } catch (error) {
+      console.error("Error adding to cart:", error);
+      toast.error("Failed to add item to cart");
+    }
+  };
   return (
     <>
       <article className="cat-card overflow-hidden rounded-lg shadow-xl hover:-translate-y-2 transition-all duration-200">
@@ -43,7 +58,7 @@ function Product(props) {
           <div className="pt-3">
             <button
               className="group relative inline-flex items-center overflow-hidden rounded-sm bg-cyan-500 px-8 py-3 text-white focus:ring-3 focus:outline-hidden mr-3"
-              href="#"
+              onClick={handleCart}
             >
               <span className="absolute -start-full transition-all group-hover:start-4">
                 <svg
