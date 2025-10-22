@@ -54,6 +54,7 @@ function About() {
       description:
         "Started our journey as a small home bakery, baking fresh cakes and treats with love.",
       icon: <ChefHat size={25} color="#ffffff" />,
+      image: "cake-dot.png",
     },
     {
       year: "2021",
@@ -61,6 +62,7 @@ function About() {
       description:
         "Opened our first bakery shop and welcomed our very first walk-in customers.",
       icon: <Store size={25} color="#ffffff" />,
+      image: "cake-dot-2.png",
     },
     {
       year: "2022",
@@ -68,6 +70,7 @@ function About() {
       description:
         "Introduced our signature customized cakes and special dessert menu.",
       icon: <Cake color="#ffffff" size={27} />,
+      image: "cake-dot-3.png",
     },
     {
       year: "2023",
@@ -75,6 +78,7 @@ function About() {
       description:
         "Expanded our services to create cakes for weddings, birthdays, and big celebrations.",
       icon: <Rocket color="#ffffff" />,
+      image: "cake-dot-4.png",
     },
     {
       year: "2024",
@@ -82,6 +86,7 @@ function About() {
       description:
         "Launched online ordering and started delivering our fresh bakes across the city.",
       icon: <Truck color="#ffffff" />,
+      image: "cake-dot-5.png",
     },
   ];
 
@@ -171,8 +176,8 @@ function About() {
           ›
         </button> */}
 
-      {/* hero section 3 */}
-      <section className="overflow-hidden bg-cover bg-no-repeat h-screen grid grid-cols-1 md:grid-cols-2  bg-[url('/images/bfHero.png')]">
+      {/* hero section 2 */}
+      <section className="overflow-hidden bg-cover bg-no-repeat h-screen grid grid-cols-1 md:grid-cols-2 bg-[url('/images/bfHero.png')]">
         {/* left column */}
         <div className="p-8 md:p-12 lg:px-16 lg:py-24 mt-38">
           <div className="text-start ltr:sm:text-left rtl:sm:text-right">
@@ -217,7 +222,7 @@ function About() {
       </section>
 
       {/* time line section */}
-      <section className="pt-46 bg-pink-100 bg-[url('/images/swirl.png')]">
+      <section className="pt-16 bg-pink-100 bg-[url('/images/swirl.png')]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl luckyGuy text-black font-semibold mb-4">
@@ -233,7 +238,7 @@ function About() {
           {/* Timeline */}
           <div className="relative">
             {/* candle */}
-            <div className="absolute left-1/2 transform -translate-x-1/2 w-2 rounded-bl-2xl rounded-br-4xl bg-sky-500 bg-center bg-cover bg-no-repeat h-full hidden lg:block"></div>
+            <div className="absolute left-1/2 transform -translate-x-1/2 w-3 rounded-full bg-pink-300 h-full hidden lg:block"></div>
 
             <div className="space-y-12">
               {milestones.map((milestone, index) => (
@@ -250,7 +255,7 @@ function About() {
                     }`}
                   >
                     {/* cards */}
-                    <div className="border-2 border-transparent rounded-xl hover:border-sky-500 shadow-lg hover:shadow-xl bg-white bg-cover transition-all duration-300">
+                    <div className="border-2 border-transparent rounded-2xl hover:border-sky-500 shadow-lg hover:shadow-xl bg-white bg-cover transition-all duration-300">
                       <div className="p-6">
                         <div className="flex items-center mb-4">
                           <div className="w-12 h-12 bg-blue-400 rounded-full flex items-center justify-center mr-4">
@@ -274,9 +279,12 @@ function About() {
                   </div>
 
                   {/* Timeline dot */}
-                  {/* <div className="hidden lg:flex w-2/12 justify-center">
-                    <div className="w-6 h-6 bg-amber-700 rounded-full border-4 border-white shadow-lg"></div>
-                  </div> */}
+                  <div className="hidden lg:flex w-2/12 justify-center">
+                    <div
+                      className={`h-18 w-18 m-2 bg-center bg-contain bg-no-repeat z-30 drop-shadow-2xl`}
+                      style={{ backgroundImage: `url(/images/${milestone.image})` }}
+                    ></div>
+                  </div>
 
                   {/* Spacer */}
                   <div className="hidden lg:block w-5/12"></div>
