@@ -47,7 +47,7 @@ function Product(props) {
 
   const handleQuantityChange = async (change) => {
     const newQuantity = quantity + change;
-    if (newQuantity >= 1 && newQuantity <= 10) {
+    if (newQuantity >= 1 && newQuantity <= 50) {
       setQuantity(newQuantity);
       try {
         await axios.put("http://localhost:5000/cart", {
@@ -136,12 +136,12 @@ function Product(props) {
                 </span>
               </button>
             ) : (
-              <div className="space-x-2 group relative inline-flex items-center overflow-hidden rounded-sm bg-cyan-500 py-3 text-white focus:ring-3 focus:outline-hidden mr-3">
+              <div className="space-x-2 translate-y-1 group relative inline-flex items-center overflow-hidden rounded-sm bg-cyan-500 py-2 text-white focus:ring-3 focus:outline-hidden mr-3">
                 <Button
                   variant="ghost"
                   size="sm"
                   onClick={() => handleQuantityChange(-1)}
-                  disabled={quantity <= 1}
+                  // disabled={quantity <= 1}
                 >
                   <Minus className="h-4 w-4" />
                 </Button>
@@ -150,7 +150,7 @@ function Product(props) {
                   variant="ghost"
                   size="sm"
                   onClick={() => handleQuantityChange(1)}
-                  disabled={quantity >= 10}
+                  // disabled={quantity >= 10}
                 >
                   <Plus className="h-4 w-4" />
                 </Button>

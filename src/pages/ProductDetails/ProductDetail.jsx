@@ -1,6 +1,7 @@
 import { Button } from "../../components/ui/button";
 import { Card, CardContent } from "../../components/ui/card";
 import { Badge } from "../../components/ui/badge";
+import toast from "react-hot-toast";
 import { Separator } from "../../components/ui/separator";
 import Product from "../../components/Products.jsx";
 import { useEffect, useState } from "react";
@@ -18,13 +19,51 @@ import {
 } from "lucide-react";
 
 function ProductDetailPage({ onNavigate, onAddToCart }) {
+  const userId = "670e2f1cf9a0b3142b12b70c";
   const { productId } = useParams();
   const [product, setProduct] = useState(null);
+  const [added, setAdded] = useState(false);
   const [relatedProducts, setRelatedProducts] = useState([]);
   const [selectedImage, setSelectedImage] = useState(0);
   const [quantity, setQuantity] = useState(1);
   const [isWishlisted, setIsWishlisted] = useState(false);
   const [loading, setLoading] = useState(true);
+
+  // for changing the button
+  const handleCart = async () => {
+    try {
+      await axios.post("http://localhost:5000/cart", {
+        userId,
+        productId,
+        quantity: 1,
+      });
+      setAdded(true);
+      toast.success(`${product.category?.title} added to cart!`);
+    } catch (error) {
+      console.error("Error adding to cart:", error);
+      toast.error("Failed to add item to cart");
+    }
+  };
+  useEffect(() => {
+    const checkCartStatus = async () => {
+      try {
+        const res = await axios.get(`http://localhost:5000/cart/${userId}`);
+        const userCart = res.data; // adjust to match your backend response
+        const foundItem = userCart.items.find(
+          (item) => item.productId._id === productId
+        );
+
+        if (foundItem) {
+          setAdded(true);
+          setQuantity(foundItem.quantity);
+        }
+      } catch (error) {
+        console.error("Error checking cart:", error);
+      }
+    };
+
+    checkCartStatus();
+  }, [productId]);
 
   // for fetching the product
   useEffect(() => {
@@ -80,17 +119,17 @@ function ProductDetailPage({ onNavigate, onAddToCart }) {
 
   const handleQuantityChange = async (change) => {
     const newQuantity = quantity + change;
-    if (newQuantity >= 1 && newQuantity <= 10) {
+    if (newQuantity >= 1 && newQuantity <= 50) {
       setQuantity(newQuantity);
       try {
         await axios.put("http://localhost:5000/cart", {
           userId,
-          productId: props.id,
+          productId,
           quantity: newQuantity,
         });
         toast.success(`Quantity updated to ${newQuantity}`);
       } catch (err) {
-        console.error("Error Updating Cart", error);
+        console.error("Error Updating Cart", err);
         toast.error("Failed to update quantity");
       }
     }
@@ -191,13 +230,13 @@ function ProductDetailPage({ onNavigate, onAddToCart }) {
 
             {/* Quantity */}
             <div className="flex items-center space-x-4">
-              <label>Quantity:</label>
-              <div className="flex items-center space-x-2 bg-white rounded-lg p-2">
+              {/* <label>Quantity:</label> */}
+              {/* <div className="flex items-center space-x-2 bg-white rounded-lg p-2">
                 <Button
                   variant="ghost"
                   size="sm"
                   onClick={() => handleQuantityChange(-1)}
-                  disabled={quantity <= 1}
+                  // disabled={quantity <= 1}
                 >
                   <Minus className="h-4 w-4" />
                 </Button>
@@ -206,11 +245,11 @@ function ProductDetailPage({ onNavigate, onAddToCart }) {
                   variant="ghost"
                   size="sm"
                   onClick={() => handleQuantityChange(1)}
-                  disabled={quantity >= 10}
+                  // disabled={quantity >= 10}
                 >
                   <Plus className="h-4 w-4" />
                 </Button>
-              </div>
+              </div> */}
               <span>
                 Total:{" "}
                 <strong className="text-[#00BCD4]">
@@ -221,13 +260,65 @@ function ProductDetailPage({ onNavigate, onAddToCart }) {
 
             {/* Actions */}
             <div className="flex space-x-3">
-              <Button
-                size="lg"
-                className="flex-1 bg-[#00BCD4] text-white"
-                onClick={handleAddToCart}
-              >
-                <ShoppingCart className="mr-2 h-5 w-5" /> Add to Cart
-              </Button>
+              {!added ? (
+                <button
+                  className="group relative inline-flex items-center overflow-hidden rounded-sm bg-cyan-500 px-8 py-3 text-white focus:ring-3 focus:outline-hidden mr-3"
+                  onClick={handleCart}
+                  size="lg"
+                >
+                  <span className="absolute -start-full transition-all group-hover:start-4">
+                    <svg
+                      className="size-5 rtl:rotate-180"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+                      <g
+                        id="SVGRepo_tracerCarrier"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      ></g>
+                      <g id="SVGRepo_iconCarrier">
+                        <path
+                          d="M7.2998 5H22L20 12H8.37675M21 16H9L7 3H4M4 8H2M5 11H2M6 14H2M10 20C10 20.5523 9.55228 21 9 21C8.44772 21 8 20.5523 8 20C8 19.4477 8.44772 19 9 19C9.55228 19 10 19.4477 10 20ZM21 20C21 20.5523 20.5523 21 20 21C19.4477 21 19 20.5523 19 20C19 19.4477 19.4477 19 20 19C20.5523 19 21 19.4477 21 20Z"
+                          stroke="#fff"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        ></path>
+                      </g>
+                    </svg>
+                  </span>
+
+                  <span className="text-sm font-medium transition-all group-hover:ms-4">
+                    Add to cart
+                  </span>
+                </button>
+              ) : (
+                <div
+                  size="lg"
+                  className="space-x-2 group relative inline-flex items-center overflow-hidden rounded-sm bg-cyan-500 py-1 text-white focus:ring-3 focus:outline-hidden mr-3"
+                >
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => handleQuantityChange(-1)}
+                    // disabled={quantity <= 1}
+                  >
+                    <Minus className="h-4 w-4" />
+                  </Button>
+                  <span className="w-8 text-center">{quantity}</span>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => handleQuantityChange(1)}
+                    // disabled={quantity >= 10}
+                  >
+                    <Plus className="h-4 w-4" />
+                  </Button>
+                </div>
+              )}
               <Button
                 size="lg"
                 className="flex-1 bg-[#FF80AB] text-white"
