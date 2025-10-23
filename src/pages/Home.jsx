@@ -5,10 +5,19 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { ChevronsDown } from "lucide-react";
+import OnlineCourseCard from "../components/OnlineCourseCard.jsx";
 
 function Home() {
   const { categoryName } = useParams();
   const [products, setProducts] = useState([]);
+  const [courses, setCourses] = useState([]);
+
+  // const productImages = [
+  //   "/images/cake-1.jpg",
+  //   "/images/cake-2.jpg",
+  //   "/images/cake-3.jpg",
+  //   "/images/cake-bg-5.jpg",
+  // ];
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -22,6 +31,17 @@ function Home() {
       }
     };
     fetchProducts();
+
+    async function fetchCourse() {
+      try {
+        let response = await axios.get(`http://localhost:5000/course`);
+        // console.log("all response: ", response.data.courses);
+        setCourses(response.data.courses?.slice(0, 3));
+      } catch (error) {
+        console.error("can't fetch courses", error);
+      }
+    }
+    fetchCourse();
   }, []);
 
   return (
@@ -254,6 +274,7 @@ function Home() {
               id={p._id}
               category={categoryName}
               img={`http://localhost:5000${p.images?.[0]}`}
+              // img={productImages[index % productImages.length]}
               price={p.price}
               title={p.title}
               subject={p.subject}
@@ -1461,6 +1482,50 @@ function Home() {
               </div>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* online course section */}
+      <section className="!py-10">
+        <Heading title="Learn, Bake, and Grow with Sweet Dreams Academy" />
+        <div className="text-center text-lg !mt-5">
+          <p>
+            Join our online courses to master baking skills, explore creative recipes, and
+            turn your passion into a thriving business—anytime, anywhere.
+          </p>
+        </div>
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 lg:gap-8">
+          {courses.length > 0 ? (
+            courses.map((course, index) => {
+              return (
+                <div key={index}>
+                  <div>
+                    <OnlineCourseCard
+                      path={`/courses/course-payment-page/`}
+                      endPoint={course._id}
+                      image={course.ImageUrl}
+                      rating={course.rating}
+                      reviews={course.reviews}
+                      students={course.students}
+                      description={course.description}
+                      title={course.title}
+                      subtitle={course.subtitle}
+                      duration={course.duration}
+                      totalHours={course.totalHours}
+                      totalVideos={course.totalVideos}
+                      highlights={course.highlights}
+                      price={course.price}
+                      originalPrice={course.originalPrice}
+                    />
+                  </div>
+                </div>
+              );
+            })
+          ) : (
+            <div className="w-screen">
+              <p className="text-2xl text-center w-full">no courses found</p>
+            </div>
+          )}
         </div>
       </section>
 

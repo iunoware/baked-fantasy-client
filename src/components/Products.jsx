@@ -64,12 +64,12 @@ function Product(props) {
   };
   return (
     <>
-      <article className="cat-card overflow-hidden rounded-lg shadow-xl hover:-translate-y-2 transition-all duration-200">
+      <article className="cat-card bg-white overflow-hidden rounded-2xl shadow-xl hover:-translate-y-2 transition-all duration-200">
         <div className="relative p-2 h-56">
           <img
             alt="Cake"
             src="/images/cake-2.jpg"
-            className="h-full w-full rounded-2xl object-cover cat-img"
+            className="h-full w-full rounded-xl object-cover cat-img"
           />
 
           {/* <div className={`absolute inset-0 ${colors[props.color]}`}></div> */}
@@ -78,7 +78,7 @@ function Product(props) {
           <div className="hover-content">
             <Link
               to={`/products/${props.category}/${props.id}`}
-              className="bg-white rounded-lg px-4 py-2 font-bold shadow"
+              className="bg-white rounded-3xl px-4 py-2 font-bold shadow"
             >
               View details
             </Link>
