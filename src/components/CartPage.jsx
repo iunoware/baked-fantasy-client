@@ -1,5 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import toast from "react-hot-toast";
+import axios from "axios";
 import {
   Minus,
   Plus,
@@ -26,6 +28,10 @@ export function CartPage({
   const [promoInput, setPromoInput] = useState(promoCode);
   const [promoApplied, setPromoApplied] = useState(false);
 
+  const [added, setAdded] = useState(false);
+  const [quantity, setQuantity] = useState(1);
+  const userId = "670e2f1cf9a0b3142b12b70c";
+
   const applyPromo = () => {
     if (promoInput === "SAVE20") {
       setPromoCode(promoInput);
@@ -33,6 +39,27 @@ export function CartPage({
     } else {
       setPromoCode("");
       setPromoApplied(false);
+    }
+  };
+
+  const handleQuantityChange = async (itemId, currentQuantity, change) => {
+    const newQuantity = currentQuantity + change;
+    if (newQuantity < 1 || newQuantity > 50) return;
+
+    try {
+      await axios.put("http://localhost:5000/cart", {
+        userId,
+        productId: itemId,
+        quantity: newQuantity,
+      });
+
+      // Call your parent’s updateCartItem to update the state
+      updateCartItem(itemId, newQuantity);
+
+      toast.success(`Quantity updated to ${newQuantity}`);
+    } catch (err) {
+      console.error("Error updating cart:", err);
+      toast.error("Failed to update quantity");
     }
   };
 
@@ -120,7 +147,7 @@ export function CartPage({
                               variant="ghost"
                               size="sm"
                               onClick={() =>
-                                updateCartItem(item.id, item.quantity - 1)
+                                handleQuantityChange(item.id, item.quantity, -1)
                               }
                               className="h-8 w-8 p-0 hover:bg-orange-50"
                               disabled={item.quantity <= 1}
@@ -134,7 +161,7 @@ export function CartPage({
                               variant="ghost"
                               size="sm"
                               onClick={() =>
-                                updateCartItem(item.id, item.quantity + 1)
+                                handleQuantityChange(item.id, item.quantity, 1)
                               }
                               className="h-8 w-8 p-0 hover:bg-orange-50"
                             >
