@@ -5,23 +5,43 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { ChevronsDown } from "lucide-react";
+import OnlineCourseCard from "../components/OnlineCourseCard.jsx";
 
 function Home() {
   const { categoryName } = useParams();
   const [products, setProducts] = useState([]);
+  const [courses, setCourses] = useState([]);
+
+  // const productImages = [
+  //   "/images/cake-1.jpg",
+  //   "/images/cake-2.jpg",
+  //   "/images/cake-3.jpg",
+  //   "/images/cake-bg-5.jpg",
+  // ];
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
         await axios.get(`http://localhost:5000/products`).then((res) => {
           const shuffled = res.data.sort(() => 0.5 - Math.random());
-          setProducts(shuffled.slice(0, 3));
+          setProducts(shuffled.slice(0, 4));
         });
       } catch (err) {
         console.error("Error fetching Products:", err);
       }
     };
     fetchProducts();
+
+    async function fetchCourse() {
+      try {
+        let response = await axios.get(`http://localhost:5000/course`);
+        // console.log("all response: ", response.data.courses);
+        setCourses(response.data.courses?.slice(0, 3));
+      } catch (error) {
+        console.error("can't fetch courses", error);
+      }
+    }
+    fetchCourse();
   }, []);
 
   return (
@@ -45,8 +65,8 @@ function Home() {
               For Bakers. By Bakers.
             </h2>
             <p className="text-center max-w-3xl luckyGuy text-white text-lg px-2 md:text-xl">
-              From oven-fresh cakes to premium baking essentials, experience the
-              joy of baking — whether you’re buying or creating.
+              From oven-fresh cakes to premium baking essentials, experience the joy of
+              baking — whether you’re buying or creating.
             </p>
           </div>
         </div>
@@ -56,10 +76,11 @@ function Home() {
       </div>
 
       {/* card section */}
-      <div
+      {/* <div
         className="flex justify-around py-15 [@media(max-width:768px)]:flex-col bg-[#f1faee]"
         id="section-2"
-      >
+      > */}
+      <div className="py-15 bg grid grid-cols-2 gap-4 lg:grid-cols-4 lg:gap-8">
         <div className="card-1 text-center flex flex-col items-center card-hover hover:animate-wiggle">
           <svg
             width="100px"
@@ -101,7 +122,6 @@ function Home() {
               ></path>
             </g>
           </svg>
-
           <div className="pt-5">
             <h2 className="text-2xl font-bold">100+</h2>
             <p className="text-lg">Happy Students</p>
@@ -244,17 +264,17 @@ function Home() {
       <section className="feature-section bg-[#f1faee] py-8 pb-12">
         <Heading title="Featured Products" />
         <p className="subHeading">
-          Handcrafted with love using premium ingredients and traditional
-          techniques
+          Handcrafted with love using premium ingredients and traditional techniques
         </p>
         {/* products section */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 py-15 px-10">
+        <div className="grid [@media(max-width:553px)]:!grid-cols-1 [@media(max-width:846px)]:grid-cols-2 [@media(max-width:1111px)]:grid-cols-3 [@media(min-width:1111px)]:grid-cols-4 gap-5 py-15 px-10">
           {products.map((p) => (
             <Product
               key={p._id}
               id={p._id}
               category={categoryName}
               img={`http://localhost:5000${p.images?.[0]}`}
+              // img={productImages[index % productImages.length]}
               price={p.price}
               title={p.title}
               subject={p.subject}
@@ -299,7 +319,7 @@ function Home() {
           </h1>
           <div className="flex mx-auto pt-5">
             <Link
-              className="group w-fit  relative inline-flex items-center overflow-hidden rounded-sm bg-cyan-500 px-8 py-3 text-white focus:ring-3 focus:outline-hidden mr-3"
+              className="group w-fit  relative inline-flex items-center overflow-hidden rounded-sm bg-pink-500 px-8 py-3 text-white focus:ring-3 focus:outline-hidden mr-3"
               to="/categories"
             >
               <span className="absolute -start-full transition-all group-hover:start-4">
@@ -339,8 +359,8 @@ function Home() {
       <section className="why-choose-us my-5 ">
         <Heading title="Why Choose Backed Fantasy?" />
         <p className="text-center text-xl py-5">
-          Discover what makes us the premier choice for baking education and
-          premium baked goods.
+          Discover what makes us the premier choice for baking education and premium baked
+          goods.
         </p>
         <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-5 px-15">
           <div className="mascot flex justify-center">
@@ -657,8 +677,8 @@ function Home() {
                     </h3>
 
                     <p className="mt-4 text-sm sm:text-base">
-                      Industry-recognized certifications that boost your career
-                      in professional baking
+                      Industry-recognized certifications that boost your career in
+                      professional baking
                     </p>
                   </div>
                 </div>
@@ -740,8 +760,8 @@ function Home() {
                     </h3>
 
                     <p className="mt-4 text-sm sm:text-base">
-                      Learn from award-winning professional bakers with 15+
-                      years of industry experience
+                      Learn from award-winning professional bakers with 15+ years of
+                      industry experience
                     </p>
                   </div>
                 </div>
@@ -808,8 +828,8 @@ function Home() {
                     </h3>
 
                     <p className="mt-4 text-sm sm:text-base">
-                      Only the finest, locally-sourced ingredients for authentic
-                      taste and quality
+                      Only the finest, locally-sourced ingredients for authentic taste and
+                      quality
                     </p>
                   </div>
                 </div>
@@ -887,8 +907,8 @@ function Home() {
                     </h3>
 
                     <p className="mt-4 text-sm sm:text-base">
-                      Complete event catering services for weddings, corporate
-                      events, and celebrations
+                      Complete event catering services for weddings, corporate events, and
+                      celebrations
                     </p>
                   </div>
                 </div>
@@ -912,9 +932,8 @@ function Home() {
               </h1>
 
               <p className="mt-4 text-base text-pretty text-white sm:text-lg/relaxed">
-                Order bulk cakes & desserts for birthdays, weddings, or events.
-                Fresh, delicious treats delivered to make every celebration
-                memorable.
+                Order bulk cakes & desserts for birthdays, weddings, or events. Fresh,
+                delicious treats delivered to make every celebration memorable.
               </p>
 
               <div className="mt-4 flex gap-4 sm:mt-6">
@@ -988,8 +1007,8 @@ function Home() {
           <div className="text-center mb-16">
             <Heading title="Featured Courses" />
             <p className="subHeading">
-              Learn from industry experts with our comprehensive online and
-              offline baking courses
+              Learn from industry experts with our comprehensive online and offline baking
+              courses
             </p>
           </div>
 
@@ -1051,10 +1070,9 @@ function Home() {
                   </h3>
                 </div>
                 <p className="text-gray-600 mb-6 leading-relaxed">
-                  Our online baking course is designed for beginners and
-                  enthusiasts who want to master baking from the comfort of
-                  home. With step-by-step video lessons and expert guidance, you
-                  can learn at your own pace.
+                  Our online baking course is designed for beginners and enthusiasts who
+                  want to master baking from the comfort of home. With step-by-step video
+                  lessons and expert guidance, you can learn at your own pace.
                 </p>
 
                 <div className="space-y-4 my-6">
@@ -1273,9 +1291,9 @@ function Home() {
                   </h3>
                 </div>
                 <p className="text-gray-600 !mb-6 leading-relaxed">
-                  Master baking in our in-person classes guided by professional
-                  chefs. Get practical experience, real-time feedback, and learn
-                  advanced techniques in a fully equipped kitchen.
+                  Master baking in our in-person classes guided by professional chefs. Get
+                  practical experience, real-time feedback, and learn advanced techniques
+                  in a fully equipped kitchen.
                 </p>
 
                 <div className="space-y-4 mb-6">
@@ -1467,15 +1485,58 @@ function Home() {
         </div>
       </section>
 
+      {/* online course section */}
+      <section className="!py-10">
+        <Heading title="Learn, Bake, and Grow with Sweet Dreams Academy" />
+        <div className="text-center text-lg !mt-5">
+          <p>
+            Join our online courses to master baking skills, explore creative recipes, and
+            turn your passion into a thriving business—anytime, anywhere.
+          </p>
+        </div>
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 lg:gap-8">
+          {courses.length > 0 ? (
+            courses.map((course, index) => {
+              return (
+                <div key={index}>
+                  <div>
+                    <OnlineCourseCard
+                      path={`/courses/course-payment-page/`}
+                      endPoint={course._id}
+                      image={course.ImageUrl}
+                      rating={course.rating}
+                      reviews={course.reviews}
+                      students={course.students}
+                      description={course.description}
+                      title={course.title}
+                      subtitle={course.subtitle}
+                      duration={course.duration}
+                      totalHours={course.totalHours}
+                      totalVideos={course.totalVideos}
+                      highlights={course.highlights}
+                      price={course.price}
+                      originalPrice={course.originalPrice}
+                    />
+                  </div>
+                </div>
+              );
+            })
+          ) : (
+            <div className="w-screen">
+              <p className="text-2xl text-center w-full">no courses found</p>
+            </div>
+          )}
+        </div>
+      </section>
+
       {/* testimonial section */}
       <div className="bg">
         <section className="mt-10 mx-15 pt-10">
           <Heading title="What Our Students Say" />
           <p className="subHeading">
-            Join thousands of satisfied students and customers who trust Sweet
-            Dreams
+            Join thousands of satisfied students and customers who trust Sweet Dreams
           </p>
-          <div className="flex lg:flex-row flex-col gap-5 py-10  items-center">
+          <div className="flex lg:flex-row flex-col gap-5 py-10 items-center">
             <div className="video flex justify-center lg:w-4/12 md:w-6/12 w-full">
               <video
                 src="/videos/review.mp4"
@@ -1486,105 +1547,100 @@ function Home() {
                 className="rounded-xl h-130"
               ></video>
             </div>
-            <div className="cards lg:w-8/12 md:w-6/12 w-full grid lg:grid-cols-2 md:grid-cols-2 grid-cols-2 gap-4 pr-8">
-              <div className="block rounded-md p-4 bg-sky-300 shadow-sm sm:p-6 lg:h-45  hover:scale-102 transition-all duration-200 ease-in-out ">
-                <div className="sm:flex sm:justify-between sm:gap-4 lg:gap-6">
-                  <div className="sm:order-last sm:shrink-0">
-                    <div className="size-16 rounded-full object-cover sm:size-[72px] bg-rose-300 flex justify-center items-center text-xl font-bold">
-                      NR
+            <div className="flex flex-col gap-5">
+              <div className="cards w-full h-auto grid lg:grid-cols-2 md:grid-cols-2 grid-cols-1 gap-4 ">
+                <div className="block rounded-md p-4 bg-sky-300 shadow-sm sm:p-6 hover:scale-102 transition-all duration-200 ease-in-out ">
+                  <div className="sm:flex sm:justify-between sm:gap-4 lg:gap-6">
+                    <div className="sm:order-last sm:shrink-0">
+                      <div className="size-16 rounded-full object-cover sm:size-[72px] bg-rose-300 flex justify-center items-center text-xl font-bold">
+                        SM
+                      </div>
+                    </div>
+                    <div className="mt-4 sm:mt-0">
+                      <h3 className="text-lg font-medium text-pretty text-gray-900">
+                        <div className="star flex">⭐⭐⭐⭐⭐</div>
+                      </h3>
+
+                      <p className="mt-1 text-lg font-bold text-gray-900">Sujitha Mani</p>
+
+                      <p className="mt-4 text-md text-pretty text-gray-900">
+                        "I joined Baking class in baked fantasy best teaching I got from
+                        my mentor thank you mam I suggested to my friends"
+                      </p>
                     </div>
                   </div>
-                  <div className="mt-4 sm:mt-0">
-                    <h3 className="text-lg font-medium text-pretty text-gray-900">
-                      <div className="star flex"> ⭐⭐⭐⭐⭐</div>
-                    </h3>
+                </div>
 
-                    <p className="mt-1 text-sm font-bold text-gray-900">
-                      By Nikitha (Home Baker)
-                    </p>
+                <div className="block rounded-md p-4 shadow-sm sm:p-6 hover:scale-102 transition-all duration-200 ease-in-out bg-sky-300 ">
+                  <div className="sm:flex sm:justify-between sm:gap-4 lg:gap-6">
+                    <div className="sm:order-last sm:shrink-0">
+                      <div className="size-16 rounded-full object-cover sm:size-[72px] bg-rose-300 flex justify-center items-center text-xl font-bold">
+                        RR
+                      </div>
+                    </div>
+                    <div className="mt-4 sm:mt-0">
+                      <h3 className="text-lg font-medium text-pretty text-gray-900">
+                        <div className="stars">⭐⭐⭐⭐⭐</div>
+                      </h3>
 
-                    <p className="mt-4 line-clamp-2 text-sm text-pretty text-gray-900">
-                      "The online cake decorating course transformed my hobby
-                      into a thriving business. The instructors are amazing!"
-                    </p>
+                      <p className="mt-1 text-lg font-bold text-gray-900">
+                        Revathy Rathnavel
+                      </p>
+
+                      <p className="mt-4 text-md text-pretty text-gray-900">
+                        "The taste of the cakes and pastry were delicious....... Very
+                        tasty and also healthy"
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="block rounded-md p-4 shadow-sm sm:p-6 hover:scale-102 transition-all duration-200 ease-in-out bg-sky-300">
+                  <div className="sm:flex sm:justify-between sm:gap-4 lg:gap-6">
+                    <div className="sm:order-last sm:shrink-0">
+                      <div className="size-16 rounded-full object-cover sm:size-[72px] bg-rose-300 flex justify-center items-center text-xl font-bold">
+                        VM
+                      </div>
+                    </div>
+                    <div className="mt-4 sm:mt-0">
+                      <h3 className="text-lg font-medium text-pretty text-gray-900">
+                        <div className="stars">⭐⭐⭐⭐</div>
+                      </h3>
+
+                      <p className="mt-1 text-lg font-bold text-gray-900">Valar Mathi</p>
+
+                      <p className="mt-4 text-md text-pretty text-gray-900">
+                        "Well equipped hands on practice and individual attention for all
+                        students"
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="block rounded-md p-4 shadow-sm sm:p-6 hover:scale-102 transition-all duration-200 ease-in-out bg-sky-300">
+                  <div className="sm:flex sm:justify-between sm:gap-4 lg:gap-6">
+                    <div className="sm:order-last sm:shrink-0">
+                      <div className="size-16 rounded-full object-cover sm:size-[72px] bg-rose-300 flex justify-center items-center text-xl font-bold">
+                        HJ
+                      </div>
+                    </div>
+                    <div className="mt-4 sm:mt-0">
+                      <h3 className="text-lg font-medium text-pretty text-gray-900">
+                        <div className="stars">⭐⭐⭐⭐⭐</div>
+                      </h3>
+
+                      <p className="mt-1 text-lg font-bold text-gray-900">
+                        H.Jeyasudha 217
+                      </p>
+
+                      <p className="mt-4 text-md text-pretty text-gray-900">
+                        "The best shop and good quality."
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
-              <div className="block rounded-md p-4 shadow-sm sm:p-6 lg:h-45 hover:scale-102 transition-all duration-200 ease-in-out bg-sky-300 ">
-                <div className="sm:flex sm:justify-between sm:gap-4 lg:gap-6">
-                  <div className="sm:order-last sm:shrink-0">
-                    <img
-                      alt=""
-                      src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1180&q=80"
-                      className="size-16 rounded-full object-cover sm:size-[72px]"
-                    />
-                  </div>
-                  <div className="mt-4 sm:mt-0">
-                    <h3 className="text-lg font-medium text-pretty text-gray-900">
-                      <div className="stars">⭐⭐⭐⭐</div>
-                    </h3>
 
-                    <p className="mt-1 text-sm font-bold text-gray-900">
-                      By Ram
-                    </p>
-
-                    <p className="mt-4 line-clamp-2 text-sm text-pretty text-gray-900">
-                      "The Baked Fantasy Baking Institute offers the most
-                      comprehensive baking education. Highly recommended!"
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div className="block rounded-md p-4 shadow-sm sm:p-6 lg:h-45 hover:scale-102 transition-all duration-200 ease-in-out bg-sky-300">
-                <div className="sm:flex sm:justify-between sm:gap-4 lg:gap-6">
-                  <div className="sm:order-last sm:shrink-0">
-                    <img
-                      alt=""
-                      src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1180&q=80"
-                      className="size-16 rounded-full object-cover sm:size-[72px]"
-                    />
-                  </div>
-                  <div className="mt-4 sm:mt-0">
-                    <h3 className="text-lg font-medium text-pretty text-gray-900">
-                      <div className="stars">⭐⭐⭐⭐</div>
-                    </h3>
-
-                    <p className="mt-1 text-sm font-bold text-gray-900">
-                      By Raja (customer)
-                    </p>
-
-                    <p className="mt-4 line-clamp-2 text-sm text-pretty text-gray-900">
-                      "Their bulk order service is exceptional. Quality products
-                      delivered on time, every time."
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div className="block rounded-md p-4 shadow-sm sm:p-6 lg:h-45 hover:scale-102 transition-all duration-200 ease-in-out bg-sky-300">
-                <div className="sm:flex sm:justify-between sm:gap-4 lg:gap-6">
-                  <div className="sm:order-last sm:shrink-0">
-                    <img
-                      alt=""
-                      src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1180&q=80"
-                      className="size-16 rounded-full object-cover sm:size-[72px]"
-                    />
-                  </div>
-                  <div className="mt-4 sm:mt-0">
-                    <h3 className="text-lg font-medium text-pretty text-gray-900">
-                      <div className="stars">⭐⭐⭐⭐⭐</div>
-                    </h3>
-
-                    <p className="mt-1 text-sm font-bold text-gray-900">
-                      By Parveen (Home Baker)
-                    </p>
-
-                    <p className="mt-4 line-clamp-2 text-sm text-pretty text-gray-900">
-                      Baked Fantasy helped us launch our dessert menu with
-                      professional training and ongoing support.
-                    </p>
-                  </div>
-                </div>
-              </div>
               <div className="btn col-span-2 flex justify-center">
                 <a
                   className="group relative inline-flex items-center overflow-hidden rounded-sm border border-current px-3 py-3 text-sky-600 "
@@ -1628,9 +1684,9 @@ function Home() {
             </h1>
 
             <p className="mt-4 text-base text-pretty text-gray-700 sm:text-lg/relaxed">
-              Join our baking courses, shop eco-friendly products, or place bulk
-              orders with ease. From beginners to café owners, we have the
-              perfect baking solutions for you.
+              Join our baking courses, shop eco-friendly products, or place bulk orders
+              with ease. From beginners to café owners, we have the perfect baking
+              solutions for you.
             </p>
 
             <div className="mt-4 flex gap-4 sm:mt-6">

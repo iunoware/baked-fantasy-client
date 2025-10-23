@@ -8,18 +8,17 @@ import { Mail } from "lucide-react";
 
 function Footer() {
   return (
-    <div className="bg p-10">
+    <div className="bg p-6">
       <footer className="bg-pink-600 block rounded-4xl">
         <div className="mx-auto max-w-screen-xl space-y-8 px-4 py-16 sm:px-6 lg:space-y-16 lg:px-8 grid gird-cols-3">
           <div className="grid grid-cols-1 h-full sm:h-full md:h-full lg:h-40 lg:grid-cols-3 ">
-            <div>
+            <div className="">
               <div className="text-white font-black text-2xl ">
                 <h3 className="brand-name">The Baked Fantasy</h3>
               </div>
               <p className="mt-4 max-w-xs text-white">
-                Your premier destination for professional baking education and
-                artisanal bakery products. Learn from experts and savor the
-                finest baked goods.
+                Your premier destination for professional baking education and artisanal
+                bakery products. Learn from experts and savor the finest baked goods.
               </p>
 
               {/* social links */}
@@ -118,99 +117,100 @@ function Footer() {
               </ul>
             </div>
 
-            {/* quick links */}
-            {/* <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:col-span-2 lg:grid-cols-4"> */}
-            <div>
-              <p className="font-semibold text-xl pt-10 lg:pt-0 text-white">
-                Quick Links
-              </p>
+            <div className="lg:col-span-2 grid grid-cols-1 md:grid-cols-2">
+              {/* quick links */}
+              <div className="hidden md:block">
+                <p className="font-semibold text-xl pt-10 lg:pt-0 text-white">
+                  Quick Links
+                </p>
 
-              <ul className="mt-6 space-y-4 text-lg">
-                <li>
-                  <Link
-                    to="/"
-                    className="text-white transition-all duration-200 hover:font-bold"
-                  >
-                    Home
-                  </Link>
-                </li>
+                <ul className="mt-6 space-y-4 text-lg">
+                  <li>
+                    <Link
+                      to="/"
+                      className="text-white transition-all duration-200 hover:font-bold"
+                    >
+                      Home
+                    </Link>
+                  </li>
 
-                <li>
-                  <Link
-                    to="/about"
-                    className="text-white transition-all duration-200 hover:font-bold"
-                  >
-                    About Us
-                  </Link>
-                </li>
+                  <li>
+                    <Link
+                      to="/about"
+                      className="text-white transition-all duration-200 hover:font-bold"
+                    >
+                      About Us
+                    </Link>
+                  </li>
 
-                <li>
-                  <Link
-                    to="/products"
-                    className="text-white transition-all duration-200 hover:font-bold"
-                  >
-                    Products
-                  </Link>
-                </li>
+                  <li>
+                    <Link
+                      to="/products"
+                      className="text-white transition-all duration-200 hover:font-bold"
+                    >
+                      Products
+                    </Link>
+                  </li>
 
-                <li>
-                  <Link
-                    to="/courses"
-                    className="text-white transition-all duration-200 hover:font-bold"
-                  >
-                    Courses
-                  </Link>
-                </li>
+                  <li>
+                    <Link
+                      to="/courses"
+                      className="text-white transition-all duration-200 hover:font-bold"
+                    >
+                      Courses
+                    </Link>
+                  </li>
 
-                <li>
-                  <Link
-                    to="/contact"
-                    className="text-white transition-all duration-200 hover:font-bold"
-                  >
-                    Contact us
-                  </Link>
-                </li>
-              </ul>
+                  <li>
+                    <Link
+                      to="/contact"
+                      className="text-white transition-all duration-200 hover:font-bold"
+                    >
+                      Contact us
+                    </Link>
+                  </li>
+                </ul>
+              </div>
+
+              {/* contact info */}
+              <div>
+                <p className="font-semibold text-xl pt-10 lg:pt-0 text-white">
+                  Contact Info
+                </p>
+
+                <ul className="mt-6 space-y-4 text-lg">
+                  <li>
+                    <a
+                      href="#"
+                      className="text-white flex gap-2 transition-all duration-200 hover:font-semibold"
+                    >
+                      <MapPin size={24} />
+                      123 Baker Street, Culinary District New York, NY 10001
+                    </a>
+                  </li>
+
+                  <li>
+                    <a
+                      href="#"
+                      className="text-white flex gap-2 transition-all duration-200 hover:font-bold"
+                    >
+                      <Phone size={20} />
+                      (555) 123-BAKE
+                    </a>
+                  </li>
+
+                  <li>
+                    <a
+                      href="#"
+                      className="text-white flex gap-2 transition-all duration-200 hover:font-bold"
+                    >
+                      <Mail size={20} />
+                      info@sweetdreamsbaking.com
+                    </a>
+                  </li>
+                </ul>
+              </div>
             </div>
-
-            <div>
-              <p className="font-semibold text-xl pt-10 lg:pt-0 text-white">
-                Contact Info
-              </p>
-
-              <ul className="mt-6 space-y-4 text-lg">
-                <li>
-                  <a
-                    href="#"
-                    className="text-white flex gap-2 transition-all duration-200 hover:font-semibold"
-                  >
-                    <MapPin size={24} />
-                    123 Baker Street, Culinary District New York, NY 10001
-                  </a>
-                </li>
-
-                <li>
-                  <a
-                    href="#"
-                    className="text-white flex gap-2 transition-all duration-200 hover:font-bold"
-                  >
-                    <Phone size={20} />
-                    (555) 123-BAKE
-                  </a>
-                </li>
-
-                <li>
-                  <a
-                    href="#"
-                    className="text-white flex gap-2 transition-all duration-200 hover:font-bold"
-                  >
-                    <Mail size={20} />
-                    info@sweetdreamsbaking.com
-                  </a>
-                </li>
-              </ul>
-            </div>
-            {/* </div> */}
           </div>
 
           <p className="text-md inline-block w-fit pt-10 sm:pt-10 md:pt-10 lg:pt-2 text-white">
