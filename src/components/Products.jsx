@@ -62,13 +62,15 @@ function Product(props) {
       }
     }
   };
+
   return (
     <>
       <article className="cat-card bg-white overflow-hidden rounded-2xl shadow-xl hover:-translate-y-2 transition-all duration-200">
         <div className="relative p-2 h-56">
           <img
             alt="Cake"
-            src="/images/cake-2.jpg"
+            // src="/images/cake-2.jpg"
+            src={props.img}
             className="h-full w-full rounded-xl object-cover cat-img"
           />
 
