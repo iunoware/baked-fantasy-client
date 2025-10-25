@@ -38,7 +38,7 @@ function CakesAdmin() {
           subject: subject,
           image: file,
         },
-        { headers: { "Content-Type": "multipart/form-data",  } }
+        { headers: { "Content-Type": "multipart/form-data" } }
       );
       console.log("category added: ", postResponse.data);
     } catch (error) {

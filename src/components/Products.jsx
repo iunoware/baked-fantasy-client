@@ -31,7 +31,9 @@ function Product(props) {
       try {
         const res = await axios.get(`http://localhost:5000/cart/${userId}`);
         const userCart = res.data; // adjust to match your backend response
-        const foundItem = userCart.items.find((item) => item.productId._id === props.id);
+        const foundItem = userCart.items.find(
+          (item) => item.productId._id === props.id
+        );
 
         if (foundItem) {
           setAdded(true);
