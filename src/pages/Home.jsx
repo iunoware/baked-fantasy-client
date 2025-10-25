@@ -47,7 +47,7 @@ function Home() {
 
   return (
     <div className="bg-[#f1faee]">
-      {/* <Modal /> */}
+      <Modal />
       {/* hero section */}
       <div className="pt-35 z-51 md:pt-15 h-screen w-screen relative bg-pink-100 flex justify-center items-center">
         <div className="">
