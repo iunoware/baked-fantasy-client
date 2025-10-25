@@ -96,7 +96,7 @@ function Sidebar() {
 
                 <li>
                   <NavLink
-                    to={`/admin/products`}
+                    to={`/admin/essentials`}
                     // className="flex items-center gap-3 rounded-md px-2 py-2 text-gray-700 hover:bg-pink-50 transition-colors"
                     className={({ isActive }) =>
                       `${

@@ -1,4 +1,4 @@
-/* eslint-disable no-unused-vars */
+// /* eslint-disable no-unused-vars */
 import { ChevronDown, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -7,14 +7,14 @@ import CategoryCardAdmin from "../../components/adminPanel/CategoryCardAdmin.jsx
 function CakesAdmin() {
   // const [isDropdownVisible, setIsDropdownVisible] = useState(false);
   const [courses, setCourses] = useState([]);
-  const [currentCategory, setCurrentCategory] = useState();
+  // const [currentCategory, setCurrentCategory] = useState();
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   useEffect(() => {
     async function fetchCourses() {
       try {
         const response = await axios.get(`http://localhost:5000/categories`);
-        console.log(response.data);
+        // console.log(response.data);
         setCourses(response.data);
         // console.log("courses: ", courses);
       } catch (error) {
@@ -24,25 +24,47 @@ function CakesAdmin() {
     fetchCourses();
   }, []);
 
+  const token =
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4YTk3ZDYxOTdlMjcxMDM0OWUwNmI0MyIsImlhdCI6MTc2MTM4MTc4MSwiZXhwIjoxNzYxNDY4MTgxfQ.Td-IXJkCgZYR24KCOFfetqRkRR-bcYeI_e0jo3QQg5c";
+
   async function postCategory(e) {
+    e.preventDefault();
+
     const form = e.target;
     const name = form.categoryTitle.value.trim();
     const subject = form.categorySubject.value.trim();
     const file = form.categoryFile.files[0];
 
-    try {
-      const postResponse = await axios.post(
-        `http://localhost:5000/categories`,
-        {
-          title: name,
-          subject: subject,
-          image: file,
-        },
-        { headers: { "Content-Type": "multipart/form-data" } }
-      );
-      console.log("category added: ", postResponse.data);
-    } catch (error) {
-      console.error("error message: ", error.message);
+    if (!name || !subject || !file) {
+      window.alert("Please fill all fields and select an image!");
+      return;
+    } else {
+      const formData = new FormData();
+      formData.append("title", name);
+      formData.append("subject", subject);
+      formData.append("image", file);
+
+      try {
+        const postResponse = await axios.post(
+          `http://localhost:5000/categories`,
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        // setCourses((prev) => [...prev, postResponse.data]);
+
+        // const newResponse = await axios.get(`http://localhost:5000/categories`);
+        // setCourses(newResponse.data);
+        console.log("category added: ", postResponse.data);
+        setIsModalVisible(false);
+        window.location.reload();
+      } catch (error) {
+        console.error("error message: ", error.message);
+      }
     }
   }
 
@@ -116,10 +138,10 @@ function CakesAdmin() {
               />
             </div>
 
-            <div className="flex justify-center items-center my-4">
+            <div className="flex justify-center items-center">
               <button
                 type="submit"
-                className="bg-pink-600 font-semibold hover:cursor-pointer hover:bg-pink-500 transition-all duration-200 text-white px-4 py-3 rounded-xl"
+                className="bg-pink-600 w-full font-semibold hover:cursor-pointer hover:bg-pink-500 transition-all duration-200 text-white px-4 py-3 rounded-xl"
               >
                 Add new category
               </button>
@@ -133,12 +155,12 @@ function CakesAdmin() {
           <div>
             <h1 className="text-3xl font-semibold">Cakes and Cookies Categories</h1>
 
-            <p className="text-md pt-1">Manage your bakery products and inventory</p>
+            <p className="text-md pt-1">Manage your bakery products' category</p>
           </div>
           <div>
             <button
               onClick={() => setIsModalVisible(true)}
-              className="bg-pink-500 text-white font-semibold py-3 px-5 rounded-xl hover:bg-pink-600 transition-colors duration-200"
+              className="bg-pink-500 cursor-pointer text-white font-semibold py-3 px-5 rounded-xl hover:bg-pink-600 transition-colors duration-200"
             >
               + Add Category
             </button>
@@ -150,7 +172,7 @@ function CakesAdmin() {
           <div className="flex flex-col md:flex-row gap-5 md:gap-0 justify-between">
             <div>
               <h2 className="font-semibold text-xl">Cakes and cookies inventory</h2>
-              <p>Manage all your bakery products</p>
+              <p>Manage all your bakery products' categories</p>
             </div>
             <div>
               {/* dropdown */}
@@ -213,12 +235,12 @@ function CakesAdmin() {
           </div>
 
           {/* product cards */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 lg:gap-8">
             {courses.map((course, i) => (
               <div key={i} className="">
                 <CategoryCardAdmin
                   title={course.title}
-                  description={course.subject}
+                  subject={course.subject}
                   sliderBtn={course.title}
                   image={course.imageUrl}
                 />
