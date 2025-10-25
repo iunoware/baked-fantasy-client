@@ -64,6 +64,7 @@ function Product(props) {
       }
     }
   };
+
   return (
     <>
       <article className="cat-card bg-white overflow-hidden rounded-2xl shadow-xl hover:-translate-y-2 transition-all duration-200">
