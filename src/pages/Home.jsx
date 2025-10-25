@@ -313,51 +313,6 @@ function Home() {
         </div>
       </section>
 
-      {/* banner */}
-      <div className="mx-auto text-center rounded-4xl md:bg-[url('/images/banner.jpg')] bg-[url('/images/mobile-banner.jpg')] bg-center bg-cover w-[100vw] h-[100vh] md:w-[80vw] md:h-[70vh]">
-        <div className="flex flex-col items center w-full h-full justify-center">
-          <h1 className="flex mx-auto luckyGuy justify-center text-5xl/15 items-center text-pink-400 font-bold">
-            Still thinking about dessert? <br />
-            Your cravings won’t wait! 🤤
-          </h1>
-          <div className="flex mx-auto pt-5">
-            <Link
-              className="group w-fit  relative inline-flex items-center overflow-hidden rounded-sm bg-pink-500 px-8 py-3 text-white focus:ring-3 focus:outline-hidden mr-3"
-              to="/categories"
-            >
-              <span className="absolute -start-full transition-all group-hover:start-4">
-                <svg
-                  className="size-5 rtl:rotate-180"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
-                  <g
-                    id="SVGRepo_tracerCarrier"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  ></g>
-                  <g id="SVGRepo_iconCarrier">
-                    <path
-                      d="M7.2998 5H22L20 12H8.37675M21 16H9L7 3H4M4 8H2M5 11H2M6 14H2M10 20C10 20.5523 9.55228 21 9 21C8.44772 21 8 20.5523 8 20C8 19.4477 8.44772 19 9 19C9.55228 19 10 19.4477 10 20ZM21 20C21 20.5523 20.5523 21 20 21C19.4477 21 19 20.5523 19 20C19 19.4477 19.4477 19 20 19C20.5523 19 21 19.4477 21 20Z"
-                      stroke="#fff"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    ></path>
-                  </g>
-                </svg>
-              </span>
-
-              <span className="text-sm font-medium transition-all group-hover:ms-4">
-                Order Now
-              </span>
-            </Link>
-          </div>
-        </div>
-      </div>
-
       {/* why choose us section */}
       <section className="why-choose-us my-5 ">
         <Heading title="Why Choose Backed Fantasy?" />
@@ -1489,6 +1444,50 @@ function Home() {
           </div>
         </div>
       </section>
+      {/* banner */}
+      <div className="mx-auto text-center rounded-4xl md:bg-[url('/images/banner.jpg')] bg-[url('/images/mobile-banner.jpg')] bg-center bg-cover w-[100vw] h-[100vh] md:w-[80vw] md:h-[70vh]">
+        <div className="flex flex-col items center w-full h-full justify-center">
+          <h1 className="flex mx-auto luckyGuy justify-center text-5xl/15 items-center text-pink-400 font-bold">
+            Still thinking about dessert? <br />
+            Your cravings won’t wait! 🤤
+          </h1>
+          <div className="flex mx-auto pt-5">
+            <Link
+              className="group w-fit  relative inline-flex items-center overflow-hidden rounded-sm bg-pink-500 px-8 py-3 text-white focus:ring-3 focus:outline-hidden mr-3"
+              to="/categories"
+            >
+              <span className="absolute -start-full transition-all group-hover:start-4">
+                <svg
+                  className="size-5 rtl:rotate-180"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+                  <g
+                    id="SVGRepo_tracerCarrier"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  ></g>
+                  <g id="SVGRepo_iconCarrier">
+                    <path
+                      d="M7.2998 5H22L20 12H8.37675M21 16H9L7 3H4M4 8H2M5 11H2M6 14H2M10 20C10 20.5523 9.55228 21 9 21C8.44772 21 8 20.5523 8 20C8 19.4477 8.44772 19 9 19C9.55228 19 10 19.4477 10 20ZM21 20C21 20.5523 20.5523 21 20 21C19.4477 21 19 20.5523 19 20C19 19.4477 19.4477 19 20 19C20.5523 19 21 19.4477 21 20Z"
+                      stroke="#fff"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    ></path>
+                  </g>
+                </svg>
+              </span>
+
+              <span className="text-sm font-medium transition-all group-hover:ms-4">
+                Order Now
+              </span>
+            </Link>
+          </div>
+        </div>
+      </div>
 
       {/* online course section */}
       <section className="!py-10">
@@ -1687,7 +1686,7 @@ function Home() {
       </div>
 
       {/* CTA section */}
-      <section className="lg:grid lg:h-[80vh]  lg:bg-cover lg:bg-center md:bg-center md:bg-cover relative bg-violet-300 lg:bg-[url('/images/bulkorder-2.png')] md:bg-[url('/images/bulkOrder.png')]">
+      <section className="lg:grid lg:h-[80vh]  lg:bg-cover lg:bg-center md:bg-center md:bg-cover relative bg-violet-300 lg:bg-[url('/images/bulkOrder.png')] md:bg-[url('/images/bulkOrder.png')]">
         <div className="lg:absolute lg:left-0 lg:top-[3vh] mt-18 w-screen max-w-screen-xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8 lg:py-32">
           <div className="max-w-prose text-left">
             <h1 className="lg:text-4xl font-bold text-gray-900 text-xl text-left">
