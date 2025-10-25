@@ -1,12 +1,13 @@
 import { GraduationCap, SquarePen, X, Check } from "lucide-react";
+import { Link } from "react-router-dom";
 
 function CategoryCardAdmin(props) {
   return (
     <div>
       {/* <h1>hello world</h1> */}
       {/* <p>Current category: {props.title}</p> */}
-      <div className={`rounded-2xl bg-white shadow-xl m-2`}>
-        <div className="rounded-xl h-60 w-auto !m-2 translate-y-2 flex align-bottom overflow-hidden">
+      <div className="rounded-2xl min-h-75 bg-white shadow-xl m-2 group">
+        <div className="rounded-xl relative h-40 w-auto !m-2 translate-y-2 flex align-bottom overflow-hidden">
           <img
             src={`http://localhost:5000${props.image}`}
             alt="course-img"
@@ -16,14 +17,26 @@ function CategoryCardAdmin(props) {
             }}
             className="rounded-xl w-full h-full object-center object-cover !z-0 hover:scale-104 transition-all duration-200"
           />
+          <div className="absolute inset-0 flex justify-center items-center">
+            <Link
+              to={`/admin/cakes/${props.title}`}
+              // state={}
+              className="bg-white cursor-pointer rounded-full px-3 py-2 font-bold translate-y-5 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300"
+            >
+              View Product
+            </Link>
+          </div>
         </div>
-        <div className="p-5 w-full">
-          <h2 className="font-semibold text-2xl">{props.title}</h2>
-          <p className="">{props.description}</p>
+        <div className="p-5 w-full flex justify-between">
+          <div>
+            <h2 className="font-semibold text-2xl">{props.title}</h2>
+
+            <p className="">{props.subject}</p>
+          </div>
 
           <div className="mt-4 flex justify-between">
             {/* <div className="text-3xl font-bold text-pink-500">₹{props.price}</div> */}
-            <div className="flex flex-row justify-center items-center gap-4">
+            <div className="flex flex-row justify-end items-start gap-4">
               <div>
                 <SquarePen
                   color="#808080"
@@ -32,7 +45,7 @@ function CategoryCardAdmin(props) {
                 />
               </div>
               <div>
-                <label
+                {/* <label
                   htmlFor={props.sliderBtn}
                   className="group hover:cursor-pointer relative block h-6 w-12 rounded-full bg-gray-300 transition-colors [-webkit-tap-highlight-color:_transparent] has-checked:bg-red-500"
                 >
@@ -43,7 +56,7 @@ function CategoryCardAdmin(props) {
 
                     <X size={10} />
                   </span>
-                </label>
+                </label> */}
               </div>
             </div>
           </div>
