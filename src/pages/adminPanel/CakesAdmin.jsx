@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import CategoryCardAdmin from "../../components/adminPanel/CategoryCardAdmin.jsx";
@@ -24,6 +24,28 @@ function CakesAdmin() {
     fetchCourses();
   }, []);
 
+  async function postCategory(e) {
+    const form = e.target;
+    const name = form.categoryTitle.value.trim();
+    const subject = form.categorySubject.value.trim();
+    const file = form.categoryFile.files[0];
+
+    try {
+      const postResponse = await axios.post(
+        `http://localhost:5000/categories`,
+        {
+          title: name,
+          subject: subject,
+          image: file,
+        },
+        { headers: { "Content-Type": "multipart/form-data",  } }
+      );
+      console.log("category added: ", postResponse.data);
+    } catch (error) {
+      console.error("error message: ", error.message);
+    }
+  }
+
   return (
     <div className="bg-white">
       {/* modal for edit */}
@@ -47,27 +69,14 @@ function CakesAdmin() {
             <button
               type="button"
               onClick={() => setIsModalVisible(false)}
-              className="-me-4 -mt-4 rounded-full p-2 transition-colors hover:bg-gray-600 focus:outline-none"
+              className="-me-4 -mt-4 rounded-full p-2 transition-colors hover:bg-gray-300 focus:outline-none"
               aria-label="Close"
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="size-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="#000000"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              </svg>
+              <X size={20} />
             </button>
           </div>
 
-          <div className="mt-4 flex flex-col gap-3">
+          <form onSubmit={postCategory} className="mt-4 flex flex-col gap-3">
             {/* <p className="text-pretty text-gray-700">this is a test run</p> */}
             <div className="flex gap-3 justify-between items-center">
               {/* <label htmlFor="categoryName" className="text-lg">
@@ -75,7 +84,8 @@ function CakesAdmin() {
               </label> */}
               <input
                 type="text"
-                id="categoryName"
+                name="categoryTitle"
+                id="categoryTitle"
                 className="ring ring-gray-500 text-black rounded-lg p-2 w-full"
                 placeholder="Category name"
               />
@@ -87,6 +97,7 @@ function CakesAdmin() {
               </label> */}
               <input
                 type="text"
+                name="categorySubject"
                 id="categorySubject"
                 className="ring ring-gray-500 text-black rounded-lg p-2 w-full"
                 placeholder="Subject"
@@ -100,16 +111,20 @@ function CakesAdmin() {
               <input
                 type="file"
                 id="categoryFile"
+                name="categoryFile"
                 className="ring h-20 ring-gray-500 text-black rounded-lg p-2 w-full"
               />
             </div>
-          </div>
 
-          <div className="flex justify-center items-center my-7">
-            <button className="bg-pink-600 font-semibold hover:cursor-pointer hover:bg-pink-500 transition-all duration-200 text-white px-4 py-3 rounded-xl">
-              Add new category
-            </button>
-          </div>
+            <div className="flex justify-center items-center my-4">
+              <button
+                type="submit"
+                className="bg-pink-600 font-semibold hover:cursor-pointer hover:bg-pink-500 transition-all duration-200 text-white px-4 py-3 rounded-xl"
+              >
+                Add new category
+              </button>
+            </div>
+          </form>
         </div>
       </div>
 

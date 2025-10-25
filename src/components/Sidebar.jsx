@@ -70,7 +70,7 @@ function Sidebar() {
                     // className="flex items-center gap-3 rounded-md px-2 py-2 text-gray-700 hover:bg-pink-50 transition-colors"
                     className={({ isActive }) =>
                       `${
-                        isActive ? "bg-sky-50" : ""
+                        isActive ? "bg-pink-50" : ""
                       } flex items-center gap-3 rounded-md px-2 py-2 text-gray-700 hover:bg-pink-50 transition-colors`
                     }
                   >
@@ -100,7 +100,7 @@ function Sidebar() {
                     // className="flex items-center gap-3 rounded-md px-2 py-2 text-gray-700 hover:bg-pink-50 transition-colors"
                     className={({ isActive }) =>
                       `${
-                        isActive ? "bg-sky-50" : ""
+                        isActive ? "bg-pink-50" : ""
                       } flex items-center gap-3 rounded-md px-2 py-2 text-gray-700 hover:bg-pink-50 transition-colors`
                     }
                   >
@@ -130,7 +130,7 @@ function Sidebar() {
                     // className="flex items-center gap-3 rounded-md px-2 py-2 text-gray-700 hover:bg-pink-50 transition-colors"
                     className={({ isActive }) =>
                       `${
-                        isActive ? "bg-sky-50" : ""
+                        isActive ? "bg-pink-50" : ""
                       } flex items-center gap-3 rounded-md px-2 py-2 text-gray-700 hover:bg-pink-50 transition-colors`
                     }
                   >
@@ -160,7 +160,7 @@ function Sidebar() {
                     // className="flex items-center gap-3 rounded-md px-2 py-2 text-gray-700 hover:bg-pink-50 transition-colors"
                     className={({ isActive }) =>
                       `${
-                        isActive ? "bg-sky-50" : ""
+                        isActive ? "bg-pink-50" : ""
                       } flex items-center gap-3 rounded-md px-2 py-2 text-gray-700 hover:bg-pink-50 transition-colors`
                     }
                   >
@@ -190,7 +190,7 @@ function Sidebar() {
                     // className="flex items-center gap-3 rounded-md px-2 py-2 text-gray-700 hover:bg-pink-50 transition-colors"
                     className={({ isActive }) =>
                       `${
-                        isActive ? "bg-sky-50" : ""
+                        isActive ? "bg-pink-50" : ""
                       } flex items-center gap-3 rounded-md px-2 py-2 text-gray-700 hover:bg-pink-50 transition-colors`
                     }
                   >

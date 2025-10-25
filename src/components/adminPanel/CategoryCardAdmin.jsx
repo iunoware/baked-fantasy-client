@@ -16,7 +16,7 @@ function CategoryCardAdmin(props) {
               e.target.onError = null;
               e.target.src = "/images/cake-2.jpg";
             }}
-            className="rounded-xl hover:scale-104 transition-all duration-200"
+            className="rounded-xl !z-0 hover:scale-104 transition-all duration-200"
           />
         </div>
         <div className="p-5 w-full">
