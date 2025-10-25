@@ -14,7 +14,7 @@ function CakesAdmin() {
     async function fetchCourses() {
       try {
         const response = await axios.get(`http://localhost:5000/categories`);
-        // console.log(response.data);
+        console.log(response.data);
         setCourses(response.data);
         // console.log("courses: ", courses);
       } catch (error) {
@@ -220,6 +220,7 @@ function CakesAdmin() {
                   title={course.title}
                   description={course.subject}
                   sliderBtn={course.title}
+                  image={course.imageUrl}
                 />
               </div>
             ))}

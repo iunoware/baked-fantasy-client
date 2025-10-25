@@ -6,17 +6,15 @@ function CategoryCardAdmin(props) {
       {/* <h1>hello world</h1> */}
       {/* <p>Current category: {props.title}</p> */}
       <div className={`rounded-2xl bg-white shadow-xl m-2`}>
-        <div className="rounded-xl !m-2 translate-y-2 flex align-bottom overflow-hidden">
+        <div className="rounded-xl h-60 w-auto !m-2 translate-y-2 flex align-bottom overflow-hidden">
           <img
-            src={
-              props.image ? `http://localhost:5000${props.image}` : "/images/cake-2.jpg"
-            }
+            src={`http://localhost:5000${props.image}`}
             alt="course-img"
             onError={(e) => {
               e.target.onError = null;
               e.target.src = "/images/cake-2.jpg";
             }}
-            className="rounded-xl !z-0 hover:scale-104 transition-all duration-200"
+            className="rounded-xl w-full h-full object-center object-cover !z-0 hover:scale-104 transition-all duration-200"
           />
         </div>
         <div className="p-5 w-full">
