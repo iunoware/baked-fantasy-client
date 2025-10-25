@@ -1,4 +1,6 @@
 import { X } from "lucide-react";
+// this si for the modal
+// and this is also
 function Modal() {
   return (
     <>
