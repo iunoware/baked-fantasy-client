@@ -52,7 +52,7 @@ export default function NewNav() {
             <div className="md:flex md:items-center md:gap-12">
               <Link
                 to="/"
-                className="text-[#af5753] inline-block [@media(max-width:440px)]:text-xs [@media(max-width:1180px)]:text-md [@media(max-width:1220px)]:text-xl text-2xl font-bold brand-name"
+                className="text-red inline-block [@media(max-width:440px)]:text-xs [@media(max-width:1180px)]:text-md [@media(max-width:1220px)]:text-xl text-2xl font-bold brand-name"
               >
                 The Backed Fantasy
               </Link>
@@ -68,13 +68,13 @@ export default function NewNav() {
                       className={({ isActive }) =>
                         `text-lg relative group rounded-lg p-3 transition ${
                           isActive
-                            ? "bg-pink-500 font-semibold text-white"
+                            ? "bg-red font-semibold text-white"
                             : "hover:text-black text-gray-800 "
                         } `
                       }
                     >
                       Home
-                      <span className=" absolute left-1 bottom-0 h-[3px] rounded-xl w-0 bg-pink-500 transition-all duration-300 group-hover:w-[90%]"></span>
+                      <span className=" absolute left-1 bottom-0 h-[3px] rounded-xl w-0 bg-red transition-all duration-300 group-hover:w-[90%]"></span>
                     </NavLink>
                   </li>
 
@@ -85,13 +85,13 @@ export default function NewNav() {
                       className={({ isActive }) =>
                         `text-lg relative group rounded-lg p-3 transition ${
                           isActive
-                            ? "bg-pink-500 text-white font-semibold"
+                            ? "bg-red text-white font-semibold"
                             : "hover:text-black text-gray-800 "
                         } `
                       }
                     >
                       About
-                      <span className="absolute left-1 bottom-0 h-[3px] rounded-xl w-0 bg-pink-500 transition-all duration-300 group-hover:w-[90%]"></span>
+                      <span className="absolute left-1 bottom-0 h-[3px] rounded-xl w-0 bg-red transition-all duration-300 group-hover:w-[90%]"></span>
                       {/* <span className="absolute bottom-0 left-1/2 h-[2px] w-0 -translate-x-1/2 origin-center rounded-xl bg-sky-500 transition-all duration-300 group-hover:w-[90%]"></span> */}
                     </NavLink>
                   </li>
@@ -103,13 +103,13 @@ export default function NewNav() {
                       className={({ isActive }) =>
                         `text-lg relative group rounded-lg p-3 transition ${
                           isActive
-                            ? "bg-pink-500 text-white font-semibold"
+                            ? "bg-red text-white font-semibold"
                             : "hover:text-black text-gray-800 "
                         } `
                       }
                     >
                       Products
-                      <span className="absolute left-1 bottom-0 h-[3px] rounded-xl w-0 bg-pink-500 transition-all duration-300 group-hover:w-[90%]"></span>
+                      <span className="absolute left-1 bottom-0 h-[3px] rounded-xl w-0 bg-red transition-all duration-300 group-hover:w-[90%]"></span>
                     </NavLink>
                   </li> */}
                   <li>
@@ -129,7 +129,7 @@ export default function NewNav() {
                           className={({ isActive }) =>
                             `flex items-center gap-2 text-lg relative group rounded-lg p-3 transition focus:relative ${
                               isActive
-                                ? "bg-pink-500 text-white font-semibold"
+                                ? "bg-red text-white font-semibold"
                                 : "hover:text-black text-gray-800 "
                             } `
                           }
@@ -215,7 +215,7 @@ export default function NewNav() {
                           className={({ isActive }) =>
                             `flex items-center gap-2 text-lg relative group rounded-lg p-3 transition focus:relative ${
                               isActive
-                                ? "bg-pink-500 text-white font-semibold"
+                                ? "bg-red text-white font-semibold"
                                 : "hover:text-black text-gray-800 "
                             } `
                           }
@@ -263,20 +263,20 @@ export default function NewNav() {
                       className={({ isActive }) =>
                         `text-lg relative group rounded-lg p-3 transition ${
                           isActive
-                            ? "bg-pink-500 text-white font-semibold"
+                            ? "bg-red text-white font-semibold"
                             : "hover:text-black text-gray-800 "
                         } `
                       }
                     >
                       Contact
-                      <span className="absolute left-1 bottom-0 h-[3px] rounded-xl w-0 bg-pink-500 transition-all duration-300 group-hover:w-[90%]"></span>
+                      <span className="absolute left-1 bottom-0 h-[3px] rounded-xl w-0 bg-red transition-all duration-300 group-hover:w-[90%]"></span>
                     </NavLink>
                   </li>
                 </ul>
               </nav>
             </div>
             <div className="searchBar">
-              <search className="px-5 py-2.5 bg-pink-100 rounded-2xl font-medium text-pink-600  flex items-center">
+              <search className="px-5 py-2.5 bg-orange-100 rounded-2xl font-medium text-red flex items-center">
                 <label htmlFor="search">
                   <Search size={20} />
                 </label>
@@ -284,22 +284,22 @@ export default function NewNav() {
                   type="search"
                   id="search"
                   placeholder="search cakes"
-                  className="border-none w-70 bg-pink-100 rounded-2xl focus:outline-none pl-3 "
+                  className="border-none w-70 bg-orange-100 rounded-2xl focus:outline-none pl-3 "
                 />
               </search>
             </div>
             <div className="flex items-center gap-4">
-              <div className="sm:flex rounded-2xl p-1 bg-pink-100 sm:gap-4">
+              <div className="sm:flex rounded-2xl p-1 bg-orange-100 sm:gap-4">
                 <div className="hidden sm:flex">
                   <Link
-                    className=" px-5 cursor-pointer py-2.5 text-sm font-medium text-pink-600"
+                    className=" px-5 cursor-pointer py-2.5 text-sm font-medium text-red"
                     to="/cart"
                   >
                     <ShoppingCart size={20} />
                   </Link>
                 </div>
                 <Link
-                  className=" px-5 py-2.5 cursor-pointer text-sm font-medium text-pink-600"
+                  className=" px-5 py-2.5 cursor-pointer text-sm font-medium text-red"
                   // onClick={() => setLoginOpen(true)}
                   to="/profile"
                 >
@@ -320,10 +320,7 @@ export default function NewNav() {
         <nav className="block md:block shadow-lg lg:hidden z-50 fixed top-0 left-0 w-full h-35 bg-pink-50">
           <div className="flex justify-between pt-4 pl-3">
             <div className="logo flex items-center">
-              <Link
-                to="/"
-                className="text-pink-500 text-xl font-bold brand-name"
-              >
+              <Link to="/" className="text-red text-xl font-bold brand-name">
                 The Backed Fantasy
               </Link>
             </div>
@@ -342,7 +339,7 @@ export default function NewNav() {
             </div>
           </div>
           <div className="searchBar pt-5 mx-5">
-            <search className="px-5 py-2.5 bg-pink-200 text-pink-600 rounded-2xl flex items-center">
+            <search className="px-5 py-2.5 bg-pink-200 text-red rounded-2xl flex items-center">
               <label htmlFor="search">
                 <Search size={20} />
               </label>
@@ -350,7 +347,7 @@ export default function NewNav() {
                 type="search"
                 id="search"
                 placeholder="search cakes"
-                className="border-none w-full font-medium text-pink-600 bg-pink-200 rounded-2xl   focus:outline-none pl-3"
+                className="border-none w-full font-medium text-red bg-pink-200 rounded-2xl   focus:outline-none pl-3"
               />
             </search>
           </div>
