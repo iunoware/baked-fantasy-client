@@ -12,6 +12,7 @@ function Home() {
   const { categoryName } = useParams();
   const [products, setProducts] = useState([]);
   const [courses, setCourses] = useState([]);
+  const [banner, setBanner] = useState({});
 
   // const productImages = [
   //   "/images/cake-1.jpg",
@@ -19,6 +20,18 @@ function Home() {
   //   "/images/cake-3.jpg",
   //   "/images/cake-bg-5.jpg",
   // ];
+  useEffect(() => {
+    const fetchBaner = async () => {
+      try {
+        const res = await axios.get("http://localhost:5000/banner");
+        setBanner(res.data[0]);
+        // console.log(res.data);
+      } catch (error) {
+        console.error("Error Fetching Banner", error);
+      }
+    };
+    fetchBaner();
+  }, []);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -47,7 +60,7 @@ function Home() {
 
   return (
     <div className="bg">
-      {/* <Modal /> */}
+      {banner.active == true ? <Modal /> : ""}
       {/* hero section */}
       <div className="pt-35 z-51 md:pt-15 h-screen w-screen relative bg-pink-100 flex justify-center items-center">
         <div className="">
@@ -976,10 +989,10 @@ function Home() {
           <div className="relative flex md:justify-end md:items-center justify-center pt-3 h-[60vh] md:pt-0 items-start lg:justify-end lg:pr-20 md:pr-10 bg-center bg-cover md:bg-[url('/images/popup.jpg')] bg-[url('/images/popup-mo.jpg')] rounded-2xl">
             <div className="">
               <h1 className="mansalva-regular drop-shadow-5xl sm:px-0 px-5 w-full text-white md:text-6xl text-4xl text-center">
-                15 Days <br /> Baking Course
+                {banner?.title || "Titles not yet"}
               </h1>
               <p className="luckyGuy pt-5 px-4 w-full text-white font-bold text-lg text-center">
-                Learn the basic <br /> and fundamental skills of baking!
+                {banner?.subject || "Subjects not yet"}
               </p>
               <div className="w-full flex justify-center">
                 <button className="w-30 p-2 mt-5 bg-sky-500 backdrop-blur-2xl hover:scale-108 transition-all ease-in text-white font-bold rounded-2xl">
