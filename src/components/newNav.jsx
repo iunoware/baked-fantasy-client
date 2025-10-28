@@ -52,7 +52,7 @@ export default function NewNav() {
             <div className="md:flex md:items-center md:gap-12">
               <Link
                 to="/"
-                className="text-pink-500 inline-block [@media(max-width:440px)]:text-xs [@media(max-width:1180px)]:text-md [@media(max-width:1220px)]:text-xl text-2xl font-bold brand-name"
+                className="text-[#af5753] inline-block [@media(max-width:440px)]:text-xs [@media(max-width:1180px)]:text-md [@media(max-width:1220px)]:text-xl text-2xl font-bold brand-name"
               >
                 The Backed Fantasy
               </Link>
@@ -320,7 +320,10 @@ export default function NewNav() {
         <nav className="block md:block shadow-lg lg:hidden z-50 fixed top-0 left-0 w-full h-35 bg-pink-50">
           <div className="flex justify-between pt-4 pl-3">
             <div className="logo flex items-center">
-              <Link to="/" className="text-pink-500 text-xl font-bold brand-name">
+              <Link
+                to="/"
+                className="text-pink-500 text-xl font-bold brand-name"
+              >
                 The Backed Fantasy
               </Link>
             </div>
@@ -422,7 +425,11 @@ export default function NewNav() {
                 </Link>
               </li>
               <li className="rounded-lg">
-                <Link to="/courses" onClick={() => setMenuOpen(false)} className="ml-4">
+                <Link
+                  to="/courses"
+                  onClick={() => setMenuOpen(false)}
+                  className="ml-4"
+                >
                   • Courses
                 </Link>
               </li>

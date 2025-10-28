@@ -1,9 +1,11 @@
+import axios from "axios";
 import { X } from "lucide-react";
 import { useEffect, useState } from "react";
 
 function Modal() {
   const [close, setClose] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
+  const [modal, setModal] = useState();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -16,6 +18,22 @@ function Modal() {
   }, []);
 
   if (close || !showPopup) return null;
+
+  useEffect(() => {
+    const fetchModal = async () => {
+      try {
+        const res = await axios.get(
+          "http://localhost:5000/banner/68ff6f48e9b1fff91c44273a"
+        );
+        console.log(res.data);
+
+        setModal(res.data);
+      } catch (error) {
+        console.error("Error Fetching Modal", error);
+      }
+    };
+    fetchModal();
+  }, []);
 
   return (
     <>
@@ -37,10 +55,12 @@ function Modal() {
             </button>
             <div className="">
               <h1 className="mansalva-regular drop-shadow-5xl sm:px-0 px-5 w-full text-white md:text-6xl text-4xl text-center">
-                15 Days <br /> Baking Course
+                {/* 15 Days <br /> Baking Course */}
+                {modal.title}
               </h1>
               <p className="luckyGuy pt-5 px-4 w-full text-white font-bold text-lg text-center">
-                Learn the basic <br /> and fundamental skills of baking!
+                {/* Learn the basic <br /> and fundamental skills of baking! */}
+                {modal.subject}
               </p>
               <div className="w-full flex justify-center">
                 <button className="w-30 p-2 mt-5 bg-sky-500 backdrop-blur-2xl hover:scale-108 transition-all ease-in text-white font-bold rounded-2xl">

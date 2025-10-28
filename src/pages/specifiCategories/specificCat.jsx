@@ -50,7 +50,8 @@ function SpecificCategory() {
             id={p._id} // ✅ pass id
             category={categoryName}
             img={`http://localhost:5000${p.images?.[0]}`} // 👈 thumbnail only
-            price={p.price}
+            originalPrice={p.originalPrice}
+            discountedPrice={p.discountedPrice}
             title={p.title}
             subject={p.subject}
           />
