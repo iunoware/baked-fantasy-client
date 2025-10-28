@@ -91,7 +91,7 @@ function Product(props) {
         </div>
 
         {/* Bottom white content */}
-        <div className=" p-4 sm:p-6">
+        <div className=" p-4 md:p-6">
           <div className="text-black flex">
             <div className="flex items-center gap-2 w-10/12">
               <div>
@@ -99,15 +99,36 @@ function Product(props) {
                 <p className="text-md pt-2">{props.subject}</p>
               </div>
             </div>
-            <p className="mt-2 pb-3 font-extrabold text-3xl text-blue-500">
-              {" "}
-              ₹{props.price}
+            <p className="mt-2 w-full flex justify-end gap-3 items-center pb-3 font-extrabold text-2xl text-black">
+              <span className="text-xl line-through text-red">
+                ₹{props.originalPrice}
+              </span>
+              <span> ₹{props.discountedPrice}</span>
             </p>
           </div>
+          {/* new box */}
+          {/* <div class="text-black flex">
+            <div class="flex items-center gap-2 w-12/12">
+              <div>
+                <h3 class="font-bold text-xl">Sweet Heritage Box</h3>
+                <p class="text-sm md:text-md subHeading pt-2">
+                  A golden box of Tamil Nadu’s classic sweets - rich, festive,
+                  and full of tradition.
+                </p>
+              </div>
+            </div>
+            <p class="flex items-center mt-2 pb-3 font-extrabold text-2xl text-black">
+              <span class="opacity-75 line-through font-bold text-lg text-[#bb0001]">
+                ₹500
+              </span>
+              <span class="pl-2"> ₹425 </span>
+            </p>
+          </div> */}
+          {/* new box end */}
           <div className="pt-3">
             {!added ? (
               <button
-                className="group relative inline-flex items-center overflow-hidden rounded-sm bg-cyan-500 px-8 py-3 text-white focus:ring-3 focus:outline-hidden mr-3"
+                className="group relative inline-flex items-center overflow-hidden rounded-lg bg-cyan-500 px-8 py-3 text-white focus:ring-3 focus:outline-hidden mr-3"
                 onClick={handleCart}
               >
                 <span className="absolute -start-full transition-all group-hover:start-4">
@@ -140,7 +161,7 @@ function Product(props) {
                 </span>
               </button>
             ) : (
-              <div className="space-x-2 translate-y-1 group relative inline-flex items-center overflow-hidden rounded-sm bg-cyan-500 py-2 text-white focus:ring-3 focus:outline-hidden mr-3">
+              <div className="space-x-2 translate-y-1 group relative inline-flex items-center overflow-hidden rounded-lg bg-cyan-500 py-2 text-white focus:ring-3 focus:outline-hidden mr-3">
                 <Button
                   variant="ghost"
                   size="sm"
@@ -161,7 +182,7 @@ function Product(props) {
               </div>
             )}
             <button
-              className="group relative inline-flex items-center overflow-hidden rounded-sm border border-current px-3 py-3 text-sky-600 focus:ring-3 focus:outline-hidden"
+              className="group relative inline-flex items-center overflow-hidden rounded-lg border border-current px-3 py-3 text-sky-600 focus:ring-3 focus:outline-hidden"
               href="#"
             >
               <span className="absolute -start-full transition-all group-hover:start-1">

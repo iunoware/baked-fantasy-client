@@ -20,6 +20,14 @@ body {
   font-style: normal;
 }
 
+@theme {
+  --color-blue: #73c3b4;
+  --color-red: #c77773;
+  --color-cream: #fef9ec;
+  --color-butterscothch: #d78e47;
+  --color-brown: #b16231;
+}
+
 .redText {
   color: red;
 }
@@ -67,7 +75,7 @@ body {
 
 /* background color */
 .bg {
-  @apply bg-[#f1faee];
+  @apply bg-[#fef9ec];
 }
 
 /* heading color */

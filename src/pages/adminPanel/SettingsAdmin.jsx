@@ -1,21 +1,72 @@
-import { SquarePen } from "lucide-react";
 import { useState } from "react";
+import { X, SquarePen } from "lucide-react";
+import toast from "react-hot-toast";
+import axios from "axios";
 
 function SettingsAdmin() {
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const token = "";
+
+  async function postCategory(e) {
+    e.preventDefault();
+
+    const form = e.target;
+    const title = form.bannerTitle.value.trim();
+    const subject = form.bannerSubject.value.trim();
+    const file = form.bgImg.files[0];
+
+    if (!title || !subject || !file) {
+      window.alert("Please fill all fields and select an image!");
+      return;
+    } else {
+      const formData = new FormData();
+      formData.append("title", title);
+      formData.append("subject", subject);
+      formData.append("image", file);
+
+      try {
+        const postBanner = await axios.post(
+          "http://localhost:5000/banner",
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+              Authorization: ` Bearer ${token}`,
+            },
+          }
+        );
+        toast.success("Login Successful! Welcome back 🍰");
+        console.log("Banner added: ", postBanner.data);
+        setIsModalVisible(false);
+        window.location.reload();
+      } catch (error) {
+        console.error("error message: ", error.message);
+      }
+    }
+  }
 
   return (
     <div className="bg h-[100vh]">
       {/* modal */}
       <div
-        className="fixed inset-0 z-50 grid place-content-center bg-black/50 p-4"
+        className={`${
+          isModalVisible ? "block" : "hidden"
+        } fixed inset-0 z-50 grid place-content-center bg-black/50 p-4`}
         role="dialog"
         aria-modal="true"
         aria-labelledby="modalTitle"
       >
         <div className="w-[60vh] rounded-lg bg-white p-6 shadow-lg">
-          <h2 className="text-2xl font-bold">Add New Banner</h2>
-          <form className="mt-4 flex flex-col gap-3">
+          <div className="flex justify-between pb-3">
+            <h2 className="text-2xl font-bold">Add New Banner</h2>
+            <button
+              onClick={() => setIsModalVisible(false)}
+              className="cursor-pointer hover:rotate-90 transition-all ease-in"
+            >
+              <X />
+            </button>
+          </div>
+          <form className="mt-4 flex flex-col gap-3" onSubmit={postCategory}>
             {/* <p className="text-pretty text-gray-700">this is a test run</p> */}
             <div className="flex gap-3 justify-between items-center">
               {/* <label htmlFor="categoryName" className="text-lg">
@@ -23,10 +74,10 @@ function SettingsAdmin() {
               </label> */}
               <input
                 type="text"
-                name="categoryTitle"
-                id="categoryTitle"
-                className="ring ring-gray-500 text-black rounded-lg p-2 w-full"
-                placeholder="Banner Title"
+                name="bannerTitle"
+                // id="bannerTitle"
+                className="ring ring-gray-500 placeholder:text-black text-black rounded-lg p-2 w-full"
+                placeholder="Title"
               />
             </div>
 
@@ -36,10 +87,10 @@ function SettingsAdmin() {
               </label> */}
               <input
                 type="text"
-                name="categorySubject"
-                id="categorySubject"
-                className="ring ring-gray-500 text-black rounded-lg p-2 w-full"
-                placeholder="Banner Sub Heading"
+                name="bannerSubject"
+                // id="bannerSubject"
+                className="ring ring-gray-500 placeholder:text-black text-black rounded-lg p-2 w-full"
+                placeholder="Subject"
               />
             </div>
 
@@ -49,9 +100,10 @@ function SettingsAdmin() {
               </label> */}
               <input
                 type="file"
-                id="categoryFile"
-                name="categoryFile"
-                className="ring h-20 ring-gray-500 text-black rounded-lg p-2 w-full"
+                // id="bannerBg"
+                name="bgImg"
+                placeholder="Choose an Background Image"
+                className="ring h-20 ring-gray-500 text-black text-center rounded-lg p-2 w-full"
               />
             </div>
 
@@ -71,13 +123,9 @@ function SettingsAdmin() {
         {/* heading */}
         <div className="flex flex-col md:flex-row gap-5 md:gap-0 justify-between">
           <div>
-            <h1 className="text-3xl font-semibold">
-              Cakes and Cookies Categories
-            </h1>
+            <h1 className="text-3xl font-semibold">Banner Information</h1>
 
-            <p className="text-md pt-1">
-              Manage your bakery products and inventory
-            </p>
+            <p className="text-md pt-1">Temporary Banner</p>
           </div>
           <div>
             <button
@@ -89,7 +137,7 @@ function SettingsAdmin() {
           </div>
         </div>
         {/* main section */}
-        {/* <div className="flex items-center justify-center mt-10">
+        <div className="flex items-center justify-center mt-10">
           <div className="bg-white relative p-5 rounded-2xl shadow-2xl w-[50%] h-fit">
             <div className="">
               <h2 className="font-bold text-xl">Banner Information</h2>
@@ -114,7 +162,7 @@ function SettingsAdmin() {
                 <p className="pl-4 pt-1 text-lg">Enroll Now</p>
               </div>
             </div>
-            
+
             <div className="absolute flex items-center justify-center right-5 bottom-5 flex-row gap-5">
               <SquarePen
                 color="#808080"
@@ -165,7 +213,7 @@ function SettingsAdmin() {
               </label>
             </div>
           </div>
-        </div> */}
+        </div>
       </div>
     </div>
   );
