@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
@@ -20,7 +19,12 @@ function IndividualCakesAdmin() {
         console.log("products: ", response.data);
         setProducts(response.data);
       } catch (err) {
-        console.error("Error fetching products:", err);
+        if (err.response && err.response.data.status === 404) {
+          console.warn("no products found in: ", categoryName);
+          setProducts([]);
+        } else {
+          console.error("Error fetching products:", err);
+        }
       }
     }
 
@@ -28,7 +32,7 @@ function IndividualCakesAdmin() {
   }, []);
 
   const token =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4YTk3ZDYxOTdlMjcxMDM0OWUwNmI0MyIsImlhdCI6MTc2MTU0NjYyMCwiZXhwIjoxNzYxNjMzMDIwfQ.3Hbn0HxnFNK2td5hUfirMLpSGKcUFs87PIBldDjFNsk";
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4YTk3ZDYxOTdlMjcxMDM0OWUwNmI0MyIsImlhdCI6MTc2MTY0NjA0MCwiZXhwIjoxNzYxNzMyNDQwfQ.by9qSWdklxR4AE9J2QquZ5oFIZTul1qAh3o-xzVGL0c";
 
   async function postCategory(e) {
     e.preventDefault();
@@ -37,26 +41,42 @@ function IndividualCakesAdmin() {
     const name = form.productTitle.value.trim();
     const subject = form.productSubject.value.trim();
     const files = form.productFile.files;
+    const originalPrice = form.productOriginalPrice.value.trim();
+    const discountedPrice = form.productPrice.value.trim();
+    const description = form.productDescription.value.trim();
+    const info = form.productInfo.value.trim();
+    const inStock = form.productInStock.value.trim();
     if (files.length > 4) {
       window.alert("You can only upload up to 4 images.");
       return;
     }
-    const price = form.productPrice.value.trim();
-    const originalPride = form.productOriginalPrice.value.trim();
-    const description = form.productDescription.value.trim();
-    const info = form.productInfo.value.trim();
-    const inStock = form.productInStock.value.trim();
 
-    if (!name || !subject || !files) {
+    if (
+      !form ||
+      !name ||
+      !subject ||
+      !files ||
+      !originalPrice ||
+      !discountedPrice ||
+      !description ||
+      !info ||
+      !inStock
+    ) {
       window.alert("Please fill all fields and select an image!");
       return;
     } else {
       const formData = new FormData();
       formData.append("title", name);
+      formData.append("originalPrice", originalPrice);
+      formData.append("discountedPrice", discountedPrice);
       formData.append("subject", subject);
-      formData.append("image", files);
-      formData.append("price", price);
-      // formData.append("originalPrice", originalPrice);
+      formData.append("description", description);
+      formData.append("info", info);
+      formData.append("category", categoryName);
+      for (let i = 0; i < files.length; i++) {
+        formData.append("images", files[i]);
+      }
+      formData.append("inStock", inStock);
 
       try {
         const postResponse = await axios.post(
@@ -69,11 +89,7 @@ function IndividualCakesAdmin() {
             },
           }
         );
-        // setCourses((prev) => [...prev, postResponse.data]);
-
-        // const newResponse = await axios.get(`http://localhost:5000/categories`);
-        // setCourses(newResponse.data);
-        console.log("category added: ", postResponse.data);
+        console.log("product status: ", postResponse.data);
         setIsModalVisible(false);
         window.location.reload();
       } catch (error) {
@@ -99,7 +115,7 @@ function IndividualCakesAdmin() {
               id="modalTitle"
               className="md:text-3xl text-center w-full mb-5 font-bold text-black text-2xl"
             >
-              Add new Category
+              Add new Product
             </h2>
 
             <button
@@ -147,7 +163,7 @@ function IndividualCakesAdmin() {
               />
             </div>
 
-            {/* price */}
+            {/* discounted price */}
             <div className="flex gap-3 justify-between items-center">
               <input
                 type="text"
@@ -195,8 +211,8 @@ function IndividualCakesAdmin() {
             <div className="flex gap-3 justify-between items-center">
               <input
                 type="text"
-                name="productStock"
-                id="productStock"
+                name="productInStock"
+                id="productInStock"
                 className="ring ring-gray-500 text-black rounded-lg p-2 w-full"
                 placeholder="Is it in Stock? (y/n)"
               />
@@ -214,10 +230,7 @@ function IndividualCakesAdmin() {
         </div>
       </div>
 
-      {/* <div>
-        <h1 className="text-3xl font-semibold">{categoryName}</h1>
-        <p className="text-md pt-1">Manage your bakery products</p>
-      </div> */}
+      {/* add product button */}
       <div className="flex flex-col md:flex-row gap-5 md:gap-0 justify-between">
         <div>
           <h1 className="text-3xl font-semibold text-pink-600">{categoryName}</h1>
@@ -239,33 +252,29 @@ function IndividualCakesAdmin() {
           All {categoryName} Products
         </h2>
 
-        {/* {products.map((product, i) => (
+        <div className="overflow-x-auto shadow-lg bg-white rounded-2xl mt-5 p-3 space-x-4 ">
+          {products.length > 0 ? (
+            <table className="table-auto ">
+              <thead>
+                <tr className="divide-y text-xl divide-gray-300">
+                  <th className="p-4 text-start">S.no</th>
+                  <th className="p-4 text-start">Images</th>
+                  <th className="p-4 text-start">Name</th>
+                  <th className="p-4 text-start">Discounted Price</th>
+                  <th className="p-4 text-start">Original Price</th>
+                  <th className="p-4 text-start">description</th>
+                  <th className="p-4 text-start">info</th>
+                  <th className="p-4 text-start">inStock</th>
+                  <th className="p-4 text-start">Actions</th>
+                </tr>
+              </thead>
 
-        ))} */}
-
-        <div className="overflow-x-auto shadow-lg bg-white rounded-2xl mt-5 p-3 space-x-4 text-xl">
-          <table className="table-auto ">
-            <thead>
-              <tr className="divide-y divide-gray-300">
-                <th className="p-4 text-start">S.no</th>
-                <th className="p-4 text-start">Images</th>
-                <th className="p-4 text-start">Name</th>
-                <th className="p-4 text-start">Price</th>
-                <th className="p-4 text-start">Original Price</th>
-                {/* <th className="p-4 text-start">Subject</th> */}
-                <th className="p-4 text-start">description</th>
-                <th className="p-4 text-start">info</th>
-                <th className="p-4 text-start">inStock</th>
-                <th className="p-4 text-start">Actions</th>
-              </tr>
-            </thead>
-
-            {products.map((product, i) => (
-              <tbody key={product._id}>
-                <tr className="my-3 divide-y divide-gray-300">
-                  <td className="p-4">{i + 1}</td>
-                  <td className="p-4">
-                    {/* <div className="grid grid-cols-1 gap-1 lg:grid-cols-2 lg:gap-2">
+              {products.map((product, i) => (
+                <tbody key={product._id} className={i % 2 === 0 ? "bg-gray-100" : ""}>
+                  <tr className="my-3 divide-y text-lg divide-gray-300">
+                    <td className="p-4">{i + 1}</td>
+                    <td className="p-4">
+                      {/* <div className="grid grid-cols-1 gap-1 lg:grid-cols-2 lg:gap-2">
                     {product.images.map((image, i) => (
                       <img
                         src={`http://localhost:5000${image}`}
@@ -274,26 +283,26 @@ function IndividualCakesAdmin() {
                       />
                     ))}
                   </div> */}
-                    <img
-                      src={`http://localhost:5000${product.images[0]}`}
-                      alt="Product Image"
-                      className="h-20 rounded-lg object-center object-cover w-20"
-                    />
-                  </td>
-                  <td className="p-4">
-                    {product.title}
-                    <span className="text-md text-gray-500 block">
-                      ({product.subject})
-                    </span>
-                  </td>
-                  <td className="p-4">₹{product.price}</td>
-                  <td className="p-4">₹discounted price!</td>
-                  <td className="p-4">{product.description}</td>
-                  <td className="p-4">{product.info}</td>
-                  <td className="p-4">{product.inStock}</td>
-                  <td className="p-4 flex justify-center items-center">
-                    <SquarePen size={20} className="cursor-pointer" />
-                    {/* <label
+                      <img
+                        src={`http://localhost:5000${product.images[0]}`}
+                        alt="Product Image"
+                        className="h-20 rounded-lg object-center object-cover w-20"
+                      />
+                    </td>
+                    <td className="p-4">
+                      {product.title}
+                      <span className="text-md text-gray-500 block">
+                        ({product.subject})
+                      </span>
+                    </td>
+                    <td className="p-4">₹{product.originalPrice}</td>
+                    <td className="p-4">₹{product.discountedPrice}</td>
+                    <td className="p-4">{product.description}</td>
+                    <td className="p-4">{product.info}</td>
+                    <td className="p-4">{product.inStock ? "true" : "false"}</td>
+                    <td className="p-4">
+                      <SquarePen size={20} className="cursor-pointer" />
+                      {/* <label
                       htmlFor={product.title}
                       className="group hover:cursor-pointer relative block h-6 w-12 rounded-full bg-gray-300 transition-colors [-webkit-tap-highlight-color:_transparent] has-checked:bg-red-500"
                     >
@@ -309,53 +318,18 @@ function IndividualCakesAdmin() {
                         <X size={10} />
                       </span>
                     </label> */}
-                  </td>
-                </tr>
-              </tbody>
-            ))}
-
-            {/* <tbody>
-            <tr className="my-3 divide-y divide-gray-300">
-              <td className="p-4">1</td>
-              <td className="p-4">
-                The Sliding Mr. Bones (Next Stop, Pottersville)
-                <span className="text-md text-gray-500 block">1961</span>
-              </td>
-              <td className="p-4">₹599</td>
-              <td className="p-4">₹899</td>
-              <td className="p-4">Images here</td>
-              <td className="p-4">description goes here</td>
-              <td className="p-4">info of the product goes here</td>
-              <td className="p-4">true</td>
-            </tr>
-
-            <tr className="my-3 divide-y divide-gray-300">
-              <td className="p-4">2</td>
-              <td className="p-4">
-                Witchy Woman <span className="text-md text-gray-500 block">1972</span>
-              </td>
-              <td className="p-4">₹599</td>
-              <td className="p-4">₹899</td>
-              <td className="p-4">Images here</td>
-              <td className="p-4">description goes here</td>
-              <td className="p-4">info of the product goes here</td>
-              <td className="p-4">true</td>
-            </tr>
-
-            <tr className="my-3 divide-y divide-gray-300">
-              <td className="p-4">3</td>
-              <td className="p-4">
-                Shining Star <span className="text-md text-gray-500 block">1975</span>
-              </td>
-              <td className="p-4">₹599</td>
-              <td className="p-4">₹899</td>
-              <td className="p-4">Images here</td>
-              <td className="p-4">description goes here</td>
-              <td className="p-4">info of the product goes here</td>
-              <td className="p-4">true</td>
-            </tr>
-          </tbody> */}
-          </table>
+                    </td>
+                  </tr>
+                </tbody>
+              ))}
+            </table>
+          ) : (
+            <div>
+              <h2 className="text-2xl font-semibold">
+                There are no products in this {categoryName} category
+              </h2>
+            </div>
+          )}
         </div>
       </div>
     </div>
