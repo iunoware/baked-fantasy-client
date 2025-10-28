@@ -5,9 +5,7 @@ import axios from "axios";
 import CategoryCardAdmin from "../../components/adminPanel/CategoryCardAdmin.jsx";
 
 function CakesAdmin() {
-  // const [isDropdownVisible, setIsDropdownVisible] = useState(false);
   const [courses, setCourses] = useState([]);
-  // const [currentCategory, setCurrentCategory] = useState();
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   useEffect(() => {
@@ -25,7 +23,7 @@ function CakesAdmin() {
   }, []);
 
   const token =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4YTk3ZDYxOTdlMjcxMDM0OWUwNmI0MyIsImlhdCI6MTc2MTM4MTc4MSwiZXhwIjoxNzYxNDY4MTgxfQ.Td-IXJkCgZYR24KCOFfetqRkRR-bcYeI_e0jo3QQg5c";
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4YTk3ZDYxOTdlMjcxMDM0OWUwNmI0MyIsImlhdCI6MTc2MTU0NjYyMCwiZXhwIjoxNzYxNjMzMDIwfQ.3Hbn0HxnFNK2td5hUfirMLpSGKcUFs87PIBldDjFNsk";
 
   async function postCategory(e) {
     e.preventDefault();
@@ -70,7 +68,7 @@ function CakesAdmin() {
 
   return (
     <div className="bg-white">
-      {/* modal for edit */}
+      {/* modal for post category */}
       <div
         className={`${
           isModalVisible ? "block" : "hidden"
@@ -243,6 +241,8 @@ function CakesAdmin() {
                   subject={course.subject}
                   sliderBtn={course.title}
                   image={course.imageUrl}
+                  categoryId={course._id}
+                  // modal={`setIsModal2Visible(true)`}
                 />
               </div>
             ))}
