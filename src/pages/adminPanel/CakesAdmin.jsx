@@ -1,12 +1,14 @@
 // /* eslint-disable no-unused-vars */
-import { ChevronDown, X } from "lucide-react";
+import { ChevronDown, X, Check } from "lucide-react";
 import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import axios from "axios";
 import CategoryCardAdmin from "../../components/adminPanel/CategoryCardAdmin.jsx";
 
 function CakesAdmin() {
   const [courses, setCourses] = useState([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isActive, setIsActive] = useState(true);
 
   useEffect(() => {
     async function fetchCourses() {
@@ -23,7 +25,7 @@ function CakesAdmin() {
   }, []);
 
   const token =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4YTk3ZDYxOTdlMjcxMDM0OWUwNmI0MyIsImlhdCI6MTc2MTU0NjYyMCwiZXhwIjoxNzYxNjMzMDIwfQ.3Hbn0HxnFNK2td5hUfirMLpSGKcUFs87PIBldDjFNsk";
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4YTk3ZDYxOTdlMjcxMDM0OWUwNmI0MyIsImlhdCI6MTc2MTcxNDEyMiwiZXhwIjoxNzYxODAwNTIyfQ.nHMQbJNUxXQKQ7xbabLDl018xkl0mFTcLeLvx9a9644";
 
   async function postCategory(e) {
     e.preventDefault();
@@ -33,8 +35,15 @@ function CakesAdmin() {
     const subject = form.categorySubject.value.trim();
     const file = form.categoryFile.files[0];
 
-    if (!name || !subject || !file) {
-      window.alert("Please fill all fields and select an image!");
+    if (!name) {
+      // window.alert("Please fill all fields and select an image!");
+      toast.error("Please enter a Name");
+      return;
+    } else if (!subject) {
+      toast.error("Please enter a Subject");
+      return;
+    } else if (!file) {
+      toast.error("Please enter an Image");
       return;
     } else {
       const formData = new FormData();
@@ -58,9 +67,13 @@ function CakesAdmin() {
         // const newResponse = await axios.get(`http://localhost:5000/categories`);
         // setCourses(newResponse.data);
         console.log("category added: ", postResponse.data);
+        toast.success("Category added");
         setIsModalVisible(false);
-        window.location.reload();
+        setTimeout(() => {
+          window.location.reload();
+        }, 2000);
       } catch (error) {
+        toast.error("Can't add Category");
         console.error("error message: ", error.message);
       }
     }
@@ -89,7 +102,7 @@ function CakesAdmin() {
             <button
               type="button"
               onClick={() => setIsModalVisible(false)}
-              className="-me-4 -mt-4 rounded-full p-2 transition-colors hover:bg-gray-300 focus:outline-none"
+              className="-me-4 -mt-4 rounded-full p-2 cursor-pointer transition-all hover:rotate-90 ease-in focus:outline-none"
               aria-label="Close"
             >
               <X size={20} />
@@ -97,11 +110,8 @@ function CakesAdmin() {
           </div>
 
           <form onSubmit={postCategory} className="mt-4 flex flex-col gap-3">
-            {/* <p className="text-pretty text-gray-700">this is a test run</p> */}
+            {/* title */}
             <div className="flex gap-3 justify-between items-center">
-              {/* <label htmlFor="categoryName" className="text-lg">
-                Category Name:{" "}
-              </label> */}
               <input
                 type="text"
                 name="categoryTitle"
@@ -111,10 +121,8 @@ function CakesAdmin() {
               />
             </div>
 
+            {/* subject */}
             <div className="flex gap-3 justify-between items-center">
-              {/* <label htmlFor="categorySubject" className="text-lg">
-                Subject:{" "}
-              </label> */}
               <input
                 type="text"
                 name="categorySubject"
@@ -124,16 +132,38 @@ function CakesAdmin() {
               />
             </div>
 
+            {/* file */}
             <div className="flex gap-3 justify-between items-center">
-              {/* <label htmlFor="categoryFile" className="text-lg">
-                Category Name:{" "}
-              </label> */}
               <input
                 type="file"
                 id="categoryFile"
                 name="categoryFile"
                 className="ring h-20 ring-gray-500 text-black rounded-lg p-2 w-full"
               />
+            </div>
+
+            {/* isActive */}
+            <div className="flex justify-between mb-5">
+              <div>
+                <h4>{isActive ? "Activate" : "De-activate"}</h4>
+              </div>
+              <label
+                htmlFor="category"
+                className="group hover:cursor-pointer relative block h-6 w-12 rounded-full bg-gray-300 transition-colors [-webkit-tap-highlight-color:_transparent] has-checked:bg-red-500"
+              >
+                <input
+                  type="checkbox"
+                  onClick={() => setIsActive((prev) => !prev)}
+                  id="category"
+                  className="peer sr-only"
+                />
+
+                <span className="absolute inset-y-0 start-0 m-1 grid size-4 place-content-center rounded-full bg-white text-gray-700 transition-[inset-inline-start] peer-checked:start-6 peer-checked:*:first:hidden *:last:hidden peer-checked:*:last:block">
+                  <Check size={10} />
+
+                  <X size={10} />
+                </span>
+              </label>
             </div>
 
             <div className="flex justify-center items-center">
@@ -242,6 +272,7 @@ function CakesAdmin() {
                   sliderBtn={course.title}
                   image={course.imageUrl}
                   categoryId={course._id}
+                  activate={course.isActive}
                   // modal={`setIsModal2Visible(true)`}
                 />
               </div>

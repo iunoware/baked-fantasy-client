@@ -1,8 +1,11 @@
+// /* eslint-disable no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { SquarePen, Check, X } from "lucide-react";
+import toast from "react-hot-toast";
+import ProductAdmin from "./ProductAdmin";
 
 function IndividualCakesAdmin() {
   const { categoryName } = useParams();
@@ -32,7 +35,7 @@ function IndividualCakesAdmin() {
   }, []);
 
   const token =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4YTk3ZDYxOTdlMjcxMDM0OWUwNmI0MyIsImlhdCI6MTc2MTY0NjA0MCwiZXhwIjoxNzYxNzMyNDQwfQ.by9qSWdklxR4AE9J2QquZ5oFIZTul1qAh3o-xzVGL0c";
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4YTk3ZDYxOTdlMjcxMDM0OWUwNmI0MyIsImlhdCI6MTc2MTcxNDEyMiwiZXhwIjoxNzYxODAwNTIyfQ.nHMQbJNUxXQKQ7xbabLDl018xkl0mFTcLeLvx9a9644";
 
   async function postCategory(e) {
     e.preventDefault();
@@ -45,7 +48,7 @@ function IndividualCakesAdmin() {
     const discountedPrice = form.productPrice.value.trim();
     const description = form.productDescription.value.trim();
     const info = form.productInfo.value.trim();
-    const inStock = form.productInStock.value.trim();
+    const isActive = form.productIsActive.value.trim();
     if (files.length > 4) {
       window.alert("You can only upload up to 4 images.");
       return;
@@ -60,9 +63,10 @@ function IndividualCakesAdmin() {
       !discountedPrice ||
       !description ||
       !info ||
-      !inStock
+      !isActive
     ) {
-      window.alert("Please fill all fields and select an image!");
+      // window.alert("Please fill all fields and select an image!");
+      toast.error("Please fill all fields!");
       return;
     } else {
       const formData = new FormData();
@@ -76,7 +80,7 @@ function IndividualCakesAdmin() {
       for (let i = 0; i < files.length; i++) {
         formData.append("images", files[i]);
       }
-      formData.append("inStock", inStock);
+      formData.append("isActive", isActive);
 
       try {
         const postResponse = await axios.post(
@@ -90,9 +94,13 @@ function IndividualCakesAdmin() {
           }
         );
         console.log("product status: ", postResponse.data);
+        toast.success("Product success fully added");
         setIsModalVisible(false);
-        window.location.reload();
+        setTimeout(() => {
+          window.location.reload();
+        }, 2000);
       } catch (error) {
+        toast.error("Can't add products");
         console.error("error message: ", error.message);
       }
     }
@@ -207,12 +215,12 @@ function IndividualCakesAdmin() {
               />
             </div>
 
-            {/* inStock */}
+            {/* isActive */}
             <div className="flex gap-3 justify-between items-center">
               <input
                 type="text"
-                name="productInStock"
-                id="productInStock"
+                name="productIsActive"
+                id="productIsActive"
                 className="ring ring-gray-500 text-black rounded-lg p-2 w-full"
                 placeholder="Is it in Stock? (y/n)"
               />
@@ -223,7 +231,7 @@ function IndividualCakesAdmin() {
                 type="submit"
                 className="bg-pink-600 w-full font-semibold hover:cursor-pointer hover:bg-pink-500 transition-all duration-200 text-white px-4 py-3 rounded-xl"
               >
-                Add new category
+                Add new Product
               </button>
             </div>
           </form>
@@ -254,7 +262,7 @@ function IndividualCakesAdmin() {
 
         <div className="overflow-x-auto shadow-lg bg-white rounded-2xl mt-5 p-3 space-x-4 ">
           {products.length > 0 ? (
-            <table className="table-auto ">
+            <table>
               <thead>
                 <tr className="divide-y text-xl divide-gray-300">
                   <th className="p-4 text-start">S.no</th>
@@ -264,64 +272,28 @@ function IndividualCakesAdmin() {
                   <th className="p-4 text-start">Original Price</th>
                   <th className="p-4 text-start">description</th>
                   <th className="p-4 text-start">info</th>
-                  <th className="p-4 text-start">inStock</th>
+                  <th className="p-4 text-start">isActive</th>
                   <th className="p-4 text-start">Actions</th>
                 </tr>
               </thead>
-
-              {products.map((product, i) => (
-                <tbody key={product._id} className={i % 2 === 0 ? "bg-gray-100" : ""}>
-                  <tr className="my-3 divide-y text-lg divide-gray-300">
-                    <td className="p-4">{i + 1}</td>
-                    <td className="p-4">
-                      {/* <div className="grid grid-cols-1 gap-1 lg:grid-cols-2 lg:gap-2">
-                    {product.images.map((image, i) => (
-                      <img
-                        src={`http://localhost:5000${image}`}
-                        alt="product image"
-                        className="h-10 rounded-lg object-center object-cover w-10"
-                      />
-                    ))}
-                  </div> */}
-                      <img
-                        src={`http://localhost:5000${product.images[0]}`}
-                        alt="Product Image"
-                        className="h-20 rounded-lg object-center object-cover w-20"
-                      />
-                    </td>
-                    <td className="p-4">
-                      {product.title}
-                      <span className="text-md text-gray-500 block">
-                        ({product.subject})
-                      </span>
-                    </td>
-                    <td className="p-4">₹{product.originalPrice}</td>
-                    <td className="p-4">₹{product.discountedPrice}</td>
-                    <td className="p-4">{product.description}</td>
-                    <td className="p-4">{product.info}</td>
-                    <td className="p-4">{product.inStock ? "true" : "false"}</td>
-                    <td className="p-4">
-                      <SquarePen size={20} className="cursor-pointer" />
-                      {/* <label
-                      htmlFor={product.title}
-                      className="group hover:cursor-pointer relative block h-6 w-12 rounded-full bg-gray-300 transition-colors [-webkit-tap-highlight-color:_transparent] has-checked:bg-red-500"
-                    >
-                      <input
-                        type="checkbox"
-                        id={product.title}
-                        className="peer sr-only"
-                      />
-
-                      <span className="absolute inset-y-0 start-0 m-1 grid size-4 place-content-center rounded-full bg-white text-gray-700 transition-[inset-inline-start] peer-checked:start-6 peer-checked:*:first:hidden *:last:hidden peer-checked:*:last:block">
-                        <Check size={10} />
-
-                        <X size={10} />
-                      </span>
-                    </label> */}
-                    </td>
-                  </tr>
-                </tbody>
-              ))}
+              <tbody>
+                {products.map((product, i) => (
+                  <ProductAdmin
+                    key={i}
+                    productId={product._id}
+                    i={i}
+                    images={product.images}
+                    title={product.title}
+                    subject={product.subject}
+                    originalPrice={product.originalPrice}
+                    discountedPrice={product.discountedPrice}
+                    description={product.description}
+                    info={product.info}
+                    isActive={product.isActive}
+                    categoryName={categoryName}
+                  />
+                ))}
+              </tbody>
             </table>
           ) : (
             <div>
