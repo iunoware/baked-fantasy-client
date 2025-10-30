@@ -121,6 +121,7 @@ import OrdersAdmin from "./pages/adminPanel/OrdersAdmin.jsx";
 import BannerAdmin from "./pages/adminPanel/BannerAdmin.jsx";
 import IndividualCakesAdmin from "./pages/adminPanel/IndividualCakesAdmin.jsx";
 import SettingsAdmin from "./pages/adminPanel/SettingsAdmin.jsx";
+import AdminLogin from "./components/adminPanel/AdminLogin.jsx";
 
 function AppContent() {
   const location = useLocation();
@@ -170,7 +171,9 @@ function AppContent() {
         />
 
         {/* admin routes */}
+
         <Route path="/admin" element={<Dashboard />} />
+        <Route path="/admin/login" element={<AdminLogin />} />
         <Route path="/admin/courses" element={<CourseAdmin />} />
         <Route path="/admin/essentials" element={<EssentialsAdmin />} />
         <Route path="/admin/cakes" element={<CakesAdmin />} />
