@@ -115,7 +115,7 @@ import Profile from "./pages/Profile.jsx";
 import Dashboard from "./pages/adminPanel/Dashboard.jsx";
 import CourseAdmin from "./pages/adminPanel/CourseAdmin.jsx";
 import Sidebar from "./components/Sidebar.jsx";
-import ProductAdmin from "./pages/adminPanel/ProductsAdmin.jsx";
+import EssentialsAdmin from "./pages/adminPanel/EssentialsAdmin.jsx";
 import CakesAdmin from "./pages/adminPanel/CakesAdmin.jsx";
 import OrdersAdmin from "./pages/adminPanel/OrdersAdmin.jsx";
 import BannerAdmin from "./pages/adminPanel/BannerAdmin.jsx";
@@ -172,7 +172,7 @@ function AppContent() {
         {/* admin routes */}
         <Route path="/admin" element={<Dashboard />} />
         <Route path="/admin/courses" element={<CourseAdmin />} />
-        <Route path="/admin/essentials" element={<ProductAdmin />} />
+        <Route path="/admin/essentials" element={<EssentialsAdmin />} />
         <Route path="/admin/cakes" element={<CakesAdmin />} />
         <Route path="/admin/orders" element={<OrdersAdmin />} />
         <Route path="/admin/banner" element={<BannerAdmin />} />
