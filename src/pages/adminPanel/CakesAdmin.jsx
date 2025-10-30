@@ -101,7 +101,10 @@ function CakesAdmin() {
 
             <button
               type="button"
-              onClick={() => setIsModalVisible(false)}
+              onClick={() => {
+                setIsModalVisible(false);
+                toast.error("Category not added!");
+              }}
               className="-me-4 -mt-4 rounded-full p-2 cursor-pointer transition-all hover:rotate-90 ease-in focus:outline-none"
               aria-label="Close"
             >

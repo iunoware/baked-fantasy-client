@@ -18,8 +18,7 @@ function IndividualCakesAdmin() {
         const response = await axios.get(
           `http://localhost:5000/products/category/${categoryName}`
         );
-        // setProducts(res.data);
-        console.log("products: ", response.data);
+        // console.log("products id: ", response.data[1]._id, response.data[1].title);
         setProducts(response.data);
       } catch (err) {
         if (err.response && err.response.data.status === 404) {
@@ -30,7 +29,6 @@ function IndividualCakesAdmin() {
         }
       }
     }
-
     fetchProducts();
   }, []);
 
@@ -128,8 +126,11 @@ function IndividualCakesAdmin() {
 
             <button
               type="button"
-              onClick={() => setIsModalVisible(false)}
-              className="-me-4 -mt-4 rounded-full p-2 transition-colors hover:bg-gray-300 focus:outline-none"
+              onClick={() => {
+                setIsModalVisible(false);
+                toast.error("No product added");
+              }}
+              className="-me-4 -mt-4 rounded-full p-2 transition-all ease-in hover:rotate-90 focus:outline-none"
               aria-label="Close"
             >
               <X size={20} />
@@ -222,7 +223,7 @@ function IndividualCakesAdmin() {
                 name="productIsActive"
                 id="productIsActive"
                 className="ring ring-gray-500 text-black rounded-lg p-2 w-full"
-                placeholder="Is it in Stock? (y/n)"
+                placeholder="Is it active? (true/false)"
               />
             </div>
 
@@ -268,8 +269,8 @@ function IndividualCakesAdmin() {
                   <th className="p-4 text-start">S.no</th>
                   <th className="p-4 text-start">Images</th>
                   <th className="p-4 text-start">Name</th>
-                  <th className="p-4 text-start">Discounted Price</th>
                   <th className="p-4 text-start">Original Price</th>
+                  <th className="p-4 text-start">Discounted Price</th>
                   <th className="p-4 text-start">description</th>
                   <th className="p-4 text-start">info</th>
                   <th className="p-4 text-start">isActive</th>
