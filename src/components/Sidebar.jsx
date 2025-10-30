@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 import {
+  Megaphone,
   Settings,
   ChartColumn,
   GraduationCap,
@@ -183,6 +184,35 @@ function Sidebar() {
                     )}
                   </NavLink>
                 </li>
+                <li>
+                  <NavLink
+                    to={`/admin/banner`}
+                    // className="flex items-center gap-3 rounded-md px-2 py-2 text-gray-700 hover:bg-pink-50 transition-colors"
+                    className={({ isActive }) =>
+                      `${
+                        isActive ? "bg-pink-50" : ""
+                      } flex items-center gap-3 rounded-md px-2 py-2 text-gray-700 hover:bg-pink-50 transition-colors`
+                    }
+                  >
+                    {({ isActive }) => (
+                      <>
+                        <Megaphone
+                          size={20}
+                          className={`shrink-0 ${
+                            isActive ? "text-pink-600" : "text-gray-500"
+                          }`}
+                        />
+                        <span
+                          className={`text-lg font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap ${
+                            isActive ? "text-pink-500" : "text-gray-800"
+                          }`}
+                        >
+                          Banner
+                        </span>
+                      </>
+                    )}
+                  </NavLink>
+                </li>
 
                 <li>
                   <NavLink
@@ -227,7 +257,9 @@ function Sidebar() {
               <>
                 <LogOut
                   size={20}
-                  className={`shrink-0 ${isActive ? "text-pink-600" : "text-gray-500"}`}
+                  className={`shrink-0 ${
+                    isActive ? "text-pink-600" : "text-gray-500"
+                  }`}
                 />
                 <span
                   className={`text-lg font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap ${
