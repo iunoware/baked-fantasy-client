@@ -53,7 +53,7 @@ function BannerAdmin() {
   useEffect(() => {
     const fetchBaner = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/admin/newUser");
+        const res = await axios.get("http://localhost:5000/banner");
         setBanner(res.data[0]);
         // console.log(res.data);
       } catch (error) {
@@ -126,11 +126,11 @@ function BannerAdmin() {
             </div>
             {/* Date */}
             <div className="flex gap-3 border-1 rounded-lg p-2 border-gray-500 justify-between items-center">
-              <label htmlFor="duration">Duration:</label>
+              <label htmlFor="lastDate">LastDate:</label>
               <input
                 type="date"
                 name="lastDate"
-                id="duration"
+                id="lastDate"
                 className=""
                 placeholder="Enter Last Date for the Banner"
               />

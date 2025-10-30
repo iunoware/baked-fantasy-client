@@ -13,38 +13,32 @@ function SettingsAdmin() {
     const name = form.adminName.value.trim();
     const password = form.password.value.trim();
     const confirmPass = form.confirmPass.value.trim();
-    const masterPassword = form.masterPassword.files[0];
+    const masterName = form.masterName.value.trim();
+    const masterPassword = form.masterPassword.value.trim();
 
-    if (password != confirmPass) toast.error("please enter same password");
-
-    const formData = new FormData();
-    formData.append("name", name);
-    formData.append("password", password);
-    formData.append("confirmPass", confirmPass);
-    formData.append("masterPassword", masterPassword);
-    // formData.append("active", active);
+    if (password !== confirmPass) {
+      toast.error("Passwords must match");
+      return;
+    }
 
     try {
-      const postadmin = await axios.post(
-        "http://localhost:5000/admin/user",
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-            Authorization: ` Bearer ${token}`,
-          },
-        }
-      );
-      toast.success("Banner Edited Successfully 🍰");
-      // console.log("Banner added: ", postBanner.data);
-      // console.log("Current toggle value:", isActive);
+      const res = await axios.post("http://localhost:5000/admin/newUser", {
+        name,
+        password,
+        confirmPass,
+        masterName,
+        masterPassword,
+      });
+
+      toast.success("Admin created successfully 🎉");
       setIsModalVisible(false);
-      setTimeout(() => {
-        window.location.reload();
-      }, 2000);
+      setTimeout(() => window.location.reload(), 1500);
     } catch (error) {
-      console.error("error message: ", error.message);
-      toast.error("Try Again 😑");
+      console.error(
+        "Error creating admin:",
+        error.response?.data || error.message
+      );
+      toast.error(error.response?.data?.msg || "Something went wrong");
     }
   }
 
@@ -102,7 +96,7 @@ function SettingsAdmin() {
                   className="ring ring-gray-500 placeholder:text-black text-black rounded-lg p-2 w-full "
                 />
               </div>
-              {/* Master Password */}
+              {/* Master Name */}
               <div className="flex gap-3 justify-between items-center">
                 <input
                   type="text"
@@ -113,7 +107,7 @@ function SettingsAdmin() {
                 />
               </div>
 
-              {/* Master Name */}
+              {/* Master Password */}
               <div className="flex items-center justify-between flex-row">
                 <input
                   type="text"
@@ -179,14 +173,14 @@ function SettingsAdmin() {
                   <p className="pl-4 pt-1 text-lg">+1 (555) 123-CAKE</p>
                 </div>
               </div>
-              <div className="absolute flex items-center justify-center right-5 bottom-5 flex-row gap-5">
+              {/* <div className="absolute flex items-center justify-center right-5 bottom-5 flex-row gap-5">
                 <SquarePen
                   onClick={() => setIsModalVisible(true)}
                   color="#808080"
                   size={20}
                   className="hover:text-black hover:cursor-pointer hover:-translate-y-1 transition-all duration-200"
                 />
-              </div>
+              </div> */}
             </div>
             {/* 2 */}
             <div className="bg-white relative p-5 rounded-2xl shadow-2xl w-[50%] h-fit">
@@ -217,14 +211,14 @@ function SettingsAdmin() {
                   Create New Admin
                 </button>
               </div>
-              <div className="absolute flex items-center justify-center right-5 bottom-5 flex-row gap-5">
+              {/* <div className="absolute flex items-center justify-center right-5 bottom-5 flex-row gap-5">
                 <SquarePen
                   onClick={() => setIsModalVisible(true)}
                   color="#808080"
                   size={20}
                   className="hover:text-black hover:cursor-pointer hover:-translate-y-1 transition-all duration-200"
                 />
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
