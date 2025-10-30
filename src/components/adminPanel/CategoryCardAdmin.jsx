@@ -126,7 +126,10 @@ function CategoryCardAdmin(props) {
 
             <button
               type="button"
-              onClick={() => setIsModal2Visible(false)}
+              onClick={() => {
+                setIsModal2Visible(false);
+                toast.error("No edit saved");
+              }}
               className="-me-4 -mt-4 rounded-full p-2 cursor-pointer transition-all hover:rotate-90 ease-in focus:outline-none"
               aria-label="Close"
             >
@@ -141,6 +144,7 @@ function CategoryCardAdmin(props) {
                 type="text"
                 name="categoryTitle"
                 id="categoryTitle"
+                defaultValue={props.title}
                 // onChange={(e) => setTitle(e.target.value)}
                 className="ring ring-gray-500 text-black rounded-lg p-2 w-full"
                 placeholder="Category name"
@@ -153,6 +157,7 @@ function CategoryCardAdmin(props) {
                 type="text"
                 name="categorySubject"
                 id="categorySubject"
+                defaultValue={props.subject}
                 // onChange={(e) => setSubject(e.target.value)}
                 className="ring ring-gray-500 text-black rounded-lg p-2 w-full"
                 placeholder="Subject"
@@ -262,7 +267,7 @@ function CategoryCardAdmin(props) {
               </button>
             </div>
           ) : (
-            <div className="text-center">Loading...</div>
+            <div className="text-center">Loading please wait...</div>
           )}
         </div>
       </div>
