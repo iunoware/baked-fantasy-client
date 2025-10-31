@@ -84,12 +84,7 @@
 // export default App;
 
 // new one
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  useLocation,
-} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import Home from "../src/pages/Home.jsx";
 import About from "../src/pages/About.jsx";
@@ -116,10 +111,10 @@ import Dashboard from "./pages/adminPanel/Dashboard.jsx";
 import CourseAdmin from "./pages/adminPanel/CourseAdmin.jsx";
 import Sidebar from "./components/Sidebar.jsx";
 import EssentialsAdmin from "./pages/adminPanel/EssentialsAdmin.jsx";
-import CakesAdmin from "./pages/adminPanel/CakesAdmin.jsx";
+import CakesAdmin from "./pages/adminPanel/cakes/CakesAdmin.jsx";
 import OrdersAdmin from "./pages/adminPanel/OrdersAdmin.jsx";
 import BannerAdmin from "./pages/adminPanel/BannerAdmin.jsx";
-import IndividualCakesAdmin from "./pages/adminPanel/IndividualCakesAdmin.jsx";
+import IndividualCakesAdmin from "./pages/adminPanel/cakes/IndividualCakesAdmin.jsx";
 import SettingsAdmin from "./pages/adminPanel/SettingsAdmin.jsx";
 import AdminLogin from "./components/adminPanel/AdminLogin.jsx";
 
@@ -143,24 +138,12 @@ function AppContent() {
         <Route path="/categories" element={<Categories />} />
         <Route path="/ess-categories" element={<EssCategories />} />
         <Route path="/products/:categoryName" element={<SpecificCategory />} />
-        <Route
-          path="/essentials/:categoryName"
-          element={<EssSpeciCategory />}
-        />
-        <Route
-          path="/products/:categoryName/:productId"
-          element={<ProductDetail />}
-        />
-        <Route
-          path="/essentials/:categoryName/:productId"
-          element={<EssDetailPage />}
-        />
+        <Route path="/essentials/:categoryName" element={<EssSpeciCategory />} />
+        <Route path="/products/:categoryName/:productId" element={<ProductDetail />} />
+        <Route path="/essentials/:categoryName/:productId" element={<EssDetailPage />} />
         <Route path="/courses" element={<Courses />} />
         <Route path="/courses/online-course" element={<OnlineCourse />} />
-        <Route
-          path="/course/my-learning/:courseId"
-          element={<OnlineCourseDetails />}
-        />
+        <Route path="/course/my-learning/:courseId" element={<OnlineCourseDetails />} />
         <Route path="/courses/offline-course" element={<OfflineCourse />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/cart" element={<Cart />} />
@@ -180,10 +163,7 @@ function AppContent() {
         <Route path="/admin/orders" element={<OrdersAdmin />} />
         <Route path="/admin/banner" element={<BannerAdmin />} />
         <Route path="/admin/settings" element={<SettingsAdmin />} />
-        <Route
-          path="/admin/cakes/:categoryName"
-          element={<IndividualCakesAdmin />}
-        />
+        <Route path="/admin/cakes/:categoryName" element={<IndividualCakesAdmin />} />
       </Routes>
 
       {!hideLayout && <Footer />}
