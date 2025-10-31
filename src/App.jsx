@@ -111,10 +111,10 @@ import Dashboard from "./pages/adminPanel/Dashboard.jsx";
 import CourseAdmin from "./pages/adminPanel/CourseAdmin.jsx";
 import Sidebar from "./components/Sidebar.jsx";
 import EssentialsAdmin from "./pages/adminPanel/EssentialsAdmin.jsx";
-import CakesAdmin from "./pages/adminPanel/cakes/CakesAdmin.jsx";
+import CakesAdmin from "./pages/adminPanel/CakesAdmin.jsx";
 import OrdersAdmin from "./pages/adminPanel/OrdersAdmin.jsx";
 import BannerAdmin from "./pages/adminPanel/BannerAdmin.jsx";
-import IndividualCakesAdmin from "./pages/adminPanel/cakes/IndividualCakesAdmin.jsx";
+import IndividualCakesAdmin from "./pages/adminPanel/IndividualCakesAdmin.jsx";
 import SettingsAdmin from "./pages/adminPanel/SettingsAdmin.jsx";
 import AdminLogin from "./components/adminPanel/AdminLogin.jsx";
 
