@@ -1,9 +1,9 @@
-// /* eslint-disable no-unused-vars */
+/* eslint-disable no-unused-vars */
 import { ChevronDown, X, Check } from "lucide-react";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import axios from "axios";
-import CategoryCardAdmin from "../../components/adminPanel/CategoryCardAdmin.jsx";
+import CategoryCardAdmin from "../../../components/adminPanel/cakes/CategoryCardAdmin.jsx";
 
 function CakesAdmin() {
   const [courses, setCourses] = useState([]);
@@ -146,7 +146,7 @@ function CakesAdmin() {
             </div>
 
             {/* isActive */}
-            <div className="flex justify-between mb-5">
+            {/* <div className="flex justify-between mb-5">
               <div>
                 <h4>{isActive ? "Activate" : "De-activate"}</h4>
               </div>
@@ -167,9 +167,9 @@ function CakesAdmin() {
                   <X size={10} />
                 </span>
               </label>
-            </div>
+            </div> */}
 
-            <div className="flex justify-center items-center">
+            <div className="flex mt-5 justify-center items-center">
               <button
                 type="submit"
                 className="bg-pink-600 w-full font-semibold hover:cursor-pointer hover:bg-pink-500 transition-all duration-200 text-white px-4 py-3 rounded-xl"
