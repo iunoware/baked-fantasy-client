@@ -122,6 +122,15 @@ import BannerAdmin from "./pages/adminPanel/BannerAdmin.jsx";
 import IndividualCakesAdmin from "./pages/adminPanel/IndividualCakesAdmin.jsx";
 import SettingsAdmin from "./pages/adminPanel/SettingsAdmin.jsx";
 import AdminLogin from "./components/adminPanel/AdminLogin.jsx";
+import { Navigate } from "react-router-dom";
+
+function ProtectedAdminRoute({ children }) {
+  const token = localStorage.getItem("token");
+  if (!token) {
+    return <Navigate to="/admin-login" replace />;
+  }
+  return children;
+}
 
 function AppContent() {
   const location = useLocation();
@@ -171,18 +180,70 @@ function AppContent() {
         />
 
         {/* admin routes */}
-
-        <Route path="/admin" element={<Dashboard />} />
-        <Route path="/admin/login" element={<AdminLogin />} />
-        <Route path="/admin/courses" element={<CourseAdmin />} />
-        <Route path="/admin/essentials" element={<EssentialsAdmin />} />
-        <Route path="/admin/cakes" element={<CakesAdmin />} />
-        <Route path="/admin/orders" element={<OrdersAdmin />} />
-        <Route path="/admin/banner" element={<BannerAdmin />} />
-        <Route path="/admin/settings" element={<SettingsAdmin />} />
+        <Route
+          path="/admin"
+          element={
+            <ProtectedAdminRoute>
+              <Dashboard />
+            </ProtectedAdminRoute>
+          }
+        />
+        <Route path="/admin-login" element={<AdminLogin />} />
+        <Route
+          path="/admin/courses"
+          element={
+            <ProtectedAdminRoute>
+              <CourseAdmin />
+            </ProtectedAdminRoute>
+          }
+        />
+        <Route
+          path="/admin/essentials"
+          element={
+            <ProtectedAdminRoute>
+              <EssentialsAdmin />
+            </ProtectedAdminRoute>
+          }
+        />
+        <Route
+          path="/admin/cakes"
+          element={
+            <ProtectedAdminRoute>
+              <CakesAdmin />
+            </ProtectedAdminRoute>
+          }
+        />
+        <Route
+          path="/admin/orders"
+          element={
+            <ProtectedAdminRoute>
+              <OrdersAdmin />
+            </ProtectedAdminRoute>
+          }
+        />
+        <Route
+          path="/admin/banner"
+          element={
+            <ProtectedAdminRoute>
+              <BannerAdmin />
+            </ProtectedAdminRoute>
+          }
+        />
+        <Route
+          path="/admin/settings"
+          element={
+            <ProtectedAdminRoute>
+              <SettingsAdmin />
+            </ProtectedAdminRoute>
+          }
+        />
         <Route
           path="/admin/cakes/:categoryName"
-          element={<IndividualCakesAdmin />}
+          element={
+            <ProtectedAdminRoute>
+              <IndividualCakesAdmin />
+            </ProtectedAdminRoute>
+          }
         />
       </Routes>
 
