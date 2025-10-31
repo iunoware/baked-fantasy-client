@@ -84,7 +84,12 @@
 // export default App;
 
 // new one
-import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useLocation,
+} from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import Home from "../src/pages/Home.jsx";
 import About from "../src/pages/About.jsx";
@@ -117,6 +122,15 @@ import BannerAdmin from "./pages/adminPanel/BannerAdmin.jsx";
 import IndividualCakesAdmin from "./pages/adminPanel/cakes/IndividualCakesAdmin.jsx";
 import SettingsAdmin from "./pages/adminPanel/SettingsAdmin.jsx";
 import AdminLogin from "./components/adminPanel/AdminLogin.jsx";
+import { Navigate } from "react-router-dom";
+
+function ProtectedAdminRoute({ children }) {
+  const token = localStorage.getItem("token");
+  if (!token) {
+    return <Navigate to="/admin-login" replace />;
+  }
+  return children;
+}
 
 function AppContent() {
   const location = useLocation();
@@ -138,12 +152,24 @@ function AppContent() {
         <Route path="/categories" element={<Categories />} />
         <Route path="/ess-categories" element={<EssCategories />} />
         <Route path="/products/:categoryName" element={<SpecificCategory />} />
-        <Route path="/essentials/:categoryName" element={<EssSpeciCategory />} />
-        <Route path="/products/:categoryName/:productId" element={<ProductDetail />} />
-        <Route path="/essentials/:categoryName/:productId" element={<EssDetailPage />} />
+        <Route
+          path="/essentials/:categoryName"
+          element={<EssSpeciCategory />}
+        />
+        <Route
+          path="/products/:categoryName/:productId"
+          element={<ProductDetail />}
+        />
+        <Route
+          path="/essentials/:categoryName/:productId"
+          element={<EssDetailPage />}
+        />
         <Route path="/courses" element={<Courses />} />
         <Route path="/courses/online-course" element={<OnlineCourse />} />
-        <Route path="/course/my-learning/:courseId" element={<OnlineCourseDetails />} />
+        <Route
+          path="/course/my-learning/:courseId"
+          element={<OnlineCourseDetails />}
+        />
         <Route path="/courses/offline-course" element={<OfflineCourse />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/cart" element={<Cart />} />
@@ -154,16 +180,71 @@ function AppContent() {
         />
 
         {/* admin routes */}
-
-        <Route path="/admin" element={<Dashboard />} />
-        <Route path="/admin/login" element={<AdminLogin />} />
-        <Route path="/admin/courses" element={<CourseAdmin />} />
-        <Route path="/admin/essentials" element={<EssentialsAdmin />} />
-        <Route path="/admin/cakes" element={<CakesAdmin />} />
-        <Route path="/admin/orders" element={<OrdersAdmin />} />
-        <Route path="/admin/banner" element={<BannerAdmin />} />
-        <Route path="/admin/settings" element={<SettingsAdmin />} />
-        <Route path="/admin/cakes/:categoryName" element={<IndividualCakesAdmin />} />
+        <Route
+          path="/admin"
+          element={
+            <ProtectedAdminRoute>
+              <Dashboard />
+            </ProtectedAdminRoute>
+          }
+        />
+        <Route path="/admin-login" element={<AdminLogin />} />
+        <Route
+          path="/admin/courses"
+          element={
+            <ProtectedAdminRoute>
+              <CourseAdmin />
+            </ProtectedAdminRoute>
+          }
+        />
+        <Route
+          path="/admin/essentials"
+          element={
+            <ProtectedAdminRoute>
+              <EssentialsAdmin />
+            </ProtectedAdminRoute>
+          }
+        />
+        <Route
+          path="/admin/cakes"
+          element={
+            <ProtectedAdminRoute>
+              <CakesAdmin />
+            </ProtectedAdminRoute>
+          }
+        />
+        <Route
+          path="/admin/orders"
+          element={
+            <ProtectedAdminRoute>
+              <OrdersAdmin />
+            </ProtectedAdminRoute>
+          }
+        />
+        <Route
+          path="/admin/banner"
+          element={
+            <ProtectedAdminRoute>
+              <BannerAdmin />
+            </ProtectedAdminRoute>
+          }
+        />
+        <Route
+          path="/admin/settings"
+          element={
+            <ProtectedAdminRoute>
+              <SettingsAdmin />
+            </ProtectedAdminRoute>
+          }
+        />
+        <Route
+          path="/admin/cakes/:categoryName"
+          element={
+            <ProtectedAdminRoute>
+              <IndividualCakesAdmin />
+            </ProtectedAdminRoute>
+          }
+        />
       </Routes>
 
       {!hideLayout && <Footer />}

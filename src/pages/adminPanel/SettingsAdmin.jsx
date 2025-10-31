@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
-import { X, SquarePen } from "lucide-react";
+import { X, SquarePen, Eye, EyeOff } from "lucide-react";
 import toast from "react-hot-toast";
 import axios from "axios";
 
 function SettingsAdmin() {
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [visibility, setVisiblity] = useState(false);
+  const [visibility2, setVisiblity2] = useState(false);
 
   async function postAdmin(e) {
     e.preventDefault();
@@ -78,19 +80,48 @@ function SettingsAdmin() {
                 />
               </div>
               {/* password */}
-              <div className="flex gap-3 justify-between items-center">
+              <div className="flex gap-3 justify-between relative items-center">
+                <label
+                  // htmlFor="userName"
+                  name="adminPass"
+                  className="absolute cursor-pointer end-3"
+                  onClick={() => setVisiblity((prev) => !prev)}
+                >
+                  {visibility ? (
+                    <EyeOff className="text-gray-400" size={20} />
+                  ) : (
+                    <Eye className="text-gray-400" size={20} />
+                  )}
+                </label>
                 <input
-                  type="text"
                   name="password"
-                  // id="bannerSubject"
+                  title="Password must be at least 6 characters long, include uppercase, lowercase, and a number."
+                  required
+                  pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$"
+                  type={visibility ? "text" : "password"}
                   className="ring ring-gray-500 placeholder:text-black text-black rounded-lg p-2 w-full"
                   placeholder="Enter Password"
                 />
               </div>
               {/* Re-enter Password */}
-              <div className="flex gap-3 justify-between items-center">
+              <div className="flex gap-3 justify-between relative items-center">
+                <label
+                  // htmlFor="userName"
+                  name="adminPass"
+                  className="absolute cursor-pointer end-3"
+                  onClick={() => setVisiblity((prev) => !prev)}
+                >
+                  {visibility ? (
+                    <EyeOff className="text-gray-400" size={20} />
+                  ) : (
+                    <Eye className="text-gray-400" size={20} />
+                  )}
+                </label>
                 <input
-                  type="text"
+                  title="Password must be at least 6 characters long, include uppercase, lowercase, and a number."
+                  required
+                  type={visibility ? "text" : "password"}
+                  pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$"
                   name="confirmPass"
                   placeholder="Re-enter Password"
                   className="ring ring-gray-500 placeholder:text-black text-black rounded-lg p-2 w-full "
@@ -108,10 +139,25 @@ function SettingsAdmin() {
               </div>
 
               {/* Master Password */}
-              <div className="flex items-center justify-between flex-row">
+              <div className="flex items-center justify-between relative flex-row">
+                <label
+                  // htmlFor="userName"
+                  name="adminPass"
+                  className="absolute cursor-pointer end-3"
+                  onClick={() => setVisiblity2((prev) => !prev)}
+                >
+                  {visibility2 ? (
+                    <EyeOff className="text-gray-400" size={20} />
+                  ) : (
+                    <Eye className="text-gray-400" size={20} />
+                  )}
+                </label>
                 <input
-                  type="text"
+                  title="Password must be at least 6 characters long, include uppercase, lowercase, and a number."
+                  required
+                  type={visibility2 ? "text" : "password"}
                   name="masterPassword"
+                  pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$"
                   //   id="duration"
                   className="ring ring-gray-500 placeholder:text-black text-black rounded-lg p-2 w-full"
                   placeholder="Enter Master Password"
