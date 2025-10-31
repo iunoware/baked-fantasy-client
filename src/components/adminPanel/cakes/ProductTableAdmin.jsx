@@ -7,6 +7,7 @@ import toast from "react-hot-toast";
 function ProductAdmin(props) {
   const [isEditModal, setIsEditModal] = useState(false);
   const [isActive, setIsActive] = useState(true);
+  const [inStock, setInStock] = useState(true);
   const [deleteModal, setDeleteModal] = useState(false);
   const [isBtnVisible, setIsBtnVisible] = useState(false);
 
@@ -65,6 +66,7 @@ function ProductAdmin(props) {
     //   formData.append("images", files[i]);
     // }
     formData.append("isActive", isActive);
+    formData.append("inStock", inStock);
 
     try {
       const postResponse = await axios.patch(
@@ -225,10 +227,9 @@ function ProductAdmin(props) {
                 </div>
 
                 {/* isActive */}
-                <div className="flex justify-between mb-5">
+                <div className="flex justify-between mt-5">
                   <div>
-                    <h4>{isActive ? "Active" : "De-active"}</h4>
-                    {/* <h4>Active</h4> */}
+                    <h4>{isActive ? "🟢 Active" : "🔴 De-active"}</h4>
                   </div>
                   <label
                     htmlFor={props.title}
@@ -238,6 +239,30 @@ function ProductAdmin(props) {
                       type="checkbox"
                       onClick={() => setIsActive((prev) => !prev)}
                       id={props.title}
+                      className="peer sr-only"
+                    />
+
+                    <span className="absolute inset-y-0 start-0 m-1 grid size-4 place-content-center rounded-full bg-white text-gray-700 transition-[inset-inline-start] peer-checked:start-6 peer-checked:*:first:hidden *:last:hidden peer-checked:*:last:block">
+                      <Check size={10} />
+
+                      <X size={10} />
+                    </span>
+                  </label>
+                </div>
+
+                {/* inStock */}
+                <div className="flex gap-3 my-5 justify-between items-center">
+                  <div>
+                    <h4>{inStock ? "🟢 In-stock" : "🔴 Not-in-stock"}</h4>
+                  </div>
+                  <label
+                    htmlFor={props._id}
+                    className="group hover:cursor-pointer relative block h-6 w-12 rounded-full bg-gray-300 transition-colors [-webkit-tap-highlight-color:_transparent] has-checked:bg-red-500"
+                  >
+                    <input
+                      type="checkbox"
+                      onClick={() => setInStock((prev) => !prev)}
+                      id={props._id}
                       className="peer sr-only"
                     />
 
@@ -349,7 +374,7 @@ function ProductAdmin(props) {
         <td className="p-4">₹{props.discountedPrice}</td>
         <td className="p-4">{props.description}</td>
         <td className="p-4">{props.info}</td>
-        <td className="p-4">{props.isActive ? "true" : "false"}</td>
+        <td className="p-4 ">{props.inStock ? "🟢 Yes" : "🔴 No"}</td>
         <td className="p-4 text-center align-middle">
           <div className="flex gap-3 !h-full !w-full justify-center items-center">
             <div>

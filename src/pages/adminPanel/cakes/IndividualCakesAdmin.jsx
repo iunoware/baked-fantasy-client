@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 // /* eslint-disable no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
@@ -5,12 +6,14 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { SquarePen, Check, X } from "lucide-react";
 import toast from "react-hot-toast";
-import ProductAdmin from "./ProductAdmin";
+import ProductAdmin from "../../../components/adminPanel/cakes/ProductTableAdmin";
 
 function IndividualCakesAdmin() {
   const { categoryName } = useParams();
   const [products, setProducts] = useState([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isActive, setIsActive] = useState(true);
+  const [inStock, setInStock] = useState(true);
 
   useEffect(() => {
     async function fetchProducts() {
@@ -46,7 +49,7 @@ function IndividualCakesAdmin() {
     const discountedPrice = form.productPrice.value.trim();
     const description = form.productDescription.value.trim();
     const info = form.productInfo.value.trim();
-    const isActive = form.productIsActive.value.trim();
+    // const isActive = form.productIsActive.value.trim();
     if (files.length > 4) {
       window.alert("You can only upload up to 4 images.");
       return;
@@ -60,8 +63,7 @@ function IndividualCakesAdmin() {
       !originalPrice ||
       !discountedPrice ||
       !description ||
-      !info ||
-      !isActive
+      !info
     ) {
       // window.alert("Please fill all fields and select an image!");
       toast.error("Please fill all fields!");
@@ -75,10 +77,11 @@ function IndividualCakesAdmin() {
       formData.append("description", description);
       formData.append("info", info);
       formData.append("category", categoryName);
+      // formData.append("isActive", isActive);
+      formData.append("inStock", inStock);
       for (let i = 0; i < files.length; i++) {
         formData.append("images", files[i]);
       }
-      formData.append("isActive", isActive);
 
       try {
         const postResponse = await axios.post(
@@ -216,16 +219,53 @@ function IndividualCakesAdmin() {
               />
             </div>
 
-            {/* isActive */}
-            <div className="flex gap-3 justify-between items-center">
-              <input
-                type="text"
-                name="productIsActive"
-                id="productIsActive"
-                className="ring ring-gray-500 text-black rounded-lg p-2 w-full"
-                placeholder="Is it active? (true/false)"
-              />
+            {/* inStock */}
+            <div className="flex gap-3 my-5 justify-between items-center">
+              <div>
+                <h4>{inStock ? "🟢 In-stock" : "🔴 Not-in-stock"}</h4>
+              </div>
+              <label
+                htmlFor="inStockProduct"
+                className="group hover:cursor-pointer relative block h-6 w-12 rounded-full bg-gray-300 transition-colors [-webkit-tap-highlight-color:_transparent] has-checked:bg-red-500"
+              >
+                <input
+                  type="checkbox"
+                  onClick={() => setInStock((prev) => !prev)}
+                  id="inStockProduct"
+                  className="peer sr-only"
+                />
+
+                <span className="absolute inset-y-0 start-0 m-1 grid size-4 place-content-center rounded-full bg-white text-gray-700 transition-[inset-inline-start] peer-checked:start-6 peer-checked:*:first:hidden *:last:hidden peer-checked:*:last:block">
+                  <Check size={10} />
+
+                  <X size={10} />
+                </span>
+              </label>
             </div>
+
+            {/* isActive */}
+            {/* <div className="flex gap-3 mt-5 justify-between items-center">
+              <div>
+                <h4>{isActive ? "🟢 Active" : "🔴 De-active"}</h4>
+              </div>
+              <label
+                htmlFor="isActiveProduct"
+                className="group hover:cursor-pointer relative block h-6 w-12 rounded-full bg-gray-300 transition-colors [-webkit-tap-highlight-color:_transparent] has-checked:bg-red-500"
+              >
+                <input
+                  type="checkbox"
+                  onClick={() => setIsActive((prev) => !prev)}
+                  id="isActiveProduct"
+                  className="peer sr-only"
+                />
+
+                <span className="absolute inset-y-0 start-0 m-1 grid size-4 place-content-center rounded-full bg-white text-gray-700 transition-[inset-inline-start] peer-checked:start-6 peer-checked:*:first:hidden *:last:hidden peer-checked:*:last:block">
+                  <Check size={10} />
+
+                  <X size={10} />
+                </span>
+              </label>
+            </div> */}
 
             <div className="flex justify-center items-center">
               <button
@@ -275,7 +315,7 @@ function IndividualCakesAdmin() {
                   <th className="p-4 text-start">Discounted Price</th>
                   <th className="p-4 text-start">description</th>
                   <th className="p-4 text-start">info</th>
-                  <th className="p-4 text-start">isActive</th>
+                  <th className="p-4 text-start">InStock</th>
                   <th className="p-4 text-start">Actions</th>
                 </tr>
               </thead>
@@ -293,6 +333,7 @@ function IndividualCakesAdmin() {
                     description={product.description}
                     info={product.info}
                     isActive={product.isActive}
+                    inStock={product.inStock}
                     categoryName={categoryName}
                   />
                 ))}
