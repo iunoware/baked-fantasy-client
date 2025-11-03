@@ -100,9 +100,11 @@ function Product(props) {
                 <p className="text-md pt-2">{props.subject}</p>
               </div>
             </div>
-            <p className="mt-2 pb-3 font-extrabold text-3xl text-blue-500">
-              {" "}
-              ₹{props.price}
+            <p className="mt-2 w-full flex justify-end gap-3 items-center pb-3 font-extrabold text-2xl text-black">
+              <span className="text-xl line-through text-red">
+                ₹{props.originalPrice}
+              </span>
+              <span> ₹{props.discountedPrice}</span>
             </p>
           </div>
           <div className="pt-3">
