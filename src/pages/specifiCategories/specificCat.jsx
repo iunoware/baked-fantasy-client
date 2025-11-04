@@ -52,6 +52,7 @@ function SpecificCategory() {
             img={`http://localhost:5000${p.images?.[0]}`} // 👈 thumbnail only
             originalPrice={p.originalPrice}
             discountedPrice={p.discountedPrice}
+            inStock={p.inStock}
             title={p.title}
             subject={p.subject}
           />
