@@ -302,54 +302,66 @@ function Home() {
           techniques
         </p>
         {/* products section */}
-        <div className="grid [@media(max-width:553px)]:!grid-cols-1 [@media(max-width:846px)]:grid-cols-2 [@media(max-width:1111px)]:grid-cols-3 [@media(min-width:1111px)]:grid-cols-4 gap-5 py-15 px-10">
-          {products.map((p) =>
-            p.isActive ? (
-              <Product
-                key={p._id}
-                id={p._id}
-                category={categoryName}
-                img={`http://localhost:5000${p.images?.[0]}`}
-                // img={productImages[index % productImages.length]}
-                originalPrice={p.originalPrice}
-                discountedPrice={p.discountedPrice}
-                inStock={p.inStock}
-                // price={p.price}
-                title={p.title}
-                subject={p.subject}
-              />
-            ) : (
-              <div></div>
-            )
-          )}
-        </div>
-        <div className="see-all-products pt-5 flex justify-center">
-          <Link
-            className="group relative inline-flex items-center overflow-hidden rounded-lg border border-current px-3 py-3 text-sky-600 "
-            to={`/categories`}
-          >
-            <span className="absolute -start-full transition-all group-hover:start-1">
-              <svg
-                className="size-5 rtl:rotate-180"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
+        {products.length > 0 ? (
+          <div>
+            <div className="grid [@media(max-width:553px)]:!grid-cols-1 [@media(max-width:846px)]:grid-cols-2 [@media(max-width:1111px)]:grid-cols-3 [@media(min-width:1111px)]:grid-cols-4 gap-5 py-15 px-10">
+              {products.map((p) =>
+                p.isActive ? (
+                  <Product
+                    key={p._id}
+                    id={p._id}
+                    category={categoryName}
+                    img={`http://localhost:5000${p.images?.[0]}`}
+                    originalPrice={p.originalPrice}
+                    discountedPrice={p.discountedPrice}
+                    inStock={p.inStock}
+                    title={p.title}
+                    subject={p.subject}
+                  />
+                ) : (
+                  <div></div>
+                )
+              )}
+            </div>
+            <div className="see-all-products flex justify-center">
+              <Link
+                className="group relative inline-flex items-center overflow-hidden rounded-lg border border-current px-3 py-3 text-sky-600 "
+                to={`/categories`}
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M17 8l4 4m0 0l-4 4m4-4H3"
-                />
-              </svg>
-            </span>
+                <span className="absolute -start-full transition-all group-hover:start-1">
+                  <svg
+                    className="size-5 rtl:rotate-180"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M17 8l4 4m0 0l-4 4m4-4H3"
+                    />
+                  </svg>
+                </span>
 
-            <span className="text-sm font-medium transition-all group-hover:ms-4">
-              View All Products
-            </span>
-          </Link>
-        </div>
+                <span className="text-sm font-medium transition-all group-hover:ms-4">
+                  View All Products
+                </span>
+              </Link>
+            </div>
+          </div>
+        ) : (
+          <div className="flex flex-col items-center justify-center">
+            <dotlottie-wc
+              src="https://lottie.host/eca676f3-586d-448f-bf3a-5d6a0c59ba6f/RDwRt4kKPP.lottie"
+              className="h-60 w-70"
+              autoplay
+              loop
+            ></dotlottie-wc>
+            <p className="text-3xl font-bold">Products Coming Soon</p>
+          </div>
+        )}
       </section>
 
       {/* why choose us section */}
@@ -1501,16 +1513,16 @@ function Home() {
       </section>
 
       {/* online course section */}
-      <section className="!py-10">
+      <section className="!py-10 mb-10">
         <Heading title="Learn, Bake, and Grow with Sweet Dreams Academy" />
-        <div className="text-center text-lg !mt-5">
+        <div className="text-center text-lg !mt-5 mb-10">
           <p>
             Join our online courses to master baking skills, explore creative
             recipes, and turn your passion into a thriving business—anytime,
             anywhere.
           </p>
         </div>
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 lg:gap-8">
+        {/* <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 lg:gap-8">
           {courses.length > 0 ? (
             courses.map((course, index) => {
               return (
@@ -1540,6 +1552,53 @@ function Home() {
           ) : (
             <div className="w-screen">
               <p className="text-2xl text-center w-full">no courses found</p>
+            </div>
+          )}
+        </div> */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+          {courses.length > 0 ? (
+            courses.map((course, index) => {
+              return (
+                <div key={index}>
+                  <article className="bg-white overflow-hidden rounded-2xl shadow-xl hover:-translate-y-2 transition-all duration-200">
+                    <div className="relative p-2 h-66 w-full">
+                      <img
+                        alt="Cake"
+                        // src="/images/cake-2.jpg"
+                        src={`http://localhost:5000${course.ImageUrl}`}
+                        className="h-full w-full rounded-xl object-cover"
+                      />
+                    </div>
+
+                    {/* Bottom white content */}
+                    <div className=" p-4 md:p-6">
+                      <div className="text-black flex">
+                        <div className="flex items-center gap-2 w-10/12">
+                          <div>
+                            <h3 className="font-bold text-xl">
+                              {course.title}
+                            </h3>
+                            <p className="text-md pt-2">{course.description}</p>
+                          </div>
+                        </div>
+                        <button className=" bg-blue h-[3rem] lg:w-[27%] rounded-xl font-bold text-white cursor-pointer">
+                          Start Learning
+                        </button>
+                      </div>
+                    </div>
+                  </article>
+                </div>
+              );
+            })
+          ) : (
+            <div className="w-screen flex flex-col items-center justify-center">
+              <dotlottie-wc
+                src="https://lottie.host/eca676f3-586d-448f-bf3a-5d6a0c59ba6f/RDwRt4kKPP.lottie"
+                className="h-60 w-70"
+                autoplay
+                loop
+              ></dotlottie-wc>
+              <p className="text-3xl font-bold">Courses Coming Soon</p>
             </div>
           )}
         </div>
@@ -1598,56 +1657,70 @@ function Home() {
           journey.
         </p>
         {/* products section */}
-        <div className="grid [@media(max-width:553px)]:!grid-cols-1 [@media(max-width:846px)]:grid-cols-2 [@media(max-width:1111px)]:grid-cols-3 [@media(min-width:1111px)]:grid-cols-4 gap-5 py-15 px-10">
-          {essentials.map(
-            (p) => (
-              // p.isActive ? (
-              <Essentials
-                key={p._id}
-                id={p._id}
-                category={categoryName}
-                img={`http://localhost:5000${p.images?.[0]}`}
-                // img={productImages[index % productImages.length]}
-                originalPrice={p.originalPrice}
-                discountedPrice={p.discountedPrice}
-                inStock={p.inStock}
-                // price={p.price}
-                title={p.title}
-                subject={p.subject}
-              />
-            )
-            // ) : (
-            //   <div></div>
-            // )
-          )}
-        </div>
-        <div className="see-all-products pt-5 flex justify-center">
-          <Link
-            className="group relative inline-flex items-center overflow-hidden rounded-lg border border-current px-3 py-3 text-sky-600 "
-            to={"/ess-categories"}
-          >
-            <span className="absolute -start-full transition-all group-hover:start-1">
-              <svg
-                className="size-5 rtl:rotate-180"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
+        {essentials.length > 0 ? (
+          <div>
+            <div className="grid [@media(max-width:553px)]:!grid-cols-1 [@media(max-width:846px)]:grid-cols-2 [@media(max-width:1111px)]:grid-cols-3 [@media(min-width:1111px)]:grid-cols-4 gap-5 py-15 px-10">
+              {essentials.map(
+                (p) => (
+                  // p.isActive ? (
+                  <Essentials
+                    key={p._id}
+                    id={p._id}
+                    category={categoryName}
+                    img={`http://localhost:5000${p.images?.[0]}`}
+                    // img={productImages[index % productImages.length]}
+                    originalPrice={p.originalPrice}
+                    discountedPrice={p.discountedPrice}
+                    inStock={p.inStock}
+                    // price={p.price}
+                    title={p.title}
+                    subject={p.subject}
+                  />
+                )
+                // ) : (
+                //   <div></div>
+                // )
+              )}
+            </div>
+            <div className="see-all-products flex justify-center">
+              <Link
+                className="group relative inline-flex items-center overflow-hidden rounded-lg border border-current px-3 py-3 text-sky-600 "
+                to={"/ess-categories"}
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M17 8l4 4m0 0l-4 4m4-4H3"
-                />
-              </svg>
-            </span>
+                <span className="absolute -start-full transition-all group-hover:start-1">
+                  <svg
+                    className="size-5 rtl:rotate-180"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M17 8l4 4m0 0l-4 4m4-4H3"
+                    />
+                  </svg>
+                </span>
 
-            <span className="text-sm font-medium transition-all group-hover:ms-4">
-              View All Products
-            </span>
-          </Link>
-        </div>
+                <span className="text-sm font-medium transition-all group-hover:ms-4">
+                  View All Products
+                </span>
+              </Link>
+            </div>
+          </div>
+        ) : (
+          <div className="flex flex-col items-center justify-center">
+            <dotlottie-wc
+              src="https://lottie.host/eca676f3-586d-448f-bf3a-5d6a0c59ba6f/RDwRt4kKPP.lottie"
+              className="h-60 w-70"
+              autoplay
+              loop
+            ></dotlottie-wc>
+            <p className="text-3xl font-bold">Baking Essentials Coming Soon</p>
+          </div>
+        )}
       </section>
 
       {/* testimonial section */}

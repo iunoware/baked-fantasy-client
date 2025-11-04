@@ -30,8 +30,10 @@ function Product(props) {
     const checkCartStatus = async () => {
       try {
         const res = await axios.get(`http://localhost:5000/cart/${userId}`);
-        const userCart = res.data; // adjust to match your backend response
-        const foundItem = userCart.items.find((item) => item.productId._id === props.id);
+        const userCart = res.data;
+        const foundItem = userCart.items.find(
+          (item) => item.productId._id === props.id
+        );
 
         if (foundItem) {
           setAdded(true);
@@ -60,6 +62,18 @@ function Product(props) {
         console.error("Error Updating Cart", err);
         toast.error("Failed to update quantity");
       }
+    } else if (newQuantity === 0) {
+      try {
+        await axios.delete(`http://localhost:5000/cart`, {
+          data: { userId, productId: props.id },
+        });
+        setAdded(false);
+        setQuantity(1);
+        toast.success(`${props.title} removed from cart`);
+      } catch (err) {
+        console.error("Error removing item:", err);
+        toast.error("Failed to remove item");
+      }
     }
   };
 
@@ -71,11 +85,15 @@ function Product(props) {
             alt="Cake"
             // src="/images/cake-2.jpg"
             src={props.img}
-            className={`${
-              props.inStock ? "" : "grayscale opacity-60"
-            } h-full w-full rounded-xl object-cover cat-img`}
+            className={`
+              ${props.inStock ? "" : "grayscale opacity-60"}
+              h-full w-full rounded-xl object-cover cat-img`}
           />
-          <div className={`${props.inStock ? "hidden" : "flex"} absolute top-2 right-2`}>
+          <div
+            className={`${
+              props.inStock ? "hidden" : "flex"
+            } absolute top-2 right-2`}
+          >
             <span className="text-lg border-2 border-red-600 bg-white rounded-lg p-1 font-extrabold text-red-600">
               SOLD OUT
             </span>
@@ -137,7 +155,9 @@ function Product(props) {
               <button
                 disabled={!props.inStock}
                 className={`${
-                  props.inStock ? "cursor-pointer" : "cursor-not-allowed bg-gray-400"
+                  props.inStock
+                    ? "cursor-pointer"
+                    : "cursor-not-allowed bg-gray-400"
                 } group relative inline-flex items-center overflow-hidden rounded-lg bg-cyan-500 px-8 py-3 text-white focus:ring-3 focus:outline-hidden mr-3`}
                 onClick={handleCart}
               >

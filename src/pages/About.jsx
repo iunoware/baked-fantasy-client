@@ -93,25 +93,24 @@ function About() {
   // testimonial
   const testimonials = [
     {
-      name: "Nikitha (Home baker)",
+      name: "Suba Lakshmi",
       stars: "⭐⭐⭐⭐⭐",
-      description:
-        "The online cake decorating course transformed my hobby into a thriving business. The instructors are amazing!",
+      description: "Super tasty brownies😋😋😋😋. Highly recommended",
     },
     {
-      name: "Ram",
+      name: "Padmavathy Shivagurunathan",
       stars: "⭐⭐⭐⭐",
       description:
         "Sweet Dreams Baking Institute offers the most comprehensive baking education. Highly recommended!",
     },
     {
-      name: "By Raja (customer)",
+      name: "karthi micky",
       stars: "⭐⭐⭐⭐⭐",
       description:
         "Their bulk order service is exceptional. Quality products delivered on time, every time.",
     },
     {
-      name: "Parveen (Home baker)",
+      name: "Selvarani Nagaraj",
       stars: "⭐⭐⭐⭐",
       description:
         "Baked Fantasy helped us launch our dessert menu with professional training and ongoing support.",
@@ -282,7 +281,9 @@ function About() {
                   <div className="hidden lg:flex w-2/12 justify-center">
                     <div
                       className={`h-18 w-18 m-2 bg-center bg-contain bg-no-repeat z-30 drop-shadow-2xl`}
-                      style={{ backgroundImage: `url(/images/${milestone.image})` }}
+                      style={{
+                        backgroundImage: `url(/images/${milestone.image})`,
+                      }}
                     ></div>
                   </div>
 
