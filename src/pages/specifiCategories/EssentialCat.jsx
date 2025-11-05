@@ -44,18 +44,23 @@ function SpecificCategory() {
 
       {/* products */}
       <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5 px-20 py-10">
-        {products.map((p) => (
-          <Product
-            key={p._id}
-            id={p._id} // ✅ pass id
-            category={categoryName}
-            img={`http://localhost:5000${p.images?.[0]}`}
-            originalPrice={p.originalPrice}
-            discountedPrice={p.discountedPrice}
-            title={p.title}
-            subject={p.subject}
-          />
-        ))}
+        {products.map((p) =>
+          p.isActive ? (
+            <Product
+              key={p._id}
+              id={p._id} // ✅ pass id
+              category={categoryName}
+              img={`http://localhost:5000${p.images?.[0]}`}
+              originalPrice={p.originalPrice}
+              discountedPrice={p.discountedPrice}
+              title={p.title}
+              subject={p.subject}
+              inStock={p.inStock}
+            />
+          ) : (
+            ""
+          )
+        )}
       </div>
     </div>
   );

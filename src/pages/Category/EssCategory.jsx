@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import Heading from "../../components/Heading.jsx";
 import { useEffect, useState } from "react";
 import Category from "../../components/Essential-cat";
@@ -22,12 +23,12 @@ function EssCategories() {
       <section className="lg:pt-30 md:pt-20 pt-40 bg-purple-100">
         <Heading title="Sustainable Baking Essentials" />
         <p className="subHeading">
-          All the essentials you need — bowls, spoons, molds, and premium flour
-          — built to make your baking effortless and your results extraordinary.
+          All the essentials you need — bowls, spoons, molds, and premium flour — built to
+          make your baking effortless and your results extraordinary.
         </p>
         <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5 px-20 py-10">
-          {products.map((p, i) => {
-            return (
+          {products.map((p, i) =>
+            p.isActive ? (
               <Category
                 key={p._id}
                 img={p.imageUrl}
@@ -35,8 +36,10 @@ function EssCategories() {
                 title={p.title}
                 subject={p.subject}
               />
-            );
-          })}
+            ) : (
+              ""
+            )
+          )}
         </div>
         {/* why choose us section */}
         <section className="whyChooseUs flex justify-center pb-8">
@@ -57,12 +60,9 @@ function EssCategories() {
                   autoplay
                   loop
                 ></dotlottie-wc>
-                <h2 className="text-3xl font-bold text-amber-700">
-                  Premium ingredients
-                </h2>
+                <h2 className="text-3xl font-bold text-amber-700">Premium ingredients</h2>
                 <p className="text-md pt-5">
-                  Only the finest, locally-sourced ingredients go into our
-                  products
+                  Only the finest, locally-sourced ingredients go into our products
                 </p>
               </div>
               <div className="card-2 flex flex-col  items-center text-center">
@@ -88,9 +88,7 @@ function EssCategories() {
                   autoplay
                   loop
                 ></dotlottie-wc>
-                <h2 className="text-3xl font-bold text-amber-700">
-                  Fresh Delivery
-                </h2>
+                <h2 className="text-3xl font-bold text-amber-700">Fresh Delivery</h2>
                 <p className="text-md pt-5">
                   Same-day delivery ensures you get the freshest products
                 </p>
@@ -108,12 +106,12 @@ function EssCategories() {
               </h2>
 
               <p className="hidden text-gray-500 md:mt-4 md:block">
-                Looking to order in bulk for your next party, event, or
-                corporate gathering? We provide freshly baked cakes and treats,
-                crafted to perfection and delivered with care. Whether it’s a
-                birthday, wedding, festival, or business celebration, our bulk
-                orders ensure consistent quality, delicious taste, and beautiful
-                presentation—making your special occasion truly unforgettable.
+                Looking to order in bulk for your next party, event, or corporate
+                gathering? We provide freshly baked cakes and treats, crafted to
+                perfection and delivered with care. Whether it’s a birthday, wedding,
+                festival, or business celebration, our bulk orders ensure consistent
+                quality, delicious taste, and beautiful presentation—making your special
+                occasion truly unforgettable.
               </p>
 
               <div className="mt-4 md:mt-8">

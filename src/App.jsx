@@ -84,12 +84,7 @@
 // export default App;
 
 // new one
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  useLocation,
-} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import Home from "../src/pages/Home.jsx";
 import About from "../src/pages/About.jsx";
@@ -108,7 +103,7 @@ import Login from "./components/Login.jsx";
 import OnlineCourseDetails from "./pages/OnlineCourseDetails.jsx";
 import Cart from "./pages/Cart.jsx";
 import EssSpeciCategory from "./pages/specifiCategories/EssentialCat.jsx";
-import EssDetailPage from "./pages/ProductDetails/EssentialDetail.jsx";
+// import EssDetailPage from "./pages/ProductDetails/EssentialDetail.jsx";
 import MyLearning from "./pages/MyLearning.jsx";
 import CoursePaymentPage from "./pages/CoursePaymentPage.jsx";
 import Profile from "./pages/Profile.jsx";
@@ -122,6 +117,8 @@ import BannerAdmin from "./pages/adminPanel/BannerAdmin.jsx";
 import IndividualCakesAdmin from "./pages/adminPanel/cakes/IndividualCakesAdmin.jsx";
 import SettingsAdmin from "./pages/adminPanel/SettingsAdmin.jsx";
 import AdminLogin from "./components/adminPanel/AdminLogin.jsx";
+import IndividualEssentialAdmin from "./pages/adminPanel/essentials/IndividualEssentialsAdmin.jsx";
+import EssentialDetailsPage from "./pages/ProductDetails/EssentialDetail.jsx";
 import { Navigate } from "react-router-dom";
 
 function ProtectedAdminRoute({ children }) {
@@ -152,24 +149,15 @@ function AppContent() {
         <Route path="/categories" element={<Categories />} />
         <Route path="/ess-categories" element={<EssCategories />} />
         <Route path="/products/:categoryName" element={<SpecificCategory />} />
+        <Route path="/essentials/:categoryName" element={<EssSpeciCategory />} />
+        <Route path="/products/:categoryName/:productId" element={<ProductDetail />} />
         <Route
-          path="/essentials/:categoryName"
-          element={<EssSpeciCategory />}
-        />
-        <Route
-          path="/products/:categoryName/:productId"
-          element={<ProductDetail />}
-        />
-        <Route
-          path="/essentials/:categoryName/:productId"
-          element={<EssDetailPage />}
+          path="/essential/:categoryName/:productId"
+          element={<EssentialDetailsPage />}
         />
         <Route path="/courses" element={<Courses />} />
         <Route path="/courses/online-course" element={<OnlineCourse />} />
-        <Route
-          path="/course/my-learning/:courseId"
-          element={<OnlineCourseDetails />}
-        />
+        <Route path="/course/my-learning/:courseId" element={<OnlineCourseDetails />} />
         <Route path="/courses/offline-course" element={<OfflineCourse />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/cart" element={<Cart />} />
@@ -242,6 +230,14 @@ function AppContent() {
           element={
             <ProtectedAdminRoute>
               <IndividualCakesAdmin />
+            </ProtectedAdminRoute>
+          }
+        />
+        <Route
+          path="/admin/essentials/:categoryName"
+          element={
+            <ProtectedAdminRoute>
+              <IndividualEssentialAdmin />
             </ProtectedAdminRoute>
           }
         />
