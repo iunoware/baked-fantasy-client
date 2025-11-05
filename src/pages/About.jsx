@@ -67,8 +67,7 @@ function About() {
     {
       year: "2022",
       title: "Signature Cakes Launched",
-      description:
-        "Introduced our signature customized cakes and special dessert menu.",
+      description: "Introduced our signature customized cakes and special dessert menu.",
       icon: <Cake color="#ffffff" size={27} />,
       image: "cake-dot-3.png",
     },
@@ -180,15 +179,15 @@ function About() {
         {/* left column */}
         <div className="p-8 md:p-12 lg:px-16 lg:py-24 mt-38">
           <div className="text-start ltr:sm:text-left rtl:sm:text-right">
-            <h2 className="text-2xl font-bold text-white sm:text-3xl md:text-5xl">
-              From <span className="text-pink-500">Oven to Heart</span> - and
-              From Us to Your Kitchen.
+            <h2 className="text-2xl font-bold luckyGuy text-white sm:text-3xl md:text-5xl">
+              From <span className="text-pink-500">Oven to Heart</span> - and From Us to
+              Your Kitchen.
             </h2>
 
             <p className="hidden max-w-lg text-white/90 md:mt-6 md:block md:text-lg md:leading-relaxed">
-              The Baked Fantasy brings you fresh cakes, pastries, and desserts
-              made with love. Celebrate life’s moments with us-or join our
-              baking courses to create your own oven-fresh treats at home.
+              The Baked Fantasy brings you fresh cakes, pastries, and desserts made with
+              love. Celebrate life’s moments with us-or join our baking courses to create
+              your own oven-fresh treats at home.
             </p>
             <div className="flex gap-10 items-center">
               <div className="mt-4 sm:mt-8">
@@ -221,16 +220,16 @@ function About() {
       </section>
 
       {/* time line section */}
-      <section className="pt-16 bg-pink-100 bg-[url('/images/swirl.png')]">
+      <section className="pt-16 bg bg-[url('/images/swirl.png')]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl luckyGuy text-black font-semibold mb-4">
               Our Journey
             </h2>
             <p className="text-lg text-black/70 max-w-3xl mx-auto">
-              From a passionate home baker to a skilled academy instructor and a
-              thriving large-scale home bakery, our journey is driven by love
-              for the craft and dedication to sharing it with others.
+              From a passionate home baker to a skilled academy instructor and a thriving
+              large-scale home bakery, our journey is driven by love for the craft and
+              dedication to sharing it with others.
             </p>
           </div>
 
@@ -254,10 +253,10 @@ function About() {
                     }`}
                   >
                     {/* cards */}
-                    <div className="border-2 border-transparent rounded-2xl hover:border-sky-500 shadow-lg hover:shadow-xl bg-white bg-cover transition-all duration-300">
+                    <div className="border-2 border-transparent rounded-2xl hover:border-pink-300 shadow-lg hover:shadow-xl bg-white bg-cover transition-all duration-300">
                       <div className="p-6">
                         <div className="flex items-center mb-4">
-                          <div className="w-12 h-12 bg-blue-400 rounded-full flex items-center justify-center mr-4">
+                          <div className="w-12 h-12 bg-pink-400 rounded-full flex items-center justify-center mr-4">
                             {milestone.icon}
                           </div>
                           <div>
@@ -297,45 +296,43 @@ function About() {
       </section>
 
       {/* CTA section */}
-      <div className="bg-pink-100 bg-[url('/images/swirl.png')]">
+      <div className="bg bg-[url('/images/swirl.png')]">
         <section className="overflow-hidden bg-[url(/images/cta-cake-bg-3.png)] pt-40 bg-center sm:grid sm:grid-cols-2 sm:items-center">
           <div className="p-8 md:p-12 lg:px-16 lg:py-24">
             <div className="mx-auto max-w-xl text-center ltr:sm:text-left rtl:sm:text-right">
               <h2 className="!text-4xl font-semibold mb-5 text-gray-900 pt-60 md:text-3xl">
-                Turn Your Passion for{" "}
-                <span className="text-pink-600">Baking</span> Into{" "}
-                <span className="text-pink-600">Perfection</span>
+                Turn Your Passion for <span className="text-pink-500">Baking</span> Into{" "}
+                <span className="text-pink-500">Perfection</span>
               </h2>
 
               <p className="hidden text-xl mb-5 text-gray-800 md:mt-4 md:block">
-                Join our academy and transform your home baking skills into
-                professional expertise - from homemade treats to large-scale
-                success!
+                Join our academy and transform your home baking skills into professional
+                expertise - from homemade treats to large-scale success!
               </p>
 
               <div className="mt-4 flex md:mt-8">
                 <Link
-                  className="group relative inline-flex items-center overflow-hidden rounded-lg bg-cyan-500 px-8 py-3 text-white mr-3"
+                  className="group relative inline-flex items-center overflow-hidden rounded-lg bg-pink-400 px-8 py-3 text-white mr-3"
                   to="/courses"
                 >
                   <span className="absolute -start-full transition-all group-hover:start-4">
                     <LaptopMinimal size={20} />
                   </span>
 
-                  <span className="text-sm font-medium transition-all group-hover:ms-4">
+                  <span className="text-md font-medium transition-all group-hover:ms-4">
                     Our Courses
                   </span>
                 </Link>
 
                 <Link
-                  className="group relative bg-white inline-flex items-center overflow-hidden rounded-lg border border-current px-3 py-3 text-sky-500"
+                  className="group relative bg-white inline-flex items-center overflow-hidden rounded-lg border border-current px-3 py-3 text-pink-400"
                   to="/categories"
                 >
                   <span className="absolute -start-full transition-all group-hover:start-1">
                     <ShoppingCart size={36} className="pr-5" />
                   </span>
 
-                  <span className="text-sm text-sky-500 font-medium transition-all group-hover:ms-4">
+                  <span className="text-sm text-pink-400 font-medium transition-all group-hover:ms-4">
                     Our Products
                   </span>
                 </Link>
@@ -383,21 +380,17 @@ function About() {
                 Recognized Excellence
               </h3>
               <p className="text-lg text-black/80 leading-relaxed">
-                Our commitment to quality craftsmanship and exceptional customer
-                service has been recognized by industry leaders and our
-                community. These awards reflect our dedication to traditional
-                baking methods and innovative approaches to creating memorable
-                experiences.
+                Our commitment to quality craftsmanship and exceptional customer service
+                has been recognized by industry leaders and our community. These awards
+                reflect our dedication to traditional baking methods and innovative
+                approaches to creating memorable experiences.
               </p>
 
               <div className="space-y-4 mt-7 transition-all duration-200">
                 <div className="bg-white shadow-lg rounded-lg p-4 flex items-start gap-4">
                   {/* Award icon */}
                   <div className="w-8 h-8 text-blue-400 flex items-center justify-center flex-shrink-0 mt-1">
-                    <svg
-                      className="w-full h-full fill-current"
-                      viewBox="0 0 24 24"
-                    >
+                    <svg className="w-full h-full fill-current" viewBox="0 0 24 24">
                       <path d="M12 2L15.09 8.26L22 9L17 14L18.18 21L12 17.77L5.82 21L7 14L2 9L8.91 8.26L12 2Z" />
                     </svg>
                   </div>
@@ -421,8 +414,8 @@ function About() {
             Sweet words from our customers
           </h2>
           <p className="text-xl text-gray-800/80 text-center">
-            Discover what makes our bakery special through the heartfelt stories
-            of our beloved customers
+            Discover what makes our bakery special through the heartfelt stories of our
+            beloved customers
           </p>
         </div>
 
