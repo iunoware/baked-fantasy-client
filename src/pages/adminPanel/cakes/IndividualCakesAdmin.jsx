@@ -1,5 +1,4 @@
 /* eslint-disable no-unused-vars */
-// /* eslint-disable no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
@@ -99,7 +98,7 @@ function IndividualCakesAdmin() {
         setIsModalVisible(false);
         setTimeout(() => {
           window.location.reload();
-        }, 2000);
+        }, 1000);
       } catch (error) {
         toast.error("Can't add products");
         console.error("error message: ", error.message);
@@ -282,9 +281,7 @@ function IndividualCakesAdmin() {
       {/* add product button */}
       <div className="flex flex-col md:flex-row gap-5 md:gap-0 justify-between">
         <div>
-          <h1 className="text-3xl font-semibold text-pink-600">
-            {categoryName}
-          </h1>
+          <h1 className="text-3xl font-semibold text-pink-600">{categoryName}</h1>
 
           <p className="text-md pt-1">Manage your bakery products</p>
         </div>
@@ -341,7 +338,7 @@ function IndividualCakesAdmin() {
             </table>
           ) : (
             <div>
-              <h2 className="text-2xl font-semibold">
+              <h2 className="text-4xl h-40 flex justify-center items-center">
                 There are no products in this {categoryName} category
               </h2>
             </div>

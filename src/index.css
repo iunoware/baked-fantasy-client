@@ -111,3 +111,7 @@ html,
 body {
   scroll-behavior: smooth;
 }
+
+.edit-modal::-webkit-scrollbar {
+  display: none;
+}

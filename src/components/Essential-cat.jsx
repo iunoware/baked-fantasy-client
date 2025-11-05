@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useMemo } from "react";
+// import { useMemo } from "react";
 
 function EssCategory(props) {
   //   const colors = {
@@ -29,12 +29,12 @@ function EssCategory(props) {
 
   return (
     <Link to={`/essentials/${props.title}`} className="card">
-      <article className="cat-card overflow-hidden rounded-lg shadow-lg hover:-translate-y-2 transition-all duration-200 ">
-        <div className="relative h-56">
+      <article className="cat-card overflow-hidden rounded-2xl shadow-lg hover:-translate-y-2 transition-all duration-200 ">
+        <div className="relative bg-white h-56">
           <img
             alt={props.title}
             src={`http://localhost:5000${props.img}`}
-            className="h-full w-full object-cover cat-img"
+            className="h-full w-full p-2 rounded-2xl object-cover cat-img"
           />
 
           {/* <div className={`absolute inset-0 ${randomColor}`}></div> */}
@@ -46,18 +46,19 @@ function EssCategory(props) {
             </div>
           </div>
 
-          <div className="absolute bottom-4 left-4 text-white">
+          {/* <div className="absolute bottom-4 left-4 text-white">
             <div className="flex items-center gap-2">
               <div>
                 <h3 className="font-bold text-black text-2xl">{props.title}</h3>
                 <p className="text-sm text-black">15 products</p>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
 
         {/* Bottom white content */}
         <div className="bg-white p-4 sm:p-6">
+          <h2 className="font-bold text-black text-2xl">{props.title}</h2>
           <p className="mt-2 text-sm text-gray-600">{props.subject}</p>
         </div>
       </article>

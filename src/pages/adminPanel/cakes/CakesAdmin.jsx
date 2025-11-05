@@ -71,7 +71,7 @@ function CakesAdmin() {
         setIsModalVisible(false);
         setTimeout(() => {
           window.location.reload();
-        }, 2000);
+        }, 1000);
       } catch (error) {
         toast.error("Can't add Category");
         console.error("error message: ", error.message);
