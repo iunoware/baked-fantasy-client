@@ -31,9 +31,7 @@ function Product(props) {
       try {
         const res = await axios.get(`http://localhost:5000/cart/${userId}`);
         const userCart = res.data;
-        const foundItem = userCart.items.find(
-          (item) => item.productId._id === props.id
-        );
+        const foundItem = userCart.items.find((item) => item.productId._id === props.id);
 
         if (foundItem) {
           setAdded(true);
@@ -86,14 +84,10 @@ function Product(props) {
             // src="/images/cake-2.jpg"
             src={props.img}
             className={`
-              ${props.inStock ? "" : "grayscale opacity-60"}
+              ${props.inStock ? "" : " opacity-60"}
               h-full w-full rounded-xl object-cover cat-img`}
           />
-          <div
-            className={`${
-              props.inStock ? "hidden" : "flex"
-            } absolute top-2 right-2`}
-          >
+          <div className={`${props.inStock ? "hidden" : "flex"} absolute top-2 right-2`}>
             <span className="text-lg border-2 border-red-600 bg-white rounded-lg p-1 font-extrabold text-red-600">
               SOLD OUT
             </span>
@@ -155,9 +149,7 @@ function Product(props) {
               <button
                 disabled={!props.inStock}
                 className={`${
-                  props.inStock
-                    ? "cursor-pointer"
-                    : "cursor-not-allowed bg-gray-400"
+                  props.inStock ? "cursor-pointer" : "cursor-not-allowed"
                 } group relative inline-flex items-center overflow-hidden rounded-lg bg-cyan-500 px-8 py-3 text-white focus:ring-3 focus:outline-hidden mr-3`}
                 onClick={handleCart}
               >
@@ -214,10 +206,8 @@ function Product(props) {
             <button
               disabled={props.inStock ? "false" : "true"}
               className={`${
-                props.inStock
-                  ? "cursor-pointer text-sky-600"
-                  : "cursor-not-allowed text-gray-400"
-              } group relative inline-flex items-center overflow-hidden rounded-lg border border-current px-3 py-3  focus:ring-3 focus:outline-hidden`}
+                props.inStock ? "cursor-pointer" : "cursor-not-allowed"
+              } group relative inline-flex items-center text-sky-600 overflow-hidden rounded-lg border border-current px-3 py-3  focus:ring-3 focus:outline-hidden`}
               href="#"
             >
               <span className="absolute -start-full transition-all group-hover:start-1">
