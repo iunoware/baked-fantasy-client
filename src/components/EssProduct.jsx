@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useState } from "react";
 import { Button } from "../components/ui/button";
 import { Link } from "react-router-dom";
@@ -16,10 +17,26 @@ function Product(props) {
 
   // Quantity change
   const handleQuantityChange = (change) => {
-    const newQuantity = quantity + change;
-    if (newQuantity >= 1 && newQuantity <= 50) {
-      setQuantity(newQuantity);
-    }
+    // Add to cart (local only)
+    const handleCart = () => {
+      setAdded(true);
+      toast.success(`${props.title} added to cart!`);
+    };
+
+    // Quantity change
+    const handleQuantityChange = (change) => {
+      const newQuantity = quantity + change;
+      if (newQuantity >= 1 && newQuantity <= 50) {
+        setQuantity(newQuantity);
+      }
+    };
+
+    // Send to WhatsApp
+    const sendToWhatsApp = () => {
+      const phone = "919003710091"; // your WhatsApp number
+      const message = `Order Details:%0A${props.title} - Quantity: ${quantity}`;
+      window.open(`https://wa.me/${phone}?text=${message}`);
+    };
   };
 
   // Send to WhatsApp
