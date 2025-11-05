@@ -1012,7 +1012,7 @@ function Home() {
       </section>
 
       {/* course section */}
-      <section id="cement" className="py-20 bg">
+      <section className="py-20 bg">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <Heading title="Featured Courses" />
@@ -1555,7 +1555,7 @@ function Home() {
             </div>
           )}
         </div> */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+        <div className="grid grid-cols-1 px-10 md:grid-cols-2 lg:grid-cols-3 gap-10">
           {courses.length > 0 ? (
             courses.map((course, index) => {
               return (

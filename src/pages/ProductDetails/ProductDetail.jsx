@@ -209,13 +209,16 @@ function ProductDetailPage({ onNavigate, onAddToCart }) {
 
             {/* Price */}
             <div className="flex items-center space-x-4">
-              <span className="text-3xl font-bold text-[#00BCD4]">
-                ₹{product.price}
+              <span className="text-3xl flex items-center justify-center gap-3 font-bold text-black">
+                <span className="text-red-600/60 text-2xl line-through">
+                  ₹{product.discountedPrice}
+                </span>
+                ₹{product.originalPrice}
               </span>
               {product.originalPrice && (
                 <Badge className="bg-green-100 text-green-800">
                   {Math.round(
-                    ((product.originalPrice - product.price) /
+                    ((product.originalPrice - product.discountedPrice) /
                       product.originalPrice) *
                       100
                   )}
@@ -253,7 +256,7 @@ function ProductDetailPage({ onNavigate, onAddToCart }) {
               <span>
                 Total:{" "}
                 <strong className="text-[#00BCD4]">
-                  ₹{(product.price * quantity).toFixed(2)}
+                  ₹{(product.originalPrice * quantity).toFixed(2)}
                 </strong>
               </span>
             </div>
@@ -364,7 +367,9 @@ function ProductDetailPage({ onNavigate, onAddToCart }) {
               id={related._id}
               category={related.category?.title}
               img={`http://localhost:5000${related.images?.[0]}`}
-              price={related.price}
+              // price={related.price}
+              discountedPrice={related.discountedPrice}
+              originalPrice={related.originalPrice}
               title={related.title}
               subject={related.subject}
             />
