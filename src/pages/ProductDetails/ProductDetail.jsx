@@ -30,42 +30,43 @@ function ProductDetailPage({ onNavigate, onAddToCart }) {
   const [loading, setLoading] = useState(true);
 
   // for changing the button
-  const handleCart = async () => {
-    try {
-      await axios.post("http://localhost:5000/cart", {
-        userId,
-        productId,
-        quantity: 1,
-      });
-      setAdded(true);
-      toast.success(`${product.category?.title} added to cart!`);
-    } catch (error) {
-      console.error("Error adding to cart:", error);
-      toast.error("Failed to add item to cart");
-    }
-  };
-  useEffect(() => {
-    const checkCartStatus = async () => {
-      try {
-        const res = await axios.get(`http://localhost:5000/cart/${userId}`);
-        const userCart = res.data; // adjust to match your backend response
-        const foundItem = userCart.items.find(
-          (item) => item.productId._id === productId
-        );
+  // const handleCart = async () => {
+  //   try {
+  //     await axios.post("http://localhost:5000/cart", {
+  //       userId,
+  //       productId,
+  //       quantity: 1,
+  //     });
+  //     setAdded(true);
+  //     toast.success(`${product.category?.title} added to cart!`);
+  //   } catch (error) {
+  //     console.error("Error adding to cart:", error);
+  //     toast.error("Failed to add item to cart");
+  //   }
+  // };
+  // useEffect(() => {
+  //   const checkCartStatus = async () => {
+  //     try {
+  //       const res = await axios.get(`http://localhost:5000/cart/${userId}`);
+  //       const userCart = res.data; // adjust to match your backend response
+  //       const foundItem = userCart.items.find(
+  //         (item) => item.productId._id === productId
+  //       );
 
-        if (foundItem) {
-          setAdded(true);
-          setQuantity(foundItem.quantity);
-        }
-      } catch (error) {
-        console.error("Error checking cart:", error);
-      }
-    };
+  //       if (foundItem) {
+  //         setAdded(true);
+  //         setQuantity(foundItem.quantity);
+  //       }
+  //     } catch (error) {
+  //       console.error("Error checking cart:", error);
+  //     }
+  //   };
 
-    checkCartStatus();
-  }, [productId]);
+  //   checkCartStatus();
+  // }, [productId]);
 
-  // for fetching the product
+  // for fetching the
+
   useEffect(() => {
     const fetchProduct = async () => {
       try {
@@ -117,31 +118,30 @@ function ProductDetailPage({ onNavigate, onAddToCart }) {
     );
   }
 
-  const handleQuantityChange = async (change) => {
-    const newQuantity = quantity + change;
-    if (newQuantity >= 1 && newQuantity <= 50) {
-      setQuantity(newQuantity);
-      try {
-        await axios.put("http://localhost:5000/cart", {
-          userId,
-          productId,
-          quantity: newQuantity,
-        });
-        toast.success(`Quantity updated to ${newQuantity}`);
-      } catch (err) {
-        console.error("Error Updating Cart", err);
-        toast.error("Failed to update quantity");
-      }
+  const handleBuyNow = () => {
+    const phone = "919003710091"; // your WhatsApp number (no +)
+    const message = `Hi! I would like to order ${quantity} x ${product.title}.`;
+    const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+    window.open(url, "_blank");
+  };
+
+  const handleQuantityChange = (change) => {
+    const newQty = quantity + change;
+    if (newQty >= 1 && newQty <= 50) {
+      setQuantity(newQty);
     }
+  };
+  const handleCart = () => {
+    setAdded(true);
+    toast.success(`${props.title} added to cart!`);
   };
 
   const handleAddToCart = () => {
     onAddToCart(product, quantity);
   };
+  // const sendToWhatsApp = () => {
 
-  const handleBuyNow = () => {
-    onNavigate("checkout", { productId: product._id, quantity });
-  };
+  // };
 
   return (
     <div className="min-h-screen bg-[#FFF5E1] py-15">

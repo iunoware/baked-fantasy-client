@@ -46,13 +46,13 @@ export default function NewNav() {
   return (
     <>
       <header className="w-screen">
-        <nav className="bg-[#fcf1db] shadow-xl h-18 fixed top-0 left-0 w-screen z-50 px-15 hidden lg:block md:hidden ">
+        <nav className="bg-[#aebba9] shadow-xl h-18 fixed top-0 left-0 w-screen z-50 px-15 hidden lg:block md:hidden ">
           <div className="flex h-18 items-center justify-between">
             {/* logo */}
             <div className="md:flex md:items-center md:gap-12">
               <Link
                 to="/"
-                className="text-red inline-block [@media(max-width:440px)]:text-xs [@media(max-width:1180px)]:text-md [@media(max-width:1220px)]:text-xl text-2xl font-bold brand-name"
+                className="text-white inline-block [@media(max-width:440px)]:text-xs [@media(max-width:1180px)]:text-md [@media(max-width:1220px)]:text-xl text-2xl font-bold brand-name"
               >
                 The Backed Fantasy
               </Link>
@@ -68,13 +68,13 @@ export default function NewNav() {
                       className={({ isActive }) =>
                         `text-lg relative group rounded-lg p-3 transition ${
                           isActive
-                            ? "bg-red font-semibold text-white"
+                            ? "bg-white font-semibold text-[#3a4437]"
                             : "hover:text-black text-gray-800 "
                         } `
                       }
                     >
                       Home
-                      <span className=" absolute left-1 bottom-0 h-[3px] rounded-xl w-0 bg-red transition-all duration-300 group-hover:w-[90%]"></span>
+                      <span className=" absolute left-1 bottom-0 h-[3px] rounded-xl w-0 bg-[#3a4437] transition-all duration-300 group-hover:w-[90%]"></span>
                     </NavLink>
                   </li>
 
@@ -91,7 +91,7 @@ export default function NewNav() {
                       }
                     >
                       About
-                      <span className="absolute left-1 bottom-0 h-[3px] rounded-xl w-0 bg-red transition-all duration-300 group-hover:w-[90%]"></span>
+                      <span className="absolute left-1 bottom-0 h-[3px] rounded-xl w-0 bg-[#3a4437] transition-all duration-300 group-hover:w-[90%]"></span>
                       {/* <span className="absolute bottom-0 left-1/2 h-[2px] w-0 -translate-x-1/2 origin-center rounded-xl bg-sky-500 transition-all duration-300 group-hover:w-[90%]"></span> */}
                     </NavLink>
                   </li>
