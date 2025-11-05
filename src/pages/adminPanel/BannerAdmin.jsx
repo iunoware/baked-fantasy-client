@@ -90,7 +90,7 @@ function BannerAdmin() {
         aria-modal="true"
         aria-labelledby="modalTitle"
       >
-        <div className="w-[60vh] rounded-lg bg-white p-6 shadow-lg">
+        <div className="md:w-[60vw] w-[90vw] rounded-lg bg-white p-6 shadow-lg">
           <div className="flex justify-between pb-3">
             <h2 className="text-2xl font-bold">Edit Banner</h2>
             <button
