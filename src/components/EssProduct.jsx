@@ -84,7 +84,7 @@ function Product(props) {
                 className={`${
                   props.inStock
                     ? "cursor-pointer new-primary-text"
-                    : "cursor-not-allowed text-gray-500"
+                    : "cursor-not-allowed text-gray-400"
                 } group relative inline-flex items-center overflow-hidden rounded-lg  border border-current px-8 py-3`}
                 onClick={handleCart}
               >
@@ -113,7 +113,7 @@ function Product(props) {
               className={`${
                 props.inStock
                   ? "cursor-pointer new-primary-bg"
-                  : "cursor-not-allowed bg-gray-500"
+                  : "cursor-not-allowed bg-gray-400"
               } group relative inline-flex items-center overflow-hidden text-white rounded-lg border border-current px-4 py-3`}
               onClick={sendToWhatsApp}
             >

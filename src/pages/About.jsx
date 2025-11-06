@@ -112,7 +112,7 @@ function About() {
       name: "Selvarani Nagaraj",
       stars: "⭐⭐⭐⭐",
       description:
-        "Baked Fantasy helped us launch our dessert menu with professional training and ongoing support.",
+        "Loved everything from Baked Fantasy! The cakes and pastries are super fresh, soft, and full of flavor.",
     },
   ];
 
@@ -179,7 +179,7 @@ function About() {
         {/* left column */}
         <div className="p-8 md:p-12 lg:px-16 lg:py-24 mt-38">
           <div className="text-start ltr:sm:text-left rtl:sm:text-right">
-            <h2 className="text-2xl font-bold luckyGuy text-white sm:text-3xl md:text-5xl">
+            <h2 className="text-2xl font-bold lora text-white sm:text-3xl md:text-5xl">
               From <span className="text-pink-500">Oven to Heart</span> - and From Us to
               Your Kitchen.
             </h2>
@@ -193,7 +193,7 @@ function About() {
               <div className="mt-4 sm:mt-8">
                 <Link
                   to={`/categories`}
-                  className="bg-sky-500 inline-block rounded-full px-12 py-3 text-sm font-medium text-white transition hover:bg-sky-700 focus:ring-3  focus:outline-hidden"
+                  className="bg-pink-600 hover:-translate-y-2  inline-block rounded-xl px-8 py-3 text-lg font-medium text-white transition focus:ring-3  focus:outline-hidden"
                 >
                   Shop products
                 </Link>
@@ -201,7 +201,7 @@ function About() {
               <div className="mt-4 sm:mt-8">
                 <Link
                   to={`/courses`}
-                  className="border-2 border-sky-500 inline-block rounded-full px-12 py-3 text-sm font-medium text-white transition hover:bg-sky-500 focus:ring-3  focus:outline-hidden"
+                  className="border-2 border-current hover:-translate-y-2 text-white inline-block rounded-full px-12 py-3 text-sm font-medium transition focus:ring-3 focus:outline-hidden"
                 >
                   Explore course
                 </Link>
@@ -223,7 +223,7 @@ function About() {
       <section className="pt-16 bg bg-[url('/images/swirl.png')]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl luckyGuy text-black font-semibold mb-4">
+            <h2 className="text-3xl md:text-4xl lora text-black font-bold mb-4">
               Our Journey
             </h2>
             <p className="text-lg text-black/70 max-w-3xl mx-auto">
@@ -236,7 +236,7 @@ function About() {
           {/* Timeline */}
           <div className="relative">
             {/* candle */}
-            <div className="absolute left-1/2 transform -translate-x-1/2 w-3 rounded-full bg-pink-300 h-full hidden lg:block"></div>
+            <div className="absolute left-1/2 transform -translate-x-1/2 w-3 rounded-full new-primary-bg h-full hidden lg:block"></div>
 
             <div className="space-y-12">
               {milestones.map((milestone, index) => (
@@ -253,10 +253,10 @@ function About() {
                     }`}
                   >
                     {/* cards */}
-                    <div className="border-2 border-transparent rounded-2xl hover:border-pink-300 shadow-lg hover:shadow-xl bg-white bg-cover transition-all duration-300">
+                    <div className="border-2 border-transparent rounded-2xl hover:-translate-y-2 shadow-lg hover:shadow-xl bg-white bg-cover transition-all duration-300">
                       <div className="p-6">
                         <div className="flex items-center mb-4">
-                          <div className="w-12 h-12 bg-pink-400 rounded-full flex items-center justify-center mr-4">
+                          <div className="w-12 h-12 new-primary-bg rounded-full flex items-center justify-center mr-4">
                             {milestone.icon}
                           </div>
                           <div>
@@ -301,8 +301,8 @@ function About() {
           <div className="p-8 md:p-12 lg:px-16 lg:py-24">
             <div className="mx-auto max-w-xl text-center ltr:sm:text-left rtl:sm:text-right">
               <h2 className="!text-4xl font-semibold mb-5 text-gray-900 pt-60 md:text-3xl">
-                Turn Your Passion for <span className="text-pink-500">Baking</span> Into{" "}
-                <span className="text-pink-500">Perfection</span>
+                Turn Your Passion for <span className="new-primary-text">Baking</span>{" "}
+                Into <span className="new-primary-text">Perfection</span>
               </h2>
 
               <p className="hidden text-xl mb-5 text-gray-800 md:mt-4 md:block">
@@ -312,7 +312,7 @@ function About() {
 
               <div className="mt-4 flex md:mt-8">
                 <Link
-                  className="group relative inline-flex items-center overflow-hidden rounded-lg bg-pink-400 px-8 py-3 text-white mr-3"
+                  className="group relative inline-flex items-center overflow-hidden rounded-lg new-primary-bg px-8 py-3 text-white mr-3"
                   to="/courses"
                 >
                   <span className="absolute -start-full transition-all group-hover:start-4">
@@ -325,14 +325,14 @@ function About() {
                 </Link>
 
                 <Link
-                  className="group relative bg-white inline-flex items-center overflow-hidden rounded-lg border border-current px-3 py-3 text-pink-400"
+                  className="group relative bg-white inline-flex items-center overflow-hidden rounded-lg border border-current px-3 py-3 new-primary-text"
                   to="/categories"
                 >
                   <span className="absolute -start-full transition-all group-hover:start-1">
                     <ShoppingCart size={36} className="pr-5" />
                   </span>
 
-                  <span className="text-sm text-pink-400 font-medium transition-all group-hover:ms-4">
+                  <span className="text-sm new-primary-text font-medium transition-all group-hover:ms-4">
                     Our Products
                   </span>
                 </Link>
@@ -351,7 +351,7 @@ function About() {
       {/* award section */}
       <section className="awards py-16 md:py-24 bg">
         <div className="container mx-auto px-6 max-w-7xl">
-          <h2 className="text-3xl luckyGuy font-semibold md:text-4xl text-black text-center mb-18">
+          <h2 className="text-3xl lora font-bold md:text-4xl text-black text-center mb-18">
             Awards & Recognition
           </h2>
 
@@ -376,7 +376,7 @@ function About() {
 
             {/* Content - Bottom-left */}
             <div>
-              <h3 className="!text-4xl font-semibold luckyGuy text-black mb-7">
+              <h3 className="!text-4xl font-bold lora text-black mb-7">
                 Recognized Excellence
               </h3>
               <p className="text-lg text-black/80 leading-relaxed">
@@ -389,7 +389,7 @@ function About() {
               <div className="space-y-4 mt-7 transition-all duration-200">
                 <div className="bg-white shadow-lg rounded-lg p-4 flex items-start gap-4">
                   {/* Award icon */}
-                  <div className="w-8 h-8 text-blue-400 flex items-center justify-center flex-shrink-0 mt-1">
+                  <div className="w-8 h-8 new-primary-text flex items-center justify-center flex-shrink-0 mt-1">
                     <svg className="w-full h-full fill-current" viewBox="0 0 24 24">
                       <path d="M12 2L15.09 8.26L22 9L17 14L18.18 21L12 17.77L5.82 21L7 14L2 9L8.91 8.26L12 2Z" />
                     </svg>
@@ -410,7 +410,7 @@ function About() {
       {/* testimonial */}
       <section className="py-12 lg:px-12 md:px-8 px-3 bg">
         <div>
-          <h2 className="text-5xl luckyGuy font-semibold text-black text-center mb-6">
+          <h2 className="text-5xl lora font-semibold text-black text-center mb-6">
             Sweet words from our customers
           </h2>
           <p className="text-xl text-gray-800/80 text-center">
@@ -424,10 +424,10 @@ function About() {
             return (
               <div
                 key={index}
-                className="bg-white shadow-lg backdrop-blur-2xl p-5 rounded-xl gap-2 w-[70%] place-items-center transition-all duration-200"
+                className="bg-white shadow-lg p-5 h-40 new-primary-bg text-white rounded-xl gap-2 w-[70%] place-items-center transition-all duration-200"
               >
                 <div>
-                  <h4 className="text-black text-xl pl-1 font-semibold">
+                  <h4 className="text-white text-xl pl-1 font-semibold">
                     {testimonial.name}
                   </h4>
                   <p className="mb-5">{testimonial.stars}</p>
@@ -440,7 +440,7 @@ function About() {
 
         <div className="text-center mt-8">
           <a
-            className="group border-1 border-sky-500 relative inline-flex items-center overflow-hidden rounded-full px-8 py-3 text-blue-600"
+            className="group relative inline-flex items-center overflow-hidden text-white rounded-xl px-8 py-3 new-primary-bg"
             target="_blank"
             href="https://www.google.com/search?sca_esv=2522d5777cdbdc58&hl=en-IN&sxsrf=AE3TifM5O43bpWbi0h4G7E4CC6revb5kUw:1756809251615&si=AMgyJEtREmoPL4P1I5IDCfuA8gybfVI2d5Uj7QMwYCZHKDZ-EyA5slTbW5eqP8ucakgreX9x5iS9IjevVKjBh3MoISwnxvEXSJrMtaQHVVz68EGLEUFcXSqJuheZ6Pgqck4By3xgI21U9ATN03pkW79iZnC_AWvL4saAap8ttk0zFqIEHFMdl2o%3D&q=The+Baked+Fantasy+%7C+Baking+Academy+in+Madurai+Reviews&sa=X&ved=2ahUKEwjHyoW78LmPAxVWT2wGHdG9OG0Q0bkNegQIHxAD&biw=1536&bih=695&dpr=1.25"
           >
@@ -461,7 +461,7 @@ function About() {
               </svg>
             </span>
 
-            <span className="text-lg font-medium transition-all group-hover:ms-4">
+            <span className="text-lg font-semibold transition-all group-hover:ms-4">
               See more Reviews
             </span>
           </a>
