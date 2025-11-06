@@ -9,7 +9,7 @@ import { Mail } from "lucide-react";
 function Footer() {
   return (
     <div className="bg p-6">
-      <footer className="bg-[#9A4B47] block rounded-4xl">
+      <footer className="new-primary-bg block rounded-4xl">
         <div className="mx-auto max-w-screen-xl space-y-8 px-4 py-16 sm:px-6 lg:space-y-16 lg:px-8 grid gird-cols-3">
           <div className="grid grid-cols-1 h-full sm:h-full md:h-full lg:h-40 lg:grid-cols-3 ">
             <div className="">

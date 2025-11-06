@@ -46,13 +46,13 @@ export default function NewNav() {
   return (
     <>
       <header className="w-screen">
-        <nav className="bg-[#aebba9] shadow-xl h-18 fixed top-0 left-0 w-screen z-50 px-15 hidden lg:block md:hidden ">
+        <nav className="bg-white shadow-xl h-18 fixed top-0 left-0 w-screen z-50 px-15 hidden lg:block md:hidden ">
           <div className="flex h-18 items-center justify-between">
             {/* logo */}
             <div className="md:flex md:items-center md:gap-12">
               <Link
                 to="/"
-                className="text-white inline-block [@media(max-width:440px)]:text-xs [@media(max-width:1180px)]:text-md [@media(max-width:1220px)]:text-xl text-2xl font-bold brand-name"
+                className="new-primary-text inline-block [@media(max-width:440px)]:text-xs [@media(max-width:1180px)]:text-md [@media(max-width:1220px)]:text-xl text-2xl font-bold brand-name"
               >
                 The Backed Fantasy
               </Link>
@@ -68,13 +68,13 @@ export default function NewNav() {
                       className={({ isActive }) =>
                         `text-lg relative group rounded-lg p-3 transition ${
                           isActive
-                            ? "bg-white font-semibold text-[#3a4437]"
+                            ? "new-primary-bg font-semibold new-text"
                             : "hover:text-black text-gray-800 "
                         } `
                       }
                     >
                       Home
-                      <span className=" absolute left-1 bottom-0 h-[3px] rounded-xl w-0 bg-[#3a4437] transition-all duration-300 group-hover:w-[90%]"></span>
+                      <span className=" absolute left-1 bottom-0 h-[3px] rounded-xl w-0 bg-[#870D32] transition-all duration-300 group-hover:w-[90%]"></span>
                     </NavLink>
                   </li>
 
@@ -85,13 +85,13 @@ export default function NewNav() {
                       className={({ isActive }) =>
                         `text-lg relative group rounded-lg p-3 transition ${
                           isActive
-                            ? "bg-red text-white font-semibold"
+                            ? "new-primary-bg font-semibold new-text"
                             : "hover:text-black text-gray-800 "
                         } `
                       }
                     >
                       About
-                      <span className="absolute left-1 bottom-0 h-[3px] rounded-xl w-0 bg-[#3a4437] transition-all duration-300 group-hover:w-[90%]"></span>
+                      <span className="absolute left-1 bottom-0 h-[3px] rounded-xl w-0 bg-[#870D32] transition-all duration-300 group-hover:w-[90%]"></span>
                       {/* <span className="absolute bottom-0 left-1/2 h-[2px] w-0 -translate-x-1/2 origin-center rounded-xl bg-sky-500 transition-all duration-300 group-hover:w-[90%]"></span> */}
                     </NavLink>
                   </li>
@@ -129,7 +129,7 @@ export default function NewNav() {
                           className={({ isActive }) =>
                             `flex items-center gap-2 text-lg relative group rounded-lg p-3 transition focus:relative ${
                               isActive
-                                ? "bg-red text-white font-semibold"
+                                ? "new-primary-bg font-semibold new-text"
                                 : "hover:text-black text-gray-800 "
                             } `
                           }
@@ -215,7 +215,7 @@ export default function NewNav() {
                           className={({ isActive }) =>
                             `flex items-center gap-2 text-lg relative group rounded-lg p-3 transition focus:relative ${
                               isActive
-                                ? "bg-red text-white font-semibold"
+                                ? "new-primary-bg font-semibold new-text"
                                 : "hover:text-black text-gray-800 "
                             } `
                           }
@@ -263,7 +263,7 @@ export default function NewNav() {
                       className={({ isActive }) =>
                         `text-lg relative group rounded-lg p-3 transition ${
                           isActive
-                            ? "bg-red text-white font-semibold"
+                            ? "new-primary-bg font-semibold new-text"
                             : "hover:text-black text-gray-800 "
                         } `
                       }
@@ -276,26 +276,26 @@ export default function NewNav() {
               </nav>
             </div>
             <div className="searchBar">
-              <search className="px-5 py-2.5 bg-orange-100 rounded-2xl font-medium text-red flex items-center">
+              <search className="px-5 py-2.5 new-primary-text border-2 border-current rounded-xl font-medium flex items-center">
                 <label htmlFor="search">
-                  <Search size={20} />
+                  <Search size={20} color="#870D32" />
                 </label>
                 <input
                   type="search"
                   id="search"
                   placeholder="search cakes"
-                  className="border-none w-70 bg-orange-100 rounded-2xl focus:outline-none pl-3 "
+                  className="border-none w-70 text-black rounded-lg focus:outline-none ml-3 pl-3 "
                 />
               </search>
             </div>
             <div className="flex items-center gap-4">
-              <div className="sm:flex rounded-2xl p-1 bg-orange-100 sm:gap-4">
+              <div className="sm:flex rounded-2xl p-1 new-primary-bg sm:gap-4">
                 <div className="hidden sm:flex">
                   <Link
                     className=" px-5 cursor-pointer py-2.5 text-sm font-medium text-red"
                     to="/cart"
                   >
-                    <ShoppingCart size={20} />
+                    <ShoppingCart size={20} color="#F6E9D9" />
                   </Link>
                 </div>
                 <Link
@@ -303,7 +303,7 @@ export default function NewNav() {
                   // onClick={() => setLoginOpen(true)}
                   to="/profile"
                 >
-                  <User size={20} />
+                  <User size={20} color="#F6E9D9" />
                 </Link>
               </div>
 
@@ -317,37 +317,39 @@ export default function NewNav() {
             </div>
           </div>
         </nav>
-        <nav className="block md:block shadow-lg lg:hidden z-50 fixed top-0 left-0 w-full h-35 bg-pink-50">
+
+        {/* mobile nav */}
+        <nav className="block md:block shadow-lg lg:hidden z-40 fixed top-0 left-0 w-full h-35 bg-white">
           <div className="flex justify-between pt-4 pl-3">
             <div className="logo flex items-center">
-              <Link to="/" className="text-red text-xl font-bold brand-name">
+              <Link to="/" className="new-primary-text text-xl font-bold brand-name">
                 The Backed Fantasy
               </Link>
             </div>
             <div className="links flex items-center gap-8 mr-5">
-              <div className="bg-pink-200 flex items-center gap-6 rounded-2xl p-3 px-5">
+              <div className="new-primary-bg flex items-center gap-6 rounded-2xl p-3 px-5">
                 <Link to="/cart">
-                  <ShoppingCart size={20} />
+                  <ShoppingCart size={20} color="#F6E9D9" />
                 </Link>
                 <a onClick={() => setLoginOpen(true)}>
-                  <User size={20} />
+                  <User size={20} color="#F6E9D9" />
                 </a>
               </div>
               <div className="menu">
-                <Menu size={24} onClick={() => setMenuOpen(true)} />
+                <Menu size={24} onClick={() => setMenuOpen(true)} color="#472823" />
               </div>
             </div>
           </div>
           <div className="searchBar pt-5 mx-5">
-            <search className="px-5 py-2.5 bg-pink-200 text-red rounded-2xl flex items-center">
+            <search className="px-5 py-2.5 new-primary-text border-2 border-current rounded-xl flex items-center">
               <label htmlFor="search">
-                <Search size={20} />
+                <Search size={20} color="#870D32" />
               </label>
               <input
                 type="search"
                 id="search"
                 placeholder="search cakes"
-                className="border-none w-full font-medium text-red bg-pink-200 rounded-2xl   focus:outline-none pl-3"
+                className="border-none w-full font-medium text-black bg-white rounded-lg ml-3 focus:outline-none pl-3"
               />
             </search>
           </div>
@@ -369,7 +371,7 @@ export default function NewNav() {
                   onClick={() => setMenuOpen(false)}
                   className="flex gap-1 justify-start items-center"
                 >
-                  <House color="#0084d1" size={15} />
+                  <House color="#870D32" size={20} />
                   Home
                 </Link>
               </li>
@@ -379,7 +381,7 @@ export default function NewNav() {
                   onClick={() => setMenuOpen(false)}
                   className="flex gap-1 justify-start items-center"
                 >
-                  <Users color="#0084d1" size={15} />
+                  <Users color="#870D32" size={20} />
                   About
                 </Link>
               </li>
@@ -389,7 +391,7 @@ export default function NewNav() {
                   onClick={() => setMenuOpen(false)}
                   className="flex gap-1 justify-start items-center"
                 >
-                  <ShoppingCart size={15} color="#0084d1" />
+                  <ShoppingCart size={20} color="#870D32" />
                   Shop
                 </Link>
               </li>
@@ -417,16 +419,12 @@ export default function NewNav() {
                   onClick={() => setMenuOpen(false)}
                   className="flex gap-1 justify-start items-center"
                 >
-                  <Book size={15} color="#0084d1" />
+                  <Book size={20} color="#870D32" />
                   Course
                 </Link>
               </li>
               <li className="rounded-lg">
-                <Link
-                  to="/courses"
-                  onClick={() => setMenuOpen(false)}
-                  className="ml-4"
-                >
+                <Link to="/courses" onClick={() => setMenuOpen(false)} className="ml-4">
                   • Courses
                 </Link>
               </li>
@@ -445,7 +443,7 @@ export default function NewNav() {
                   onClick={() => setMenuOpen(false)}
                   className="flex gap-1 justify-start items-center"
                 >
-                  <Phone size={15} color="#0084d1" />
+                  <Phone size={20} color="#870D32" />
                   Contact
                 </Link>
               </li>

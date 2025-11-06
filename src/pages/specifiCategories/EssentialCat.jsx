@@ -43,7 +43,7 @@ function SpecificCategory() {
       </div>
 
       {/* products */}
-      <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5 px-20 py-10">
+      <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5 lg:px-20 md:px-15 sm:px-10 px-5 py-10">
         {products.map((p) =>
           p.isActive ? (
             <Product

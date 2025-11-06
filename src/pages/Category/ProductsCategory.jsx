@@ -28,7 +28,7 @@ function Categories() {
             Discover our wide range of handcrafted baked goods, made with premium
             ingredients and traditional techniques passed down through generations.
           </p>
-          <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5 px-20 py-10">
+          <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5 lg:px-20 md:px-15 sm:px-10 px-5 py-10">
             {products.map((p, i) =>
               p.isActive ? (
                 <Category
@@ -45,12 +45,12 @@ function Categories() {
           </div>
         </section>
         {/* why choose us section */}
-        <section className="whyChooseUs flex justify-center pb-8">
-          <div className="bg-white shadow-xl rounded-2xl w-9/12">
+        <section className="whyChooseUs flex justify-center pb-8 lg:px-20 md:px-15 sm:px-10 px-5">
+          <div className="bg-white shadow-xl rounded-2xl ">
             <h2 className="text-center text-5xl font-bold pt-10">
               Why Choose Our Products ?
             </h2>
-            <p className="subHeading">
+            <p className="subHeading px-2">
               Every item is crafted with care using the finest ingredients and
               time-honored techniques
             </p>
