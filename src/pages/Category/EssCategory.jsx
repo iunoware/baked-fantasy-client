@@ -3,6 +3,7 @@ import Heading from "../../components/Heading.jsx";
 import { useEffect, useState } from "react";
 import Category from "../../components/Essential-cat";
 import axios from "axios";
+import Loading from "../../components/Loading.jsx";
 
 function EssCategories() {
   const [products, setProducts] = useState([]);
@@ -20,32 +21,38 @@ function EssCategories() {
 
   return (
     <>
-      <section className="lg:pt-30 md:pt-20 pt-40 bg-purple-100">
+      <section className="lg:pt-30 md:pt-20 pt-40 bg">
         <Heading title="Sustainable Baking Essentials" />
         <p className="subHeading">
           All the essentials you need — bowls, spoons, molds, and premium flour — built to
           make your baking effortless and your results extraordinary.
         </p>
         <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5 lg:px-20 md:px-15 sm:px-10 px-5 py-10">
-          {products.map((p, i) =>
-            p.isActive ? (
-              <Category
-                key={p._id}
-                img={p.imageUrl}
-                emoji="🍩"
-                title={p.title}
-                subject={p.subject}
-              />
-            ) : (
-              ""
+          {products.length > 0 ? (
+            products.map((p, i) =>
+              p.isActive ? (
+                <Category
+                  key={p._id}
+                  img={p.imageUrl}
+                  emoji="🍩"
+                  title={p.title}
+                  subject={p.subject}
+                />
+              ) : (
+                ""
+              )
             )
+          ) : (
+            <div className="w-full flex justify-start col-span-full items-center">
+              <Loading text={"Products are coming soon"} />
+            </div>
           )}
         </div>
 
         {/* why choose us section */}
         <section className="whyChooseUs flex justify-center pb-8 lg:px-20 md:px-15 sm:px-10 px-5">
-          <div className="bg-white rounded-2xl">
-            <h2 className="text-center text-5xl font-bold pt-10">
+          <div className="bg-white shadow-xl rounded-2xl">
+            <h2 className="text-center text-5xl lora font-bold pt-10">
               Why Choose Our Products ?
             </h2>
             <p className="subHeading px-2">

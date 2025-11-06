@@ -25,7 +25,7 @@ function Footer() {
               <ul className="mt-8 flex gap-6">
                 <li>
                   <a
-                    href="#"
+                    href="https://www.facebook.com/profile.php?id=100079658200291"
                     rel="noreferrer"
                     target="_blank"
                     className="text-white flex transition-all duration-300 hover:-translate-y-1"
@@ -49,7 +49,7 @@ function Footer() {
 
                 <li>
                   <a
-                    href="#"
+                    href="https://www.instagram.com/thebakedfantasy/?fbclid=IwY2xjawN5VPhleHRuA2FlbQIxMABicmlkETFvaFBqOEtQejhUNDhUWG9nc3J0YwZhcHBfaWQQMjIyMDM5MTc4ODIwMDg5MgABHldG2usqEap9WHWd_T0R5YtwNBizZoBFnaUypwedcK1zm1ev2SNznJliGd0f_aem_Pum16EwbhhjCbG_I_O0YZQ"
                     rel="noreferrer"
                     target="_blank"
                     className="text-white flex transition-all duration-300 hover:-translate-y-1"
@@ -181,31 +181,44 @@ function Footer() {
                 <ul className="mt-6 space-y-4 text-lg">
                   <li>
                     <a
-                      href="#"
-                      className="text-white flex gap-2 transition-all duration-200 hover:font-semibold"
+                      href="https://maps.app.goo.gl/LTWYRQ9R5etirRqYA"
+                      target="_blank"
+                      className="text-white flex justify-center items-start gap-2 transition-all duration-200 hover:font-semibold"
                     >
-                      <MapPin size={24} />
-                      123 Baker Street, Culinary District New York, NY 10001
+                      <div>
+                        <MapPin size={24} />
+                      </div>
+                      <div>
+                        Jeevana school road, Jai nagar 2nd street, Ponmeni, Bypass Road,
+                        Madurai- 625016
+                      </div>
                     </a>
                   </li>
 
                   <li>
                     <a
-                      href="#"
+                      href="tel:+916379240125"
+                      target="_blank"
                       className="text-white flex gap-2 transition-all duration-200 hover:font-bold"
                     >
-                      <Phone size={20} />
-                      (555) 123-BAKE
+                      <div>
+                        <Phone size={20} />
+                      </div>
+                      <div>+91 6379240125</div>
                     </a>
                   </li>
 
                   <li>
                     <a
-                      href="#"
+                      // href="https://mailto:thebakedfantasy.6@gmail.com"
+                      href="https://mail.google.com/mail/?view=cm&fs=1&to=thebakedfantasy.6@gmail.com"
+                      target="_blank"
                       className="text-white flex gap-2 transition-all duration-200 hover:font-bold"
                     >
-                      <Mail size={20} />
-                      info@sweetdreamsbaking.com
+                      <div>
+                        <Mail size={20} />
+                      </div>
+                      <div>thebakedfantasy.6@gmail.com</div>
                     </a>
                   </li>
                 </ul>

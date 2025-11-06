@@ -4,6 +4,7 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
+import Loading from "../../components/Loading.jsx";
 
 function SpecificCategory() {
   const { categoryName } = useParams(); // comes from URL /products/:categoryName
@@ -44,19 +45,25 @@ function SpecificCategory() {
 
       {/* products */}
       <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5 lg:px-20 md:px-15 sm:px-10 px-5 py-10">
-        {products.map((p) => (
-          <Product
-            key={p._id}
-            id={p._id} // ✅ pass id
-            category={categoryName}
-            img={`http://localhost:5000${p.images?.[0]}`} // 👈 thumbnail only
-            originalPrice={p.originalPrice}
-            discountedPrice={p.discountedPrice}
-            inStock={p.inStock}
-            title={p.title}
-            subject={p.subject}
-          />
-        ))}
+        {products.length > 0 ? (
+          products.map((p) => (
+            <Product
+              key={p._id}
+              id={p._id} // ✅ pass id
+              category={categoryName}
+              img={`http://localhost:5000${p.images?.[0]}`} // 👈 thumbnail only
+              originalPrice={p.originalPrice}
+              discountedPrice={p.discountedPrice}
+              inStock={p.inStock}
+              title={p.title}
+              subject={p.subject}
+            />
+          ))
+        ) : (
+          <div className="w-full flex justify-start col-span-full items-center">
+            <Loading text={"Products are coming soon"} />
+          </div>
+        )}
       </div>
     </div>
   );

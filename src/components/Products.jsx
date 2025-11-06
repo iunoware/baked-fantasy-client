@@ -16,7 +16,7 @@ function Product(props) {
 
   // WhatsApp Direct Send
   const sendToWhatsApp = () => {
-    const phone = "919003710091"; // your WhatsApp number (no +)
+    const phone = "916379240125"; // your WhatsApp number (no +)
     const message = `Hi! I would like to order ${quantity} x ${props.title}.`;
     const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
     window.open(url, "_blank");

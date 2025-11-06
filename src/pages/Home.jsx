@@ -349,7 +349,7 @@ function Home() {
           //   <p className="text-3xl font-bold">Products Coming Soon</p>
           // </div>
           <div className="text-center">
-            <Loading />
+            <Loading text="Products coming soon" />
           </div>
         )}
       </section>
@@ -914,14 +914,12 @@ function Home() {
       </section>
 
       {/* event section */}
-      <section className="lg:grid lg:h-[80vh] md:h-[45vh] h-[42vh] lg:bg-cover lg:bg-center md:bg-center md:bg-cover relative md:bg-violet-300 bg-violet-300  lg:bg-[url('/images/bulk-2.jpg')] mt-18 py-10">
+      <section className="lg:grid lg:h-[80vh] md:h-[45vh] h-[42vh] lg:bg-cover lg:bg-center md:bg-center md:bg-cover relative md:bg-violet-300 bg-violet-300  lg:bg-[url('/images/bulk-order-banner-4.png')] mt-18 py-10">
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-2 lg:gap-8 px-8">
           <div className="textSide flex space-y-15 ">
             <div className="max-w-prose flex flex-col space-y-5 ">
               <h1 className="lg:text-6xl text-white md:text-5xl text-2xl font-bold sm:text-5xl">
-                <strong className="new-primary-text  mb-5 font-extrabold">
-                  Bulk Orders
-                </strong>
+                <strong className="text-white mb-5 font-extrabold">Bulk Orders</strong>
                 <br />
                 <span>for Every Occasion</span>
               </h1>
@@ -932,9 +930,9 @@ function Home() {
               </p>
 
               <div className="mt-4 flex gap-4 sm:mt-6">
-                <a
-                  className="group relative inline-flex items-center overflow-hidden rounded-lg new-primary-bg px-8 py-3 text-white focus:ring-3 focus:outline-hidden mr-3"
-                  href="#"
+                <Link
+                  className="group relative inline-flex items-center overflow-hidden rounded-lg bg-[#ebe6ee] px-8 py-3 text-black mr-3"
+                  to="/contact"
                 >
                   <span className="absolute -start-full transition-all group-hover:start-4">
                     <svg
@@ -944,19 +942,19 @@ function Home() {
                       xmlnsXlink="http://www.w3.org/1999/xlink"
                       viewBox="0 0 512 512"
                       xmlSpace="preserve"
-                      fill="#ffffff"
+                      fill="#000000"
                       style={{ transform: "rotate(90deg)" }}
                     >
                       <g>
                         <path
-                          style={{ fill: "#ffffff" }}
+                          style={{ fill: "#000000" }}
                           d="M408.387,512H159.603c-8.313,0-15.054-6.741-15.054-15.054v-71.829
         c0-8.313,6.741-15.054,15.054-15.054h132.043c8.313,0,15.054,6.741,15.054,15.054c0,8.313-6.741,15.054-15.054,15.054H174.657
         v41.722h218.676v-41.722h-28.605c-8.313,0-15.054-6.741-15.054-15.054c0-8.313,6.741-15.054,15.054-15.054h43.659
         c8.313,0,15.054,6.741,15.054,15.054v71.829C423.441,505.26,416.7,512,408.387,512z"
                         />
                         <path
-                          style={{ fill: "#ffffff" }}
+                          style={{ fill: "#000000" }}
                           d="M302.481,198.013v-15.951c0-15.948-13.009-29.53-29.728-30.096
         c-17.553-0.595-31.979,12.793-31.979,29.391v17.213l-0.333-154.106c0-16.243-13.813-29.411-30.854-29.411H208.4
         c-17.039,0-30.854,13.168-30.854,29.411v110.671v25.447v76.908l-30.02-73.097c-5.281-15.769-22.984-24.465-39.527-19.431
@@ -965,7 +963,7 @@ function Home() {
         c-17.039,0-30.854,13.168-30.854,29.411v-6.989c0-16.243-13.813-29.411-30.854-29.411l0,0c-17.039,0-30.854,13.168-30.854,29.411"
                         />
                         <path
-                          style={{ fill: "#ffffff" }}
+                          style={{ fill: "#000000" }}
                           d="M376.115,381.032c-0.011,0-0.02,0-0.03,0l-177.421-0.077c-25.033-0.012-48.062-14.139-58.672-35.988
         L74.073,209.223c-0.283-0.583-0.528-1.182-0.733-1.796c-3.788-11.308-2.854-23.391,2.625-34.022
         c5.684-11.03,15.502-19.142,27.643-22.843c24.074-7.325,49.967,5.457,58.011,28.529l0.872,2.121V44.463
@@ -981,7 +979,7 @@ function Home() {
                   <span className="text-lg font-semibold transition-all group-hover:ms-4">
                     Book Now
                   </span>
-                </a>
+                </Link>
               </div>
             </div>
           </div>
@@ -1583,14 +1581,17 @@ function Home() {
               );
             })
           ) : (
-            <div className="w-screen flex flex-col items-center justify-center">
-              <dotlottie-wc
-                src="https://lottie.host/eca676f3-586d-448f-bf3a-5d6a0c59ba6f/RDwRt4kKPP.lottie"
-                className="h-60 w-70"
-                autoplay
-                loop
-              ></dotlottie-wc>
-              <p className="text-3xl font-bold">Courses Coming Soon</p>
+            // <div className="w-screen flex flex-col items-center justify-center">
+            //   <dotlottie-wc
+            //     src="https://lottie.host/eca676f3-586d-448f-bf3a-5d6a0c59ba6f/RDwRt4kKPP.lottie"
+            //     className="h-60 w-70"
+            //     autoplay
+            //     loop
+            //   ></dotlottie-wc>
+            //   <p className="text-3xl font-bold">Courses Coming Soon</p>
+            // </div>
+            <div className="w-full flex justify-start col-span-full items-center">
+              <Loading text={"Products are coming soon"} />
             </div>
           )}
         </div>
@@ -1651,27 +1652,22 @@ function Home() {
         {essentials.length > 0 ? (
           <div>
             <div className="grid [@media(max-width:553px)]:!grid-cols-1 [@media(max-width:846px)]:grid-cols-2 [@media(max-width:1111px)]:grid-cols-3 [@media(min-width:1111px)]:grid-cols-4 gap-5 py-15 px-10">
-              {essentials.map(
-                (p) => (
-                  // p.isActive ? (
-                  <Essentials
-                    key={p._id}
-                    id={p._id}
-                    category={categoryName}
-                    img={`http://localhost:5000${p.images?.[0]}`}
-                    // img={productImages[index % productImages.length]}
-                    originalPrice={p.originalPrice}
-                    discountedPrice={p.discountedPrice}
-                    inStock={p.inStock}
-                    // price={p.price}
-                    title={p.title}
-                    subject={p.subject}
-                  />
-                )
-                // ) : (
-                //   <div></div>
-                // )
-              )}
+              {essentials.map((p) => (
+                // p.isActive ? (
+                <Essentials
+                  key={p._id}
+                  id={p._id}
+                  category={categoryName}
+                  img={`http://localhost:5000${p.images?.[0]}`}
+                  // img={productImages[index % productImages.length]}
+                  originalPrice={p.originalPrice}
+                  discountedPrice={p.discountedPrice}
+                  inStock={p.inStock}
+                  // price={p.price}
+                  title={p.title}
+                  subject={p.subject}
+                />
+              ))}
             </div>
             <div className="see-all-products flex justify-center">
               <Link
@@ -1702,14 +1698,17 @@ function Home() {
             </div>
           </div>
         ) : (
-          <div className="flex flex-col items-center justify-center">
-            <dotlottie-wc
-              src="https://lottie.host/eca676f3-586d-448f-bf3a-5d6a0c59ba6f/RDwRt4kKPP.lottie"
-              className="h-60 w-70"
-              autoplay
-              loop
-            ></dotlottie-wc>
-            <p className="text-3xl font-bold">Baking Essentials Coming Soon</p>
+          // <div className="flex flex-col items-center justify-center">
+          //   <dotlottie-wc
+          //     src="https://lottie.host/eca676f3-586d-448f-bf3a-5d6a0c59ba6f/RDwRt4kKPP.lottie"
+          //     className="h-60 w-70"
+          //     autoplay
+          //     loop
+          //   ></dotlottie-wc>
+          //   <p className="text-3xl font-bold">Baking Essentials Coming Soon</p>
+          // </div>
+          <div className="w-full flex justify-start col-span-full items-center">
+            <Loading text={"Products are coming soon"} />
           </div>
         )}
       </section>
@@ -1859,7 +1858,7 @@ function Home() {
       </div>
 
       {/* CTA section */}
-      <section className="lg:grid lg:h-[80vh]  lg:bg-cover lg:bg-center md:bg-center md:bg-cover relative bg-violet-300 lg:bg-[url('/images/bulkOrder.png')] md:bg-[url('/images/bulkOrder.png')]">
+      <section className="lg:grid lg:h-[80vh] lg:bg-cover lg:bg-center md:bg-center md:bg-cover relative bg-[url('/images/bulkorder-4.png')]">
         <div className="lg:absolute lg:left-0 lg:top-[3vh] mt-18 w-screen max-w-screen-xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8 lg:py-32">
           <div className="max-w-prose text-left">
             <h1 className="lg:text-4xl font-bold text-gray-900 text-xl text-left">
@@ -1874,7 +1873,10 @@ function Home() {
             </p>
 
             <div className="mt-4 flex gap-4 sm:mt-6">
-              <Link to="/contact" className="group relative inline-flex items-center overflow-hidden rounded-lg new-primary-bg px-8 py-3 text-white focus:ring-3 focus:outline-hidden mr-3">
+              <Link
+                to="/contact"
+                className="group relative inline-flex items-center overflow-hidden rounded-lg new-primary-bg px-8 py-3 text-white focus:ring-3 focus:outline-hidden mr-3"
+              >
                 <span className="absolute -start-full transition-all group-hover:start-4">
                   <svg
                     className="size-5 rtl:rotate-180"

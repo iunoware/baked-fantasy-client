@@ -3,6 +3,7 @@ import Heading from "../../components/Heading.jsx";
 import Category from "../../components/Product-Cat.jsx";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import Loading from "../../components/Loading.jsx";
 
 function Categories() {
   const [products, setProducts] = useState([]);
@@ -29,25 +30,31 @@ function Categories() {
             ingredients and traditional techniques passed down through generations.
           </p>
           <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5 lg:px-20 md:px-15 sm:px-10 px-5 py-10">
-            {products.map((p, i) =>
-              p.isActive ? (
-                <Category
-                  key={p._id}
-                  img={p.imageUrl}
-                  emoji="🍩"
-                  title={p.title}
-                  subject={p.subject}
-                />
-              ) : (
-                ""
+            {products.length > 0 ? (
+              products.map((p, i) =>
+                p.isActive ? (
+                  <Category
+                    key={p._id}
+                    img={p.imageUrl}
+                    emoji="🍩"
+                    title={p.title}
+                    subject={p.subject}
+                  />
+                ) : (
+                  ""
+                )
               )
+            ) : (
+              <div className="w-full flex justify-start col-span-full items-center">
+                <Loading text={"Products are coming soon"} />
+              </div>
             )}
           </div>
         </section>
         {/* why choose us section */}
         <section className="whyChooseUs flex justify-center pb-8 lg:px-20 md:px-15 sm:px-10 px-5">
           <div className="bg-white shadow-xl rounded-2xl ">
-            <h2 className="text-center text-5xl font-bold pt-10">
+            <h2 className="text-center text-5xl lora font-bold pt-10">
               Why Choose Our Products ?
             </h2>
             <p className="subHeading px-2">

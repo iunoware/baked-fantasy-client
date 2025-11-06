@@ -175,16 +175,16 @@ function About() {
         </button> */}
 
       {/* hero section 2 */}
-      <section className="overflow-hidden bg-cover bg-no-repeat h-screen grid grid-cols-1 md:grid-cols-2 bg-[url('/images/bfHero.png')]">
+      <section className="overflow-hidden bg-cover bg-no-repeat h-screen grid grid-cols-1 md:grid-cols-2 bg-[url('/images/about-hero-5.jpg')]">
         {/* left column */}
         <div className="p-8 md:p-12 lg:px-16 lg:py-24 mt-38">
           <div className="text-start ltr:sm:text-left rtl:sm:text-right">
-            <h2 className="text-2xl font-bold lora text-white sm:text-3xl md:text-5xl">
-              From <span className="text-pink-500">Oven to Heart</span> - and From Us to
-              Your Kitchen.
+            <h2 className="text-2xl font-bold lora text-black sm:text-3xl md:text-5xl">
+              From <span className="new-primary-text">Oven to Heart</span> - and From Us
+              to Your Kitchen.
             </h2>
 
-            <p className="hidden max-w-lg text-white/90 md:mt-6 md:block md:text-lg md:leading-relaxed">
+            <p className="hidden max-w-lg text-black/90 md:mt-6 md:block md:text-lg md:leading-relaxed">
               The Baked Fantasy brings you fresh cakes, pastries, and desserts made with
               love. Celebrate life’s moments with us-or join our baking courses to create
               your own oven-fresh treats at home.
@@ -193,7 +193,7 @@ function About() {
               <div className="mt-4 sm:mt-8">
                 <Link
                   to={`/categories`}
-                  className="bg-pink-600 hover:-translate-y-2  inline-block rounded-xl px-8 py-3 text-lg font-medium text-white transition focus:ring-3  focus:outline-hidden"
+                  className="new-primary-bg text-white hover:-translate-y-2 inline-block rounded-xl px-8 py-3 lg:text-lg font-medium transition focus:ring-3  focus:outline-hidden"
                 >
                   Shop products
                 </Link>
@@ -201,7 +201,7 @@ function About() {
               <div className="mt-4 sm:mt-8">
                 <Link
                   to={`/courses`}
-                  className="border-2 border-current hover:-translate-y-2 text-white inline-block rounded-full px-12 py-3 text-sm font-medium transition focus:ring-3 focus:outline-hidden"
+                  className="border-2 border-current hover:-translate-y-2 new-primary-text inline-block rounded-xl px-12 py-3 text-sm font-medium transition focus:ring-3 focus:outline-hidden"
                 >
                   Explore course
                 </Link>
@@ -305,12 +305,11 @@ function About() {
                 Into <span className="new-primary-text">Perfection</span>
               </h2>
 
-              <p className="hidden text-xl mb-5 text-gray-800 md:mt-4 md:block">
-                Join our academy and transform your home baking skills into professional
-                expertise - from homemade treats to large-scale success!
+              <p className="hidden text-xl mb-5 lg:w-100 text-gray-800 md:mt-4 md:block">
+                Join our academy to turn your home baking into professional mastery!
               </p>
 
-              <div className="mt-4 flex md:mt-8">
+              <div className="mt-4 flex md:justify-start justify-center items-center md:mt-8">
                 <Link
                   className="group relative inline-flex items-center overflow-hidden rounded-lg new-primary-bg px-8 py-3 text-white mr-3"
                   to="/courses"

@@ -278,7 +278,7 @@ function ProductAdmin(props) {
                 <div className="flex justify-center items-center">
                   <button
                     type="submit"
-                    className="bg-pink-600 w-full font-semibold hover:cursor-pointer hover:bg-pink-500 transition-all duration-200 text-white px-4 py-3 rounded-xl"
+                    className="new-primary-bg w-full font-semibold hover:cursor-pointer hover:scale-102 transition-all duration-200 text-white px-4 py-3 rounded-xl"
                   >
                     Update changes
                   </button>
@@ -355,7 +355,7 @@ function ProductAdmin(props) {
         </td>
       </tr>
       <tr
-        className={`${props.i % 2 === 0 ? "bg-gray-100" : ""} ${
+        className={`${props.i % 2 === 0 ? "bg-gray-50" : ""} ${
           !props.isActive ? "bg-red-200" : ""
         } my-3 divide-y text-lg divide-gray-300`}
       >

@@ -24,7 +24,7 @@ function Product(props) {
 
   // Send to WhatsApp
   const sendToWhatsApp = () => {
-    const phone = "919003710091"; // your WhatsApp number
+    const phone = "916379240125"; // your WhatsApp number
     const message = `Order Details:%0A${props.title} - Quantity: ${quantity}`;
     window.open(`https://wa.me/${phone}?text=${message}`);
   };

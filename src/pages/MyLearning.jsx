@@ -4,6 +4,7 @@ import OnlineCourseCard from "../components/OnlineCourseCard.jsx";
 import { Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import Heading from "../components/Heading.jsx";
+import Loading from "../components/Loading.jsx";
 
 function MyLearning() {
   // use the localstorage's getItem  and setItem
@@ -90,7 +91,11 @@ function MyLearning() {
           })
         ) : (
           <div className="w-screen">
-            <p className="text-2xl text-center w-full">no courses found</p>
+            {/* <p className="text-4xl px-2 font-bold my-10 mb-10 text-center lora  w-full">
+              You haven't purchased any courses yet!
+            </p> */}
+            {/* <Heading title={"You haven't purchased any courses yet"} /> */}
+            <Loading text={"Courses are coming soon"} />
           </div>
         )}
       </div>

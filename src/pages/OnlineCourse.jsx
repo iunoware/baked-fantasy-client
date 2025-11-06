@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import Heading from "../components/Heading.jsx";
+import Loading from "../components/Loading.jsx";
 
 // let coursePrices = [];
 
@@ -95,7 +96,8 @@ function OnlineCourse() {
           })
         ) : (
           <div className="w-screen">
-            <p className="text-2xl text-center w-full">no courses found</p>
+            {/* <p className="text-2xl text-center w-full">no courses found</p> */}
+            <Loading text={"Online courses are coming soon"} />
           </div>
         )}
       </div>
