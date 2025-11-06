@@ -272,7 +272,7 @@ function IndividualEssentialAdmin() {
             <div className="flex justify-center items-center">
               <button
                 type="submit"
-                className="bg-pink-600 w-full font-semibold hover:cursor-pointer hover:bg-pink-500 transition-all duration-200 text-white px-4 py-3 rounded-xl"
+                className="new-primary-bg w-full font-semibold hover:cursor-pointer hover:scale-102 transition-all duration-200 text-white px-4 py-3 rounded-xl"
               >
                 Add new Product
               </button>
@@ -284,14 +284,14 @@ function IndividualEssentialAdmin() {
       {/* add product button */}
       <div className="flex flex-col md:flex-row gap-5 md:gap-0 justify-between">
         <div>
-          <h1 className="text-3xl font-semibold text-pink-600">{categoryName}</h1>
+          <h1 className="text-3xl font-semibold new-primary-text">{categoryName}</h1>
 
           <p className="text-md pt-1">Manage your bakery products</p>
         </div>
         <div>
           <button
             onClick={() => setIsModalVisible(true)}
-            className="bg-pink-500 cursor-pointer text-white font-semibold py-3 px-5 rounded-xl hover:bg-pink-600 transition-colors duration-200"
+            className="new-primary-bg cursor-pointer text-white font-semibold py-3 px-5 rounded-xl hover:scale-102 transition-colors duration-200"
           >
             + Add Product
           </button>
@@ -299,7 +299,7 @@ function IndividualEssentialAdmin() {
       </div>
 
       <div className="bg shadow-xl w-full pt-5 md:p-5 my-10 rounded-xl">
-        <h2 className="text-2xl font-semibold text-pink-600">
+        <h2 className="text-2xl font-semibold new-primary-text">
           All {categoryName} Products
         </h2>
 

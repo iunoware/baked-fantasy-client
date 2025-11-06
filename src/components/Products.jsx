@@ -16,7 +16,7 @@ function Product(props) {
 
   // WhatsApp Direct Send
   const sendToWhatsApp = () => {
-    const phone = "919003710091"; // your WhatsApp number (no +)
+    const phone = "916379240125"; // your WhatsApp number (no +)
     const message = `Hi! I would like to order ${quantity} x ${props.title}.`;
     const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
     window.open(url, "_blank");
@@ -99,8 +99,10 @@ function Product(props) {
               <button
                 disabled={!props.inStock}
                 className={`${
-                  props.inStock ? "cursor-pointer" : "cursor-not-allowed"
-                } group relative inline-flex items-center overflow-hidden rounded-sm bg-cyan-500 px-8 py-3 text-white`}
+                  props.inStock
+                    ? "cursor-pointer new-primary-text"
+                    : "cursor-not-allowed text-gray-400"
+                } group relative inline-flex items-center overflow-hidden rounded-lg border border-current px-8 py-3 `}
                 onClick={handleCart}
               >
                 <span className="text-sm font-medium transition-all group-hover:ms-2">
@@ -108,17 +110,17 @@ function Product(props) {
                 </span>
               </button>
             ) : (
-              <div className="space-x-2 inline-flex items-center overflow-hidden rounded-sm bg-cyan-500 py-2 text-white px-4">
+              <div className="space-x-2 inline-flex items-center overflow-hidden rounded-lg border border-current py-1 new-primary-text px-4">
                 <Button
                   variant="ghost"
                   size="sm"
                   onClick={() => handleQuantityChange(-1)}
                 >
-                  <Minus className="h-4 w-4" />
+                  <Minus className="h-3 w-4" />
                 </Button>
                 <span className="w-8 text-center">{quantity}</span>
                 <Button variant="ghost" size="sm" onClick={() => handleQuantityChange(1)}>
-                  <Plus className="h-4 w-4" />
+                  <Plus className="h-3 w-4" />
                 </Button>
               </div>
             )}
@@ -126,8 +128,10 @@ function Product(props) {
             <button
               disabled={!props.inStock}
               className={`${
-                props.inStock ? "cursor-pointer" : "cursor-not-allowed"
-              } group relative inline-flex items-center overflow-hidden rounded-sm border border-current px-4 py-3 text-sky-600`}
+                props.inStock
+                  ? "cursor-pointer new-primary-bg"
+                  : "cursor-not-allowed bg-gray-400"
+              } group relative inline-flex items-center overflow-hidden rounded-lg px-4 py-3 text-white `}
               onClick={sendToWhatsApp}
             >
               <span className="text-sm font-medium">Buy Now</span>

@@ -2,9 +2,9 @@ import { SquareCheckBig, MailCheck } from "lucide-react";
 import Heading from "../components/Heading.jsx";
 
 function Contact() {
-  const name = "umar";
-  const age = "20";
-  const degree = "B.com";
+  // const name = "umar";
+  // const age = "20";
+  // const degree = "B.com";
   return (
     <>
       <div className="bg">
