@@ -423,7 +423,7 @@ function About() {
             return (
               <div
                 key={index}
-                className="bg-white shadow-lg p-5 h-40 new-primary-bg text-white rounded-xl gap-2 w-[70%] place-items-center transition-all duration-200"
+                className="bg-white shadow-lg p-5 h-fit md:h-40 new-primary-bg text-white rounded-xl gap-2 w-[70%] place-items-center transition-all duration-200"
               >
                 <div>
                   <h4 className="text-white text-xl pl-1 font-semibold">
