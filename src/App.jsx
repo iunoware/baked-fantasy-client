@@ -86,6 +86,7 @@
 // new one
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
+import EnquiryBtn from "./components/EnquiryBtn.jsx";
 import Home from "../src/pages/Home.jsx";
 import About from "../src/pages/About.jsx";
 import Categories from "./pages/Category/ProductsCategory.jsx";
@@ -142,7 +143,6 @@ function AppContent() {
 
       {/* Show Navbar and Footer only for non-admin routes */}
       {hideLayout ? <Sidebar /> : <Navbar />}
-
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<Home />} />
@@ -247,6 +247,7 @@ function AppContent() {
         />
       </Routes>
 
+      <EnquiryBtn />
       {!hideLayout && <Footer />}
     </>
   );
