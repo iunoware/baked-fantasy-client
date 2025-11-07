@@ -29,31 +29,31 @@ function OnlineCourseCard(props) {
           <p className="">{props.description}</p>
           <div className="space-y-2 my-5">
             <div className="flex items-center ">
-              <div className="w-2 h-2 rounded-full bg-sky-500 mr-3"></div>
+              <div className="w-2 h-2 rounded-full new-primary-bg mr-3"></div>
               <span className="">
                 {props.highlights[0] ? props.highlights[0] : "Course highlight"}
               </span>
             </div>
             <div className="flex items-center ">
-              <div className="w-2 h-2 rounded-full bg-sky-500 mr-3"></div>
+              <div className="w-2 h-2 rounded-full new-primary-bg mr-3"></div>
               <span className="">
                 {props.highlights[1] ? props.highlights[1] : "Course highlight"}
               </span>
             </div>
             <div className="flex items-center ">
-              <div className="w-2 h-2 rounded-full bg-sky-500 mr-3"></div>
+              <div className="w-2 h-2 rounded-full new-primary-bg mr-3"></div>
               <span className="">
                 {props.highlights[2] ? props.highlights[2] : "Course highlight"}
               </span>
             </div>
             <div className="flex items-center ">
-              <div className="w-2 h-2 rounded-full bg-sky-500 mr-3"></div>
+              <div className="w-2 h-2 rounded-full new-primary-bg mr-3"></div>
               <span className="">
                 {props.highlights[3] ? props.highlights[3] : "Course highlight"}
               </span>
             </div>
             <div className="flex items-center ">
-              <div className="w-2 h-2 rounded-full bg-sky-500 mr-3"></div>
+              <div className="w-2 h-2 rounded-full new-primary-bg mr-3"></div>
               <span className="">
                 {props.highlights[4] ? props.highlights[4] : "Course highlight"}
               </span>
@@ -63,7 +63,7 @@ function OnlineCourseCard(props) {
           <Link
             to={`${props.path}${props.endPoint}`}
             state={{ price: props.price, courseId: props.endPoint }}
-            className="group mt-3 w-full relative inline-flex items-center overflow-hidden rounded-xl bg-sky-500 px-8 py-4 text-white"
+            className="group mt-3 w-full relative inline-flex items-center overflow-hidden rounded-xl new-primary-bg px-8 py-4 text-white"
           >
             <span className="absolute -start-full transition-all group-hover:start-4">
               <GraduationCap size={25} />

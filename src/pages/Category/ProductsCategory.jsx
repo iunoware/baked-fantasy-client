@@ -4,6 +4,7 @@ import Category from "../../components/Product-Cat.jsx";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Loading from "../../components/Loading.jsx";
+import { Link } from "react-router-dom";
 
 function Categories() {
   const [products, setProducts] = useState([]);
@@ -29,7 +30,29 @@ function Categories() {
             Discover our wide range of handcrafted baked goods, made with premium
             ingredients and traditional techniques passed down through generations.
           </p>
-          <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5 lg:px-20 md:px-15 sm:px-10 px-5 py-10">
+          <div className="grid lg:grid-cols-5 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-5 place-items-center lg:px-20 md:px-15 sm:px-10 px-5 py-10">
+            <Link to={`/products/all-products`} className="card">
+              <article className="cat-card overflow-hidden rounded-[50%] h-70 w-70 shadow-lg hover:-translate-y-2 transition-all duration-200 ">
+                <div className="relative h-full w-full p-2 bg-white">
+                  <img
+                    alt={"product-image"}
+                    src={`/images/cake-3.jpg`}
+                    className="h-full w-full rounded-[50%] object-cover cat-img"
+                  />
+
+                  <div className="hover-content">
+                    <div className="bg-white rounded-full px-4 py-2 font-bold shadow">
+                      Explore all products
+                    </div>
+                  </div>
+                </div>
+              </article>
+              <div className="p-4 flex justify-center sm:p-6">
+                <h2 className="font-bold lora text-black text-2xl">All products</h2>
+                {/* <p className="mt-2 text-sm text-gray-600">{props.subject}</p> */}
+              </div>
+            </Link>
+
             {products.length > 0 ? (
               products.map((p, i) =>
                 p.isActive ? (
@@ -51,10 +74,11 @@ function Categories() {
             )}
           </div>
         </section>
+
         {/* why choose us section */}
         <section className="whyChooseUs flex justify-center pb-8 lg:px-20 md:px-15 sm:px-10 px-5">
-          <div className="bg-white shadow-xl rounded-2xl ">
-            <h2 className="text-center text-5xl lora font-bold pt-10">
+          <div className="bg-white shadow-xl rounded-2xl">
+            <h2 className="text-center new-primary-text text-5xl lora font-bold pt-10">
               Why Choose Our Products ?
             </h2>
             <p className="subHeading px-2">
@@ -70,7 +94,9 @@ function Categories() {
                   autoplay
                   loop
                 ></dotlottie-wc>
-                <h2 className="text-3xl font-bold text-amber-700">Premium ingredients</h2>
+                <h2 className="text-3xl font-bold new-primary-text">
+                  Premium ingredients
+                </h2>
                 <p className="text-md pt-5">
                   Only the finest, locally-sourced ingredients go into our products
                 </p>
@@ -83,7 +109,7 @@ function Categories() {
                   autoplay
                   loop
                 ></dotlottie-wc>
-                <h2 className="text-3xl font-bold text-amber-700">
+                <h2 className="text-3xl font-bold new-primary-text">
                   Expert Craftsmanship
                 </h2>
                 <p className="text-md pt-5">
@@ -98,7 +124,7 @@ function Categories() {
                   autoplay
                   loop
                 ></dotlottie-wc>
-                <h2 className="text-3xl font-bold text-amber-700">Fresh Delivery</h2>
+                <h2 className="text-3xl font-bold new-primary-text">Fresh Delivery</h2>
                 <p className="text-md pt-5">
                   Same-day delivery ensures you get the freshest products
                 </p>
@@ -106,28 +132,25 @@ function Categories() {
             </div>
           </div>
         </section>
-        {/* bulk order section */}
 
-        <section className="bulk-orders overflow-hidden mt-20 bg-gray-50 sm:grid sm:grid-cols-2 sm:items-center">
+        {/* bulk order section */}
+        <section className="bulk-orders overflow-hidden m-8 rounded-2xl bg-gray-50 sm:grid sm:grid-cols-2 sm:items-center">
           <div className="p-8 md:p-12 lg:px-16 lg:py-24">
             <div className="mx-auto max-w-xl text-center ltr:sm:text-left rtl:sm:text-right">
-              <h2 className="text-2xl font-bold text-gray-900 md:text-3xl">
+              <h2 className="text-2xl md:text-3xl lora font-bold new-primary-text">
                 Planning a party, event, or business order?
               </h2>
 
-              <p className="hidden text-gray-500 md:mt-4 md:block">
-                Looking to order in bulk for your next party, event, or corporate
-                gathering? We provide freshly baked cakes and treats, crafted to
-                perfection and delivered with care. Whether it’s a birthday, wedding,
-                festival, or business celebration, our bulk orders ensure consistent
-                quality, delicious taste, and beautiful presentation—making your special
-                occasion truly unforgettable.
+              <p className="hidden text-gray-700 md:mt-4 md:block">
+                Planning a party, event, or corporate gathering? Enjoy our freshly baked
+                cakes and treats—crafted with care, consistent in quality, and perfect for
+                any celebration.
               </p>
 
               <div className="mt-4 md:mt-8">
-                <a
-                  className="group relative inline-flex items-center overflow-hidden rounded-sm bg-cyan-500 px-8 py-3 text-white focus:ring-3 focus:outline-hidden mr-3"
-                  href="#"
+                <Link
+                  className="group relative inline-flex items-center overflow-hidden rounded-lg new-primary-bg px-8 py-3 text-white focus:ring-3 focus:outline-hidden mr-3"
+                  to="/contact"
                 >
                   <span className="absolute -start-full transition-all group-hover:start-4">
                     <svg
@@ -169,10 +192,10 @@ function Categories() {
                     </svg>
                   </span>
 
-                  <span className="text-sm font-medium transition-all group-hover:ms-4">
+                  <span className="text-md font-medium transition-all group-hover:ms-4">
                     Book Your Order
                   </span>
-                </a>
+                </Link>
               </div>
             </div>
           </div>

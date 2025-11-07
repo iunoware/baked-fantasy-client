@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { Button } from "../../components/ui/button";
 import { Card, CardContent } from "../../components/ui/card";
 import { Badge } from "../../components/ui/badge";
@@ -7,15 +8,9 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import toast from "react-hot-toast";
 
-import {
-  Star,
-  ShoppingCart,
-  Heart,
-  ArrowLeft,
-  Plus,
-  Minus,
-} from "lucide-react";
+import { Star, ShoppingCart, Heart, ArrowLeft, Plus, Minus } from "lucide-react";
 
 function ProductDetailPage({ onNavigate, onAddToCart }) {
   const [added, setAdded] = useState(false);
@@ -92,9 +87,10 @@ function ProductDetailPage({ onNavigate, onAddToCart }) {
       setQuantity(newQty);
     }
   };
+
   const handleCart = () => {
     setAdded(true);
-    toast.success(`${props.title} added to cart!`);
+    toast.success(`product added to cart!`);
   };
 
   // const handleAddToCart = () => {
@@ -115,7 +111,7 @@ function ProductDetailPage({ onNavigate, onAddToCart }) {
             //   })
             // }
             to={`/essentials/${product.category?.title}`}
-            className="flex items-center text-muted-foreground hover:text-[#00BCD4]"
+            className="flex items-center text-muted-foreground hover:text-[#870D32]"
           >
             <ArrowLeft className="h-4 w-4 mr-2" />
             Back to {product.category?.title || "Products"}
@@ -142,7 +138,7 @@ function ProductDetailPage({ onNavigate, onAddToCart }) {
                   onClick={() => setSelectedImage(index)}
                   className={`p-2 rounded-lg ${
                     selectedImage === index
-                      ? "ring-2 ring-[#00BCD4]"
+                      ? "ring-2 ring-[#870D32]"
                       : "shadow hover:shadow-md"
                   }`}
                 >
@@ -190,14 +186,14 @@ function ProductDetailPage({ onNavigate, onAddToCart }) {
             <Separator />
 
             {/* Quantity */}
-            {/* <div className="flex items-center space-x-4">
-              <label>Quantity:</label>
-              <div className="flex items-center space-x-2 bg-white rounded-lg p-2">
+            <div className="flex items-center space-x-4">
+              {/* <label>Quantity:</label> */}
+              {/* <div className="flex items-center space-x-2 bg-white rounded-lg p-2">
                 <Button
                   variant="ghost"
                   size="sm"
                   onClick={() => handleQuantityChange(-1)}
-                  disabled={quantity <= 1}
+                  // disabled={quantity <= 1}
                 >
                   <Minus className="h-4 w-4" />
                 </Button>
@@ -206,24 +202,24 @@ function ProductDetailPage({ onNavigate, onAddToCart }) {
                   variant="ghost"
                   size="sm"
                   onClick={() => handleQuantityChange(1)}
-                  disabled={quantity >= 10}
+                  // disabled={quantity >= 10}
                 >
                   <Plus className="h-4 w-4" />
                 </Button>
-              </div>
+              </div> */}
               <span>
                 Total:{" "}
-                <strong className="text-[#00BCD4]">
-                  ₹{(product.price * quantity).toFixed(2)}
+                <strong className=" text-2xl text-[#870D32]">
+                  ₹{(product.originalPrice * quantity).toFixed(2)}
                 </strong>
               </span>
-            </div> */}
+            </div>
 
             {/* Actions */}
             <div className="flex space-x-3">
               {!added ? (
                 <button
-                  className="group relative inline-flex items-center overflow-hidden rounded-sm bg-cyan-500 px-8 py-3 text-white focus:ring-3 focus:outline-hidden mr-3"
+                  className="group relative inline-flex cursor-pointer items-center overflow-hidden rounded-lg new-primary-text px-8 py-3 border border-current mr-3"
                   onClick={handleCart}
                   size="lg"
                 >
@@ -243,7 +239,7 @@ function ProductDetailPage({ onNavigate, onAddToCart }) {
                       <g id="SVGRepo_iconCarrier">
                         <path
                           d="M7.2998 5H22L20 12H8.37675M21 16H9L7 3H4M4 8H2M5 11H2M6 14H2M10 20C10 20.5523 9.55228 21 9 21C8.44772 21 8 20.5523 8 20C8 19.4477 8.44772 19 9 19C9.55228 19 10 19.4477 10 20ZM21 20C21 20.5523 20.5523 21 20 21C19.4477 21 19 20.5523 19 20C19 19.4477 19.4477 19 20 19C20.5523 19 21 19.4477 21 20Z"
-                          stroke="#fff"
+                          stroke="#870D32"
                           strokeWidth="2"
                           strokeLinecap="round"
                           strokeLinejoin="round"
@@ -259,12 +255,13 @@ function ProductDetailPage({ onNavigate, onAddToCart }) {
               ) : (
                 <div
                   size="lg"
-                  className="space-x-2 group relative inline-flex items-center overflow-hidden rounded-sm bg-cyan-500 py-1 text-white focus:ring-3 focus:outline-hidden mr-3"
+                  className="space-x-2 group relative cursor-pointer inline-flex items-center overflow-hidden rounded-lg new-primary-text border border-current py-1.5 mr-3"
                 >
                   <Button
                     variant="ghost"
                     size="sm"
                     onClick={() => handleQuantityChange(-1)}
+                    className="cursor-pointer"
                     // disabled={quantity <= 1}
                   >
                     <Minus className="h-4 w-4" />
@@ -274,27 +271,30 @@ function ProductDetailPage({ onNavigate, onAddToCart }) {
                     variant="ghost"
                     size="sm"
                     onClick={() => handleQuantityChange(1)}
+                    className="cursor-pointer"
                     // disabled={quantity >= 10}
                   >
                     <Plus className="h-4 w-4" />
                   </Button>
                 </div>
               )}
-              <Button
+              <button
                 size="lg"
-                className="flex-1 bg-[#FF80AB] text-white"
+                className=" rounded-lg new-primary-bg cursor-pointer px-8 py-3 text-white"
                 onClick={handleBuyNow}
               >
                 Buy Now
-              </Button>
-              <Button
+              </button>
+              <button
                 variant="outline"
                 size="lg"
                 onClick={() => setIsWishlisted(!isWishlisted)}
-                className={isWishlisted ? "bg-red-50 text-red-600" : ""}
+                className={`${
+                  isWishlisted ? "bg-red-50 text-red-600" : ""
+                } cursor-pointer `}
               >
                 <Heart className={isWishlisted ? "fill-current" : ""} />
-              </Button>
+              </button>
             </div>
           </div>
         </div>
