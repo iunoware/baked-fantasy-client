@@ -1,4 +1,11 @@
-import { SquareCheckBig, MailCheck } from "lucide-react";
+import {
+  SquareCheckBig,
+  MailCheck,
+  MapPinCheck,
+  PhoneCall,
+  Mail,
+  Clock9,
+} from "lucide-react";
 import Heading from "../components/Heading.jsx";
 
 function Contact() {
@@ -12,9 +19,9 @@ function Contact() {
         <div className="min-h-screen md:pt-16 pb-10 page-transition">
           <div className="container mx-auto px-4">
             <div className="text-center mb-12 fade-in">
-              <Heading title="  Contact Us" />
+              <Heading title=" Contact Us" />
 
-              <p className="text-lg pt-3 text-muted-foreground max-w-2xl mx-auto">
+              <p className="text-xl pt-3 text-gray-900 text-muted-foreground max-w-2xl mx-auto">
                 Get in touch with us for courses, orders, or any questions you
                 may have
               </p>
@@ -31,35 +38,35 @@ function Contact() {
                       <input
                         type="text"
                         placeholder="Your Name"
-                        className="w-full p-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#00BCD4] transition-all"
+                        className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#870D32] transition-all"
                       />
                       <input
                         type="email"
                         placeholder="Your Email"
-                        className="w-full p-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#00BCD4] transition-all"
+                        className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#870D32] transition-all"
                       />
                       <input
                         type="text"
                         placeholder="Subject"
-                        className="w-full p-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#00BCD4] transition-all"
+                        className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#870D32] transition-all"
                       />
                       <textarea
                         placeholder="Your Message"
                         rows={4}
-                        className="w-full p-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#00BCD4] transition-all"
+                        className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#870D32] transition-all"
                       />
                       {/* <button className="w-full bg-[#00BCD4] hover:bg-[#00ACC1] text-white py-3 rounded-lg font-medium transition-colors btn-hover">
                         Send Message
                       </button> */}
                       <a
-                        className="w-full group justify-center relative inline-flex items-center overflow-hidden rounded-sm bg-cyan-500 px-8 py-3 text-white focus:ring-3 focus:outline-hidden mr-3"
+                        className="w-full text-white group justify-center relative inline-flex items-center overflow-hidden rounded-sm new-primary-bg px-8 py-3 font-bold focus:ring-3 focus:outline-hidden mr-3"
                         href="#"
                       >
                         <span className="absolute -start-full transition-all group-hover:start-4">
                           <MailCheck size="20" />
                         </span>
 
-                        <span className="text-sm font-medium transition-all group-hover:ms-4">
+                        <span className="text-sm font-bold transition-all group-hover:ms-4">
                           Send Message
                         </span>
                       </a>
@@ -72,8 +79,10 @@ function Contact() {
                     </h2>
                     <div className="space-y-4">
                       <div className="flex items-start space-x-3">
-                        <div className="w-8 h-8 bg-[#00BCD4] rounded-lg flex items-center justify-center flex-shrink-0 mt-1">
-                          <span className="text-white text-sm">📍</span>
+                        <div className="w-8 h-8 new-primary-bg  rounded-lg flex items-center justify-center flex-shrink-0 mt-1">
+                          <span className="text-white text-sm">
+                            <MapPinCheck className="p-1" />
+                          </span>
                         </div>
                         <div>
                           <p className="text-xl font-medium text-foreground">
@@ -88,8 +97,10 @@ function Contact() {
                       </div>
 
                       <div className="flex items-start space-x-3">
-                        <div className="w-8 h-8 bg-[#FF80AB] rounded-lg flex items-center justify-center flex-shrink-0 mt-1">
-                          <span className="text-white text-sm">📞</span>
+                        <div className="w-8 h-8 new-primary-bg rounded-lg flex items-center justify-center flex-shrink-0 mt-1">
+                          <span className="text-white text-sm">
+                            <PhoneCall className="p-1" />
+                          </span>
                         </div>
                         <div>
                           <p className="text-xl font-medium text-foreground">
@@ -102,8 +113,10 @@ function Contact() {
                       </div>
 
                       <div className="flex items-start space-x-3">
-                        <div className="w-8 h-8 bg-[#00BCD4] rounded-lg flex items-center justify-center flex-shrink-0 mt-1">
-                          <span className="text-white text-sm">✉️</span>
+                        <div className="w-8 h-8 new-primary-bg rounded-lg flex items-center justify-center flex-shrink-0 mt-1">
+                          <span className="text-white text-sm">
+                            <Mail className="p-1" />
+                          </span>
                         </div>
                         <div>
                           <p className="text-xl font-medium text-foreground">
@@ -116,8 +129,10 @@ function Contact() {
                       </div>
 
                       <div className="flex items-start space-x-3">
-                        <div className="w-8 h-8 bg-[#FF80AB] rounded-lg flex items-center justify-center flex-shrink-0 mt-1">
-                          <span className="text-white text-sm">🕒</span>
+                        <div className="w-8 h-8 new-primary-bg rounded-lg flex items-center justify-center flex-shrink-0 mt-1">
+                          <span className="text-white text-sm">
+                            <Clock9 className="p-1" />
+                          </span>
                         </div>
                         <div>
                           <p className="font-medium text-xl text-foreground">
@@ -142,7 +157,7 @@ function Contact() {
             <div className="textSide flex items-center md:order-1 order-2">
               <div className="max-w-prose text-left">
                 <h1 className="text-4xl font-bold text-gray-900 sm:text-5xl">
-                  <strong className="text-pink-400">Bulk Orders</strong> for
+                  <strong className="new-primary-text">Bulk Orders</strong> for
                   Every Occasion increase
                 </h1>
 
@@ -154,7 +169,7 @@ function Contact() {
 
                 <div className="mt-4 flex gap-4 sm:mt-6">
                   <a
-                    className="group relative inline-flex items-center overflow-hidden rounded-sm bg-cyan-500 px-8 py-3 text-white focus:ring-3 focus:outline-hidden mr-3"
+                    className="group relative inline-flex items-center overflow-hidden rounded-sm new-primary-bg px-8 py-3 text-white focus:ring-3 focus:outline-hidden mr-3"
                     href="#"
                   >
                     <span className="absolute -start-full transition-all group-hover:start-4">

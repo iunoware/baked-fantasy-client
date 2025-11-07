@@ -14,7 +14,7 @@ function Dashboard() {
         <div className="lg:pl-28 pl-20 pt-10 pr-10">
           <div className="flex flex-col md:flex-row gap-5 md:gap-0 justify-between">
             <div>
-              <h1 className="text-3xl font-semibold">Admin Dashboard</h1>
+              <h1 className="text-3xl lora font-semibold">Admin Dashboard</h1>
               <p className="text-md pt-1">Welcome Back Admin</p>
             </div>
           </div>

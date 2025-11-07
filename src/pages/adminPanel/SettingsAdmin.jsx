@@ -40,10 +40,13 @@ function SettingsAdmin() {
     }
 
     try {
-      await axios.post(`http://localhost:5000/admin/delete/${selectedAdminId}`, {
-        masterName,
-        masterPassword,
-      });
+      await axios.post(
+        `http://localhost:5000/admin/delete/${selectedAdminId}`,
+        {
+          masterName,
+          masterPassword,
+        }
+      );
       toast.success("Admin deleted successfully");
       setAdmin(admin.filter((a) => a._id !== selectedAdminId));
       setDeleteModal(false);
@@ -82,7 +85,10 @@ function SettingsAdmin() {
       setIsModalVisible(false);
       setTimeout(() => window.location.reload(), 1500);
     } catch (error) {
-      console.error("Error creating admin:", error.response?.data || error.message);
+      console.error(
+        "Error creating admin:",
+        error.response?.data || error.message
+      );
       toast.error(error.response?.data?.msg || "Something went wrong");
     }
   }
@@ -99,7 +105,7 @@ function SettingsAdmin() {
           aria-modal="true"
           aria-labelledby="modalTitle"
         >
-          <div className="w-[60vh] rounded-lg bg-white p-6 shadow-lg">
+          <div className="md:w-150 rounded-lg bg-white p-6 shadow-lg">
             <div className="flex justify-between pb-3">
               <h2 className="text-2xl font-bold">Delete Admin</h2>
               <button
@@ -114,12 +120,15 @@ function SettingsAdmin() {
             <div>
               <p className="text-xl">
                 This Admin will be{" "}
-                <span className="text-red-500 font-bold">permanently deleted</span>, and
-                can't be recovered back.
+                <span className="text-red-500 font-bold">
+                  permanently deleted
+                </span>
+                , and can't be recovered back.
               </p>
               <p className="pt-5">
-                Only the <span className="font-bold">Master Admin</span> has permission to
-                delete users. Enter the Admin Id and Password to continue.
+                Only the <span className="font-bold">Master Admin</span> has
+                permission to delete users. Enter the Admin Id and Password to
+                continue.
               </p>
               {/* form */}
               <form className="mt-4 flex flex-col gap-3" onSubmit={deleteAdmin}>
@@ -172,7 +181,8 @@ function SettingsAdmin() {
             </div>
           </div>
         </div>
-        ;{/* create Admin modal */}
+
+        {/* create Admin modal */}
         <div
           className={`${
             isModalVisible ? "block" : "hidden"
@@ -181,7 +191,7 @@ function SettingsAdmin() {
           aria-modal="true"
           aria-labelledby="modalTitle"
         >
-          <div className="rounded-lg bg-white p-6 shadow-lg">
+          <div className="rounded-2xl w-90 md:w-150 bg-white p-6 shadow-lg">
             <div className="flex justify-between pb-3">
               <h2 className="text-2xl font-bold">Create New Admin</h2>
               <button
@@ -300,18 +310,21 @@ function SettingsAdmin() {
             </form>
           </div>
         </div>
-        <div className="lg:pl-30 pl-20 pt-10 pr-10">
+
+        <div className="lg:pl-30 pl-20 pt-10 pr-3 md:pr-10">
           {/* heading */}
           <div className="flex justify-between items-center">
             <div>
-              <h1 className="text-3xl font-semibold">Settings</h1>
+              <h1 className="text-3xl lora new-primary-text font-semibold">
+                Settings
+              </h1>
 
               <p className="text-md pt-1">Configure your bakery admin panel</p>
             </div>
             <div>
               <button
                 onClick={() => setIsModalVisible(true)}
-                className="new-primary-bg flex gap-2 items-center text-white font-semibold py-3 px-5 rounded-xl hover:scale-102 transition-all duration-200"
+                className="new-primary-bg flex gap-2 items-center text-white font-semibold p-2 md:py-3 md:px-5 rounded-xl hover:scale-102 transition-all duration-200"
               >
                 <SquarePen size={15} /> Add New Admin
               </button>
@@ -319,84 +332,48 @@ function SettingsAdmin() {
           </div>
           {/* main section */}
           <div className="flex bg-white p-5 rounded-2xl items-center justify-center mt-10">
-            {/* 1 */}
-            {/* <div className="bg-white relative p-5 rounded-2xl shadow-2xl w-[50%] h-fit">
-              <div className="">
-                <h2 className="font-bold text-xl">Company Details</h2>
-                <p className="pt-2">The Baked Fantasy</p>
-              </div>
-
-              <div className="mt-7 flex flex-col space-y-5">
-                <div className="">
-                  <h2 className="font-bold text-black/90 text-xl">
-                    Store Name
-                  </h2>
-                  <p className="pl-4 text-lg pt-1">The Baked Fantasy</p>
-                </div>
-                <div className="">
-                  <h2 className="font-bold text-black/90 text-xl">Address</h2>
-                  <p className="pl-4 pt-1 text-lg">
-                    123 Baker Street, Sweet City, SC 12345
-                  </p>
-                </div>
-                <div className="">
-                  <h2 className="font-bold text-black/90 text-xl">Phone</h2>
-                  <p className="pl-4 pt-1 text-lg">+1 (555) 123-CAKE</p>
-                </div>
-              </div>
-            </div> */}
-            {/* 2 */}
-            {/* <div className="bg-white relative p-5 rounded-2xl shadow-2xl w-[50%] h-fit">
-              <div className="">
-                <h2 className="font-bold text-xl">Admin Management</h2>
-                <p className="pt-2">Your account settings</p>
-              </div>
-
-              <div className="mt-5 flex flex-col space-y-5">
-                <div className="">
-                  <h2 className="font-bold text-black/90 text-xl">Name</h2>
-                  <p className="pl-4 text-lg pt-1">Master Admin</p>
-                </div>
-
-                <button
-                  className="bg-pink-400 mx-auto rounded-2xl text-white font-bold hover:scale-95 transition-all p-2 w-fit"
-                  onClick={() => setIsModalVisible(true)}
-                >
-                  Create New Admin
-                </button>
-              </div>
-            </div> */}
-            {/* table */}
             <table className="min-w-full divide-y-2 divide-gray-200">
               <thead className="ltr:text-left rtl:text-right">
                 <tr className="*:font-medium *:text-gray-900">
                   <th className="px-3 py-2 whitespace-nowrap">S.No</th>
                   <th className="px-3 py-2 whitespace-nowrap">User Name</th>
-                  {/* <th className="px-3 py-2 whitespace-nowrap">Password</th> */}
-                  {/* <th className="px-3 py-2 whitespace-nowrap">Status</th> */}
                   <th className="px-3 py-2 whitespace-nowrap">Delete</th>
                 </tr>
               </thead>
+              {admin.length > 0 ? (
+                <tbody className="divide-y divide-gray-200 *:even:bg-gray-50">
+                  {admin.map((a, i) => (
+                    <tr key={i} className="*:text-gray-900 *:first:font-medium">
+                      <td className="px-3 py-2 whitespace-nowrap">{i + 1}</td>
+                      <td className="px-3 py-2 whitespace-nowrap font-bold">
+                        {a.name}
+                      </td>
+                      <td className="px-3 py-2 whitespace-nowrap ">
+                        <button disabled={a.isMaster}>
+                          <Trash2
+                            // onClick={() => handleDelete(a._id)}
 
-              <tbody className="divide-y divide-gray-200 *:even:bg-gray-50">
-                {admin.map((a, i) => (
-                  <tr key={i} className="*:text-gray-900 *:first:font-medium">
-                    <td className="px-3 py-2 whitespace-nowrap">{i + 1}</td>
-                    <td className="px-3 py-2 whitespace-nowrap font-bold">{a.name}</td>
-                    <td className="px-3 py-2 whitespace-nowrap ">
-                      <Trash2
-                        // onClick={() => handleDelete(a._id)}
-                        onClick={() => {
-                          setSelectedAdminId(a._id);
-                          setDeleteModal(true);
-                        }}
-                        size={18}
-                        className="text-red-700 cursor-pointer"
-                      />
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
+                            onClick={() => {
+                              setSelectedAdminId(a._id);
+                              setDeleteModal(true);
+                            }}
+                            size={18}
+                            className={`${
+                              a.isMaster
+                                ? "cursor-not-allowed text-gray-400"
+                                : "text-red-700 cursor-pointer"
+                            }`}
+                          />
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              ) : (
+                <div className="divide-y font-bold text-xl divide-gray-200 *:even:bg-gray-50">
+                  NO Admin Added
+                </div>
+              )}
             </table>
           </div>
         </div>

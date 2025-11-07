@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { useEffect, useState } from "react";
-import { X, SquarePen } from "lucide-react";
+import { X, SquarePen, Check } from "lucide-react";
 import toast from "react-hot-toast";
 import axios from "axios";
 
@@ -28,12 +28,16 @@ function BannerAdmin() {
     formData.append("active", active);
 
     try {
-      const postBanner = await axios.patch("http://localhost:5000/banner", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-          Authorization: ` Bearer ${token}`,
-        },
-      });
+      const postBanner = await axios.patch(
+        "http://localhost:5000/banner",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: ` Bearer ${token}`,
+          },
+        }
+      );
       toast.success("Banner Edited Successfully 🍰");
       // console.log("Banner added: ", postBanner.data);
       // console.log("Current toggle value:", isActive);
@@ -145,7 +149,7 @@ function BannerAdmin() {
             {/* <label htmlFor="isActive">Active</label> */}
             <div className="flex items-center justify-between flex-row px-3">
               <p>{isActive ? "Activate" : "De-activate"}</p>
-              <label
+              {/* <label
                 htmlFor="AcceptConditions"
                 className="group relative block h-8 w-14 rounded-full bg-gray-300 transition-colors [-webkit-tap-highlight-color:_transparent] has-checked:bg-green-500"
               >
@@ -156,36 +160,29 @@ function BannerAdmin() {
                   className="peer sr-only"
                 />
 
-                <span className="absolute inset-y-0 start-0 m-1 grid size-6 place-content-center rounded-full bg-white text-gray-700 transition-[inset-inline-start] peer-checked:start-6 peer-checked::first:hidden *:last:hidden peer-checked::last:block">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth="1.5"
-                    stroke="currentColor"
-                    className="size-4"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M6 18 18 6M6 6l12 12"
-                    />
-                  </svg>
+                <span className="absolute inset-y-0 start-0 m-1 grid size-4 place-content-center rounded-full bg-white text-gray-700 transition-[inset-inline-start] peer-checked:start-6 peer-checked:*:first:hidden *:last:hidden peer-checked:*:last:block">
+                  
+                  <Check size={10} />
 
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth="1.5"
-                    stroke="currentColor"
-                    className="size-4"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="m4.5 12.75 6 6 9-13.5"
-                    />
-                  </svg>
+                  <X size={10} />
+                  
+                </span>
+              </label> */}
+              {/* new */}
+              <label
+                htmlFor="AcceptConditions"
+                className="group hover:cursor-pointer relative block h-6 w-12 rounded-full bg-gray-300 transition-colors [-webkit-tap-highlight-color:_transparent] has-checked:bg-green-500"
+              >
+                <input
+                  type="checkbox"
+                  onClick={() => setActive((prev) => !prev)}
+                  id="AcceptConditions"
+                  className="peer sr-only"
+                />
+
+                <span className="absolute inset-y-0 start-0 m-1 grid size-4 place-content-center rounded-full bg-white text-gray-700 transition-[inset-inline-start] peer-checked:start-6 peer-checked:*:first:hidden *:last:hidden peer-checked:*:last:block">
+                  <X size={10} />
+                  <Check size={10} />
                 </span>
               </label>
             </div>
@@ -204,16 +201,18 @@ function BannerAdmin() {
 
       <div className="lg:pl-30 pl-20 pt-10 pr-10">
         {/* heading */}
-        <div className="flex flex-col md:flex-row gap-5 md:gap-0 justify-between">
+        <div className="flex flex-row gap-5 md:gap-0 justify-between">
           <div>
-            <h1 className="text-3xl font-semibold">Banner</h1>
+            <h1 className="text-3xl new-primary-text font-semibold lora">
+              Banner
+            </h1>
 
             <p className="text-md pt-1">Edit Banners</p>
           </div>
           <div>
             <button
               onClick={() => setIsModalVisible(true)}
-              className="new-primary-bg flex gap-2 items-center text-white font-semibold py-3 px-5 rounded-xl hover:scale-102 transition-all duration-200"
+              className="new-primary-bg flex gap-2 items-center text-white font-semibold px-2 py-2 md:py-3 md:px-5 rounded-xl hover:scale-102 transition-all duration-200"
             >
               <SquarePen size={15} /> Edit Banner
             </button>
@@ -221,7 +220,8 @@ function BannerAdmin() {
         </div>
         {/* main section */}
         <div className="flex items-center justify-center mt-10">
-          <div className="bg-white relative p-5 rounded-2xl shadow-2xl w-[50%] h-fit">
+          {/* {banner.length < 0 ? ( */}
+          <div className="bg-white relative p-5 rounded-2xl shadow-2xl w-200 h-fit">
             <div className="">
               <h2 className="font-bold text-xl">Banner Information</h2>
               <p className="pt-2">Temporary Banner</p>
@@ -230,7 +230,9 @@ function BannerAdmin() {
             <div className="mt-7 flex flex-col space-y-5">
               <div className="">
                 <h2 className="font-bold text-black/90 text-xl">Heading</h2>
-                <p className="pl-4 text-lg pt-1">{banner?.title || "Titles not yet"}</p>
+                <p className="pl-4 text-lg pt-1">
+                  {banner?.title || "Titles not yet"}
+                </p>
               </div>
               <div className="">
                 <h2 className="font-bold text-black/90 text-xl">Sub Heading</h2>
@@ -262,103 +264,13 @@ function BannerAdmin() {
                 size={20}
                 className="hover:text-black hover:cursor-pointer hover:-translate-y-1 transition-all duration-200"
               />
-              {/* <label
-                htmlFor="AcceptConditions"
-                className="group relative block h-8 w-14 rounded-full bg-gray-300 transition-colors [-webkit-tap-highlight-color:_transparent] has-checked:bg-green-500"
-              >
-                <input
-                  // onClick={() => setActive((prev) => !prev)}
-                  onClick={() => axios.patch("http://localhost:5000/banner")}
-                  type="checkbox"
-                  id="AcceptConditions"
-                  className="peer sr-only"
-                />
-
-                <span className="absolute inset-y-0 start-0 m-1 grid size-6 place-content-center rounded-full bg-white text-gray-700 transition-[inset-inline-start] peer-checked:start-6 peer-checked::first:hidden *:last:hidden peer-checked::last:block">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth="1.5"
-                    stroke="currentColor"
-                    className="size-4"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M6 18 18 6M6 6l12 12"
-                    />
-                  </svg>
-
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth="1.5"
-                    stroke="currentColor"
-                    className="size-4"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="m4.5 12.75 6 6 9-13.5"
-                    />
-                  </svg>
-                </span>
-              </label> */}
             </div>
           </div>
-
-          {/* <div className="absolute flex items-center justify-center right-5 bottom-5 flex-row gap-5">
-            <SquarePen
-              onClick={() => setIsModalVisible(true)}
-              color="#808080"
-              size={20}
-              className="hover:text-black hover:cursor-pointer hover:-translate-y-1 transition-all duration-200"
-            />
-            <label
-              htmlFor="AcceptConditions"
-              className="group relative block h-8 w-14 rounded-full bg-gray-300 transition-colors [-webkit-tap-highlight-color:_transparent] has-checked:bg-green-500"
-            >
-              <input
-                type="checkbox"
-                id="AcceptConditions"
-                className="peer sr-only"
-              />
-
-              <span className="absolute inset-y-0 start-0 m-1 grid size-6 place-content-center rounded-full bg-white text-gray-700 transition-[inset-inline-start] peer-checked:start-6 peer-checked::first:hidden *:last:hidden peer-checked::last:block">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth="1.5"
-                  stroke="currentColor"
-                  className="size-4"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M6 18 18 6M6 6l12 12"
-                  />
-                </svg>
-
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth="1.5"
-                  stroke="currentColor"
-                  className="size-4"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="m4.5 12.75 6 6 9-13.5"
-                  />
-                </svg>
-              </span>
-            </label>
-          </div> */}
+          {/* ) : ( */}
+          {/* <div className="h-[60vh] flex flex-col space-y-3 items-center justify-center">
+              <h1 className="text-2xl font-bold">No Products Added</h1>
+            </div> */}
+          {/* )} */}
         </div>
       </div>
     </div>

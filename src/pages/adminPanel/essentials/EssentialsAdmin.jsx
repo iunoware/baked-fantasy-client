@@ -14,7 +14,9 @@ function EssentialsAdmin() {
   useEffect(() => {
     async function fetchCourses() {
       try {
-        const response = await axios.get(`http://localhost:5000/ess-categories`);
+        const response = await axios.get(
+          `http://localhost:5000/ess-categories`
+        );
         // console.log(response.data);
         setEssentialCategories(response.data);
         // console.log("essentialCategories: ", essentialCategories);
@@ -184,11 +186,13 @@ function EssentialsAdmin() {
       <div className="lg:pl-28 pl-20 pt-10 pr-10">
         <div className="flex flex-col md:flex-row gap-5 md:gap-0 justify-between">
           <div>
-            <h1 className="text-3xl new-primary-text font-semibold">
+            <h1 className="text-3xl lora new-primary-text font-semibold">
               Baking Essentials Categories
             </h1>
 
-            <p className="text-md pt-1">Manage your bakery essentials' categories</p>
+            <p className="text-md pt-1">
+              Manage your bakery essentials' categories
+            </p>
           </div>
           <div>
             <button
@@ -209,82 +213,31 @@ function EssentialsAdmin() {
               </h2>
               <p>Manage all your bakery essentials' categories</p>
             </div>
-            <div>
-              {/* dropdown */}
-              {/* <div className="relative inline-flex">
-                <span
-                  onClick={() => setIsDropdownVisible(isDropdownVisible ? false : true)}
-                  className="inline-flex bg-pink-500 text-white divide-gray-300 overflow-hidden rounded-xl border hover:bg-pink-400 border-gray-300 shadow-sm"
-                >
-                  <button
-                    type="button"
-                    className="px-3 py-2 hover:cursor-pointer text-md font-medium text-white transition-colors   focus:relative"
-                  >
-                    Categories
-                  </button>
-
-                  <button
-                    type="button"
-                    className="px-3 py-2 hover:cursor-pointer font-medium text-white transition-color focus:relative"
-                    aria-label="Menu"
-                  >
-                    <ChevronDown
-                      size={18}
-                      className={`${isDropdownVisible ? "rotate-180" : "rotate-0"}`}
-                    />
-                  </button>
-                </span>
-
-                <div
-                  role="menu"
-                  className={`${
-                    isDropdownVisible ? "block" : "hidden"
-                  } absolute end-0 top-12 z-auto w-37.5 overflow-hidden rounded-xl border border-gray-300 bg-white shadow-sm`}
-                >
-                  <div
-                    role="menuitem"
-                    onClick={() => {
-                      setCurrentCategory("allCategories");
-                      setIsDropdownVisible(false);
-                    }}
-                    className="block hover:cursor-pointer px-3 py-2 text-md font-medium text-gray-700 transition-colors hover:bg-gray-100 hover:text-gray-900"
-                  >
-                    All Categories
-                  </div>
-                  {essentialCategories.map((course, i) => (
-                    <div
-                      key={i}
-                      role="menuitem"
-                      onClick={() => {
-                        setCurrentCategory(course.title);
-                        setIsDropdownVisible(false);
-                      }}
-                      className="block hover:cursor-pointer px-3 py-2 text-md font-medium text-gray-700 transition-colors hover:bg-gray-100 hover:text-gray-900"
-                    >
-                      {course.title}
-                    </div>
-                  ))}
-                </div>
-              </div> */}
-            </div>
+            <div></div>
           </div>
 
           {/* product cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 lg:gap-8">
-            {essentialCategories.map((course, i) => (
-              <div key={i} className="">
-                <EssentialsCategoryCardAdmin
-                  title={course.title}
-                  subject={course.subject}
-                  sliderBtn={course.title}
-                  image={course.imageUrl}
-                  categoryId={course._id}
-                  activate={course.isActive}
-                  // modal={`setIsModal2Visible(true)`}
-                />
-              </div>
-            ))}
-          </div>
+          {essentialCategories.length > 0 ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 lg:gap-8">
+              {essentialCategories.map((course, i) => (
+                <div key={i} className="">
+                  <EssentialsCategoryCardAdmin
+                    title={course.title}
+                    subject={course.subject}
+                    sliderBtn={course.title}
+                    image={course.imageUrl}
+                    categoryId={course._id}
+                    activate={course.isActive}
+                    // modal={`setIsModal2Visible(true)`}
+                  />
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="h-[60vh] flex flex-col space-y-3 items-center justify-center">
+              <h1 className="text-2xl font-bold">No Products Added</h1>
+            </div>
+          )}
 
           {/* {essentialCategories > 0 ? (
             <div></div>

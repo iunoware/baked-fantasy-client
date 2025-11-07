@@ -322,7 +322,10 @@ export default function NewNav() {
         <nav className="block md:block shadow-lg lg:hidden z-40 fixed top-0 left-0 w-full h-35 bg-white">
           <div className="flex justify-between pt-4 pl-3">
             <div className="logo flex items-center">
-              <Link to="/" className="new-primary-text text-xl font-bold brand-name">
+              <Link
+                to="/"
+                className="new-primary-text text-xl font-bold brand-name"
+              >
                 The Backed Fantasy
               </Link>
             </div>
@@ -336,7 +339,11 @@ export default function NewNav() {
                 </a>
               </div>
               <div className="menu">
-                <Menu size={24} onClick={() => setMenuOpen(true)} color="#472823" />
+                <Menu
+                  size={24}
+                  onClick={() => setMenuOpen(true)}
+                  color="#472823"
+                />
               </div>
             </div>
           </div>
@@ -424,7 +431,11 @@ export default function NewNav() {
                 </Link>
               </li>
               <li className="rounded-lg">
-                <Link to="/courses" onClick={() => setMenuOpen(false)} className="ml-4">
+                <Link
+                  to="/courses"
+                  onClick={() => setMenuOpen(false)}
+                  className="ml-4"
+                >
                   • Courses
                 </Link>
               </li>

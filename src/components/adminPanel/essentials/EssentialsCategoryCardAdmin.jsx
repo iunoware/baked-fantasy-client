@@ -201,7 +201,7 @@ function EssentialsCategoryCardAdmin(props) {
             <div className="flex justify-center items-center">
               <button
                 type="submit"
-                className="bg-pink-600 w-full font-semibold hover:cursor-pointer hover:bg-pink-500 transition-all duration-200 text-white px-4 py-3 rounded-xl"
+                className="new-primary-bg w-full font-semibold hover:cursor-pointer hover:scale-102 transition-all duration-200 text-white px-4 py-3 rounded-xl"
               >
                 Confirm Changes
               </button>
@@ -232,10 +232,14 @@ function EssentialsCategoryCardAdmin(props) {
               </h2>
               <p className=" text-center w-full mb-5 text-black">
                 The category{" "}
-                <span className="text-pink-500 font-semibold text-lg">{props.title}</span>{" "}
+                <span className="text-pink-500 font-semibold text-lg">
+                  {props.title}
+                </span>{" "}
                 will be{" "}
-                <span className="text-red-600 font-semibold">permanently deleted</span>,
-                and can't be recovered back.
+                <span className="text-red-600 font-semibold">
+                  permanently deleted
+                </span>
+                , and can't be recovered back.
               </p>
             </div>
 
@@ -292,7 +296,10 @@ function EssentialsCategoryCardAdmin(props) {
           <div className="absolute inset-0 flex justify-center items-center">
             <Link
               to={`/admin/essentials/${props.title}`}
-              state={{ categoryId: props.categoryId, categoryName: props.title }}
+              state={{
+                categoryId: props.categoryId,
+                categoryName: props.title,
+              }}
               className="bg-white cursor-pointer rounded-full px-3 py-2 font-bold translate-y-5 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300"
             >
               View Product

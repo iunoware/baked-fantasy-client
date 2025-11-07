@@ -25,12 +25,20 @@ body {
   font-weight: 900;
   font-style: normal;
 }
+/* background color */
+.bg {
+  @apply bg-[#fef9ec];
+}
 
 @theme {
+  /* for text */
   --color-blue: #73c3b4;
-  --color-red: #800000;
-  --color-cream: #fef9ec;
-  --color-butterscothch: #d78e47;
+  /* for navbar */
+  --color-red: #be0604;
+  /* for bg */
+  --color-cream: #fff4d9;
+  /* for active */
+  --color-vibrant: #f9c7c2;
   --color-brown: #b16231;
 }
 
