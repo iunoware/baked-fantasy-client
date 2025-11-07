@@ -442,7 +442,7 @@ export default function NewNav() {
               <li className="rounded-lg">
                 <Link
                   to="/courses/my-learning/"
-                  onClick={() => setMenuOpen(false)}
+                  onClick={() => se(false)}
                   className="ml-4"
                 >
                   • My Learning
