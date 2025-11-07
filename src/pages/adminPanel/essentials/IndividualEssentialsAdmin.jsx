@@ -162,7 +162,7 @@ function IndividualEssentialAdmin() {
                 name="productFile"
                 multiple
                 accept="image/png, image/jpeg, image/webp, image/gif"
-                className="ring h-20 ring-gray-500 text-black rounded-lg p-2 w-full"
+                className="h-20 border-2 cursor-pointer border-dashed border-gray-500 text-black rounded-lg p-2 w-full"
               />
             </div>
 
@@ -284,9 +284,7 @@ function IndividualEssentialAdmin() {
       {/* add product button */}
       <div className="flex flex-col md:flex-row gap-5 md:gap-0 justify-between">
         <div>
-          <h1 className="text-3xl font-semibold new-primary-text lora">
-            {categoryName}
-          </h1>
+          <h1 className="text-3xl font-semibold new-primary-text lora">{categoryName}</h1>
 
           <p className="text-md pt-1">Manage your bakery products</p>
         </div>

@@ -14,9 +14,7 @@ function EssentialsAdmin() {
   useEffect(() => {
     async function fetchCourses() {
       try {
-        const response = await axios.get(
-          `http://localhost:5000/ess-categories`
-        );
+        const response = await axios.get(`http://localhost:5000/ess-categories`);
         // console.log(response.data);
         setEssentialCategories(response.data);
         // console.log("essentialCategories: ", essentialCategories);
@@ -143,7 +141,7 @@ function EssentialsAdmin() {
                 type="file"
                 id="categoryFile"
                 name="categoryFile"
-                className="ring h-20 ring-gray-500 text-black rounded-lg p-2 w-full"
+                className="h-20 border-2 cursor-pointer border-dashed border-gray-500 text-black rounded-lg p-2 w-full"
               />
             </div>
 
@@ -190,9 +188,7 @@ function EssentialsAdmin() {
               Baking Essentials Categories
             </h1>
 
-            <p className="text-md pt-1">
-              Manage your bakery essentials' categories
-            </p>
+            <p className="text-md pt-1">Manage your bakery essentials' categories</p>
           </div>
           <div>
             <button

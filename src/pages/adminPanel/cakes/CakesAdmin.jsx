@@ -24,8 +24,7 @@ function CakesAdmin() {
     fetchCourses();
   }, []);
 
-  const token =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4YTk3ZDYxOTdlMjcxMDM0OWUwNmI0MyIsImlhdCI6MTc2MTcxNDEyMiwiZXhwIjoxNzYxODAwNTIyfQ.nHMQbJNUxXQKQ7xbabLDl018xkl0mFTcLeLvx9a9644";
+  const token = "";
 
   async function postCategory(e) {
     e.preventDefault();
@@ -141,7 +140,7 @@ function CakesAdmin() {
                 type="file"
                 id="categoryFile"
                 name="categoryFile"
-                className="ring h-20 ring-gray-500 text-black rounded-lg p-2 w-full"
+                className="h-20 border-2 cursor-pointer border-dashed border-gray-500 text-black rounded-lg p-2 w-full"
               />
             </div>
 
@@ -188,9 +187,7 @@ function CakesAdmin() {
               Cakes and Cookies Categories
             </h1>
 
-            <p className="text-md pt-1">
-              Manage your bakery products' category
-            </p>
+            <p className="text-md pt-1">Manage your bakery products' category</p>
           </div>
           <div>
             <button

@@ -94,6 +94,36 @@ function EssentialsTableAdmin(props) {
     }
   }
 
+  // path individual images
+  const handleReplaceImage = (index) => {
+    const fileInput = document.createElement("input");
+    fileInput.type = "file";
+    fileInput.accept = "image/png, image/jpeg, image/webp, image/gif";
+    fileInput.onchange = async (e) => {
+      const newFile = e.target.files[0];
+      if (!newFile) return;
+
+      const formData = new FormData();
+      formData.append("image", newFile);
+      formData.append("replaceIndex", index);
+
+      try {
+        const res = await axios.patch(
+          `http://localhost:5000/essentials/${props.productId}/replace-image`,
+          formData,
+          { headers: { "Content-Type": "multipart/form-data" } }
+        );
+        toast.success("Image replaced successfully!");
+        console.log("Updated product:", res.data);
+        setTimeout(() => window.location.reload(), 800);
+      } catch (error) {
+        console.error("Image replace failed:", error);
+        toast.error("Couldn't replace image");
+      }
+    };
+    fileInput.click();
+  };
+
   return (
     <>
       <tr>
@@ -144,16 +174,16 @@ function EssentialsTableAdmin(props) {
 
                 {/* file */}
                 <div className="flex flex-col gap-3 justify-between items-center">
-                  <input
+                  {/* <input
                     type="file"
                     id="productFile"
                     name="productFile"
                     multiple
                     accept="image/png, image/jpeg, image/webp, image/gif"
-                    className="ring h-20 ring-gray-500 text-black rounded-lg p-2 w-full"
-                  />
+                    className="h-20 border-2 cursor-pointer border-dashed border-gray-500 text-black rounded-lg p-2 w-full"
+                  /> */}
 
-                  {/* <h2 className="font-semibold">Current images</h2> */}
+                  <h2 className="font-semibold">Click an image to replace</h2>
                   <div className="flex gap-1 cursor-pointer">
                     {props.images.map((image, i) => (
                       <div key={i} className="relative group">
@@ -162,9 +192,13 @@ function EssentialsTableAdmin(props) {
                           alt={`product image ${i} `}
                           className="h-20 w-20 object-center object-cover rounded-lg"
                         />
-                        {/* <div className="absolute inset-0 flex justify-center items-center opacity-0 group-hover:opacity-100 transition-all duration-300 ">
-                          <SquarePen color="#ffffff" />
-                        </div> */}
+                        <div className="absolute inset-0 flex justify-center items-center opacity-0 group-hover:opacity-100 transition-all duration-300">
+                          <SquarePen
+                            color="#ffffff"
+                            className="cursor-pointer"
+                            onClick={() => handleReplaceImage(i)}
+                          />
+                        </div>
                       </div>
                     ))}
                   </div>
