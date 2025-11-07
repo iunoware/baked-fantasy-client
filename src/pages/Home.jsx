@@ -17,10 +17,6 @@ function Home() {
   const [courses, setCourses] = useState([]);
   const [banner, setBanner] = useState({});
 
-  // useEffect(() => {
-
-  // }, []);
-
   useEffect(() => {
     // for fetching Bakery Products
     const fetchProducts = async () => {
@@ -106,53 +102,39 @@ function Home() {
       </div>
 
       {/* card section */}
-      {/* <div
-        className="flex justify-around py-15 [@media(max-width:768px)]:flex-col bg-[#f1faee]"
-        id="section-2"
-      > */}
       <div
         className="py-15 bg grid grid-cols-2 gap-4 lg:grid-cols-4 lg:gap-8"
         id="section-2"
       >
+        {/* students */}
         <div className="card-1 text-center flex flex-col items-center card-hover hover:animate-wiggle">
           <svg
-            width="100px"
-            height="100px"
-            viewBox="-128 -128 768.00 768.00"
+            fill="#F6E9D9"
+            width="105px"
+            viewBox="-13.12 -13.12 58.24 58.24"
+            version="1.1"
             xmlns="http://www.w3.org/2000/svg"
-            stroke="#ffffff"
-            className="fill-blue"
+            stroke="#F6E9D9"
           >
-            <g
-              id="SVGRepo_bgCarrier"
-              strokeWidth="0"
-              transform="translate(0,0), scale(1)"
-            >
+            <g id="SVGRepo_bgCarrier" stroke-width="0">
               <rect
-                x="-128"
-                y="-128"
-                width="768.00"
-                height="768.00"
-                rx="384"
-                strokeWidth="0"
+                x="-13.12"
+                y="-13.12"
+                width="58.24"
+                height="58.24"
+                rx="29.12"
+                fill="#870D32"
+                strokewidth="0"
               ></rect>
             </g>
             <g
               id="SVGRepo_tracerCarrier"
-              strokeLinecap="round"
-              strokeLinejoin="round"
+              stroke-linecap="round"
+              stroke-linejoin="round"
             ></g>
             <g id="SVGRepo_iconCarrier">
-              <path
-                fill="var(--ci-primary-color, #ffffff)"
-                d="M462.541,316.3l-64.344-42.1,24.774-45.418A79.124,79.124,0,0,0,432.093,192V120A103.941,103.941,0,0,0,257.484,43.523L279.232,67a71.989,71.989,0,0,1,120.861,53v72a46.809,46.809,0,0,1-5.215,21.452L355.962,284.8l89.058,58.274a42.16,42.16,0,0,1,19.073,35.421V432h-72v32h104V378.494A74.061,74.061,0,0,0,462.541,316.3Z"
-                className="ci-primary"
-              ></path>
-              <path
-                fill="var(--ci-primary-color, #ffffff)"
-                d="M318.541,348.3l-64.343-42.1,24.773-45.418A79.124,79.124,0,0,0,288.093,224V152A104.212,104.212,0,0,0,184.04,47.866C126.723,47.866,80.093,94.581,80.093,152v72a78,78,0,0,0,9.015,36.775l24.908,45.664L50.047,348.3A74.022,74.022,0,0,0,16.5,410.4L16,496H352.093V410.494A74.061,74.061,0,0,0,318.541,348.3ZM320.093,464H48.186l.31-53.506a42.158,42.158,0,0,1,19.073-35.421l88.682-58.029L117.2,245.452A46.838,46.838,0,0,1,112.093,224V152a72,72,0,1,1,144,0v72a46.809,46.809,0,0,1-5.215,21.452L211.962,316.8l89.058,58.274a42.16,42.16,0,0,1,19.073,35.421Z"
-                className="ci-primary"
-              ></path>
+              {" "}
+              <path d="M23.313 26.102l-6.296-3.488c2.34-1.841 2.976-5.459 2.976-7.488v-4.223c0-2.796-3.715-5.91-7.447-5.91-3.73 0-7.544 3.114-7.544 5.91v4.223c0 1.845 0.78 5.576 3.144 7.472l-6.458 3.503s-1.688 0.752-1.688 1.689v2.534c0 0.933 0.757 1.689 1.688 1.689h21.625c0.931 0 1.688-0.757 1.688-1.689v-2.534c0-0.994-1.689-1.689-1.689-1.689zM23.001 30.015h-21.001v-1.788c0.143-0.105 0.344-0.226 0.502-0.298 0.047-0.021 0.094-0.044 0.139-0.070l6.459-3.503c0.589-0.32 0.979-0.912 1.039-1.579s-0.219-1.32-0.741-1.739c-1.677-1.345-2.396-4.322-2.396-5.911v-4.223c0-1.437 2.708-3.91 5.544-3.91 2.889 0 5.447 2.44 5.447 3.91v4.223c0 1.566-0.486 4.557-2.212 5.915-0.528 0.416-0.813 1.070-0.757 1.739s0.446 1.267 1.035 1.589l6.296 3.488c0.055 0.030 0.126 0.063 0.184 0.089 0.148 0.063 0.329 0.167 0.462 0.259v1.809zM30.312 21.123l-6.39-3.488c2.34-1.841 3.070-5.459 3.070-7.488v-4.223c0-2.796-3.808-5.941-7.54-5.941-2.425 0-4.904 1.319-6.347 3.007 0.823 0.051 1.73 0.052 2.514 0.302 1.054-0.821 2.386-1.308 3.833-1.308 2.889 0 5.54 2.47 5.54 3.941v4.223c0 1.566-0.58 4.557-2.305 5.915-0.529 0.416-0.813 1.070-0.757 1.739 0.056 0.67 0.445 1.267 1.035 1.589l6.39 3.488c0.055 0.030 0.126 0.063 0.184 0.089 0.148 0.063 0.329 0.167 0.462 0.259v1.779h-4.037c0.61 0.46 0.794 1.118 1.031 2h3.319c0.931 0 1.688-0.757 1.688-1.689v-2.503c-0.001-0.995-1.689-1.691-1.689-1.691z"></path>{" "}
             </g>
           </svg>
           <div className="pt-5">
@@ -161,44 +143,46 @@ function Home() {
           </div>
         </div>
 
+        {/* chef hat */}
         <div className="card-2 text-center flex flex-col items-center card-hover hover:animate-wiggle">
           <svg
-            width="100px"
-            height="100px"
-            viewBox="-5.76 -5.76 35.52 35.52"
-            fill="white"
+            width="105px"
+            height="105px"
+            viewBox="-7.92 -7.92 39.84 39.84"
+            fill="none"
             xmlns="http://www.w3.org/2000/svg"
+            stroke="#F6E9D9"
           >
-            <g id="SVGRepo_bgCarrier" strokeWidth="0">
+            <g id="SVGRepo_bgCarrier" stroke-width="0">
               <rect
-                x="-5.76"
-                y="-5.76"
-                width="35.52"
-                height="35.52"
-                rx="17.76"
-                // fill="#D1C9D8"
-                className="fill-blue"
-                strokeWidth="0"
+                x="-7.92"
+                y="-7.92"
+                width="39.84"
+                height="39.84"
+                rx="19.92"
+                fill="#870D32"
+                strokewidth="0"
               ></rect>
             </g>
             <g
               id="SVGRepo_tracerCarrier"
-              strokeLinecap="round"
-              strokeLinejoin="round"
+              stroke-linecap="round"
+              stroke-linejoin="round"
             ></g>
             <g id="SVGRepo_iconCarrier">
               {" "}
               <path
                 d="M19 18H19.75H19ZM5 14.584H5.75C5.75 14.2859 5.57345 14.016 5.30028 13.8967L5 14.584ZM19 14.584L18.6997 13.8967C18.4265 14.016 18.25 14.2859 18.25 14.584H19ZM15.75 7C15.75 7.41421 16.0858 7.75 16.5 7.75C16.9142 7.75 17.25 7.41421 17.25 7H15.75ZM6.75 7C6.75 7.41421 7.08579 7.75 7.5 7.75C7.91421 7.75 8.25 7.41421 8.25 7H6.75ZM7 4.25C3.82436 4.25 1.25 6.82436 1.25 10H2.75C2.75 7.65279 4.65279 5.75 7 5.75V4.25ZM17 5.75C19.3472 5.75 21.25 7.65279 21.25 10H22.75C22.75 6.82436 20.1756 4.25 17 4.25V5.75ZM15 21.25H9V22.75H15V21.25ZM9 21.25C8.03599 21.25 7.38843 21.2484 6.90539 21.1835C6.44393 21.1214 6.24643 21.0142 6.11612 20.8839L5.05546 21.9445C5.51093 22.4 6.07773 22.5857 6.70552 22.6701C7.31174 22.7516 8.07839 22.75 9 22.75V21.25ZM4.25 18C4.25 18.9216 4.24841 19.6883 4.32991 20.2945C4.41432 20.9223 4.59999 21.4891 5.05546 21.9445L6.11612 20.8839C5.9858 20.7536 5.87858 20.5561 5.81654 20.0946C5.75159 19.6116 5.75 18.964 5.75 18H4.25ZM18.25 18C18.25 18.964 18.2484 19.6116 18.1835 20.0946C18.1214 20.5561 18.0142 20.7536 17.8839 20.8839L18.9445 21.9445C19.4 21.4891 19.5857 20.9223 19.6701 20.2945C19.7516 19.6883 19.75 18.9216 19.75 18H18.25ZM15 22.75C15.9216 22.75 16.6883 22.7516 17.2945 22.6701C17.9223 22.5857 18.4891 22.4 18.9445 21.9445L17.8839 20.8839C17.7536 21.0142 17.5561 21.1214 17.0946 21.1835C16.6116 21.2484 15.964 21.25 15 21.25V22.75ZM7 5.75C7.2137 5.75 7.42326 5.76571 7.6277 5.79593L7.84703 4.31205C7.57021 4.27114 7.28734 4.25 7 4.25V5.75ZM12 1.25C9.68949 1.25 7.72942 2.7421 7.02709 4.81312L8.44763 5.29486C8.94981 3.81402 10.3516 2.75 12 2.75V1.25ZM7.02709 4.81312C6.84722 5.34352 6.75 5.91118 6.75 6.5H8.25C8.25 6.07715 8.3197 5.67212 8.44763 5.29486L7.02709 4.81312ZM17 4.25C16.7127 4.25 16.4298 4.27114 16.153 4.31205L16.3723 5.79593C16.5767 5.76571 16.7863 5.75 17 5.75V4.25ZM12 2.75C13.6484 2.75 15.0502 3.81402 15.5524 5.29486L16.9729 4.81312C16.2706 2.7421 14.3105 1.25 12 1.25V2.75ZM15.5524 5.29486C15.6803 5.67212 15.75 6.07715 15.75 6.5H17.25C17.25 5.91118 17.1528 5.34352 16.9729 4.81312L15.5524 5.29486ZM5.75 18V14.584H4.25V18H5.75ZM5.30028 13.8967C3.79769 13.2402 2.75 11.7416 2.75 10H1.25C1.25 12.359 2.6705 14.3846 4.69972 15.2712L5.30028 13.8967ZM18.25 14.584L18.25 18H19.75L19.75 14.584H18.25ZM21.25 10C21.25 11.7416 20.2023 13.2402 18.6997 13.8967L19.3003 15.2712C21.3295 14.3846 22.75 12.359 22.75 10H21.25ZM15.75 6.5V7H17.25V6.5H15.75ZM6.75 6.5V7H8.25V6.5H6.75Z"
-                fill="white"
-              ></path>
+                fill="#F6E9D9"
+              ></path>{" "}
               <path
+                opacity="0.5"
                 d="M5 18H19"
-                stroke="white"
-                strokeWidth="0.576"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              ></path>
+                stroke="#F6E9D9"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              ></path>{" "}
             </g>
           </svg>
           <div className="pt-5">
@@ -207,40 +191,46 @@ function Home() {
           </div>
         </div>
 
+        {/* medal */}
         <div className="card-3 text-center flex flex-col items-center card-hover hover:animate-wiggle">
           <svg
-            width="100px"
-            height="100px"
-            viewBox="-5.76 -5.76 35.52 35.52"
+            width="104px"
+            height="104px"
+            viewBox="-7.92 -7.92 39.84 39.84"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
           >
-            <g id="SVGRepo_bgCarrier" strokeWidth="0">
+            <g id="SVGRepo_bgCarrier" stroke-width="0">
               <rect
-                x="-5.76"
-                y="-5.76"
-                width="35.52"
-                height="35.52"
-                rx="17.76"
-                // fill="#D1C9D8"
-                className="fill-blue"
-                strokeWidth="0"
+                x="-7.92"
+                y="-7.92"
+                width="39.84"
+                height="39.84"
+                rx="19.92"
+                fill="#870D32"
+                strokewidth="0"
               ></rect>
             </g>
             <g
               id="SVGRepo_tracerCarrier"
-              strokeLinecap="round"
-              strokeLinejoin="round"
+              stroke-linecap="round"
+              stroke-linejoin="round"
             ></g>
             <g id="SVGRepo_iconCarrier">
               {" "}
+              <circle
+                cx="12"
+                cy="9"
+                r="7"
+                stroke="#F6E9D9"
+                stroke-width="1.5"
+              ></circle>{" "}
               <path
-                d="M7.96668 14.7219L7 22L11.5884 19.247C11.7381 19.1572 11.8129 19.1123 11.8928 19.0947C11.9634 19.0792 12.0366 19.0792 12.1072 19.0947C12.1871 19.1123 12.2619 19.1572 12.4116 19.247L17 22L16.0343 14.7212M19 9C19 12.866 15.866 16 12 16C8.13401 16 5 12.866 5 9C5 5.13401 8.13401 2 12 2C15.866 2 19 5.13401 19 9Z"
-                stroke="white"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              ></path>
+                d="M7.35111 15L6.71424 17.323C6.0859 19.6148 5.77173 20.7607 6.19097 21.3881C6.3379 21.6079 6.535 21.7844 6.76372 21.9008C7.41635 22.2331 8.42401 21.7081 10.4393 20.658C11.1099 20.3086 11.4452 20.1339 11.8014 20.0959C11.9335 20.0818 12.0665 20.0818 12.1986 20.0959C12.5548 20.1339 12.8901 20.3086 13.5607 20.658C15.576 21.7081 16.5837 22.2331 17.2363 21.9008C17.465 21.7844 17.6621 21.6079 17.809 21.3881C18.2283 20.7607 17.9141 19.6148 17.2858 17.323L16.6489 15"
+                stroke="#F6E9D9"
+                stroke-width="1.5"
+                stroke-linecap="round"
+              ></path>{" "}
             </g>
           </svg>
           <div className="pt-5">
@@ -249,41 +239,40 @@ function Home() {
           </div>
         </div>
 
+        {/* star */}
         <div className="card-4 text-center flex flex-col items-center card-hover hover:animate-wiggle">
           <svg
-            className="flex justify-center"
-            width="100px"
-            height="100px"
-            viewBox="-5.76 -5.76 35.52 35.52"
+            width="105px"
+            height="105px"
+            viewBox="-7.92 -7.92 39.84 39.84"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
           >
-            <g id="SVGRepo_bgCarrier" strokeWidth="0">
+            <g id="SVGRepo_bgCarrier" stroke-width="0">
               <rect
-                x="-5.76"
-                y="-5.76"
-                width="35.52"
-                height="35.52"
-                rx="17.76"
-                // fill="#D1C9D8"
-                className="fill-blue"
-                strokeWidth="0"
+                x="-7.92"
+                y="-7.92"
+                width="39.84"
+                height="39.84"
+                rx="19.92"
+                fill="#870D32"
+                strokewidth="0"
               ></rect>
             </g>
             <g
               id="SVGRepo_tracerCarrier"
-              strokeLinecap="round"
-              strokeLinejoin="round"
+              stroke-linecap="round"
+              stroke-linejoin="round"
             ></g>
             <g id="SVGRepo_iconCarrier">
               {" "}
               <path
                 d="M11.245 4.174C11.4765 3.50808 11.5922 3.17513 11.7634 3.08285C11.9115 3.00298 12.0898 3.00298 12.238 3.08285C12.4091 3.17513 12.5248 3.50808 12.7563 4.174L14.2866 8.57639C14.3525 8.76592 14.3854 8.86068 14.4448 8.93125C14.4972 8.99359 14.5641 9.04218 14.6396 9.07278C14.725 9.10743 14.8253 9.10947 15.0259 9.11356L19.6857 9.20852C20.3906 9.22288 20.743 9.23007 20.8837 9.36432C21.0054 9.48051 21.0605 9.65014 21.0303 9.81569C20.9955 10.007 20.7146 10.2199 20.1528 10.6459L16.4387 13.4616C16.2788 13.5829 16.1989 13.6435 16.1501 13.7217C16.107 13.7909 16.0815 13.8695 16.0757 13.9507C16.0692 14.0427 16.0982 14.1387 16.1563 14.3308L17.506 18.7919C17.7101 19.4667 17.8122 19.8041 17.728 19.9793C17.6551 20.131 17.5108 20.2358 17.344 20.2583C17.1513 20.2842 16.862 20.0829 16.2833 19.6802L12.4576 17.0181C12.2929 16.9035 12.2106 16.8462 12.1211 16.8239C12.042 16.8043 11.9593 16.8043 11.8803 16.8239C11.7908 16.8462 11.7084 16.9035 11.5437 17.0181L7.71805 19.6802C7.13937 20.0829 6.85003 20.2842 6.65733 20.2583C6.49056 20.2358 6.34626 20.131 6.27337 19.9793C6.18915 19.8041 6.29123 19.4667 6.49538 18.7919L7.84503 14.3308C7.90313 14.1387 7.93218 14.0427 7.92564 13.9507C7.91986 13.8695 7.89432 13.7909 7.85123 13.7217C7.80246 13.6435 7.72251 13.5829 7.56262 13.4616L3.84858 10.6459C3.28678 10.2199 3.00588 10.007 2.97101 9.81569C2.94082 9.65014 2.99594 9.48051 3.11767 9.36432C3.25831 9.23007 3.61074 9.22289 4.31559 9.20852L8.9754 9.11356C9.176 9.10947 9.27631 9.10743 9.36177 9.07278C9.43726 9.04218 9.50414 8.99359 9.55657 8.93125C9.61593 8.86068 9.64887 8.76592 9.71475 8.57639L11.245 4.174Z"
-                stroke="white"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              ></path>
+                stroke="#F6E9D9"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              ></path>{" "}
             </g>
           </svg>
           <div className="pt-5">
@@ -294,7 +283,7 @@ function Home() {
       </div>
 
       {/* featured Bakery products */}
-      <section className="feature-section bg-[#f1faee] py-8 pb-12">
+      <section className="feature-section bg py-8 pb-12">
         <Heading title="Featured Products" />
         <p className="subHeading">
           Handcrafted with love using premium ingredients and traditional techniques
@@ -323,7 +312,7 @@ function Home() {
             </div>
             <div className="see-all-products flex justify-center">
               <Link
-                className="group relative inline-flex items-center overflow-hidden rounded-lg border border-current px-3 py-3 text-sky-600 "
+                className="group relative inline-flex items-center overflow-hidden rounded-lg px-3 py-3 new-primary-bg "
                 to={`/categories`}
               >
                 <span className="absolute -start-full transition-all group-hover:start-1">
@@ -332,7 +321,7 @@ function Home() {
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     viewBox="0 0 24 24"
-                    stroke="currentColor"
+                    stroke="#ffffff"
                   >
                     <path
                       strokeLinecap="round"
@@ -343,7 +332,7 @@ function Home() {
                   </svg>
                 </span>
 
-                <span className="text-sm font-medium transition-all group-hover:ms-4">
+                <span className="text-lg text-white font-medium transition-all group-hover:ms-4">
                   View All Products
                 </span>
               </Link>
@@ -360,7 +349,7 @@ function Home() {
           //   <p className="text-3xl font-bold">Products Coming Soon</p>
           // </div>
           <div className="text-center">
-            <Loading />
+            <Loading text="Products coming soon" />
           </div>
         )}
       </section>
@@ -374,19 +363,19 @@ function Home() {
         </p>
         <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-5 px-15">
           <div className="mascot flex justify-center">
-            <img src="/images/mascot.png" alt="mascot" />
+            <img src="/images/register-mascot.png" alt="mascot" />
           </div>
           {/* main cards */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 pt-5">
             {/* card-1 */}
-            <div className="rounded-2xl bg-sky-400">
+            <div className="rounded-2xl new-primary-light-bg">
               <div className="group relative block h-64 lg:h-70">
-                <span className="absolute rounded-2xl inset-0 border-2 border-dashed border-sky-800"></span>
+                <span className="absolute rounded-2xl inset-0"></span>
 
-                <div className="border-sky-400 bg-sky-200 relative rounded-2xl flex h-full transform items-end border-2  transition-transform group-hover:-translate-x-2 group-hover:-translate-y-2">
+                <div className="new-primary-bg text-white relative rounded-2xl flex h-full transform items-end border-2  transition-transform group-hover:-translate-x-2 group-hover:-translate-y-2">
                   <div className="p-4 !pt-0 transition-opacity group-hover:absolute group-hover:opacity-0 sm:p-6 lg:p-8 lg:opacity-100 [@media(max-width:600px)]:opacity-0 ">
                     <svg
-                      fill="#000000"
+                      fill="#ffffff"
                       version="1.1"
                       id="Capa_1"
                       xmlns="http://www.w3.org/2000/svg"
@@ -696,17 +685,17 @@ function Home() {
             </div>
 
             {/* card-2 */}
-            <div className="rounded-2xl bg-sky-400">
+            <div className="rounded-2xl new-primary-light-bg">
               <div className="group relative block h-64 sm:h-80 lg:h-70 ">
-                <span className="absolute rounded-2xl inset-0 border-2 border-dashed border-sky-800"></span>
+                <span className="absolute rounded-2xl inset-0"></span>
 
-                <div className="border-sky-400 bg-sky-200 relative rounded-2xl flex h-full transform items-end border-2  transition-transform group-hover:-translate-x-2 group-hover:-translate-y-2">
+                <div className="new-primary-bg text-white relative rounded-2xl flex h-full transform items-end border-2  transition-transform group-hover:-translate-x-2 group-hover:-translate-y-2">
                   <div className="p-4 !pt-0 transition-opacity group-hover:absolute group-hover:opacity-0 sm:p-6 lg:p-8 lg:opacity-100 [@media(max-width:600px)]:opacity-0 ">
                     <svg
                       width="60px"
                       height="60px"
                       viewBox="0 0 24 24"
-                      fill="none"
+                      fill="#ffffff"
                       xmlns="http://www.w3.org/2000/svg"
                     >
                       <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
@@ -719,11 +708,11 @@ function Home() {
                         {" "}
                         <path
                           d="M19 18H19.75H19ZM5 14.584H5.75C5.75 14.2859 5.57345 14.016 5.30028 13.8967L5 14.584ZM19 14.584L18.6997 13.8967C18.4265 14.016 18.25 14.2859 18.25 14.584H19ZM15.75 7C15.75 7.41421 16.0858 7.75 16.5 7.75C16.9142 7.75 17.25 7.41421 17.25 7H15.75ZM6.75 7C6.75 7.41421 7.08579 7.75 7.5 7.75C7.91421 7.75 8.25 7.41421 8.25 7H6.75ZM7 4.25C3.82436 4.25 1.25 6.82436 1.25 10H2.75C2.75 7.65279 4.65279 5.75 7 5.75V4.25ZM17 5.75C19.3472 5.75 21.25 7.65279 21.25 10H22.75C22.75 6.82436 20.1756 4.25 17 4.25V5.75ZM15 21.25H9V22.75H15V21.25ZM9 21.25C8.03599 21.25 7.38843 21.2484 6.90539 21.1835C6.44393 21.1214 6.24643 21.0142 6.11612 20.8839L5.05546 21.9445C5.51093 22.4 6.07773 22.5857 6.70552 22.6701C7.31174 22.7516 8.07839 22.75 9 22.75V21.25ZM4.25 18C4.25 18.9216 4.24841 19.6883 4.32991 20.2945C4.41432 20.9223 4.59999 21.4891 5.05546 21.9445L6.11612 20.8839C5.9858 20.7536 5.87858 20.5561 5.81654 20.0946C5.75159 19.6116 5.75 18.964 5.75 18H4.25ZM18.25 18C18.25 18.964 18.2484 19.6116 18.1835 20.0946C18.1214 20.5561 18.0142 20.7536 17.8839 20.8839L18.9445 21.9445C19.4 21.4891 19.5857 20.9223 19.6701 20.2945C19.7516 19.6883 19.75 18.9216 19.75 18H18.25ZM15 22.75C15.9216 22.75 16.6883 22.7516 17.2945 22.6701C17.9223 22.5857 18.4891 22.4 18.9445 21.9445L17.8839 20.8839C17.7536 21.0142 17.5561 21.1214 17.0946 21.1835C16.6116 21.2484 15.964 21.25 15 21.25V22.75ZM7 5.75C7.2137 5.75 7.42326 5.76571 7.6277 5.79593L7.84703 4.31205C7.57021 4.27114 7.28734 4.25 7 4.25V5.75ZM12 1.25C9.68949 1.25 7.72942 2.7421 7.02709 4.81312L8.44763 5.29486C8.94981 3.81402 10.3516 2.75 12 2.75V1.25ZM7.02709 4.81312C6.84722 5.34352 6.75 5.91118 6.75 6.5H8.25C8.25 6.07715 8.3197 5.67212 8.44763 5.29486L7.02709 4.81312ZM17 4.25C16.7127 4.25 16.4298 4.27114 16.153 4.31205L16.3723 5.79593C16.5767 5.76571 16.7863 5.75 17 5.75V4.25ZM12 2.75C13.6484 2.75 15.0502 3.81402 15.5524 5.29486L16.9729 4.81312C16.2706 2.7421 14.3105 1.25 12 1.25V2.75ZM15.5524 5.29486C15.6803 5.67212 15.75 6.07715 15.75 6.5H17.25C17.25 5.91118 17.1528 5.34352 16.9729 4.81312L15.5524 5.29486ZM5.75 18V14.584H4.25V18H5.75ZM5.30028 13.8967C3.79769 13.2402 2.75 11.7416 2.75 10H1.25C1.25 12.359 2.6705 14.3846 4.69972 15.2712L5.30028 13.8967ZM18.25 14.584L18.25 18H19.75L19.75 14.584H18.25ZM21.25 10C21.25 11.7416 20.2023 13.2402 18.6997 13.8967L19.3003 15.2712C21.3295 14.3846 22.75 12.359 22.75 10H21.25ZM15.75 6.5V7H17.25V6.5H15.75ZM6.75 6.5V7H8.25V6.5H6.75Z"
-                          fill="#000000"
+                          fill="#ffffff"
                         ></path>{" "}
                         <path
                           d="M5 18H19"
-                          stroke="#000000"
+                          stroke="#ffffff"
                           strokeWidth="1.5"
                           strokeLinecap="round"
                           strokeLinejoin="round"
@@ -779,11 +768,11 @@ function Home() {
             </div>
 
             {/* card-3 */}
-            <div className="rounded-2xl bg-sky-400">
+            <div className="rounded-2xl new-primary-light-bg">
               <div className="group relative block h-64 sm:h-80 lg:h-70">
-                <span className="absolute rounded-2xl inset-0 border-2 border-dashed border-sky-800"></span>
+                <span className="absolute rounded-2xl inset-0"></span>
 
-                <div className="border-sky-400 bg-sky-200 relative rounded-2xl flex h-full transform items-end border-2  transition-transform group-hover:-translate-x-2 group-hover:-translate-y-2">
+                <div className="new-primary-bg text-white relative rounded-2xl flex h-full transform items-end border-2  transition-transform group-hover:-translate-x-2 group-hover:-translate-y-2">
                   <div className="p-4 !pt-0 transition-opacity group-hover:absolute group-hover:opacity-0 sm:p-6 lg:p-8 lg:opacity-100 [@media(max-width:600px)]:opacity-0 ">
                     <svg
                       width="64px"
@@ -802,7 +791,7 @@ function Home() {
                         {" "}
                         <path
                           d="M21.2501 3C21.4925 3 21.7176 3.11688 21.8574 3.30983L21.9119 3.39706L25.9186 10.9098L25.9615 11.0122L25.9731 11.05L25.9901 11.1273L25.9994 11.2153L25.9973 11.3147L26.0001 11.25C26.0001 11.3551 25.9785 11.4552 25.9394 11.5461L25.9106 11.6057L25.87 11.6723L25.8173 11.7408L14.6 24.7047C14.4999 24.8391 14.3628 24.9277 14.2139 24.9703L14.1559 24.9844L14.0585 24.9979L13.9999 25L13.8993 24.9932L13.8142 24.9771L13.7109 24.9432L13.6852 24.931C13.5949 24.8911 13.5119 24.8316 13.4425 24.7535L2.17081 11.7263L2.1087 11.6387L2.06079 11.5456L2.02611 11.4463L2.00297 11.3152L2.00269 11.1878L2.01755 11.0891L2.02714 11.0499L2.06104 10.9538L2.08838 10.8971L6.08838 3.39706C6.20243 3.18321 6.41149 3.0396 6.64753 3.00704L6.75014 3H21.2501ZM17.9061 12H10.0911L14.0011 22.16L17.9061 12ZM8.48514 12H4.38914L11.7621 20.518L8.48514 12ZM23.6081 12H19.5151L16.2421 20.511L23.6081 12ZM10.0241 4.499H7.19914L3.99814 10.5H8.42314L10.0241 4.499ZM16.4231 4.499H11.5761L9.97514 10.5H18.0231L16.4231 4.499ZM20.8001 4.499H17.9751L19.5761 10.5H23.9991L20.8001 4.499Z"
-                          fill="#212121"
+                          fill="#ffffff"
                         ></path>{" "}
                       </g>
                     </svg>
@@ -847,34 +836,30 @@ function Home() {
             </div>
 
             {/* card-4 */}
-            <div className="rounded-2xl bg-sky-400">
+            <div className="rounded-2xl new-primary-light-bg">
               <div className="group relative block h-64 sm:h-80 lg:h-70">
-                <span className="absolute rounded-2xl inset-0 border-2 border-dashed border-sky-800"></span>
+                <span className="absolute rounded-2xl inset-0 "></span>
 
-                <div className="border-sky-400 bg-sky-200 relative rounded-2xl flex h-full transform items-end border-2  transition-transform group-hover:-translate-x-2 group-hover:-translate-y-2">
+                <div className="new-primary-bg text-white relative rounded-2xl flex h-full transform items-end border-2  transition-transform group-hover:-translate-x-2 group-hover:-translate-y-2">
                   <div className="p-4 !pt-0 transition-opacity group-hover:absolute group-hover:opacity-0 sm:p-6 lg:p-8 lg:opacity-100 [@media(max-width:600px)]:opacity-0 ">
                     <svg
-                      fill="#000000"
+                      fill="#ffffff"
                       height="64px"
                       width="64px"
                       version="1.1"
                       id="Capa_1"
                       xmlns="http://www.w3.org/2000/svg"
-                      xmlnsXlink="http://www.w3.org/1999/xlink"
+                      xmlns:xlink="http://www.w3.org/1999/xlink"
                       viewBox="0 0 550.196 550.196"
-                      xmlSpace="preserve"
+                      xml:space="preserve"
+                      stroke="#ffffff"
                     >
-                      <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+                      <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                       <g
                         id="SVGRepo_tracerCarrier"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        stroke="#CCCCCC"
-                        strokeWidth="14.305096"
-                      >
-                        {" "}
-                        <path d="M542.696,535.063h-20.668V254.297h6.584c4.143,0,7.5-3.357,7.5-7.5v-56.243c0-0.01,0-0.02,0-0.029v-0.064 c0-0.068-0.008-0.134-0.01-0.202c-0.005-0.168-0.009-0.335-0.025-0.502c-0.012-0.124-0.032-0.245-0.05-0.368 c-0.017-0.115-0.031-0.23-0.052-0.344c-0.028-0.147-0.065-0.291-0.102-0.435c-0.022-0.088-0.042-0.177-0.068-0.264 c-0.044-0.149-0.096-0.295-0.149-0.44c-0.03-0.082-0.057-0.165-0.09-0.247c-0.055-0.137-0.117-0.27-0.18-0.402 c-0.042-0.089-0.083-0.179-0.128-0.267c-0.061-0.116-0.127-0.227-0.193-0.339c-0.06-0.101-0.118-0.202-0.182-0.3 c-0.062-0.094-0.128-0.184-0.193-0.274c-0.078-0.109-0.156-0.217-0.241-0.322c-0.063-0.078-0.131-0.152-0.197-0.228 c-0.094-0.107-0.187-0.214-0.287-0.316c-0.074-0.075-0.152-0.145-0.229-0.217c-0.098-0.092-0.195-0.185-0.299-0.271 c-0.102-0.086-0.209-0.164-0.316-0.245c-0.085-0.064-0.168-0.131-0.257-0.192c-0.155-0.107-0.315-0.204-0.478-0.299 c-0.043-0.025-0.083-0.055-0.127-0.079c-0.006-0.003-0.031-0.017-0.042-0.023c-0.017-0.009-0.033-0.019-0.049-0.027 c-3.374-1.879-106.794-59.512-143.564-84.132c-32.289-21.62-107.447-96.64-108.202-97.395c-2.93-2.928-7.677-2.928-10.606,0 c-0.755,0.755-75.904,75.769-108.201,97.394c-36.773,24.622-140.222,82.271-143.567,84.133c-0.016,0.008-0.031,0.017-0.046,0.026 c-0.012,0.007-0.038,0.021-0.044,0.024c-0.047,0.026-0.088,0.057-0.134,0.084c-0.159,0.093-0.317,0.188-0.469,0.292 c-0.093,0.063-0.179,0.133-0.268,0.2c-0.103,0.078-0.206,0.153-0.305,0.236c-0.108,0.09-0.208,0.186-0.309,0.281 c-0.073,0.069-0.148,0.135-0.218,0.207c-0.104,0.105-0.2,0.216-0.297,0.327c-0.063,0.072-0.127,0.142-0.187,0.216 c-0.088,0.109-0.169,0.222-0.251,0.335c-0.062,0.086-0.125,0.171-0.183,0.26c-0.068,0.104-0.13,0.209-0.192,0.316 c-0.063,0.106-0.126,0.212-0.183,0.322c-0.049,0.094-0.093,0.19-0.138,0.287c-0.059,0.126-0.119,0.252-0.171,0.382 c-0.036,0.089-0.066,0.179-0.098,0.269c-0.05,0.139-0.099,0.277-0.141,0.419c-0.028,0.095-0.05,0.192-0.074,0.288 c-0.034,0.136-0.07,0.272-0.096,0.411c-0.024,0.123-0.039,0.247-0.057,0.372c-0.016,0.113-0.035,0.226-0.046,0.341 c-0.017,0.177-0.023,0.355-0.027,0.533c-0.001,0.059-0.009,0.116-0.009,0.175v0.057c0,0.014,0,0.028,0,0.042v56.238 c0,4.143,3.358,7.5,7.5,7.5h6.584v280.767H7.5c-4.142,0-7.5,3.357-7.5,7.5s3.358,7.5,7.5,7.5h28.168h29.334h47.838h29.334h265.849 h29.334h47.838h29.334h28.168c4.143,0,7.5-3.357,7.5-7.5S546.839,535.063,542.696,535.063z M169.94,112.187 c28.741-19.245,87.152-76.204,105.158-93.987c18.005,17.783,76.419,74.743,105.16,93.988c26.655,17.847,85.763,51.64,119.659,70.771 h-13.557c-4.143,0-7.5,3.357-7.5,7.5s3.357,7.5,7.5,7.5h34.753v41.337h-6.584h-29.334h-47.838h-29.334H142.174H112.84H65.002H35.668 h-6.584V197.96h415.023c4.143,0,7.5-3.357,7.5-7.5s-3.357-7.5-7.5-7.5H50.279C84.175,163.828,143.286,130.034,169.94,112.187z M477.694,254.297v280.767h-32.838V254.297H477.694z M400.522,254.297v280.767H149.674V254.297H400.522z M105.34,254.297v280.767 H72.502V254.297H105.34z M43.168,535.063V254.297h14.334v280.767H43.168z M120.34,535.063V254.297h14.334v280.767H120.34z M415.522,535.063V254.297h14.334v280.767H415.522z M492.694,535.063V254.297h14.334v280.767H492.694z"></path>{" "}
-                      </g>
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      ></g>
                       <g id="SVGRepo_iconCarrier">
                         {" "}
                         <path d="M542.696,535.063h-20.668V254.297h6.584c4.143,0,7.5-3.357,7.5-7.5v-56.243c0-0.01,0-0.02,0-0.029v-0.064 c0-0.068-0.008-0.134-0.01-0.202c-0.005-0.168-0.009-0.335-0.025-0.502c-0.012-0.124-0.032-0.245-0.05-0.368 c-0.017-0.115-0.031-0.23-0.052-0.344c-0.028-0.147-0.065-0.291-0.102-0.435c-0.022-0.088-0.042-0.177-0.068-0.264 c-0.044-0.149-0.096-0.295-0.149-0.44c-0.03-0.082-0.057-0.165-0.09-0.247c-0.055-0.137-0.117-0.27-0.18-0.402 c-0.042-0.089-0.083-0.179-0.128-0.267c-0.061-0.116-0.127-0.227-0.193-0.339c-0.06-0.101-0.118-0.202-0.182-0.3 c-0.062-0.094-0.128-0.184-0.193-0.274c-0.078-0.109-0.156-0.217-0.241-0.322c-0.063-0.078-0.131-0.152-0.197-0.228 c-0.094-0.107-0.187-0.214-0.287-0.316c-0.074-0.075-0.152-0.145-0.229-0.217c-0.098-0.092-0.195-0.185-0.299-0.271 c-0.102-0.086-0.209-0.164-0.316-0.245c-0.085-0.064-0.168-0.131-0.257-0.192c-0.155-0.107-0.315-0.204-0.478-0.299 c-0.043-0.025-0.083-0.055-0.127-0.079c-0.006-0.003-0.031-0.017-0.042-0.023c-0.017-0.009-0.033-0.019-0.049-0.027 c-3.374-1.879-106.794-59.512-143.564-84.132c-32.289-21.62-107.447-96.64-108.202-97.395c-2.93-2.928-7.677-2.928-10.606,0 c-0.755,0.755-75.904,75.769-108.201,97.394c-36.773,24.622-140.222,82.271-143.567,84.133c-0.016,0.008-0.031,0.017-0.046,0.026 c-0.012,0.007-0.038,0.021-0.044,0.024c-0.047,0.026-0.088,0.057-0.134,0.084c-0.159,0.093-0.317,0.188-0.469,0.292 c-0.093,0.063-0.179,0.133-0.268,0.2c-0.103,0.078-0.206,0.153-0.305,0.236c-0.108,0.09-0.208,0.186-0.309,0.281 c-0.073,0.069-0.148,0.135-0.218,0.207c-0.104,0.105-0.2,0.216-0.297,0.327c-0.063,0.072-0.127,0.142-0.187,0.216 c-0.088,0.109-0.169,0.222-0.251,0.335c-0.062,0.086-0.125,0.171-0.183,0.26c-0.068,0.104-0.13,0.209-0.192,0.316 c-0.063,0.106-0.126,0.212-0.183,0.322c-0.049,0.094-0.093,0.19-0.138,0.287c-0.059,0.126-0.119,0.252-0.171,0.382 c-0.036,0.089-0.066,0.179-0.098,0.269c-0.05,0.139-0.099,0.277-0.141,0.419c-0.028,0.095-0.05,0.192-0.074,0.288 c-0.034,0.136-0.07,0.272-0.096,0.411c-0.024,0.123-0.039,0.247-0.057,0.372c-0.016,0.113-0.035,0.226-0.046,0.341 c-0.017,0.177-0.023,0.355-0.027,0.533c-0.001,0.059-0.009,0.116-0.009,0.175v0.057c0,0.014,0,0.028,0,0.042v56.238 c0,4.143,3.358,7.5,7.5,7.5h6.584v280.767H7.5c-4.142,0-7.5,3.357-7.5,7.5s3.358,7.5,7.5,7.5h28.168h29.334h47.838h29.334h265.849 h29.334h47.838h29.334h28.168c4.143,0,7.5-3.357,7.5-7.5S546.839,535.063,542.696,535.063z M169.94,112.187 c28.741-19.245,87.152-76.204,105.158-93.987c18.005,17.783,76.419,74.743,105.16,93.988c26.655,17.847,85.763,51.64,119.659,70.771 h-13.557c-4.143,0-7.5,3.357-7.5,7.5s3.357,7.5,7.5,7.5h34.753v41.337h-6.584h-29.334h-47.838h-29.334H142.174H112.84H65.002H35.668 h-6.584V197.96h415.023c4.143,0,7.5-3.357,7.5-7.5s-3.357-7.5-7.5-7.5H50.279C84.175,163.828,143.286,130.034,169.94,112.187z M477.694,254.297v280.767h-32.838V254.297H477.694z M400.522,254.297v280.767H149.674V254.297H400.522z M105.34,254.297v280.767 H72.502V254.297H105.34z M43.168,535.063V254.297h14.334v280.767H43.168z M120.34,535.063V254.297h14.334v280.767H120.34z M415.522,535.063V254.297h14.334v280.767H415.522z M492.694,535.063V254.297h14.334v280.767H492.694z"></path>{" "}
@@ -929,14 +914,12 @@ function Home() {
       </section>
 
       {/* event section */}
-      <section className="lg:grid lg:h-[80vh] md:h-[45vh] h-[42vh] lg:bg-cover lg:bg-center md:bg-center md:bg-cover relative md:bg-violet-300 bg-violet-300  lg:bg-[url('/images/bulk-2.jpg')] mt-18 py-10">
+      <section className="lg:grid lg:h-[80vh] md:h-[45vh] h-[42vh] lg:bg-cover lg:bg-center md:bg-center md:bg-cover relative md:bg-violet-300 bg-violet-300  lg:bg-[url('/images/bulk-order-banner-4.png')] mt-18 py-10">
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-2 lg:gap-8 px-8">
           <div className="textSide flex space-y-15 ">
             <div className="max-w-prose flex flex-col space-y-5 ">
               <h1 className="lg:text-6xl text-white md:text-5xl text-2xl font-bold sm:text-5xl">
-                <strong className="text-pink-600  mb-5 font-extrabold">
-                  Bulk Orders
-                </strong>
+                <strong className="text-white mb-5 font-extrabold">Bulk Orders</strong>
                 <br />
                 <span>for Every Occasion</span>
               </h1>
@@ -947,9 +930,9 @@ function Home() {
               </p>
 
               <div className="mt-4 flex gap-4 sm:mt-6">
-                <a
-                  className="group relative inline-flex items-center overflow-hidden rounded-sm bg-pink-600 px-8 py-3 text-white focus:ring-3 focus:outline-hidden mr-3"
-                  href="#"
+                <Link
+                  className="group relative inline-flex items-center overflow-hidden rounded-lg bg-[#ebe6ee] px-8 py-3 text-black mr-3"
+                  to="/contact"
                 >
                   <span className="absolute -start-full transition-all group-hover:start-4">
                     <svg
@@ -959,19 +942,19 @@ function Home() {
                       xmlnsXlink="http://www.w3.org/1999/xlink"
                       viewBox="0 0 512 512"
                       xmlSpace="preserve"
-                      fill="#ffffff"
+                      fill="#000000"
                       style={{ transform: "rotate(90deg)" }}
                     >
                       <g>
                         <path
-                          style={{ fill: "#ffffff" }}
+                          style={{ fill: "#000000" }}
                           d="M408.387,512H159.603c-8.313,0-15.054-6.741-15.054-15.054v-71.829
         c0-8.313,6.741-15.054,15.054-15.054h132.043c8.313,0,15.054,6.741,15.054,15.054c0,8.313-6.741,15.054-15.054,15.054H174.657
         v41.722h218.676v-41.722h-28.605c-8.313,0-15.054-6.741-15.054-15.054c0-8.313,6.741-15.054,15.054-15.054h43.659
         c8.313,0,15.054,6.741,15.054,15.054v71.829C423.441,505.26,416.7,512,408.387,512z"
                         />
                         <path
-                          style={{ fill: "#ffffff" }}
+                          style={{ fill: "#000000" }}
                           d="M302.481,198.013v-15.951c0-15.948-13.009-29.53-29.728-30.096
         c-17.553-0.595-31.979,12.793-31.979,29.391v17.213l-0.333-154.106c0-16.243-13.813-29.411-30.854-29.411H208.4
         c-17.039,0-30.854,13.168-30.854,29.411v110.671v25.447v76.908l-30.02-73.097c-5.281-15.769-22.984-24.465-39.527-19.431
@@ -980,7 +963,7 @@ function Home() {
         c-17.039,0-30.854,13.168-30.854,29.411v-6.989c0-16.243-13.813-29.411-30.854-29.411l0,0c-17.039,0-30.854,13.168-30.854,29.411"
                         />
                         <path
-                          style={{ fill: "#ffffff" }}
+                          style={{ fill: "#000000" }}
                           d="M376.115,381.032c-0.011,0-0.02,0-0.03,0l-177.421-0.077c-25.033-0.012-48.062-14.139-58.672-35.988
         L74.073,209.223c-0.283-0.583-0.528-1.182-0.733-1.796c-3.788-11.308-2.854-23.391,2.625-34.022
         c5.684-11.03,15.502-19.142,27.643-22.843c24.074-7.325,49.967,5.457,58.011,28.529l0.872,2.121V44.463
@@ -993,10 +976,10 @@ function Home() {
                     </svg>
                   </span>
 
-                  <span className="text-sm font-medium transition-all group-hover:ms-4">
+                  <span className="text-lg font-semibold transition-all group-hover:ms-4">
                     Book Now
                   </span>
-                </a>
+                </Link>
               </div>
             </div>
           </div>
@@ -1564,23 +1547,33 @@ function Home() {
                       <img
                         alt="Cake"
                         // src="/images/cake-2.jpg"
-                        src={`http://localhost:5000${course.ImageUrl}`}
+                        src={`${
+                          course.ImageUrl
+                            ? "http://localhost:5000${course.ImageUrl}"
+                            : "/images/cake-2.jpg"
+                        }`}
                         className="h-full w-full rounded-xl object-cover"
+                        onError={(e) => {
+                          e.target.onError = null;
+                          e.target.src = "/images/cake-2.jpg";
+                        }}
                       />
                     </div>
 
                     {/* Bottom white content */}
-                    <div className=" p-4 md:p-6">
-                      <div className="text-black flex">
-                        <div className="flex items-center gap-2 w-10/12">
+                    <div className=" p-4">
+                      <div className="text-black flex justify-between">
+                        <div className="flex items-center gap-2">
                           <div>
                             <h3 className="font-bold text-xl">{course.title}</h3>
                             <p className="text-md pt-2">{course.description}</p>
                           </div>
                         </div>
-                        <button className=" bg-blue h-[3rem] lg:w-[27%] rounded-xl font-bold text-white cursor-pointer">
-                          Start Learning
-                        </button>
+                        <Link to="/courses" className="">
+                          <button className="new-primary-bg px-4 py-3 rounded-xl font-bold text-white cursor-pointer">
+                            Buy Now
+                          </button>
+                        </Link>
                       </div>
                     </div>
                   </article>
@@ -1588,14 +1581,17 @@ function Home() {
               );
             })
           ) : (
-            <div className="w-screen flex flex-col items-center justify-center">
-              <dotlottie-wc
-                src="https://lottie.host/eca676f3-586d-448f-bf3a-5d6a0c59ba6f/RDwRt4kKPP.lottie"
-                className="h-60 w-70"
-                autoplay
-                loop
-              ></dotlottie-wc>
-              <p className="text-3xl font-bold">Courses Coming Soon</p>
+            // <div className="w-screen flex flex-col items-center justify-center">
+            //   <dotlottie-wc
+            //     src="https://lottie.host/eca676f3-586d-448f-bf3a-5d6a0c59ba6f/RDwRt4kKPP.lottie"
+            //     className="h-60 w-70"
+            //     autoplay
+            //     loop
+            //   ></dotlottie-wc>
+            //   <p className="text-3xl font-bold">Courses Coming Soon</p>
+            // </div>
+            <div className="w-full flex justify-start col-span-full items-center">
+              <Loading text={"Products are coming soon"} />
             </div>
           )}
         </div>
@@ -1604,13 +1600,13 @@ function Home() {
       {/* banner */}
       <div className="mx-auto text-center rounded-4xl md:bg-[url('/images/banner.jpg')] bg-[url('/images/mobile-banner.jpg')] bg-center bg-cover w-[100vw] h-[100vh] md:w-[80vw] md:h-[70vh]">
         <div className="flex flex-col items center w-full h-full justify-center">
-          <h1 className="flex mx-auto luckyGuy justify-center text-5xl/15 items-center text-pink-400 font-bold">
+          <h1 className="flex mx-auto luckyGuy justify-center text-5xl/15 items-center new-primary-text font-bold">
             Still thinking about dessert? <br />
             Your cravings won’t wait! 🤤
           </h1>
-          <div className="flex mx-auto pt-5">
+          <div className="flex mx-auto pt-10">
             <Link
-              className="group w-fit  relative inline-flex items-center overflow-hidden rounded-sm bg-pink-500 px-8 py-3 text-white focus:ring-3 focus:outline-hidden mr-3"
+              className="group relative inline-flex items-center overflow-hidden rounded-lg new-primary-bg px-8 py-3 text-white focus:ring-3 focus:outline-hidden mr-3"
               to="/categories"
             >
               <span className="absolute -start-full transition-all group-hover:start-4">
@@ -1638,7 +1634,7 @@ function Home() {
                 </svg>
               </span>
 
-              <span className="text-sm font-medium transition-all group-hover:ms-4">
+              <span className="text-lg font-medium transition-all group-hover:ms-4">
                 Order Now
               </span>
             </Link>
@@ -1647,7 +1643,7 @@ function Home() {
       </div>
 
       {/* Featured Essentials */}
-      <section className="feature-section bg-[#f1faee] py-8 pb-12">
+      <section className="feature-section bg py-8 pb-12">
         <Heading title="Featured Baking Essentials" />
         <p className="subHeading">
           Premium-quality tools and ingredients for your everyday baking journey.
@@ -1656,31 +1652,26 @@ function Home() {
         {essentials.length > 0 ? (
           <div>
             <div className="grid [@media(max-width:553px)]:!grid-cols-1 [@media(max-width:846px)]:grid-cols-2 [@media(max-width:1111px)]:grid-cols-3 [@media(min-width:1111px)]:grid-cols-4 gap-5 py-15 px-10">
-              {essentials.map(
-                (p) => (
-                  // p.isActive ? (
-                  <Essentials
-                    key={p._id}
-                    id={p._id}
-                    category={categoryName}
-                    img={`http://localhost:5000${p.images?.[0]}`}
-                    // img={productImages[index % productImages.length]}
-                    originalPrice={p.originalPrice}
-                    discountedPrice={p.discountedPrice}
-                    inStock={p.inStock}
-                    // price={p.price}
-                    title={p.title}
-                    subject={p.subject}
-                  />
-                )
-                // ) : (
-                //   <div></div>
-                // )
-              )}
+              {essentials.map((p) => (
+                // p.isActive ? (
+                <Essentials
+                  key={p._id}
+                  id={p._id}
+                  category={categoryName}
+                  img={`http://localhost:5000${p.images?.[0]}`}
+                  // img={productImages[index % productImages.length]}
+                  originalPrice={p.originalPrice}
+                  discountedPrice={p.discountedPrice}
+                  inStock={p.inStock}
+                  // price={p.price}
+                  title={p.title}
+                  subject={p.subject}
+                />
+              ))}
             </div>
             <div className="see-all-products flex justify-center">
               <Link
-                className="group relative inline-flex items-center overflow-hidden rounded-lg border border-current px-3 py-3 text-sky-600 "
+                className="group relative inline-flex items-center overflow-hidden rounded-lg px-3 py-3 new-primary-bg text-white"
                 to={"/ess-categories"}
               >
                 <span className="absolute -start-full transition-all group-hover:start-1">
@@ -1700,21 +1691,24 @@ function Home() {
                   </svg>
                 </span>
 
-                <span className="text-sm font-medium transition-all group-hover:ms-4">
+                <span className="text-lg font-medium transition-all group-hover:ms-4">
                   View All Products
                 </span>
               </Link>
             </div>
           </div>
         ) : (
-          <div className="flex flex-col items-center justify-center">
-            <dotlottie-wc
-              src="https://lottie.host/eca676f3-586d-448f-bf3a-5d6a0c59ba6f/RDwRt4kKPP.lottie"
-              className="h-60 w-70"
-              autoplay
-              loop
-            ></dotlottie-wc>
-            <p className="text-3xl font-bold">Baking Essentials Coming Soon</p>
+          // <div className="flex flex-col items-center justify-center">
+          //   <dotlottie-wc
+          //     src="https://lottie.host/eca676f3-586d-448f-bf3a-5d6a0c59ba6f/RDwRt4kKPP.lottie"
+          //     className="h-60 w-70"
+          //     autoplay
+          //     loop
+          //   ></dotlottie-wc>
+          //   <p className="text-3xl font-bold">Baking Essentials Coming Soon</p>
+          // </div>
+          <div className="w-full flex justify-start col-span-full items-center">
+            <Loading text={"Products are coming soon"} />
           </div>
         )}
       </section>
@@ -1737,9 +1731,10 @@ function Home() {
                 className="rounded-xl h-130"
               ></video>
             </div>
+
             <div className="flex flex-col gap-5">
               <div className="cards w-full h-auto grid lg:grid-cols-2 md:grid-cols-2 grid-cols-1 gap-4 ">
-                <div className="block rounded-md p-4 bg-sky-300 shadow-sm sm:p-6 hover:scale-102 transition-all duration-200 ease-in-out ">
+                <div className="block rounded-md p-4 new-primary-bg shadow-sm sm:p-6 hover:scale-102 transition-all duration-200 ease-in-out ">
                   <div className="sm:flex sm:justify-between sm:gap-4 lg:gap-6">
                     <div className="sm:order-last sm:shrink-0">
                       <div className="size-16 rounded-full object-cover sm:size-[72px] bg-rose-300 flex justify-center items-center text-xl font-bold">
@@ -1751,9 +1746,9 @@ function Home() {
                         <div className="star flex">⭐⭐⭐⭐⭐</div>
                       </h3>
 
-                      <p className="mt-1 text-lg font-bold text-gray-900">Sujitha Mani</p>
+                      <p className="mt-1 text-lg font-bold text-white">Sujitha Mani</p>
 
-                      <p className="mt-4 text-md text-pretty text-gray-900">
+                      <p className="mt-4 text-md text-pretty text-white">
                         "I joined Baking class in baked fantasy best teaching I got from
                         my mentor thank you mam I suggested to my friends"
                       </p>
@@ -1761,7 +1756,7 @@ function Home() {
                   </div>
                 </div>
 
-                <div className="block rounded-md p-4 shadow-sm sm:p-6 hover:scale-102 transition-all duration-200 ease-in-out bg-sky-300 ">
+                <div className="block rounded-md p-4 shadow-sm sm:p-6 hover:scale-102 transition-all duration-200 ease-in-out new-primary-bg">
                   <div className="sm:flex sm:justify-between sm:gap-4 lg:gap-6">
                     <div className="sm:order-last sm:shrink-0">
                       <div className="size-16 rounded-full object-cover sm:size-[72px] bg-rose-300 flex justify-center items-center text-xl font-bold">
@@ -1769,15 +1764,15 @@ function Home() {
                       </div>
                     </div>
                     <div className="mt-4 sm:mt-0">
-                      <h3 className="text-lg font-medium text-pretty text-gray-900">
+                      <h3 className="text-lg font-medium text-pretty text-white">
                         <div className="stars">⭐⭐⭐⭐⭐</div>
                       </h3>
 
-                      <p className="mt-1 text-lg font-bold text-gray-900">
+                      <p className="mt-1 text-lg font-bold text-white">
                         Revathy Rathnavel
                       </p>
 
-                      <p className="mt-4 text-md text-pretty text-gray-900">
+                      <p className="mt-4 text-md text-pretty text-white">
                         "The taste of the cakes and pastry were delicious....... Very
                         tasty and also healthy"
                       </p>
@@ -1785,7 +1780,7 @@ function Home() {
                   </div>
                 </div>
 
-                <div className="block rounded-md p-4 shadow-sm sm:p-6 hover:scale-102 transition-all duration-200 ease-in-out bg-sky-300">
+                <div className="block rounded-md p-4 shadow-sm sm:p-6 hover:scale-102 transition-all duration-200 ease-in-out new-primary-bg">
                   <div className="sm:flex sm:justify-between sm:gap-4 lg:gap-6">
                     <div className="sm:order-last sm:shrink-0">
                       <div className="size-16 rounded-full object-cover sm:size-[72px] bg-rose-300 flex justify-center items-center text-xl font-bold">
@@ -1793,13 +1788,13 @@ function Home() {
                       </div>
                     </div>
                     <div className="mt-4 sm:mt-0">
-                      <h3 className="text-lg font-medium text-pretty text-gray-900">
+                      <h3 className="text-lg font-medium text-pretty text-white">
                         <div className="stars">⭐⭐⭐⭐</div>
                       </h3>
 
-                      <p className="mt-1 text-lg font-bold text-gray-900">Valar Mathi</p>
+                      <p className="mt-1 text-lg font-bold text-white">Valar Mathi</p>
 
-                      <p className="mt-4 text-md text-pretty text-gray-900">
+                      <p className="mt-4 text-md text-pretty text-white">
                         "Well equipped hands on practice and individual attention for all
                         students"
                       </p>
@@ -1807,7 +1802,7 @@ function Home() {
                   </div>
                 </div>
 
-                <div className="block rounded-md p-4 shadow-sm sm:p-6 hover:scale-102 transition-all duration-200 ease-in-out bg-sky-300">
+                <div className="block rounded-md p-4 shadow-sm sm:p-6 hover:scale-102 transition-all duration-200 ease-in-out new-primary-bg">
                   <div className="sm:flex sm:justify-between sm:gap-4 lg:gap-6">
                     <div className="sm:order-last sm:shrink-0">
                       <div className="size-16 rounded-full object-cover sm:size-[72px] bg-rose-300 flex justify-center items-center text-xl font-bold">
@@ -1815,15 +1810,13 @@ function Home() {
                       </div>
                     </div>
                     <div className="mt-4 sm:mt-0">
-                      <h3 className="text-lg font-medium text-pretty text-gray-900">
+                      <h3 className="text-lg font-medium text-pretty text-white">
                         <div className="stars">⭐⭐⭐⭐⭐</div>
                       </h3>
 
-                      <p className="mt-1 text-lg font-bold text-gray-900">
-                        H.Jeyasudha 217
-                      </p>
+                      <p className="mt-1 text-lg font-bold text-white">H.Jeyasudha 217</p>
 
-                      <p className="mt-4 text-md text-pretty text-gray-900">
+                      <p className="mt-4 text-md text-pretty text-white">
                         "The best shop and good quality."
                       </p>
                     </div>
@@ -1831,9 +1824,9 @@ function Home() {
                 </div>
               </div>
 
-              <div className="btn col-span-2 flex justify-center">
+              <div className="btn col-span-2 flex justify-center mt-5">
                 <a
-                  className="group relative inline-flex items-center overflow-hidden rounded-sm border border-current px-3 py-3 text-sky-600 "
+                  className="group relative inline-flex items-center overflow-hidden rounded-lg px-3 py-3 new-primary-bg"
                   href="https://www.google.com/search?sca_esv=2522d5777cdbdc58&hl=en-IN&sxsrf=AE3TifM5O43bpWbi0h4G7E4CC6revb5kUw:1756809251615&si=AMgyJEtREmoPL4P1I5IDCfuA8gybfVI2d5Uj7QMwYCZHKDZ-EyA5slTbW5eqP8ucakgreX9x5iS9IjevVKjBh3MoISwnxvEXSJrMtaQHVVz68EGLEUFcXSqJuheZ6Pgqck4By3xgI21U9ATN03pkW79iZnC_AWvL4saAap8ttk0zFqIEHFMdl2o%3D&q=The+Baked+Fantasy+%7C+Baking+Academy+in+Madurai+Reviews&sa=X&ved=2ahUKEwjHyoW78LmPAxVWT2wGHdG9OG0Q0bkNegQIHxAD&biw=1536&bih=695&dpr=1.25"
                   target="blank"
                 >
@@ -1854,7 +1847,7 @@ function Home() {
                     </svg>
                   </span>
 
-                  <span className="text-sm font-medium transition-all group-hover:ms-4">
+                  <span className="text-lg text-white font-medium transition-all group-hover:ms-4">
                     View All Reviews
                   </span>
                 </a>
@@ -1865,11 +1858,11 @@ function Home() {
       </div>
 
       {/* CTA section */}
-      <section className="lg:grid lg:h-[80vh]  lg:bg-cover lg:bg-center md:bg-center md:bg-cover relative bg-violet-300 lg:bg-[url('/images/bulkOrder.png')] md:bg-[url('/images/bulkOrder.png')]">
+      <section className="lg:grid lg:h-[80vh] lg:bg-cover lg:bg-center md:bg-center md:bg-cover relative bg-[url('/images/bulkorder-4.png')]">
         <div className="lg:absolute lg:left-0 lg:top-[3vh] mt-18 w-screen max-w-screen-xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8 lg:py-32">
           <div className="max-w-prose text-left">
             <h1 className="lg:text-4xl font-bold text-gray-900 text-xl text-left">
-              <strong className="text-rose-400"> Learn, Shop & Order </strong>
+              <strong className="new-primary-text"> Learn, Shop & Order </strong>
               with The Baked Fantasy
             </h1>
 
@@ -1880,9 +1873,9 @@ function Home() {
             </p>
 
             <div className="mt-4 flex gap-4 sm:mt-6">
-              <a
-                className="group relative inline-flex items-center overflow-hidden rounded-sm bg-cyan-500 px-8 py-3 text-white focus:ring-3 focus:outline-hidden mr-3"
-                href="#"
+              <Link
+                to="/contact"
+                className="group relative inline-flex items-center overflow-hidden rounded-lg new-primary-bg px-8 py-3 text-white focus:ring-3 focus:outline-hidden mr-3"
               >
                 <span className="absolute -start-full transition-all group-hover:start-4">
                   <svg
@@ -1907,13 +1900,14 @@ function Home() {
                   </svg>
                 </span>
 
-                <span className="text-sm font-medium transition-all group-hover:ms-4">
+                <span className="text-lg font-medium transition-all group-hover:ms-4">
                   Contact Us
                 </span>
-              </a>
-              <a
-                className="group relative inline-flex items-center overflow-hidden rounded-sm border border-current px-3 py-3 text-sky-600 focus:ring-3 focus:outline-hidden"
-                href="#"
+              </Link>
+
+              <Link
+                to="/categories"
+                className="group relative inline-flex items-center overflow-hidden rounded-lg border border-current px-3 py-3 new-primary-text focus:ring-3 focus:outline-hidden"
               >
                 <span className="absolute -start-full transition-all group-hover:start-1">
                   <svg
@@ -1933,7 +1927,8 @@ function Home() {
                       <path
                         d="M7.2998 5H22L20 12H8.37675M21 16H9L7 3H4M4 8H2M5 11H2M6 14H2M10 20C10 20.5523 9.55228 21 9 21C8.44772 21 8 20.5523 8 20C8 19.4477 8.44772 19 9 19C9.55228 19 10 19.4477 10 20ZM21 20C21 20.5523 20.5523 21 20 21C19.4477 21 19 20.5523 19 20C19 19.4477 19.4477 19 20 19C20.5523 19 21 19.4477 21 20Z"
                         // stroke="#dc0c7c"
-                        className="stroke-sky-600"
+                        className=""
+                        stroke="#870D32"
                         strokeWidth="2"
                         strokeLinecap="round"
                         strokeLinejoin="round"
@@ -1942,10 +1937,10 @@ function Home() {
                   </svg>
                 </span>
 
-                <span className="text-sm font-medium transition-all group-hover:ms-4">
+                <span className="text-lg font-medium transition-all group-hover:ms-4">
                   Shop Products
                 </span>
-              </a>
+              </Link>
             </div>
           </div>
         </div>

@@ -24,7 +24,7 @@ function Sidebar() {
             </span> */}
             <img src="/images/baked-fantasy-logo.png" alt="" className="h-15" />
             {/* <span
-              className={`text-lg font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap text-pink-500`}
+              className={`text-lg font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap new-primary-text`}
             >
               <span className="text-sm">Baked </span>
               <span className="text-sm">Fantasy</span>
@@ -48,13 +48,13 @@ function Sidebar() {
                       <ChartColumn
                         size={20}
                         className={`shrink-0 ${
-                          isActive ? "text-pink-600" : "text-gray-500"
+                          isActive ? "new-primary-text" : "text-gray-500"
                         }`}
                         strokeWidth={`${isActive ? 2 : 3}`}
                       />
                       <span
                         className={`text-lg font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap ${
-                          isActive ? "text-pink-500" : "text-gray-800"
+                          isActive ? "new-primary-text" : "text-gray-800"
                         }`}
                       >
                         Dashboard
@@ -80,12 +80,12 @@ function Sidebar() {
                         <GraduationCap
                           size={20}
                           className={`shrink-0 ${
-                            isActive ? "text-pink-600" : "text-gray-500"
+                            isActive ? "new-primary-text" : "text-gray-500"
                           }`}
                         />
                         <span
                           className={`text-lg font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap ${
-                            isActive ? "text-pink-500" : "text-gray-800"
+                            isActive ? "new-primary-text" : "text-gray-800"
                           }`}
                         >
                           Courses
@@ -110,12 +110,12 @@ function Sidebar() {
                         <ShoppingCart
                           size={20}
                           className={`shrink-0 ${
-                            isActive ? "text-pink-600" : "text-gray-500"
+                            isActive ? "new-primary-text" : "text-gray-500"
                           }`}
                         />
                         <span
                           className={`text-lg font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap ${
-                            isActive ? "text-pink-500" : "text-gray-800"
+                            isActive ? "new-primary-text" : "text-gray-800"
                           }`}
                         >
                           Products
@@ -140,12 +140,12 @@ function Sidebar() {
                         <Cake
                           size={20}
                           className={`shrink-0 ${
-                            isActive ? "text-pink-600" : "text-gray-500"
+                            isActive ? "new-primary-text" : "text-gray-500"
                           }`}
                         />
                         <span
                           className={`text-lg font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap ${
-                            isActive ? "text-pink-500" : "text-gray-800"
+                            isActive ? "new-primary-text" : "text-gray-800"
                           }`}
                         >
                           Cakes
@@ -170,12 +170,12 @@ function Sidebar() {
                         <Users
                           size={20}
                           className={`shrink-0 ${
-                            isActive ? "text-pink-600" : "text-gray-500"
+                            isActive ? "new-primary-text" : "text-gray-500"
                           }`}
                         />
                         <span
                           className={`text-lg font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap ${
-                            isActive ? "text-pink-500" : "text-gray-800"
+                            isActive ? "new-primary-text" : "text-gray-800"
                           }`}
                         >
                           Orders
@@ -199,12 +199,12 @@ function Sidebar() {
                         <Megaphone
                           size={20}
                           className={`shrink-0 ${
-                            isActive ? "text-pink-600" : "text-gray-500"
+                            isActive ? "new-primary-text" : "text-gray-500"
                           }`}
                         />
                         <span
                           className={`text-lg font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap ${
-                            isActive ? "text-pink-500" : "text-gray-800"
+                            isActive ? "new-primary-text" : "text-gray-800"
                           }`}
                         >
                           Banner
@@ -229,12 +229,12 @@ function Sidebar() {
                         <Settings
                           size={20}
                           className={`shrink-0 ${
-                            isActive ? "text-pink-600" : "text-gray-500"
+                            isActive ? "new-primary-text" : "text-gray-500"
                           }`}
                         />
                         <span
                           className={`text-lg font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap ${
-                            isActive ? "text-pink-500" : "text-gray-800"
+                            isActive ? "new-primary-text" : "text-gray-800"
                           }`}
                         >
                           Settings
@@ -262,12 +262,12 @@ function Sidebar() {
                 <LogOut
                   size={20}
                   className={`shrink-0 ${
-                    isActive ? "text-pink-600" : "text-gray-500"
+                    isActive ? "new-primary-text" : "text-gray-500"
                   }`}
                 />
                 <span
                   className={`text-lg font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap ${
-                    isActive ? "text-pink-500" : "text-gray-800"
+                    isActive ? "new-primary-text" : "text-gray-800"
                   }`}
                 >
                   LogOut

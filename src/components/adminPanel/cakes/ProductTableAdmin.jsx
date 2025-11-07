@@ -29,7 +29,7 @@ function ProductAdmin(props) {
       setDeleteModal(false);
       setTimeout(() => {
         window.location.reload();
-      }, 2000);
+      }, 1000);
       console.log(`Deleted: ${props.title}`);
     } catch (error) {
       toast.error(`Can't delete ${props.title}`);
@@ -43,7 +43,7 @@ function ProductAdmin(props) {
     const form = e.target;
     const name = form.productTitle.value.trim() || props.title;
     const subject = form.productSubject.value.trim() || props.subject;
-    // const files = form.productFile.files;
+    const files = form.productFile.files;
     const originalPrice = form.productOriginalPrice.value.trim() || props.originalPrice;
     const discountedPrice = form.productPrice.value.trim() || props.discountedPrice;
     const description = form.productDescription.value.trim() || props.description;
@@ -62,9 +62,9 @@ function ProductAdmin(props) {
     if (description) formData.append("description", description);
     if (info) formData.append("info", info);
     // if (props.categoryName) formData.append("category", props.categoryName);
-    // for (let i = 0; i < files.length; i++) {
-    //   formData.append("images", files[i]);
-    // }
+    for (let i = 0; i < files.length; i++) {
+      formData.append("images", files[i]);
+    }
     formData.append("isActive", isActive);
     formData.append("inStock", inStock);
 
@@ -84,7 +84,7 @@ function ProductAdmin(props) {
       setIsEditModal(false);
       setTimeout(() => {
         window.location.reload();
-      }, 2000);
+      }, 1000);
     } catch (error) {
       toast.error("Can't add products");
       console.error("error message: ", error.message);
@@ -104,7 +104,7 @@ function ProductAdmin(props) {
             aria-modal="true"
             aria-labelledby="modalTitle"
           >
-            <div className="w-full max-w-md rounded-xl bg-white backdrop-blur-xl p-10 shadow-lg">
+            <div className="w-full max-w-md rounded-xl edit-modal overflow-auto h-150 bg-white backdrop-blur-xl p-10 shadow-lg">
               <div className="flex items-start justify-between">
                 <h2
                   id="modalTitle"
@@ -140,16 +140,17 @@ function ProductAdmin(props) {
                 </div>
 
                 {/* file */}
-                <div className="flex gap-3 justify-between items-center">
-                  {/* <input
+                <div className="flex flex-col gap-3 justify-between items-center">
+                  <input
                     type="file"
                     id="productFile"
                     name="productFile"
                     multiple
                     accept="image/png, image/jpeg, image/webp, image/gif"
                     className="ring h-20 ring-gray-500 text-black rounded-lg p-2 w-full"
-                  /> */}
+                  />
 
+                  {/* <h2 className="font-semibold">Current images</h2> */}
                   <div className="flex gap-1 cursor-pointer">
                     {props.images.map((image, i) => (
                       <div key={i} className="relative group">
@@ -158,9 +159,9 @@ function ProductAdmin(props) {
                           alt={`product image ${i} `}
                           className="h-20 w-20 object-center object-cover rounded-lg"
                         />
-                        <div className="absolute inset-0 flex justify-center items-center opacity-0 group-hover:opacity-100 transition-all duration-300 ">
+                        {/* <div className="absolute inset-0 flex justify-center items-center opacity-0 group-hover:opacity-100 transition-all duration-300 ">
                           <SquarePen color="#ffffff" />
-                        </div>
+                        </div> */}
                       </div>
                     ))}
                   </div>
@@ -277,7 +278,7 @@ function ProductAdmin(props) {
                 <div className="flex justify-center items-center">
                   <button
                     type="submit"
-                    className="bg-pink-600 w-full font-semibold hover:cursor-pointer hover:bg-pink-500 transition-all duration-200 text-white px-4 py-3 rounded-xl"
+                    className="new-primary-bg w-full font-semibold hover:cursor-pointer hover:scale-102 transition-all duration-200 text-white px-4 py-3 rounded-xl"
                   >
                     Update changes
                   </button>
@@ -354,7 +355,7 @@ function ProductAdmin(props) {
         </td>
       </tr>
       <tr
-        className={`${props.i % 2 === 0 ? "bg-gray-100" : ""} ${
+        className={`${props.i % 2 === 0 ? "bg-gray-50" : ""} ${
           !props.isActive ? "bg-red-200" : ""
         } my-3 divide-y text-lg divide-gray-300`}
       >

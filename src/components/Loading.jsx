@@ -1,29 +1,22 @@
 import React from "react";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 
-function Loading() {
+function Loading(props) {
   return (
-    <div>
-      {/* // <DotLottieReact
-    //   style={{
-    //     width: props.width ? props.width : "200px",
-    //     height: props.height ? props.height : "200px",
-    //   }}
-    //   src="https://lottie.host/a09916fc-5ef3-405b-a7db-2936a5071835/G2IFDxTp13.lottie"
-    //   loop
-    //   autoplay
-    // /> */}
-      <DotLottieReact
+    <div className="flex w-full justify-center items-center flex-col mb-15 rounded-2xl">
+      {/* <DotLottieReact
         src="https://lottie.host/4bfe01ad-0034-45ec-a8ad-5e40cb714e89/bL24PzwADu.lottie"
         loop
         autoplay
-        className="flex justify-center items-center p-0 m-0 w-80 h-80"
-        // style={{
-        //   width: "200px",
-        //   height: "200px",
-        // }}
+        className="flex justify-center items-center p-0 m-0 w-80 h-80 rounded-2xl"
+      /> */}
+      <DotLottieReact
+        src="https://lottie.host/d04b0aee-856c-4e0e-8b65-317529d3af7e/cQsMS5sDkO.lottie"
+        loop
+        autoplay
+        className="flex justify-center items-center p-0 m-0 w-200 rounded-2xl"
       />
-      <h2 className="text-center">Small props text</h2>
+      <h2 className="text-center lora font-semibold text-3xl px-3 -translate-y-20">{props.text}</h2>
     </div>
   );
 }

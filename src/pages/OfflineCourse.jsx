@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Heading from "../components/Heading.jsx";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import Loading from "../components/Loading.jsx";
 
 function OfflineCourse() {
   let [courses, setCourses] = useState([]);
@@ -91,50 +92,50 @@ function OfflineCourse() {
       </div>
 
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 lg:gap-8">
-        {courses.map((course, i) => (
-          <div key={i} className="">
-            <div className="rounded-2xl bg-white shadow-xl m-10">
-              <div className="rounded-xl m-2 flex align-bottom overflow-hidden">
-                <img
-                  src={course.image ? course.image : `/images/cake-2.jpg`}
-                  alt={course.title}
-                  className="rounded-xl hover:scale-104 transition-all duration-200"
-                />
-              </div>
-              <div className="p-5 w-full">
-                <h2 className="font-semibold text-2xl ">{course.title}</h2>
-                <p className="">{course.description}</p>
-                <div className="space-y-4 my-5">
-                  <div className="flex items-center ">
-                    <div className="w-2 h-2 rounded-full bg-sky-500 mr-3"></div>
-                    <span className="">{course.highlights[0]}</span>
-                  </div>
-                  <div className="flex items-center ">
-                    <div className="w-2 h-2 rounded-full bg-sky-500 mr-3"></div>
-                    <span className="">{course.highlights[1]}</span>
-                  </div>
-                  <div className="flex items-center ">
-                    <div className="w-2 h-2 rounded-full bg-sky-500 mr-3"></div>
-                    <span className="">{course.highlights[2]}</span>
-                  </div>
+        {courses.length > 0 ? (
+          courses.map((course, i) => (
+            <div key={i} className="">
+              <div className="rounded-2xl bg-white shadow-xl m-10">
+                <div className="rounded-xl m-2 flex align-bottom overflow-hidden">
+                  <img
+                    src={course.image ? course.image : `/images/cake-2.jpg`}
+                    alt={course.title}
+                    className="rounded-xl hover:scale-104 transition-all duration-200"
+                  />
                 </div>
+                <div className="p-5 w-full">
+                  <h2 className="font-semibold text-2xl ">{course.title}</h2>
+                  <p>{course.description}</p>
+                  <div className="space-y-4 my-5">
+                    {course.highlights?.slice(0, 3).map((point, idx) => (
+                      <div className="flex items-center" key={idx}>
+                        <div className="w-2 h-2 rounded-full bg-sky-500 mr-3"></div>
+                        <span>{point}</span>
+                      </div>
+                    ))}
+                  </div>
 
-                <Link
-                  className="group mt-3 w-full relative inline-flex items-center overflow-hidden rounded-xl bg-sky-500 px-8 py-4 text-white"
-                  to={`/contact`}
-                >
-                  <span className="absolute -start-full transition-all group-hover:start-4">
-                    <GraduationCap size={25} />
-                  </span>
+                  <Link
+                    className="group mt-3 w-full relative inline-flex items-center overflow-hidden rounded-xl bg-sky-500 px-8 py-4 text-white"
+                    to="/contact"
+                  >
+                    <span className="absolute -start-full transition-all group-hover:start-4">
+                      <GraduationCap size={25} />
+                    </span>
 
-                  <span className="text-lg w-full text-center font-medium transition-all group-hover:ms-4">
-                    Enroll now
-                  </span>
-                </Link>
+                    <span className="text-lg w-full text-center font-medium transition-all group-hover:ms-4">
+                      Enroll now
+                    </span>
+                  </Link>
+                </div>
               </div>
             </div>
+          ))
+        ) : (
+          <div className="w-screen">
+            <Loading text={"Offline courses are coming soon"} />
           </div>
-        ))}
+        )}
       </div>
     </div>
   );

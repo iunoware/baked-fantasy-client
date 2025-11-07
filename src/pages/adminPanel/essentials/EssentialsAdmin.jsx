@@ -4,9 +4,10 @@ import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import axios from "axios";
 import EssentialsCategoryCardAdmin from "../../../components/adminPanel/essentials/EssentialsCategoryCardAdmin.jsx";
+import Loading from "../../../components/Loading.jsx";
 
 function EssentialsAdmin() {
-  const [courses, setCourses] = useState([]);
+  const [essentialCategories, setEssentialCategories] = useState([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isActive, setIsActive] = useState(true);
 
@@ -15,8 +16,8 @@ function EssentialsAdmin() {
       try {
         const response = await axios.get(`http://localhost:5000/ess-categories`);
         // console.log(response.data);
-        setCourses(response.data);
-        // console.log("courses: ", courses);
+        setEssentialCategories(response.data);
+        // console.log("essentialCategories: ", essentialCategories);
       } catch (error) {
         console.error("error message: ", error);
       }
@@ -52,7 +53,7 @@ function EssentialsAdmin() {
 
       try {
         const postResponse = await axios.post(
-          `http://localhost:5000/categories`,
+          `http://localhost:5000/ess-categories`,
           formData,
           {
             headers: {
@@ -61,16 +62,16 @@ function EssentialsAdmin() {
             },
           }
         );
-        // setCourses((prev) => [...prev, postResponse.data]);
+        // setEssentialCategories((prev) => [...prev, postResponse.data]);
 
         // const newResponse = await axios.get(`http://localhost:5000/categories`);
-        // setCourses(newResponse.data);
+        // setEssentialCategories(newResponse.data);
         console.log("category added: ", postResponse.data);
         toast.success("Category added");
         setIsModalVisible(false);
         setTimeout(() => {
           window.location.reload();
-        }, 2000);
+        }, 1000);
       } catch (error) {
         toast.error("Can't add Category");
         console.error("error message: ", error.message);
@@ -171,7 +172,7 @@ function EssentialsAdmin() {
             <div className="flex mt-5 justify-center items-center">
               <button
                 type="submit"
-                className="bg-pink-600 w-full font-semibold hover:cursor-pointer hover:bg-pink-500 transition-all duration-200 text-white px-4 py-3 rounded-xl"
+                className="new-primary-bg w-full font-semibold hover:cursor-pointer hover:scale-102 transition-all duration-200 text-white px-4 py-3 rounded-xl"
               >
                 Add new category
               </button>
@@ -183,14 +184,16 @@ function EssentialsAdmin() {
       <div className="lg:pl-28 pl-20 pt-10 pr-10">
         <div className="flex flex-col md:flex-row gap-5 md:gap-0 justify-between">
           <div>
-            <h1 className="text-3xl font-semibold">Cakes and Cookies Categories</h1>
+            <h1 className="text-3xl new-primary-text font-semibold">
+              Baking Essentials Categories
+            </h1>
 
-            <p className="text-md pt-1">Manage your bakery products' category</p>
+            <p className="text-md pt-1">Manage your bakery essentials' categories</p>
           </div>
           <div>
             <button
               onClick={() => setIsModalVisible(true)}
-              className="bg-pink-500 cursor-pointer text-white font-semibold py-3 px-5 rounded-xl hover:bg-pink-600 transition-colors duration-200"
+              className="new-primary-bg cursor-pointer text-white font-semibold py-3 px-5 rounded-xl hover:scale-102 transition-all duration-200"
             >
               + Add Category
             </button>
@@ -201,8 +204,10 @@ function EssentialsAdmin() {
           {/* heading content */}
           <div className="flex flex-col md:flex-row gap-5 md:gap-0 justify-between">
             <div>
-              <h2 className="font-semibold text-xl">Cakes and cookies inventory</h2>
-              <p>Manage all your bakery products' categories</p>
+              <h2 className="font-semibold new-primary-text text-xl">
+                Baking Essentials inventory
+              </h2>
+              <p>Manage all your bakery essentials' categories</p>
             </div>
             <div>
               {/* dropdown */}
@@ -246,7 +251,7 @@ function EssentialsAdmin() {
                   >
                     All Categories
                   </div>
-                  {courses.map((course, i) => (
+                  {essentialCategories.map((course, i) => (
                     <div
                       key={i}
                       role="menuitem"
@@ -266,7 +271,7 @@ function EssentialsAdmin() {
 
           {/* product cards */}
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 lg:gap-8">
-            {courses.map((course, i) => (
+            {essentialCategories.map((course, i) => (
               <div key={i} className="">
                 <EssentialsCategoryCardAdmin
                   title={course.title}
@@ -280,6 +285,12 @@ function EssentialsAdmin() {
               </div>
             ))}
           </div>
+
+          {/* {essentialCategories > 0 ? (
+            <div></div>
+          ) : (
+            <Loading text={"Essentials are coming soon"} />
+          )} */}
         </div>
       </div>
     </div>

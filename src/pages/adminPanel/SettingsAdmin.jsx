@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useEffect, useState } from "react";
 import { X, SquarePen, Eye, EyeOff, Trash2 } from "lucide-react";
 import toast from "react-hot-toast";
@@ -39,13 +40,10 @@ function SettingsAdmin() {
     }
 
     try {
-      await axios.post(
-        `http://localhost:5000/admin/delete/${selectedAdminId}`,
-        {
-          masterName,
-          masterPassword,
-        }
-      );
+      await axios.post(`http://localhost:5000/admin/delete/${selectedAdminId}`, {
+        masterName,
+        masterPassword,
+      });
       toast.success("Admin deleted successfully");
       setAdmin(admin.filter((a) => a._id !== selectedAdminId));
       setDeleteModal(false);
@@ -84,10 +82,7 @@ function SettingsAdmin() {
       setIsModalVisible(false);
       setTimeout(() => window.location.reload(), 1500);
     } catch (error) {
-      console.error(
-        "Error creating admin:",
-        error.response?.data || error.message
-      );
+      console.error("Error creating admin:", error.response?.data || error.message);
       toast.error(error.response?.data?.msg || "Something went wrong");
     }
   }
@@ -119,15 +114,12 @@ function SettingsAdmin() {
             <div>
               <p className="text-xl">
                 This Admin will be{" "}
-                <span className="text-red-500 font-bold">
-                  permanently deleted
-                </span>
-                , and can't be recovered back.
+                <span className="text-red-500 font-bold">permanently deleted</span>, and
+                can't be recovered back.
               </p>
               <p className="pt-5">
-                Only the <span className="font-bold">Master Admin</span> has
-                permission to delete users. Enter the Admin Id and Password to
-                continue.
+                Only the <span className="font-bold">Master Admin</span> has permission to
+                delete users. Enter the Admin Id and Password to continue.
               </p>
               {/* form */}
               <form className="mt-4 flex flex-col gap-3" onSubmit={deleteAdmin}>
@@ -189,7 +181,7 @@ function SettingsAdmin() {
           aria-modal="true"
           aria-labelledby="modalTitle"
         >
-          <div className="w-[60vh] rounded-lg bg-white p-6 shadow-lg">
+          <div className="rounded-lg bg-white p-6 shadow-lg">
             <div className="flex justify-between pb-3">
               <h2 className="text-2xl font-bold">Create New Admin</h2>
               <button
@@ -300,7 +292,7 @@ function SettingsAdmin() {
               <div className="flex justify-center items-center my-4">
                 <button
                   type="submit"
-                  className="bg-pink-600 font-semibold hover:cursor-pointer hover:bg-pink-500 transition-all duration-200 text-white px-4 py-3 rounded-xl"
+                  className="new-primary-bg font-semibold hover:cursor-pointer hover:scale-102 transition-all duration-200 text-white px-4 py-3 rounded-xl"
                 >
                   Add New Admin
                 </button>
@@ -319,7 +311,7 @@ function SettingsAdmin() {
             <div>
               <button
                 onClick={() => setIsModalVisible(true)}
-                className="bg-pink-500 flex gap-2 items-center text-white font-semibold py-3 px-5 rounded-xl hover:bg-pink-600 transition-colors duration-200"
+                className="new-primary-bg flex gap-2 items-center text-white font-semibold py-3 px-5 rounded-xl hover:scale-102 transition-all duration-200"
               >
                 <SquarePen size={15} /> Add New Admin
               </button>
@@ -390,9 +382,7 @@ function SettingsAdmin() {
                 {admin.map((a, i) => (
                   <tr key={i} className="*:text-gray-900 *:first:font-medium">
                     <td className="px-3 py-2 whitespace-nowrap">{i + 1}</td>
-                    <td className="px-3 py-2 whitespace-nowrap font-bold">
-                      {a.name}
-                    </td>
+                    <td className="px-3 py-2 whitespace-nowrap font-bold">{a.name}</td>
                     <td className="px-3 py-2 whitespace-nowrap ">
                       <Trash2
                         // onClick={() => handleDelete(a._id)}

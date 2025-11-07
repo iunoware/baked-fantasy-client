@@ -63,7 +63,7 @@ function CategoryCardAdmin(props) {
       setIsModal2Visible(false);
       setTimeout(() => {
         window.location.reload();
-      }, 2000);
+      }, 1000);
     } catch (error) {
       // setAnyError(true);
       toast.error("can't edit category");
@@ -92,7 +92,7 @@ function CategoryCardAdmin(props) {
       setDeleteModal(false);
       setTimeout(() => {
         window.location.reload();
-      }, 2000);
+      }, 1000);
       console.log(`Deleted ${props.title}`);
     } catch (error) {
       toast.error(`Can't delete ${props.title}`);

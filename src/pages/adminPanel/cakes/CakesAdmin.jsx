@@ -71,7 +71,7 @@ function CakesAdmin() {
         setIsModalVisible(false);
         setTimeout(() => {
           window.location.reload();
-        }, 2000);
+        }, 1000);
       } catch (error) {
         toast.error("Can't add Category");
         console.error("error message: ", error.message);
@@ -172,7 +172,7 @@ function CakesAdmin() {
             <div className="flex mt-5 justify-center items-center">
               <button
                 type="submit"
-                className="bg-pink-600 w-full font-semibold hover:cursor-pointer hover:bg-pink-500 transition-all duration-200 text-white px-4 py-3 rounded-xl"
+                className="new-primary-bg w-full font-semibold hover:cursor-pointer hover:scale-102 transition-all duration-200 text-white px-4 py-3 rounded-xl"
               >
                 Add new category
               </button>
@@ -184,14 +184,16 @@ function CakesAdmin() {
       <div className="lg:pl-28 pl-20 pt-10 pr-10">
         <div className="flex flex-col md:flex-row gap-5 md:gap-0 justify-between">
           <div>
-            <h1 className="text-3xl font-semibold">Cakes and Cookies Categories</h1>
+            <h1 className="text-3xl new-primary-text font-semibold">
+              Cakes and Cookies Categories
+            </h1>
 
             <p className="text-md pt-1">Manage your bakery products' category</p>
           </div>
           <div>
             <button
               onClick={() => setIsModalVisible(true)}
-              className="bg-pink-500 cursor-pointer text-white font-semibold py-3 px-5 rounded-xl hover:bg-pink-600 transition-colors duration-200"
+              className="new-primary-bg cursor-pointer text-white font-semibold py-3 px-5 rounded-xl hover:bg-pink-600 transition-colors duration-200"
             >
               + Add Category
             </button>
@@ -202,7 +204,9 @@ function CakesAdmin() {
           {/* heading content */}
           <div className="flex flex-col md:flex-row gap-5 md:gap-0 justify-between">
             <div>
-              <h2 className="font-semibold text-xl">Cakes and cookies inventory</h2>
+              <h2 className="font-semibold new-primary-text text-xl">
+                Cakes and cookies inventory
+              </h2>
               <p>Manage all your bakery products' categories</p>
             </div>
             <div>

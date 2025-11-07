@@ -47,18 +47,19 @@ function Category(props) {
             </div>
           </div>
 
-          <div className="absolute bottom-4 left-4 text-white">
+          {/* <div className="absolute bottom-4 left-4 text-white">
             <div className="flex items-center gap-2">
               <div>
                 <h3 className="font-bold text-2xl">{props.title}</h3>
                 <p className="text-sm">15 products</p>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
 
         {/* Bottom white content */}
         <div className="bg-white p-4 sm:p-6">
+          <h2 className="font-bold text-black text-2xl">{props.title}</h2>
           <p className="mt-2 text-sm text-gray-600">{props.subject}</p>
         </div>
       </article>

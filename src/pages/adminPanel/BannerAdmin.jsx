@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useEffect, useState } from "react";
 import { X, SquarePen } from "lucide-react";
 import toast from "react-hot-toast";
@@ -27,16 +28,12 @@ function BannerAdmin() {
     formData.append("active", active);
 
     try {
-      const postBanner = await axios.patch(
-        "http://localhost:5000/banner",
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-            Authorization: ` Bearer ${token}`,
-          },
-        }
-      );
+      const postBanner = await axios.patch("http://localhost:5000/banner", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: ` Bearer ${token}`,
+        },
+      });
       toast.success("Banner Edited Successfully 🍰");
       // console.log("Banner added: ", postBanner.data);
       // console.log("Current toggle value:", isActive);
@@ -90,7 +87,7 @@ function BannerAdmin() {
         aria-modal="true"
         aria-labelledby="modalTitle"
       >
-        <div className="md:w-[60vw] w-[90vw] rounded-lg bg-white p-6 shadow-lg">
+        <div className="rounded-lg bg-white p-6 shadow-lg">
           <div className="flex justify-between pb-3">
             <h2 className="text-2xl font-bold">Edit Banner</h2>
             <button
@@ -196,7 +193,7 @@ function BannerAdmin() {
             <div className="flex justify-center items-center my-4">
               <button
                 type="submit"
-                className="bg-pink-600 font-semibold hover:cursor-pointer hover:bg-pink-500 transition-all duration-200 text-white px-4 py-3 rounded-xl"
+                className="new-primary-bg font-semibold hover:cursor-pointer hover:scale-102 transition-all duration-200 text-white px-4 py-3 rounded-xl"
               >
                 Add new category
               </button>
@@ -216,7 +213,7 @@ function BannerAdmin() {
           <div>
             <button
               onClick={() => setIsModalVisible(true)}
-              className="bg-pink-500 flex gap-2 items-center text-white font-semibold py-3 px-5 rounded-xl hover:bg-pink-600 transition-colors duration-200"
+              className="new-primary-bg flex gap-2 items-center text-white font-semibold py-3 px-5 rounded-xl hover:scale-102 transition-all duration-200"
             >
               <SquarePen size={15} /> Edit Banner
             </button>
@@ -233,9 +230,7 @@ function BannerAdmin() {
             <div className="mt-7 flex flex-col space-y-5">
               <div className="">
                 <h2 className="font-bold text-black/90 text-xl">Heading</h2>
-                <p className="pl-4 text-lg pt-1">
-                  {banner?.title || "Titles not yet"}
-                </p>
+                <p className="pl-4 text-lg pt-1">{banner?.title || "Titles not yet"}</p>
               </div>
               <div className="">
                 <h2 className="font-bold text-black/90 text-xl">Sub Heading</h2>

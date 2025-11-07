@@ -1,5 +1,4 @@
 /* eslint-disable no-unused-vars */
-// /* eslint-disable no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
@@ -99,7 +98,7 @@ function IndividualCakesAdmin() {
         setIsModalVisible(false);
         setTimeout(() => {
           window.location.reload();
-        }, 2000);
+        }, 1000);
       } catch (error) {
         toast.error("Can't add products");
         console.error("error message: ", error.message);
@@ -270,7 +269,7 @@ function IndividualCakesAdmin() {
             <div className="flex justify-center items-center">
               <button
                 type="submit"
-                className="bg-pink-600 w-full font-semibold hover:cursor-pointer hover:bg-pink-500 transition-all duration-200 text-white px-4 py-3 rounded-xl"
+                className="new-primary-bg w-full font-semibold hover:cursor-pointer hover:scale-102 transition-all duration-200 text-white px-4 py-3 rounded-xl"
               >
                 Add new Product
               </button>
@@ -282,7 +281,7 @@ function IndividualCakesAdmin() {
       {/* add product button */}
       <div className="flex flex-col md:flex-row gap-5 md:gap-0 justify-between">
         <div>
-          <h1 className="text-3xl font-semibold text-pink-600">
+          <h1 className="text-3xl font-semibold new-primary-text Manage your bakery products">
             {categoryName}
           </h1>
 
@@ -291,7 +290,7 @@ function IndividualCakesAdmin() {
         <div>
           <button
             onClick={() => setIsModalVisible(true)}
-            className="bg-pink-500 cursor-pointer text-white font-semibold py-3 px-5 rounded-xl hover:bg-pink-600 transition-colors duration-200"
+            className="new-primary-bg cursor-pointer text-white font-semibold py-3 px-5 rounded-xl hover:scale-102 transition-colors duration-200"
           >
             + Add Product
           </button>
@@ -299,7 +298,7 @@ function IndividualCakesAdmin() {
       </div>
 
       <div className="bg shadow-xl w-full pt-5 md:p-5 my-10 rounded-xl">
-        <h2 className="text-2xl font-semibold text-pink-600">
+        <h2 className="text-2xl font-semibold new-primary-text">
           All {categoryName} Products
         </h2>
 
@@ -341,7 +340,7 @@ function IndividualCakesAdmin() {
             </table>
           ) : (
             <div>
-              <h2 className="text-2xl font-semibold">
+              <h2 className="text-4xl h-40 flex justify-center items-center">
                 There are no products in this {categoryName} category
               </h2>
             </div>
