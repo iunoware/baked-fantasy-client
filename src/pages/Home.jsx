@@ -58,12 +58,10 @@ function Home() {
     // for fetching Baking Essentials
     const fetchEssentials = async () => {
       try {
-        await axios
-          .get(`http://localhost:5000/bakingEssentials`)
-          .then((res) => {
-            const shuffled = res.data.sort(() => 0.5 - Math.random());
-            setEssentials(shuffled.slice(0, 4));
-          });
+        await axios.get(`http://localhost:5000/bakingEssentials`).then((res) => {
+          const shuffled = res.data.sort(() => 0.5 - Math.random());
+          setEssentials(shuffled.slice(0, 4));
+        });
       } catch (err) {
         console.error("Error fetching Products:", err);
       }
@@ -93,8 +91,8 @@ function Home() {
               For Bakers. By Bakers.
             </h2>
             <p className="text-center max-w-3xl luckyGuy text-white text-lg px-2 md:text-xl">
-              From oven-fresh cakes to premium baking essentials, experience the
-              joy of baking — whether you’re buying or creating.
+              From oven-fresh cakes to premium baking essentials, experience the joy of
+              baking — whether you’re buying or creating.
             </p>
           </div>
         </div>
@@ -288,8 +286,7 @@ function Home() {
       <section className="feature-section bg py-8 pb-12">
         <Heading title="Featured Products" />
         <p className="subHeading">
-          Handcrafted with love using premium ingredients and traditional
-          techniques
+          Handcrafted with love using premium ingredients and traditional techniques
         </p>
         {/* products section */}
         {products.length > 0 ? (
@@ -361,8 +358,8 @@ function Home() {
       <section className="why-choose-us my-5 ">
         <Heading title="Why Choose Backed Fantasy?" />
         <p className="text-center text-xl py-5">
-          Discover what makes us the premier choice for baking education and
-          premium baked goods.
+          Discover what makes us the premier choice for baking education and premium baked
+          goods.
         </p>
         <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-5 px-15">
           <div className="mascot flex justify-center">
@@ -529,7 +526,7 @@ function Home() {
 
                   <div className="absolute p-4 opacity-0 transition-opacity group-hover:relative group-hover:opacity-100 sm:p-6 lg:p-8 sm:opacity-0 [@media(max-width:600px)]:opacity-100">
                     <svg
-                      fill="#000000"
+                      fill="#ffffff"
                       version="1.1"
                       id="Capa_1"
                       xmlns="http://www.w3.org/2000/svg"
@@ -679,8 +676,8 @@ function Home() {
                     </h3>
 
                     <p className="mt-4 text-sm sm:text-base">
-                      Industry-recognized certifications that boost your career
-                      in professional baking
+                      Industry-recognized certifications that boost your career in
+                      professional baking
                     </p>
                   </div>
                 </div>
@@ -732,7 +729,7 @@ function Home() {
                       width="50px"
                       height="50px"
                       viewBox="0 0 24 24"
-                      fill="none"
+                      fill="#ffffff"
                       xmlns="http://www.w3.org/2000/svg"
                       className="lg:hidden sm:block"
                     >
@@ -746,11 +743,11 @@ function Home() {
                         {" "}
                         <path
                           d="M19 18H19.75H19ZM5 14.584H5.75C5.75 14.2859 5.57345 14.016 5.30028 13.8967L5 14.584ZM19 14.584L18.6997 13.8967C18.4265 14.016 18.25 14.2859 18.25 14.584H19ZM15.75 7C15.75 7.41421 16.0858 7.75 16.5 7.75C16.9142 7.75 17.25 7.41421 17.25 7H15.75ZM6.75 7C6.75 7.41421 7.08579 7.75 7.5 7.75C7.91421 7.75 8.25 7.41421 8.25 7H6.75ZM7 4.25C3.82436 4.25 1.25 6.82436 1.25 10H2.75C2.75 7.65279 4.65279 5.75 7 5.75V4.25ZM17 5.75C19.3472 5.75 21.25 7.65279 21.25 10H22.75C22.75 6.82436 20.1756 4.25 17 4.25V5.75ZM15 21.25H9V22.75H15V21.25ZM9 21.25C8.03599 21.25 7.38843 21.2484 6.90539 21.1835C6.44393 21.1214 6.24643 21.0142 6.11612 20.8839L5.05546 21.9445C5.51093 22.4 6.07773 22.5857 6.70552 22.6701C7.31174 22.7516 8.07839 22.75 9 22.75V21.25ZM4.25 18C4.25 18.9216 4.24841 19.6883 4.32991 20.2945C4.41432 20.9223 4.59999 21.4891 5.05546 21.9445L6.11612 20.8839C5.9858 20.7536 5.87858 20.5561 5.81654 20.0946C5.75159 19.6116 5.75 18.964 5.75 18H4.25ZM18.25 18C18.25 18.964 18.2484 19.6116 18.1835 20.0946C18.1214 20.5561 18.0142 20.7536 17.8839 20.8839L18.9445 21.9445C19.4 21.4891 19.5857 20.9223 19.6701 20.2945C19.7516 19.6883 19.75 18.9216 19.75 18H18.25ZM15 22.75C15.9216 22.75 16.6883 22.7516 17.2945 22.6701C17.9223 22.5857 18.4891 22.4 18.9445 21.9445L17.8839 20.8839C17.7536 21.0142 17.5561 21.1214 17.0946 21.1835C16.6116 21.2484 15.964 21.25 15 21.25V22.75ZM7 5.75C7.2137 5.75 7.42326 5.76571 7.6277 5.79593L7.84703 4.31205C7.57021 4.27114 7.28734 4.25 7 4.25V5.75ZM12 1.25C9.68949 1.25 7.72942 2.7421 7.02709 4.81312L8.44763 5.29486C8.94981 3.81402 10.3516 2.75 12 2.75V1.25ZM7.02709 4.81312C6.84722 5.34352 6.75 5.91118 6.75 6.5H8.25C8.25 6.07715 8.3197 5.67212 8.44763 5.29486L7.02709 4.81312ZM17 4.25C16.7127 4.25 16.4298 4.27114 16.153 4.31205L16.3723 5.79593C16.5767 5.76571 16.7863 5.75 17 5.75V4.25ZM12 2.75C13.6484 2.75 15.0502 3.81402 15.5524 5.29486L16.9729 4.81312C16.2706 2.7421 14.3105 1.25 12 1.25V2.75ZM15.5524 5.29486C15.6803 5.67212 15.75 6.07715 15.75 6.5H17.25C17.25 5.91118 17.1528 5.34352 16.9729 4.81312L15.5524 5.29486ZM5.75 18V14.584H4.25V18H5.75ZM5.30028 13.8967C3.79769 13.2402 2.75 11.7416 2.75 10H1.25C1.25 12.359 2.6705 14.3846 4.69972 15.2712L5.30028 13.8967ZM18.25 14.584L18.25 18H19.75L19.75 14.584H18.25ZM21.25 10C21.25 11.7416 20.2023 13.2402 18.6997 13.8967L19.3003 15.2712C21.3295 14.3846 22.75 12.359 22.75 10H21.25ZM15.75 6.5V7H17.25V6.5H15.75ZM6.75 6.5V7H8.25V6.5H6.75Z"
-                          fill="#000000"
+                          fill="#ffffff"
                         ></path>{" "}
                         <path
                           d="M5 18H19"
-                          stroke="#000000"
+                          stroke="#ffffff"
                           strokeWidth="1.5"
                           strokeLinecap="round"
                           strokeLinejoin="round"
@@ -762,8 +759,8 @@ function Home() {
                     </h3>
 
                     <p className="mt-4 text-sm sm:text-base">
-                      Learn from award-winning professional bakers with 15+
-                      years of industry experience
+                      Learn from award-winning professional bakers with 15+ years of
+                      industry experience
                     </p>
                   </div>
                 </div>
@@ -821,7 +818,7 @@ function Home() {
                       <g id="SVGRepo_iconCarrier">
                         <path
                           d="M21.2501 3C21.4925 3 21.7176 3.11688 21.8574 3.30983L21.9119 3.39706L25.9186 10.9098L25.9615 11.0122L25.9731 11.05L25.9901 11.1273L25.9994 11.2153L25.9973 11.3147L26.0001 11.25C26.0001 11.3551 25.9785 11.4552 25.9394 11.5461L25.9106 11.6057L25.87 11.6723L25.8173 11.7408L14.6 24.7047C14.4999 24.8391 14.3628 24.9277 14.2139 24.9703L14.1559 24.9844L14.0585 24.9979L13.9999 25L13.8993 24.9932L13.8142 24.9771L13.7109 24.9432L13.6852 24.931C13.5949 24.8911 13.5119 24.8316 13.4425 24.7535L2.17081 11.7263L2.1087 11.6387L2.06079 11.5456L2.02611 11.4463L2.00297 11.3152L2.00269 11.1878L2.01755 11.0891L2.02714 11.0499L2.06104 10.9538L2.08838 10.8971L6.08838 3.39706C6.20243 3.18321 6.41149 3.0396 6.64753 3.00704L6.75014 3H21.2501ZM17.9061 12H10.0911L14.0011 22.16L17.9061 12ZM8.48514 12H4.38914L11.7621 20.518L8.48514 12ZM23.6081 12H19.5151L16.2421 20.511L23.6081 12ZM10.0241 4.499H7.19914L3.99814 10.5H8.42314L10.0241 4.499ZM16.4231 4.499H11.5761L9.97514 10.5H18.0231L16.4231 4.499ZM20.8001 4.499H17.9751L19.5761 10.5H23.9991L20.8001 4.499Z"
-                          fill="#212121"
+                          fill="#ffffff"
                         ></path>
                       </g>
                     </svg>
@@ -830,8 +827,8 @@ function Home() {
                     </h3>
 
                     <p className="mt-4 text-sm sm:text-base">
-                      Only the finest, locally-sourced ingredients for authentic
-                      taste and quality
+                      Only the finest, locally-sourced ingredients for authentic taste and
+                      quality
                     </p>
                   </div>
                 </div>
@@ -875,7 +872,7 @@ function Home() {
 
                   <div className="absolute p-4 opacity-0 transition-opacity group-hover:relative group-hover:opacity-100 sm:p-6 lg:p-8 sm:opacity-0 [@media(max-width:600px)]:opacity-100">
                     <svg
-                      fill="#000000"
+                      fill="#ffffff"
                       height="64px"
                       width="64px"
                       version="1.1"
@@ -891,7 +888,7 @@ function Home() {
                         id="SVGRepo_tracerCarrier"
                         strokeLinecap="round"
                         strokeLinejoin="round"
-                        stroke="#CCCCCC"
+                        stroke="#ffffff"
                         strokeWidth="14.305096"
                       >
                         <path d="M542.696,535.063h-20.668V254.297h6.584c4.143,0,7.5-3.357,7.5-7.5v-56.243c0-0.01,0-0.02,0-0.029v-0.064 c0-0.068-0.008-0.134-0.01-0.202c-0.005-0.168-0.009-0.335-0.025-0.502c-0.012-0.124-0.032-0.245-0.05-0.368 c-0.017-0.115-0.031-0.23-0.052-0.344c-0.028-0.147-0.065-0.291-0.102-0.435c-0.022-0.088-0.042-0.177-0.068-0.264 c-0.044-0.149-0.096-0.295-0.149-0.44c-0.03-0.082-0.057-0.165-0.09-0.247c-0.055-0.137-0.117-0.27-0.18-0.402 c-0.042-0.089-0.083-0.179-0.128-0.267c-0.061-0.116-0.127-0.227-0.193-0.339c-0.06-0.101-0.118-0.202-0.182-0.3 c-0.062-0.094-0.128-0.184-0.193-0.274c-0.078-0.109-0.156-0.217-0.241-0.322c-0.063-0.078-0.131-0.152-0.197-0.228 c-0.094-0.107-0.187-0.214-0.287-0.316c-0.074-0.075-0.152-0.145-0.229-0.217c-0.098-0.092-0.195-0.185-0.299-0.271 c-0.102-0.086-0.209-0.164-0.316-0.245c-0.085-0.064-0.168-0.131-0.257-0.192c-0.155-0.107-0.315-0.204-0.478-0.299 c-0.043-0.025-0.083-0.055-0.127-0.079c-0.006-0.003-0.031-0.017-0.042-0.023c-0.017-0.009-0.033-0.019-0.049-0.027 c-3.374-1.879-106.794-59.512-143.564-84.132c-32.289-21.62-107.447-96.64-108.202-97.395c-2.93-2.928-7.677-2.928-10.606,0 c-0.755,0.755-75.904,75.769-108.201,97.394c-36.773,24.622-140.222,82.271-143.567,84.133c-0.016,0.008-0.031,0.017-0.046,0.026 c-0.012,0.007-0.038,0.021-0.044,0.024c-0.047,0.026-0.088,0.057-0.134,0.084c-0.159,0.093-0.317,0.188-0.469,0.292 c-0.093,0.063-0.179,0.133-0.268,0.2c-0.103,0.078-0.206,0.153-0.305,0.236c-0.108,0.09-0.208,0.186-0.309,0.281 c-0.073,0.069-0.148,0.135-0.218,0.207c-0.104,0.105-0.2,0.216-0.297,0.327c-0.063,0.072-0.127,0.142-0.187,0.216 c-0.088,0.109-0.169,0.222-0.251,0.335c-0.062,0.086-0.125,0.171-0.183,0.26c-0.068,0.104-0.13,0.209-0.192,0.316 c-0.063,0.106-0.126,0.212-0.183,0.322c-0.049,0.094-0.093,0.19-0.138,0.287c-0.059,0.126-0.119,0.252-0.171,0.382 c-0.036,0.089-0.066,0.179-0.098,0.269c-0.05,0.139-0.099,0.277-0.141,0.419c-0.028,0.095-0.05,0.192-0.074,0.288 c-0.034,0.136-0.07,0.272-0.096,0.411c-0.024,0.123-0.039,0.247-0.057,0.372c-0.016,0.113-0.035,0.226-0.046,0.341 c-0.017,0.177-0.023,0.355-0.027,0.533c-0.001,0.059-0.009,0.116-0.009,0.175v0.057c0,0.014,0,0.028,0,0.042v56.238 c0,4.143,3.358,7.5,7.5,7.5h6.584v280.767H7.5c-4.142,0-7.5,3.357-7.5,7.5s3.358,7.5,7.5,7.5h28.168h29.334h47.838h29.334h265.849 h29.334h47.838h29.334h28.168c4.143,0,7.5-3.357,7.5-7.5S546.839,535.063,542.696,535.063z M169.94,112.187 c28.741-19.245,87.152-76.204,105.158-93.987c18.005,17.783,76.419,74.743,105.16,93.988c26.655,17.847,85.763,51.64,119.659,70.771 h-13.557c-4.143,0-7.5,3.357-7.5,7.5s3.357,7.5,7.5,7.5h34.753v41.337h-6.584h-29.334h-47.838h-29.334H142.174H112.84H65.002H35.668 h-6.584V197.96h415.023c4.143,0,7.5-3.357,7.5-7.5s-3.357-7.5-7.5-7.5H50.279C84.175,163.828,143.286,130.034,169.94,112.187z M477.694,254.297v280.767h-32.838V254.297H477.694z M400.522,254.297v280.767H149.674V254.297H400.522z M105.34,254.297v280.767 H72.502V254.297H105.34z M43.168,535.063V254.297h14.334v280.767H43.168z M120.34,535.063V254.297h14.334v280.767H120.34z M415.522,535.063V254.297h14.334v280.767H415.522z M492.694,535.063V254.297h14.334v280.767H492.694z"></path>{" "}
@@ -905,8 +902,8 @@ function Home() {
                     </h3>
 
                     <p className="mt-4 text-sm sm:text-base">
-                      Complete event catering services for weddings, corporate
-                      events, and celebrations
+                      Complete event catering services for weddings, corporate events, and
+                      celebrations
                     </p>
                   </div>
                 </div>
@@ -922,17 +919,14 @@ function Home() {
           <div className="textSide flex space-y-15 ">
             <div className="max-w-prose flex flex-col space-y-5 ">
               <h1 className="lg:text-6xl text-white md:text-5xl text-2xl font-bold sm:text-5xl">
-                <strong className="text-white mb-5 font-extrabold">
-                  Bulk Orders
-                </strong>
+                <strong className="text-white mb-5 font-extrabold">Bulk Orders</strong>
                 <br />
                 <span>for Every Occasion</span>
               </h1>
 
               <p className="mt-4 text-base text-pretty text-white sm:text-lg/relaxed">
-                Order bulk cakes & desserts for birthdays, weddings, or events.
-                Fresh, delicious treats delivered to make every celebration
-                memorable.
+                Order bulk cakes & desserts for birthdays, weddings, or events. Fresh,
+                delicious treats delivered to make every celebration memorable.
               </p>
 
               <div className="mt-4 flex gap-4 sm:mt-6">
@@ -1006,8 +1000,8 @@ function Home() {
           <div className="text-center mb-16">
             <Heading title="Featured Courses" />
             <p className="subHeading">
-              Learn from industry experts with our comprehensive online and
-              offline baking courses
+              Learn from industry experts with our comprehensive online and offline baking
+              courses
             </p>
           </div>
           {/* Offline Course Popup */}
@@ -1034,9 +1028,8 @@ function Home() {
         <Heading title="Learn, Bake, and Grow with Sweet Dreams Academy" />
         <div className="text-center text-lg !mt-5 mb-10">
           <p>
-            Join our online courses to master baking skills, explore creative
-            recipes, and turn your passion into a thriving business—anytime,
-            anywhere.
+            Join our online courses to master baking skills, explore creative recipes, and
+            turn your passion into a thriving business—anytime, anywhere.
           </p>
         </div>
         <div className="grid grid-cols-1 px-10 md:grid-cols-2 lg:grid-cols-3 gap-10">
@@ -1067,9 +1060,7 @@ function Home() {
                       <div className="text-black flex justify-between">
                         <div className="flex items-center gap-2">
                           <div>
-                            <h3 className="font-bold text-xl">
-                              {course.title}
-                            </h3>
+                            <h3 className="font-bold text-xl">{course.title}</h3>
                             <p className="text-md pt-2">{course.description}</p>
                           </div>
                         </div>
@@ -1200,8 +1191,7 @@ function Home() {
       <section className="feature-section bg py-8 pb-12">
         <Heading title="Featured Baking Essentials" />
         <p className="subHeading">
-          Premium-quality tools and ingredients for your everyday baking
-          journey.
+          Premium-quality tools and ingredients for your everyday baking journey.
         </p>
         {/* products section */}
         {essentials.length > 0 ? (
@@ -1273,8 +1263,7 @@ function Home() {
         <section className="mt-10 mx-15 pt-10">
           <Heading title="What Our Students Say" />
           <p className="subHeading">
-            Join thousands of satisfied students and customers who trust Sweet
-            Dreams
+            Join thousands of satisfied students and customers who trust Sweet Dreams
           </p>
           <div className="flex lg:flex-row flex-col gap-5 py-10 items-center">
             <div className="video flex justify-center lg:w-4/12 md:w-6/12 w-full">
@@ -1302,14 +1291,11 @@ function Home() {
                         <div className="star flex">⭐⭐⭐⭐⭐</div>
                       </h3>
 
-                      <p className="mt-1 text-lg font-bold text-white">
-                        Sujitha Mani
-                      </p>
+                      <p className="mt-1 text-lg font-bold text-white">Sujitha Mani</p>
 
                       <p className="mt-4 text-md text-pretty text-white">
-                        "I joined Baking class in baked fantasy best teaching I
-                        got from my mentor thank you mam I suggested to my
-                        friends"
+                        "I joined Baking class in baked fantasy best teaching I got from
+                        my mentor thank you mam I suggested to my friends"
                       </p>
                     </div>
                   </div>
@@ -1332,8 +1318,8 @@ function Home() {
                       </p>
 
                       <p className="mt-4 text-md text-pretty text-white">
-                        "The taste of the cakes and pastry were delicious.......
-                        Very tasty and also healthy"
+                        "The taste of the cakes and pastry were delicious....... Very
+                        tasty and also healthy"
                       </p>
                     </div>
                   </div>
@@ -1351,13 +1337,11 @@ function Home() {
                         <div className="stars">⭐⭐⭐⭐</div>
                       </h3>
 
-                      <p className="mt-1 text-lg font-bold text-white">
-                        Valar Mathi
-                      </p>
+                      <p className="mt-1 text-lg font-bold text-white">Valar Mathi</p>
 
                       <p className="mt-4 text-md text-pretty text-white">
-                        "Well equipped hands on practice and individual
-                        attention for all students"
+                        "Well equipped hands on practice and individual attention for all
+                        students"
                       </p>
                     </div>
                   </div>
@@ -1375,9 +1359,7 @@ function Home() {
                         <div className="stars">⭐⭐⭐⭐⭐</div>
                       </h3>
 
-                      <p className="mt-1 text-lg font-bold text-white">
-                        H.Jeyasudha 217
-                      </p>
+                      <p className="mt-1 text-lg font-bold text-white">H.Jeyasudha 217</p>
 
                       <p className="mt-4 text-md text-pretty text-white">
                         "The best shop and good quality."
@@ -1399,7 +1381,7 @@ function Home() {
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
                       viewBox="0 0 24 24"
-                      stroke="currentColor"
+                      stroke="#ffffff"
                     >
                       <path
                         strokeLinecap="round"
@@ -1425,17 +1407,14 @@ function Home() {
         <div className="lg:absolute lg:left-0 lg:top-[3vh] mt-18 w-screen max-w-screen-xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8 lg:py-32">
           <div className="max-w-prose text-left">
             <h1 className="lg:text-4xl font-bold text-gray-900 text-xl text-left">
-              <strong className="new-primary-text">
-                {" "}
-                Learn, Shop & Order{" "}
-              </strong>
+              <strong className="new-primary-text"> Learn, Shop & Order </strong>
               with The Baked Fantasy
             </h1>
 
             <p className="mt-4 text-base text-pretty text-gray-700 sm:text-lg/relaxed">
-              Join our baking courses, shop eco-friendly products, or place bulk
-              orders with ease. From beginners to café owners, we have the
-              perfect baking solutions for you.
+              Join our baking courses, shop eco-friendly products, or place bulk orders
+              with ease. From beginners to café owners, we have the perfect baking
+              solutions for you.
             </p>
 
             <div className="mt-4 flex gap-4 sm:mt-6">

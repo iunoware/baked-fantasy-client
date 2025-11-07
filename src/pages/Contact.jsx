@@ -117,7 +117,7 @@ function Contact() {
                   </div>
 
                   <div className="flex flex-col items-center-safe">
-                    <h2 className="text-xl  font-semibold text-foreground mb-6">
+                    <h2 className="text-xl font-semibold text-foreground mb-6">
                       Contact Information
                     </h2>
                     <div className="space-y-4">
@@ -133,7 +133,7 @@ function Contact() {
                         </div>
                         <div>
                           <p className="text-xl font-medium text-foreground">Address</p>
-                          <p className="text-muted-foreground text-lg">
+                          <p className="text-muted-foreground text-lg break-words">
                             Jeevana school road, Jai nagar 2nd street, Ponmeni, Bypass
                             Road, Madurai - 625016
                           </p>
@@ -168,7 +168,7 @@ function Contact() {
                         </div>
                         <div>
                           <p className="text-xl font-medium text-foreground">Email</p>
-                          <p className="text-muted-foreground text-lg">
+                          <p className="text-muted-foreground break-all text-lg">
                             thebakedfantasy.6@gmail.com
                           </p>
                         </div>
