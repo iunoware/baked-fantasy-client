@@ -32,7 +32,7 @@ function OfflineCourse() {
     <div className="bg pt-20">
       <Link
         to="/courses"
-        className="flex pt-10 pl-10 w-fit items-center text-sm text-gray-600 hover:text-sky-500 mb-3"
+        className="flex pt-10 pl-10 w-fit items-center text-sm text-gray-600 hover:text-[#870D32] mb-3"
       >
         <ArrowLeft className="h-4 w-4 mr-2" /> Back to Courses
       </Link>
@@ -109,14 +109,14 @@ function OfflineCourse() {
                   <div className="space-y-4 my-5">
                     {course.highlights?.slice(0, 3).map((point, idx) => (
                       <div className="flex items-center" key={idx}>
-                        <div className="w-2 h-2 rounded-full bg-sky-500 mr-3"></div>
+                        <div className="w-2 h-2 rounded-full new-primary-bg mr-3"></div>
                         <span>{point}</span>
                       </div>
                     ))}
                   </div>
 
                   <Link
-                    className="group mt-3 w-full relative inline-flex items-center overflow-hidden rounded-xl bg-sky-500 px-8 py-4 text-white"
+                    className="group mt-3 w-full relative inline-flex items-center overflow-hidden rounded-xl new-primary-bg px-8 py-4 text-white"
                     to="/contact"
                   >
                     <span className="absolute -start-full transition-all group-hover:start-4">

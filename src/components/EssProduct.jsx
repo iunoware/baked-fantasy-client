@@ -85,10 +85,10 @@ function Product(props) {
                   props.inStock
                     ? "cursor-pointer new-primary-text"
                     : "cursor-not-allowed text-gray-400"
-                } group relative inline-flex items-center overflow-hidden rounded-lg  border border-current px-8 py-3`}
+                } group relative inline-flex items-center overflow-hidden rounded-lg border border-current px-8 py-3`}
                 onClick={handleCart}
               >
-                <span className="text-sm font-medium transition-all group-hover:ms-2">
+                <span className="text-sm font-medium transition-all">
                   Add to cart
                 </span>
               </button>

@@ -28,40 +28,49 @@ function EssCategory(props) {
   //   }, []);
 
   return (
+    // <Link to={`/essentials/${props.title}`} className="card">
+    //   <article className="cat-card overflow-hidden rounded-2xl shadow-lg hover:-translate-y-2 transition-all duration-200 ">
+    //     <div className="relative bg-white h-56">
+    //       <img
+    //         alt={props.title}
+    //         src={`http://localhost:5000${props.img}`}
+    //         className="h-full w-full p-2 rounded-2xl object-cover cat-img"
+    //       />
+
+    //       <div className="hover-content">
+    //         <div className="bg-white rounded-lg px-4 py-2 font-bold shadow">
+    //           Explore {props.title}
+    //         </div>
+    //       </div>
+    //     </div>
+
+    //     <div className="bg-white p-4 sm:p-6">
+    //       <h2 className="font-bold text-black text-2xl">{props.title}</h2>
+    //       <p className="mt-2 text-sm text-gray-600">{props.subject}</p>
+    //     </div>
+    //   </article>
+    // </Link>
+
     <Link to={`/essentials/${props.title}`} className="card">
-      <article className="cat-card overflow-hidden rounded-2xl shadow-lg hover:-translate-y-2 transition-all duration-200 ">
-        <div className="relative bg-white h-56">
+      <article className="cat-card overflow-hidden rounded-[50%] h-70 w-70 shadow-lg hover:-translate-y-2 transition-all duration-200 ">
+        <div className="relative h-full w-full p-2 bg-white">
           <img
             alt={props.title}
             src={`http://localhost:5000${props.img}`}
-            className="h-full w-full p-2 rounded-2xl object-cover cat-img"
+            className="h-full w-full rounded-[50%] object-cover cat-img"
           />
 
-          {/* <div className={`absolute inset-0 ${randomColor}`}></div> */}
-
-          {/* Centered hover button */}
           <div className="hover-content">
-            <div className="bg-white rounded-lg px-4 py-2 font-bold shadow">
+            <div className="bg-white rounded-full px-4 py-2 font-bold shadow">
               Explore {props.title}
             </div>
           </div>
-
-          {/* <div className="absolute bottom-4 left-4 text-white">
-            <div className="flex items-center gap-2">
-              <div>
-                <h3 className="font-bold text-black text-2xl">{props.title}</h3>
-                <p className="text-sm text-black">15 products</p>
-              </div>
-            </div>
-          </div> */}
-        </div>
-
-        {/* Bottom white content */}
-        <div className="bg-white p-4 sm:p-6">
-          <h2 className="font-bold text-black text-2xl">{props.title}</h2>
-          <p className="mt-2 text-sm text-gray-600">{props.subject}</p>
         </div>
       </article>
+      <div className="p-4 flex justify-center sm:p-6">
+        <h2 className="font-bold lora text-black text-2xl">{props.title}</h2>
+        {/* <p className="mt-2 text-sm text-gray-600">{props.subject}</p> */}
+      </div>
     </Link>
   );
 }
