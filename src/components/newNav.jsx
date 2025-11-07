@@ -145,7 +145,7 @@ export default function NewNav() {
                         >
                           <Link
                             to="/categories"
-                            className="block text-center px-3 py-2 text-lg font-medium text-gray-700 transition-colors hover:bg-[#fce8d8] hover:text-gray-900"
+                            className="block text-center px-3 py-2 text-lg font-medium text-gray-700 transition-colors hover:bg-sky-50 hover:text-gray-900"
                             role="menuitem"
                           >
                             <div className="flex items-center gap-2">
@@ -156,7 +156,7 @@ export default function NewNav() {
 
                           <Link
                             to="/ess-categories"
-                            className="block text-center px-3 py-2 text-lg font-medium text-gray-700 transition-colors hover:bg-[#fce8d8] hover:text-gray-900"
+                            className="block text-center px-3 py-2 text-lg font-medium text-gray-700 transition-colors hover:bg-sky-50 hover:text-gray-900"
                             role="menuitem"
                           >
                             <div className="flex items-center gap-2">
@@ -232,7 +232,7 @@ export default function NewNav() {
                         >
                           <Link
                             to="/courses"
-                            className="block text-center px-3 py-2 text-lg font-medium text-gray-700 transition-colors hover:bg-[#fce8d8] hover:text-gray-900"
+                            className="block text-center px-3 py-2 text-lg font-medium text-gray-700 transition-colors hover:bg-pink-50 hover:text-gray-900"
                             role="menuitem"
                           >
                             <div className="flex items-center gap-2">
@@ -243,7 +243,7 @@ export default function NewNav() {
 
                           <Link
                             to="/courses/my-learning/"
-                            className="block text-center px-3 py-2 text-lg font-medium text-gray-700 transition-colors hover:bg-[#fce8d8] hover:text-gray-900"
+                            className="block text-center px-3 py-2 text-lg font-medium text-gray-700 transition-colors hover:bg-pink-50 hover:text-gray-900"
                             role="menuitem"
                           >
                             <div className="flex items-center gap-2">
@@ -269,7 +269,7 @@ export default function NewNav() {
                       }
                     >
                       Contact
-                      <span className="absolute left-1 bottom-0 h-[3px] rounded-xl w-0 bg-white transition-all duration-300 group-hover:w-[90%]"></span>
+                      <span className="absolute left-1 bottom-0 h-[3px] rounded-xl w-0 bg-red transition-all duration-300 group-hover:w-[90%]"></span>
                     </NavLink>
                   </li>
                 </ul>

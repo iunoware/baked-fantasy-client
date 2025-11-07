@@ -21,7 +21,7 @@ function AdminLogin() {
       });
 
       // ✅ Save token in localStorage
-      localStorage.setItem("token", response.data.token);
+      sessionStorage.setItem("token", response.data.token);
       // window.location.href = "/admin/dashboard";
 
       toast.success("Welcome Back Admin 💜");
@@ -36,19 +36,30 @@ function AdminLogin() {
 
   return (
     <>
-      <div className="bg-white fixed top-0 left-0 w-[100vw] h-[100vh] flex items-center-safe justify-center-safe">
+      <div
+        style={{ zIndex: "99" }}
+        className="fixed top-0 left-0 w-[100vw] h-[100vh] flex items-center-safe justify-center-safe"
+      >
         {/* login form */}
         <div
           className={`${
             isModalVisible ? "block" : "hidden"
-          } fixed inset-0 z-50 grid place-content-center bg-black/50 p-4`}
+          } fixed inset-0 grid place-content-center bg p-4`}
           role="dialog"
+          style={{ zIndex: "99" }}
           aria-modal="true"
           aria-labelledby="modalTitle"
         >
-          <div className="w-[70vh] rounded-lg bg-white p-6 shadow-lg">
-            <div className="flex justify-between pb-3">
-              <h2 className="text-2xl font-bold">Admin Login</h2>
+          <div className="md:w-[60vh] rounded-2xl bg-white p-6 shadow-xl">
+            <div className="flex justify-center items-center ">
+              <img
+                className="w-[20%]"
+                src="/images/baked-fantasy-logo.png"
+                alt="THE BAKED FANTASY"
+              />
+            </div>
+            <div className="flex justify-center py-3">
+              <h2 className="text-2xl lora font-bold">Admin Login</h2>
             </div>
             <form className="mt-4 flex flex-col gap-3" onSubmit={verifyAdmin}>
               {/* Admin Name */}

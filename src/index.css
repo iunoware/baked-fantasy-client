@@ -27,12 +27,12 @@ body {
 }
 /* background color */
 .bg {
-  @apply bg-[#fbeacf];
+  @apply bg-[#fef9ec];
 }
 
 @theme {
   /* for text */
-  --color-blue: #3a1d04;
+  --color-blue: #73c3b4;
   /* for navbar */
   --color-red: #be0604;
   /* for bg */

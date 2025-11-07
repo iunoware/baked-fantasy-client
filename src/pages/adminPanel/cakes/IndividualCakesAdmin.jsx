@@ -281,7 +281,7 @@ function IndividualCakesAdmin() {
       {/* add product button */}
       <div className="flex flex-col md:flex-row gap-5 md:gap-0 justify-between">
         <div>
-          <h1 className="text-3xl font-semibold new-primary-text Manage your bakery products">
+          <h1 className="text-3xl lora font-semibold new-primary-text Manage your bakery products">
             {categoryName}
           </h1>
 

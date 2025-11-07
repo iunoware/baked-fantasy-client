@@ -68,7 +68,7 @@ function Modal() {
             {modal?.subject ?? ""}
           </p>
           <div className="w-full flex justify-center">
-            <button className="w-30 p-2 mt-5 bg-sky-500 backdrop-blur-2xl hover:scale-108 transition-all ease-in text-white font-bold rounded-2xl">
+            <button className="w-30 p-2 mt-5 new-primary-bg backdrop-blur-2xl hover:scale-108 transition-all ease-in text-white font-bold rounded-2xl">
               Enroll now
             </button>
           </div>

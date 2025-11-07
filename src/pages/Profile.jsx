@@ -15,14 +15,17 @@ import { LogOut, Settings, ShoppingBag, GraduationCap } from "lucide-react";
 
 export default function App() {
   const [activeTab, setActiveTab] = useState("orders");
+  const d = new Date();
+  const month = d.toLocaleString("default", { month: "long" });
+  const year = d.getFullYear();
 
   const userData = {
-    name: "Emma Richardson",
-    email: "emma.richardson@example.com",
-    avatar:
-      "https://images.unsplash.com/photo-1551929175-f82f676827b8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcm9maWxlJTIwd29tYW4lMjBwb3J0cmFpdHxlbnwxfHx8fDE3NjA0MTM3NjZ8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+    name: "User",
+    email: "user@example.com",
+    // avatar: "images/defaultProfile.jpg",
+
     membershipLevel: "Gold Member",
-    joinedDate: "January 2024",
+    joinedDate: month + " " + year,
   };
 
   return (
@@ -74,29 +77,29 @@ export default function App() {
                   </TabsTrigger>
                 </TabsList>
 
-                <TabsContent value="orders" className="mt-0">
-                  <motion.div
-                    key="orders"
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: 20 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <OrdersTab />
-                  </motion.div>
-                </TabsContent>
+                {/* <TabsContent value="orders" className="mt-0">
+                    <motion.div
+                      key="orders"
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: 20 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <OrdersTab />
+                    </motion.div>
+                  </TabsContent>
 
-                <TabsContent value="courses" className="mt-0">
-                  <motion.div
-                    key="courses"
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: 20 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <CoursesTab />
-                  </motion.div>
-                </TabsContent>
+                  <TabsContent value="courses" className="mt-0">
+                    <motion.div
+                      key="courses"
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: 20 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <CoursesTab />
+                    </motion.div>
+                  </TabsContent> */}
               </Tabs>
             </motion.div>
           </div>

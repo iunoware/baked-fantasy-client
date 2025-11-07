@@ -119,7 +119,11 @@ function Product(props) {
                   <Minus className="h-3 w-4" />
                 </Button>
                 <span className="w-8 text-center">{quantity}</span>
-                <Button variant="ghost" size="sm" onClick={() => handleQuantityChange(1)}>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => handleQuantityChange(1)}
+                >
                   <Plus className="h-3 w-4" />
                 </Button>
               </div>
