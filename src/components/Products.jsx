@@ -105,9 +105,7 @@ function Product(props) {
                 } group relative inline-flex items-center overflow-hidden rounded-lg border border-current px-8 py-3 `}
                 onClick={handleCart}
               >
-                <span className="text-sm font-medium transition-all group-hover:ms-2">
-                  Add to cart
-                </span>
+                <span className="text-sm font-medium transition-all">Add to cart</span>
               </button>
             ) : (
               <div className="space-x-2 inline-flex items-center overflow-hidden rounded-lg border border-current py-1 new-primary-text px-4">

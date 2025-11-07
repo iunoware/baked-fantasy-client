@@ -1,33 +1,31 @@
-import Product from "../../components/EssProduct";
+/* eslint-disable no-unused-vars */
 import { useEffect, useState } from "react";
-import axios from "axios";
-import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { ShoppingCart, ArrowLeft } from "lucide-react";
-import Loading from "../../components/Loading.jsx";
+import { ArrowLeft } from "lucide-react";
+import Product from "../../components/EssProduct.jsx";
+import axios from "axios";
+import Loading from "../../components/Loading";
 
-function SpecificCategory() {
-  const { categoryName } = useParams(); // comes from URL /products/:categoryName
+function AllEssentials() {
+  const token = "";
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    const fetchProducts = async () => {
+    async function fetchAllProducts() {
       try {
-        const res = await axios.get(
-          `http://localhost:5000/essentials/category/${categoryName}`
-        );
-        setProducts(res.data);
-      } catch (err) {
-        console.error("Error fetching products:", err);
+        const response = await axios.get(`http://localhost:5000/bakingEssentials`);
+        // console.log("all products: ", response.data);
+        // console.log("category name: ", response.data[0].category.title);
+        setProducts(response.data);
+      } catch (error) {
+        console.error("Can't fetch all products", error.message);
       }
-    };
-
-    fetchProducts();
-  }, [categoryName]);
+    }
+    fetchAllProducts();
+  }, []);
 
   return (
-    <div className="category-page">
-      {/* hero section */}
+    <div className="bg">
       <div className="hero relative bg-[url(/images/ess-hero2.png)] bg-cover bg-center h-[80vh] flex justify-baseline items-center ps-10 ">
         <div className="absolute inset-0 top-23 left-5 space-x-2 mb-8">
           <Link
@@ -37,13 +35,12 @@ function SpecificCategory() {
             className="flex items-center text-muted-foreground hover:text-[#870D32]"
           >
             <ArrowLeft className="h-4 w-4 mr-2" />
-            Back to Products
+            Back to Categories
           </Link>
         </div>
-        <h1 className="w-4/12 text-9xl font-extrabold">{categoryName}</h1>
+        <h1 className="w-4/12 text-9xl font-extrabold">All Essentials</h1>
       </div>
 
-      {/* products */}
       <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5 lg:px-20 md:px-15 sm:px-10 px-5 py-10">
         {products.length > 0 ? (
           products.map((p) =>
@@ -51,7 +48,7 @@ function SpecificCategory() {
               <Product
                 key={p._id}
                 id={p._id} // ✅ pass id
-                category={categoryName}
+                category={p.category.title}
                 img={`http://localhost:5000${p.images?.[0]}`}
                 originalPrice={p.originalPrice}
                 discountedPrice={p.discountedPrice}
@@ -73,4 +70,4 @@ function SpecificCategory() {
   );
 }
 
-export default SpecificCategory;
+export default AllEssentials;

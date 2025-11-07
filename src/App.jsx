@@ -124,6 +124,8 @@ import SettingsAdmin from "./pages/adminPanel/SettingsAdmin.jsx";
 import AdminLogin from "./components/adminPanel/AdminLogin.jsx";
 import IndividualEssentialAdmin from "./pages/adminPanel/essentials/IndividualEssentialsAdmin.jsx";
 import EssentialDetailsPage from "./pages/ProductDetails/EssentialDetail.jsx";
+import AllEssentials from "./pages/specifiCategories/AllEssentials.jsx";
+import AllProducts from "./pages/specifiCategories/AllProducts.jsx";
 import { Navigate } from "react-router-dom";
 
 function ProtectedAdminRoute({ children }) {
@@ -158,6 +160,8 @@ function AppContent() {
           path="/essentials/:categoryName"
           element={<EssSpeciCategory />}
         />
+        <Route path="/essentials/all-products" element={<AllEssentials />} />
+        <Route path="/products/all-products" element={<AllProducts />} />
         <Route
           path="/products/:categoryName/:productId"
           element={<ProductDetail />}
