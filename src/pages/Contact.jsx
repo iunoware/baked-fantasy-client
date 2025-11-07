@@ -12,9 +12,9 @@ function Contact() {
         <div className="min-h-screen md:pt-16 pb-10 page-transition">
           <div className="container mx-auto px-4">
             <div className="text-center mb-12 fade-in">
-              <Heading title="  Contact Us" />
+              <Heading title=" Contact Us" className="!text-blue" />
 
-              <p className="text-lg pt-3 text-muted-foreground max-w-2xl mx-auto">
+              <p className="text-lg pt-3 text-blue text-muted-foreground max-w-2xl mx-auto">
                 Get in touch with us for courses, orders, or any questions you
                 may have
               </p>
@@ -52,14 +52,14 @@ function Contact() {
                         Send Message
                       </button> */}
                       <a
-                        className="w-full group justify-center relative inline-flex items-center overflow-hidden rounded-sm bg-cyan-500 px-8 py-3 text-white focus:ring-3 focus:outline-hidden mr-3"
+                        className="w-full text-black group justify-center relative inline-flex items-center overflow-hidden rounded-sm bg-[#F9C7C2] px-8 py-3 font-bold focus:ring-3 focus:outline-hidden mr-3"
                         href="#"
                       >
                         <span className="absolute -start-full transition-all group-hover:start-4">
                           <MailCheck size="20" />
                         </span>
 
-                        <span className="text-sm font-medium transition-all group-hover:ms-4">
+                        <span className="text-sm font-bold transition-all group-hover:ms-4">
                           Send Message
                         </span>
                       </a>
