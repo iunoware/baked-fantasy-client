@@ -190,7 +190,7 @@ function Footer() {
                       </div>
                       <div>
                         Jeevana school road, Jai nagar 2nd street, Ponmeni, Bypass Road,
-                        Madurai- 625016
+                        Madurai - 625016
                       </div>
                     </a>
                   </li>

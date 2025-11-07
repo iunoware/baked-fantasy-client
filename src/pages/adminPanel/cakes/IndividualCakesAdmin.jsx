@@ -153,13 +153,15 @@ function IndividualCakesAdmin() {
 
             {/* file */}
             <div className="flex gap-3 justify-between items-center">
+              {/* <label htmlFor="productFile">Choose a file</label> */}
               <input
                 type="file"
                 id="productFile"
                 name="productFile"
                 multiple
+                placeholder="Choose your images"
                 accept="image/png, image/jpeg, image/webp, image/gif"
-                className="ring h-20 ring-gray-500 text-black rounded-lg p-2 w-full"
+                className="h-20 border-2 cursor-pointer border-dashed border-gray-500 text-black rounded-lg p-2 w-full"
               />
             </div>
 

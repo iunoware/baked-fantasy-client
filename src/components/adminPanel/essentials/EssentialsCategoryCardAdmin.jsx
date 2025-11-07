@@ -170,7 +170,7 @@ function EssentialsCategoryCardAdmin(props) {
                 type="file"
                 id="categoryFile"
                 name="categoryFile"
-                className="ring h-20 ring-gray-500 text-black rounded-lg p-2 w-full"
+                className=" h-20 border-2 cursor-pointer border-dashed border-gray-500 text-black rounded-lg p-2 w-full"
               />
             </div>
 
@@ -232,14 +232,10 @@ function EssentialsCategoryCardAdmin(props) {
               </h2>
               <p className=" text-center w-full mb-5 text-black">
                 The category{" "}
-                <span className="text-pink-500 font-semibold text-lg">
-                  {props.title}
-                </span>{" "}
+                <span className="text-pink-500 font-semibold text-lg">{props.title}</span>{" "}
                 will be{" "}
-                <span className="text-red-600 font-semibold">
-                  permanently deleted
-                </span>
-                , and can't be recovered back.
+                <span className="text-red-600 font-semibold">permanently deleted</span>,
+                and can't be recovered back.
               </p>
             </div>
 

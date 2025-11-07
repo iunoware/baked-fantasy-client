@@ -31,14 +31,14 @@ function AllProducts() {
           <Link
             variant="ghost"
             size="sm"
-            to={`/ess-categories`}
+            to={`/categories`}
             className="flex items-center text-muted-foreground hover:text-[#870D32]"
           >
             <ArrowLeft className="h-4 w-4 mr-2" />
             Back to Categories
           </Link>
         </div>
-        <h1 className="w-4/12 text-9xl font-extrabold">All Essentials</h1>
+        <h1 className="w-4/12 text-9xl font-extrabold">All Products</h1>
       </div>
 
       <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5 lg:px-20 md:px-15 sm:px-10 px-5 py-10">

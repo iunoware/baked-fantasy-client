@@ -84,12 +84,7 @@
 // export default App;
 
 // new one
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  useLocation,
-} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import EnquiryBtn from "./components/EnquiryBtn.jsx";
 import Home from "../src/pages/Home.jsx";
@@ -156,26 +151,17 @@ function AppContent() {
         <Route path="/categories" element={<Categories />} />
         <Route path="/ess-categories" element={<EssCategories />} />
         <Route path="/products/:categoryName" element={<SpecificCategory />} />
-        <Route
-          path="/essentials/:categoryName"
-          element={<EssSpeciCategory />}
-        />
+        <Route path="/essentials/:categoryName" element={<EssSpeciCategory />} />
         <Route path="/essentials/all-products" element={<AllEssentials />} />
         <Route path="/products/all-products" element={<AllProducts />} />
-        <Route
-          path="/products/:categoryName/:productId"
-          element={<ProductDetail />}
-        />
+        <Route path="/products/:categoryName/:productId" element={<ProductDetail />} />
         <Route
           path="/essential/:categoryName/:productId"
           element={<EssentialDetailsPage />}
         />
         <Route path="/courses" element={<Courses />} />
         <Route path="/courses/online-course" element={<OnlineCourse />} />
-        <Route
-          path="/course/my-learning/:courseId"
-          element={<OnlineCourseDetails />}
-        />
+        <Route path="/course/my-learning/:courseId" element={<OnlineCourseDetails />} />
         <Route path="/courses/offline-course" element={<OfflineCourse />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/cart" element={<Cart />} />
