@@ -17,8 +17,9 @@ function Footer() {
                 <h3 className="brand-name">The Baked Fantasy</h3>
               </div>
               <p className="mt-4 max-w-xs text-white">
-                Your premier destination for professional baking education and artisanal
-                bakery products. Learn from experts and savor the finest baked goods.
+                Your premier destination for professional baking education and
+                artisanal bakery products. Learn from experts and savor the
+                finest baked goods.
               </p>
 
               {/* social links */}
@@ -189,8 +190,8 @@ function Footer() {
                         <MapPin size={24} />
                       </div>
                       <div>
-                        Jeevana school road, Jai nagar 2nd street, Ponmeni, Bypass Road,
-                        Madurai - 625016
+                        Jeevana school road, Jai nagar 2nd street, Ponmeni,
+                        Bypass Road, Madurai - 625016
                       </div>
                     </a>
                   </li>
