@@ -65,7 +65,7 @@ npm run preview
 
 ### Product
 
-- CardsAdmin (page) => whole page category
+- CadesAdmin (page) => whole page category
 - CategoryCardAdmin (component) => category card
 - IndividualCakesAdmin (page) => whole page products
 - ProductTableAdmin (component) => individual product table

@@ -6,8 +6,8 @@ import toast from "react-hot-toast";
 
 function ProductAdmin(props) {
   const [isEditModal, setIsEditModal] = useState(false);
-  const [isActive, setIsActive] = useState(true);
-  const [inStock, setInStock] = useState(true);
+  const [isActive, setIsActive] = useState(props.isActive);
+  const [inStock, setInStock] = useState(props.inStock);
   const [deleteModal, setDeleteModal] = useState(false);
   const [isBtnVisible, setIsBtnVisible] = useState(false);
 
@@ -271,14 +271,23 @@ function ProductAdmin(props) {
                 {/* to hide or show the product */}
                 <div className="flex justify-between mt-5">
                   <div>
-                    <h4>{isActive ? "🟢 Active" : "🔴 De-active"}</h4>
+                    {/* <h4>{isActive ? "🟢 Active" : "🔴 De-active"}</h4> */}
+                    <h4>{isActive ? "🟢 Visible" : "🔴 Hidden"}</h4>
                   </div>
-                  <label
+                  <input
+                    type="checkbox"
+                    checked={isActive}
+                    onClick={() => setIsActive((prev) => !prev)}
+                    id={props.title}
+                    className="h-6 w-6"
+                  />
+                  {/* <label
                     htmlFor={props.title}
                     className="group hover:cursor-pointer relative block h-6 w-12 rounded-full bg-gray-300 transition-colors [-webkit-tap-highlight-color:_transparent] has-checked:bg-red-500"
                   >
                     <input
                       type="checkbox"
+                      checked={!isActive}
                       onClick={() => setIsActive((prev) => !prev)}
                       id={props.title}
                       className="peer sr-only"
@@ -289,7 +298,7 @@ function ProductAdmin(props) {
 
                       <X size={10} />
                     </span>
-                  </label>
+                  </label> */}
                 </div>
 
                 {/* inStock */}
@@ -297,12 +306,21 @@ function ProductAdmin(props) {
                   <div>
                     <h4>{inStock ? "🟢 In-stock" : "🔴 Not-in-stock"}</h4>
                   </div>
-                  <label
+                  <input
+                    type="checkbox"
+                    checked={inStock}
+                    onClick={() => setInStock((prev) => !prev)}
+                    id={props._id}
+                    className="h-6 w-6"
+                  />
+
+                  {/* <label
                     htmlFor={props._id}
                     className="group hover:cursor-pointer relative block h-6 w-12 rounded-full bg-gray-300 transition-colors [-webkit-tap-highlight-color:_transparent] has-checked:bg-red-500"
                   >
                     <input
                       type="checkbox"
+                      checked={inStock}
                       onClick={() => setInStock((prev) => !prev)}
                       id={props._id}
                       className="peer sr-only"
@@ -313,7 +331,7 @@ function ProductAdmin(props) {
 
                       <X size={10} />
                     </span>
-                  </label>
+                  </label> */}
                 </div>
 
                 <div className="flex justify-center items-center">
@@ -346,15 +364,15 @@ function ProductAdmin(props) {
                   >
                     Are you sure? Do you really want to{" "}
                     <span className="text-red-600">delete</span>{" "}
-                    <span className="text-pink-500">{props.title}</span>
+                    <span className="text-red-600">{props.title}</span>
                   </h2>
                   <p className=" text-center w-full mb-5 text-black">
                     The product{" "}
-                    <span className="text-pink-500 font-semibold text-lg">
+                    <span className="text-red-600 font-bold text-lg">
                       {props.title}
                     </span>{" "}
                     will be{" "}
-                    <span className="text-red-600 font-semibold">
+                    <span className="text-red-600 font-bold">
                       permanently deleted
                     </span>
                     , and can't be recovered back.

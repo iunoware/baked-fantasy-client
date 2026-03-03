@@ -18,7 +18,7 @@ function IndividualCakesAdmin() {
     async function fetchProducts() {
       try {
         const response = await axios.get(
-          `http://localhost:5000/products/category/${categoryName}`
+          `http://localhost:5000/products/category/${categoryName}`,
         );
         // console.log("products id: ", response.data[1]._id, response.data[1].title);
         setProducts(response.data);
@@ -91,7 +91,7 @@ function IndividualCakesAdmin() {
               "Content-Type": "multipart/form-data",
               Authorization: `Bearer ${token}`,
             },
-          }
+          },
         );
         console.log("product status: ", postResponse.data);
         toast.success("Product success fully added");
@@ -225,7 +225,22 @@ function IndividualCakesAdmin() {
               <div>
                 <h4>{inStock ? "🟢 In-stock" : "🔴 Not-in-stock"}</h4>
               </div>
-              <label
+
+              {/* <input
+                type="checkbox"
+                onClick={() => setInStock((prev) => !prev)}
+                id="inStockProduct"
+                className="peer sr-only"
+              /> */}
+
+              <input
+                type="checkbox"
+                checked={inStock}
+                id="inStockProduct"
+                onClick={() => setInStock((prev) => !prev)}
+                className="h-6 w-6"
+              />
+              {/* <label
                 htmlFor="inStockProduct"
                 className="group hover:cursor-pointer relative block h-6 w-12 rounded-full bg-gray-300 transition-colors [-webkit-tap-highlight-color:_transparent] has-checked:bg-red-500"
               >
@@ -241,7 +256,7 @@ function IndividualCakesAdmin() {
 
                   <X size={10} />
                 </span>
-              </label>
+              </label> */}
             </div>
 
             {/* isActive */}

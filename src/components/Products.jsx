@@ -37,12 +37,12 @@ function Product(props) {
             alt={props.title}
             src={props.img}
             className={`${
-              props.inStock ? "" : "opacity-60"
+              props.inStock ? "" : "grayscale-100"
             } h-full w-full rounded-xl object-cover`}
           />
           {!props.inStock && (
-            <div className="absolute top-2 right-2">
-              <span className="text-lg border-2 border-red-600 bg-white rounded-lg p-1 font-extrabold text-red-600">
+            <div className="absolute top-2.5 right-2">
+              <span className="text-2xl rounded-bl-lg bg-white p-3 font-bold text-red-600">
                 SOLD OUT
               </span>
             </div>
@@ -117,11 +117,7 @@ function Product(props) {
                   <Minus className="h-3 w-4" />
                 </Button>
                 <span className="w-8 text-center">{quantity}</span>
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={() => handleQuantityChange(1)}
-                >
+                <Button variant="ghost" size="sm" onClick={() => handleQuantityChange(1)}>
                   <Plus className="h-3 w-4" />
                 </Button>
               </div>

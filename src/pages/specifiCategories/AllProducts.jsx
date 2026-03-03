@@ -5,23 +5,30 @@ import { ArrowLeft } from "lucide-react";
 import Product from "../../components/Products.jsx";
 import axios from "axios";
 import Loading from "../../components/Loading";
+import { WarningProvider } from "@radix-ui/react-dialog";
 
 function AllProducts() {
   const token = "";
   const [products, setProducts] = useState([]);
 
-  useEffect(() => {
-    async function fetchAllProducts() {
-      try {
-        const response = await axios.get(`http://localhost:5000/products`);
-        // console.log("all products: ", response.data);
-        // console.log("category name: ", response.data[0].category.title);
-        setProducts(response.data);
-      } catch (error) {
-        console.error("Can't fetch all products", error.message);
-      }
+  async function fetchAllProducts() {
+    try {
+      const response = await axios.get(`http://localhost:5000/products`);
+      console.log("all products: ", response.data);
+      // console.log("category name: ", response.data[0].category.title);
+      setProducts(response.data);
+    } catch (error) {
+      console.error("Can't fetch all products", error.message);
     }
+  }
+
+  useEffect(() => {
     fetchAllProducts();
+    // function handleFocus() {
+    //   fetchAllProducts();
+    // }
+    // window.addEventListener("focus", handleFocus());
+    // return () => window.removeEventListener("focus", handleFocus());
   }, []);
 
   return (
@@ -58,7 +65,7 @@ function AllProducts() {
               />
             ) : (
               ""
-            )
+            ),
           )
         ) : (
           <div className="w-full flex justify-start col-span-full items-center">

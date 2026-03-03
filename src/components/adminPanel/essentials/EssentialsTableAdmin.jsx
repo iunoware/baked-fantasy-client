@@ -9,8 +9,8 @@ import toast from "react-hot-toast";
 
 function EssentialsTableAdmin(props) {
   const [isEditModal, setIsEditModal] = useState(false);
-  const [isActive, setIsActive] = useState(true);
-  const [inStock, setInStock] = useState(true);
+  const [isActive, setIsActive] = useState(props.isActive);
+  const [inStock, setInStock] = useState(props.inStock);
   const [deleteModal, setDeleteModal] = useState(false);
   const [isBtnVisible, setIsBtnVisible] = useState(false);
 
@@ -25,7 +25,7 @@ function EssentialsTableAdmin(props) {
   async function deleteFunction() {
     try {
       const response = await axios.delete(
-        `http://localhost:5000/essentials/${props.productId}`
+        `http://localhost:5000/essentials/${props.productId}`,
       );
       // console.log(response.data);
       toast.success(`${props.title} deleted successfully`);
@@ -46,7 +46,7 @@ function EssentialsTableAdmin(props) {
     const form = e.target;
     const name = form.productTitle.value.trim() || props.title;
     const subject = form.productSubject.value.trim() || props.subject;
-    const files = form.productFile.files;
+    const files = form.productFile?.files;
     const originalPrice = form.productOriginalPrice.value.trim() || props.originalPrice;
     const discountedPrice = form.productPrice.value.trim() || props.discountedPrice;
     const description = form.productDescription.value.trim() || props.description;
@@ -65,8 +65,10 @@ function EssentialsTableAdmin(props) {
     if (description) formData.append("description", description);
     if (info) formData.append("info", info);
     // if (props.categoryName) formData.append("category", props.categoryName);
-    for (let i = 0; i < files.length; i++) {
-      formData.append("images", files[i]);
+    if (files && files.length > 0) {
+      for (let i = 0; i < files.length; i++) {
+        formData.append("images", files[i]);
+      }
     }
     formData.append("isActive", isActive);
     formData.append("inStock", inStock);
@@ -80,14 +82,14 @@ function EssentialsTableAdmin(props) {
             "Content-Type": "multipart/form-data",
             Authorization: `Bearer ${token}`,
           },
-        }
+        },
       );
       console.log("product status: ", postResponse.data);
       toast.success("Product success fully added");
       setIsEditModal(false);
       setTimeout(() => {
         window.location.reload();
-      }, 1000);
+      }, 300);
     } catch (error) {
       toast.error("Can't add products");
       console.error("error message: ", error.message);
@@ -111,10 +113,10 @@ function EssentialsTableAdmin(props) {
         const res = await axios.patch(
           `http://localhost:5000/essentials/${props.productId}/replace-image`,
           formData,
-          { headers: { "Content-Type": "multipart/form-data" } }
+          { headers: { "Content-Type": "multipart/form-data" } },
         );
         toast.success("Image replaced successfully!");
-        console.log("Updated product:", res.data);
+        // console.log("Updated product:", res.data);
         setTimeout(() => window.location.reload(), 800);
       } catch (error) {
         console.error("Image replace failed:", error);
@@ -267,9 +269,16 @@ function EssentialsTableAdmin(props) {
                 {/* isActive */}
                 <div className="flex justify-between mt-5">
                   <div>
-                    <h4>{isActive ? "🟢 Active" : "🔴 De-active"}</h4>
+                    <h4>{isActive ? "🟢 Visible" : "🔴 Hidden"}</h4>
                   </div>
-                  <label
+                  <input
+                    type="checkbox"
+                    checked={isActive}
+                    onClick={() => setIsActive((prev) => !prev)}
+                    id={props.title}
+                    className="h-6 w-6"
+                  />
+                  {/* <label
                     htmlFor={props.title}
                     className="group hover:cursor-pointer relative block h-6 w-12 rounded-full bg-gray-300 transition-colors [-webkit-tap-highlight-color:_transparent] has-checked:bg-red-500"
                   >
@@ -285,7 +294,7 @@ function EssentialsTableAdmin(props) {
 
                       <X size={10} />
                     </span>
-                  </label>
+                  </label> */}
                 </div>
 
                 {/* inStock */}
@@ -293,7 +302,15 @@ function EssentialsTableAdmin(props) {
                   <div>
                     <h4>{inStock ? "🟢 In-stock" : "🔴 Not-in-stock"}</h4>
                   </div>
-                  <label
+                  <input
+                    type="checkbox"
+                    checked={inStock}
+                    onClick={() => setInStock((prev) => !prev)}
+                    id={props._id}
+                    className="h-6 w-6"
+                  />
+
+                  {/* <label
                     htmlFor={props._id}
                     className="group hover:cursor-pointer relative block h-6 w-12 rounded-full bg-gray-300 transition-colors [-webkit-tap-highlight-color:_transparent] has-checked:bg-red-500"
                   >
@@ -309,7 +326,7 @@ function EssentialsTableAdmin(props) {
 
                       <X size={10} />
                     </span>
-                  </label>
+                  </label> */}
                 </div>
 
                 <div className="flex justify-center items-center">
@@ -342,15 +359,15 @@ function EssentialsTableAdmin(props) {
                   >
                     Are you sure? Do you really want to{" "}
                     <span className="text-red-600">delete</span>{" "}
-                    <span className="text-pink-500">{props.title}</span>
+                    <span className="text-red-600">{props.title}</span>
                   </h2>
                   <p className=" text-center w-full mb-5 text-black">
                     The product{" "}
-                    <span className="text-pink-500 font-semibold text-lg">
+                    <span className="text-red-600 font-bold text-lg">
                       {props.title}
                     </span>{" "}
                     will be{" "}
-                    <span className="text-red-600 font-semibold">
+                    <span className="text-red-600 font-bold">
                       permanently deleted
                     </span>
                     , and can't be recovered back.
