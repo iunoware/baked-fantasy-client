@@ -11,7 +11,10 @@ function ProductAdmin(props) {
   const [deleteModal, setDeleteModal] = useState(false);
   const [isBtnVisible, setIsBtnVisible] = useState(false);
 
-  const token = "";
+  // const token = localStorage.getItem("token");
+  const token =
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4YTk3ZDYxOTdlMjcxMDM0OWUwNmI0MyIsImlhdCI6MTc3MjUyNjIxNywiZXhwIjoxNzcyNjEyNjE3fQ.vWlcrqHvxh3Nb6pj8TuItnzBsjtfh21ahtuBp1w1_CE";
+  localStorage.setItem("token", token);
 
   function deleteTimeout() {
     setTimeout(() => {
@@ -22,7 +25,7 @@ function ProductAdmin(props) {
   async function deleteFunction() {
     try {
       const response = await axios.delete(
-        `http://localhost:5000/products/${props.productId}`
+        `http://localhost:5000/products/${props.productId}`,
       );
       // console.log(response.data);
       toast.success(`${props.title} deleted successfully`);
@@ -43,7 +46,7 @@ function ProductAdmin(props) {
     const form = e.target;
     const name = form.productTitle.value.trim() || props.title;
     const subject = form.productSubject.value.trim() || props.subject;
-    const files = form.productFile.files;
+    const files = form.productFile?.files;
     const originalPrice = form.productOriginalPrice.value.trim() || props.originalPrice;
     const discountedPrice = form.productPrice.value.trim() || props.discountedPrice;
     const description = form.productDescription.value.trim() || props.description;
@@ -62,8 +65,10 @@ function ProductAdmin(props) {
     if (description) formData.append("description", description);
     if (info) formData.append("info", info);
     // if (props.categoryName) formData.append("category", props.categoryName);
-    for (let i = 0; i < files.length; i++) {
-      formData.append("images", files[i]);
+    if (files && files.length > 0) {
+      for (let i = 0; i < files.length; i++) {
+        formData.append("images", files[i]);
+      }
     }
     formData.append("isActive", isActive);
     formData.append("inStock", inStock);
@@ -77,14 +82,15 @@ function ProductAdmin(props) {
             "Content-Type": "multipart/form-data",
             Authorization: `Bearer ${token}`,
           },
-        }
+        },
       );
       console.log("product status: ", postResponse.data);
       toast.success("Product success fully added");
       setIsEditModal(false);
       setTimeout(() => {
         window.location.reload();
-      }, 1000);
+        // }, 1000);
+      }, 300);
     } catch (error) {
       toast.error("Can't add products");
       console.error("error message: ", error.message);
@@ -108,7 +114,7 @@ function ProductAdmin(props) {
         const res = await axios.patch(
           `http://localhost:5000/products/${props.productId}/replace-image`,
           formData,
-          { headers: { "Content-Type": "multipart/form-data" } }
+          { headers: { "Content-Type": "multipart/form-data" } },
         );
         toast.success("Image replaced successfully!");
         console.log("Updated product:", res.data);
@@ -262,6 +268,7 @@ function ProductAdmin(props) {
                 </div>
 
                 {/* isActive */}
+                {/* to hide or show the product */}
                 <div className="flex justify-between mt-5">
                   <div>
                     <h4>{isActive ? "🟢 Active" : "🔴 De-active"}</h4>
