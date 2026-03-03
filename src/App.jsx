@@ -1,9 +1,4 @@
-import {
-  useLocation,
-  BrowserRouter as Router,
-  Routes,
-  Route,
-} from "react-router-dom";
+import { useLocation, BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import EnquiryBtn from "./components/EnquiryBtn.jsx";
 import Home from "../src/pages/Home.jsx";
@@ -54,7 +49,7 @@ function ProtectedAdminRoute({ children }) {
 
 function AppContent() {
   const location = useLocation();
-  const hideLayout = location.pathname.startsWith("/admin"); // ✅ detect admin routes
+  const isAdmin = location.pathname.startsWith("/admin"); // detect admin routes
 
   return (
     <>
@@ -62,7 +57,7 @@ function AppContent() {
       <ScrollToTop />
 
       {/* Show Navbar and Footer only for non-admin routes */}
-      {hideLayout ? <Sidebar /> : <Navbar />}
+      {isAdmin ? <Sidebar /> : <Navbar />}
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<Home />} />
@@ -71,26 +66,17 @@ function AppContent() {
         <Route path="/categories" element={<Categories />} />
         <Route path="/ess-categories" element={<EssCategories />} />
         <Route path="/products/:categoryName" element={<SpecificCategory />} />
-        <Route
-          path="/essentials/:categoryName"
-          element={<EssSpeciCategory />}
-        />
+        <Route path="/essentials/:categoryName" element={<EssSpeciCategory />} />
         <Route path="/essentials/all-products" element={<AllEssentials />} />
         <Route path="/products/all-products" element={<AllProducts />} />
-        <Route
-          path="/products/:categoryName/:productId"
-          element={<ProductDetail />}
-        />
+        <Route path="/products/:categoryName/:productId" element={<ProductDetail />} />
         <Route
           path="/essential/:categoryName/:productId"
           element={<EssentialDetailsPage />}
         />
         <Route path="/courses" element={<Courses />} />
         <Route path="/courses/online-course" element={<OnlineCourse />} />
-        <Route
-          path="/course/my-learning/:courseId"
-          element={<OnlineCourseDetails />}
-        />
+        <Route path="/course/my-learning/:courseId" element={<OnlineCourseDetails />} />
         <Route path="/courses/offline-course" element={<OfflineCourse />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/cart" element={<Cart />} />
@@ -176,8 +162,12 @@ function AppContent() {
         />
       </Routes>
 
-      <EnquiryBtn />
-      {!hideLayout && <Footer />}
+      {!isAdmin && (
+        <>
+          <EnquiryBtn />
+          <Footer />
+        </>
+      )}
     </>
   );
 }
