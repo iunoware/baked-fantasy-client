@@ -27,7 +27,7 @@ body {
 }
 /* background color */
 .bg {
-  @apply bg-[#fef9ec];
+  @apply bg-[#EFE1D0];
 }
 
 @theme {
@@ -75,7 +75,9 @@ body {
   align-items: center;
   justify-content: center;
   opacity: 0;
-  transition: opacity 200ms ease-in, transform 200ms ease-in;
+  transition:
+    opacity 200ms ease-in,
+    transform 200ms ease-in;
   transform: translateY(10px);
 }
 
@@ -106,6 +108,12 @@ body {
   font-weight: normal;
   font-size: normal;
 }
+@font-face {
+  font-family: "picktea";
+  src: url("/fonts/picktea.ttf") format("truetype");
+  font-weight: normal;
+  font-size: normal;
+}
 
 /* h1,
 h2 {
@@ -119,6 +127,7 @@ h2 {
 html,
 body {
   scroll-behavior: smooth;
+  background-color: #efe1d0 !important;
 }
 
 .edit-modal::-webkit-scrollbar {

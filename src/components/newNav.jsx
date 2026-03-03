@@ -96,22 +96,6 @@ export default function NewNav() {
                     </NavLink>
                   </li>
 
-                  {/* products */}
-                  {/* <li>
-                    <NavLink
-                      to="/categories"
-                      className={({ isActive }) =>
-                        `text-lg relative group rounded-lg p-3 transition ${
-                          isActive
-                            ? "bg-red text-white font-semibold"
-                            : "hover:text-black text-gray-800 "
-                        } `
-                      }
-                    >
-                      Products
-                      <span className="absolute left-1 bottom-0 h-[3px] rounded-xl w-0 bg-red transition-all duration-300 group-hover:w-[90%]"></span>
-                    </NavLink>
-                  </li> */}
                   <li>
                     <div
                       className="relative inline-flex"
