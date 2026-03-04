@@ -65,7 +65,7 @@ npm run preview
 
 ### Product
 
-- CadesAdmin (page) => whole page category
+- CakesAdmin (page) => whole page category
 - CategoryCardAdmin (component) => category card
 - IndividualCakesAdmin (page) => whole page products
 - ProductTableAdmin (component) => individual product table
@@ -95,4 +95,4 @@ This codebase is proprietary and intended for official use only.
 
 ## Website link
 
-[Link](https://thebakedfantasy.com)
+[https://thebakedfantasy.com](https://thebakedfantasy.com)

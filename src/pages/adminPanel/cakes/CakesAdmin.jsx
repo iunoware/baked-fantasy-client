@@ -6,22 +6,23 @@ import axios from "axios";
 import CategoryCardAdmin from "../../../components/adminPanel/cakes/CategoryCardAdmin.jsx";
 
 function CakesAdmin() {
-  const [courses, setCourses] = useState([]);
+  const [products, setProducts] = useState([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isActive, setIsActive] = useState(true);
 
   useEffect(() => {
-    async function fetchCourses() {
+    async function fetchProducts() {
       try {
         const response = await axios.get(`http://localhost:5000/categories`);
         // console.log(response.data);
-        setCourses(response.data);
-        // console.log("courses: ", courses);
+        setProducts(response.data);
+        // console.log("products: ", products);
       } catch (error) {
         console.error("error message: ", error);
       }
     }
-    fetchCourses();
+    // fetchCourses();
+    fetchProducts();
   }, []);
 
   const token = "";
@@ -59,18 +60,18 @@ function CakesAdmin() {
               "Content-Type": "multipart/form-data",
               Authorization: `Bearer ${token}`,
             },
-          }
+          },
         );
-        // setCourses((prev) => [...prev, postResponse.data]);
+        // setProducts((prev) => [...prev, postResponse.data]);
 
         // const newResponse = await axios.get(`http://localhost:5000/categories`);
-        // setCourses(newResponse.data);
+        // setProducts(newResponse.data);
         console.log("category added: ", postResponse.data);
         toast.success("Category added");
         setIsModalVisible(false);
         setTimeout(() => {
           window.location.reload();
-        }, 1000);
+        }, 200);
       } catch (error) {
         toast.error("Can't add Category");
         console.error("error message: ", error.message);
@@ -206,15 +207,18 @@ function CakesAdmin() {
               <h2 className="font-semibold new-primary-text text-xl">
                 Cakes and cookies inventory
               </h2>
-              <p>Manage all your bakery products' categories</p>
+              <p className="text-lg">
+                Total Categories:{" "}
+                <span className="font-bold text-xl">{products.length}</span>
+              </p>
             </div>
             <div></div>
           </div>
 
           {/* product cards */}
-          {courses.length > 0 ? (
+          {products.length > 0 ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 lg:gap-8">
-              {courses.map((course, i) => (
+              {products.map((course, i) => (
                 <div key={i} className="">
                   <CategoryCardAdmin
                     title={course.title}

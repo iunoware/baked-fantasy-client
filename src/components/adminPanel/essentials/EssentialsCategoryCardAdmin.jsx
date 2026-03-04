@@ -1,8 +1,6 @@
-// function EssentialsCategoryCardAdmin() {}
 // export default EssentialsCategoryCardAdmin;
 
 /* eslint-disable no-unused-vars */
-/* eslint-disable react-hooks/exhaustive-deps */
 import { Trash2, SquarePen, X, Check } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -11,14 +9,9 @@ import axios from "axios";
 
 function EssentialsCategoryCardAdmin(props) {
   const [isModal2Visible, setIsModal2Visible] = useState(false);
-  const [isActive, setIsActive] = useState(true);
+  const [isActive, setIsActive] = useState(props.activate);
   const [deleteModal, setDeleteModal] = useState(false);
   const [isBtnVisible, setIsBtnVisible] = useState(false);
-
-  // const [currentCategory, setCurrentCategory] = useState([]);
-  // const [anyError, setAnyError] = useState(false);
-  // const [title, setTitle] = useState(props.title);
-  // const [subject, setSubject] = useState(props.subject);
 
   const token = "";
 
@@ -57,7 +50,7 @@ function EssentialsCategoryCardAdmin(props) {
             "Content-Type": "multipart/form-data",
             Authorization: `Bearer ${token}`,
           },
-        }
+        },
       );
       //   console.log("patch data: ", response.data);
       toast.success("Category Edited");
@@ -85,7 +78,7 @@ function EssentialsCategoryCardAdmin(props) {
           headers: {
             Authorization: `Bearer ${token}`,
           },
-        }
+        },
       );
       // console.log(response.data);
       toast.success(`${props.title} deleted successfully`);
@@ -100,9 +93,9 @@ function EssentialsCategoryCardAdmin(props) {
     }
   }
 
-  useEffect(() => {
-    props.isActive ? setIsActive(false) : setIsActive(true);
-  }, []);
+  // useEffect(() => {
+  //   props.isActive ? setIsActive(false) : setIsActive(true);
+  // }, []);
 
   return (
     <div>
@@ -177,9 +170,19 @@ function EssentialsCategoryCardAdmin(props) {
             {/* isActive */}
             <div className="flex justify-between mb-5">
               <div>
-                <h4>{isActive ? "Active" : "De-active"}</h4>
+                {/* <h4>{isActive ? "🟢 Active" : "🔴 De-active"}</h4> */}
+                <h4>{isActive ? "🟢 Visible" : "🔴 Hidden"}</h4>
               </div>
-              <label
+
+              <input
+                type="checkbox"
+                checked={isActive}
+                id="inStockProduct"
+                onClick={() => setIsActive((prev) => !prev)}
+                className="h-6 w-6"
+              />
+
+              {/* <label
                 htmlFor={props.title}
                 className="group hover:cursor-pointer relative block h-6 w-12 rounded-full bg-gray-300 transition-colors [-webkit-tap-highlight-color:_transparent] has-checked:bg-red-500"
               >
@@ -195,7 +198,7 @@ function EssentialsCategoryCardAdmin(props) {
 
                   <X size={10} />
                 </span>
-              </label>
+              </label> */}
             </div>
 
             <div className="flex justify-center items-center">

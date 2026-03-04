@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { SquarePen, Check, X } from "lucide-react";
@@ -10,32 +10,82 @@ import ProductAdmin from "../../../components/adminPanel/cakes/ProductTableAdmin
 function IndividualCakesAdmin() {
   const { categoryName } = useParams();
   const [products, setProducts] = useState([]);
+  const [displayProducts, setDisplayProducts] = useState([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isActive, setIsActive] = useState(true);
   const [inStock, setInStock] = useState(true);
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
+  const [filter, setFilter] = useState("");
 
-  useEffect(() => {
-    async function fetchProducts() {
-      try {
-        const response = await axios.get(
-          `http://localhost:5000/products/category/${categoryName}`,
-        );
-        // console.log("products id: ", response.data[1]._id, response.data[1].title);
-        setProducts(response.data);
-      } catch (err) {
-        if (err.response && err.response.data.status === 404) {
-          console.warn("no products found in: ", categoryName);
-          setProducts([]);
-        } else {
-          console.error("Error fetching products:", err);
-        }
+  const dropdownRef = useRef(null);
+
+  // filter function
+  function filterProducts(selectedFilter) {
+    let updatedProducts = [...products];
+
+    switch (selectedFilter) {
+      case "inStock":
+        updatedProducts = updatedProducts.filter((p) => p.inStock);
+        break;
+      case "notInStock":
+        updatedProducts = updatedProducts.filter((p) => !p.inStock);
+        break;
+      case "visible":
+        updatedProducts = updatedProducts.filter((p) => p.isActive);
+        break;
+      case "hidden":
+        updatedProducts = updatedProducts.filter((p) => !p.isActive);
+        break;
+      case "newestFirst":
+        updatedProducts.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+        break;
+      case "oldestFirst":
+        updatedProducts.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
+        break;
+      default:
+        updatedProducts = [...products];
+    }
+    setDisplayProducts(updatedProducts);
+  }
+
+  // product fetching function
+  async function fetchProducts() {
+    try {
+      const response = await axios.get(
+        `http://localhost:5000/products/category/${categoryName}`,
+      );
+      // console.log("products id: ", response.data[1]._id, response.data[1].title);
+      setProducts(response.data);
+      setDisplayProducts(response.data);
+    } catch (err) {
+      if (err.response && err.response.data.status === 404) {
+        console.warn("no products found in: ", categoryName);
+        setProducts([]);
+      } else {
+        console.error("Error fetching products:", err);
       }
     }
+  }
+
+  // to close the dropdown when clicked outside the dropdown
+  function handleOutsideClick(e) {
+    // logic: if the dropdown exists AND the clicked element is NOT inside the dropdown
+    if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+      setIsFilterOpen(false);
+    }
+  }
+
+  useEffect(() => {
     fetchProducts();
+
+    document.addEventListener("mousedown", handleOutsideClick);
+
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+    };
   }, []);
 
-  const token =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4YTk3ZDYxOTdlMjcxMDM0OWUwNmI0MyIsImlhdCI6MTc2MTcxNDEyMiwiZXhwIjoxNzYxODAwNTIyfQ.nHMQbJNUxXQKQ7xbabLDl018xkl0mFTcLeLvx9a9644";
+  const token = "";
 
   async function postCategory(e) {
     e.preventDefault();
@@ -107,7 +157,7 @@ function IndividualCakesAdmin() {
   }
 
   return (
-    <div className="lg:pl-28 pl-20 pt-10 pr-10">
+    <div className="lg:pl-28 pl-20 pt-10 lg:pr-10 pr-5">
       {/* modal for post category */}
       <div
         className={`${
@@ -315,12 +365,145 @@ function IndividualCakesAdmin() {
       </div>
 
       <div className="bg shadow-xl w-full pt-5 md:p-5 my-10 rounded-xl">
-        <h2 className="text-2xl font-semibold new-primary-text">
-          All {categoryName} Products
-        </h2>
+        <div className="flex md:flex-row flex-col justify-between md:items-center items-start gap-5 px-3">
+          <div>
+            <h2 className="text-2xl font-semibold new-primary-text">
+              All {categoryName} Products
+            </h2>
+            <p className="text-lg">
+              Total products:{" "}
+              <span className="font-bold text-xl">{displayProducts.length}</span>
+            </p>
+          </div>
+
+          {/* dropdown */}
+          <div className="flex gap-5 justify-center items-center">
+            {/* clear filter button */}
+            <button
+              onClick={() => setDisplayProducts(products)}
+              className="active:scale-95 px-3 py-2 cursor-pointer text-lg font-medium text-black border rounded-lg transition-colors focus:relative"
+            >
+              Clear Filter
+            </button>
+
+            {/* filter */}
+            <div ref={dropdownRef} className="relative inline-flex ">
+              <span
+                onClick={() => setIsFilterOpen((prev) => !prev)}
+                className="inline-flex overflow-hidden rounded-lg border border-gray-300 new-primary-bg shadow-sm"
+              >
+                <button
+                  type="button"
+                  className="px-3 py-2 cursor-pointer text-lg font-medium text-white transition-colors focus:relative"
+                >
+                  Filter
+                </button>
+
+                <button
+                  type="button"
+                  className="px-3 py-2 cursor-pointer text-sm font-medium text-white transition-colors focus:relative"
+                  aria-label="Menu"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    class="size-4"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="m19.5 8.25-7.5 7.5-7.5-7.5"
+                    ></path>
+                  </svg>
+                </button>
+              </span>
+
+              {/* dropdown divs */}
+              <div
+                role="menu"
+                className={`${isFilterOpen ? "absolute" : "hidden"} md:end-0 md:left-auto left-0 top-12 z-auto w-35 overflow-hidden rounded-lg border border-gray-300 bg-white shadow-sm`}
+              >
+                <div
+                  onClick={() => {
+                    setIsFilterOpen(false);
+                    // setFilter("inStock");
+                    filterProducts("inStock");
+                  }}
+                  className="block cursor-pointer px-3 py-2 text-lg font-medium text-gray-700 transition-colors hover:bg-gray-100 hover:text-gray-900"
+                  role="menuitem"
+                >
+                  In-stock
+                </div>
+
+                <div
+                  onClick={() => {
+                    setIsFilterOpen(false);
+                    // setFilter("notInStock");
+                    filterProducts("notInStock");
+                  }}
+                  className="block cursor-pointer px-3 py-2 text-lg font-medium text-gray-700 transition-colors hover:bg-gray-100 hover:text-gray-900"
+                  role="menuitem"
+                >
+                  Not-in-stock
+                </div>
+
+                <div
+                  onClick={() => {
+                    setIsFilterOpen(false);
+                    // setFilter("visible");
+                    filterProducts("visible");
+                  }}
+                  className="block cursor-pointer px-3 py-2 text-lg font-medium text-gray-700 transition-colors hover:bg-gray-100 hover:text-gray-900"
+                  role="menuitem"
+                >
+                  Visible
+                </div>
+
+                <div
+                  onClick={() => {
+                    setIsFilterOpen(false);
+                    // setFilter("hidden");
+                    filterProducts("hidden");
+                  }}
+                  className="block cursor-pointer px-3 py-2 text-lg font-medium text-gray-700 transition-colors hover:bg-gray-100 hover:text-gray-900"
+                  role="menuitem"
+                >
+                  Hidden
+                </div>
+
+                <div
+                  onClick={() => {
+                    setIsFilterOpen(false);
+                    // setFilter("newestFirst");
+                    filterProducts("newestFirst");
+                  }}
+                  className="block cursor-pointer px-3 py-2 text-lg font-medium text-gray-700 transition-colors hover:bg-gray-100 hover:text-gray-900"
+                  role="menuitem"
+                >
+                  Newest first
+                </div>
+
+                <div
+                  onClick={() => {
+                    setIsFilterOpen(false);
+                    // setFilter("oldestFirst");
+                    filterProducts("oldestFirst");
+                  }}
+                  className="block cursor-pointer px-3 py-2 text-lg font-medium text-gray-700 transition-colors hover:bg-gray-100 hover:text-gray-900"
+                  role="menuitem"
+                >
+                  Oldest first
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
 
         <div className="overflow-x-auto shadow-lg bg-white rounded-2xl mt-5 p-3 space-x-4 ">
-          {products.length > 0 ? (
+          {displayProducts.length > 0 ? (
             <table>
               <thead>
                 <tr className="divide-y text-xl divide-gray-300">
@@ -336,7 +519,7 @@ function IndividualCakesAdmin() {
                 </tr>
               </thead>
               <tbody>
-                {products.map((product, i) => (
+                {displayProducts.map((product, i) => (
                   <ProductAdmin
                     key={i}
                     productId={product._id}
@@ -358,7 +541,8 @@ function IndividualCakesAdmin() {
           ) : (
             <div>
               <h2 className="text-4xl h-40 flex justify-center items-center">
-                There are no products in this {categoryName} category
+                There are no products in the {categoryName} category. Please add some
+                products.
               </h2>
             </div>
           )}

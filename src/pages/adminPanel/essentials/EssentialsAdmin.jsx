@@ -60,7 +60,7 @@ function EssentialsAdmin() {
               "Content-Type": "multipart/form-data",
               Authorization: `Bearer ${token}`,
             },
-          }
+          },
         );
         // setEssentialCategories((prev) => [...prev, postResponse.data]);
 
@@ -207,7 +207,10 @@ function EssentialsAdmin() {
               <h2 className="font-semibold new-primary-text text-xl">
                 Baking Essentials inventory
               </h2>
-              <p>Manage all your bakery essentials' categories</p>
+              <p className="text-lg">
+                Total Categories:{" "}
+                <span className="font-bold text-xl">{essentialCategories.length}</span>
+              </p>
             </div>
             <div></div>
           </div>
