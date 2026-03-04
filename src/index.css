@@ -68,6 +68,16 @@ body {
     }
   }
 }
+
+.hide-scrollbar {
+  overflow-y: scroll;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
+}
 .hover-content {
   position: absolute;
   inset: 0;

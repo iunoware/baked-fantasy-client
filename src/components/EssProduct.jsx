@@ -1,24 +1,34 @@
-import { useState } from "react";
-import { Button } from "../components/ui/button";
 import { Link } from "react-router-dom";
+import { Button } from "../components/ui/button";
 import { Plus, Minus } from "lucide-react";
 import toast from "react-hot-toast";
+import { useCart } from "../context/CartContext.jsx";
 
 function Product(props) {
-  const [added, setAdded] = useState(false);
-  const [quantity, setQuantity] = useState(1);
+  const { cartItems, addToCart, increaseQuantity, decreaseQuantity } = useCart();
+  const cartItem = cartItems.find((item) => item.id === props.id);
+  const added = !!cartItem;
+  const quantity = cartItem ? cartItem.quantity : 1;
 
-  // Add to cart (local only)
+  // Add to cart
   const handleCart = () => {
-    setAdded(true);
+    addToCart({
+      id: props.id,
+      name: props.title,
+      price: props.discountedPrice,
+      image: props.img,
+      category: props.category,
+      subject: props.subject
+    });
     toast.success(`${props.title} added to cart!`);
   };
 
   // Quantity change
   const handleQuantityChange = (change) => {
-    const newQuantity = quantity + change;
-    if (newQuantity >= 1 && newQuantity <= 50) {
-      setQuantity(newQuantity);
+    if (change > 0) {
+      increaseQuantity(props.id);
+    } else {
+      decreaseQuantity(props.id);
     }
   };
 
@@ -49,9 +59,8 @@ function Product(props) {
           {/* <div className={`absolute inset-0 ${colors[props.color]}`}></div> */}
           {/* Centered hover button */}
           <div
-            className={`${
-              props.inStock ? "block" : "hidden"
-            } absolute inset-0 w-full h-full flex justify-center items-center translate-y-10 opacity-0 group-hover/card:translate-y-0 group-hover/card:opacity-100 transition-all duration-300`}
+            className={`${props.inStock ? "block" : "hidden"
+              } absolute inset-0 w-full h-full flex justify-center items-center translate-y-10 opacity-0 group-hover/card:translate-y-0 group-hover/card:opacity-100 transition-all duration-300`}
           >
             <Link
               to={`/essential/${props.category}/${props.id}`}
@@ -81,11 +90,10 @@ function Product(props) {
             {!added ? (
               <button
                 disabled={!props.inStock}
-                className={`${
-                  props.inStock
-                    ? "cursor-pointer new-primary-text"
-                    : "cursor-not-allowed text-gray-400"
-                } group relative inline-flex items-center overflow-hidden rounded-lg border border-current px-8 py-3`}
+                className={`${props.inStock
+                  ? "cursor-pointer new-primary-text"
+                  : "cursor-not-allowed text-gray-400"
+                  } group relative inline-flex items-center overflow-hidden rounded-lg border border-current px-8 py-3`}
                 onClick={handleCart}
               >
                 <span className="text-sm font-medium transition-all">
@@ -110,11 +118,10 @@ function Product(props) {
 
             <button
               disabled={!props.inStock}
-              className={`${
-                props.inStock
-                  ? "cursor-pointer new-primary-bg"
-                  : "cursor-not-allowed bg-gray-400"
-              } group relative inline-flex items-center overflow-hidden text-white rounded-lg border border-current px-4 py-3`}
+              className={`${props.inStock
+                ? "cursor-pointer new-primary-bg"
+                : "cursor-not-allowed bg-gray-400"
+                } group relative inline-flex items-center overflow-hidden text-white rounded-lg border border-current px-4 py-3`}
               onClick={sendToWhatsApp}
             >
               <span className="text-sm font-medium">Buy Now</span>

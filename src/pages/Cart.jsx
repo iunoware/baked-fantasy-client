@@ -5,35 +5,12 @@ import { PaymentPage } from "../components/PaymentPage.jsx";
 import { ConfirmationPage } from "../components/ConfirmationPage.jsx";
 import axios from "axios";
 
+import { useCart } from "../context/CartContext.jsx";
+
 export default function App() {
   const [currentStep, setCurrentStep] = useState("cart");
   const [orderNumber, setOrderNumber] = useState("");
-  const [cartItems, setCartItems] = useState([]);
-
-  const userId = "670e2f1cf9a0b3142b12b70c";
-
-  useEffect(() => {
-    const fetchCart = async () => {
-      try {
-        const res = await axios.get(`http://localhost:5000/cart/${userId}`);
-        const cartData = res.data;
-        console.log(cartData);
-
-        const formattedItems = cartData.items.map((item) => ({
-          id: item.productId._id,
-          name: item.productId.title,
-          image: `http://localhost:5000${item.productId.images?.[0]}`,
-          price: item.productId.price,
-          quantity: item.quantity,
-          description: item.productId.subject || "No description available",
-        }));
-        setCartItems(formattedItems);
-      } catch (err) {
-        console.error("Error Fetching Cart", err);
-      }
-    };
-    fetchCart();
-  }, [userId]);
+  const { cartItems, updateQuantity, removeFromCart } = useCart();
 
   const [promoCode, setPromoCode] = useState("");
   const [selectedAddress, setSelectedAddress] = useState(null);
@@ -57,24 +34,10 @@ export default function App() {
     { id: "4", type: "cod", label: "Cash on Delivery" },
   ];
 
-  const updateCartItem = (id, quantity) => {
-    if (quantity === 0) {
-      setCartItems((prev) => prev.filter((item) => item.id !== id));
-    } else {
-      setCartItems((prev) =>
-        prev.map((item) => (item.id === id ? { ...item, quantity } : item))
-      );
-    }
-  };
-
-  const removeCartItem = (id) => {
-    setCartItems((prev) => prev.filter((item) => item.id !== id));
-  };
-
   const calculateOrderSummary = () => {
     const subtotal = cartItems.reduce(
       (sum, item) => sum + item.price * item.quantity,
-      0
+      0,
     );
     const discount = promoCode === "SAVE20" ? subtotal * 0.2 : 0;
     const taxes = (subtotal - discount) * 0.18; // 18% GST
@@ -119,8 +82,8 @@ export default function App() {
       {currentStep === "cart" && (
         <CartPage
           cartItems={cartItems}
-          updateCartItem={updateCartItem}
-          removeCartItem={removeCartItem}
+          updateCartItem={updateQuantity}
+          removeCartItem={removeFromCart}
           promoCode={promoCode}
           setPromoCode={setPromoCode}
           orderSummary={orderSummary}

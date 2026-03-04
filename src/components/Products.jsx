@@ -1,32 +1,43 @@
-import { useState } from "react";
-import { Button } from "../components/ui/button";
 import { Link } from "react-router-dom";
+import { Button } from "../components/ui/button";
 import { Plus, Minus } from "lucide-react";
 import toast from "react-hot-toast";
+import { useCart } from "../context/CartContext.jsx";
 
 function Product(props) {
-  const [added, setAdded] = useState(false);
-  const [quantity, setQuantity] = useState(1);
+  const { cartItems, addToCart, increaseQuantity, decreaseQuantity } =
+    useCart();
+  const cartItem = cartItems.find((item) => item.id === props.id);
+  const added = !!cartItem;
+  const quantity = cartItem ? cartItem.quantity : 1;
 
-  // Add to cart (local only)
+  // Add to cart
   const handleCart = () => {
-    setAdded(true);
+    addToCart({
+      id: props.id,
+      name: props.title,
+      price: props.discountedPrice,
+      image: props.img,
+      category: props.category,
+      subject: props.subject,
+    });
     toast.success(`${props.title} added to cart!`);
   };
 
-  // WhatsApp Direct Send
-  const sendToWhatsApp = () => {
-    const phone = "916379240125"; // your WhatsApp number (no +)
-    const message = `Hi! I would like to order ${quantity} x ${props.title}.`;
-    const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
-    window.open(url, "_blank");
+  // Quantity change
+  const handleQuantityChange = (change) => {
+    if (change > 0) {
+      increaseQuantity(props.id);
+    } else {
+      decreaseQuantity(props.id);
+    }
   };
 
-  const handleQuantityChange = (change) => {
-    const newQty = quantity + change;
-    if (newQty >= 1 && newQty <= 50) {
-      setQuantity(newQty);
-    }
+  // Send to WhatsApp
+  const sendToWhatsApp = () => {
+    const phone = "916379240125"; // your WhatsApp number
+    const message = `Order Details:% 0A${props.title} - Quantity: ${quantity} `;
+    window.open(`https://wa.me/${phone}?text=${message}`);
   };
 
   return (
@@ -36,9 +47,8 @@ function Product(props) {
           <img
             alt={props.title}
             src={props.img}
-            className={`${
-              props.inStock ? "" : "grayscale-100"
-            } h-full w-full rounded-xl object-cover`}
+            className={`${props.inStock ? "" : "grayscale-100"
+              } h-full w-full rounded-xl object-cover`}
           />
           {!props.inStock && (
             <div className="absolute top-2.5 right-2">
@@ -49,9 +59,8 @@ function Product(props) {
           )}
 
           <div
-            className={`${
-              props.inStock ? "block" : "hidden"
-            } absolute inset-0 flex justify-center items-center translate-y-10 opacity-0 group-hover/card:translate-y-0 group-hover/card:opacity-100 transition-all duration-300`}
+            className={`${props.inStock ? "block" : "hidden"
+              } absolute inset-0 flex justify-center items-center translate-y-10 opacity-0 group-hover/card:translate-y-0 group-hover/card:opacity-100 transition-all duration-300`}
           >
             <Link
               to={`/products/${props.category}/${props.id}`}
@@ -98,14 +107,15 @@ function Product(props) {
             {!added ? (
               <button
                 disabled={!props.inStock}
-                className={`${
-                  props.inStock
+                className={`${props.inStock
                     ? "cursor-pointer new-primary-text"
                     : "cursor-not-allowed text-gray-400"
-                } group relative inline-flex items-center overflow-hidden rounded-lg border border-current px-8 py-3 `}
+                  } group relative inline-flex items-center overflow-hidden rounded-lg border border-current px-8 py-3 `}
                 onClick={handleCart}
               >
-                <span className="text-sm font-medium transition-all">Add to cart</span>
+                <span className="text-sm font-medium transition-all">
+                  Add to cart
+                </span>
               </button>
             ) : (
               <div className="space-x-2 inline-flex items-center overflow-hidden rounded-lg border border-current py-1 new-primary-text px-4">
@@ -117,7 +127,11 @@ function Product(props) {
                   <Minus className="h-3 w-4" />
                 </Button>
                 <span className="w-8 text-center">{quantity}</span>
-                <Button variant="ghost" size="sm" onClick={() => handleQuantityChange(1)}>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => handleQuantityChange(1)}
+                >
                   <Plus className="h-3 w-4" />
                 </Button>
               </div>
@@ -125,11 +139,10 @@ function Product(props) {
 
             <button
               disabled={!props.inStock}
-              className={`${
-                props.inStock
+              className={`${props.inStock
                   ? "cursor-pointer new-primary-bg"
                   : "cursor-not-allowed bg-gray-400"
-              } group relative inline-flex items-center overflow-hidden rounded-lg px-4 py-3 text-white `}
+                } group relative inline-flex items-center overflow-hidden rounded-lg px-4 py-3 text-white `}
               onClick={sendToWhatsApp}
             >
               <span className="text-sm font-medium">Buy Now</span>
