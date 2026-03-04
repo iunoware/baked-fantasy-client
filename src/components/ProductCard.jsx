@@ -1,4 +1,19 @@
+import { useCart } from "../context/CartContext.jsx";
+
 function Card(props) {
+  const { addToCart } = useCart();
+
+  const handleAddToCart = (e) => {
+    e.preventDefault();
+    addToCart({
+      id: props.id,
+      name: props.name,
+      price: props.price,
+      img: props.img,
+      discount: props.discount
+    });
+  };
+
   return (
     <>
       <div className=" rounded bg-gray-300">
@@ -24,8 +39,8 @@ function Card(props) {
             {/* primary buttons */}
             <div className="buttons pt-5">
               <a
-                className="group relative inline-flex items-center overflow-hidden rounded-sm bg-cyan-500 px-8 py-3 text-white focus:ring-3 focus:outline-hidden mr-3"
-                href="#"
+                className="group relative inline-flex items-center overflow-hidden rounded-sm bg-cyan-500 px-8 py-3 text-white focus:ring-3 focus:outline-hidden mr-3 cursor-pointer"
+                onClick={handleAddToCart}
               >
                 <span className="absolute -start-full transition-all group-hover:start-4">
                   <svg

@@ -172,10 +172,14 @@ function AppContent() {
   );
 }
 
+import { CartProvider } from "./context/CartContext.jsx";
+
 function App() {
   return (
     <Router>
-      <AppContent />
+      <CartProvider>
+        <AppContent />
+      </CartProvider>
     </Router>
   );
 }

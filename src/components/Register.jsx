@@ -1,5 +1,4 @@
-/* eslint-disable no-unused-vars */
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "./ui/button.jsx";
 import { Input } from "./ui/input.jsx";
 import { Card, CardContent } from "./ui/card.jsx";
@@ -14,6 +13,16 @@ import {
 } from "../fireBaseConfig.js";
 
 function Register({ isOpen, onClose, onOpenLogin }) {
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    password: "",
+    phoneNumber: "",
+  });
+  const [message, setMessage] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
   // for otp
   const [showVerify, setVerify] = useState(false);
   const [confirmationResult, setConfirmation] = useState(null);
@@ -90,16 +99,6 @@ function Register({ isOpen, onClose, onOpenLogin }) {
     }
   };
 
-  const [form, setForm] = useState({
-    name: "",
-    email: "",
-    password: "",
-    phoneNumber: "",
-  });
-  const [message, setMessage] = useState("");
-  const [showPassword, setShowPassword] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-
   if (!isOpen) return null;
 
   const handleChange = (e) => {
@@ -112,7 +111,7 @@ function Register({ isOpen, onClose, onOpenLogin }) {
       <div className="fixed inset-0 -z-10" onClick={onClose} />
 
       {/* Simplified & Compact Modal Container */}
-      <div className="relative w-full max-w-[400px] bg-white rounded-2xl shadow-2xl overflow-hidden my-auto transform transition-all animate-in fade-in zoom-in duration-300">
+      <div className="relative hide-scrollbar w-full max-w-[400px] bg-white rounded-2xl shadow-2xl overflow-y-scroll my-auto transform transition-all animate-in fade-in zoom-in duration-300">
         {/* Minimal Accent Line */}
         <div className="h-1 w-full bg-[#ec4174]" />
 

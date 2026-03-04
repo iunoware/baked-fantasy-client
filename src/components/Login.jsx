@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "./ui/button.jsx";
 import { Input } from "./ui/input.jsx";
 import { Card, CardContent } from "./ui/card.jsx";
@@ -47,7 +47,6 @@ function Login({ isOpen, onClose, onOpenRegister }) {
 
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("user", JSON.stringify(res.data.user));
-
       setMessage(res.data.msg);
       onClose();
       toast.success("Login Successful Welcome back 🍰");
