@@ -32,8 +32,8 @@ function ProductAdmin(props) {
       setDeleteModal(false);
       setTimeout(() => {
         window.location.reload();
-      }, 1000);
-      console.log(`Deleted: ${props.title}`);
+      }, 200);
+      // console.log(`Deleted: ${props.title}`);
     } catch (error) {
       toast.error(`Can't delete ${props.title}`);
       console.error(`can't delete ${props.title}`, error.message);
@@ -368,14 +368,10 @@ function ProductAdmin(props) {
                   </h2>
                   <p className=" text-center w-full mb-5 text-black">
                     The product{" "}
-                    <span className="text-red-600 font-bold text-lg">
-                      {props.title}
-                    </span>{" "}
+                    <span className="text-red-600 font-bold text-lg">{props.title}</span>{" "}
                     will be{" "}
-                    <span className="text-red-600 font-bold">
-                      permanently deleted
-                    </span>
-                    , and can't be recovered back.
+                    <span className="text-red-600 font-bold">permanently deleted</span>,
+                    and can't be recovered back.
                   </p>
                 </div>
 
@@ -416,7 +412,7 @@ function ProductAdmin(props) {
       <tr
         className={`${props.i % 2 === 0 ? "bg-gray-50" : ""} ${
           !props.isActive ? "bg-red-200" : ""
-        } my-3 divide-y text-lg divide-gray-300`}
+        } my-3 divide-y text-lg divide-gray-300 `}
       >
         <td className="p-4">{props.i + 1}</td>
         <td className="p-4">
