@@ -1,10 +1,17 @@
-import React, { useCallback, useLayoutEffect, useRef, useState } from "react";
+import React, {
+  useCallback,
+  useLayoutEffect,
+  useRef,
+  useState,
+  useEffect,
+} from "react";
 import { NavLink } from "react-router-dom";
 import { Menu, X, Search, ShoppingCart, User } from "lucide-react";
 import { gsap } from "gsap";
 import { Link } from "react-router-dom";
 import Login from "./Login.jsx";
 import Register from "./Register.jsx";
+import { useCart } from "../context/CartContext.jsx";
 
 export const StaggeredMenu = ({
   position = "right",
@@ -26,6 +33,28 @@ export const StaggeredMenu = ({
   const [isLoginOpen, setLoginOpen] = useState(false);
   const [isRegisterOpen, setRegisterOpen] = useState(false);
   const openRef = useRef(false);
+  const { cartCount } = useCart();
+
+  // for disabling scroll when login or register is open
+  useEffect(() => {
+    if (isLoginOpen || isRegisterOpen) {
+      document.body.style.setProperty("overflow", "hidden", "important");
+      document.documentElement.style.setProperty(
+        "overflow",
+        "hidden",
+        "important",
+      );
+    } else {
+      document.body.style.removeProperty("overflow");
+      document.documentElement.style.removeProperty("overflow");
+    }
+
+    return () => {
+      document.body.style.removeProperty("overflow");
+      document.documentElement.style.removeProperty("overflow");
+    };
+  }, [isLoginOpen, isRegisterOpen]);
+
   const openRegisterFromLogin = () => {
     setLoginOpen(false);
     setRegisterOpen(true);
@@ -463,9 +492,8 @@ export const StaggeredMenu = ({
 
   return (
     <div
-      className={`overflow-x-clip fixed sm-scope z-40 pointer-events-none ${
-        isFixed ? "fixed top-0 left-0 overflow-hidden" : "w-full h-full"
-      }`}
+      className={`overflow-x-clip fixed sm-scope z-40 pointer-events-none ${isFixed ? "fixed top-0 left-0 overflow-hidden" : "w-full h-full"
+        }`}
     >
       <div
         className={
@@ -537,16 +565,21 @@ export const StaggeredMenu = ({
               <div className="sm:flex rounded-2xl p-1 new-primary-bg sm:gap-4">
                 <div className="hidden sm:flex">
                   <Link
-                    className=" px-5 cursor-pointer py-2.5 text-sm font-medium text-red"
+                    className=" px-5 cursor-pointer py-2.5 text-sm font-medium text-red relative"
                     to="/cart"
                   >
                     <ShoppingCart size={20} color="#F6E9D9" />
+                    {cartCount > 0 && (
+                      <span className="absolute -top-1 -right-0 bg-white text-pink-600 text-[10px] font-bold px-1.5 py-0.5 rounded-full shadow-sm">
+                        {cartCount}
+                      </span>
+                    )}
                   </Link>
                 </div>
                 <Link
                   className=" px-5 py-2.5 cursor-pointer text-sm font-medium text-red"
                   onClick={() => setLoginOpen(true)}
-                  //   to="/profile"
+                //   to="/profile"
                 >
                   <User size={20} color="#F6E9D9" />
                 </Link>
@@ -620,8 +653,13 @@ export const StaggeredMenu = ({
             </div>
             <div className="links flex items-center gap-8 mr-5">
               <div className="new-primary-bg flex items-center gap-6 rounded-2xl p-3 px-5">
-                <Link to="/cart">
+                <Link to="/cart" className="relative">
                   <ShoppingCart size={20} color="#F6E9D9" />
+                  {cartCount > 0 && (
+                    <span className="absolute -top-2 -right-2 bg-white text-pink-600 text-[8px] font-bold px-1 py-0.5 rounded-full shadow-sm">
+                      {cartCount}
+                    </span>
+                  )}
                 </Link>
                 <a
                   className="cursor-pointer"
@@ -660,7 +698,7 @@ export const StaggeredMenu = ({
           ref={panelRef}
           className="staggered-menu-panel shadow-xl z-50 overflow-y-hidden! absolute top-0 right-0 h-screen! bg-white! flex flex-col p-[6em_2em_2em_2em] backdrop-blur-md pointer-events-auto"
           style={{ WebkitBackdropFilter: "blur(12px)" }}
-          // aria-hidden={!open}
+        // aria-hidden={!open}
         >
           <div className="sm-panel-inner flex-1 flex flex-col gap-5">
             <ul
@@ -676,8 +714,7 @@ export const StaggeredMenu = ({
                   >
                     <NavLink
                       className={({ isActive }) =>
-                        `${
-                          isActive ? "text-pink-400!" : "text-black!"
+                        `${isActive ? "text-pink-400!" : "text-black!"
                         } sm-panel-item relative hover:text-pink-400! cursor-pointer leading-none tracking-[-2px] uppercase transition-[background,color] duration-150 ease-linear inline-block no-underline pr-[1.4em]`
                       }
                       to={it.link}
@@ -715,7 +752,7 @@ export const StaggeredMenu = ({
                 className="sm-socials mt-auto pt-8 flex flex-col gap-3"
                 aria-label="Social links"
               >
-                <h3 className="sm-socials-title m-0 text-base font-medium text-white!">
+                <h3 className="sm-socials-title m-0 text-base font-medium text-black!">
                   Socials
                 </h3>
                 <ul
@@ -728,7 +765,7 @@ export const StaggeredMenu = ({
                         href={s.link}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="sm-socials-link text-[1.2rem] font-medium text-white! no-underline relative inline-block py-0.5 transition-[color,opacity] duration-300 ease-linear"
+                        className="sm-socials-link text-[1.2rem] font-medium text-red! no-underline relative inline-block py-0.5 transition-[color,opacity] duration-300 ease-linear"
                       >
                         {s.label}
                       </a>
