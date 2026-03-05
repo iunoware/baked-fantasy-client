@@ -1,7 +1,21 @@
-import { useState } from "react";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
 function OrdersAdmin() {
   const [active, setActive] = useState();
+  const [orders, setOrders] = useState([]);
+
+  useEffect(() => {
+    async function getOrder() {
+      try {
+        let res = await axios.get(`http://localhost:5000/orders`);
+        setOrders(res.data.orders);
+      } catch (err) {
+        console.error("Error fetching Products:", err);
+      }
+    }
+    getOrder();
+  }, []);
 
   return (
     <div className="bg mb-10">
@@ -70,48 +84,32 @@ function OrdersAdmin() {
                 </thead>
 
                 <tbody className="divide-y divide-gray-200 *:even:bg-gray-50">
-                  <tr className="*:text-gray-900 *:first:font-medium">
-                    <td className="px-3 py-2 whitespace-nowrap">05/10/20225</td>
-                    <td className="px-3 py-2 whitespace-nowrap">1241</td>
+                  {orders.map((order) => (
+                    <tr
+                      key={order._id}
+                      className="*:text-gray-900 *:first:font-medium"
+                    >
+                      <td className="px-3 py-2 whitespace-nowrap">
+                        {new Date(order.createdAt).toLocaleDateString()}
+                      </td>
 
-                    <td className="px-3 py-2 whitespace-nowrap">
-                      30 Days Baking Course
-                    </td>
-                    <td className="px-3 py-2 whitespace-nowrap">Sumathi R</td>
-                    <td className="px-3 py-2 whitespace-nowrap">₹ 499</td>
-                  </tr>
-                  <tr className="*:text-gray-900 *:first:font-medium">
-                    <td className="px-3 py-2 whitespace-nowrap">04/06/2025</td>
-                    <td className="px-3 py-2 whitespace-nowrap">1214</td>
+                      <td className="px-3 py-2 whitespace-nowrap">
+                        {order.products[0]?.productId?._id}
+                      </td>
 
-                    <td className="px-3 py-2 whitespace-nowrap">
-                      15 Days Baking Course
-                    </td>
-                    <td className="px-3 py-2 whitespace-nowrap">
-                      Rajesh Prasanth
-                    </td>
-                    <td className="px-3 py-2 whitespace-nowrap">₹ 399</td>
-                  </tr>
-                  <tr className="*:text-gray-900 *:first:font-medium">
-                    <td className="px-3 py-2 whitespace-nowrap">12/10/2025</td>
-                    <td className="px-3 py-2 whitespace-nowrap">1212</td>
+                      <td className="px-3 py-2 whitespace-nowrap">
+                        {order.products[0]?.productId?.name}
+                      </td>
 
-                    <td className="px-3 py-2 whitespace-nowrap">
-                      30 Days Baking Course
-                    </td>
-                    <td className="px-3 py-2 whitespace-nowrap">Thrisha S</td>
-                    <td className="px-3 py-2 whitespace-nowrap">₹ 399</td>
-                  </tr>
-                  <tr className="*:text-gray-900 *:first:font-medium">
-                    <td className="px-3 py-2 whitespace-nowrap">20/06/2025</td>
-                    <td className="px-3 py-2 whitespace-nowrap">1234</td>
+                      <td className="px-3 py-2 whitespace-nowrap">
+                        {order.customerName}
+                      </td>
 
-                    <td className="px-3 py-2 whitespace-nowrap">
-                      15 Days Baking Course
-                    </td>
-                    <td className="px-3 py-2 whitespace-nowrap">Mandana R</td>
-                    <td className="px-3 py-2 whitespace-nowrap">₹ 399</td>
-                  </tr>
+                      <td className="px-3 py-2 whitespace-nowrap">
+                        ₹ {order.totalPrice}
+                      </td>
+                    </tr>
+                  ))}
                 </tbody>
               </table>
             </div>
