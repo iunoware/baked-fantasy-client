@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import axios from "axios";
 import AdminLogin from "../../components/adminPanel/AdminLogin.jsx";
 import {
@@ -10,15 +9,16 @@ import {
 } from "lucide-react";
 import { useEffect, useState } from "react";
 
-const url = "http://localhost:5000/";
+const url = "http://localhost:5000";
 
 function Dashboard() {
-  const [orders, setOrders] = useState([]);
+  const [ordersToday, setOrdersToday] = useState(0);
 
   async function fetchOrders() {
     try {
       const response = await axios.get(`${url}/orders/today`);
-      setOrders(response.data);
+      setOrdersToday(response.data.totalOrdersToday);
+      console.log(response.data.totalOrdersToday);
     } catch (error) {
       console.log(error.message);
     }
@@ -43,7 +43,7 @@ function Dashboard() {
             <div className="bg-gray-50 space-y-2 shadow-xl rounded-2xl">
               <h1 className="pt-3 pl-4 text-xl font-bold">Orders Today</h1>
               <div className="flex px-5 pt-3 justify-between">
-                <p className="text-2xl font-bold">24</p>
+                <p className="text-2xl font-bold">{ordersToday}</p>
                 <div className="bg-red-100 text-xl rounded-xl p-2">
                   <ShoppingCart className="text-blue" />
                 </div>
