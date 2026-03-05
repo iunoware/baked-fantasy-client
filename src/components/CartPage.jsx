@@ -28,9 +28,9 @@ export function CartPage({
   const [promoInput, setPromoInput] = useState(promoCode);
   const [promoApplied, setPromoApplied] = useState(false);
 
-  const [added, setAdded] = useState(false);
-  const [quantity, setQuantity] = useState(1);
-  const userId = "670e2f1cf9a0b3142b12b70c";
+  // Get userId from localStorage if available, fallback to hardcoded test ID
+  const savedUser = JSON.parse(localStorage.getItem("user") || "{}");
+  const userId = savedUser._id || "670e2f1cf9a0b3142b12b70c";
 
   const applyPromo = () => {
     if (promoInput === "SAVE20") {
@@ -42,25 +42,12 @@ export function CartPage({
     }
   };
 
-  const handleQuantityChange = async (itemId, currentQuantity, change) => {
-    const newQuantity = currentQuantity + change;
+  const handleQuantityChange = (itemId, currentQuantity, change) => {
+    const newQuantity = Number(currentQuantity) + change;
     if (newQuantity < 1 || newQuantity > 50) return;
 
-    try {
-      await axios.put("http://localhost:5000/cart", {
-        userId,
-        productId: itemId,
-        quantity: newQuantity,
-      });
-
-      // Call your parent’s updateCartItem to update the state
-      updateCartItem(itemId, newQuantity);
-
-      toast.success(`Quantity updated to ${newQuantity}`);
-    } catch (err) {
-      console.error("Error updating cart:", err);
-      toast.error("Failed to update quantity");
-    }
+    // The updateCartItem (updateQuantity from context) now handles DB sync automatically
+    updateCartItem(itemId, newQuantity);
   };
 
   return (
