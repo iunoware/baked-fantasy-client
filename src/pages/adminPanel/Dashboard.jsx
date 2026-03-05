@@ -13,6 +13,7 @@ const url = "http://localhost:5000";
 
 function Dashboard() {
   const [ordersToday, setOrdersToday] = useState(0);
+  const [thisMonthSales, setThisMonthSales] = useState([]);
 
   async function fetchOrders() {
     try {
@@ -20,12 +21,22 @@ function Dashboard() {
       setOrdersToday(response.data.totalOrdersToday);
       console.log(response.data.totalOrdersToday);
     } catch (error) {
-      console.log(error.message);
+      console.error(error.message);
+    }
+  }
+
+  async function thisMonthSalesFunc() {
+    try {
+      const response = await axios.get(`${url}/orders/count`);
+      setThisMonthSales(response.data);
+    } catch (error) {
+      console.error(error.message);
     }
   }
 
   useEffect(() => {
     fetchOrders();
+    thisMonthSalesFunc();
   }, []);
 
   return (
@@ -56,7 +67,7 @@ function Dashboard() {
 
             {/* 2 */}
             <div className="bg-gray-50 space-y-2 shadow-xl rounded-2xl p-4">
-              <h1 className="pt-3 pl-4 text-xl font-bold">Revenue</h1>
+              <h1 className="pt-3 pl-4 text-xl font-bold">Total Revenue this month</h1>
               <div className="flex px-5 pt-2 justify-between">
                 <div className="flex gap-1 items-center">
                   <IndianRupee className="text-green-500" size={20} />
@@ -74,9 +85,9 @@ function Dashboard() {
 
             {/* 3 */}
             <div className="bg-gray-50 space-y-2 shadow-xl rounded-2xl p-4">
-              <h1 className="pt-3 pl-4 text-xl font-bold">Courses Sales</h1>
+              <h1 className="pt-3 pl-4 text-xl font-bold">Courses Sales this month</h1>
               <div className="flex px-5 pt-3 justify-between">
-                <p className="text-2xl font-bold">32</p>
+                <p className="text-2xl font-bold">{thisMonthSales.courseSales}</p>
                 <div className="bg-red-100 text-xl rounded-xl p-2">
                   <ChefHat className="text-blue" />
                 </div>
