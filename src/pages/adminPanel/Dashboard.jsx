@@ -54,7 +54,7 @@ function Dashboard() {
             <div className="bg-gray-50 space-y-2 shadow-xl rounded-2xl p-4">
               <h1 className="pt-3 pl-4 text-xl font-bold">Total Orders Today</h1>
               <div className="flex px-5 pt-3 justify-between">
-                <p className="text-2xl font-bold">{ordersToday}</p>
+                <p className="text-3xl font-bold">{ordersToday}</p>
                 <div className="bg-red-100 text-xl rounded-xl p-2">
                   <ShoppingCart className="text-blue" />
                 </div>
@@ -71,7 +71,7 @@ function Dashboard() {
               <div className="flex px-5 pt-2 justify-between">
                 <div className="flex gap-1 items-center">
                   <IndianRupee className="text-green-500" size={20} />
-                  <p className="text-2xl font-bold">2204</p>
+                  <p className="text-3xl font-bold">2204</p>
                 </div>
                 <div className="bg-red-100 text-xl rounded-xl p-2">
                   <BadgeIndianRupee className="text-green-400" />
@@ -87,7 +87,7 @@ function Dashboard() {
             <div className="bg-gray-50 space-y-2 shadow-xl rounded-2xl p-4">
               <h1 className="pt-3 pl-4 text-xl font-bold">Courses Sales this month</h1>
               <div className="flex px-5 pt-3 justify-between">
-                <p className="text-2xl font-bold">{thisMonthSales.courseSales}</p>
+                <p className="text-3xl font-bold">{thisMonthSales.courseSales}</p>
                 <div className="bg-red-100 text-xl rounded-xl p-2">
                   <ChefHat className="text-blue" />
                 </div>
