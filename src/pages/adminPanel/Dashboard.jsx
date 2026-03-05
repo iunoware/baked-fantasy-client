@@ -40,22 +40,22 @@ function Dashboard() {
           </div>
           <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 my-10 gap-5">
             {/* 1 */}
-            <div className="bg-gray-50 space-y-2 shadow-xl rounded-2xl">
-              <h1 className="pt-3 pl-4 text-xl font-bold">Orders Today</h1>
+            <div className="bg-gray-50 space-y-2 shadow-xl rounded-2xl p-4">
+              <h1 className="pt-3 pl-4 text-xl font-bold">Total Orders Today</h1>
               <div className="flex px-5 pt-3 justify-between">
                 <p className="text-2xl font-bold">{ordersToday}</p>
                 <div className="bg-red-100 text-xl rounded-xl p-2">
                   <ShoppingCart className="text-blue" />
                 </div>
               </div>
-              <p className="flex gap-4 pl-5 pb-5">
+              {/* <p className="flex gap-4 pl-5 pb-5">
                 <ChartNoAxesCombined className="text-green-500" />
                 <span className="text-lg">+12% vs last month</span>
-              </p>
+              </p> */}
             </div>
 
             {/* 2 */}
-            <div className="bg-gray-50 space-y-2 shadow-xl rounded-2xl">
+            <div className="bg-gray-50 space-y-2 shadow-xl rounded-2xl p-4">
               <h1 className="pt-3 pl-4 text-xl font-bold">Revenue</h1>
               <div className="flex px-5 pt-2 justify-between">
                 <div className="flex gap-1 items-center">
@@ -66,14 +66,14 @@ function Dashboard() {
                   <BadgeIndianRupee className="text-green-400" />
                 </div>
               </div>
-              <p className="flex gap-4 pl-5">
+              {/* <p className="flex gap-4 pl-5">
                 <ChartNoAxesCombined className="text-green-500" />
                 <span className="text-lg">+18% vs last month</span>
-              </p>
+              </p> */}
             </div>
 
             {/* 3 */}
-            <div className="bg-gray-50 space-y-2 shadow-xl rounded-2xl">
+            <div className="bg-gray-50 space-y-2 shadow-xl rounded-2xl p-4">
               <h1 className="pt-3 pl-4 text-xl font-bold">Courses Sales</h1>
               <div className="flex px-5 pt-3 justify-between">
                 <p className="text-2xl font-bold">32</p>
@@ -81,10 +81,10 @@ function Dashboard() {
                   <ChefHat className="text-blue" />
                 </div>
               </div>
-              <p className="flex gap-4 pl-5">
+              {/* <p className="flex gap-4 pl-5">
                 <ChartNoAxesCombined className="text-green-500" />
                 <span className="text-lg">+20% vs last month</span>
-              </p>
+              </p> */}
             </div>
           </div>
           {/* <div className="graph md:w-[90vw] md:h-[100vh] flex items-center justify-center">
