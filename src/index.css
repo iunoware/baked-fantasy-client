@@ -1,17 +1,27 @@
 @import url("https://fonts.googleapis.com/css2?family=Edu+NSW+ACT+Cursive:wght@400..700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Mansalva&display=swap");
+/* @import url("https://fonts.googleapis.com/css2?family=Funnel+Display:wght@300..800&family=Lora:ital,wght@0,400..700;1,400..700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Mozilla+Text:wght@200..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Quicksand:wght@300..700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"); */
 @import url("https://fonts.googleapis.com/css2?family=Funnel+Display:wght@300..800&family=Lora:ital,wght@0,400..700;1,400..700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Mozilla+Text:wght@200..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Quicksand:wght@300..700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
 
 @import "tailwindcss";
 
-body {
-  font-family: "Quicksand";
-  overflow-y: hidden;
+@font-face {
+  font-family: "Gliker";
+  src: url("/fonts/gliker-regular.ttf") format("truetype");
+  font-weight: normal;
+  font-size: normal;
+}
+@font-face {
+  font-family: "picktea";
+  src: url("/fonts/picktea.ttf") format("truetype");
+  font-weight: normal;
+  font-size: normal;
 }
 
-.lora {
-  font-family: "Lora";
+body {
+  font-family: "poppins";
+  overflow-y: hidden;
 }
 
 .luckyGuy {
@@ -25,6 +35,17 @@ body {
   font-weight: 900;
   font-style: normal;
 }
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Lora";
+  /* font-family: "picktea" */
+}
+
 /* background color */
 .bg {
   @apply bg-[#EFE1D0];
@@ -37,6 +58,7 @@ body {
   --color-red: #be0604;
   /* for bg */
   --color-cream: #fff4d9;
+  --color-cream2: #faf6eb;
   /* for active */
   --color-vibrant: #f9c7c2;
   --color-brown: #b16231;
@@ -71,8 +93,8 @@ body {
 
 .hide-scrollbar {
   overflow-y: scroll;
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
 .hide-scrollbar::-webkit-scrollbar {
@@ -112,19 +134,6 @@ body {
   }
 }
 
-@font-face {
-  font-family: "Gliker";
-  src: url("/fonts/gliker-regular.ttf") format("truetype");
-  font-weight: normal;
-  font-size: normal;
-}
-@font-face {
-  font-family: "picktea";
-  src: url("/fonts/picktea.ttf") format("truetype");
-  font-weight: normal;
-  font-size: normal;
-}
-
 /* h1,
 h2 {
   font-family: "Gliker";
@@ -162,11 +171,6 @@ body {
 }
 
 .new-primary-bg {
-  /* dark brown ⬇️ */
-  /* @apply bg-[#472823]; */
-  /* light brown ⬇️ */
-  /* @apply bg-[#854a42]; */
-  /* dark red ⬇️ */
   @apply bg-[#870D32];
 }
 
@@ -179,11 +183,6 @@ body {
 }
 
 .new-primary-text {
-  /* dark brown ⬇️ */
-  /* @apply text-[#472823]; */
-  /* light brown ⬇️ */
-  /* @apply text-[#854a42]; */
-  /* dark red ⬇️ */
   @apply text-[#870D32];
 }
 
