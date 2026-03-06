@@ -134,6 +134,19 @@ h6 {
   }
 }
 
+/* @font-face {
+  font-family: "Gliker";
+  src: url("/fonts/gliker-regular.ttf") format("truetype");
+  font-weight: normal;
+  font-size: normal;
+}
+@font-face {
+  font-family: "picktea";
+  src: url("/fonts/picktea.ttf") format("truetype");
+  font-weight: normal;
+  font-size: normal;
+} */
+
 /* h1,
 h2 {
   font-family: "Gliker";
