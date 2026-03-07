@@ -6,11 +6,11 @@ import axios from "axios";
 import { Eye, EyeOff, Mail, Lock, User, X, Phone } from "lucide-react";
 import { GoogleLogin } from "@react-oauth/google";
 import toast from "react-hot-toast";
-import {
-  auth,
-  RecaptchaVerifier,
-  signInWithPhoneNumber,
-} from "../fireBaseConfig.js";
+// import {
+//   auth,
+//   RecaptchaVerifier,
+//   signInWithPhoneNumber,
+// } from "../fireBaseConfig.js";
 
 function Register({ isOpen, onClose, onOpenLogin }) {
   const [form, setForm] = useState({
@@ -22,10 +22,11 @@ function Register({ isOpen, onClose, onOpenLogin }) {
   const [message, setMessage] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [otpVerified, setOtpVerified] = useState(false);
 
   // for otp
   const [showVerify, setVerify] = useState(false);
-  const [confirmationResult, setConfirmation] = useState(null);
+  // const [confirmationResult, setConfirmation] = useState(null);
   const [otp, setOtp] = useState("");
 
   const sendOtp = async () => {
@@ -33,50 +34,78 @@ function Register({ isOpen, onClose, onOpenLogin }) {
       toast.error("Please enter your phone number first");
       return;
     }
+    if (!form.email) {
+      toast.error("Please enter your email number first");
+      return;
+    }
 
     try {
-      const recaptcha = new RecaptchaVerifier(auth, "recaptcha-container", {
-        size: "invisible",
+      setIsLoading(true);
+      const res = await axios.post("http://localhost:5000/send-otp", {
+        email: form.email,
+        type: "register",
       });
-
-      const confirmation = await signInWithPhoneNumber(
-        auth,
-        "+91" + form.phoneNumber,
-        recaptcha,
-      );
-
-      setConfirmation(confirmation);
       setVerify(true);
-      toast.success("OTP sent successfully!");
-    } catch (error) {
-      console.error("Failed to send OTP", error);
-      toast.error("Failed to send OTP");
+      toast.success(res.data.msg || "OTP sent to your email!");
+
+      // const recaptcha = new RecaptchaVerifier(auth, "recaptcha-container", {
+      //   size: "invisible",
+      // });
+
+      // const confirmation = await signInWithPhoneNumber(
+      //   auth,
+      //   "+91" + form.phoneNumber,
+      //   recaptcha,
+      // );
+    } catch (err) {
+      toast.error(err.response?.data?.msg || "Failed to send OTP");
+    } finally {
+      setIsLoading(false);
     }
   };
 
   const verifyOtp = async () => {
     try {
-      await confirmationResult.confirm(otp);
-      await registerUser(); // separate registration logic
-      toast.success("OTP verified & user registered!");
+      setIsLoading(true);
+
+      const res = await axios.post("http://localhost:5000/verify-otp", {
+        email: form.email,
+        otp: otp.trim(),
+        type: "register",
+      });
+
+      setOtpVerified(true);
+      toast.success("OTP verified!");
+
+      await registerUser();
+      setLoggedIn(true);
     } catch (error) {
-      console.error(error);
-      toast.error("Invalid OTP, please try again.");
+      toast.error(error.response?.data?.msg || "Invalid OTP");
+    } finally {
+      setIsLoading(false);
     }
   };
+
+  // if (!otpVerified) {
+  //   toast.error("Please verify OTP first");
+  //   return;
+  // }
 
   const registerUser = async () => {
     try {
       const { name, email, password, phoneNumber } = form;
+
       setIsLoading(true);
       const res = await axios.post("http://localhost:5000/register", {
         name,
         email,
         password,
-        phoneNumber,
+        mobileNumber: phoneNumber,
       });
       onClose();
       toast.success("User Registered Successfully 🍰");
+      localStorage.setItem("token", res.data.token);
+      localStorage.setItem("user", JSON.stringify(res.data.user));
     } catch (err) {
       toast.error(err.response?.data?.msg || "Something went wrong");
     } finally {
@@ -252,7 +281,7 @@ function Register({ isOpen, onClose, onOpenLogin }) {
                     id="otp"
                     name="otp"
                     type="text"
-                    placeholder="Enter 4 Digit OTP"
+                    placeholder="Enter 6 Digit OTP"
                     value={otp}
                     onChange={(e) => setOtp(e.target.value)}
                     className="pl-10 h-10.5 bg-green-50 border-green-100 rounded-xl focus-visible:ring-1 focus-visible:ring-green-500 transition-all font-bold tracking-widest text-green-700"

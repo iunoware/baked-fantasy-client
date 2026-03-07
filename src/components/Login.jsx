@@ -50,6 +50,7 @@ function Login({ isOpen, onClose, onOpenRegister }) {
       setMessage(res.data.msg);
       onClose();
       toast.success("Login Successful Welcome back 🍰");
+      setLoggedIn(true);
     } catch (err) {
       setMessage(err.response?.data?.msg || "Something went wrong");
     } finally {
