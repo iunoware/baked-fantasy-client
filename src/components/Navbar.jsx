@@ -12,6 +12,7 @@ import { Link } from "react-router-dom";
 import Login from "./Login.jsx";
 import Register from "./Register.jsx";
 import { useCart } from "../context/CartContext.jsx";
+import { tr } from "framer-motion/client";
 
 export const StaggeredMenu = ({
   position = "right",
@@ -30,6 +31,7 @@ export const StaggeredMenu = ({
   onMenuClose,
 }) => {
   const [open, setOpen] = useState(false);
+  const [isLoggedIn, setLoggedIn] = useState(false);
   const [isLoginOpen, setLoginOpen] = useState(false);
   const [isRegisterOpen, setRegisterOpen] = useState(false);
   const openRef = useRef(false);
@@ -54,6 +56,20 @@ export const StaggeredMenu = ({
       document.documentElement.style.removeProperty("overflow");
     };
   }, [isLoginOpen, isRegisterOpen]);
+
+  // const handleUserClick = () => {
+
+  // };
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      setLoggedIn(false);
+    } else {
+      setLoggedIn(true);
+    }
+  }, []);
 
   const openRegisterFromLogin = () => {
     setLoginOpen(false);
@@ -492,8 +508,9 @@ export const StaggeredMenu = ({
 
   return (
     <div
-      className={`overflow-x-clip fixed sm-scope z-40 pointer-events-none ${isFixed ? "fixed top-0 left-0 overflow-hidden" : "w-full h-full"
-        }`}
+      className={`overflow-x-clip fixed sm-scope z-40 pointer-events-none ${
+        isFixed ? "fixed top-0 left-0 overflow-hidden" : "w-full h-full"
+      }`}
     >
       <div
         className={
@@ -578,8 +595,16 @@ export const StaggeredMenu = ({
                 </div>
                 <Link
                   className=" px-5 py-2.5 cursor-pointer text-sm font-medium text-red"
-                  onClick={() => setLoginOpen(true)}
-                //   to="/profile"
+                  to={isLoggedIn ? "/profile" : "#"}
+                  onClick={
+                    !isLoggedIn
+                      ? (e) => {
+                          e.preventDefault();
+                          setLoginOpen(true);
+                        }
+                      : undefined
+                  }
+                  // onClick={() => handleUserClick}
                 >
                   <User size={20} color="#F6E9D9" />
                 </Link>
@@ -698,7 +723,7 @@ export const StaggeredMenu = ({
           ref={panelRef}
           className="staggered-menu-panel shadow-xl z-50 overflow-y-hidden! absolute top-0 right-0 h-screen! bg-white! flex flex-col p-[6em_2em_2em_2em] backdrop-blur-md pointer-events-auto"
           style={{ WebkitBackdropFilter: "blur(12px)" }}
-        // aria-hidden={!open}
+          // aria-hidden={!open}
         >
           <div className="sm-panel-inner flex-1 flex flex-col gap-5">
             <ul
@@ -714,7 +739,8 @@ export const StaggeredMenu = ({
                   >
                     <NavLink
                       className={({ isActive }) =>
-                        `${isActive ? "text-pink-400!" : "text-black!"
+                        `${
+                          isActive ? "text-pink-400!" : "text-black!"
                         } sm-panel-item relative hover:text-pink-400! cursor-pointer leading-none tracking-[-2px] uppercase transition-[background,color] duration-150 ease-linear inline-block no-underline pr-[1.4em]`
                       }
                       to={it.link}
