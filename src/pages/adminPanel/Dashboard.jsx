@@ -30,16 +30,8 @@ function Dashboard() {
   });
   const [totalRevenue, setTotalRevenue] = useState(0);
   const [chartFiler, setChartFilter] = useState("overall");
-
-  // async function fetchOrders() {
-  //   try {
-  //     const response = await axios.get(`${url}/orders/today`);
-  //     setOrdersToday(response.data.totalOrdersToday);
-  //     console.log(response.data.totalOrdersToday);
-  //   } catch (error) {
-  //     console.error(error.message);
-  //   }
-  // }
+  const [orders, setOrders] = useState([]);
+  // const [orders, setOrders] = useState([]);
 
   let cards = [
     {
@@ -209,12 +201,23 @@ function Dashboard() {
     }
   }
 
+  // to fetch the today's orders in detail
+  async function fetchOrders() {
+    try {
+      const response = await axios.get(`${url}/orders/todayDetail`);
+      setOrders(response.data.orders);
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+
   useEffect(() => {
     revenue();
     todaySalesFunc();
     weekSalesFunc();
     thisMonthSalesFunc();
     overAllSalesFunc();
+    fetchOrders();
   }, []);
 
   return (
@@ -227,6 +230,7 @@ function Dashboard() {
               <p className="text-md pt-1">Welcome Back Admin</p>
             </div>
           </div>
+
           {/* top 4 cards */}
           <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 my-8 gap-10">
             {cards.map((card, index) => (
@@ -253,6 +257,7 @@ function Dashboard() {
               </div>
             ))}
           </div>
+
           {/* chart below */}
           {/* filter button */}
           <div className="flex gap-2 my-10 bg-white w-fit rounded-xl p-1 shadow-sm">
@@ -281,6 +286,7 @@ function Dashboard() {
               Overall
             </div>
           </div>
+
           {/* this month chart */}
           <div className="grid lg:grid-cols-4 grid-cols-1">
             {/* line chart */}
@@ -351,6 +357,16 @@ function Dashboard() {
                 <Chart options={optionsPie} series={seriesPie} type="pie" height={350} />
               </div>
             </div>
+          </div>
+          {/* chart above */}
+
+          {/* orders overview section */}
+          <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1">
+            {orders.map((order, index) => (
+              <div key={index} className="text-xl my-10">
+                {order}
+              </div>
+            ))}
           </div>
         </div>
       </div>
