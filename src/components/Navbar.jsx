@@ -13,7 +13,6 @@ import Login from "./Login.jsx";
 import Register from "./Register.jsx";
 import { useCart } from "../context/CartContext.jsx";
 
-
 export const StaggeredMenu = ({
   position = "right",
   colors = ["#FC3500", "#003153"],
@@ -520,8 +519,9 @@ export const StaggeredMenu = ({
 
   return (
     <div
-      className={`overflow-x-clip fixed sm-scope z-40 pointer-events-none ${isFixed ? "fixed top-0 left-0 overflow-hidden" : "w-full h-full"
-        }`}
+      className={`overflow-x-clip fixed sm-scope z-40 pointer-events-none ${
+        isFixed ? "fixed top-0 left-0 overflow-hidden" : "w-full h-full"
+      }`}
     >
       <div
         className={
@@ -788,7 +788,7 @@ export const StaggeredMenu = ({
           ref={panelRef}
           className="staggered-menu-panel shadow-xl z-50 overflow-y-hidden! absolute top-0 right-0 h-screen! bg-white! flex flex-col p-[6em_2em_2em_2em] backdrop-blur-md pointer-events-auto"
           style={{ WebkitBackdropFilter: "blur(12px)" }}
-        // aria-hidden={!open}
+          // aria-hidden={!open}
         >
           <div className="sm-panel-inner flex-1 flex flex-col gap-5">
             <ul
@@ -804,7 +804,8 @@ export const StaggeredMenu = ({
                   >
                     <NavLink
                       className={({ isActive }) =>
-                        `${isActive ? "text-pink-400!" : "text-black!"
+                        `${
+                          isActive ? "text-pink-400!" : "text-black!"
                         } sm-panel-item relative hover:text-pink-400! cursor-pointer leading-none tracking-[-2px] uppercase transition-[background,color] duration-150 ease-linear inline-block no-underline pr-[1.4em]`
                       }
                       to={it.link}
