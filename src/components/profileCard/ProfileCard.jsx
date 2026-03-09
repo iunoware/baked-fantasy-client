@@ -5,15 +5,9 @@ import {
 } from "../../components/ui/avatar";
 import { Button } from "../../components/ui/button";
 import { motion } from "framer-motion";
-import { Calendar, Award } from "lucide-react";
+import { Calendar, Award, Phone } from "lucide-react";
 
-export function ProfileCard({
-  name,
-  email,
-  avatar,
-  membershipLevel,
-  joinedDate,
-}) {
+export function ProfileCard({ name, email, avatar, mobileNumber, joinedDate }) {
   return (
     <div
       initial={{ opacity: 0, y: 30 }}
@@ -42,8 +36,8 @@ export function ProfileCard({
 
         <div className="w-full space-y-3 pt-2">
           <div className="flex items-center gap-3 text-muted-foreground">
-            <Award className="w-4 h-4 text-pink-400" />
-            <span className="text-sm">{membershipLevel}</span>
+            <Phone className="w-4 h-4 text-pink-400" />
+            <span className="text-sm">{mobileNumber}</span>
           </div>
           <div className="flex items-center gap-3 text-muted-foreground">
             <Calendar className="w-4 h-4 text-pink-400" />

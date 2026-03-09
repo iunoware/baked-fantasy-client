@@ -37,25 +37,23 @@ function Sidebar() {
                 <NavLink
                   to={`/admin`}
                   className={`flex items-center gap-3 rounded-md px-2 py-2 text-gray-700 hover:bg-pink-50 transition-colors`}
-                  // className={({ isActive }) =>
-                  //   `${
-                  //     isActive ? "bg-sky-50" : ""
-                  //   } flex items-center gap-3 rounded-md px-2 py-2 text-gray-700 hover:bg-pink-50 transition-colors`
-                  // }
+                // className={({ isActive }) =>
+                //   `${
+                //     isActive ? "bg-sky-50" : ""
+                //   } flex items-center gap-3 rounded-md px-2 py-2 text-gray-700 hover:bg-pink-50 transition-colors`
+                // }
                 >
                   {({ isActive }) => (
                     <>
                       <ChartColumn
                         size={20}
-                        className={`shrink-0 ${
-                          isActive ? "new-primary-text" : "text-gray-500"
-                        }`}
+                        className={`shrink-0 ${isActive ? "new-primary-text" : "text-gray-500"
+                          }`}
                         strokeWidth={`${isActive ? 2 : 3}`}
                       />
                       <span
-                        className={`text-lg font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap ${
-                          isActive ? "new-primary-text" : "text-gray-800"
-                        }`}
+                        className={`text-lg font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap ${isActive ? "new-primary-text" : "text-gray-800"
+                          }`}
                       >
                         Dashboard
                       </span>
@@ -70,8 +68,7 @@ function Sidebar() {
                     to={`/admin/courses`}
                     // className="flex items-center gap-3 rounded-md px-2 py-2 text-gray-700 hover:bg-pink-50 transition-colors"
                     className={({ isActive }) =>
-                      `${
-                        isActive ? "bg-pink-50" : ""
+                      `${isActive ? "bg-pink-50" : ""
                       } flex items-center gap-3 rounded-md px-2 py-2 text-gray-700 hover:bg-pink-50 transition-colors`
                     }
                   >
@@ -79,14 +76,12 @@ function Sidebar() {
                       <>
                         <GraduationCap
                           size={20}
-                          className={`shrink-0 ${
-                            isActive ? "new-primary-text" : "text-gray-500"
-                          }`}
+                          className={`shrink-0 ${isActive ? "new-primary-text" : "text-gray-500"
+                            }`}
                         />
                         <span
-                          className={`text-lg font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap ${
-                            isActive ? "new-primary-text" : "text-gray-800"
-                          }`}
+                          className={`text-lg font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap ${isActive ? "new-primary-text" : "text-gray-800"
+                            }`}
                         >
                           Courses
                         </span>
@@ -100,8 +95,7 @@ function Sidebar() {
                     to={`/admin/essentials`}
                     // className="flex items-center gap-3 rounded-md px-2 py-2 text-gray-700 hover:bg-pink-50 transition-colors"
                     className={({ isActive }) =>
-                      `${
-                        isActive ? "bg-pink-50" : ""
+                      `${isActive ? "bg-pink-50" : ""
                       } flex items-center gap-3 rounded-md px-2 py-2 text-gray-700 hover:bg-pink-50 transition-colors`
                     }
                   >
@@ -109,14 +103,12 @@ function Sidebar() {
                       <>
                         <ShoppingCart
                           size={20}
-                          className={`shrink-0 ${
-                            isActive ? "new-primary-text" : "text-gray-500"
-                          }`}
+                          className={`shrink-0 ${isActive ? "new-primary-text" : "text-gray-500"
+                            }`}
                         />
                         <span
-                          className={`text-lg font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap ${
-                            isActive ? "new-primary-text" : "text-gray-800"
-                          }`}
+                          className={`text-lg font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap ${isActive ? "new-primary-text" : "text-gray-800"
+                            }`}
                         >
                           Products
                         </span>
@@ -130,8 +122,7 @@ function Sidebar() {
                     to={`/admin/cakes`}
                     // className="flex items-center gap-3 rounded-md px-2 py-2 text-gray-700 hover:bg-pink-50 transition-colors"
                     className={({ isActive }) =>
-                      `${
-                        isActive ? "bg-pink-50" : ""
+                      `${isActive ? "bg-pink-50" : ""
                       } flex items-center gap-3 rounded-md px-2 py-2 text-gray-700 hover:bg-pink-50 transition-colors`
                     }
                   >
@@ -139,14 +130,12 @@ function Sidebar() {
                       <>
                         <Cake
                           size={20}
-                          className={`shrink-0 ${
-                            isActive ? "new-primary-text" : "text-gray-500"
-                          }`}
+                          className={`shrink-0 ${isActive ? "new-primary-text" : "text-gray-500"
+                            }`}
                         />
                         <span
-                          className={`text-lg font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap ${
-                            isActive ? "new-primary-text" : "text-gray-800"
-                          }`}
+                          className={`text-lg font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap ${isActive ? "new-primary-text" : "text-gray-800"
+                            }`}
                         >
                           Cakes
                         </span>
@@ -160,8 +149,7 @@ function Sidebar() {
                     to={`/admin/orders`}
                     // className="flex items-center gap-3 rounded-md px-2 py-2 text-gray-700 hover:bg-pink-50 transition-colors"
                     className={({ isActive }) =>
-                      `${
-                        isActive ? "bg-pink-50" : ""
+                      `${isActive ? "bg-pink-50" : ""
                       } flex items-center gap-3 rounded-md px-2 py-2 text-gray-700 hover:bg-pink-50 transition-colors`
                     }
                   >
@@ -169,14 +157,12 @@ function Sidebar() {
                       <>
                         <Users
                           size={20}
-                          className={`shrink-0 ${
-                            isActive ? "new-primary-text" : "text-gray-500"
-                          }`}
+                          className={`shrink-0 ${isActive ? "new-primary-text" : "text-gray-500"
+                            }`}
                         />
                         <span
-                          className={`text-lg font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap ${
-                            isActive ? "new-primary-text" : "text-gray-800"
-                          }`}
+                          className={`text-lg font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap ${isActive ? "new-primary-text" : "text-gray-800"
+                            }`}
                         >
                           Orders
                         </span>
@@ -189,8 +175,7 @@ function Sidebar() {
                     to={`/admin/banner`}
                     // className="flex items-center gap-3 rounded-md px-2 py-2 text-gray-700 hover:bg-pink-50 transition-colors"
                     className={({ isActive }) =>
-                      `${
-                        isActive ? "bg-pink-50" : ""
+                      `${isActive ? "bg-pink-50" : ""
                       } flex items-center gap-3 rounded-md px-2 py-2 text-gray-700 hover:bg-pink-50 transition-colors`
                     }
                   >
@@ -198,14 +183,12 @@ function Sidebar() {
                       <>
                         <Megaphone
                           size={20}
-                          className={`shrink-0 ${
-                            isActive ? "new-primary-text" : "text-gray-500"
-                          }`}
+                          className={`shrink-0 ${isActive ? "new-primary-text" : "text-gray-500"
+                            }`}
                         />
                         <span
-                          className={`text-lg font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap ${
-                            isActive ? "new-primary-text" : "text-gray-800"
-                          }`}
+                          className={`text-lg font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap ${isActive ? "new-primary-text" : "text-gray-800"
+                            }`}
                         >
                           Banner
                         </span>
@@ -219,8 +202,7 @@ function Sidebar() {
                     to={`/admin/settings`}
                     // className="flex items-center gap-3 rounded-md px-2 py-2 text-gray-700 hover:bg-pink-50 transition-colors"
                     className={({ isActive }) =>
-                      `${
-                        isActive ? "bg-pink-50" : ""
+                      `${isActive ? "bg-pink-50" : ""
                       } flex items-center gap-3 rounded-md px-2 py-2 text-gray-700 hover:bg-pink-50 transition-colors`
                     }
                   >
@@ -228,14 +210,12 @@ function Sidebar() {
                       <>
                         <Settings
                           size={20}
-                          className={`shrink-0 ${
-                            isActive ? "new-primary-text" : "text-gray-500"
-                          }`}
+                          className={`shrink-0 ${isActive ? "new-primary-text" : "text-gray-500"
+                            }`}
                         />
                         <span
-                          className={`text-lg font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap ${
-                            isActive ? "new-primary-text" : "text-gray-800"
-                          }`}
+                          className={`text-lg font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap ${isActive ? "new-primary-text" : "text-gray-800"
+                            }`}
                         >
                           Settings
                         </span>
@@ -249,32 +229,26 @@ function Sidebar() {
         </div>
 
         <div className="sticky inset-x-0 bottom-0 border-t border-gray-100 bg-white p-2">
-          <NavLink
+          <button
             onClick={() => {
+              sessionStorage.removeItem("token");
+              // Also clear localStorage just in case it was used elsewhere
               localStorage.removeItem("token");
+              localStorage.removeItem("user");
               window.location.href = "/admin-login";
             }}
-            // to={`/admin`}
-            className="flex items-center gap-3 rounded-md px-2 py-2 text-gray-700 hover:bg-pink-50 transition-colors"
+            className="group flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-gray-700 hover:bg-red-50 hover:text-red-600 transition-all duration-200"
           >
-            {({ isActive }) => (
-              <>
-                <LogOut
-                  size={20}
-                  className={`shrink-0 ${
-                    isActive ? "new-primary-text" : "text-gray-500"
-                  }`}
-                />
-                <span
-                  className={`text-lg font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap ${
-                    isActive ? "new-primary-text" : "text-gray-800"
-                  }`}
-                >
-                  LogOut
-                </span>
-              </>
-            )}
-          </NavLink>
+            <LogOut
+              size={20}
+              className="shrink-0 text-gray-500 group-hover:text-red-500 transition-colors"
+            />
+            <span
+              className="text-sm font-bold opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap"
+            >
+              Logout Session
+            </span>
+          </button>
         </div>
       </div>
     </>

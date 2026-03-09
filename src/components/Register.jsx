@@ -12,7 +12,7 @@ import toast from "react-hot-toast";
 //   signInWithPhoneNumber,
 // } from "../fireBaseConfig.js";
 
-function Register({ isOpen, onClose, onOpenLogin }) {
+function Register({ isOpen, onClose, onOpenLogin, setLoggedIn }) {
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -35,7 +35,7 @@ function Register({ isOpen, onClose, onOpenLogin }) {
       return;
     }
     if (!form.email) {
-      toast.error("Please enter your email number first");
+      toast.error("Please enter your email first");
       return;
     }
 
@@ -47,16 +47,6 @@ function Register({ isOpen, onClose, onOpenLogin }) {
       });
       setVerify(true);
       toast.success(res.data.msg || "OTP sent to your email!");
-
-      // const recaptcha = new RecaptchaVerifier(auth, "recaptcha-container", {
-      //   size: "invisible",
-      // });
-
-      // const confirmation = await signInWithPhoneNumber(
-      //   auth,
-      //   "+91" + form.phoneNumber,
-      //   recaptcha,
-      // );
     } catch (err) {
       toast.error(err.response?.data?.msg || "Failed to send OTP");
     } finally {
@@ -78,18 +68,12 @@ function Register({ isOpen, onClose, onOpenLogin }) {
       toast.success("OTP verified!");
 
       await registerUser();
-      setLoggedIn(true);
     } catch (error) {
       toast.error(error.response?.data?.msg || "Invalid OTP");
     } finally {
       setIsLoading(false);
     }
   };
-
-  // if (!otpVerified) {
-  //   toast.error("Please verify OTP first");
-  //   return;
-  // }
 
   const registerUser = async () => {
     try {
@@ -102,10 +86,13 @@ function Register({ isOpen, onClose, onOpenLogin }) {
         password,
         mobileNumber: phoneNumber,
       });
-      onClose();
-      toast.success("User Registered Successfully 🍰");
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("user", JSON.stringify(res.data.user));
+      toast.success("User Registered Successfully 🍰");
+      if (typeof setLoggedIn === "function") {
+        setLoggedIn(true);
+      }
+      onClose();
     } catch (err) {
       toast.error(err.response?.data?.msg || "Something went wrong");
     } finally {
@@ -116,15 +103,25 @@ function Register({ isOpen, onClose, onOpenLogin }) {
   // Google Registration
   const handleSuccess = async (credentialResponse) => {
     try {
+      setIsLoading(true);
       const res = await axios.post("http://localhost:5000/google-login", {
         token: credentialResponse.credential,
       });
 
       localStorage.setItem("token", res.data.token);
+      localStorage.setItem("user", JSON.stringify(res.data.user));
+
+      toast.success("Logged in with Google 🎉");
+      if (typeof setLoggedIn === "function") {
+        setLoggedIn(true);
+      }
       onClose();
-      toast.success("User Registered Successfully 🍰");
     } catch (err) {
-      console.error("Login failed:", err);
+      console.error("Google Login failed:", err);
+      const errorMessage = err.response?.data?.msg || err.response?.data?.error || "Google Login failed";
+      toast.error(errorMessage);
+    } finally {
+      setIsLoading(false);
     }
   };
 

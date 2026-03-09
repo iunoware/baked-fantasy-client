@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { ProfileCard } from "../components/profileCard/ProfileCard.jsx";
 import { OrdersTab } from "../components/profileCard/OrdersTab";
@@ -15,18 +15,43 @@ import { LogOut, Settings, ShoppingBag, GraduationCap } from "lucide-react";
 
 export default function App() {
   const [activeTab, setActiveTab] = useState("orders");
+  const [userData, setUserData] = useState(null);
   const d = new Date();
   const month = d.toLocaleString("default", { month: "long" });
   const year = d.getFullYear();
 
-  const userData = {
-    name: "User",
-    email: "user@example.com",
-    // avatar: "images/defaultProfile.jpg",
+  useEffect(() => {
+    try {
+      const data = localStorage.getItem("user");
+      if (data) {
+        const parsedData = JSON.parse(data);
+        setUserData({
+          ...parsedData,
+          name: parsedData.name || "User",
+          email: parsedData.email || "user@example.com",
+          mobileNumber:
+            parsedData.mobileNumber ||
+            "Add your Mobile Number using the Edit option",
+          joinedDate: parsedData.joinedDate || `${month} ${year}`,
+          // avatar: parsedData.avatar || "/images/defaultProfile.jpg"
+        });
+      } else {
+        // If no user data, redirect to home (or show login)
+        window.location.href = "/";
+      }
+    } catch (err) {
+      console.error("Error parsing user data:", err);
+      window.location.href = "/";
+    }
+  }, [month, year]);
 
-    membershipLevel: "Gold Member",
-    joinedDate: month + " " + year,
-  };
+  if (!userData) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-[#FFFDF9]">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-pink-500"></div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-[#FFFDF9]">
@@ -77,29 +102,29 @@ export default function App() {
                   </TabsTrigger>
                 </TabsList>
 
-                {/* <TabsContent value="orders" className="mt-0">
-                    <motion.div
-                      key="orders"
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      exit={{ opacity: 0, x: 20 }}
-                      transition={{ duration: 0.3 }}
-                    >
-                      <OrdersTab />
-                    </motion.div>
-                  </TabsContent>
+                <TabsContent value="orders" className="mt-0">
+                  <motion.div
+                    key="orders"
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: 20 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <OrdersTab />
+                  </motion.div>
+                </TabsContent>
 
-                  <TabsContent value="courses" className="mt-0">
-                    <motion.div
-                      key="courses"
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      exit={{ opacity: 0, x: 20 }}
-                      transition={{ duration: 0.3 }}
-                    >
-                      <CoursesTab />
-                    </motion.div>
-                  </TabsContent> */}
+                <TabsContent value="courses" className="mt-0">
+                  <motion.div
+                    key="courses"
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: 20 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <CoursesTab />
+                  </motion.div>
+                </TabsContent>
               </Tabs>
             </motion.div>
           </div>
@@ -116,6 +141,13 @@ export default function App() {
             <Button
               variant="outline"
               className="rounded-xl gap-2 border-gray-200 hover:border-gray-300 shadow-sm hover:shadow-md transition-all duration-300"
+              onClick={() => {
+                sessionStorage.removeItem("token");
+                // Also clear localStorage just in case it was used elsewhere
+                localStorage.removeItem("token");
+                localStorage.removeItem("user");
+                window.location.href = "/";
+              }}
             >
               <LogOut className="w-4 h-4" />
               Logout
