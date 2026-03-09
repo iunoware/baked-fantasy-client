@@ -8,7 +8,7 @@ import { Eye, EyeOff, Mail, Lock, X } from "lucide-react";
 import axios from "axios";
 import toast from "react-hot-toast";
 
-function Login({ isOpen, onClose, onOpenRegister }) {
+function Login({ isOpen, onClose, onOpenRegister, setLoggedIn }) {
   const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
@@ -17,16 +17,25 @@ function Login({ isOpen, onClose, onOpenRegister }) {
 
   const handleSuccess = async (credentialResponse) => {
     try {
+      setIsLoading(true);
       const res = await axios.post("http://localhost:5000/google-login", {
         token: credentialResponse.credential,
       });
 
       localStorage.setItem("token", res.data.token);
-      setMessage(res.data.msg);
-      onClose();
+      localStorage.setItem("user", JSON.stringify(res.data.user));
+
       toast.success("Login Successful! Welcome back 🍰");
+      if (typeof setLoggedIn === "function") {
+        setLoggedIn(true);
+      }
+      onClose();
     } catch (err) {
-      console.error("Login failed:", err);
+      console.error("Google Login failed:", err);
+      const errorMessage = err.response?.data?.msg || err.response?.data?.error || "Google Login failed";
+      toast.error(errorMessage);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -47,12 +56,15 @@ function Login({ isOpen, onClose, onOpenRegister }) {
 
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("user", JSON.stringify(res.data.user));
-      setMessage(res.data.msg);
-      onClose();
+      setMessage("");
       toast.success("Login Successful Welcome back 🍰");
-      setLoggedIn(true);
+      if (typeof setLoggedIn === "function") {
+        setLoggedIn(true);
+      }
+      onClose();
     } catch (err) {
       setMessage(err.response?.data?.msg || "Something went wrong");
+      toast.error(err.response?.data?.msg || "Login failed");
     } finally {
       setIsLoading(false);
     }

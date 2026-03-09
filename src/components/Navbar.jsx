@@ -6,13 +6,13 @@ import React, {
   useEffect,
 } from "react";
 import { NavLink } from "react-router-dom";
-import { Menu, X, Search, ShoppingCart, User } from "lucide-react";
+import { Menu, X, Search, ShoppingCart, User, LogOut } from "lucide-react";
 import { gsap } from "gsap";
 import { Link } from "react-router-dom";
 import Login from "./Login.jsx";
 import Register from "./Register.jsx";
 import { useCart } from "../context/CartContext.jsx";
-import { tr } from "framer-motion/client";
+
 
 export const StaggeredMenu = ({
   position = "right",
@@ -506,11 +506,22 @@ export const StaggeredMenu = ({
     };
   }, [closeOnClickAway, open, closeMenu]);
 
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    sessionStorage.removeItem("token");
+    setLoggedIn(false);
+    setIsDropdownOpen(false);
+    toast.success("Logged out successfully");
+    window.location.href = "/";
+  };
+
   return (
     <div
-      className={`overflow-x-clip fixed sm-scope z-40 pointer-events-none ${
-        isFixed ? "fixed top-0 left-0 overflow-hidden" : "w-full h-full"
-      }`}
+      className={`overflow-x-clip fixed sm-scope z-40 pointer-events-none ${isFixed ? "fixed top-0 left-0 overflow-hidden" : "w-full h-full"
+        }`}
     >
       <div
         className={
@@ -526,7 +537,7 @@ export const StaggeredMenu = ({
           className="sm-prelayers absolute top-0 right-0 bottom-0 pointer-events-none z-5"
           aria-hidden="true"
         >
-          {() => {
+          {(() => {
             const raw =
               colors && colors.length
                 ? colors.slice(0, 4)
@@ -543,7 +554,7 @@ export const StaggeredMenu = ({
                 style={{ background: c }}
               />
             ));
-          }}
+          })()}
         </div>
 
         <header
@@ -593,21 +604,50 @@ export const StaggeredMenu = ({
                     )}
                   </Link>
                 </div>
-                <Link
-                  className=" px-5 py-2.5 cursor-pointer text-sm font-medium text-red"
-                  to={isLoggedIn ? "/profile" : "#"}
-                  onClick={
-                    !isLoggedIn
-                      ? (e) => {
-                          e.preventDefault();
-                          setLoginOpen(true);
-                        }
-                      : undefined
-                  }
-                  // onClick={() => handleUserClick}
-                >
-                  <User size={20} color="#F6E9D9" />
-                </Link>
+                <div className="relative">
+                  <button
+                    className=" px-5 py-2.5 cursor-pointer text-sm font-medium text-red flex items-center gap-2"
+                    onClick={() => {
+                      if (isLoggedIn) {
+                        setIsDropdownOpen(!isDropdownOpen);
+                      } else {
+                        setLoginOpen(true);
+                      }
+                    }}
+                  >
+                    <User size={20} color="#F6E9D9" />
+                  </button>
+
+                  {/* Profile Dropdown */}
+                  {isLoggedIn && isDropdownOpen && (
+                    <div className="absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-2xl border border-pink-100 py-2 z-[100] animate-in slide-in-from-top-2 duration-200">
+                      <Link
+                        to="/profile"
+                        className="flex items-center gap-3 px-4 py-3 text-sm text-gray-700 hover:bg-pink-50 transition-colors"
+                        onClick={() => setIsDropdownOpen(false)}
+                      >
+                        <User size={16} className="text-pink-500" />
+                        My Profile
+                      </Link>
+                      <Link
+                        to="/cart"
+                        className="flex items-center gap-3 px-4 py-3 text-sm text-gray-700 hover:bg-pink-50 transition-colors md:hidden"
+                        onClick={() => setIsDropdownOpen(false)}
+                      >
+                        <ShoppingCart size={16} className="text-pink-500" />
+                        My Cart
+                      </Link>
+                      <div className="h-px bg-pink-100 my-1"></div>
+                      <button
+                        onClick={handleLogout}
+                        className="flex items-center gap-3 w-full px-4 py-3 text-sm text-red-600 hover:bg-red-50 transition-colors"
+                      >
+                        <LogOut size={16} />
+                        Logout
+                      </button>
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
             <button
@@ -686,12 +726,37 @@ export const StaggeredMenu = ({
                     </span>
                   )}
                 </Link>
-                <a
-                  className="cursor-pointer"
-                  onClick={() => setLoginOpen(true)}
-                >
-                  <User size={20} color="#F6E9D9" />
-                </a>
+                <div className="relative">
+                  <button
+                    className="cursor-pointer"
+                    onClick={() => {
+                      if (isLoggedIn) {
+                        setIsDropdownOpen(!isDropdownOpen);
+                      } else {
+                        setLoginOpen(true);
+                      }
+                    }}
+                  >
+                    <User size={20} color="#F6E9D9" />
+                  </button>
+                  {isLoggedIn && isDropdownOpen && (
+                    <div className="absolute right-0 mt-3 w-40 bg-white rounded-xl shadow-2xl border border-pink-100 py-1 z-[100]">
+                      <Link
+                        to="/profile"
+                        className="block px-4 py-2 text-sm text-gray-700 active:bg-pink-50"
+                        onClick={() => setIsDropdownOpen(false)}
+                      >
+                        Profile
+                      </Link>
+                      <button
+                        onClick={handleLogout}
+                        className="block w-full text-left px-4 py-2 text-sm text-red-600 active:bg-red-50"
+                      >
+                        Logout
+                      </button>
+                    </div>
+                  )}
+                </div>
               </div>
               <div className="menu">
                 <Menu
@@ -723,7 +788,7 @@ export const StaggeredMenu = ({
           ref={panelRef}
           className="staggered-menu-panel shadow-xl z-50 overflow-y-hidden! absolute top-0 right-0 h-screen! bg-white! flex flex-col p-[6em_2em_2em_2em] backdrop-blur-md pointer-events-auto"
           style={{ WebkitBackdropFilter: "blur(12px)" }}
-          // aria-hidden={!open}
+        // aria-hidden={!open}
         >
           <div className="sm-panel-inner flex-1 flex flex-col gap-5">
             <ul
@@ -739,8 +804,7 @@ export const StaggeredMenu = ({
                   >
                     <NavLink
                       className={({ isActive }) =>
-                        `${
-                          isActive ? "text-pink-400!" : "text-black!"
+                        `${isActive ? "text-pink-400!" : "text-black!"
                         } sm-panel-item relative hover:text-pink-400! cursor-pointer leading-none tracking-[-2px] uppercase transition-[background,color] duration-150 ease-linear inline-block no-underline pr-[1.4em]`
                       }
                       to={it.link}
@@ -807,11 +871,13 @@ export const StaggeredMenu = ({
         isOpen={isLoginOpen}
         onClose={() => setLoginOpen(false)}
         onOpenRegister={openRegisterFromLogin}
+        setLoggedIn={setLoggedIn}
       />
       <Register
         isOpen={isRegisterOpen}
         onClose={() => setRegisterOpen(false)}
         onOpenLogin={openLoginFromRegister}
+        setLoggedIn={setLoggedIn}
       />
 
       <style>{`
