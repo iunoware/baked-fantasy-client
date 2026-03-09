@@ -187,6 +187,10 @@ body {
   @apply bg-[#870D32];
 }
 
+.new-primary-bg-dark {
+  @apply bg-[#9a0c36];
+}
+
 .new-primary-light-bg {
   @apply bg-[#ec4174];
 }

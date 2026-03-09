@@ -3,6 +3,7 @@ import axios from "axios";
 import Chart from "react-apexcharts";
 import { Handbag, Banknote, CakeSlice, GraduationCap } from "lucide-react";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const url = "http://localhost:5000";
 
@@ -221,8 +222,8 @@ function Dashboard() {
   }, []);
 
   return (
-    <div className="bg-butterscothch">
-      <div className="bg-cream min-h-screen">
+    <div className="">
+      <div className="bg-cream">
         <div className="lg:pl-28 pl-20 pt-10 pr-10">
           <div className="flex flex-col md:flex-row gap-5 md:gap-0 justify-between">
             <div>
@@ -236,7 +237,7 @@ function Dashboard() {
             {cards.map((card, index) => (
               <div
                 key={index}
-                className="p-8 space-y-4 bg-white shadow-sm transition-shadow duration-300 rounded-xl "
+                className="p-8 space-y-4 bg-white shadow-sm transition-shadow duration-300 rounded-xl"
               >
                 <div className="flex justify-between">
                   {/* svg icon */}
@@ -259,115 +260,154 @@ function Dashboard() {
           </div>
 
           {/* chart below */}
-          {/* filter button */}
-          <div className="flex gap-2 my-10 bg-white w-fit rounded-xl p-1 shadow-sm">
-            <div
-              onClick={() => setChartFilter("today")}
-              className={`${chartFiler === "today" ? "new-primary-bg text-white hover:new-primary-bg/90" : "hover:bg-gray-100"} p-2 cursor-pointer rounded-lg`}
-            >
-              Today
+          <div className="my-20">
+            {/* filter button */}
+            <div className="flex gap-2 my-10 bg-white w-fit rounded-xl p-1 shadow-sm">
+              <div
+                onClick={() => setChartFilter("today")}
+                className={`${chartFiler === "today" ? "new-primary-bg text-white hover:new-primary-bg/90" : "hover:bg-gray-100"} p-2 cursor-pointer rounded-lg`}
+              >
+                Today
+              </div>
+              <div
+                onClick={() => setChartFilter("7days")}
+                className={`${chartFiler === "7days" ? "new-primary-bg text-white hover:new-primary-bg/90" : "hover:bg-gray-100"} p-2 cursor-pointer rounded-lg`}
+              >
+                7 Days
+              </div>
+              <div
+                onClick={() => setChartFilter("30days")}
+                className={`${chartFiler === "30days" ? "new-primary-bg text-white hover:new-primary-bg/90" : "hover:bg-gray-100"} p-2 cursor-pointer rounded-lg`}
+              >
+                30 Days
+              </div>
+              <div
+                onClick={() => setChartFilter("overall")}
+                className={`${chartFiler === "overall" ? "new-primary-bg text-white hover:new-primary-bg/90" : "hover:bg-gray-100"} p-2 cursor-pointer rounded-lg`}
+              >
+                Overall
+              </div>
             </div>
-            <div
-              onClick={() => setChartFilter("7days")}
-              className={`${chartFiler === "7days" ? "new-primary-bg text-white hover:new-primary-bg/90" : "hover:bg-gray-100"} p-2 cursor-pointer rounded-lg`}
-            >
-              7 Days
-            </div>
-            <div
-              onClick={() => setChartFilter("30days")}
-              className={`${chartFiler === "30days" ? "new-primary-bg text-white hover:new-primary-bg/90" : "hover:bg-gray-100"} p-2 cursor-pointer rounded-lg`}
-            >
-              30 Days
-            </div>
-            <div
-              onClick={() => setChartFilter("overall")}
-              className={`${chartFiler === "overall" ? "new-primary-bg text-white hover:new-primary-bg/90" : "hover:bg-gray-100"} p-2 cursor-pointer rounded-lg`}
-            >
-              Overall
-            </div>
-          </div>
 
-          {/* this month chart */}
-          <div className="grid lg:grid-cols-4 grid-cols-1">
-            {/* line chart */}
-            <div className="lg:col-span-3">
-              <div className={`${chartFiler === "today" ? "block" : "hidden"}`}>
-                <Chart options={options} series={seriesToday} type="bar" height={350} />
-                {/* <Chart
+            {/* this month chart */}
+            <div className="grid lg:grid-cols-4 grid-cols-1">
+              {/* line chart */}
+              <div className="lg:col-span-3">
+                <div className={`${chartFiler === "today" ? "block" : "hidden"}`}>
+                  <Chart options={options} series={seriesToday} type="bar" height={350} />
+                  {/* <Chart
                   options={options}
                   series={barSeries[chartFiler]}
                   type="bar"
                   height={350}
                 /> */}
+                </div>
+
+                <div className={`${chartFiler === "7days" ? "block" : "hidden"}`}>
+                  <Chart
+                    options={options}
+                    series={seriesThisWeek}
+                    type="bar"
+                    height={350}
+                  />
+                </div>
+
+                <div className={`${chartFiler === "30days" ? "block" : "hidden"}`}>
+                  <Chart
+                    options={options}
+                    series={seriesThisMonth}
+                    type="bar"
+                    height={350}
+                  />
+                </div>
+
+                <div className={`${chartFiler === "overall" ? "block" : "hidden"}`}>
+                  <Chart options={options} series={series} type="bar" height={350} />
+                </div>
               </div>
 
-              <div className={`${chartFiler === "7days" ? "block" : "hidden"}`}>
-                <Chart
-                  options={options}
-                  series={seriesThisWeek}
-                  type="bar"
-                  height={350}
-                />
-              </div>
+              {/* pie chart */}
+              <div className="lg:col-span-1">
+                <div className={`${chartFiler === "today" ? "block" : "hidden"}`}>
+                  <Chart
+                    options={optionsPie}
+                    series={seriesPieToday}
+                    type="pie"
+                    height={350}
+                  />
+                </div>
 
-              <div className={`${chartFiler === "30days" ? "block" : "hidden"}`}>
-                <Chart
-                  options={options}
-                  series={seriesThisMonth}
-                  type="bar"
-                  height={350}
-                />
-              </div>
+                <div className={`${chartFiler === "7days" ? "block" : "hidden"}`}>
+                  <Chart
+                    options={optionsPie}
+                    series={seriesPieWeek}
+                    type="pie"
+                    height={350}
+                  />
+                </div>
 
-              <div className={`${chartFiler === "overall" ? "block" : "hidden"}`}>
-                <Chart options={options} series={series} type="bar" height={350} />
+                <div className={`${chartFiler === "30days" ? "block" : "hidden"}`}>
+                  <Chart
+                    options={optionsPie}
+                    series={seriesPieMonth}
+                    type="pie"
+                    height={350}
+                  />
+                </div>
+
+                <div className={`${chartFiler === "overall" ? "block" : "hidden"}`}>
+                  <Chart
+                    options={optionsPie}
+                    series={seriesPie}
+                    type="pie"
+                    height={350}
+                  />
+                </div>
               </div>
             </div>
-
-            {/* pie chart */}
-            <div className="lg:col-span-1">
-              <div className={`${chartFiler === "today" ? "block" : "hidden"}`}>
-                <Chart
-                  options={optionsPie}
-                  series={seriesPieToday}
-                  type="pie"
-                  height={350}
-                />
-              </div>
-
-              <div className={`${chartFiler === "7days" ? "block" : "hidden"}`}>
-                <Chart
-                  options={optionsPie}
-                  series={seriesPieWeek}
-                  type="pie"
-                  height={350}
-                />
-              </div>
-
-              <div className={`${chartFiler === "30days" ? "block" : "hidden"}`}>
-                <Chart
-                  options={optionsPie}
-                  series={seriesPieMonth}
-                  type="pie"
-                  height={350}
-                />
-              </div>
-
-              <div className={`${chartFiler === "overall" ? "block" : "hidden"}`}>
-                <Chart options={optionsPie} series={seriesPie} type="pie" height={350} />
-              </div>
-            </div>
+            {/* chart above */}
           </div>
-          {/* chart above */}
 
           {/* orders overview section */}
-          <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1">
-            {orders.map((order, index) => (
-              <div key={index} className="text-xl my-10">
-                {order}
-              </div>
-            ))}
+          <div className="py-10">
+            <h2 className="text-3xl lora new-primary-text font-semibold">
+              Orders Overview
+            </h2>
+            <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1">
+              {orders.map((order, index) => (
+                <div
+                  key={index}
+                  className="text-xl bg-white my-10 shadow-lg p-3 rounded-xl"
+                >
+                  <div className="space-y-4">
+                    <p className="">Order ID: {order._id}</p>
+                    <p>{order.name}</p>
+                    <p>Mobile: {order.number || "unavailable"}</p>
+                    <p>Address: {order.billingAddress}</p>
+                    <hr />
+                    <div className="flex items-center gap-2">
+                      <p>Items ({order.products.length}):</p>
+                      {order.products.map((product) => (
+                        <p key={product._id}>{product.price}</p>
+                        // product name
+                        // <p key={product._id}>{product.name}</p>
+                      ))}
+                    </div>
+                    <p>Status: {order.orderStatus}</p>
+                    <hr />
+                    <Link
+                      to="/admin/orders"
+                      className="text-white block cursor-pointer hover:new-primary-bg new-primary-bg-dark rounded-lg p-3 w-full"
+                    >
+                      View details
+                    </Link>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
+
+          {/* <div className="text-3xl">This is the orders table</div> */}
         </div>
       </div>
     </div>
