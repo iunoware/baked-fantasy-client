@@ -373,37 +373,43 @@ function Dashboard() {
             <h2 className="text-3xl lora new-primary-text font-semibold">
               Orders Overview
             </h2>
-            <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1">
-              {orders.map((order, index) => (
-                <div
-                  key={index}
-                  className="text-xl bg-white my-10 shadow-lg p-3 rounded-xl"
-                >
-                  <div className="space-y-4">
-                    <p className="">Order ID: {order._id}</p>
-                    <p>{order.name}</p>
-                    <p>Mobile: {order.number || "unavailable"}</p>
-                    <p>Address: {order.billingAddress}</p>
-                    <hr />
-                    <div className="flex items-center gap-2">
-                      <p>Items ({order.products.length}):</p>
-                      {order.products.map((product) => (
-                        <p key={product._id}>{product.price}</p>
-                        // product name
-                        // <p key={product._id}>{product.name}</p>
-                      ))}
+            <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 place-items-center">
+              {orders.length > 0 ? (
+                orders.map((order, index) => (
+                  <div
+                    key={index}
+                    className="text-xl bg-white my-10 shadow-lg p-3 rounded-xl"
+                  >
+                    <div className="space-y-4">
+                      <p className="">Order ID: {order._id}</p>
+                      <p>{order.name}</p>
+                      <p>Mobile: {order.number || "unavailable"}</p>
+                      <p>Address: {order.billingAddress}</p>
+                      <hr />
+                      <div className="flex items-center gap-2">
+                        <p>Items ({order.products.length}):</p>
+                        {order.products.map((product) => (
+                          <p key={product._id}>{product.price}</p>
+                          // product name
+                          // <p key={product._id}>{product.name}</p>
+                        ))}
+                      </div>
+                      <p>Status: {order.orderStatus}</p>
+                      <hr />
+                      <Link
+                        to="/admin/orders"
+                        className="text-white block cursor-pointer hover:new-primary-bg new-primary-bg-dark rounded-lg p-3 w-full"
+                      >
+                        View details
+                      </Link>
                     </div>
-                    <p>Status: {order.orderStatus}</p>
-                    <hr />
-                    <Link
-                      to="/admin/orders"
-                      className="text-white block cursor-pointer hover:new-primary-bg new-primary-bg-dark rounded-lg p-3 w-full"
-                    >
-                      View details
-                    </Link>
                   </div>
+                ))
+              ) : (
+                <div className="">
+                  <img src="/images/no-orders-found.png" alt="No orders found" />
                 </div>
-              ))}
+              )}
             </div>
           </div>
 
