@@ -1,3 +1,6 @@
+// for pushing issue
+// for pushing issue
+
 import { useState, useEffect } from "react";
 import { Button } from "./ui/button.jsx";
 import { Input } from "./ui/input.jsx";
@@ -118,7 +121,10 @@ function Register({ isOpen, onClose, onOpenLogin, setLoggedIn }) {
       onClose();
     } catch (err) {
       console.error("Google Login failed:", err);
-      const errorMessage = err.response?.data?.msg || err.response?.data?.error || "Google Login failed";
+      const errorMessage =
+        err.response?.data?.msg ||
+        err.response?.data?.error ||
+        "Google Login failed";
       toast.error(errorMessage);
     } finally {
       setIsLoading(false);
