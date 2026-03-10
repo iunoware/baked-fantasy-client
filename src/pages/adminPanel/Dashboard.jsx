@@ -396,7 +396,7 @@ function Dashboard() {
             {orders.length > 0 ? (
               <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 place-items-center">
                 {orders.map((order, index) => (
-                  <div key={index} className="min-w-90 bg-white p-4 rounded-xl">
+                  <div key={index} className="min-w-90 bg-white p-4 rounded-xl shadow-xl">
                     {/* card header */}
                     <div key={index}>
                       <div className="flex justify-between items-start mb-5 relative z-10">
@@ -443,7 +443,7 @@ function Dashboard() {
                     {/* Product List */}
                     <div className="bg-[#fdfbf7] rounded-[22px] p-4 mb-6 space-y-2.5 border border-[#f5efdf]/50 relative z-10">
                       <div className="flex justify-between items-center mb-1">
-                        <span className="text-[8px] font-black text-gray-300 uppercase tracking-[0.2em]">
+                        <span className="text-[8px] font-black text-gray-500 uppercase tracking-[0.2em]">
                           Products List
                         </span>
                         <span className="bg-white/80 px-2 py-0.5 rounded text-[9px] font-bold text-[#870D32]">
@@ -453,25 +453,33 @@ function Dashboard() {
 
                       {order.products.map((item, idx) => (
                         <div key={idx} className="space-y-2">
-                          <div className="flex justify-between text-xs font-semibold text-gray-700">
+                          <div className="flex justify-between text-xs font-semibold text-gray-800">
                             <span className="truncate pr-4">
-                              • {item.productId?.title || item.productId?.name}
+                              • {item.title || item.product?.name}
                             </span>
                             <span className="shrink-0 text-[#870D32] font-black tracking-tighter">
                               × {item.quantity}
                             </span>
                           </div>
-                          <div className="pt-3 mt-3 border-t border-dashed border-gray-200/80 flex justify-between items-center">
-                            <span className="text-[9px] font-black text-gray-400 uppercase tracking-widest">
-                              Total Price
-                            </span>
-                            <span className="text-lg md:text-xl font-semibold text-[#870D32]">
-                              ₹{item.totalPrice}
-                            </span>
-                          </div>
                         </div>
                       ))}
+                      <div className="pt-3 mt-3 border-t border-dashed border-gray-200/80 flex justify-between items-center">
+                        <span className="text-[9px] font-black text-gray-500 uppercase tracking-widest">
+                          Total Price
+                        </span>
+                        <span className="text-lg md:text-xl font-semibold text-[#870D32]">
+                          ₹{order.totalPrice}
+                        </span>
+                      </div>
                     </div>
+
+                    {/* view details button */}
+                    <Link
+                      to="/admin/orders"
+                      className="new-primary-bg-dark hover:new-primary-bg text-white w-full text-center block p-3 rounded-lg"
+                    >
+                      View Details
+                    </Link>
                   </div>
 
                   // <div
