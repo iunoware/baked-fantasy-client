@@ -310,7 +310,7 @@ function Home() {
                   />
                 ) : (
                   <div></div>
-                )
+                ),
               )}
             </div>
             <div className="see-all-products flex justify-center">

@@ -135,7 +135,7 @@ export const StaggeredMenu = ({
   const socialItems = [
     {
       label: "Instagram",
-      link: "https://www.instagram.com/sai_constructions_?igsh=YWhuaGpjeDMwNjRi",
+      link: "https://www.instagram.com/thebakedfantasy/",
     },
     {
       label: "Facebook",

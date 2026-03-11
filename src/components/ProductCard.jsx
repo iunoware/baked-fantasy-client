@@ -1,106 +1,186 @@
+import { Link } from "react-router-dom";
+import { Plus, Minus, ShoppingCart } from "lucide-react";
+import toast from "react-hot-toast";
 import { useCart } from "../context/CartContext.jsx";
 
-function Card(props) {
-  const { addToCart } = useCart();
+/**
+ * A universal Product Card component used for both Bakery Products and Baking Essentials.
+ * 
+ * @param {Object} props
+ * @param {string} props.id - Product ID
+ * @param {string} props.title - Product Title
+ * @param {string} props.img - Product Image URL
+ * @param {string} props.category - Product Category
+ * @param {string} props.subject - Product Subtitle/Subject
+ * @param {number|string} props.originalPrice - Original Price
+ * @param {number|string} props.discountedPrice - Discounted Price
+ * @param {boolean} props.inStock - Stock Availability
+ * @param {string} props.type - 'bakery' or 'essential' (defaults to 'bakery')
+ */
+const ProductCard = ({
+  id,
+  title,
+  img,
+  category,
+  subject,
+  originalPrice,
+  discountedPrice,
+  inStock,
+  type = "bakery",
+}) => {
+  const { cartItems, addToCart, increaseQuantity, decreaseQuantity } = useCart();
+  const cartItem = cartItems.find((item) => item.id === id);
+  const added = !!cartItem;
+  const quantity = cartItem ? cartItem.quantity : 1;
 
-  const handleAddToCart = (e) => {
+  // Add to cart handler
+  const handleCart = (e) => {
     e.preventDefault();
+    if (!inStock) return;
+
     addToCart({
-      id: props.id,
-      name: props.name,
-      price: props.price,
-      img: props.img,
-      discount: props.discount
+      id,
+      name: title,
+      price: discountedPrice,
+      image: img,
+      category,
+      subject
     });
+    toast.success(`${title} added to cart!`);
   };
 
+  // Quantity change handler
+  const handleQuantityChange = (change) => {
+    if (change > 0) {
+      increaseQuantity(id);
+    } else {
+      decreaseQuantity(id);
+    }
+  };
+
+  // WhatsApp redirect for Baking Essentials
+  const sendToWhatsApp = (e) => {
+    e.stopPropagation();
+    const phone = "916379240125";
+    const message = `Order Details:%0A${title} - Quantity: ${quantity}`;
+    window.open(`https://wa.me/${phone}?text=${message}`);
+  };
+
+  // Define dynamic paths and actions based on product type
+  const detailLink = type === "essential"
+    ? `/essential/${category}/${id}`
+    : `/products/${category}/${id}`;
+
+  const buyNowAction = type === "essential" ? sendToWhatsApp : (e) => e.stopPropagation();
+
   return (
-    <>
-      <div className=" rounded bg-gray-300">
-        <article className="overflow-hidden rounded-lg shadow-sm transition hover:shadow-lg">
+    <div className="product-card group/card shadow-xl h-full group relative bg-white rounded-2xl border border-neutral-100 p-2 transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 flex flex-col">
+      {/* Image Section */}
+      <Link
+        to={detailLink}
+        className="relative aspect-square w-auto h-60 rounded-xl overflow-hidden bg-neutral-50/50"
+      >
+        <div className="relative w-full h-full transition-transform duration-700 ease-out group-hover:scale-110">
           <img
-            alt="cakes"
-            src={props.img}
-            className="h-56 w-full object-cover hover:scale-105 transition-all duration-200 ease-in-out"
+            src={img}
+            alt={title}
+            className={`object-cover object-center h-full w-full ${!inStock ? "opacity-60 grayscale-[0.5]" : ""}`}
             loading="lazy"
           />
-          <div className="bg-white p-4 sm:p-6">
-            <a href="#">
-              <h3 className="mt-0.5 text-lg text-gray-900 font-bold">
-                {props.name}
-              </h3>
-            </a>
-            <p className="mt-2 line-clamp-3 text-xl/relaxed text-blue-500 font-extrabold">
-              ₹{props.price}
-              <span className="text-[15px] strike line-through text-gray-500 font-medium pl-2">
-                ₹{props.discount}
-              </span>
-            </p>
-            {/* primary buttons */}
-            <div className="buttons pt-5">
-              <a
-                className="group relative inline-flex items-center overflow-hidden rounded-sm bg-cyan-500 px-8 py-3 text-white focus:ring-3 focus:outline-hidden mr-3 cursor-pointer"
-                onClick={handleAddToCart}
-              >
-                <span className="absolute -start-full transition-all group-hover:start-4">
-                  <svg
-                    className="size-5 rtl:rotate-180"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
-                    <g
-                      id="SVGRepo_tracerCarrier"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    ></g>
-                    <g id="SVGRepo_iconCarrier">
-                      <path
-                        d="M7.2998 5H22L20 12H8.37675M21 16H9L7 3H4M4 8H2M5 11H2M6 14H2M10 20C10 20.5523 9.55228 21 9 21C8.44772 21 8 20.5523 8 20C8 19.4477 8.44772 19 9 19C9.55228 19 10 19.4477 10 20ZM21 20C21 20.5523 20.5523 21 20 21C19.4477 21 19 20.5523 19 20C19 19.4477 19.4477 19 20 19C20.5523 19 21 19.4477 21 20Z"
-                        stroke="#fff"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      ></path>
-                    </g>
-                  </svg>
-                </span>
+        </div>
 
-                <span className="text-sm font-medium transition-all group-hover:ms-4">
-                  Add to cart
-                </span>
-              </a>
-              <a
-                className="group relative inline-flex items-center overflow-hidden rounded-sm border border-current px-3 py-3 text-pink-600 focus:ring-3 focus:outline-hidden"
-                href="#"
-              >
-                <span className="absolute -start-full transition-all group-hover:start-1">
-                  <svg
-                    className="size-5 rtl:rotate-180"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M17 8l4 4m0 0l-4 4m4-4H3"
-                    />
-                  </svg>
-                </span>
-
-                <span className="text-sm font-medium transition-all group-hover:ms-4">
-                  view more
-                </span>
-              </a>
-            </div>
+        {/* Sold Out Badge */}
+        {!inStock && (
+          <div className="absolute top-2 right-2 z-20">
+            <span className="text-xs border-2 border-red-600 bg-white/90 backdrop-blur-sm rounded-lg px-2 py-1 font-extrabold text-red-600 shadow-sm">
+              SOLD OUT
+            </span>
           </div>
-        </article>
+        )}
+
+        {/* View Details Hover Overlay */}
+        <div
+          className={`${inStock ? "block" : "hidden"
+            } absolute inset-0 z-10 flex justify-center items-center translate-y-10 opacity-0 group-hover/card:translate-y-0 group-hover/card:opacity-100 transition-all duration-300`}
+        >
+          <div className="bg-white text-neutral-900 rounded-3xl px-5 py-2 font-bold shadow-lg group-hover:scale-105 transition-transform duration-300">
+            View details
+          </div>
+        </div>
+      </Link>
+
+      {/* Details Section */}
+      <div className="flex flex-col justify-between flex-1 p-3">
+        <div>
+          <div className="flex flex-col justify-between items-start mb-2">
+            <h3 className="text-lg font-bold text-neutral-900 group-hover:text-green-700 transition-colors duration-300 line-clamp-1">
+              {title}
+            </h3>
+            <p className="text-sm text-neutral-600 line-clamp-1 h-5">{subject}</p>
+          </div>
+
+          <div className="flex items-center gap-2 mb-4">
+            <span className="text-md line-through font-medium text-neutral-400">
+              ₹{originalPrice}
+            </span>
+            <span className="w-1 h-1 rounded-full bg-neutral-300" />
+            <span className="text-xl font-bold text-neutral-900">
+              ₹{discountedPrice}
+            </span>
+          </div>
+        </div>
+
+        {/* Action Buttons */}
+        <div>
+          {/* Add to Cart Button (Only shown if not already added) */}
+          <button
+            disabled={!inStock}
+            onClick={handleCart}
+            className={`mt-auto ${added ? "hidden" : "flex"} z-10 w-full cursor-pointer bg-neutral-900 text-white font-bold py-3.5 rounded-xl items-center justify-center gap-2 hover:bg-green-700 transition-all duration-300 active:scale-95 shadow-sm disabled:opacity-50 disabled:grayscale disabled:cursor-not-allowed`}
+          >
+            <ShoppingCart size={18} />
+            Add to Cart
+          </button>
+
+          {/* Quantity Controls and Buy Now (Shown when added to cart) */}
+          <div
+            className={`${added ? "flex" : "hidden"} gap-3 z-10 items-center w-full`}
+          >
+            <div className="flex items-center justify-between bg-neutral-100 rounded-xl p-1.5 flex-1">
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleQuantityChange(-1);
+                }}
+                className="p-2 z-10 rounded-lg hover:bg-white hover:shadow-sm transition-all text-neutral-600 active:scale-90"
+              >
+                <Minus size={16} />
+              </button>
+              <span className="font-bold text-neutral-900 min-w-5 text-center">
+                {quantity}
+              </span>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleQuantityChange(+1);
+                }}
+                className="p-2 rounded-lg hover:bg-white hover:shadow-sm transition-all text-neutral-600 active:scale-90"
+              >
+                <Plus size={16} />
+              </button>
+            </div>
+            <button
+              disabled={!inStock}
+              onClick={buyNowAction}
+              className="flex-[1.5] z-10 bg-green-700 text-white font-bold py-3.5 rounded-xl flex items-center justify-center gap-2 hover:bg-green-800 transition-all duration-300 active:scale-95 shadow-sm disabled:opacity-50"
+            >
+              Buy now
+            </button>
+          </div>
+        </div>
       </div>
-    </>
+    </div>
   );
-}
-export default Card;
+};
+
+export default ProductCard;
