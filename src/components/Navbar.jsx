@@ -33,6 +33,11 @@ export const StaggeredMenu = ({
   const [isLoggedIn, setLoggedIn] = useState(false);
   const [isLoginOpen, setLoginOpen] = useState(false);
   const [isRegisterOpen, setRegisterOpen] = useState(false);
+  const [search, setSearch] = useState("");
+  const [suggestions, setSuggestions] = useState([]);
+  const [showSuggestions, setShowSuggestions] = useState(false);
+  const searchRef = useRef(null);
+  const mobileSearchRef = useRef(null);
   const openRef = useRef(false);
   const { cartCount } = useCart();
 
@@ -55,10 +60,6 @@ export const StaggeredMenu = ({
       document.documentElement.style.removeProperty("overflow");
     };
   }, [isLoginOpen, isRegisterOpen]);
-
-  // const handleUserClick = () => {
-
-  // };
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -100,7 +101,6 @@ export const StaggeredMenu = ({
   const openTlRef = useRef(null);
   const closeTweenRef = useRef(null);
   const spinTweenRef = useRef(null);
-  const textCycleAnimRef = useRef(null);
   const colorTweenRef = useRef(null);
 
   const toggleBtnRef = useRef(null);
@@ -420,38 +420,6 @@ export const StaggeredMenu = ({
     }
   }, [changeMenuColorOnOpen, menuButtonColor, openMenuButtonColor]);
 
-  //   const animateText = useCallback((opening) => {
-  //     const inner = textInnerRef.current;
-  //     if (!inner) return;
-
-  //     textCycleAnimRef.current?.kill();
-
-  //     const currentLabel = opening ? "Menu" : "Close";
-  //     const targetLabel = opening ? "Close" : "Menu";
-  //     const cycles = 3;
-
-  //     const seq = [currentLabel];
-  //     let last = currentLabel;
-  //     for (let i = 0; i < cycles; i++) {
-  //       last = last === "Umar" ? "Umar" : "Abdullah";
-  //       seq.push(last);
-  //     }
-  //     if (last !== targetLabel) seq.push(targetLabel);
-  //     seq.push(targetLabel);
-
-  //     setTextLines(seq);
-  //     gsap.set(inner, { yPercent: 0 });
-
-  //     const lineCount = seq.length;
-  //     const finalShift = ((lineCount - 1) / lineCount) * 100;
-
-  //     textCycleAnimRef.current = gsap.to(inner, {
-  //       yPercent: -finalShift,
-  //       duration: 0.5 + lineCount * 0.07,
-  //       ease: "power4.out",
-  //     });
-  //   }, []);
-
   const toggleMenu = useCallback(() => {
     const target = !openRef.current;
     openRef.current = target;
@@ -505,6 +473,21 @@ export const StaggeredMenu = ({
     };
   }, [closeOnClickAway, open, closeMenu]);
 
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        searchRef.current &&
+        !searchRef.current.contains(event.target) &&
+        mobileSearchRef.current &&
+        !mobileSearchRef.current.contains(event.target)
+      ) {
+        setShowSuggestions(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const handleLogout = () => {
@@ -515,6 +498,26 @@ export const StaggeredMenu = ({
     setIsDropdownOpen(false);
     toast.success("Logged out successfully");
     window.location.href = "/";
+  };
+
+  const handleSearch = async (value) => {
+    setSearch(value);
+
+    if (!value.trim()) {
+      setSuggestions([]);
+      setShowSuggestions(false);
+      return;
+    }
+
+    try {
+      const res = await fetch(`http://localhost:5000/search?q=${value}`);
+      const data = await res.json();
+      setSuggestions(data);
+      setShowSuggestions(true);
+    } catch (error) {
+      console.error("Search error:", error);
+      setSuggestions([]);
+    }
   };
 
   return (
@@ -576,7 +579,7 @@ export const StaggeredMenu = ({
             </span>
           </Link>
           <div className="flex gap-10">
-            <div className="searchBar">
+            <div className="searchBar relative" ref={searchRef}>
               <search className="px-5 py-2.5 new-primary-text border-2 border-current rounded-xl font-medium flex items-center">
                 <label htmlFor="search">
                   <Search size={20} color="#870D32" />
@@ -584,10 +587,56 @@ export const StaggeredMenu = ({
                 <input
                   type="search"
                   id="search"
+                  value={search}
+                  onChange={(e) => handleSearch(e.target.value)}
+                  onFocus={() => search.trim() && setShowSuggestions(true)}
                   placeholder="search cakes"
-                  className="border-none w-70 text-black rounded-lg focus:outline-none ml-3 pl-3 "
+                  className="border-none w-70 text-black rounded-lg focus:outline-none ml-3 pl-3"
                 />
               </search>
+              {showSuggestions && suggestions.length > 0 && (
+                <div className="absolute top-full left-0 mt-2 w-full bg-white rounded-xl shadow-2xl border border-gray-100 overflow-hidden z-[100] max-h-80 overflow-y-auto">
+                  {suggestions.map((item) => (
+                    <Link
+                      key={item._id}
+                      to={
+                        item.category
+                          ? `/products/${item.category.title}/${item._id}`
+                          : `/products/all/${item._id}`
+                      }
+                      className="flex items-center gap-3 p-3 hover:bg-gray-50 transition-colors border-b border-gray-50 last:border-none group"
+                      onClick={() => setShowSuggestions(false)}
+                    >
+                      <div className="w-12 h-12 rounded-lg overflow-hidden bg-gray-100 shrink-0">
+                        <img
+                          src={
+                            item.images?.[0]
+                              ? `http://localhost:5000${item.images[0]}`
+                              : "/images/placeholder.png"
+                          }
+                          alt={item.title}
+                          className="w-full h-full object-cover transition-transform group-hover:scale-110"
+                        />
+                      </div>
+                      <div className="flex-1">
+                        <h4 className="text-sm font-semibold text-gray-800 line-clamp-1">
+                          {item.title}
+                        </h4>
+                        <div className="flex items-center gap-2">
+                          <p className="text-xs font-bold text-[#870D32]">
+                            ₹{item.discountedPrice}
+                          </p>
+                          {item.originalPrice && (
+                            <p className="text-[10px] text-gray-400 line-through">
+                              ₹{item.originalPrice}
+                            </p>
+                          )}
+                        </div>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+              )}
             </div>
             <div className="flex items-center gap-4">
               <div className="sm:flex rounded-2xl p-1 new-primary-bg sm:gap-4">
@@ -768,18 +817,57 @@ export const StaggeredMenu = ({
               </div>
             </div>
           </div>
-          <div className="searchBar pt-5 mx-5">
+          <div className="searchBar pt-5 mx-5 relative" ref={mobileSearchRef}>
             <search className="px-5 py-2.5 new-primary-text border-2 border-current rounded-xl flex items-center">
-              <label htmlFor="search">
+              <label htmlFor="search-mobile">
                 <Search size={20} color="#870D32" />
               </label>
               <input
                 type="search"
-                id="search"
+                id="search-mobile"
+                value={search}
+                onChange={(e) => handleSearch(e.target.value)}
+                onFocus={() => search.trim() && setShowSuggestions(true)}
                 placeholder="search cakes"
                 className="border-none w-full font-medium text-black bg-white rounded-lg ml-3 focus:outline-none pl-3"
               />
             </search>
+            {showSuggestions && suggestions.length > 0 && (
+              <div className="absolute top-full left-0 mt-2 w-full bg-white rounded-xl shadow-2xl border border-gray-100 overflow-hidden z-[100] max-h-60 overflow-y-auto">
+                {suggestions.map((item) => (
+                  <Link
+                    key={item._id}
+                    to={
+                      item.category
+                        ? `/products/${item.category.title}/${item._id}`
+                        : `/products/all/${item._id}`
+                    }
+                    className="flex items-center gap-3 p-3 hover:bg-gray-50 transition-colors border-b border-gray-50 last:border-none group"
+                    onClick={() => setShowSuggestions(false)}
+                  >
+                    <div className="w-12 h-12 rounded-lg overflow-hidden bg-gray-100 shrink-0">
+                      <img
+                        src={
+                          item.images?.[0]
+                            ? `http://localhost:5000${item.images[0]}`
+                            : "/images/placeholder.png"
+                        }
+                        alt={item.title}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                    <div className="flex-1">
+                      <h4 className="text-sm font-semibold text-gray-800 line-clamp-1">
+                        {item.title}
+                      </h4>
+                      <p className="text-xs font-bold text-[#870D32]">
+                        ₹{item.discountedPrice}
+                      </p>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            )}
           </div>
         </nav>
         {/* real nav */}
