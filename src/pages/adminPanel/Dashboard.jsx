@@ -38,6 +38,11 @@ function Dashboard() {
     cakeSales: 0,
     courseSales: 0,
   });
+  const [cardFilter, setCardFilter] = useState({
+    essentialSales: 0,
+    cakeSales: 0,
+    courseSales: 0,
+  });
   // const [overall, setOverall] = useState(null);
   const [totalRevenue, setTotalRevenue] = useState(0);
   const [chartFiler, setChartFilter] = useState("overall");
@@ -50,7 +55,8 @@ function Dashboard() {
       color: "bg-pink-100",
       difference: 12.5,
       type: "Essentials sold",
-      numbers: thisMonthSales.essentialSales,
+      // numbers: thisMonthSales.essentialSales,
+      numbers: cardFilter.essentialSales,
     },
     {
       icon: <Banknote className="text-orange-600" />,
@@ -64,14 +70,16 @@ function Dashboard() {
       color: "bg-blue-100",
       difference: 12.5,
       type: "Cakes Sold",
-      numbers: thisMonthSales.cakeSales,
+      // numbers: thisMonthSales.cakeSales,
+      numbers: cardFilter.cakeSales,
     },
     {
       icon: <GraduationCap className="text-purple-600" />,
       color: "bg-purple-100",
       difference: 12.5,
       type: "Courses Sold",
-      numbers: thisMonthSales.courseSales,
+      // numbers: thisMonthSales.courseSales,
+      numbers: cardFilter.courseSales,
     },
   ];
 
@@ -141,20 +149,6 @@ function Dashboard() {
     },
   };
 
-  // const optionsPie = {
-  //   chart: {
-  //     type: "pie",
-  //     animations: {
-  //       enabled: true,
-  //     },
-  //   },
-  //   labels: ["Essentials", "Cakes", "Courses"],
-  //   colors: ["#3b82f6", "#22c55e", "#f59e0b"],
-  //   legend: {
-  //     position: "bottom",
-  //   },
-  // };
-
   const seriesPieToday = [
     todaySales.essentialSales,
     todaySales.cakeSales,
@@ -181,6 +175,7 @@ function Dashboard() {
     try {
       const response = await axios.get(`${url}/orders/today`);
       setTodaySales(response.data);
+      setCardFilter(response.data);
     } catch (error) {
       console.error(error.message);
     }
@@ -191,6 +186,7 @@ function Dashboard() {
     try {
       const response = await axios.get(`${url}/orders/thisWeek`);
       setThisWeekSales(response.data);
+      setCardFilter(response.data);
     } catch (error) {
       console.error(error.message);
     }
@@ -201,6 +197,7 @@ function Dashboard() {
     try {
       const response = await axios.get(`${url}/orders/thisMonth`);
       setThisMonthSales(response.data);
+      setCardFilter(response.data);
     } catch (error) {
       console.error(error.message);
     }
@@ -211,6 +208,7 @@ function Dashboard() {
     try {
       const response = await axios.get(`${url}/orders/overall`);
       setOverall(response.data);
+      setCardFilter(response.data);
     } catch (error) {
       console.error(error.message);
     }
@@ -268,6 +266,46 @@ function Dashboard() {
             </div>
           </div>
 
+          {/* filter button */}
+          <div className="flex gap-2 my-10 bg-white w-fit rounded-xl p-1 shadow-sm">
+            <div
+              onClick={() => {
+                setChartFilter("today");
+                setCardFilter(todaySales);
+              }}
+              className={`${chartFiler === "today" ? "new-primary-bg text-white hover:new-primary-bg/90" : "hover:bg-gray-100"} p-2 cursor-pointer rounded-lg`}
+            >
+              Today
+            </div>
+            <div
+              onClick={() => {
+                setChartFilter("7days");
+                setCardFilter(thisWeekSales);
+              }}
+              className={`${chartFiler === "7days" ? "new-primary-bg text-white hover:new-primary-bg/90" : "hover:bg-gray-100"} p-2 cursor-pointer rounded-lg`}
+            >
+              7 Days
+            </div>
+            <div
+              onClick={() => {
+                setChartFilter("30days");
+                setCardFilter(thisMonthSales);
+              }}
+              className={`${chartFiler === "30days" ? "new-primary-bg text-white hover:new-primary-bg/90" : "hover:bg-gray-100"} p-2 cursor-pointer rounded-lg`}
+            >
+              30 Days
+            </div>
+            <div
+              onClick={() => {
+                setChartFilter("overall");
+                setCardFilter(overall);
+              }}
+              className={`${chartFiler === "overall" ? "new-primary-bg text-white hover:new-primary-bg/90" : "hover:bg-gray-100"} p-2 cursor-pointer rounded-lg`}
+            >
+              Overall
+            </div>
+          </div>
+
           {/* top 4 cards */}
           <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 my-8 gap-10">
             {cards.map((card, index) => (
@@ -297,34 +335,6 @@ function Dashboard() {
 
           {/* chart below */}
           <div className="my-20">
-            {/* filter button */}
-            <div className="flex gap-2 my-10 bg-white w-fit rounded-xl p-1 shadow-sm">
-              <div
-                onClick={() => setChartFilter("today")}
-                className={`${chartFiler === "today" ? "new-primary-bg text-white hover:new-primary-bg/90" : "hover:bg-gray-100"} p-2 cursor-pointer rounded-lg`}
-              >
-                Today
-              </div>
-              <div
-                onClick={() => setChartFilter("7days")}
-                className={`${chartFiler === "7days" ? "new-primary-bg text-white hover:new-primary-bg/90" : "hover:bg-gray-100"} p-2 cursor-pointer rounded-lg`}
-              >
-                7 Days
-              </div>
-              <div
-                onClick={() => setChartFilter("30days")}
-                className={`${chartFiler === "30days" ? "new-primary-bg text-white hover:new-primary-bg/90" : "hover:bg-gray-100"} p-2 cursor-pointer rounded-lg`}
-              >
-                30 Days
-              </div>
-              <div
-                onClick={() => setChartFilter("overall")}
-                className={`${chartFiler === "overall" ? "new-primary-bg text-white hover:new-primary-bg/90" : "hover:bg-gray-100"} p-2 cursor-pointer rounded-lg`}
-              >
-                Overall
-              </div>
-            </div>
-
             {/* this month chart */}
             <div className="grid lg:grid-cols-4 grid-cols-1">
               {/* line chart */}
