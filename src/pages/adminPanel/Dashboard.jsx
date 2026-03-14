@@ -43,11 +43,21 @@ function Dashboard() {
     cakeSales: 0,
     courseSales: 0,
   });
-  // const [overall, setOverall] = useState(null);
-  const [totalRevenue, setTotalRevenue] = useState(0);
+
+  // const [todayRevenue, setTodayRevenue] = useState(0);
+  // const [weekRevenue, setWeekRevenue] = useState(0);
+  // const [monthRevenue, setMonthRevenue] = useState(0);
+  // const [totalRevenue, setTotalRevenue] = useState(0);
+
+  const [revenue, setRevenue] = useState({
+    today: 0,
+    week: 0,
+    month: 0,
+    overall: 0,
+  });
+
   const [chartFiler, setChartFilter] = useState("overall");
   const [orders, setOrders] = useState([]);
-  // const [orders, setOrders] = useState([]);
 
   let cards = [
     {
@@ -63,7 +73,8 @@ function Dashboard() {
       color: "bg-orange-100",
       difference: 12.5,
       type: "Total Revenue",
-      numbers: totalRevenue,
+      numbers: revenue,
+      // numbers: cardFilter.totalRevenue,
     },
     {
       icon: <CakeSlice className="text-blue-600" />,
@@ -175,7 +186,11 @@ function Dashboard() {
     try {
       const response = await axios.get(`${url}/orders/today`);
       setTodaySales(response.data);
-      setCardFilter(response.data);
+      // setCardFilter(response.data);
+      setCardFilter((prev) => ({
+        ...prev,
+        ...response.data,
+      }));
     } catch (error) {
       console.error(error.message);
     }
@@ -186,7 +201,11 @@ function Dashboard() {
     try {
       const response = await axios.get(`${url}/orders/thisWeek`);
       setThisWeekSales(response.data);
-      setCardFilter(response.data);
+      // setCardFilter(response.data);
+      setCardFilter((prev) => ({
+        ...prev,
+        ...response.data,
+      }));
     } catch (error) {
       console.error(error.message);
     }
@@ -197,7 +216,11 @@ function Dashboard() {
     try {
       const response = await axios.get(`${url}/orders/thisMonth`);
       setThisMonthSales(response.data);
-      setCardFilter(response.data);
+      // setCardFilter(response.data);
+      setCardFilter((prev) => ({
+        ...prev,
+        ...response.data,
+      }));
     } catch (error) {
       console.error(error.message);
     }
@@ -208,17 +231,69 @@ function Dashboard() {
     try {
       const response = await axios.get(`${url}/orders/overall`);
       setOverall(response.data);
-      setCardFilter(response.data);
+      setCardFilter((prev) => ({
+        ...prev,
+        ...response.data,
+      }));
+    } catch (error) {
+      console.error(error.message);
+    }
+  }
+
+  // today revenue
+  async function todayRevenueFunc() {
+    try {
+      const response = await axios.get(`${url}/orders/todayRevenue`);
+      // setCardFilter(response.data);
+      // setTodayRevenue(response.data.totalRevenue);
+      setRevenue((prev) => ({
+        ...prev,
+        today: response.data.totalRevenue,
+      }));
+    } catch (error) {
+      console.error(error.message);
+    }
+  }
+
+  // this week revenue
+  async function thisWeekRevenue() {
+    try {
+      const response = await axios.get(`${url}/orders/thisWeekRevenue`);
+      // setCardFilter(response.data.totalRevenue);
+      // setWeekRevenue(response.data.totalRevenue);
+      setRevenue((prev) => ({
+        ...prev,
+        week: response.data.totalRevenue,
+      }));
+    } catch (error) {
+      console.error(error.message);
+    }
+  }
+
+  // this month revenue
+  async function thisMonthRevenue() {
+    try {
+      const response = await axios.get(`${url}/orders/thisMonthRevenue`);
+      // setCardFilter(response.data.totalRevenue);
+      // setMonthRevenue(response.data.totalRevenue);
+      setRevenue((prev) => ({
+        ...prev,
+        month: response.data.totalRevenue,
+      }));
     } catch (error) {
       console.error(error.message);
     }
   }
 
   // grand total revenue
-  async function revenue() {
+  async function revenueFunc() {
     try {
       const response = await axios.get(`${url}/orders/revenue`);
-      setTotalRevenue(response.data.totalRevenue);
+      // setTotalRevenue(response.data.totalRevenue);
+      setRevenue((prev) => ({
+        ...prev,
+        overall: response.data.totalRevenue,
+      }));
     } catch (error) {
       console.log(error.message);
     }
@@ -235,7 +310,10 @@ function Dashboard() {
   }
 
   useEffect(() => {
-    revenue();
+    todayRevenueFunc();
+    thisWeekRevenue();
+    thisMonthRevenue();
+    revenueFunc();
     todaySalesFunc();
     weekSalesFunc();
     thisMonthSalesFunc();
@@ -272,6 +350,7 @@ function Dashboard() {
               onClick={() => {
                 setChartFilter("today");
                 setCardFilter(todaySales);
+                setRevenue(revenue.today);
               }}
               className={`${chartFiler === "today" ? "new-primary-bg text-white hover:new-primary-bg/90" : "hover:bg-gray-100"} p-2 cursor-pointer rounded-lg`}
             >
@@ -281,6 +360,7 @@ function Dashboard() {
               onClick={() => {
                 setChartFilter("7days");
                 setCardFilter(thisWeekSales);
+                setRevenue(revenue.week);
               }}
               className={`${chartFiler === "7days" ? "new-primary-bg text-white hover:new-primary-bg/90" : "hover:bg-gray-100"} p-2 cursor-pointer rounded-lg`}
             >
@@ -290,6 +370,7 @@ function Dashboard() {
               onClick={() => {
                 setChartFilter("30days");
                 setCardFilter(thisMonthSales);
+                setRevenue(revenue.month);
               }}
               className={`${chartFiler === "30days" ? "new-primary-bg text-white hover:new-primary-bg/90" : "hover:bg-gray-100"} p-2 cursor-pointer rounded-lg`}
             >
@@ -299,6 +380,7 @@ function Dashboard() {
               onClick={() => {
                 setChartFilter("overall");
                 setCardFilter(overall);
+                setRevenue(revenue.overall);
               }}
               className={`${chartFiler === "overall" ? "new-primary-bg text-white hover:new-primary-bg/90" : "hover:bg-gray-100"} p-2 cursor-pointer rounded-lg`}
             >
