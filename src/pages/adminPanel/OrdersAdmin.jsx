@@ -74,11 +74,7 @@ function OrdersAdmin() {
     }
   }
 
-  const updateOrderStatus = async (
-    orderId,
-    newStatus,
-    deliveryPartner = null,
-  ) => {
+  const updateOrderStatus = async (orderId, newStatus, deliveryPartner = null) => {
     setUpdatingId(orderId);
     try {
       const updateData = { orderStatus: newStatus };
@@ -215,9 +211,7 @@ function OrdersAdmin() {
                   <AnimatePresence mode="popLayout">
                     {orders
                       .filter((o) => o.orderStatus === column.id)
-                      .sort(
-                        (a, b) => new Date(b.createdAt) - new Date(a.createdAt),
-                      )
+                      .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
                       .map((order) => (
                         <OrderCard
                           key={order._id}
@@ -230,8 +224,7 @@ function OrdersAdmin() {
                       ))}
                   </AnimatePresence>
 
-                  {orders.filter((o) => o.orderStatus === column.id).length ===
-                    0 && (
+                  {orders.filter((o) => o.orderStatus === column.id).length === 0 && (
                     <div className="h-full flex flex-col items-center justify-center py-24 opacity-30 select-none">
                       <div className="p-5 bg-gray-200 rounded-full mb-4">
                         <AlertCircle size={32} className="text-gray-400" />
