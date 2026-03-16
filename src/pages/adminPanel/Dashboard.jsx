@@ -13,11 +13,11 @@ import {
 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import RecentOrders from "./components/RecentOrders";
 
 const url = "http://localhost:5000";
 
 function Dashboard() {
-  // const [ordersToday, setOrdersToday] = useState(0);
   const [todaySales, setTodaySales] = useState({
     essentialSales: 0,
     cakeSales: 0,
@@ -56,8 +56,7 @@ function Dashboard() {
     overall: 0,
   });
 
-  const [chartFiler, setChartFilter] = useState("overall");
-  const [orders, setOrders] = useState([]);
+  const [chartFilter, setChartFilter] = useState("overall");
 
   let cards = [
     {
@@ -73,8 +72,15 @@ function Dashboard() {
       color: "bg-orange-100",
       difference: 12.5,
       type: "Total Revenue",
-      numbers: revenue,
-      // numbers: cardFilter.totalRevenue,
+      // numbers: revenue.today,
+      numbers:
+        chartFilter === "today"
+          ? revenue.today
+          : chartFilter === "7days"
+            ? revenue.week
+            : chartFilter === "30days"
+              ? revenue.month
+              : revenue.overall,
     },
     {
       icon: <CakeSlice className="text-blue-600" />,
@@ -248,7 +254,7 @@ function Dashboard() {
       // setTodayRevenue(response.data.totalRevenue);
       setRevenue((prev) => ({
         ...prev,
-        today: response.data.totalRevenue,
+        today: response.data.revenue[0]?.totalRevenue || 0,
       }));
     } catch (error) {
       console.error(error.message);
@@ -263,7 +269,7 @@ function Dashboard() {
       // setWeekRevenue(response.data.totalRevenue);
       setRevenue((prev) => ({
         ...prev,
-        week: response.data.totalRevenue,
+        week: response.data.revenue[0]?.totalRevenue || 0,
       }));
     } catch (error) {
       console.error(error.message);
@@ -278,7 +284,7 @@ function Dashboard() {
       // setMonthRevenue(response.data.totalRevenue);
       setRevenue((prev) => ({
         ...prev,
-        month: response.data.totalRevenue,
+        month: response.data.revenue[0]?.totalRevenue || 0,
       }));
     } catch (error) {
       console.error(error.message);
@@ -299,16 +305,6 @@ function Dashboard() {
     }
   }
 
-  // to fetch the today's orders in detail
-  async function fetchOrders() {
-    try {
-      const response = await axios.get(`${url}/orders/todayDetail`);
-      setOrders(response.data.orders);
-    } catch (error) {
-      console.log(error.message);
-    }
-  }
-
   useEffect(() => {
     todayRevenueFunc();
     thisWeekRevenue();
@@ -318,20 +314,8 @@ function Dashboard() {
     weekSalesFunc();
     thisMonthSalesFunc();
     overAllSalesFunc();
-    fetchOrders();
+    // fetchOrders();
   }, []);
-
-  // get time ago for the
-  const getTimeAgo = (dateString) => {
-    const date = new Date(dateString);
-    const now = new Date();
-    const diffInMinutes = Math.floor((now - date) / (1000 * 60));
-
-    if (diffInMinutes < 1) return "Just now";
-    if (diffInMinutes < 60) return `${diffInMinutes}m ago`;
-    if (diffInMinutes < 1440) return `${Math.floor(diffInMinutes / 60)}h ago`;
-    return `${Math.floor(diffInMinutes / 1440)}d ago`;
-  };
 
   return (
     <div className="">
@@ -345,14 +329,14 @@ function Dashboard() {
           </div>
 
           {/* filter button */}
-          <div className="flex gap-2 my-10 bg-white w-fit rounded-xl p-1 shadow-sm">
+          <div className="flex text-sm md:text-md gap-2 my-10 bg-white w-fit rounded-xl p-1 shadow-sm">
             <div
               onClick={() => {
                 setChartFilter("today");
                 setCardFilter(todaySales);
-                setRevenue(revenue.today);
+                // setRevenue(revenue.today);
               }}
-              className={`${chartFiler === "today" ? "new-primary-bg text-white hover:new-primary-bg/90" : "hover:bg-gray-100"} p-2 cursor-pointer rounded-lg`}
+              className={`${chartFilter === "today" ? "new-primary-bg text-white hover:new-primary-bg/90" : "hover:bg-gray-100"} p-2 cursor-pointer rounded-lg`}
             >
               Today
             </div>
@@ -360,9 +344,9 @@ function Dashboard() {
               onClick={() => {
                 setChartFilter("7days");
                 setCardFilter(thisWeekSales);
-                setRevenue(revenue.week);
+                // setRevenue(revenue.week);
               }}
-              className={`${chartFiler === "7days" ? "new-primary-bg text-white hover:new-primary-bg/90" : "hover:bg-gray-100"} p-2 cursor-pointer rounded-lg`}
+              className={`${chartFilter === "7days" ? "new-primary-bg text-white hover:new-primary-bg/90" : "hover:bg-gray-100"} p-2 cursor-pointer rounded-lg`}
             >
               7 Days
             </div>
@@ -370,19 +354,19 @@ function Dashboard() {
               onClick={() => {
                 setChartFilter("30days");
                 setCardFilter(thisMonthSales);
-                setRevenue(revenue.month);
+                // setRevenue(revenue.month);
               }}
-              className={`${chartFiler === "30days" ? "new-primary-bg text-white hover:new-primary-bg/90" : "hover:bg-gray-100"} p-2 cursor-pointer rounded-lg`}
+              className={`${chartFilter === "30days" ? "new-primary-bg text-white hover:new-primary-bg/90" : "hover:bg-gray-100"} p-2 cursor-pointer rounded-lg`}
             >
               30 Days
             </div>
             <div
               onClick={() => {
                 setChartFilter("overall");
-                setCardFilter(overall);
-                setRevenue(revenue.overall);
+                setCardFilter("overall");
+                // setRevenue(revenue.overall);
               }}
-              className={`${chartFiler === "overall" ? "new-primary-bg text-white hover:new-primary-bg/90" : "hover:bg-gray-100"} p-2 cursor-pointer rounded-lg`}
+              className={`${chartFilter === "overall" ? "new-primary-bg text-white hover:new-primary-bg/90" : "hover:bg-gray-100"} p-2 cursor-pointer rounded-lg`}
             >
               Overall
             </div>
@@ -421,17 +405,17 @@ function Dashboard() {
             <div className="grid lg:grid-cols-4 grid-cols-1">
               {/* line chart */}
               <div className="lg:col-span-3">
-                <div className={`${chartFiler === "today" ? "block" : "hidden"}`}>
+                <div className={`${chartFilter === "today" ? "block" : "hidden"}`}>
                   <Chart options={options} series={seriesToday} type="bar" height={350} />
                   {/* <Chart
                   options={options}
-                  series={barSeries[chartFiler]}
+                  series={barSeries[chartFilter]}
                   type="bar"
                   height={350}
                 /> */}
                 </div>
 
-                <div className={`${chartFiler === "7days" ? "block" : "hidden"}`}>
+                <div className={`${chartFilter === "7days" ? "block" : "hidden"}`}>
                   <Chart
                     options={options}
                     series={seriesThisWeek}
@@ -440,7 +424,7 @@ function Dashboard() {
                   />
                 </div>
 
-                <div className={`${chartFiler === "30days" ? "block" : "hidden"}`}>
+                <div className={`${chartFilter === "30days" ? "block" : "hidden"}`}>
                   <Chart
                     options={options}
                     series={seriesThisMonth}
@@ -449,14 +433,14 @@ function Dashboard() {
                   />
                 </div>
 
-                <div className={`${chartFiler === "overall" ? "block" : "hidden"}`}>
+                <div className={`${chartFilter === "overall" ? "block" : "hidden"}`}>
                   <Chart options={options} series={series} type="bar" height={350} />
                 </div>
               </div>
 
               {/* pie chart */}
               <div className="lg:col-span-1">
-                <div className={`${chartFiler === "today" ? "block" : "hidden"}`}>
+                <div className={`${chartFilter === "today" ? "block" : "hidden"}`}>
                   <Chart
                     options={optionsPie}
                     series={seriesPieToday}
@@ -465,7 +449,7 @@ function Dashboard() {
                   />
                 </div>
 
-                <div className={`${chartFiler === "7days" ? "block" : "hidden"}`}>
+                <div className={`${chartFilter === "7days" ? "block" : "hidden"}`}>
                   <Chart
                     options={optionsPie}
                     series={seriesPieWeek}
@@ -474,7 +458,7 @@ function Dashboard() {
                   />
                 </div>
 
-                <div className={`${chartFiler === "30days" ? "block" : "hidden"}`}>
+                <div className={`${chartFilter === "30days" ? "block" : "hidden"}`}>
                   <Chart
                     options={optionsPie}
                     series={seriesPieMonth}
@@ -483,7 +467,7 @@ function Dashboard() {
                   />
                 </div>
 
-                <div className={`${chartFiler === "overall" ? "block" : "hidden"}`}>
+                <div className={`${chartFilter === "overall" ? "block" : "hidden"}`}>
                   <Chart
                     options={optionsPie}
                     series={seriesPie}
@@ -496,165 +480,7 @@ function Dashboard() {
             {/* chart above */}
           </div>
 
-          {/* orders overview section */}
-          <div className="py-10">
-            <h2 className="text-3xl lora new-primary-text font-semibold mb-20">
-              Recent Orders
-            </h2>
-            {orders.length > 0 ? (
-              // <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 place-items-center space-y-10">
-              <div className="flex flex-wrap gap-10  lg:justify-start items-center">
-                {orders.map((order, index) => (
-                  <div
-                    key={index}
-                    className="min-w-80 h-110 flex flex-col justify-between bg-white p-4 rounded-xl shadow-lg"
-                  >
-                    <div>
-                      {/* card header */}
-                      <div key={index}>
-                        <div className="flex justify-between items-start mb-5 relative z-10">
-                          <div className="flex flex-col min-w-0">
-                            <span className="text-[9px] font-bold text-gray-400 uppercase tracking-widest mb-1">
-                              Order ID: #...{order._id.slice(-6).toUpperCase()}
-                            </span>
-                            <p className="font-bold text-gray-900 text-base md:text-lg flex items-center gap-2 group-hover:text-[#870D32] transition-colors leading-tight truncate">
-                              {order.user.name}
-                            </p>
-                          </div>
-                          <div className="shrink-0 flex items-center gap-1.5 text-gray-400 font-bold text-[9px] md:text-[10px] bg-gray-50 px-2 py-1 rounded-lg border border-gray-100">
-                            <Clock size={10} />
-                            {getTimeAgo(order.createdAt)}
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Customer Info */}
-                      <div className="space-y-3 mb-6 border-l-2 border-pink-50 pl-4 relative z-10">
-                        <div className="flex items-center gap-2.5">
-                          <Phone size={13} className="text-[#870D32]/60 shrink-0" />
-                          <span className="text-xs font-bold text-gray-600">
-                            {order.user.phone || "No phone"}
-                          </span>
-                        </div>
-                        <div className="flex items-start gap-2.5">
-                          <MapPin
-                            size={13}
-                            className="text-[#870D32]/60 shrink-0 mt-0.5"
-                          />
-                          <span className="text-xs font-medium text-gray-500 leading-snug line-clamp-2">
-                            {order.billingAddress}
-                          </span>
-                        </div>
-                        <div className="flex items-start gap-2.5">
-                          <Package
-                            size={13}
-                            className="text-[#870D32]/60 shrink-0 mt-0.5"
-                          />
-                          <span className="text-xs font-medium text-gray-500 leading-snug line-clamp-2">
-                            {order.orderStatus}
-                          </span>
-                        </div>
-                      </div>
-
-                      {/* Product List */}
-                      <div className="bg-[#fdfbf7] rounded-[22px] p-4 mb-6 space-y-2.5 border border-[#f5efdf] relative z-10">
-                        <div className="flex justify-between items-center mb-3">
-                          <span className="text-[8px] font-black text-gray-500 uppercase tracking-[0.2em]">
-                            Products List
-                          </span>
-                          {/* <span className="bg-white/80 px-2 py-0.5 rounded text-[9px] font-bold text-[#870D32]">
-                          {order.products.length} Items
-                        </span> */}
-                        </div>
-
-                        {order.products.map((item, idx) => (
-                          <div key={idx} className="space-y-2">
-                            <div className="flex justify-between text-xs font-semibold text-gray-800">
-                              <span className="truncate pr-4">
-                                • {item.title || item.product?.name}
-                              </span>
-                              <span className="shrink-0 text-[#870D32] font-black tracking-tighter">
-                                × {item.quantity}
-                              </span>
-                            </div>
-                          </div>
-                        ))}
-
-                        {/* <div className="space-y-2">
-                        <div className="flex justify-between text-xs font-semibold text-gray-800">
-                          <span className="truncate pr-4">
-                            • {order.products[0].productType}
-                          </span>
-                          <span className="shrink-0 text-[#870D32] font-black tracking-tighter">
-                            × {order.products[0].quantity}
-                          </span>
-                        </div>
-                      </div> */}
-
-                        <div className="pt-3 mt-3 border-t border-dashed border-gray-200/80 flex justify-between items-center">
-                          <span className="text-[9px] font-black text-gray-500 uppercase tracking-widest">
-                            Total Price
-                          </span>
-                          <span className="text-lg md:text-xl font-semibold text-[#870D32]">
-                            ₹{order.totalPrice}
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* view details button */}
-                    <Link
-                      to="/admin/orders"
-                      className="new-primary-bg-dark hover:new-primary-bg text-white w-full text-center block p-3 rounded-lg"
-                    >
-                      View Details
-                    </Link>
-                  </div>
-
-                  // <div
-                  //   key={index}
-                  //   className="text-xl bg-white my-10 shadow-lg p-3 rounded-xl"
-                  // >
-                  //   <div className="space-y-4">
-                  //     <p className="">Order ID: {order._id}</p>
-                  //     <p>{order.name}</p>
-                  //     <p>Mobile: {order.number || "unavailable"}</p>
-                  //     <p>Address: {order.billingAddress}</p>
-                  //     <hr />
-                  //     <div className="flex items-center gap-2">
-                  //       <p>Items ({order.products.length}):</p>
-                  //       {order.products.map((product) => (
-                  //         // <p key={product._id}>{product.price}</p>
-                  //         // product name
-                  //         <p key={product._id}>{product.name}</p>
-                  //       ))}
-                  //     </div>
-                  //     <p>Status: {order.orderStatus}</p>
-                  //     <hr />
-                  //     <Link
-                  //       to="/admin/orders"
-                  //       className="text-white block cursor-pointer hover:new-primary-bg new-primary-bg-dark rounded-lg p-3 w-full"
-                  //     >
-                  //       View details
-                  //     </Link>
-                  //   </div>
-                  // </div>
-                ))}
-              </div>
-            ) : (
-              <div className="flex flex-col justify-center items-center">
-                <img
-                  src="/images/no-orders-found.png"
-                  alt="No orders found"
-                  className="h-150 grayscale-75"
-                />
-                <h3 className="text-2xl font-bold new-primary-text">No Orders found</h3>
-              </div>
-            )}
-            {/* </div> */}
-          </div>
-
-          {/* <div className="text-3xl">This is the orders table</div> */}
+          <RecentOrders />
         </div>
       </div>
     </div>
