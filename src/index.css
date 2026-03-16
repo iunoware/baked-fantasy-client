@@ -50,6 +50,9 @@ h6 {
 .bg {
   @apply bg-[#EFE1D0];
 }
+.pac-container {
+  z-index: 9999 !important;
+}
 
 @theme {
   /* for text */

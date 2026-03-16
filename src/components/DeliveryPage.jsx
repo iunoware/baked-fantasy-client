@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
+import AddressAutocomplete from "./AddressAutoComplete";
 import {
   MapPin,
   Plus,
@@ -32,6 +33,7 @@ export function DeliveryPage({
   onNext,
   onPrevious,
 }) {
+  const inputRef = useRef(null);
   const [isAddingAddress, setIsAddingAddress] = useState(false);
   const [newAddress, setNewAddress] = useState({
     type: "",
@@ -55,12 +57,6 @@ export function DeliveryPage({
       type: "Home",
       address: "123 Main Street, Apartment 4B, Downtown Area",
       landmark: "Near Central Park",
-    },
-    {
-      id: "2",
-      type: "Work",
-      address: "456 Business District, Office Tower 2, Floor 15",
-      landmark: "Opposite Metro Station",
     },
   ]);
 
@@ -112,6 +108,7 @@ export function DeliveryPage({
                       <div>
                         <Label htmlFor="type">Address Type</Label>
                         <Input
+                          ref={inputRef}
                           id="type"
                           placeholder="Home, Work, etc."
                           value={newAddress.type}
@@ -126,7 +123,7 @@ export function DeliveryPage({
                       </div>
                       <div>
                         <Label htmlFor="address">Complete Address</Label>
-                        <Textarea
+                        {/* <Textarea
                           id="address"
                           placeholder="Enter your complete address"
                           className="mt-2"
@@ -137,6 +134,12 @@ export function DeliveryPage({
                               address: e.target.value,
                             })
                           }
+                        /> */}
+                        <AddressAutocomplete
+                          setLocation={(location) =>
+                            setNewAddress({ ...newAddress, address: location })
+                          }
+                          className="mt-2"
                         />
                       </div>
                       <div>
