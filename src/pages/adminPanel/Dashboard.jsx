@@ -363,7 +363,7 @@ function Dashboard() {
             <div
               onClick={() => {
                 setChartFilter("overall");
-                setCardFilter("overall");
+                setCardFilter(overall);
                 // setRevenue(revenue.overall);
               }}
               className={`${chartFilter === "overall" ? "new-primary-bg text-white hover:new-primary-bg/90" : "hover:bg-gray-100"} p-2 cursor-pointer rounded-lg`}
