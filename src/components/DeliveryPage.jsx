@@ -37,6 +37,7 @@ export function DeliveryPage({
   const [isAddingAddress, setIsAddingAddress] = useState(false);
   const [newAddress, setNewAddress] = useState({
     type: "",
+    building: "",
     address: "",
     landmark: "",
   });
@@ -116,6 +117,22 @@ export function DeliveryPage({
                             setNewAddress({
                               ...newAddress,
                               type: e.target.value,
+                            })
+                          }
+                          className="focus:ring-1 focus:ring-black/70 focus:border-none mt-2"
+                        />
+                      </div>
+                      <div>
+                        <Label htmlFor="type">Building / Floor</Label>
+                        <Input
+                          ref={inputRef}
+                          id="floor"
+                          placeholder="23/ A"
+                          value={newAddress.building}
+                          onChange={(e) =>
+                            setNewAddress({
+                              ...newAddress,
+                              building: e.target.value,
                             })
                           }
                           className="focus:ring-1 focus:ring-black/70 focus:border-none mt-2"

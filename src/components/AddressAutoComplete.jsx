@@ -1,18 +1,23 @@
-import React, { useState, useEffect, useRef } from 'react';
-import './AddressAutocomplete.css';
+import React, { useState, useEffect, useRef } from "react";
+import "./AddressAutocomplete.css";
 
-const AddressAutocomplete = ({ setLocation, placeholder = "Enter your address", className = "" }) => {
-  const [input, setInput] = useState('');
+const AddressAutocomplete = ({
+  setLocation,
+  placeholder = "Area / Locality",
+  className = "",
+}) => {
+  const [input, setInput] = useState("");
   const [suggestions, setSuggestions] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
-  
+
   const autocompleteService = useRef(null);
   const wrapperRef = useRef(null);
 
   // Initialize the AutocompleteService when Google Maps API is available
   useEffect(() => {
     if (window.google && window.google.maps && window.google.maps.places) {
-      autocompleteService.current = new window.google.maps.places.AutocompleteService();
+      autocompleteService.current =
+        new window.google.maps.places.AutocompleteService();
     } else {
       console.warn("Google Maps API not loaded yet.");
     }
@@ -39,7 +44,8 @@ const AddressAutocomplete = ({ setLocation, placeholder = "Enter your address", 
     if (!autocompleteService.current) {
       // Try to re-initialize in case it loaded late
       if (window.google && window.google.maps && window.google.maps.places) {
-        autocompleteService.current = new window.google.maps.places.AutocompleteService();
+        autocompleteService.current =
+          new window.google.maps.places.AutocompleteService();
       } else {
         return;
       }
@@ -55,21 +61,24 @@ const AddressAutocomplete = ({ setLocation, placeholder = "Enter your address", 
     autocompleteService.current.getPlacePredictions(
       { input: value },
       (predictions, status) => {
-        if (status === window.google.maps.places.PlacesServiceStatus.OK && predictions) {
+        if (
+          status === window.google.maps.places.PlacesServiceStatus.OK &&
+          predictions
+        ) {
           setSuggestions(predictions);
           setShowSuggestions(true);
         } else {
           setSuggestions([]);
           setShowSuggestions(false);
         }
-      }
+      },
     );
   };
 
   const handleSelectSuggestion = (suggestion) => {
     setInput(suggestion.description);
     setShowSuggestions(false);
-    
+
     if (setLocation) {
       setLocation({
         address: suggestion.description,
@@ -79,7 +88,10 @@ const AddressAutocomplete = ({ setLocation, placeholder = "Enter your address", 
   };
 
   return (
-    <div className={`address-autocomplete-wrapper ${className}`} ref={wrapperRef}>
+    <div
+      className={`address-autocomplete-wrapper border-gray-900! ${className}`}
+      ref={wrapperRef}
+    >
       <input
         type="text"
         value={input}
@@ -90,7 +102,7 @@ const AddressAutocomplete = ({ setLocation, placeholder = "Enter your address", 
           if (suggestions.length > 0) setShowSuggestions(true);
         }}
       />
-      
+
       {showSuggestions && suggestions.length > 0 && (
         <ul className="suggestions">
           {suggestions.map((suggestion) => (
