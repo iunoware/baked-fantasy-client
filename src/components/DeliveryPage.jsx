@@ -37,6 +37,7 @@ export function DeliveryPage({
   const [isAddingAddress, setIsAddingAddress] = useState(false);
   const [newAddress, setNewAddress] = useState({
     type: "",
+    building: "",
     address: "",
     landmark: "",
   });
@@ -45,22 +46,44 @@ export function DeliveryPage({
     if (!newAddress.type || !newAddress.address) return;
     setAddresses([...addresses, { id: Date.now().toString(), ...newAddress }]);
     setIsAddingAddress(false);
-    setNewAddress({ type: "", address: "", landmark: "" });
+    setNewAddress({ type: "", building: "", address: "", landmark: "" });
+  };
+
+  const getDistance = async (userLat, userLng) => {
+    const origin = `${STORE_LOCATION.lat},${STORE_LOCATION.lng}`;
+    const destination = `${userLat},${userLng}`;
+
+    const url = `https://maps.googleapis.com/maps/api/distancematrix/json?origins=${origin}&destinations=${destination}&key=YOUR_API_KEY`;
+
+    try {
+      const res = await fetch(url);
+      const data = await res.json();
+
+      const element = data.rows[0].elements[0];
+
+      return {
+        distanceText: element.distance.text, // "5.2 km"
+        distanceValue: element.distance.value, // in meters
+        durationText: element.duration.text, // "18 mins"
+      };
+    } catch (error) {
+      console.error("Distance API error:", error);
+    }
   };
 
   const getAddressIcon = (type) => {
     return type.toLowerCase() === "home" ? Home : Building;
   };
+
   const [addresses, setAddresses] = useState([
     {
       id: "1",
       type: "Home",
+      building: "23/a",
       address: "123 Main Street, Apartment 4B, Downtown Area",
       landmark: "Near Central Park",
     },
   ]);
-
-  // function newAddress() {}
 
   return (
     <div className="container mx-auto px-4 py-8 max-w-7xl">
@@ -122,6 +145,22 @@ export function DeliveryPage({
                         />
                       </div>
                       <div>
+                        <Label htmlFor="type">Building / Floor</Label>
+                        <Input
+                          ref={inputRef}
+                          id="floor"
+                          placeholder="23/ A"
+                          value={newAddress.building}
+                          onChange={(e) =>
+                            setNewAddress({
+                              ...newAddress,
+                              building: e.target.value,
+                            })
+                          }
+                          className="focus:ring-1 focus:ring-black/70 focus:border-none mt-2"
+                        />
+                      </div>
+                      <div>
                         <Label htmlFor="address">Complete Address</Label>
                         {/* <Textarea
                           id="address"
@@ -137,7 +176,13 @@ export function DeliveryPage({
                         /> */}
                         <AddressAutocomplete
                           setLocation={(location) =>
-                            setNewAddress({ ...newAddress, address: location })
+                            setNewAddress({
+                              ...newAddress,
+                              address: location.address,
+                              place_id: location.place_id,
+                              lat: location.lat,
+                              lng: location.lng,
+                            })
                           }
                           className="mt-2"
                         />
@@ -198,9 +243,16 @@ export function DeliveryPage({
                               </span>
                             )}
                           </div>
-                          <p className="text-gray-600 text-sm">
-                            {address.address}
-                          </p>
+
+                          <div className="flex gap-1">
+                            <p className="text-gray-600 text-sm">
+                              {address.building}
+                            </p>
+                            <p className="text-gray-600 text-sm">
+                              {address.address}
+                            </p>
+                          </div>
+
                           {address.landmark && (
                             <p className="text-gray-500 text-xs mt-1">
                               {address.landmark}

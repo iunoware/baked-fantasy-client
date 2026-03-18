@@ -1,20 +1,35 @@
-import React, { useState, useEffect, useRef } from 'react';
-import './AddressAutocomplete.css';
+import React, { useState, useEffect, useRef } from "react";
+import "./AddressAutocomplete.css";
 
-const AddressAutocomplete = ({ setLocation, placeholder = "Enter your address", className = "" }) => {
-  const [input, setInput] = useState('');
+const AddressAutocomplete = ({
+  setLocation,
+  placeholder = "Area / Locality",
+  className = "",
+}) => {
+  const [input, setInput] = useState("");
   const [suggestions, setSuggestions] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
-  
+  const placesService = useRef(null);
+
   const autocompleteService = useRef(null);
   const wrapperRef = useRef(null);
 
   // Initialize the AutocompleteService when Google Maps API is available
   useEffect(() => {
     if (window.google && window.google.maps && window.google.maps.places) {
-      autocompleteService.current = new window.google.maps.places.AutocompleteService();
+      autocompleteService.current =
+        new window.google.maps.places.AutocompleteService();
     } else {
       console.warn("Google Maps API not loaded yet.");
+    }
+  }, []);
+
+  useEffect(() => {
+    if (window.google && window.google.maps && window.google.maps.places) {
+      const mapDiv = document.createElement("div");
+      placesService.current = new window.google.maps.places.PlacesService(
+        mapDiv,
+      );
     }
   }, []);
 
@@ -39,7 +54,8 @@ const AddressAutocomplete = ({ setLocation, placeholder = "Enter your address", 
     if (!autocompleteService.current) {
       // Try to re-initialize in case it loaded late
       if (window.google && window.google.maps && window.google.maps.places) {
-        autocompleteService.current = new window.google.maps.places.AutocompleteService();
+        autocompleteService.current =
+          new window.google.maps.places.AutocompleteService();
       } else {
         return;
       }
@@ -55,42 +71,66 @@ const AddressAutocomplete = ({ setLocation, placeholder = "Enter your address", 
     autocompleteService.current.getPlacePredictions(
       { input: value },
       (predictions, status) => {
-        if (status === window.google.maps.places.PlacesServiceStatus.OK && predictions) {
+        if (
+          status === window.google.maps.places.PlacesServiceStatus.OK &&
+          predictions
+        ) {
           setSuggestions(predictions);
           setShowSuggestions(true);
         } else {
           setSuggestions([]);
           setShowSuggestions(false);
         }
-      }
+      },
     );
   };
 
   const handleSelectSuggestion = (suggestion) => {
     setInput(suggestion.description);
     setShowSuggestions(false);
-    
-    if (setLocation) {
-      setLocation({
-        address: suggestion.description,
-        place_id: suggestion.place_id,
-      });
-    }
+
+    if (!placesService.current) return;
+
+    placesService.current.getDetails(
+      { placeId: suggestion.place_id },
+      (place, status) => {
+        if (
+          status === window.google.maps.places.PlacesServiceStatus.OK &&
+          place.geometry
+        ) {
+          const lat = place.geometry.location.lat();
+          const lng = place.geometry.location.lng();
+
+          if (setLocation) {
+            setLocation({
+              address: suggestion.description,
+              place_id: suggestion.place_id,
+              lat,
+              lng,
+            });
+          }
+        }
+      },
+    );
+    console.log(location);
   };
 
   return (
-    <div className={`address-autocomplete-wrapper ${className}`} ref={wrapperRef}>
+    <div
+      className={`address-autocomplete-wrapper  ${className}`}
+      ref={wrapperRef}
+    >
       <input
         type="text"
         value={input}
         onChange={handleInputChange}
         placeholder={placeholder}
-        className="address-autocomplete-input"
+        className="border-1 rounded-md h-9 w-full p-2 border-black focus:border-3 focus:border-gray-700"
         onFocus={() => {
           if (suggestions.length > 0) setShowSuggestions(true);
         }}
       />
-      
+
       {showSuggestions && suggestions.length > 0 && (
         <ul className="suggestions">
           {suggestions.map((suggestion) => (
