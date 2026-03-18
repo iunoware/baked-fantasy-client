@@ -9,6 +9,7 @@ const AddressAutocomplete = ({
   const [input, setInput] = useState("");
   const [suggestions, setSuggestions] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
+  const placesService = useRef(null);
 
   const autocompleteService = useRef(null);
   const wrapperRef = useRef(null);
@@ -20,6 +21,15 @@ const AddressAutocomplete = ({
         new window.google.maps.places.AutocompleteService();
     } else {
       console.warn("Google Maps API not loaded yet.");
+    }
+  }, []);
+
+  useEffect(() => {
+    if (window.google && window.google.maps && window.google.maps.places) {
+      const mapDiv = document.createElement("div");
+      placesService.current = new window.google.maps.places.PlacesService(
+        mapDiv,
+      );
     }
   }, []);
 
@@ -79,17 +89,35 @@ const AddressAutocomplete = ({
     setInput(suggestion.description);
     setShowSuggestions(false);
 
-    if (setLocation) {
-      setLocation({
-        address: suggestion.description,
-        place_id: suggestion.place_id,
-      });
-    }
+    if (!placesService.current) return;
+
+    placesService.current.getDetails(
+      { placeId: suggestion.place_id },
+      (place, status) => {
+        if (
+          status === window.google.maps.places.PlacesServiceStatus.OK &&
+          place.geometry
+        ) {
+          const lat = place.geometry.location.lat();
+          const lng = place.geometry.location.lng();
+
+          if (setLocation) {
+            setLocation({
+              address: suggestion.description,
+              place_id: suggestion.place_id,
+              lat,
+              lng,
+            });
+          }
+        }
+      },
+    );
+    console.log(location);
   };
 
   return (
     <div
-      className={`address-autocomplete-wrapper border-gray-900! ${className}`}
+      className={`address-autocomplete-wrapper  ${className}`}
       ref={wrapperRef}
     >
       <input
@@ -97,7 +125,7 @@ const AddressAutocomplete = ({
         value={input}
         onChange={handleInputChange}
         placeholder={placeholder}
-        className="address-autocomplete-input"
+        className="border-1 rounded-md h-9 w-full p-2 border-black focus:border-3 focus:border-gray-700"
         onFocus={() => {
           if (suggestions.length > 0) setShowSuggestions(true);
         }}
