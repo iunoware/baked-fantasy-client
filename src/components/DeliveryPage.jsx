@@ -1,5 +1,5 @@
-import { useState, useRef } from "react";
-import AddressAutocomplete from "./AddressAutoComplete";
+import { useState, useRef, useEffect } from "react";
+import AddressAutocomplete from "./AddressAutocomplete";
 import {
   MapPin,
   Plus,
@@ -23,6 +23,7 @@ import {
   DialogTrigger,
 } from "./ui/dialog";
 import { Label } from "./ui/label";
+import { data } from "react-router-dom";
 
 export function DeliveryPage({
   selectedAddress,
@@ -30,6 +31,7 @@ export function DeliveryPage({
   deliveryInstructions,
   setDeliveryInstructions,
   orderSummary,
+  setOrderSummary,
   onNext,
   onPrevious,
 }) {
@@ -49,25 +51,32 @@ export function DeliveryPage({
     setNewAddress({ type: "", building: "", address: "", landmark: "" });
   };
 
-  const getDistance = async (userLat, userLng) => {
-    const origin = `${STORE_LOCATION.lat},${STORE_LOCATION.lng}`;
-    const destination = `${userLat},${userLng}`;
-
-    const url = `https://maps.googleapis.com/maps/api/distancematrix/json?origins=${origin}&destinations=${destination}&key=YOUR_API_KEY`;
-
+  const getDistanceFromBackend = async (lat, lng) => {
     try {
-      const res = await fetch(url);
-      const data = await res.json();
+      const res = await fetch("http://localhost:5000/distance", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          origin: {
+            lat: 9.922198052373819, // 🔥 YOUR SHOP LOCATION
+            lng: 78.08955095041708,
+          },
+          destination: {
+            lat,
+            lng,
+          },
+        }),
+      });
 
-      const element = data.rows[0].elements[0];
-
-      return {
-        distanceText: element.distance.text, // "5.2 km"
-        distanceValue: element.distance.value, // in meters
-        durationText: element.duration.text, // "18 mins"
-      };
+      if (!res.ok) {
+        throw new Error(`Distance API error: ${res.status}`);
+      }
+      return await res.json();
     } catch (error) {
-      console.error("Distance API error:", error);
+      console.error("Frontend distance error:", error);
+      return null;
     }
   };
 
@@ -84,6 +93,35 @@ export function DeliveryPage({
       landmark: "Near Central Park",
     },
   ]);
+
+  useEffect(() => {
+    if (selectedAddress?.lat && selectedAddress?.lng) {
+      getDistanceFromBackend(selectedAddress.lat, selectedAddress.lng).then(
+        (data) => {
+          if (!data || data.error || data.distanceValue === undefined) {
+            console.error("Could not calculate distance gracefully.");
+            return;
+          }
+          const fee = calculateDeliveryFee(data.distanceValue);
+
+          setOrderSummary((prev) => ({
+            ...prev,
+            deliveryFee: fee,
+            total: prev.subtotal - prev.discount + prev.taxes + fee,
+          }));
+        },
+      );
+    }
+  }, [selectedAddress, setOrderSummary]);
+
+  function calculateDeliveryFee(meters) {
+    const km = meters / 1000;
+
+    return 10 * km;
+    // if (km <= 3) return 30;
+    // if (km <= 6) return 50;
+    // return 60;
+  }
 
   return (
     <div className="container mx-auto px-4 py-8 max-w-7xl">
