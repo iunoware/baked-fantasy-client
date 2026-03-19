@@ -348,7 +348,7 @@ function Dashboard() {
               }}
               className={`${chartFilter === "7days" ? "new-primary-bg text-white hover:new-primary-bg/90" : "hover:bg-gray-100"} p-2 cursor-pointer rounded-lg`}
             >
-              7 Days
+              Week
             </div>
             <div
               onClick={() => {
@@ -358,7 +358,7 @@ function Dashboard() {
               }}
               className={`${chartFilter === "30days" ? "new-primary-bg text-white hover:new-primary-bg/90" : "hover:bg-gray-100"} p-2 cursor-pointer rounded-lg`}
             >
-              30 Days
+              Month
             </div>
             <div
               onClick={() => {
