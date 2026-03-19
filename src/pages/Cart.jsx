@@ -17,6 +17,31 @@ export default function App() {
   const [selectedPayment, setSelectedPayment] = useState(null);
   const [deliveryInstructions, setDeliveryInstructions] = useState("");
 
+  const [orderSummary, setOrderSummary] = useState({
+    subtotal: 0,
+    taxes: 0,
+    deliveryFee: 0,
+    discount: 0,
+    total: 0
+  });
+
+  useEffect(() => {
+    const subtotal = cartItems.reduce(
+      (sum, item) => sum + item.price * item.quantity,
+      0,
+    );
+    const discount = promoCode === "SAVE20" ? subtotal * 0.2 : 0;
+    const taxes = (subtotal - discount) * 0.18; // 18% GST
+    
+    setOrderSummary(prev => ({
+      ...prev,
+      subtotal,
+      taxes,
+      discount,
+      total: subtotal - discount + taxes + prev.deliveryFee,
+    }));
+  }, [cartItems, promoCode]);
+
   const paymentMethods = [
     {
       id: "1",
@@ -33,25 +58,6 @@ export default function App() {
     },
     { id: "4", type: "cod", label: "Cash on Delivery" },
   ];
-
-  const calculateOrderSummary = () => {
-    const subtotal = cartItems.reduce(
-      (sum, item) => sum + item.price * item.quantity,
-      0,
-    );
-    const discount = promoCode === "SAVE20" ? subtotal * 0.2 : 0;
-    const taxes = (subtotal - discount) * 0.18; // 18% GST
-    const deliveryFee = subtotal > 500 ? 0 : 49;
-    const total = subtotal - discount + taxes + deliveryFee;
-
-    return {
-      subtotal,
-      taxes,
-      deliveryFee,
-      discount,
-      total,
-    };
-  };
 
   const handleNextStep = () => {
     if (currentStep === "cart") {
@@ -73,8 +79,6 @@ export default function App() {
       setCurrentStep("delivery");
     }
   };
-
-  const orderSummary = calculateOrderSummary();
 
   return (
     <div className="min-h-screen bg">
@@ -98,6 +102,7 @@ export default function App() {
           deliveryInstructions={deliveryInstructions}
           setDeliveryInstructions={setDeliveryInstructions}
           orderSummary={orderSummary}
+          setOrderSummary={setOrderSummary}
           onNext={handleNextStep}
           onPrevious={handlePreviousStep}
         />
