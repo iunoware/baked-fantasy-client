@@ -24,6 +24,7 @@ import {
 } from "./ui/dialog";
 import { Label } from "./ui/label";
 import { data } from "react-router-dom";
+import axios from "axios";
 
 export function DeliveryPage({
   selectedAddress,
@@ -37,62 +38,121 @@ export function DeliveryPage({
 }) {
   const inputRef = useRef(null);
   const [isAddingAddress, setIsAddingAddress] = useState(false);
+  const [addresses, setAddresses] = useState([]);
   const [newAddress, setNewAddress] = useState({
     type: "",
     building: "",
     address: "",
     landmark: "",
+    lat: null,
+    lng: null,
   });
 
-  const addNewAddress = () => {
-    if (!newAddress.type || !newAddress.address) return;
-    setAddresses([...addresses, { id: Date.now().toString(), ...newAddress }]);
-    setIsAddingAddress(false);
-    setNewAddress({ type: "", building: "", address: "", landmark: "" });
+
+  const addAddress = async () => {
+    try {
+      if (!newAddress.address) {
+        alert(
+          "Please select a complete address from the autocomplete suggestions.",
+        );
+        return;
+      }
+
+      const token = localStorage.getItem("token");
+      console.log(
+        "🚨 [Frontend] POST /address - Token from localStorage:",
+        token,
+      );
+
+      if (!token || token === "null") {
+        alert("Please login to save your address.");
+        return;
+      }
+
+      const res = await axios.post(
+        "http://localhost:5000/address",
+        {
+          label: newAddress.type || "Home",
+          fullAddress: newAddress.address,
+          landmark: newAddress.landmark,
+          lat: newAddress.lat,
+          lng: newAddress.lng,
+          isDefault: false,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      );
+
+      const savedDoc = res.data;
+      setAddresses((prev) => [...prev, savedDoc]);
+      setSelectedAddress(savedDoc); // Auto-select to instantly calculate delivery fee!
+      setIsAddingAddress(false); // Close the modal
+      setNewAddress({
+        type: "",
+        building: "",
+        address: "",
+        landmark: "",
+        lat: null,
+        lng: null,
+      }); // Reset form
+    } catch (err) {
+      console.error(err.response?.data || err.message);
+      alert("Failed to save address. Please try again.");
+    }
+  };
+
+  const handleSelectAddress = async (address) => {
+    setSelectedAddress(address); // Optmistic UI change immediately
+
+    try {
+      const token = localStorage.getItem("token");
+      if (!token || token === "null") return;
+
+      const addressId = address._id || address.id;
+      if (!addressId) return;
+
+      const res = await axios.put(
+        `http://localhost:5000/address/${addressId}/select`,
+        {},
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+
+      setAddresses(res.data); // Update array so UI highlights the new "default" gracefully if relied upon
+    } catch (error) {
+      console.error("Failed to select address on backend:", error.response?.data || error.message);
+    }
   };
 
   const getDistanceFromBackend = async (lat, lng) => {
     try {
-      const res = await fetch("http://localhost:5000/distance", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+      const res = await axios.post("http://localhost:5000/distance", {
+        origin: {
+          lat: 9.922198052373819, // 🔥 YOUR SHOP LOCATION
+          lng: 78.08955095041708,
         },
-        body: JSON.stringify({
-          origin: {
-            lat: 9.922198052373819, // 🔥 YOUR SHOP LOCATION
-            lng: 78.08955095041708,
-          },
-          destination: {
-            lat,
-            lng,
-          },
-        }),
+        destination: {
+          lat,
+          lng,
+        },
       });
 
-      if (!res.ok) {
-        throw new Error(`Distance API error: ${res.status}`);
-      }
-      return await res.json();
+      return res.data; // ✅ axios gives data directly
     } catch (error) {
-      console.error("Frontend distance error:", error);
+      console.error(
+        "Frontend distance error:",
+        error.response?.data || error.message,
+      );
       return null;
     }
   };
 
   const getAddressIcon = (type) => {
+    if (!type) return Home;
     return type.toLowerCase() === "home" ? Home : Building;
   };
-
-  const [addresses, setAddresses] = useState([
-    {
-      id: "1",
-      type: "Home",
-      building: "23/a",
-      address: "123 Main Street, Apartment 4B, Downtown Area",
-      landmark: "Near Central Park",
-    },
-  ]);
 
   useEffect(() => {
     if (selectedAddress?.lat && selectedAddress?.lng) {
@@ -114,13 +174,45 @@ export function DeliveryPage({
     }
   }, [selectedAddress, setOrderSummary]);
 
+  // fetching address from DB
+  useEffect(() => {
+    const fetchAddress = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        console.log(
+          "🚨 [Frontend] GET /address - Token from localStorage:",
+          token,
+        );
+
+        if (!token || token === "null") {
+          console.warn("User is not logged in, skipping address fetch.");
+          return;
+        }
+
+        const res = await axios.get("http://localhost:5000/address", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        const fetchedAddresses = res.data;
+        setAddresses(fetchedAddresses);
+
+        // Auto-select Default if parent prop is currently null
+        if (!selectedAddress && fetchedAddresses.length > 0) {
+          const defaultAddr = fetchedAddresses.find(addr => addr.isDefault) || fetchedAddresses[0];
+          setSelectedAddress(defaultAddr);
+        }
+
+      } catch (error) {
+        console.error(error.response?.data || error.message);
+      }
+    };
+    fetchAddress();
+  }, []);
+
   function calculateDeliveryFee(meters) {
     const km = meters / 1000;
-
-    return 10 * km;
-    // if (km <= 3) return 30;
-    // if (km <= 6) return 50;
-    // return 60;
+    return Math.round(10 * km); // ₹10 per km, rounded cleanly
   }
 
   return (
@@ -241,7 +333,7 @@ export function DeliveryPage({
                         />
                       </div>
                       <button
-                        onClick={addNewAddress}
+                        onClick={addAddress}
                         className="group relative w-full cursor-pointer justify-center mt-6 inline-flex items-center overflow-hidden rounded-sm bg-cyan-500 px-8 py-3 text-white focus:ring-3 focus:outline-hidden mr-3"
                       >
                         <span className="absolute -start-full transition-all group-hover:start-4">
@@ -258,49 +350,42 @@ export function DeliveryPage({
               </div>
 
               <div className="space-y-3">
-                {addresses.map((address) => {
-                  const IconComponent = getAddressIcon(address.type);
-                  return (
-                    <div
-                      key={address.id}
-                      className={`p-4 border rounded-lg cursor-pointer transition-all duration-200 ${
-                        selectedAddress?.id === address.id
-                          ? "border-pink-500 bg-pink-50"
-                          : "border-gray-200 hover:border-gray-300"
-                      }`}
-                      onClick={() => setSelectedAddress(address)}
-                    >
-                      <div className="flex items-start gap-3">
-                        <IconComponent className="h-5 w-5 text-pink-400 mt-1" />
-                        <div className="flex-1">
-                          <div className="flex items-center gap-2 mb-1">
-                            <span className="font-medium">{address.type}</span>
-                            {selectedAddress?.id === address.id && (
-                              <span className="text-xs bg-pink-400 text-white px-2 py-1 rounded">
-                                Selected
-                              </span>
-                            )}
-                          </div>
+                {addresses.length > 0 ? (
+                  addresses.map((address) => {
+                    const displayType = address.label || address.type || "";
+                    const displayAddress = address.fullAddress || address.address || "";
+                    const IconComponent = getAddressIcon(displayType);
+                    const isSelected = selectedAddress?._id === address._id || selectedAddress?.id === address.id;
 
-                          <div className="flex gap-1">
-                            <p className="text-gray-600 text-sm">
-                              {address.building}
-                            </p>
-                            <p className="text-gray-600 text-sm">
-                              {address.address}
-                            </p>
+                    return (
+                      <div
+                        key={address._id || address.id} // 🔥 use _id from Mongo
+                        className={`p-4 border rounded-lg cursor-pointer transition-all duration-200 ${isSelected
+                            ? "border-pink-500 bg-pink-50"
+                            : "border-gray-200 hover:border-gray-300"
+                          }`}
+                        onClick={() => handleSelectAddress(address)}
+                      >
+                        <div className="flex items-start gap-3">
+                          <IconComponent className="h-5 w-5 text-pink-400 mt-1" />
+                          <div className="flex-1">
+                            <div className="flex items-center gap-2 mb-1">
+                              <span className="font-semibold text-lg">{displayType}</span>
+                              {isSelected && (
+                                <span className="text-xs bg-pink-500 text-white px-2.5 py-1 rounded-full font-semibold shadow-sm">
+                                  Selected
+                                </span>
+                              )}
+                            </div>
+                            <p className="text-gray-600 text-sm mt-1">{displayAddress}</p>
                           </div>
-
-                          {address.landmark && (
-                            <p className="text-gray-500 text-xs mt-1">
-                              {address.landmark}
-                            </p>
-                          )}
                         </div>
                       </div>
-                    </div>
-                  );
-                })}
+                    );
+                  })
+                ) : (
+                  <h2>No Address added</h2>
+                )}
               </div>
             </CardContent>
           </Card>

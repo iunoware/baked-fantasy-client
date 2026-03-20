@@ -5,7 +5,7 @@ import { useCart } from "../context/CartContext.jsx";
 
 /**
  * A universal Product Card component used for both Bakery Products and Baking Essentials.
- * 
+ *
  * @param {Object} props
  * @param {string} props.id - Product ID
  * @param {string} props.title - Product Title
@@ -28,7 +28,8 @@ const ProductCard = ({
   inStock,
   type = "bakery",
 }) => {
-  const { cartItems, addToCart, increaseQuantity, decreaseQuantity } = useCart();
+  const { cartItems, addToCart, increaseQuantity, decreaseQuantity } =
+    useCart();
   const cartItem = cartItems.find((item) => item.id === id);
   const added = !!cartItem;
   const quantity = cartItem ? cartItem.quantity : 1;
@@ -44,7 +45,7 @@ const ProductCard = ({
       price: discountedPrice,
       image: img,
       category,
-      subject
+      subject,
     });
     toast.success(`${title} added to cart!`);
   };
@@ -67,11 +68,13 @@ const ProductCard = ({
   };
 
   // Define dynamic paths and actions based on product type
-  const detailLink = type === "essential"
-    ? `/essential/${category}/${id}`
-    : `/products/${category}/${id}`;
+  const detailLink =
+    type === "essential"
+      ? `/essential/${category}/${id}`
+      : `/products/${category}/${id}`;
 
-  const buyNowAction = type === "essential" ? sendToWhatsApp : (e) => e.stopPropagation();
+  const buyNowAction =
+    type === "essential" ? sendToWhatsApp : (e) => e.stopPropagation();
 
   return (
     <div className="product-card group/card shadow-xl h-full group relative bg-white rounded-2xl border border-neutral-100 p-2 transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 flex flex-col">
@@ -100,8 +103,9 @@ const ProductCard = ({
 
         {/* View Details Hover Overlay */}
         <div
-          className={`${inStock ? "block" : "hidden"
-            } absolute inset-0 z-10 flex justify-center items-center translate-y-10 opacity-0 group-hover/card:translate-y-0 group-hover/card:opacity-100 transition-all duration-300`}
+          className={`${
+            inStock ? "block" : "hidden"
+          } absolute inset-0 z-10 flex justify-center items-center translate-y-10 opacity-0 group-hover/card:translate-y-0 group-hover/card:opacity-100 transition-all duration-300`}
         >
           <div className="bg-white text-neutral-900 rounded-3xl px-5 py-2 font-bold shadow-lg group-hover:scale-105 transition-transform duration-300">
             View details
@@ -116,7 +120,9 @@ const ProductCard = ({
             <h3 className="text-lg font-bold text-neutral-900 group-hover:text-green-700 transition-colors duration-300 line-clamp-1">
               {title}
             </h3>
-            <p className="text-sm text-neutral-600 line-clamp-1 h-5">{subject}</p>
+            <p className="text-sm text-neutral-600 line-clamp-1 h-5">
+              {subject}
+            </p>
           </div>
 
           <div className="flex items-center gap-2 mb-4">
@@ -136,7 +142,7 @@ const ProductCard = ({
           <button
             disabled={!inStock}
             onClick={handleCart}
-            className={`mt-auto ${added ? "hidden" : "flex"} z-10 w-full cursor-pointer bg-neutral-900 text-white font-bold py-3.5 rounded-xl items-center justify-center gap-2 hover:bg-green-700 transition-all duration-300 active:scale-95 shadow-sm disabled:opacity-50 disabled:grayscale disabled:cursor-not-allowed`}
+            className={`mt-auto ${added ? "hidden" : "flex"} z-10 w-full cursor-pointer bg-neutral-900 text-white font-bold py-3.5 rounded-xl items-center justify-center gap-2 hover:bg-violet transition-all duration-300 active:scale-95 shadow-sm disabled:opacity-50 disabled:grayscale disabled:cursor-not-allowed`}
           >
             <ShoppingCart size={18} />
             Add to Cart
@@ -172,7 +178,7 @@ const ProductCard = ({
             <button
               disabled={!inStock}
               onClick={buyNowAction}
-              className="flex-[1.5] z-10 bg-green-700 text-white font-bold py-3.5 rounded-xl flex items-center justify-center gap-2 hover:bg-green-800 transition-all duration-300 active:scale-95 shadow-sm disabled:opacity-50"
+              className="flex-[1.5] z-10 bg-violet text-white font-bold py-3.5 rounded-xl flex items-center justify-center gap-2 hover:bg-black transition-all duration-300 active:scale-95 shadow-sm disabled:opacity-50"
             >
               Buy now
             </button>
