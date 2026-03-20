@@ -195,26 +195,6 @@ function Register({ isOpen, onClose, onOpenLogin, setLoggedIn }) {
             </div>
 
             {/* Email Address Field */}
-            <div className="space-y-1">
-              <label
-                htmlFor="email"
-                className="text-[13px] font-semibold text-slate-600 ml-0.5"
-              >
-                Email
-              </label>
-              <div className="relative">
-                <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
-                <Input
-                  id="email"
-                  type="email"
-                  name="email"
-                  placeholder="name@example.com"
-                  onChange={handleChange}
-                  className="pl-10 h-10.5 bg-slate-50 border-slate-200 rounded-xl focus-visible:ring-1 focus-visible:ring-[#ec4174] focus-visible:border-[#ec4174] transition-all"
-                  required
-                />
-              </div>
-            </div>
 
             {/* Password Field */}
             <div className="space-y-1">
@@ -222,7 +202,7 @@ function Register({ isOpen, onClose, onOpenLogin, setLoggedIn }) {
                 htmlFor="password"
                 className="text-[13px] font-semibold text-slate-600 ml-0.5"
               >
-                Password
+                Create Password
               </label>
               <div className="relative">
                 <Lock className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
@@ -262,6 +242,26 @@ function Register({ isOpen, onClose, onOpenLogin, setLoggedIn }) {
                   name="phoneNumber"
                   type="tel"
                   placeholder="10-digit number"
+                  onChange={handleChange}
+                  className="pl-10 h-10.5 bg-slate-50 border-slate-200 rounded-xl focus-visible:ring-1 focus-visible:ring-[#ec4174] focus-visible:border-[#ec4174] transition-all"
+                  required
+                />
+              </div>
+            </div>
+            <div className="space-y-1">
+              <label
+                htmlFor="email"
+                className="text-[13px] font-semibold text-slate-600 ml-0.5"
+              >
+                Email
+              </label>
+              <div className="relative">
+                <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
+                <Input
+                  id="email"
+                  type="email"
+                  name="email"
+                  placeholder="name@example.com"
                   onChange={handleChange}
                   className="pl-10 h-10.5 bg-slate-50 border-slate-200 rounded-xl focus-visible:ring-1 focus-visible:ring-[#ec4174] focus-visible:border-[#ec4174] transition-all"
                   required
