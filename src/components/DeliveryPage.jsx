@@ -48,7 +48,6 @@ export function DeliveryPage({
     lng: null,
   });
 
-
   const addAddress = async () => {
     try {
       if (!newAddress.address) {
@@ -117,12 +116,15 @@ export function DeliveryPage({
       const res = await axios.put(
         `http://localhost:5000/address/${addressId}/select`,
         {},
-        { headers: { Authorization: `Bearer ${token}` } }
+        { headers: { Authorization: `Bearer ${token}` } },
       );
 
       setAddresses(res.data); // Update array so UI highlights the new "default" gracefully if relied upon
     } catch (error) {
-      console.error("Failed to select address on backend:", error.response?.data || error.message);
+      console.error(
+        "Failed to select address on backend:",
+        error.response?.data || error.message,
+      );
     }
   };
 
@@ -199,10 +201,11 @@ export function DeliveryPage({
 
         // Auto-select Default if parent prop is currently null
         if (!selectedAddress && fetchedAddresses.length > 0) {
-          const defaultAddr = fetchedAddresses.find(addr => addr.isDefault) || fetchedAddresses[0];
+          const defaultAddr =
+            fetchedAddresses.find((addr) => addr.isDefault) ||
+            fetchedAddresses[0];
           setSelectedAddress(defaultAddr);
         }
-
       } catch (error) {
         console.error(error.response?.data || error.message);
       }
@@ -353,31 +356,39 @@ export function DeliveryPage({
                 {addresses.length > 0 ? (
                   addresses.map((address) => {
                     const displayType = address.label || address.type || "";
-                    const displayAddress = address.fullAddress || address.address || "";
+                    const displayAddress =
+                      address.fullAddress || address.address || "";
                     const IconComponent = getAddressIcon(displayType);
-                    const isSelected = selectedAddress?._id === address._id || selectedAddress?.id === address.id;
+                    const isSelected =
+                      selectedAddress?._id === address._id ||
+                      selectedAddress?.id === address.id;
 
                     return (
                       <div
                         key={address._id || address.id} // 🔥 use _id from Mongo
-                        className={`p-4 border rounded-lg cursor-pointer transition-all duration-200 ${isSelected
+                        className={`p-4 border rounded-lg cursor-pointer transition-all duration-200 ${
+                          isSelected
                             ? "border-pink-500 bg-pink-50"
                             : "border-gray-200 hover:border-gray-300"
-                          }`}
+                        }`}
                         onClick={() => handleSelectAddress(address)}
                       >
                         <div className="flex items-start gap-3">
                           <IconComponent className="h-5 w-5 text-pink-400 mt-1" />
                           <div className="flex-1">
                             <div className="flex items-center gap-2 mb-1">
-                              <span className="font-semibold text-lg">{displayType}</span>
+                              <span className="font-semibold text-lg">
+                                {displayType}
+                              </span>
                               {isSelected && (
                                 <span className="text-xs bg-pink-500 text-white px-2.5 py-1 rounded-full font-semibold shadow-sm">
                                   Selected
                                 </span>
                               )}
                             </div>
-                            <p className="text-gray-600 text-sm mt-1">{displayAddress}</p>
+                            <p className="text-gray-600 text-sm mt-1">
+                              {displayAddress}
+                            </p>
                           </div>
                         </div>
                       </div>
