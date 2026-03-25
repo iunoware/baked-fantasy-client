@@ -42,20 +42,6 @@ function OnlineCourse() {
         <ArrowLeft className="h-4 w-4 mr-2" /> Back to Courses
       </Link>
 
-      {/* hero section */}
-      {/* <div className="pt-15">
-        <h1 className="lg:text-6xl md:text-5xl sm:text-4xl text-3xl flex font-semibold justify-center">
-          Choose our <span className="text-black">&nbsp;Learning path</span>
-        </h1>
-        <div className="flex justify-center">
-          <p className="text-center lg:text-2xl md:text-xl sm:text-lg max-w-[600px] mx-3 pt-10 text-gray-700">
-            Master the art of baking with our expert-led courses designed for all skill
-            levels. Whether you prefer learning online or in-person, we have the perfect
-            program for you.
-          </p>
-        </div>
-      </div> */}
-
       <div className="pb-10">
         <Heading title="Learn Anytime, Bake Anywhere" />
         <p className="text-center text-xl mt-4 px-5">
@@ -63,8 +49,6 @@ function OnlineCourse() {
           of your home - step by step, guided by our expert chefs.
         </p>
       </div>
-
-      {/* <h1 className="pt-40 text-5xl font-bold text-center">Online course</h1> */}
 
       {/* <div className="py-20 grid grid-cols-1 lg:grid-cols-2"> */}
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 lg:gap-8">
@@ -74,21 +58,13 @@ function OnlineCourse() {
               <div key={index}>
                 <div>
                   <OnlineCourseCard
-                    path={`/courses/course-payment-page/`}
-                    endPoint={course._id}
-                    image={course.ImageUrl}
-                    rating={course.rating}
-                    reviews={course.reviews}
-                    students={course.students}
-                    description={course.description}
                     title={course.title}
-                    subtitle={course.subtitle}
-                    duration={course.duration}
-                    totalHours={course.totalHours}
-                    totalVideos={course.totalVideos}
-                    highlights={course.highlights}
+                    description={course.description}
+                    rating={course.rating}
+                    totalReviews={course.totalReviews}
+                    ratingSum={course.ratingSum}
                     price={course.price}
-                    originalPrice={course.originalPrice}
+                    crossedPrice={course.crossedPrice}
                   />
                 </div>
               </div>
@@ -96,7 +72,6 @@ function OnlineCourse() {
           })
         ) : (
           <div className="w-screen">
-            {/* <p className="text-2xl text-center w-full">no courses found</p> */}
             <Loading text={"Online courses are coming soon"} />
           </div>
         )}
