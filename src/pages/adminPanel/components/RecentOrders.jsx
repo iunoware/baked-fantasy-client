@@ -51,7 +51,11 @@ export default function RecentOrders() {
         </h2>
         {orders.length > 0 ? (
           <>
-            <div className="flex flex-wrap gap-10 justify-between items-center">
+            <div
+              // className={`flex flex-wrap gap-10 items-center ${orders.length <= 2 ? "justify-start" : "justify-around"}`}
+              className={`grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-10 place-items-center`}
+              // className={`flex justify-between gap-10`}
+            >
               {visibleOrders.map((order, index) => (
                 <div
                   key={index}
@@ -136,7 +140,7 @@ export default function RecentOrders() {
                   {/* view details button */}
                   <Link
                     to="/admin/orders"
-                    className="new-primary-bg-dark hover:new-primary-bg text-white w-full text-center block p-3 rounded-lg"
+                    className="bg-[#870D32] hover:bg-[#870D32]/95 text-white w-full text-center block p-3 rounded-lg"
                   >
                     View Details
                   </Link>

@@ -28,8 +28,7 @@ const ProductCard = ({
   inStock,
   type = "bakery",
 }) => {
-  const { cartItems, addToCart, increaseQuantity, decreaseQuantity } =
-    useCart();
+  const { cartItems, addToCart, increaseQuantity, decreaseQuantity } = useCart();
   const cartItem = cartItems.find((item) => item.id === id);
   const added = !!cartItem;
   const quantity = cartItem ? cartItem.quantity : 1;
@@ -69,12 +68,9 @@ const ProductCard = ({
 
   // Define dynamic paths and actions based on product type
   const detailLink =
-    type === "essential"
-      ? `/essential/${category}/${id}`
-      : `/products/${category}/${id}`;
+    type === "essential" ? `/essential/${category}/${id}` : `/products/${category}/${id}`;
 
-  const buyNowAction =
-    type === "essential" ? sendToWhatsApp : (e) => e.stopPropagation();
+  const buyNowAction = type === "essential" ? sendToWhatsApp : (e) => e.stopPropagation();
 
   return (
     <div className="product-card group/card shadow-xl h-full group relative bg-white rounded-2xl border border-neutral-100 p-2 transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 flex flex-col">
@@ -117,21 +113,19 @@ const ProductCard = ({
       <div className="flex flex-col justify-between flex-1 p-3">
         <div>
           <div className="flex flex-col justify-between items-start mb-2">
-            <h3 className="text-lg font-bold text-neutral-900 group-hover:text-green-700 transition-colors duration-300 line-clamp-1">
+            <h3 className="text-2xl font-bold mb-2 text-neutral-900 transition-colors duration-300 line-clamp-1">
               {title}
             </h3>
-            <p className="text-sm text-neutral-600 line-clamp-1 h-5">
-              {subject}
-            </p>
+            <p className="text-sm text-neutral-600 line-clamp-1 h-5">{subject}</p>
           </div>
 
           <div className="flex items-center gap-2 mb-4">
-            <span className="text-md line-through font-medium text-neutral-400">
-              ₹{originalPrice}
+            <span className="text-2xl font-bold new-primary-text">
+              ₹{discountedPrice}
             </span>
             <span className="w-1 h-1 rounded-full bg-neutral-300" />
-            <span className="text-xl font-bold text-neutral-900">
-              ₹{discountedPrice}
+            <span className="text-md line-through font-medium text-neutral-400">
+              ₹{originalPrice}
             </span>
           </div>
         </div>
@@ -149,9 +143,7 @@ const ProductCard = ({
           </button>
 
           {/* Quantity Controls and Buy Now (Shown when added to cart) */}
-          <div
-            className={`${added ? "flex" : "hidden"} gap-3 z-10 items-center w-full`}
-          >
+          <div className={`${added ? "flex" : "hidden"} gap-3 z-10 items-center w-full`}>
             <div className="flex items-center justify-between bg-neutral-100 rounded-xl p-1.5 flex-1">
               <button
                 onClick={(e) => {

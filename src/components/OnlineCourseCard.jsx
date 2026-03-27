@@ -64,9 +64,9 @@ function OnlineCourseCard(props) {
           </div>
 
           <p className="text-2xl font-semibold new-primary-text">
-            ₹{props.price}{" "}
+            ₹{props.discountedPrice}{" "}
             <span className="line-through text-gray-600 ml-2 text-lg">
-              ₹{props.crossedPrice}
+              ₹{props.originalPrice}
             </span>
           </p>
 
