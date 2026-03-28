@@ -38,6 +38,7 @@ export function DeliveryPage({
 }) {
   const inputRef = useRef(null);
   const [isAddingAddress, setIsAddingAddress] = useState(false);
+  const [activeAddress, setActiveAddress] = useState(null);
   const [addresses, setAddresses] = useState([]);
   const [newAddress, setNewAddress] = useState({
     type: "",
@@ -68,21 +69,24 @@ export function DeliveryPage({
         return;
       }
 
-      const res = await api.post(
-        "/address",
-        {
-          label: newAddress.type || "Home",
-          fullAddress: newAddress.address,
-          landmark: newAddress.landmark,
-          lat: newAddress.lat,
-          lng: newAddress.lng,
-          building: newAddress.building,
-          isDefault: true, // Mark as default so backend removes other defaults
-        }
-      );
+      const res = await api.post("/address", {
+        label: newAddress.type || "Home",
+        fullAddress: newAddress.address,
+        landmark: newAddress.landmark,
+        lat: newAddress.lat,
+        lng: newAddress.lng,
+        building: newAddress.building,
+        isDefault: true, // Mark as default so backend removes other defaults
+      });
 
       const savedDoc = res.data;
-      setAddresses((prev) => Array.isArray(prev) ? prev.map(a => ({ ...a, isDefault: false })).concat({ ...savedDoc, isDefault: true }) : [savedDoc]);
+      setAddresses((prev) =>
+        Array.isArray(prev)
+          ? prev
+              .map((a) => ({ ...a, isDefault: false }))
+              .concat({ ...savedDoc, isDefault: true })
+          : [savedDoc],
+      );
       setSelectedAddress({ ...savedDoc, isDefault: true }); // Auto-select to instantly calculate delivery fee!
       setIsAddingAddress(false); // Close the modal
       setNewAddress({
@@ -155,9 +159,11 @@ export function DeliveryPage({
     if (selectedAddress?.lat && selectedAddress?.lng) {
       getDistanceFromBackend(selectedAddress.lat, selectedAddress.lng).then(
         (data) => {
-          let distanceMeters = 3000; // Default 5km if failed
+          let distanceMeters = 3000; // Default 3km if failed
           if (!data || !data.success || data.distance === undefined) {
-            console.error("Could not calculate distance gracefully. Using default distance (5km).");
+            console.error(
+              "Could not calculate distance gracefully. Using default distance (3km).",
+            );
           } else {
             distanceMeters = data.distance;
           }
@@ -354,22 +360,26 @@ export function DeliveryPage({
                 {addresses.length > 0 ? (
                   addresses.map((address) => {
                     const displayType = address.label || address.type || "";
-                    const displayAddress = [address.building, address.fullAddress || address.address]
+                    const displayAddress = [
+                      address.building,
+                      address.fullAddress || address.address,
+                    ]
                       .filter(Boolean)
                       .join(", ");
                     const IconComponent = getAddressIcon(displayType);
                     const isSelected =
-                      selectedAddress?._id === address._id ||
-                      selectedAddress?.id === address.id;
+                      String(selectedAddress?._id) === String(address._id);
 
                     return (
                       <div
                         key={address._id || address.id} // 🔥 use _id from Mongo
-                        className={`p-4 border rounded-lg cursor-pointer transition-all duration-200 ${isSelected
-                            ? "border-pink-500 bg-pink-50 ring-1 ring-pink-500 shadow-sm"
+                        className={`p-4 border rounded-lg cursor-pointer transition-all duration-200 ${
+                          isSelected
+                            ? "border-pink-600 bg-pink-50 ring-1 ring-pink-500 shadow-sm"
                             : "border-gray-200 hover:border-gray-300"
-                          }`}
+                        }`}
                         onClick={() => handleSelectAddress(address)}
+                        // onClick={() => setActiveAddress(address.id)}
                       >
                         <div className="flex items-start gap-3">
                           <IconComponent className="h-5 w-5 text-pink-400 mt-1" />
@@ -380,7 +390,7 @@ export function DeliveryPage({
                               </span>
                               {isSelected && (
                                 <span className="text-xs bg-pink-500 text-white px-2.5 py-1 rounded-full font-semibold shadow-sm">
-                                  Selected
+                                  Deliver Here
                                 </span>
                               )}
                             </div>
