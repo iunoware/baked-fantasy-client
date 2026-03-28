@@ -32,7 +32,7 @@ export function CoursesTab() {
   return (
     <div className="grid grid-cols-1 gap-4">
       {courses.map((course, index) => (
-        <div
+        <motion.div
           key={course.id}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -74,7 +74,7 @@ export function CoursesTab() {
               Continue
             </Button>
           </motion.div>
-        </div>
+        </motion.div>
       ))}
     </div>
   );

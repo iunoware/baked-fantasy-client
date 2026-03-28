@@ -21,6 +21,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
+  DialogDescription,
 } from "./ui/dialog";
 import { Label } from "./ui/label";
 import { data } from "react-router-dom";
@@ -190,8 +191,8 @@ export function DeliveryPage({
           token,
         );
 
-        if (!token || token === "null") {
-          console.warn("User is not logged in, skipping address fetch.");
+        if (!token || token === "null" || token === "undefined") {
+          console.warn("User is not logged in, skipping address fetch to prevent 401 error.");
           return;
         }
 
@@ -260,10 +261,13 @@ export function DeliveryPage({
                     Add New
                   </Button>
                   {/* </DialogTrigger> */}
-                  <DialogContent className="bg-pink-50">
-                    <DialogHeader>
-                      <DialogTitle>Add New Address</DialogTitle>
-                    </DialogHeader>
+                   <DialogContent className="bg-pink-50">
+                     <DialogHeader>
+                       <DialogTitle>Add New Address</DialogTitle>
+                       <DialogDescription className="hidden">
+                         Enter the details for your new delivery address.
+                       </DialogDescription>
+                     </DialogHeader>
                     <div className="space-y-4">
                       <div>
                         <Label htmlFor="type">Address Type</Label>

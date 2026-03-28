@@ -3,11 +3,17 @@ import { getTokenExpiry } from "../lib/utils";
 
 const autoLogout = (token, logout) => {
   useEffect(() => {
-    if (!token) return;
+    if (!token || token === "null" || token === "undefined") return;
 
     const expiryTime = getTokenExpiry(token);
-    const currentTime = Date.now();
+    
+    // If the token was invalid and couldn't be decoded, force logout
+    if (!expiryTime) {
+      logout();
+      return;
+    }
 
+    const currentTime = Date.now();
     const timeout = expiryTime - currentTime;
 
     if (timeout <= 0) {
@@ -20,7 +26,7 @@ const autoLogout = (token, logout) => {
     }, timeout);
 
     return () => clearTimeout(timer);
-  }, [token]);
+  }, [token, logout]);
 };
 
 export default autoLogout;

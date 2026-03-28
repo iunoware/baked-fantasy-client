@@ -129,8 +129,7 @@ function OnlineCourseDetails() {
             <video
               className="rounded-xl object-center object-cover w-full shadow-lg h-[200px] sm:h-[300px] md:h-[500px]"
               controls
-              // src={`http://localhost:5000${encodeURI(currentVideo.videoUrl)}`}
-              src={videoSrc}
+              src={`http://localhost:5000${currentVideo.videoUrl}?nocache=${Date.now()}`}
               // style={{ height: "500px", width: "100%" }}
               onContextMenu={(e) => e.preventDefault()}
               controlsList="nodownload"

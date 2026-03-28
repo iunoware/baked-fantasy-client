@@ -12,10 +12,12 @@ import {
   TabsTrigger,
 } from "../components/ui/tabs";
 import { LogOut, Settings, ShoppingBag, GraduationCap } from "lucide-react";
+import api from "../api";
 
 export default function App() {
   const [activeTab, setActiveTab] = useState("orders");
   const [userData, setUserData] = useState(null);
+  const [address, setAddress] = useState([]);
   const d = new Date();
   const month = d.toLocaleString("default", { month: "long" });
   const year = d.getFullYear();
@@ -45,6 +47,28 @@ export default function App() {
     }
   }, [month, year]);
 
+  useEffect(() => {
+    const fetchAddress = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        if (!token || token === "null" || token === "undefined") {
+          console.warn("[Profile] No valid token found, delaying /address fetch.");
+          return;
+        }
+        
+        const res = await api.get("/address");
+        setAddress(res.data);
+      } catch (error) {
+        console.error("Error fetching addresses:", error);
+      }
+    };
+
+    // Only fetch when userData is confirmed to be fully loaded
+    if (userData) {
+      fetchAddress();
+    }
+  }, [userData]);
+
   if (!userData) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-[#FFFDF9]">
@@ -67,7 +91,7 @@ export default function App() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
           {/* Left Panel - Profile Card */}
           <div className="lg:col-span-1">
-            <ProfileCard {...userData} />
+            <ProfileCard {...userData} address={address} />
           </div>
 
           {/* Right Panel - Tabs Content */}

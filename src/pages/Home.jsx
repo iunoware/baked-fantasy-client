@@ -78,7 +78,7 @@ function Home() {
       <div className="pt-35 z-51 md:pt-15 h-screen w-screen relative bg-pink-100 flex justify-center items-center">
         <div className="">
           <video
-            src="/videos/cake-3.mov"
+            src={`/videos/cake-3.mov?nocache=1`}
             autoPlay
             muted
             loop
@@ -1279,7 +1279,7 @@ function Home() {
           <div className="flex lg:flex-row flex-col gap-5 py-10 items-center">
             <div className="video flex justify-center lg:w-4/12 md:w-6/12 w-full">
               <video
-                src="/videos/review.mp4"
+                src={`/videos/review.mp4?nocache=1`}
                 controls
                 autoPlay
                 muted
