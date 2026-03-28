@@ -135,6 +135,7 @@ function OnlineCourseDetails() {
             <video
               className="rounded-xl object-center object-cover w-full shadow-lg h-[200px] sm:h-[300px] md:h-[500px]"
               controls
+              src={`http://localhost:5000${currentVideo.videoUrl}?nocache=${Date.now()}`}
               src={`${url}${currentVideo.videoUrl}`} // new
               // src={videoSrc}
               // style={{ height: "500px", width: "100%" }}

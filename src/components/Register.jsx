@@ -96,6 +96,9 @@ function Register({ isOpen, onClose, onOpenLogin, setLoggedIn }) {
         setLoggedIn(true);
       }
       onClose();
+      
+      // Auto-redirect to home/shopping page
+      window.location.href = "/";
     } catch (err) {
       toast.error(err.response?.data?.msg || "Something went wrong");
     } finally {
