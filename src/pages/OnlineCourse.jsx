@@ -63,8 +63,8 @@ function OnlineCourse() {
                     rating={course.rating}
                     totalReviews={course.totalReviews}
                     ratingSum={course.ratingSum}
-                    price={course.price}
-                    crossedPrice={course.crossedPrice}
+                    discountedPrice={course.discountedPrice}
+                    originalPrice={course.originalPrice}
                   />
                 </div>
               </div>

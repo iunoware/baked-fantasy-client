@@ -9,7 +9,7 @@ import Loading from "../components/Loading.jsx";
 function MyLearning() {
   // use the localstorage's getItem  and setItem
   const token =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGY4NDIxZTU3MTFmOTYyYzMyZTQyMiIsImlhdCI6MTc2MTEzNDE0OSwiZXhwIjoxNzYxMjIwNTQ5fQ.4ynFbupTiXUP7VrWQftX6MFCuBkfj5W0w1N4JB0z3JM";
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4YTk3ZDYxOTdlMjcxMDM0OWUwNmI0MyIsImlhdCI6MTc3NDYxMDY0NywiZXhwIjoxNzc0Njk3MDQ3fQ.WNIn7uSuqovRYIOiJdOOvLu0X2vV_KjdjAuzrk9Kxdc";
 
   let [courses, setCourses] = useState([]);
 

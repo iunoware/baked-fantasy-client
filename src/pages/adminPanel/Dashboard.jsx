@@ -336,7 +336,7 @@ function Dashboard() {
                 setCardFilter(todaySales);
                 // setRevenue(revenue.today);
               }}
-              className={`${chartFilter === "today" ? "new-primary-bg text-white hover:new-primary-bg/90" : "hover:bg-gray-100"} p-2 cursor-pointer rounded-lg`}
+              className={`${chartFilter === "today" ? "new-primary-bg text-white hover:new-primary-bg/90" : "hover:bg-gray-200"} p-2 cursor-pointer rounded-lg`}
             >
               Today
             </div>
@@ -346,7 +346,7 @@ function Dashboard() {
                 setCardFilter(thisWeekSales);
                 // setRevenue(revenue.week);
               }}
-              className={`${chartFilter === "7days" ? "new-primary-bg text-white hover:new-primary-bg/90" : "hover:bg-gray-100"} p-2 cursor-pointer rounded-lg`}
+              className={`${chartFilter === "7days" ? "new-primary-bg text-white hover:new-primary-bg/90" : "hover:bg-gray-200"} p-2 cursor-pointer rounded-lg`}
             >
               Week
             </div>
@@ -356,7 +356,7 @@ function Dashboard() {
                 setCardFilter(thisMonthSales);
                 // setRevenue(revenue.month);
               }}
-              className={`${chartFilter === "30days" ? "new-primary-bg text-white hover:new-primary-bg/90" : "hover:bg-gray-100"} p-2 cursor-pointer rounded-lg`}
+              className={`${chartFilter === "30days" ? "new-primary-bg text-white hover:new-primary-bg/90" : "hover:bg-gray-200"} p-2 cursor-pointer rounded-lg`}
             >
               Month
             </div>
@@ -366,7 +366,7 @@ function Dashboard() {
                 setCardFilter(overall);
                 // setRevenue(revenue.overall);
               }}
-              className={`${chartFilter === "overall" ? "new-primary-bg text-white hover:new-primary-bg/90" : "hover:bg-gray-100"} p-2 cursor-pointer rounded-lg`}
+              className={`${chartFilter === "overall" ? "new-primary-bg text-white hover:new-primary-bg/90" : "hover:bg-gray-200"} p-2 cursor-pointer rounded-lg`}
             >
               Overall
             </div>
