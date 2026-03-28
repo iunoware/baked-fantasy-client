@@ -6,11 +6,16 @@ import { ArrowLeft, Users, Clock10, ChevronDown, Lock, LockOpen } from "lucide-r
 import Loading from "../components/Loading.jsx";
 // import { cnBase } from "tailwind-variants";
 
+const url = "http://localhost:5000";
+
 function OnlineCourseDetails() {
+  console.log("course details page is working");
+
   let [videos, setVideos] = useState([]);
   let [videoDetails, setVideoDetails] = useState();
   let [videosBySection, setVideosBySection] = useState({});
   let [videoSrc, setVideoSrc] = useState();
+
   const { courseId } = useParams();
 
   let [visible, setVisible] = useState(null);
@@ -19,13 +24,14 @@ function OnlineCourseDetails() {
   let [totalSections, setTotalSections] = useState();
 
   var token =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGY4NDIxZTU3MTFmOTYyYzMyZTQyMiIsImlhdCI6MTc2MTEzNDE0OSwiZXhwIjoxNzYxMjIwNTQ5fQ.4ynFbupTiXUP7VrWQftX6MFCuBkfj5W0w1N4JB0z3JM";
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4YTk3ZDYxOTdlMjcxMDM0OWUwNmI0MyIsImlhdCI6MTc3NDY4MDc2NywiZXhwIjoxNzc0NzY3MTY3fQ.u18vgJ5XOANeCr9HQeAyQrZYE1z34H39X9P71ZU3I7s";
 
   useEffect(() => {
     async function fetchVideos() {
       try {
         const response = await axios.get(
-          `http://localhost:5000/course/online-course/${courseId}`
+          // `${url}/course/online-course/${courseId}`,
+          `${url}/course/${courseId}`,
           // {
           //   headers: {
           //     Authorization: `Bearer ${token}`,
@@ -53,7 +59,7 @@ function OnlineCourseDetails() {
 
     async function fetchCourseName() {
       try {
-        const details = await axios.get(`http://localhost:5000/course/${courseId}`);
+        const details = await axios.get(`${url}/course/${courseId}`);
         setVideoDetails(details.data);
       } catch (error) {
         console.error(error.message);
@@ -68,7 +74,7 @@ function OnlineCourseDetails() {
   // async function fetchVideoUrl(currentVideoUrl) {
   //   try {
   //     const response = await axios.get(
-  //       `http://localhost:5000${encodeURIComponent(currentVideoUrl)}`,
+  //       `${url}${encodeURIComponent(currentVideoUrl)}`,
   //       {
   //         headers: {
   //           Authorization: `Bearer ${token}`,
@@ -129,8 +135,8 @@ function OnlineCourseDetails() {
             <video
               className="rounded-xl object-center object-cover w-full shadow-lg h-[200px] sm:h-[300px] md:h-[500px]"
               controls
-              // src={`http://localhost:5000${encodeURI(currentVideo.videoUrl)}`}
-              src={videoSrc}
+              src={`${url}${currentVideo.videoUrl}`} // new
+              // src={videoSrc}
               // style={{ height: "500px", width: "100%" }}
               onContextMenu={(e) => e.preventDefault()}
               controlsList="nodownload"

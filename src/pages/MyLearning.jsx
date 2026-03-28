@@ -9,7 +9,7 @@ import Loading from "../components/Loading.jsx";
 function MyLearning() {
   // use the localstorage's getItem  and setItem
   const token =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4YTk3ZDYxOTdlMjcxMDM0OWUwNmI0MyIsImlhdCI6MTc3NDYxMDY0NywiZXhwIjoxNzc0Njk3MDQ3fQ.WNIn7uSuqovRYIOiJdOOvLu0X2vV_KjdjAuzrk9Kxdc";
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4YTk3ZDYxOTdlMjcxMDM0OWUwNmI0MyIsImlhdCI6MTc3NDY4MDc2NywiZXhwIjoxNzc0NzY3MTY3fQ.u18vgJ5XOANeCr9HQeAyQrZYE1z34H39X9P71ZU3I7s";
 
   let [courses, setCourses] = useState([]);
 
@@ -69,20 +69,16 @@ function MyLearning() {
               <div key={index}>
                 <div>
                   <OnlineCourseCard
-                    path={`/course/my-learning/`}
-                    endPoint={course._id}
-                    image={course.ImageUrl}
-                    rating={course.rating}
-                    reviews={course.reviews}
-                    students={course.students}
-                    description={course.description}
+                    courseId={course._id}
                     title={course.title}
-                    subtitle={course.subtitle}
-                    duration={course.duration}
-                    totalHours={course.totalHours}
-                    totalVideos={course.totalVideos}
-                    highlights={course.highlights}
-                    // price={course.price}
+                    description={course.description}
+                    rating={course.rating}
+                    totalReviews={course.totalReviews}
+                    ratingSum={course.ratingSum}
+                    link={`/course/my-learning/${course._id}`}
+                    // link={`/courses/my-learning/${course.title}-${course._id}`}
+
+                    // discountedPrice={course.discountedPrice}
                     // originalPrice={course.originalPrice}
                   />
                 </div>

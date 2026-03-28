@@ -1,9 +1,4 @@
-import {
-  useLocation,
-  BrowserRouter as Router,
-  Routes,
-  Route,
-} from "react-router-dom";
+import { useLocation, BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import EnquiryBtn from "./components/EnquiryBtn.jsx";
 import Home from "../src/pages/Home.jsx";
@@ -75,41 +70,46 @@ function AppContent() {
       {/* Show Navbar and Footer only for non-admin routes */}
       {isAdmin ? <Sidebar /> : <Navbar />}
       <Routes>
+        {/* root pages */}
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/categories" element={<Categories />} />
         <Route path="/ess-categories" element={<EssCategories />} />
+        {/* root pages */}
+
+        {/* products */}
         <Route path="/products/:categoryName" element={<SpecificCategory />} />
-        <Route
-          path="/essentials/:categoryName"
-          element={<EssSpeciCategory />}
-        />
-        <Route path="/essentials/all-products" element={<AllEssentials />} />
         <Route path="/products/all-products" element={<AllProducts />} />
-        <Route
-          path="/products/:categoryName/:productId"
-          element={<ProductDetail />}
-        />
+        <Route path="/products/:categoryName/:productId" element={<ProductDetail />} />
+        {/* products */}
+
+        {/* essentials */}
+        <Route path="/essentials/:categoryName" element={<EssSpeciCategory />} />
+        <Route path="/essentials/all-products" element={<AllEssentials />} />
         <Route
           path="/essential/:categoryName/:productId"
           element={<EssentialDetailsPage />}
         />
+        {/* essentials */}
+
+        {/* courses */}
         <Route path="/courses" element={<Courses />} />
         <Route path="/courses/online-course" element={<OnlineCourse />} />
-        <Route
-          path="/course/my-learning/:courseId"
-          element={<OnlineCourseDetails />}
-        />
+        <Route path="/course/my-learning/:courseId" element={<OnlineCourseDetails />} />
         <Route path="/courses/offline-course" element={<OfflineCourse />} />
         <Route path="/contact" element={<Contact />} />
-        <Route path="/cart" element={<Cart />} />
         <Route path="/courses/my-learning/" element={<MyLearning />} />
         <Route
           path="/courses/course-payment-page/:courseId"
           element={<CoursePaymentPage />}
         />
+        {/* courses */}
+
+        {/* card */}
+        <Route path="/cart" element={<Cart />} />
+        {/* card */}
 
         {/* admin routes */}
         <Route
