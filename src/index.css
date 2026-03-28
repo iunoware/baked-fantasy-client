@@ -12,6 +12,12 @@
   font-weight: normal;
   font-size: normal;
 }
+
+@font-face {
+  font-family: "Nexa";
+  src: url("/fonts/Nexa-Heavy.ttf") format("truetype");
+}
+
 @font-face {
   font-family: "picktea";
   src: url("/fonts/picktea.ttf") format("truetype");
@@ -30,6 +36,11 @@ body {
   /* font-weight: 600; */
   /* font-style: normal; */
 }
+
+.gliker {
+  font-family: "Gliker";
+}
+
 .mansalva-regular {
   font-family: "Mansalva", sans-serif;
   font-weight: 900;
@@ -42,8 +53,9 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Lora";
+  /* font-family: "Lora"; */
   /* font-family: "picktea" */
+  font-family: "Nexa";
 }
 
 /* background color */
@@ -83,7 +95,7 @@ h6 {
   transform: rotate(10deg) scale(1.07);
 } */
 @theme {
-  --animate-wiggle: wiggle 1s ease-in-out infinite;
+  --animate-wiggle: wiggle 1s ease-in infinite;
   @keyframes wiggle {
     0%,
     100% {

@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import axios from "axios";
 import { GraduationCap, Star } from "lucide-react";
 
@@ -34,9 +34,13 @@ function StarRating({ rating }) {
 }
 
 function OnlineCourseCard(props) {
+  const location = useLocation();
+  // console.log("path: ", location.pathname);
+  const isMyLearning = location.pathname.startsWith("/courses/my-learning");
+
   return (
     <div className="">
-      <div className="rounded-2xl bg-gray-100 shadow-lg m-10">
+      <div className="rounded-2xl bg-white shadow-lg m-10">
         <div className="rounded-xl !m-2 translate-y-2 flex align-bottom overflow-hidden">
           <img
             src={
@@ -57,25 +61,31 @@ function OnlineCourseCard(props) {
 
           <div className="flex gap-2 items-center">
             <p className="text-2xl font-semibold">{props.rating}</p>
-            <p>
+            <div>
               <StarRating rating={props.rating} />
-            </p>
+            </div>
             <p className="text-gray-400">({props.totalReviews})</p>
           </div>
 
           <p className="text-2xl font-semibold new-primary-text">
-            ₹{props.discountedPrice}{" "}
-            <span className="line-through text-gray-600 ml-2 text-lg">
-              ₹{props.originalPrice}
-            </span>
+            {props.discountedPrice && props.originalPrice ? (
+              <>
+                ₹{props.discountedPrice}{" "}
+                <span className="line-through text-gray-600 ml-2 text-lg">
+                  ₹{props.originalPrice}
+                </span>
+              </>
+            ) : (
+              <></>
+            )}
           </p>
 
           <Link
-            // to={`${props.path}${props.endPoint}`}
-            // state={{ price: props.price, courseId: props.endPoint }}
+            to={props.link}
+            state={{ courseId: props.courseId }}
             className=" text-center block mt-3 w-full rounded-xl new-primary-bg-dark hover:new-primary-bg active:scale-98 shadow-md px-8 py-4 text-white"
           >
-            Buy Now
+            {isMyLearning ? "Watch Now" : "Buy Now"}
           </Link>
         </div>
       </div>
