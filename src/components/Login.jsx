@@ -305,7 +305,6 @@ function Login({ isOpen, onClose, onOpenRegister, setLoggedIn }) {
                 <GoogleLogin
                   onSuccess={handleSuccess}
                   onError={() => console.log("Google Login Failed")}
-                  useOneTap
                 />
               </div>
 
