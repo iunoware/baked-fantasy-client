@@ -1,8 +1,12 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams, Link } from "react-router-dom";
-import { ArrowLeft, Users, Clock10, ChevronDown, File } from "lucide-react";
-import Loading from "../components/Loading.jsx";
+import { ArrowLeft, Users, Clock10, ChevronDown, FileDown, Star } from "lucide-react";
+// import ReactPlayer from "react-player";
+// import Loading from "../components/Loading.jsx";
+import "plyr/dist/plyr.css";
+import Plyr from "plyr";
+import { useRef } from "react";
 
 const url = "http://localhost:5000";
 
@@ -12,6 +16,9 @@ function OnlineCourseDetails() {
   const [course, setCourse] = useState(null);
   const [visibleSection, setVisibleSection] = useState(null);
   const [currentLesson, setCurrentLesson] = useState(null);
+  const [videoLoading, setVideoLoading] = useState(true);
+
+  const videoRef = useRef(null);
 
   useEffect(() => {
     async function fetchCourse() {
@@ -34,10 +41,40 @@ function OnlineCourseDetails() {
     fetchCourse();
   }, [courseId]);
 
-  if (!course) return <Loading height="150px" width="150px" />;
+  useEffect(() => {
+    const active = document.getElementById(currentLesson?._id);
+    active?.scrollIntoView({ behavior: "smooth", block: "center" });
+  }, [currentLesson]);
+
+  useEffect(() => {
+    if (!videoRef.current) return;
+
+    const player = new Plyr(videoRef.current, {
+      controls: [
+        "play-large",
+        "play",
+        "progress",
+        "current-time",
+        "mute",
+        "volume",
+        "settings",
+        "fullscreen",
+      ],
+    });
+
+    return () => {
+      player.destroy();
+    };
+  }, [currentLesson]);
+
+  // if (!course) return <Loading height="150px" width="150px" />;
+  if (!course)
+    return (
+      <div className="w-6 h-6 border-3 border-pink-700 border-t-pink-300 rounded-full animate-spin"></div>
+    );
 
   return (
-    <div className="bg-gray-200 pt-20">
+    <div className="bg pt-20">
       {/* HEADER */}
       {/* <div className="py-10 px-8"> */}
       <div className="py-12 px-8 border-b border-gray-400">
@@ -51,11 +88,14 @@ function OnlineCourseDetails() {
         <h1 className="text-4xl font-bold">{course.title}</h1>
         <p className="text-gray-700 mt-3 text-lg">{course.description}</p>
 
-        <div className="mt-4 flex gap-5 text-gray-600">
-          <p>⭐ {course.rating}</p>
+        <div className="mt-4 inline-flex justify-center items-center gap-5 text-gray-600">
+          <p>
+            <Star className="inline mb-1 text-amber-500 fill-amber-500" size={20} />{" "}
+            {course.rating}
+          </p>
           <p>{course.totalReviews} reviews</p>
           <p className="flex items-center gap-2">
-            <Users size={18} /> {course.totalStudents} Students
+            <Users size={16} /> {course.totalStudents} Students
           </p>
         </div>
       </div>
@@ -65,16 +105,49 @@ function OnlineCourseDetails() {
         {/* VIDEO */}
         <div className="md:col-span-3">
           {currentLesson ? (
-            <video
-              // className="w-full h-[500px] rounded-xl shadow-lg"
-              className="w-full h-[220px] sm:h-[350px] md:h-[500px] rounded-xl bg-black"
-              controls
-              src={`${url}${currentLesson.videoUrl}`}
-              onContextMenu={(e) => e.preventDefault()}
-              controlsList="nodownload"
-            />
+            <div className="relative">
+              {videoLoading && (
+                <div className="absolute inset-0 flex items-center justify-center bg-black rounded-xl">
+                  <div className="w-8 h-8 border-4 border-pink-700 border-t-transparent rounded-full animate-spin"></div>
+                </div>
+              )}
+
+              {/* <video
+                // className="w-full h-[500px] rounded-xl shadow-lg"
+                className="md:sticky md:top-20 w-full h-[220px] sm:h-[350px] md:h-[500px] rounded-xl bg-black"
+                controls
+                src={`${url}${currentLesson.videoUrl}`}
+                onLoadStart={() => setVideoLoading(true)}
+                onLoadedData={() => setVideoLoading(false)}
+                onContextMenu={(e) => e.preventDefault()}
+                controlsList="nodownload"
+              /> */}
+
+              <div className="relative rounded-xl overflow-hidden shadow-xl bg-black">
+                <video
+                  ref={videoRef}
+                  // className="w-full h-[220px] sm:h-[350px] md:h-[500px]"
+                  className="w-full h-[500px] rounded-xl plyr-react plyr--full-ui"
+                  controls
+                  onLoadStart={() => setVideoLoading(true)}
+                  onLoadedData={() => setVideoLoading(false)}
+                  crossOrigin="anonymous"
+                >
+                  <source src={`${url}${currentLesson.videoUrl}`} type="video/mp4" />
+                </video>
+              </div>
+
+              {/* Overlay Controls */}
+              {/* <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex items-end p-4">
+                <div className="text-white text-sm">
+                  <p className="font-semibold">{currentLesson?.title}</p>
+                  <p className="text-gray-300">{currentLesson?.duration}</p>
+                </div>
+              </div> */}
+            </div>
           ) : (
-            <Loading height="150px" width="150px" />
+            // <Loading height="150px" width="150px" />
+            <div className="w-6 h-6 border-3 border-pink-700 border-t-pink-300 rounded-full animate-spin"></div>
           )}
 
           {/* LESSON DETAILS */}
@@ -94,7 +167,7 @@ function OnlineCourseDetails() {
               className="mb-4 bg-white p-4 rounded-xl shadow cursor-pointer"
               onClick={() => setVisibleSection(visibleSection === index ? null : index)}
             >
-              <div className="flex justify-between">
+              <div className="flex justify-between items-center">
                 <h3 className="font-semibold">{section.title}</h3>
                 <p className="text-sm text-gray-500">{section.lessons.length} lessons</p>
                 <ChevronDown
@@ -104,16 +177,22 @@ function OnlineCourseDetails() {
 
               {/* LESSONS */}
               {visibleSection === index && (
-                <div className="mt-3">
+                // <div className="mt-3">
+                <div
+                  className={`overflow-hidden transition-all duration-300 ${
+                    visibleSection === index ? "max-h-96 mt-3" : "max-h-0"
+                  }`}
+                >
                   {section.lessons.map((lesson) => (
                     <div
                       key={lesson._id}
+                      id={lesson._id}
                       onClick={(e) => {
                         e.stopPropagation();
                         setCurrentLesson(lesson);
                       }}
                       // className="p-2 hover:bg-pink-100 rounded cursor-pointer"
-                      className={`p-3 flex justify-between rounded-md cursor-pointer transition-all duration-200 ${currentLesson?._id === lesson._id ? "bg-pink-200" : "hover:bg-pink-100"}`}
+                      className={`p-3 flex justify-between rounded-md cursor-pointer ${currentLesson?._id === lesson._id ? "bg-pink-200 border-l-4 border-pink-600" : "hover:bg-pink-100"}`}
                     >
                       <div>
                         <p className="font-medium">{lesson.title}</p>
@@ -121,9 +200,19 @@ function OnlineCourseDetails() {
                           <Clock10 size={14} /> {lesson.duration}
                         </p>
                       </div>
-                      <p>
-                        <File size={18} />
-                      </p>
+
+                      {lesson.pdfUrl && (
+                        <a
+                          href={`${url}/download?file=${lesson.pdfUrl}`}
+                          download
+                          className="text-gray-600 hover:text-gray-900"
+                        >
+                          <FileDown size={18} />
+                        </a>
+
+                        // spin animation
+                        // <div className="w-6 h-6 border-3 border-pink-700 border-t-pink-300 rounded-full animate-spin"></div>
+                      )}
                     </div>
                   ))}
                 </div>
