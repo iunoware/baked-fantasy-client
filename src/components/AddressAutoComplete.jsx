@@ -2,11 +2,12 @@ import React, { useState, useEffect, useRef } from "react";
 import "./AddressAutocomplete.css";
 
 const AddressAutocomplete = ({
+  value = "",
+  onChange,
   setLocation,
   placeholder = "Area / Locality",
   className = "",
 }) => {
-  const [input, setInput] = useState("");
   const [suggestions, setSuggestions] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const wrapperRef = useRef(null);
@@ -25,10 +26,10 @@ const AddressAutocomplete = ({
   }, []);
 
   const handleInputChange = async (e) => {
-    const value = e.target.value;
-    setInput(value);
+    const inputValue = e.target.value;
+    if (onChange) onChange(inputValue);
 
-    if (!value.trim()) {
+    if (!inputValue.trim()) {
       setSuggestions([]);
       setShowSuggestions(false);
       return;
@@ -46,7 +47,7 @@ const AddressAutocomplete = ({
       if (window.google.maps.importLibrary) {
         const { AutocompleteSuggestion } = await window.google.maps.importLibrary("places");
         if (AutocompleteSuggestion && AutocompleteSuggestion.fetchAutocompleteSuggestions) {
-          const request = { input: value };
+          const request = { input: inputValue };
           const res = await AutocompleteSuggestion.fetchAutocompleteSuggestions(request);
           if (res && res.suggestions) {
             setSuggestions(
@@ -74,7 +75,7 @@ const AddressAutocomplete = ({
     // Fallback to legacy AutocompleteService if the new API threw a 403 or import wasn't found
     if (!searchSuccessful && window.google.maps.places && window.google.maps.places.AutocompleteService) {
       const service = new window.google.maps.places.AutocompleteService();
-      service.getPlacePredictions({ input: value }, (predictions, status) => {
+      service.getPlacePredictions({ input: inputValue }, (predictions, status) => {
         if (status === window.google.maps.places.PlacesServiceStatus.OK && predictions) {
           // Normalizing predictions
           const normalized = predictions.map((p) => ({
@@ -92,7 +93,7 @@ const AddressAutocomplete = ({
   };
 
   const handleSelectSuggestion = async (suggestion) => {
-    setInput(suggestion.description);
+    if (onChange) onChange(suggestion.description);
     setShowSuggestions(false);
 
     if (!window.google || !window.google.maps) return;
@@ -155,10 +156,10 @@ const AddressAutocomplete = ({
     >
       <input
         type="text"
-        value={input}
+        value={value}
         onChange={handleInputChange}
         placeholder={placeholder}
-        className="border-1 rounded-md h-9 w-full p-2 border-black focus:border-3 focus:border-gray-700"
+        className="border-1 border rounded-md h-[42px] w-full px-3 py-2 border-slate-200 focus:border-2 focus:border-pink-500 focus:outline-none focus:ring-1 focus:ring-pink-500"
         onFocus={() => {
           if (suggestions.length > 0) setShowSuggestions(true);
         }}
