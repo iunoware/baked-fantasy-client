@@ -28,10 +28,11 @@ const ProductCard = ({
   inStock,
   type = "bakery",
 }) => {
-  const { cartItems, addToCart, increaseQuantity, decreaseQuantity } = useCart();
+  const { cartItems, addToCart, increaseQuantity, decreaseQuantity } =
+    useCart();
   const cartItem = cartItems.find((item) => item.id === id);
-  const added = !!cartItem;
-  const quantity = cartItem ? cartItem.quantity : 1;
+  const quantity = cartItem?.quantity || 0;
+  const added = quantity > 0;
 
   // Add to cart handler
   const handleCart = (e) => {
@@ -68,9 +69,12 @@ const ProductCard = ({
 
   // Define dynamic paths and actions based on product type
   const detailLink =
-    type === "essential" ? `/essential/${category}/${id}` : `/products/${category}/${id}`;
+    type === "essential"
+      ? `/essential/${category}/${id}`
+      : `/products/${category}/${id}`;
 
-  const buyNowAction = type === "essential" ? sendToWhatsApp : (e) => e.stopPropagation();
+  const buyNowAction =
+    type === "essential" ? sendToWhatsApp : (e) => e.stopPropagation();
 
   return (
     <div className="product-card group/card shadow-xl h-full group relative bg-white rounded-2xl border border-neutral-100 p-2 transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 flex flex-col">
@@ -116,7 +120,9 @@ const ProductCard = ({
             <h3 className="text-2xl font-bold mb-2 text-neutral-900 transition-colors duration-300 line-clamp-1">
               {title}
             </h3>
-            <p className="text-sm text-neutral-600 line-clamp-1 h-5">{subject}</p>
+            <p className="text-sm text-neutral-600 line-clamp-1 h-5">
+              {subject}
+            </p>
           </div>
 
           <div className="flex items-center gap-2 mb-4">
@@ -143,14 +149,16 @@ const ProductCard = ({
           </button>
 
           {/* Quantity Controls and Buy Now (Shown when added to cart) */}
-          <div className={`${added ? "flex" : "hidden"} gap-3 z-10 items-center w-full`}>
+          <div
+            className={`${added ? "flex" : "hidden"} gap-3 z-10 items-center w-full`}
+          >
             <div className="flex items-center justify-between bg-neutral-100 rounded-xl p-1.5 flex-1">
               <button
                 onClick={(e) => {
                   e.stopPropagation();
                   handleQuantityChange(-1);
                 }}
-                className="p-2 z-10 rounded-lg hover:bg-white hover:shadow-sm transition-all text-neutral-600 active:scale-90"
+                className="p-2 z-10 cursor-pointer rounded-lg hover:bg-white hover:shadow-sm transition-all text-neutral-600 active:scale-90"
               >
                 <Minus size={16} />
               </button>
@@ -162,18 +170,18 @@ const ProductCard = ({
                   e.stopPropagation();
                   handleQuantityChange(+1);
                 }}
-                className="p-2 rounded-lg hover:bg-white hover:shadow-sm transition-all text-neutral-600 active:scale-90"
+                className="p-2 cursor-pointer rounded-lg hover:bg-white hover:shadow-sm transition-all text-neutral-600 active:scale-90"
               >
                 <Plus size={16} />
               </button>
             </div>
-            <button
+            {/* <button
               disabled={!inStock}
               onClick={buyNowAction}
               className="flex-[1.5] z-10 bg-violet text-white font-bold py-3.5 rounded-xl flex items-center justify-center gap-2 hover:bg-black transition-all duration-300 active:scale-95 shadow-sm disabled:opacity-50"
             >
               Buy now
-            </button>
+            </button> */}
           </div>
         </div>
       </div>

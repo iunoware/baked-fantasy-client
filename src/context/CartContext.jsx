@@ -94,14 +94,19 @@ export const CartProvider = ({ children }) => {
   const decreaseQuantity = (productId) => {
     setCartItems((prevItems) => {
       const item = prevItems.find((i) => i.id === productId);
-      if (item && item.quantity > 1) {
-        const newQty = item.quantity - 1;
-        syncToDatabase(productId, newQty);
-        return prevItems.map((i) =>
-          i.id === productId ? { ...i, quantity: newQty } : i,
-        );
+      if (!item) return prevItems;
+
+      if (item.quantity <= 1) {
+        // Remove item entirely and sync delete to DB
+        syncToDatabase(productId, 0, "delete");
+        return prevItems.filter((i) => i.id !== productId);
       }
-      return prevItems;
+
+      const newQty = item.quantity - 1;
+      syncToDatabase(productId, newQty);
+      return prevItems.map((i) =>
+        i.id === productId ? { ...i, quantity: newQty } : i,
+      );
     });
   };
 

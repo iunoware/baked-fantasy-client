@@ -60,7 +60,7 @@ h6 {
 
 /* background color */
 .bg {
-  @apply bg-[#EFE1D0];
+  @apply bg-[#FFFFFF];
 }
 .pac-container {
   z-index: 9999 !important;

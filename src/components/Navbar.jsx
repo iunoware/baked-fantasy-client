@@ -15,7 +15,7 @@ import { useCart } from "../context/CartContext.jsx";
 
 export const StaggeredMenu = ({
   position = "right",
-  colors = ["#FC3500", "#003153"],
+  colors = ["#EC4174", "#9BBEC6"],
   displaySocials = true,
   displayItemNumbering = false,
   className,

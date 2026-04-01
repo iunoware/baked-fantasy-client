@@ -18,6 +18,10 @@ export default function Profile() {
   const [activeTab, setActiveTab] = useState("orders");
   const [userData, setUserData] = useState(null);
 
+  const handleProfileUpdate = (updated) => {
+    setUserData((prev) => ({ ...prev, ...updated }));
+  };
+
   useEffect(() => {
     try {
       const data = localStorage.getItem("user");
@@ -119,6 +123,7 @@ export default function Profile() {
               name={userData.name}
               email={userData.email}
               mobileNumber={userData.mobileNumber}
+              onUpdate={handleProfileUpdate}
             />
 
             <AnimatePresence mode="wait">
