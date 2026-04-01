@@ -60,7 +60,7 @@ h6 {
 
 /* background color */
 .bg {
-  @apply bg-[#FFFFFF];
+  @apply bg-[#E3CCBA];
 }
 .pac-container {
   z-index: 9999 !important;
@@ -69,6 +69,9 @@ h6 {
 @theme {
   /* for text */
   --color-blue: #73c3b4;
+  --color-beige: #fef9ec;
+  --color-pbrown: #40200d;
+  --color-sbrown: #c08552;
   /* for navbar */
   --color-red: #be0604;
   /* for bg */
@@ -200,7 +203,7 @@ body {
 }
 
 .new-primary-bg {
-  @apply bg-[#870D32];
+  @apply bg-[#40200D];
 }
 
 .new-primary-bg-dark {
@@ -208,7 +211,7 @@ body {
 }
 
 .new-primary-light-bg {
-  @apply bg-[#ec4174];
+  @apply bg-[#c08552];
 }
 
 .new-primary-light-text {

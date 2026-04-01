@@ -23,13 +23,16 @@ function Categories() {
 
   return (
     <>
-      <div className="product bg">
+      <div className="product bg-cream">
         <section className="lg:pt-30 md:pt-20 pt-40">
           <Heading title="Explore Our Baked Goodies" />
-          <p className="subHeading">
-            Discover our wide range of handcrafted baked goods, made with premium
-            ingredients and traditional techniques passed down through generations.
-          </p>
+          <div className="flex items-center justify-center">
+            <p className="subHeading w-4xl  text-center">
+              Discover our wide range of handcrafted baked goods, made with
+              premium ingredients and traditional techniques passed down through
+              generations.
+            </p>
+          </div>
           <div className="grid lg:grid-cols-5 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-5 place-items-center lg:px-20 md:px-15 sm:px-10 px-5 py-10">
             <Link to={`/products/all-products`} className="card">
               <article className="cat-card overflow-hidden rounded-[50%] h-70 w-70 shadow-lg hover:-translate-y-2 transition-all duration-200 ">
@@ -48,7 +51,9 @@ function Categories() {
                 </div>
               </article>
               <div className="p-4 flex justify-center sm:p-6">
-                <h2 className="font-bold lora text-black text-2xl">All products</h2>
+                <h2 className="font-bold lora text-black text-2xl">
+                  All products
+                </h2>
                 {/* <p className="mt-2 text-sm text-gray-600">{props.subject}</p> */}
               </div>
             </Link>
@@ -65,7 +70,7 @@ function Categories() {
                   />
                 ) : (
                   ""
-                )
+                ),
               )
             ) : (
               <div className="w-full flex justify-start col-span-full items-center">
@@ -98,7 +103,8 @@ function Categories() {
                   Premium ingredients
                 </h2>
                 <p className="text-md pt-5">
-                  Only the finest, locally-sourced ingredients go into our products
+                  Only the finest, locally-sourced ingredients go into our
+                  products
                 </p>
               </div>
               <div className="card-2 flex flex-col  items-center text-center">
@@ -124,7 +130,9 @@ function Categories() {
                   autoplay
                   loop
                 ></dotlottie-wc>
-                <h2 className="text-3xl font-bold new-primary-text">Fresh Delivery</h2>
+                <h2 className="text-3xl font-bold new-primary-text">
+                  Fresh Delivery
+                </h2>
                 <p className="text-md pt-5">
                   Same-day delivery ensures you get the freshest products
                 </p>
@@ -142,9 +150,9 @@ function Categories() {
               </h2>
 
               <p className="hidden text-gray-700 md:mt-4 md:block">
-                Planning a party, event, or corporate gathering? Enjoy our freshly baked
-                cakes and treats—crafted with care, consistent in quality, and perfect for
-                any celebration.
+                Planning a party, event, or corporate gathering? Enjoy our
+                freshly baked cakes and treats—crafted with care, consistent in
+                quality, and perfect for any celebration.
               </p>
 
               <div className="mt-4 md:mt-8">

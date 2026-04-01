@@ -13,7 +13,9 @@ function AllEssentials() {
   useEffect(() => {
     async function fetchAllProducts() {
       try {
-        const response = await axios.get(`http://localhost:5000/bakingEssentials`);
+        const response = await axios.get(
+          `http://localhost:5000/bakingEssentials`,
+        );
         // console.log("all products: ", response.data);
         // console.log("category name: ", response.data[0].category.title);
         setProducts(response.data);
@@ -25,7 +27,7 @@ function AllEssentials() {
   }, []);
 
   return (
-    <div className="bg">
+    <div className="bg-white">
       <div className="hero relative bg-[url(/images/ess-hero2.png)] bg-cover bg-center h-[80vh] flex justify-baseline items-center ps-10 ">
         <div className="absolute inset-0 top-23 left-5 space-x-2 mb-8">
           <Link
@@ -58,7 +60,7 @@ function AllEssentials() {
               />
             ) : (
               ""
-            )
+            ),
           )
         ) : (
           <div className="w-full flex justify-start col-span-full items-center">

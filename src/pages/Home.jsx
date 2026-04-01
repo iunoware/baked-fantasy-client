@@ -86,7 +86,7 @@ function Home() {
           ></video>
 
           <div className="flex flex-col gap-2 absolute inset-0 justify-center items-center">
-            <h2 className="font-extrabold pb-3 text-rose-400 text-2xl md:text-3xl px-2 text-center brand-name">
+            <h2 className="font-extrabold pb-3 text-[#C08552] text-2xl md:text-3xl px-2 text-center brand-name">
               The Baked Fantasy
             </h2>
             <h2 className="text-3xl md:text-6xl pb-3 font-extrabold px-2 text-center text-white luckyGuy">
@@ -103,189 +103,198 @@ function Home() {
         </a>
       </div>
 
-      {/* card section */}
+      {/* Why Choose Us section */}
       <div
-        className="py-15 bg grid grid-cols-2 gap-4 lg:grid-cols-4 lg:gap-8"
         id="section-2"
+        className="relative overflow-hidden bg py-[80px] pb-[90px] "
       >
-        {/* students */}
-        <div className="card-1 text-center flex flex-col items-center card-hover hover:animate-wiggle">
-          <svg
-            fill="#F6E9D9"
-            width="105px"
-            viewBox="-13.12 -13.12 58.24 58.24"
-            version="1.1"
-            xmlns="http://www.w3.org/2000/svg"
-            stroke="#F6E9D9"
-          >
-            <g id="SVGRepo_bgCarrier" strokeWidth="0">
-              <rect
-                x="-13.12"
-                y="-13.12"
-                width="58.24"
-                height="58.24"
-                rx="29.12"
-                fill="#870D32"
-                strokeWidth="0"
-              ></rect>
-            </g>
-            <g
-              id="SVGRepo_tracerCarrier"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            ></g>
-            <g id="SVGRepo_iconCarrier">
-              {" "}
-              <path d="M23.313 26.102l-6.296-3.488c2.34-1.841 2.976-5.459 2.976-7.488v-4.223c0-2.796-3.715-5.91-7.447-5.91-3.73 0-7.544 3.114-7.544 5.91v4.223c0 1.845 0.78 5.576 3.144 7.472l-6.458 3.503s-1.688 0.752-1.688 1.689v2.534c0 0.933 0.757 1.689 1.688 1.689h21.625c0.931 0 1.688-0.757 1.688-1.689v-2.534c0-0.994-1.689-1.689-1.689-1.689zM23.001 30.015h-21.001v-1.788c0.143-0.105 0.344-0.226 0.502-0.298 0.047-0.021 0.094-0.044 0.139-0.070l6.459-3.503c0.589-0.32 0.979-0.912 1.039-1.579s-0.219-1.32-0.741-1.739c-1.677-1.345-2.396-4.322-2.396-5.911v-4.223c0-1.437 2.708-3.91 5.544-3.91 2.889 0 5.447 2.44 5.447 3.91v4.223c0 1.566-0.486 4.557-2.212 5.915-0.528 0.416-0.813 1.070-0.757 1.739s0.446 1.267 1.035 1.589l6.296 3.488c0.055 0.030 0.126 0.063 0.184 0.089 0.148 0.063 0.329 0.167 0.462 0.259v1.809zM30.312 21.123l-6.39-3.488c2.34-1.841 3.070-5.459 3.070-7.488v-4.223c0-2.796-3.808-5.941-7.54-5.941-2.425 0-4.904 1.319-6.347 3.007 0.823 0.051 1.73 0.052 2.514 0.302 1.054-0.821 2.386-1.308 3.833-1.308 2.889 0 5.54 2.47 5.54 3.941v4.223c0 1.566-0.58 4.557-2.305 5.915-0.529 0.416-0.813 1.070-0.757 1.739 0.056 0.67 0.445 1.267 1.035 1.589l6.39 3.488c0.055 0.030 0.126 0.063 0.184 0.089 0.148 0.063 0.329 0.167 0.462 0.259v1.779h-4.037c0.61 0.46 0.794 1.118 1.031 2h3.319c0.931 0 1.688-0.757 1.688-1.689v-2.503c-0.001-0.995-1.689-1.691-1.689-1.691z"></path>{" "}
-            </g>
-          </svg>
-          <div className="pt-5">
-            <h2 className="text-2xl font-bold">100+</h2>
-            <p className="text-lg">Happy Students</p>
+        {/* Decorative background blobs */}
+        <div className="absolute pointer-events-none rounded-full w-[320px] h-[320px] -top-[60px] -right-[80px] bg-[radial-gradient(circle,rgba(135,13,50,0.06)_0%,transparent_70%)]" />
+        <div className="absolute pointer-events-none rounded-full w-[260px] h-[260px] -bottom-[40px] -left-[60px] bg-[radial-gradient(circle,rgba(180,100,40,0.07)_0%,transparent_70%)]" />
+
+        {/* Section heading */}
+        <div className="text-center mb-14 px-5">
+          <p className="text-[13px] font-semibold tracking-[3px] uppercase text-[#870D32] mb-3">
+            Our Promise
+          </p>
+          <h2 className="text-[clamp(28px,5vw,46px)] font-extrabold text-[#2c1a0e] leading-[1.15] mx-auto mb-3.5 font-serif">
+            Why Choose Us
+          </h2>
+          {/* Decorative accent */}
+          <div className="flex justify-center gap-1.5 items-center">
+            <div className="w-9 h-[2px] bg-[#870D32] rounded-[2px]" />
+            <div className="w-2 h-2 rounded-full bg-[#870D32]" />
+            <div className="w-9 h-[2px] bg-[#870D32] rounded-[2px]" />
           </div>
+          <p className="mt-4 text-base text-[#7a5c44] max-w-[480px] mx-auto leading-[1.65]">
+            We believe every bite should tell a story — crafted with care,
+            delivered with warmth.
+          </p>
         </div>
 
-        {/* chef hat */}
-        <div className="card-2 text-center flex flex-col items-center card-hover hover:animate-wiggle">
-          <svg
-            width="105px"
-            height="105px"
-            viewBox="-7.92 -7.92 39.84 39.84"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            stroke="#F6E9D9"
-          >
-            <g id="SVGRepo_bgCarrier" strokeWidth="0">
-              <rect
-                x="-7.92"
-                y="-7.92"
-                width="39.84"
-                height="39.84"
-                rx="19.92"
-                fill="#870D32"
-                strokeWidth="0"
-              ></rect>
-            </g>
-            <g
-              id="SVGRepo_tracerCarrier"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            ></g>
-            <g id="SVGRepo_iconCarrier">
-              {" "}
-              <path
-                d="M19 18H19.75H19ZM5 14.584H5.75C5.75 14.2859 5.57345 14.016 5.30028 13.8967L5 14.584ZM19 14.584L18.6997 13.8967C18.4265 14.016 18.25 14.2859 18.25 14.584H19ZM15.75 7C15.75 7.41421 16.0858 7.75 16.5 7.75C16.9142 7.75 17.25 7.41421 17.25 7H15.75ZM6.75 7C6.75 7.41421 7.08579 7.75 7.5 7.75C7.91421 7.75 8.25 7.41421 8.25 7H6.75ZM7 4.25C3.82436 4.25 1.25 6.82436 1.25 10H2.75C2.75 7.65279 4.65279 5.75 7 5.75V4.25ZM17 5.75C19.3472 5.75 21.25 7.65279 21.25 10H22.75C22.75 6.82436 20.1756 4.25 17 4.25V5.75ZM15 21.25H9V22.75H15V21.25ZM9 21.25C8.03599 21.25 7.38843 21.2484 6.90539 21.1835C6.44393 21.1214 6.24643 21.0142 6.11612 20.8839L5.05546 21.9445C5.51093 22.4 6.07773 22.5857 6.70552 22.6701C7.31174 22.7516 8.07839 22.75 9 22.75V21.25ZM4.25 18C4.25 18.9216 4.24841 19.6883 4.32991 20.2945C4.41432 20.9223 4.59999 21.4891 5.05546 21.9445L6.11612 20.8839C5.9858 20.7536 5.87858 20.5561 5.81654 20.0946C5.75159 19.6116 5.75 18.964 5.75 18H4.25ZM18.25 18C18.25 18.964 18.2484 19.6116 18.1835 20.0946C18.1214 20.5561 18.0142 20.7536 17.8839 20.8839L18.9445 21.9445C19.4 21.4891 19.5857 20.9223 19.6701 20.2945C19.7516 19.6883 19.75 18.9216 19.75 18H18.25ZM15 22.75C15.9216 22.75 16.6883 22.7516 17.2945 22.6701C17.9223 22.5857 18.4891 22.4 18.9445 21.9445L17.8839 20.8839C17.7536 21.0142 17.5561 21.1214 17.0946 21.1835C16.6116 21.2484 15.964 21.25 15 21.25V22.75ZM7 5.75C7.2137 5.75 7.42326 5.76571 7.6277 5.79593L7.84703 4.31205C7.57021 4.27114 7.28734 4.25 7 4.25V5.75ZM12 1.25C9.68949 1.25 7.72942 2.7421 7.02709 4.81312L8.44763 5.29486C8.94981 3.81402 10.3516 2.75 12 2.75V1.25ZM7.02709 4.81312C6.84722 5.34352 6.75 5.91118 6.75 6.5H8.25C8.25 6.07715 8.3197 5.67212 8.44763 5.29486L7.02709 4.81312ZM17 4.25C16.7127 4.25 16.4298 4.27114 16.153 4.31205L16.3723 5.79593C16.5767 5.76571 16.7863 5.75 17 5.75V4.25ZM12 2.75C13.6484 2.75 15.0502 3.81402 15.5524 5.29486L16.9729 4.81312C16.2706 2.7421 14.3105 1.25 12 1.25V2.75ZM15.5524 5.29486C15.6803 5.67212 15.75 6.07715 15.75 6.5H17.25C17.25 5.91118 17.1528 5.34352 16.9729 4.81312L15.5524 5.29486ZM5.75 18V14.584H4.25V18H5.75ZM5.30028 13.8967C3.79769 13.2402 2.75 11.7416 2.75 10H1.25C1.25 12.359 2.6705 14.3846 4.69972 15.2712L5.30028 13.8967ZM18.25 14.584L18.25 18H19.75L19.75 14.584H18.25ZM21.25 10C21.25 11.7416 20.2023 13.2402 18.6997 13.8967L19.3003 15.2712C21.3295 14.3846 22.75 12.359 22.75 10H21.25ZM15.75 6.5V7H17.25V6.5H15.75ZM6.75 6.5V7H8.25V6.5H6.75Z"
-                fill="#F6E9D9"
-              ></path>{" "}
-              <path
-                opacity="0.5"
-                d="M5 18H19"
-                stroke="#F6E9D9"
-                strokeWidth="1.5"
+        {/* Staggered Cards Grid */}
+        <div className="max-w-[1180px] mx-auto px-6 grid grid-cols-3 [@media(max-width:900px)]:grid-cols-2 [@media(max-width:560px)]:grid-cols-1 gap-7 items-start">
+          {/* Card 1 — Freshly Baked Daily (row 1, normal) */}
+          <div className="group transition-all relative bg-white rounded-[18px] pt-8 px-[26px] pb-7 shadow-[0_4px_18px_rgba(100,50,20,0.08)] hover:shadow-[0_12px_36px_rgba(100,50,20,0.15)] ease-in-out hover:-translate-y-[7px] cursor-default mt-0 [@media(max-width:900px)]:!mt-0">
+            <div className="w-[58px] h-[58px] rounded-[14px] flex items-center justify-center mb-5 bg-[linear-gradient(135deg,#fce8d0,#f9d5b8)]">
+              <svg
+                width="28"
+                height="28"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#870D32"
+                strokeWidth="1.8"
                 strokeLinecap="round"
                 strokeLinejoin="round"
-              ></path>{" "}
-            </g>
-          </svg>
-          <div className="pt-5">
-            <h2 className="text-2xl font-bold">5+ years</h2>
-            <p className="text-lg">Experience</p>
+              >
+                <path d="M18 8h1a4 4 0 0 1 0 8h-1" />
+                <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z" />
+                <line x1="6" y1="1" x2="6" y2="4" />
+                <line x1="10" y1="1" x2="10" y2="4" />
+                <line x1="14" y1="1" x2="14" y2="4" />
+              </svg>
+            </div>
+            <h3 className="text-[17px] font-bold text-black mb-2 tracking-[-0.2px] font-serif">
+              Freshly Baked Daily
+            </h3>
+            <p className="text-[14px] text-[#7a5c44] leading-[1.6] m-0">
+              Every item is made fresh each morning — no preservatives, no
+              shortcuts.
+            </p>
           </div>
-        </div>
 
-        {/* medal */}
-        <div className="card-3 text-center flex flex-col items-center card-hover hover:animate-wiggle">
-          <svg
-            width="104px"
-            height="104px"
-            viewBox="-7.92 -7.92 39.84 39.84"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <g id="SVGRepo_bgCarrier" strokeWidth="0">
-              <rect
-                x="-7.92"
-                y="-7.92"
-                width="39.84"
-                height="39.84"
-                rx="19.92"
-                fill="#870D32"
-                strokeWidth="0"
-              ></rect>
-            </g>
-            <g
-              id="SVGRepo_tracerCarrier"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            ></g>
-            <g id="SVGRepo_iconCarrier">
-              {" "}
-              <circle
-                cx="12"
-                cy="9"
-                r="7"
-                stroke="#F6E9D9"
-                strokeWidth="1.5"
-              ></circle>{" "}
-              <path
-                d="M7.35111 15L6.71424 17.323C6.0859 19.6148 5.77173 20.7607 6.19097 21.3881C6.3379 21.6079 6.535 21.7844 6.76372 21.9008C7.41635 22.2331 8.42401 21.7081 10.4393 20.658C11.1099 20.3086 11.4452 20.1339 11.8014 20.0959C11.9335 20.0818 12.0665 20.0818 12.1986 20.0959C12.5548 20.1339 12.8901 20.3086 13.5607 20.658C15.576 21.7081 16.5837 22.2331 17.2363 21.9008C17.465 21.7844 17.6621 21.6079 17.809 21.3881C18.2283 20.7607 17.9141 19.6148 17.2858 17.323L16.6489 15"
-                stroke="#F6E9D9"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-              ></path>{" "}
-            </g>
-          </svg>
-          <div className="pt-5">
-            <h2 className="text-2xl font-bold">50+</h2>
-            <p className="text-lg">Awards</p>
-          </div>
-        </div>
-
-        {/* star */}
-        <div className="card-4 text-center flex flex-col items-center card-hover hover:animate-wiggle">
-          <svg
-            width="105px"
-            height="105px"
-            viewBox="-7.92 -7.92 39.84 39.84"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <g id="SVGRepo_bgCarrier" strokeWidth="0">
-              <rect
-                x="-7.92"
-                y="-7.92"
-                width="39.84"
-                height="39.84"
-                rx="19.92"
-                fill="#870D32"
-                strokeWidth="0"
-              ></rect>
-            </g>
-            <g
-              id="SVGRepo_tracerCarrier"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            ></g>
-            <g id="SVGRepo_iconCarrier">
-              {" "}
-              <path
-                d="M11.245 4.174C11.4765 3.50808 11.5922 3.17513 11.7634 3.08285C11.9115 3.00298 12.0898 3.00298 12.238 3.08285C12.4091 3.17513 12.5248 3.50808 12.7563 4.174L14.2866 8.57639C14.3525 8.76592 14.3854 8.86068 14.4448 8.93125C14.4972 8.99359 14.5641 9.04218 14.6396 9.07278C14.725 9.10743 14.8253 9.10947 15.0259 9.11356L19.6857 9.20852C20.3906 9.22288 20.743 9.23007 20.8837 9.36432C21.0054 9.48051 21.0605 9.65014 21.0303 9.81569C20.9955 10.007 20.7146 10.2199 20.1528 10.6459L16.4387 13.4616C16.2788 13.5829 16.1989 13.6435 16.1501 13.7217C16.107 13.7909 16.0815 13.8695 16.0757 13.9507C16.0692 14.0427 16.0982 14.1387 16.1563 14.3308L17.506 18.7919C17.7101 19.4667 17.8122 19.8041 17.728 19.9793C17.6551 20.131 17.5108 20.2358 17.344 20.2583C17.1513 20.2842 16.862 20.0829 16.2833 19.6802L12.4576 17.0181C12.2929 16.9035 12.2106 16.8462 12.1211 16.8239C12.042 16.8043 11.9593 16.8043 11.8803 16.8239C11.7908 16.8462 11.7084 16.9035 11.5437 17.0181L7.71805 19.6802C7.13937 20.0829 6.85003 20.2842 6.65733 20.2583C6.49056 20.2358 6.34626 20.131 6.27337 19.9793C6.18915 19.8041 6.29123 19.4667 6.49538 18.7919L7.84503 14.3308C7.90313 14.1387 7.93218 14.0427 7.92564 13.9507C7.91986 13.8695 7.89432 13.7909 7.85123 13.7217C7.80246 13.6435 7.72251 13.5829 7.56262 13.4616L3.84858 10.6459C3.28678 10.2199 3.00588 10.007 2.97101 9.81569C2.94082 9.65014 2.99594 9.48051 3.11767 9.36432C3.25831 9.23007 3.61074 9.22289 4.31559 9.20852L8.9754 9.11356C9.176 9.10947 9.27631 9.10743 9.36177 9.07278C9.43726 9.04218 9.50414 8.99359 9.55657 8.93125C9.61593 8.86068 9.64887 8.76592 9.71475 8.57639L11.245 4.174Z"
-                stroke="#F6E9D9"
-                strokeWidth="2"
+          {/* Card 2 — Premium Ingredients (row 1, elevated) */}
+          <div className="group relative bg-[linear-gradient(160deg,#ffffff_60%,#fce8d0_100%)] rounded-[18px] pt-8 px-[26px] pb-7 shadow-[0_6px_28px_rgba(135,13,50,0.12)] hover:shadow-[0_12px_36px_rgba(100,50,20,0.15)] transition-all ease-in-out hover:-translate-y-[7px] cursor-default -mt-6 [@media(max-width:900px)]:!mt-0">
+            <div className="w-[58px] h-[58px] rounded-[14px] flex items-center justify-center mb-5 bg-[linear-gradient(135deg,#f5e0e8,#edcad7)]">
+              <svg
+                width="28"
+                height="28"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#870D32"
+                strokeWidth="1.8"
                 strokeLinecap="round"
                 strokeLinejoin="round"
-              ></path>{" "}
-            </g>
-          </svg>
-          <div className="pt-5">
-            <h2 className="text-2xl font-bold">4.9/5</h2>
-            <p className="text-lg">Average Rating</p>
+              >
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+              </svg>
+            </div>
+            <h3 className="text-[17px] font-bold text-[#2c1a0e] mb-2 tracking-[-0.2px] font-serif">
+              Premium Ingredients
+            </h3>
+            <p className="text-[14px] text-[#7a5c44] leading-[1.6] m-0">
+              Sourced from trusted farms — rich butter, real chocolate, and
+              seasonal fruits.
+            </p>
+          </div>
+
+          {/* Card 3 — Custom Cake Orders (row 1, low) */}
+          <div className="group relative bg-white rounded-[18px] pt-8 px-[26px] pb-7 shadow-[0_4px_18px_rgba(100,50,20,0.08)] hover:shadow-[0_12px_36px_rgba(100,50,20,0.15)] transition-all ease-in-out hover:-translate-y-[7px] cursor-default mt-9 [@media(max-width:900px)]:!mt-0">
+            <div className="w-[58px] h-[58px] rounded-[14px] flex items-center justify-center mb-5 bg-[linear-gradient(135deg,#e8f0e0,#d5e8c8)]">
+              <svg
+                width="28"
+                height="28"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#4a7c3f"
+                strokeWidth="1.8"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+              </svg>
+            </div>
+            <h3 className="text-[17px] font-bold text-[#2c1a0e] mb-2 tracking-[-0.2px] font-serif">
+              Custom Cake Orders
+            </h3>
+            <p className="text-[14px] text-[#7a5c44] leading-[1.6] m-0">
+              Dream it, we bake it — personalised cakes for every occasion and
+              flavour.
+            </p>
+          </div>
+
+          {/* Card 4 — Fast & Reliable Delivery (row 2, low) */}
+          <div className="group relative bg-white rounded-[18px] pt-8 px-[26px] pb-7 shadow-[0_4px_18px_rgba(100,50,20,0.08)] hover:shadow-[0_12px_36px_rgba(100,50,20,0.15)] transition-all ease-in-out hover:-translate-y-[7px] cursor-default mt-5 [@media(max-width:900px)]:!mt-0">
+            <div className="w-[58px] h-[58px] rounded-[14px] flex items-center justify-center mb-5 bg-[linear-gradient(135deg,#dde8f5,#c8d9f0)]">
+              <svg
+                width="28"
+                height="28"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#2a5fa0"
+                strokeWidth="1.8"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <rect x="1" y="3" width="15" height="13" />
+                <polygon points="16 8 20 8 23 11 23 16 16 16 16 8" />
+                <circle cx="5.5" cy="18.5" r="2.5" />
+                <circle cx="18.5" cy="18.5" r="2.5" />
+              </svg>
+            </div>
+            <h3 className="text-[17px] font-bold text-[#2c1a0e] mb-2 tracking-[-0.2px] font-serif">
+              Fast & Reliable Delivery
+            </h3>
+            <p className="text-[14px] text-[#7a5c44] leading-[1.6] m-0">
+              Hot and fresh at your door — timely delivery you can count on
+              every time.
+            </p>
+          </div>
+
+          {/* Card 5 — Hygienic Preparation (row 2, normal) */}
+          <div className="group relative bg-white rounded-[18px] pt-8 px-[26px] pb-7 shadow-[0_4px_18px_rgba(100,50,20,0.08)] hover:shadow-[0_12px_36px_rgba(100,50,20,0.15)] transition-all ease-in-out hover:-translate-y-[7px] cursor-default -mt-2.5 [@media(max-width:900px)]:!mt-0">
+            <div className="w-[58px] h-[58px] rounded-[14px] flex items-center justify-center mb-5 bg-[linear-gradient(135deg,#fde8d0,#fbd5b5)]">
+              <svg
+                width="28"
+                height="28"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#a05c20"
+                strokeWidth="1.8"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                <polyline points="9 22 9 12 15 12 15 22" />
+              </svg>
+            </div>
+            <h3 className="text-[17px] font-bold text-[#2c1a0e] mb-2 tracking-[-0.2px] font-serif">
+              Hygienic Preparation
+            </h3>
+            <p className="text-[14px] text-[#7a5c44] leading-[1.6] m-0">
+              FSSAI-compliant kitchen with strict cleanliness protocols at every
+              step.
+            </p>
+          </div>
+
+          {/* Card 6 — Loved by Customers (row 2, elevated) */}
+          <div className="group relative bg-white rounded-[18px] pt-8 px-[26px] pb-7 shadow-[0_4px_18px_rgba(100,50,20,0.08)] hover:shadow-[0_12px_36px_rgba(100,50,20,0.15)] transition-all ease-in-out hover:-translate-y-[7px] cursor-default mt-[30px] [@media(max-width:900px)]:!mt-0">
+            <div className="w-[58px] h-[58px] rounded-[14px] flex items-center justify-center mb-5 bg-[linear-gradient(135deg,#f0e0f5,#e2c8ed)]">
+              <svg
+                width="28"
+                height="28"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#7a3a9a"
+                strokeWidth="1.8"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+              </svg>
+            </div>
+            <h3 className="text-[17px] font-bold text-[#2c1a0e] mb-2 tracking-[-0.2px] font-serif">
+              Loved by Customers
+            </h3>
+            <p className="text-[14px] text-[#7a5c44] leading-[1.6] m-0">
+              Over 500+ happy reviews — our regulars keep coming back for more.
+            </p>
           </div>
         </div>
       </div>
 
       {/* featured Bakery products */}
-      <section className="feature-section bg py-8 pb-12">
+      <section className="feature-section bg-[#FFF8F0] py-8 pb-12">
         <Heading title="Featured Products" />
         <p className="subHeading">
           Handcrafted with love using premium ingredients and traditional
@@ -358,24 +367,28 @@ function Home() {
       </section>
 
       {/* why choose us section */}
-      <section className="why-choose-us my-5 ">
+      <section className="why-choose-us bg py-5 ">
         <Heading title="Why Choose Backed Fantasy?" />
         <p className="text-center text-xl py-5">
           Discover what makes us the premier choice for baking education and
           premium baked goods.
         </p>
         <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-5 px-15">
-          <div className="mascot flex justify-center">
-            <img src="/images/register-mascot.png" alt="mascot" />
+          <div className="mascot flex items-center justify-center">
+            <img
+              src="/images/b-mascot.png"
+              alt="mascot"
+              className="md:h-140 h-90 w-auto"
+            />
           </div>
           {/* main cards */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 pt-5">
             {/* card-1 */}
-            <div className="rounded-2xl new-primary-light-bg">
+            <div className="rounded-2xl bg-sbrown">
               <div className="group relative block h-64 lg:h-70">
                 <span className="absolute rounded-2xl inset-0"></span>
 
-                <div className="new-primary-bg text-white relative rounded-2xl flex h-full transform items-end border-2  transition-transform group-hover:-translate-x-2 group-hover:-translate-y-2">
+                <div className="bg-pbrown text-white relative rounded-2xl flex h-full transform items-end border-2  transition-transform group-hover:-translate-x-2 group-hover:-translate-y-2">
                   <div className="p-4 !pt-0 transition-opacity group-hover:absolute group-hover:opacity-0 sm:p-6 lg:p-8 lg:opacity-100 [@media(max-width:600px)]:opacity-0 ">
                     <svg
                       fill="#ffffff"
@@ -688,11 +701,11 @@ function Home() {
             </div>
 
             {/* card-2 */}
-            <div className="rounded-2xl new-primary-light-bg">
+            <div className="rounded-2xl bg-sbrown">
               <div className="group relative block h-64 sm:h-80 lg:h-70 ">
                 <span className="absolute rounded-2xl inset-0"></span>
 
-                <div className="new-primary-bg text-white relative rounded-2xl flex h-full transform items-end border-2  transition-transform group-hover:-translate-x-2 group-hover:-translate-y-2">
+                <div className="bg-pbrown text-white relative rounded-2xl flex h-full transform items-end border-2  transition-transform group-hover:-translate-x-2 group-hover:-translate-y-2">
                   <div className="p-4 !pt-0 transition-opacity group-hover:absolute group-hover:opacity-0 sm:p-6 lg:p-8 lg:opacity-100 [@media(max-width:600px)]:opacity-0 ">
                     <svg
                       width="60px"
@@ -917,12 +930,12 @@ function Home() {
       </section>
 
       {/* event section */}
-      <section className="lg:grid lg:h-[80vh] md:h-[45vh] h-[42vh] lg:bg-cover lg:bg-center md:bg-center md:bg-cover relative md:bg-violet-300 bg-violet-300  lg:bg-[url('/images/bulk-order-banner-4.png')] mt-18 py-10">
+      <section className="lg:grid lg:h-[80vh] md:h-[45vh] h-[42vh] lg:bg-cover lg:bg-center md:bg-center md:bg-cover relative md:bg-violet-300 bg-violet-300  lg:bg-[url('/images/bulk-orders.png')] mt-18 py-10">
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-2 lg:gap-8 px-8">
           <div className="textSide flex space-y-15 ">
             <div className="max-w-prose flex flex-col space-y-5 ">
               <h1 className="lg:text-6xl text-white md:text-5xl text-2xl font-bold sm:text-5xl">
-                <strong className="text-white mb-5 font-extrabold">
+                <strong className="text-[#ed8b37] mb-5 font-extrabold">
                   Bulk Orders
                 </strong>
                 <br />
@@ -937,7 +950,7 @@ function Home() {
 
               <div className="mt-4 flex gap-4 sm:mt-6">
                 <Link
-                  className="group relative inline-flex items-center overflow-hidden rounded-lg bg-[#ebe6ee] px-8 py-3 text-black mr-3"
+                  className="group relative inline-flex items-center overflow-hidden rounded-lg bg-[#ed8b37] px-8 py-3 text-white mr-3"
                   to="/contact"
                 >
                   <span className="absolute -start-full transition-all group-hover:start-4">
@@ -948,19 +961,19 @@ function Home() {
                       xmlnsXlink="http://www.w3.org/1999/xlink"
                       viewBox="0 0 512 512"
                       xmlSpace="preserve"
-                      fill="#000000"
+                      fill="#fff"
                       style={{ transform: "rotate(90deg)" }}
                     >
                       <g>
                         <path
-                          style={{ fill: "#000000" }}
+                          style={{ fill: "#fff" }}
                           d="M408.387,512H159.603c-8.313,0-15.054-6.741-15.054-15.054v-71.829
         c0-8.313,6.741-15.054,15.054-15.054h132.043c8.313,0,15.054,6.741,15.054,15.054c0,8.313-6.741,15.054-15.054,15.054H174.657
         v41.722h218.676v-41.722h-28.605c-8.313,0-15.054-6.741-15.054-15.054c0-8.313,6.741-15.054,15.054-15.054h43.659
         c8.313,0,15.054,6.741,15.054,15.054v71.829C423.441,505.26,416.7,512,408.387,512z"
                         />
                         <path
-                          style={{ fill: "#000000" }}
+                          style={{ fill: "#fff" }}
                           d="M302.481,198.013v-15.951c0-15.948-13.009-29.53-29.728-30.096
         c-17.553-0.595-31.979,12.793-31.979,29.391v17.213l-0.333-154.106c0-16.243-13.813-29.411-30.854-29.411H208.4
         c-17.039,0-30.854,13.168-30.854,29.411v110.671v25.447v76.908l-30.02-73.097c-5.281-15.769-22.984-24.465-39.527-19.431
@@ -969,7 +982,7 @@ function Home() {
         c-17.039,0-30.854,13.168-30.854,29.411v-6.989c0-16.243-13.813-29.411-30.854-29.411l0,0c-17.039,0-30.854,13.168-30.854,29.411"
                         />
                         <path
-                          style={{ fill: "#000000" }}
+                          style={{ fill: "#fff" }}
                           d="M376.115,381.032c-0.011,0-0.02,0-0.03,0l-177.421-0.077c-25.033-0.012-48.062-14.139-58.672-35.988
         L74.073,209.223c-0.283-0.583-0.528-1.182-0.733-1.796c-3.788-11.308-2.854-23.391,2.625-34.022
         c5.684-11.03,15.502-19.142,27.643-22.843c24.074-7.325,49.967,5.457,58.011,28.529l0.872,2.121V44.463
@@ -1152,11 +1165,11 @@ function Home() {
       </section>
 
       {/* banner */}
-      <div className="mx-auto text-center rounded-4xl md:bg-[url('/images/banner.jpg')] bg-[url('/images/mobile-banner.jpg')] bg-center bg-cover w-[100vw] h-[100vh] md:w-[80vw] md:h-[70vh]">
+      <div className="mx-auto text-center rounded-4xl shadow-2xl md:bg-[url('/images/banner.jpg')] bg-[url('/images/mobile-banner.jpg')] bg-center bg-cover w-[100vw] h-[100vh] md:w-[80vw] md:h-[70vh]">
         <div className="flex flex-col items center w-full h-full justify-center">
-          <h1 className="flex mx-auto luckyGuy justify-center text-5xl/15 items-center new-primary-text font-bold">
+          <h1 className="flex mx-auto luckyGuy justify-center text-5xl/15 items-center text-sbrown font-bold">
             Still thinking about dessert? <br />
-            Your cravings won’t wait! 🤤
+            Your cravings won’t wait!
           </h1>
           <div className="flex mx-auto pt-10">
             <Link
@@ -1421,18 +1434,15 @@ function Home() {
       </div>
 
       {/* CTA section */}
-      <section className="lg:grid lg:h-[80vh] lg:bg-cover lg:bg-center md:bg-center md:bg-cover relative bg-[url('/images/bulkorder-4.png')]">
+      <section className="lg:grid lg:h-[80vh] lg:bg-cover lg:bg-center md:bg-center md:bg-cover relative bg-[url('/images/home-page-last.png')]">
         <div className="lg:absolute lg:left-0 lg:top-[3vh] mt-18 w-screen max-w-screen-xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8 lg:py-32">
           <div className="max-w-prose text-left">
-            <h1 className="lg:text-4xl font-bold text-gray-900 text-xl text-left">
-              <strong className="new-primary-text">
-                {" "}
-                Learn, Shop & Order{" "}
-              </strong>
+            <h1 className="lg:text-4xl font-bold text-white text-xl text-left">
+              <strong className=""> Learn, Shop & Order </strong>
               with The Baked Fantasy
             </h1>
 
-            <p className="mt-4 text-base text-pretty text-gray-700 sm:text-lg/relaxed">
+            <p className="mt-4 text-base text-pretty text-white/80 sm:text-lg/relaxed">
               Join our baking courses, shop eco-friendly products, or place bulk
               orders with ease. From beginners to café owners, we have the
               perfect baking solutions for you.
@@ -1441,7 +1451,7 @@ function Home() {
             <div className="mt-4 flex gap-4 sm:mt-6">
               <Link
                 to="/contact"
-                className="group relative inline-flex items-center overflow-hidden rounded-lg new-primary-bg px-8 py-3 text-white focus:ring-3 focus:outline-hidden mr-3"
+                className="group relative inline-flex items-center overflow-hidden rounded-lg bg-[#fef9ec] px-8 py-3 text-black focus:ring-3 focus:outline-hidden mr-3"
               >
                 <span className="absolute -start-full transition-all group-hover:start-4">
                   <svg
@@ -1460,7 +1470,7 @@ function Home() {
                       {" "}
                       <path
                         d="M16.1007 13.359L15.5719 12.8272H15.5719L16.1007 13.359ZM16.5562 12.9062L17.085 13.438H17.085L16.5562 12.9062ZM18.9728 12.5894L18.6146 13.2483L18.9728 12.5894ZM20.8833 13.628L20.5251 14.2869L20.8833 13.628ZM21.4217 16.883L21.9505 17.4148L21.4217 16.883ZM20.0011 18.2954L19.4723 17.7636L20.0011 18.2954ZM18.6763 18.9651L18.7459 19.7119H18.7459L18.6763 18.9651ZM8.81536 14.7266L9.34418 14.1947L8.81536 14.7266ZM4.00289 5.74561L3.2541 5.78816L3.2541 5.78816L4.00289 5.74561ZM10.4775 7.19738L11.0063 7.72922H11.0063L10.4775 7.19738ZM10.6342 4.54348L11.2346 4.09401L10.6342 4.54348ZM9.37326 2.85908L8.77286 3.30855V3.30855L9.37326 2.85908ZM6.26145 2.57483L6.79027 3.10667H6.79027L6.26145 2.57483ZM4.69185 4.13552L4.16303 3.60368H4.16303L4.69185 4.13552ZM12.0631 11.4972L12.5919 10.9654L12.0631 11.4972ZM16.6295 13.8909L17.085 13.438L16.0273 12.3743L15.5719 12.8272L16.6295 13.8909ZM18.6146 13.2483L20.5251 14.2869L21.2415 12.9691L19.331 11.9305L18.6146 13.2483ZM20.8929 16.3511L19.4723 17.7636L20.5299 18.8273L21.9505 17.4148L20.8929 16.3511ZM18.6067 18.2184C17.1568 18.3535 13.4056 18.2331 9.34418 14.1947L8.28654 15.2584C12.7186 19.6653 16.9369 19.8805 18.7459 19.7119L18.6067 18.2184ZM9.34418 14.1947C5.4728 10.3453 4.83151 7.10765 4.75168 5.70305L3.2541 5.78816C3.35456 7.55599 4.14863 11.144 8.28654 15.2584L9.34418 14.1947ZM10.7195 8.01441L11.0063 7.72922L9.9487 6.66555L9.66189 6.95073L10.7195 8.01441ZM11.2346 4.09401L9.97365 2.40961L8.77286 3.30855L10.0338 4.99296L11.2346 4.09401ZM5.73263 2.04299L4.16303 3.60368L5.22067 4.66736L6.79027 3.10667L5.73263 2.04299ZM10.1907 7.48257C9.66189 6.95073 9.66117 6.95144 9.66045 6.95216C9.66021 6.9524 9.65949 6.95313 9.659 6.95362C9.65802 6.95461 9.65702 6.95561 9.65601 6.95664C9.65398 6.95871 9.65188 6.96086 9.64972 6.9631C9.64539 6.96759 9.64081 6.97245 9.63599 6.97769C9.62634 6.98816 9.61575 7.00014 9.60441 7.01367C9.58174 7.04072 9.55605 7.07403 9.52905 7.11388C9.47492 7.19377 9.41594 7.2994 9.36589 7.43224C9.26376 7.70329 9.20901 8.0606 9.27765 8.50305C9.41189 9.36833 10.0078 10.5113 11.5343 12.0291L12.5919 10.9654C11.1634 9.54499 10.8231 8.68059 10.7599 8.27309C10.7298 8.07916 10.761 7.98371 10.7696 7.96111C10.7748 7.94713 10.7773 7.9457 10.7709 7.95525C10.7677 7.95992 10.7624 7.96723 10.7541 7.97708C10.75 7.98201 10.7451 7.98759 10.7394 7.99381C10.7365 7.99692 10.7335 8.00019 10.7301 8.00362C10.7285 8.00534 10.7268 8.00709 10.725 8.00889C10.7241 8.00979 10.7232 8.0107 10.7223 8.01162C10.7219 8.01208 10.7212 8.01278 10.7209 8.01301C10.7202 8.01371 10.7195 8.01441 10.1907 7.48257ZM11.5343 12.0291C13.0613 13.5474 14.2096 14.1383 15.0763 14.2713C15.5192 14.3392 15.8763 14.285 16.1472 14.1841C16.28 14.1346 16.3858 14.0763 16.4658 14.0227C16.5058 13.9959 16.5392 13.9704 16.5663 13.9479C16.5799 13.9367 16.5919 13.9262 16.6024 13.9166C16.6077 13.9118 16.6126 13.9073 16.6171 13.903C16.6194 13.9008 16.6215 13.8987 16.6236 13.8967C16.6246 13.8957 16.6256 13.8947 16.6266 13.8937C16.6271 13.8932 16.6279 13.8925 16.6281 13.8923C16.6288 13.8916 16.6295 13.8909 16.1007 13.359C15.5719 12.8272 15.5726 12.8265 15.5733 12.8258C15.5735 12.8256 15.5742 12.8249 15.5747 12.8244C15.5756 12.8235 15.5765 12.8226 15.5774 12.8217C15.5793 12.82 15.581 12.8183 15.5827 12.8166C15.5862 12.8133 15.5895 12.8103 15.5926 12.8074C15.5988 12.8018 15.6044 12.7969 15.6094 12.7929C15.6192 12.7847 15.6265 12.7795 15.631 12.7764C15.6403 12.7702 15.6384 12.773 15.6236 12.7785C15.5991 12.7876 15.501 12.8189 15.3038 12.7886C14.8905 12.7253 14.02 12.3853 12.5919 10.9654L11.5343 12.0291ZM9.97365 2.40961C8.95434 1.04802 6.94996 0.83257 5.73263 2.04299L6.79027 3.10667C7.32195 2.578 8.26623 2.63181 8.77286 3.30855L9.97365 2.40961ZM4.75168 5.70305C4.73201 5.35694 4.89075 4.9954 5.22067 4.66736L4.16303 3.60368C3.62571 4.13795 3.20329 4.89425 3.2541 5.78816L4.75168 5.70305ZM19.4723 17.7636C19.1975 18.0369 18.9029 18.1908 18.6067 18.2184L18.7459 19.7119C19.4805 19.6434 20.0824 19.2723 20.5299 18.8273L19.4723 17.7636ZM11.0063 7.72922C11.9908 6.7503 12.064 5.2019 11.2346 4.09401L10.0338 4.99295C10.4373 5.53193 10.3773 6.23938 9.9487 6.66555L11.0063 7.72922ZM20.5251 14.2869C21.3429 14.7315 21.4703 15.7769 20.8929 16.3511L21.9505 17.4148C23.2908 16.0821 22.8775 13.8584 21.2415 12.9691L20.5251 14.2869ZM17.085 13.438C17.469 13.0562 18.0871 12.9616 18.6146 13.2483L19.331 11.9305C18.2474 11.3414 16.9026 11.5041 16.0273 12.3743L17.085 13.438Z"
-                        fill="#ffffff"
+                        fill="#000"
                       ></path>{" "}
                     </g>
                   </svg>
@@ -1473,7 +1483,7 @@ function Home() {
 
               <Link
                 to="/categories"
-                className="group relative inline-flex items-center overflow-hidden rounded-lg border border-current px-3 py-3 new-primary-text focus:ring-3 focus:outline-hidden"
+                className="group relative inline-flex items-center overflow-hidden rounded-lg border border-[#fef9ec] px-3 py-3 text-[#fef9ec] focus:ring-3 focus:outline-hidden"
               >
                 <span className="absolute -start-full transition-all group-hover:start-1">
                   <svg

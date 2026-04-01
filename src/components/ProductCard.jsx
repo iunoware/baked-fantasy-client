@@ -142,7 +142,7 @@ const ProductCard = ({
           <button
             disabled={!inStock}
             onClick={handleCart}
-            className={`mt-auto ${added ? "hidden" : "flex"} z-10 w-full cursor-pointer bg-neutral-900 text-white font-bold py-3.5 rounded-xl items-center justify-center gap-2 hover:bg-violet transition-all duration-300 active:scale-95 shadow-sm disabled:opacity-50 disabled:grayscale disabled:cursor-not-allowed`}
+            className={`mt-auto ${added ? "hidden" : "flex"} z-10 w-full cursor-pointer bg-pbrown text-white font-bold py-3.5 rounded-xl items-center justify-center gap-2 hover:bg-sbrown transition-all duration-300 active:scale-95 shadow-sm disabled:opacity-50 disabled:grayscale disabled:cursor-not-allowed`}
           >
             <ShoppingCart size={18} />
             Add to Cart
