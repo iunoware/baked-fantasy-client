@@ -8,8 +8,9 @@ import Loading from "../components/Loading.jsx";
 
 function MyLearning() {
   // use the localstorage's getItem  and setItem
-  const token =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4YTk3ZDYxOTdlMjcxMDM0OWUwNmI0MyIsImlhdCI6MTc3NDg1Njk1NywiZXhwIjoxNzc0OTQzMzU3fQ.KoYR3NW3PQQ-vTGRe4sUER_hRwKxuonU1H8WGsNokjg";
+  // const token =
+  //   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4YTk3ZDYxOTdlMjcxMDM0OWUwNmI0MyIsImlhdCI6MTc3NDg1Njk1NywiZXhwIjoxNzc0OTQzMzU3fQ.KoYR3NW3PQQ-vTGRe4sUER_hRwKxuonU1H8WGsNokjg";
+  const token = localStorage.getItem("token");
 
   let [courses, setCourses] = useState([]);
 
@@ -28,7 +29,7 @@ function MyLearning() {
       // console.log("courses list: ", coursesList);
     }
     fetchingPurchasedCourses();
-  }, []);
+  }, [token]);
 
   return (
     <div className="bg pt-20">
