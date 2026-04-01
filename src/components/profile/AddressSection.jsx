@@ -193,9 +193,9 @@ export function AddressSection() {
             <div
               key={addr._id}
               className={`relative border rounded-xl p-5 transition-all duration-300 ${
-                addr.isDefault
-                  ? "border-pink-500 bg-pink-50/30 shadow-md ring-1 ring-pink-500 ring-opacity-50"
-                  : "border-gray-200 bg-white hover:border-gray-300 hover:shadow-sm"
+                  addr.isDefault
+                    ? "border-pink-500 bg-pink-50/30 shadow-md ring-1 ring-pink-500 ring-opacity-50"
+                    : "border-gray-200 bg-white hover:border-gray-300 hover:shadow-sm"
               }`}
             >
               <div className="flex gap-3 mb-3">
