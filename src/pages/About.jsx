@@ -119,70 +119,14 @@ function About() {
 
   return (
     <div className="bg-white">
-      {/* hero section */}
-      {/* <div className="relative pt-35 md:pt-15 w-full h-[700px] z-1 overflow-hidden">
-        <div
-          className="flex transition-transform duration-700 ease-in-out"
-          style={{ transform: `translateX(-${currentIndex * 100}%)` }}
-        >
-          {images.map((image, index) => {
-            return (
-              <div key={index} className="min-w-full relative">
-                <img
-                  src={image.img}
-                  alt={`Slide ${index}`}
-                  className="w-full h-[700px] object-cover lg:object-center object-left flex-shrink-0"
-                />
-                <div className="absolute inset-0 w-full h-full opacity-30"></div>
-                <div className="absolute inset-0 w-full z-20 lg:pr-20 flex md:justify-center justify-start items-end flex-col">
-                  <h1 className=" max-w-[750px] md:text-5xl p-2 sm:text-4xl text-3xl text-end text-pink-600 mb-5 font-bold">
-                    {image.heading}
-                  </h1>
-                  <p className="lg:text-xl max-w-[750px] md:text-lg p-2 sm:text-md text-end text-pink-600">
-                    {image.content}
-                  </p>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-
-        <div className="absolute bottom-4 left-1/2  transform -translate-x-1/2 flex gap-2">
-          {images.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => goToSlide(index)}
-              className={`w-3 h-3 shadow-[inset_.5px_.5px_2px_#404040] rounded-full ${
-                currentIndex === index ? "bg-pink-400" : "bg-pink-300"
-              }`}
-            />
-          ))}
-        </div>
-      </div> */}
-      {/* button for hero section */}
-      {/* <button
-          onClick={() =>
-            setCurrentIndex((prev) => (prev - 1 + images.length) % images.length)
-          }
-          className="absolute hover:cursor-pointer z-50 left-2 top-1/2 -translate-y-1/2 text-white text-7xl p-2 px-6 rounded-full"
-        >
-          ‹
-        </button>
-        <button
-          onClick={() => setCurrentIndex((prev) => (prev + 1) % images.length)}
-          className="absolute hover:cursor-pointer z-50 right-2 top-1/2 -translate-y-1/2 text-white text-7xl p-2 px-6 rounded-full"
-        >
-          ›
-        </button> */}
-
       {/* hero section 2 */}
-      <section className="overflow-hidden bg-cover bg-no-repeat h-screen grid grid-cols-1 md:grid-cols-2 bg-[url('/images/about-hero-5.jpg')]">
+      <section className="overflow-hidden bg-cover bg-no-repeat h-screen grid grid-cols-1 md:grid-cols-2 bg-[url('/images/about-brown.png')]">
         {/* left column */}
         <div className="p-8 md:p-12 lg:px-16 lg:py-24 mt-38">
           <div className="text-start ltr:sm:text-left rtl:sm:text-right">
             <h2 className="text-2xl font-bold lora text-black sm:text-3xl md:text-5xl">
-              From <span className="new-primary-text">Oven to Heart</span> - and
-              From Us to Your Kitchen.
+              From <span className="text-pbrown">Oven to Heart</span> - and From
+              Us to Your Kitchen.
             </h2>
 
             <p className="hidden max-w-lg text-black/90 md:mt-6 md:block md:text-lg md:leading-relaxed">
@@ -193,18 +137,96 @@ function About() {
             <div className="flex gap-10 items-center">
               <div className="mt-4 sm:mt-8">
                 <Link
-                  to={`/categories`}
-                  className="new-primary-bg text-white hover:-translate-y-2 inline-block rounded-xl px-8 py-3 lg:text-lg font-medium transition focus:ring-3  focus:outline-hidden"
+                  className="group relative inline-flex items-center overflow-hidden rounded-lg bg-pbrown px-8 py-3 text-white mr-3"
+                  to="/categories"
                 >
-                  Shop products
+                  <span className="absolute -start-full transition-all group-hover:start-4">
+                    <svg
+                      className="size-5 rtl:rotate-180"
+                      version="1.1"
+                      xmlns="http://www.w3.org/2000/svg"
+                      xmlnsXlink="http://www.w3.org/1999/xlink"
+                      viewBox="0 0 512 512"
+                      xmlSpace="preserve"
+                      fill="#fff"
+                      style={{ transform: "rotate(90deg)" }}
+                    >
+                      <g>
+                        <path
+                          style={{ fill: "#fff" }}
+                          d="M408.387,512H159.603c-8.313,0-15.054-6.741-15.054-15.054v-71.829
+        c0-8.313,6.741-15.054,15.054-15.054h132.043c8.313,0,15.054,6.741,15.054,15.054c0,8.313-6.741,15.054-15.054,15.054H174.657
+        v41.722h218.676v-41.722h-28.605c-8.313,0-15.054-6.741-15.054-15.054c0-8.313,6.741-15.054,15.054-15.054h43.659
+        c8.313,0,15.054,6.741,15.054,15.054v71.829C423.441,505.26,416.7,512,408.387,512z"
+                        />
+                        <path
+                          style={{ fill: "#fff" }}
+                          d="M302.481,198.013v-15.951c0-15.948-13.009-29.53-29.728-30.096
+        c-17.553-0.595-31.979,12.793-31.979,29.391v17.213l-0.333-154.106c0-16.243-13.813-29.411-30.854-29.411H208.4
+        c-17.039,0-30.854,13.168-30.854,29.411v110.671v25.447v76.908l-30.02-73.097c-5.281-15.769-22.984-24.465-39.527-19.431
+        c-16.543,5.043-25.665,21.909-20.384,37.684l65.918,135.745c8.141,16.765,25.756,27.5,45.137,27.509l177.423,0.077
+        c27.491,0.012,49.783-21.226,49.786-47.432l0.018-116.556c0-16.243-13.813-29.411-30.854-29.411l0,0
+        c-17.039,0-30.854,13.168-30.854,29.411v-6.989c0-16.243-13.813-29.411-30.854-29.411l0,0c-17.039,0-30.854,13.168-30.854,29.411"
+                        />
+                        <path
+                          style={{ fill: "#fff" }}
+                          d="M376.115,381.032c-0.011,0-0.02,0-0.03,0l-177.421-0.077c-25.033-0.012-48.062-14.139-58.672-35.988
+        L74.073,209.223c-0.283-0.583-0.528-1.182-0.733-1.796c-3.788-11.308-2.854-23.391,2.625-34.022
+        c5.684-11.03,15.502-19.142,27.643-22.843c24.074-7.325,49.967,5.457,58.011,28.529l0.872,2.121V44.463
+        C162.492,19.946,183.087,0,208.4,0h1.186c25.313,0,45.907,19.946,45.907,44.464l0.206,95.206c5.564-1.993,11.525-2.958,17.56-2.75
+        c15.338,0.521,28.625,8.286,36.537,19.916c6.886-3.998,14.939-6.3,23.537-6.3c13.886,0,26.35,6,34.776,15.465
+        c7.569-5.329,16.88-8.475,26.933-8.475c25.313,0,45.908,19.946,45.908,44.464l-0.02,116.557
+        c-0.001,16.832-6.84,32.616-19.255,44.442C409.465,374.625,393.285,381.032,376.115,381.032z"
+                        />
+                      </g>
+                    </svg>
+                  </span>
+
+                  <span className="text-lg font-semibold transition-all group-hover:ms-4">
+                    Shop now
+                  </span>
                 </Link>
               </div>
               <div className="mt-4 sm:mt-8">
-                <Link
+                {/* <Link
                   to={`/courses`}
-                  className="border-2 border-current hover:-translate-y-2 new-primary-text inline-block rounded-xl px-12 py-3 text-sm font-medium transition focus:ring-3 focus:outline-hidden"
+                  className="border-2 border-pbrown hover:-translate-y-2 text-pbrown font-bold inline-block rounded-xl px-12 py-3 text-md transition focus:ring-3 focus:outline-hidden"
                 >
                   Explore course
+                </Link> */}
+                <Link
+                  to="/courses"
+                  className="group relative inline-flex items-center overflow-hidden rounded-lg border-2 border-pbrown px-3 py-3 text-pbrown focus:ring-3 focus:outline-hidden"
+                >
+                  <span className="absolute -start-full transition-all group-hover:start-1">
+                    <svg
+                      className="size-5 rtl:rotate-180"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+                      <g
+                        id="SVGRepo_tracerCarrier"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      ></g>
+                      <g id="SVGRepo_iconCarrier">
+                        {" "}
+                        <path
+                          d="M7.2998 5H22L20 12H8.37675M21 16H9L7 3H4M4 8H2M5 11H2M6 14H2M10 20C10 20.5523 9.55228 21 9 21C8.44772 21 8 20.5523 8 20C8 19.4477 8.44772 19 9 19C9.55228 19 10 19.4477 10 20ZM21 20C21 20.5523 20.5523 21 20 21C19.4477 21 19 20.5523 19 20C19 19.4477 19.4477 19 20 19C20.5523 19 21 19.4477 21 20Z"
+                          className="stroke-pbrown"
+                          strokeWidth="3"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        ></path>
+                      </g>
+                    </svg>
+                  </span>
+
+                  <span className="text-lg font-medium transition-all group-hover:ms-4">
+                    Explore course
+                  </span>
                 </Link>
               </div>
             </div>
@@ -297,14 +319,14 @@ function About() {
       </section>
 
       {/* CTA section */}
-      <div className="bg-white bg-[url('/images/swirl.png')]">
+      <section className="bg-white bg-[url('/images/swirl.png')]">
         <section className="overflow-hidden bg-[url(/images/cta-cake-bg-3.png)] pt-40 bg-center sm:grid sm:grid-cols-2 sm:items-center">
           <div className="p-8 md:p-12 lg:px-16 lg:py-24">
             <div className="mx-auto max-w-xl text-center ltr:sm:text-left rtl:sm:text-right">
               <h2 className="!text-4xl font-semibold mb-5 text-gray-900 pt-60 md:text-3xl">
                 Turn Your Passion for{" "}
-                <span className="new-primary-text">Baking</span> Into{" "}
-                <span className="new-primary-text">Perfection</span>
+                <span className="text-pbrown">Baking</span> Into{" "}
+                <span className="text-pbrown">Perfection</span>
               </h2>
 
               <p className="hidden text-xl mb-5 lg:w-100 text-gray-800 md:mt-4 md:block">
@@ -327,14 +349,14 @@ function About() {
                 </Link>
 
                 <Link
-                  className="group relative bg-white inline-flex items-center overflow-hidden rounded-lg border border-current px-3 py-3 new-primary-text"
+                  className="group relative inline-flex items-center overflow-hidden rounded-lg border border-current px-3 py-3 text-pbrown"
                   to="/categories"
                 >
                   <span className="absolute -start-full transition-all group-hover:start-1">
                     <ShoppingCart size={36} className="pr-5" />
                   </span>
 
-                  <span className="text-sm new-primary-text font-medium transition-all group-hover:ms-4">
+                  <span className="text-md text-pbrown font-bold transition-all group-hover:ms-4">
                     Our Products
                   </span>
                 </Link>
@@ -348,7 +370,7 @@ function About() {
           className="h-full w-full object-cover "
         /> */}
         </section>
-      </div>
+      </section>
 
       {/* award section */}
       <section className="awards py-16 md:py-24 bg-white">
@@ -394,7 +416,7 @@ function About() {
                   {/* Award icon */}
                   <div className="w-8 h-8 new-primary-text flex items-center justify-center flex-shrink-0 mt-1">
                     <svg
-                      className="w-full h-full fill-current"
+                      className="w-full h-full fill-sbrown"
                       viewBox="0 0 24 24"
                     >
                       <path d="M12 2L15.09 8.26L22 9L17 14L18.18 21L12 17.77L5.82 21L7 14L2 9L8.91 8.26L12 2Z" />
@@ -430,7 +452,7 @@ function About() {
             return (
               <div
                 key={index}
-                className="bg-white shadow-lg p-5 h-fit md:h-40 new-primary-bg text-white rounded-xl gap-2 w-[70%] place-items-center transition-all duration-200"
+                className="shadow-lg p-5 h-fit md:h-42 bg-sbrown text-white rounded-xl gap-2 w-[70%] place-items-center transition-all duration-200"
               >
                 <div>
                   <h4 className="text-white text-xl pl-1 font-semibold">

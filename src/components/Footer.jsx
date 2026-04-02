@@ -279,7 +279,7 @@ function Flavour() {
 
 export default function Footer() {
   return (
-    <footer className="bg-[#7a0c1c] text-white px-6 md:px-16 py-12">
+    <footer className="bg-pbrown text-white px-6 md:px-16 py-12">
       {/* TOP SECTION */}
       <div className="grid md:grid-cols-2 gap-10 pb-5">
         {/* LEFT - BRAND + NEWSLETTER */}
@@ -298,7 +298,7 @@ export default function Footer() {
             <h2 className="text-3xl md:text-4xl font-bold leading-tight uppercase">
               Where every <br />
               treat is a little <br />
-              <span className="text-pink-400">slice of heaven</span>
+              <span className="text-sbrown">slice of heaven</span>
             </h2>
           </div>
 
@@ -329,10 +329,16 @@ export default function Footer() {
                 <Link to="/" className="hover:text-white cursor-pointer block">
                   Homepage
                 </Link>
-                <Link to="/about" className="hover:text-white cursor-pointer block">
+                <Link
+                  to="/about"
+                  className="hover:text-white cursor-pointer block"
+                >
                   About us
                 </Link>
-                <Link to="/categories" className="hover:text-white cursor-pointer block">
+                <Link
+                  to="/categories"
+                  className="hover:text-white cursor-pointer block"
+                >
                   Bakery
                 </Link>
                 <Link
@@ -341,7 +347,10 @@ export default function Footer() {
                 >
                   Essentials
                 </Link>
-                <Link to="/courses" className="hover:text-white cursor-pointer block">
+                <Link
+                  to="/courses"
+                  className="hover:text-white cursor-pointer block"
+                >
                   Courses
                 </Link>
               </ul>
@@ -353,13 +362,22 @@ export default function Footer() {
                 Customer Support
               </h3>
               <ul className="space-y-2 text-white/80">
-                <Link to="/contact" className="hover:text-white block cursor-pointer">
+                <Link
+                  to="/contact"
+                  className="hover:text-white block cursor-pointer"
+                >
                   Contact Us
                 </Link>
-                <Link to="/profile" className="hover:text-white block cursor-pointer">
+                <Link
+                  to="/profile"
+                  className="hover:text-white block cursor-pointer"
+                >
                   My Profile
                 </Link>
-                <Link to="/cart" className="hover:text-white block cursor-pointer">
+                <Link
+                  to="/cart"
+                  className="hover:text-white block cursor-pointer"
+                >
                   My Cart
                 </Link>
                 <Link
@@ -406,8 +424,12 @@ export default function Footer() {
       <div className="flex flex-col md:flex-row justify-between items-center pt-6 text-sm text-white/70 gap-4">
         {/* LEFT */}
         <div className="flex flex-wrap gap-4">
-          <span className="hover:text-white cursor-pointer">Privacy Policy</span>
-          <span className="hover:text-white cursor-pointer">Terms & Conditions</span>
+          <span className="hover:text-white cursor-pointer">
+            Privacy Policy
+          </span>
+          <span className="hover:text-white cursor-pointer">
+            Terms & Conditions
+          </span>
           {/* <span className="hover:text-white cursor-pointer">Cookie Policy</span> */}
           {/* <span className="hover:text-white cursor-pointer">Allergen Info</span> */}
           {/* <span className="hover:text-white cursor-pointer">Nutritional Info</span> */}
