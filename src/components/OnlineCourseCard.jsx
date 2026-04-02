@@ -18,7 +18,9 @@ function StarRating({ rating }) {
             <Star className="absolute text-gray-300 w-5 h-5 fill-gray-300" />
 
             {/* full star */}
-            {full && <Star className="absolute w-5 h-5 text-amber-500 fill-amber-500" />}
+            {full && (
+              <Star className="absolute w-5 h-5 text-amber-500 fill-amber-500" />
+            )}
 
             {/* half star */}
             {half && (
@@ -44,7 +46,9 @@ function OnlineCourseCard(props) {
         <div className="rounded-xl !m-2 translate-y-2 flex align-bottom overflow-hidden">
           <img
             src={
-              props.image ? `http://localhost:5000${props.image}` : "/images/cake-2.jpg"
+              props.image
+                ? `http://localhost:5000${props.image}`
+                : "/images/cake-2.jpg"
             }
             alt="course-img"
             onError={(e) => {
@@ -83,7 +87,7 @@ function OnlineCourseCard(props) {
           <Link
             to={props.link}
             state={{ courseId: props.courseId }}
-            className=" text-center block mt-3 w-full rounded-xl new-primary-bg-dark hover:new-primary-bg active:scale-98 shadow-md px-8 py-4 text-white"
+            className=" text-center block mt-3 w-full rounded-xl transition-all bg-pbrown hover:bg-sbrown active:scale-98 shadow-md px-8 py-4 text-white"
           >
             {isMyLearning ? "Watch Now" : "Buy Now"}
           </Link>

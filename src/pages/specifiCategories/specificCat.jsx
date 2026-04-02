@@ -28,7 +28,7 @@ function SpecificCategory() {
   return (
     <div className="category-page">
       {/* hero section */}
-      <div className="hero relative bg-[url(/images/cake-hero.png)] bg-cover bg-center h-[80vh] flex justify-baseline items-center ps-10 ">
+      <div className="hero relative bg-[url(/images/cake-hero-beige.png)] bg-cover bg-center h-[80vh] flex justify-baseline items-center ps-10 ">
         <div className="absolute inset-0 top-23 left-5 space-x-2 mb-8">
           <Link
             variant="ghost"

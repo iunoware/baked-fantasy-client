@@ -33,7 +33,7 @@ function AllProducts() {
 
   return (
     <div className="bg">
-      <div className="hero relative bg-[url(/images/ess-hero2.png)] bg-cover bg-center h-[80vh] flex justify-baseline items-center ps-10 ">
+      <div className="hero relative bg-[url(/images/ess-hero3.png)] bg-cover bg-center h-[80vh] flex justify-baseline items-center ps-10 ">
         <div className="absolute inset-0 top-23 left-5 space-x-2 mb-8">
           <Link
             variant="ghost"

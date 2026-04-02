@@ -12,6 +12,7 @@ import { Link } from "react-router-dom";
 import Login from "./Login.jsx";
 import Register from "./Register.jsx";
 import { useCart } from "../context/CartContext.jsx";
+import { toast } from "react-hot-toast";
 
 export const StaggeredMenu = ({
   position = "right",
@@ -454,7 +455,7 @@ export const StaggeredMenu = ({
       playClose();
       animateIcon(false);
       animateColor(false);
-      animateText(false);
+      // animateText(false);
     }
   }, [playClose, animateIcon, animateColor, onMenuClose]);
 
@@ -561,7 +562,7 @@ export const StaggeredMenu = ({
         </div>
 
         <header
-          className="staggered-menu-header hidden! md:flex! bg-white! shadow-xl h-18! absolute left-0 w-full  items-center justify-between pointer-events-auto"
+          className="staggered-menu-header hidden! md:flex! bg-white! shadow-xl h-18! absolute left-0 w-full items-center justify-between pointer-events-auto"
           aria-label="Main navigation header"
         >
           <Link
@@ -878,6 +879,13 @@ export const StaggeredMenu = ({
           style={{ WebkitBackdropFilter: "blur(12px)" }}
           // aria-hidden={!open}
         >
+          <button
+            className="absolute top-10 right-10 text-black/50 hover:text-black transition-colors cursor-pointer"
+            onClick={toggleMenu}
+            aria-label="Close menu"
+          >
+            <X size={35} />
+          </button>
           <div className="sm-panel-inner flex-1 flex flex-col gap-5">
             <ul
               className="sm-panel-list list-none pt-10! m-0 p-0 flex flex-col gap-2"
@@ -985,8 +993,7 @@ export const StaggeredMenu = ({
 .sm-scope .sm-panel-itemWrap { position: relative; overflow: hidden; line-height: 1; }
 .sm-scope .sm-icon-line { position: absolute; left: 50%; top: 50%; width: 100%; height: 2px; background: currentColor; border-radius: 2px; transform: translate(-50%, -50%); will-change: transform; }
 .sm-scope .sm-line { display: none !important; }
-.sm-scope .staggered-menu-panel { poimport StaggeredMenu from '../../../ts-default/Components/StaggeredMenu/StaggeredMenu';
-sition: absolute; top: 0; right: 0; width: clamp(260px, 38vw, 420px); height: 100%; background: white; backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); display: flex; flex-direction: column; padding: 6em 2em 2em 2em; overflow-y: auto; z-index: 10; }
+.sm-scope .staggered-menu-panel { position: absolute; top: 0; right: 0; width: clamp(260px, 38vw, 420px); height: 100%; background: white; backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); display: flex; flex-direction: column; padding: 6em 2em 2em 2em; overflow-y: auto; z-index: 10; }
 .sm-scope [data-position='left'] .staggered-menu-panel { right: auto; left: 0; }
 .sm-scope .sm-prelayers { position: absolute; top: 0; right: 0; bottom: 0; width: clamp(260px, 38vw, 420px); pointer-events: none; z-index: 5; }
 .sm-scope [data-position='left'] .sm-prelayers { right: auto; left: 0; }
