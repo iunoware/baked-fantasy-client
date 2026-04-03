@@ -80,7 +80,7 @@ function EssentialsAdmin() {
   }
 
   return (
-    <div className="bg-white">
+    <div className="bg min-h-screen">
       {/* modal for post category */}
       <div
         className={`${
