@@ -83,7 +83,7 @@ function Categories() {
         {/* why choose us section */}
         <section className="whyChooseUs flex justify-center pb-8 lg:px-20 md:px-15 sm:px-10 px-5">
           <div className="bg-white shadow-xl rounded-2xl">
-            <h2 className="text-center new-primary-text text-5xl lora font-bold pt-10">
+            <h2 className="text-center text-black text-5xl lora font-bold pt-10">
               Why Choose Our Products ?
             </h2>
             <p className="subHeading px-2">
@@ -99,7 +99,7 @@ function Categories() {
                   autoplay
                   loop
                 ></dotlottie-wc>
-                <h2 className="text-3xl font-bold new-primary-text">
+                <h2 className="text-3xl font-bold text-sbrown">
                   Premium ingredients
                 </h2>
                 <p className="text-md pt-5">
@@ -115,7 +115,7 @@ function Categories() {
                   autoplay
                   loop
                 ></dotlottie-wc>
-                <h2 className="text-3xl font-bold new-primary-text">
+                <h2 className="text-3xl font-bold text-sbrown">
                   Expert Craftsmanship
                 </h2>
                 <p className="text-md pt-5">
@@ -130,7 +130,7 @@ function Categories() {
                   autoplay
                   loop
                 ></dotlottie-wc>
-                <h2 className="text-3xl font-bold new-primary-text">
+                <h2 className="text-3xl font-bold text-sbrown">
                   Fresh Delivery
                 </h2>
                 <p className="text-md pt-5">
@@ -145,7 +145,7 @@ function Categories() {
         <section className="bulk-orders overflow-hidden m-8 rounded-2xl bg-gray-50 sm:grid sm:grid-cols-2 sm:items-center">
           <div className="p-8 md:p-12 lg:px-16 lg:py-24">
             <div className="mx-auto max-w-xl text-center ltr:sm:text-left rtl:sm:text-right">
-              <h2 className="text-2xl md:text-3xl lora font-bold new-primary-text">
+              <h2 className="text-2xl md:text-3xl lora font-bold text-pbrown">
                 Planning a party, event, or business order?
               </h2>
 

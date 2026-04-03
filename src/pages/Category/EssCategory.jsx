@@ -23,7 +23,9 @@ function EssCategories() {
 
     async function fetchAllEssentials() {
       try {
-        const allProducts = await axios.get(`http://localhost:5000/bakingEssentials`);
+        const allProducts = await axios.get(
+          `http://localhost:5000/bakingEssentials`,
+        );
         console.log("all products: ", allProducts.data);
         setAllProducts(allProducts.data);
       } catch (error) {
@@ -38,8 +40,8 @@ function EssCategories() {
       <section className="lg:pt-30 md:pt-20 pt-40 bg">
         <Heading title="Sustainable Baking Essentials" />
         <p className="subHeading">
-          All the essentials you need — bowls, spoons, molds, and premium flour — built to
-          make your baking effortless and your results extraordinary.
+          All the essentials you need — bowls, spoons, molds, and premium flour
+          — built to make your baking effortless and your results extraordinary.
         </p>
         <div className="grid lg:grid-cols-5 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-5 place-items-center lg:px-20 md:px-15 sm:px-10 px-5 py-10">
           <Link to={`/essentials/all-products`} className="card">
@@ -59,7 +61,9 @@ function EssCategories() {
               </div>
             </article>
             <div className="p-4 flex justify-center sm:p-6">
-              <h2 className="font-bold lora text-black text-2xl">All essentials</h2>
+              <h2 className="font-bold lora text-black text-2xl">
+                All essentials
+              </h2>
               {/* <p className="mt-2 text-sm text-gray-600">{props.subject}</p> */}
             </div>
           </Link>
@@ -76,7 +80,7 @@ function EssCategories() {
                 />
               ) : (
                 ""
-              )
+              ),
             )
           ) : (
             <div className="w-full flex justify-start col-span-full items-center">
@@ -88,7 +92,7 @@ function EssCategories() {
         {/* why choose us section */}
         <section className="whyChooseUs flex justify-center pb-8 lg:px-20 md:px-15 sm:px-10 px-5">
           <div className="bg-white shadow-xl rounded-2xl">
-            <h2 className="text-center new-primary-text text-5xl lora font-bold pt-10">
+            <h2 className="text-center text-black text-5xl lora font-bold pt-10">
               Why Choose Our Products ?
             </h2>
             <p className="subHeading px-2">
@@ -104,11 +108,12 @@ function EssCategories() {
                   autoplay
                   loop
                 ></dotlottie-wc>
-                <h2 className="text-3xl font-bold new-primary-text">
+                <h2 className="text-3xl font-bold text-sbrown">
                   Premium ingredients
                 </h2>
                 <p className="text-md pt-5">
-                  Only the finest, locally-sourced ingredients go into our products
+                  Only the finest, locally-sourced ingredients go into our
+                  products
                 </p>
               </div>
               <div className="card-2 flex flex-col  items-center text-center">
@@ -119,7 +124,7 @@ function EssCategories() {
                   autoplay
                   loop
                 ></dotlottie-wc>
-                <h2 className="text-3xl font-bold new-primary-text">
+                <h2 className="text-3xl font-bold text-sbrown">
                   Expert Craftsmanship
                 </h2>
                 <p className="text-md pt-5">
@@ -134,7 +139,9 @@ function EssCategories() {
                   autoplay
                   loop
                 ></dotlottie-wc>
-                <h2 className="text-3xl font-bold new-primary-text">Fresh Delivery</h2>
+                <h2 className="text-3xl font-bold text-sbrown">
+                  Fresh Delivery
+                </h2>
                 <p className="text-md pt-5">
                   Same-day delivery ensures you get the freshest products
                 </p>
@@ -147,14 +154,14 @@ function EssCategories() {
         <section className="bulk-orders overflow-hidden m-8 rounded-2xl bg-gray-50 sm:grid sm:grid-cols-2 sm:items-center">
           <div className="p-8 md:p-12 lg:px-16 lg:py-24">
             <div className="mx-auto max-w-xl text-center ltr:sm:text-left rtl:sm:text-right">
-              <h2 className="text-2xl md:text-3xl lora font-bold new-primary-text">
+              <h2 className="text-2xl md:text-3xl lora font-bold text-sbrown">
                 Planning a party, event, or business order?
               </h2>
 
               <p className="hidden text-gray-700 md:mt-4 md:block">
-                Planning a party, event, or corporate gathering? Enjoy our freshly baked
-                cakes and treats—crafted with care, consistent in quality, and perfect for
-                any celebration.
+                Planning a party, event, or corporate gathering? Enjoy our
+                freshly baked cakes and treats—crafted with care, consistent in
+                quality, and perfect for any celebration.
               </p>
 
               <div className="mt-4 md:mt-8">
