@@ -123,6 +123,7 @@ export default function Profile() {
               name={userData.name}
               email={userData.email}
               mobileNumber={userData.mobileNumber}
+              address={userData.address}
               onUpdate={handleProfileUpdate}
             />
 
