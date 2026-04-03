@@ -55,7 +55,7 @@ function AllProducts() {
               <Product
                 key={p._id}
                 id={p._id} // ✅ pass id
-                category={p.category.title}
+                category={p.category?.title || "Uncategorized"}
                 img={`http://localhost:5000${p.images?.[0]}`}
                 originalPrice={p.originalPrice}
                 discountedPrice={p.discountedPrice}

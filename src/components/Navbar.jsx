@@ -16,7 +16,7 @@ import { toast } from "react-hot-toast";
 
 export const StaggeredMenu = ({
   position = "right",
-  colors = ["#EC4174", "#9BBEC6"],
+  colors = ["#40200d", "#c08552"],
   displaySocials = true,
   displayItemNumbering = false,
   className,
@@ -25,7 +25,7 @@ export const StaggeredMenu = ({
   openMenuButtonColor = "#000000",
   changeMenuColorOnOpen = true,
   isFixed = false,
-  accentColor = "#fbff19",
+  accentColor = "#c08552",
   closeOnClickAway = false,
   onMenuOpen,
   onMenuClose,
@@ -523,9 +523,8 @@ export const StaggeredMenu = ({
 
   return (
     <div
-      className={`overflow-x-clip fixed sm-scope z-40 pointer-events-none ${
-        isFixed ? "fixed top-0 left-0 overflow-hidden" : "w-full h-full"
-      }`}
+      className={`overflow-x-clip fixed sm-scope z-40 pointer-events-none ${isFixed ? "fixed top-0 left-0 overflow-hidden" : "w-full h-full"
+        }`}
     >
       <div
         className={
@@ -571,7 +570,7 @@ export const StaggeredMenu = ({
           >
             <img
               src={logoUrl}
-              alt="Sai Construction"
+              alt="The Baked Fantasy"
               className="block m-2 cursor-pointer h-15! w-auto object-cover"
               draggable={false}
             />{" "}
@@ -583,7 +582,7 @@ export const StaggeredMenu = ({
             <div className="searchBar relative" ref={searchRef}>
               <search className="px-5 py-2.5 new-primary-text border-2 border-current rounded-xl font-medium flex items-center">
                 <label htmlFor="search">
-                  <Search size={20} color="#870D32" />
+                  <Search size={20} color="#40200d" />
                 </label>
                 <input
                   type="search"
@@ -624,7 +623,7 @@ export const StaggeredMenu = ({
                           {item.title}
                         </h4>
                         <div className="flex items-center gap-2">
-                          <p className="text-xs font-bold text-[#870D32]">
+                          <p className="text-xs font-bold text-[#40200d]">
                             ₹{item.discountedPrice}
                           </p>
                           {item.originalPrice && (
@@ -643,12 +642,12 @@ export const StaggeredMenu = ({
               <div className="sm:flex rounded-2xl p-1 new-primary-bg sm:gap-4">
                 <div className="hidden sm:flex">
                   <Link
-                    className=" px-5 cursor-pointer py-2.5 text-sm font-medium text-red relative"
+                    className=" px-5 cursor-pointer py-2.5 text-sm font-medium text-[#40200d] relative"
                     to="/cart"
                   >
                     <ShoppingCart size={20} color="#F6E9D9" />
                     {cartCount > 0 && (
-                      <span className="absolute -top-1 -right-0 bg-white text-pink-600 text-[10px] font-bold px-1.5 py-0.5 rounded-full shadow-sm">
+                      <span className="absolute -top-1 -right-0 bg-white text-[#40200d] text-[10px] font-bold px-1.5 py-0.5 rounded-full shadow-sm">
                         {cartCount}
                       </span>
                     )}
@@ -656,7 +655,7 @@ export const StaggeredMenu = ({
                 </div>
                 <div className="relative">
                   <button
-                    className=" px-5 py-2.5 cursor-pointer text-sm font-medium text-red flex items-center gap-2"
+                    className=" px-5 py-2.5 cursor-pointer text-sm font-medium text-[#40200d] flex items-center gap-2"
                     onClick={() => {
                       if (isLoggedIn) {
                         setIsDropdownOpen(!isDropdownOpen);
@@ -670,24 +669,24 @@ export const StaggeredMenu = ({
 
                   {/* Profile Dropdown */}
                   {isLoggedIn && isDropdownOpen && (
-                    <div className="absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-2xl border border-pink-100 py-2 z-[100] animate-in slide-in-from-top-2 duration-200">
+                    <div className="absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-2xl border border-[#F6E9D9] py-2 z-[100] animate-in slide-in-from-top-2 duration-200">
                       <Link
                         to="/profile"
-                        className="flex items-center gap-3 px-4 py-3 text-sm text-gray-700 hover:bg-pink-50 transition-colors"
+                        className="flex items-center gap-3 px-4 py-3 text-sm text-gray-700 hover:bg-[#F6E9D9] transition-colors"
                         onClick={() => setIsDropdownOpen(false)}
                       >
-                        <User size={16} className="text-pink-500" />
+                        <User size={16} className="text-[#40200d]" />
                         My Profile
                       </Link>
                       <Link
                         to="/cart"
-                        className="flex items-center gap-3 px-4 py-3 text-sm text-gray-700 hover:bg-pink-50 transition-colors md:hidden"
+                        className="flex items-center gap-3 px-4 py-3 text-sm text-gray-700 hover:bg-[#F6E9D9] transition-colors md:hidden"
                         onClick={() => setIsDropdownOpen(false)}
                       >
-                        <ShoppingCart size={16} className="text-pink-500" />
+                        <ShoppingCart size={16} className="text-[#40200d]" />
                         My Cart
                       </Link>
-                      <div className="h-px bg-pink-100 my-1"></div>
+                      <div className="h-px bg-[#F6E9D9] my-1"></div>
                       <button
                         onClick={handleLogout}
                         className="flex items-center gap-3 w-full px-4 py-3 text-sm text-red-600 hover:bg-red-50 transition-colors"
@@ -771,7 +770,7 @@ export const StaggeredMenu = ({
                 <Link to="/cart" className="relative">
                   <ShoppingCart size={20} color="#F6E9D9" />
                   {cartCount > 0 && (
-                    <span className="absolute -top-2 -right-2 bg-white text-pink-600 text-[8px] font-bold px-1 py-0.5 rounded-full shadow-sm">
+                    <span className="absolute -top-2 -right-2 bg-white text-[#40200d] text-[8px] font-bold px-1 py-0.5 rounded-full shadow-sm">
                       {cartCount}
                     </span>
                   )}
@@ -790,10 +789,10 @@ export const StaggeredMenu = ({
                     <User size={20} color="#F6E9D9" />
                   </button>
                   {isLoggedIn && isDropdownOpen && (
-                    <div className="absolute right-0 mt-3 w-40 bg-white rounded-xl shadow-2xl border border-pink-100 py-1 z-[100]">
+                    <div className="absolute right-0 mt-3 w-40 bg-white rounded-xl shadow-2xl border border-[#F6E9D9] py-1 z-[100]">
                       <Link
                         to="/profile"
-                        className="block px-4 py-2 text-sm text-gray-700 active:bg-pink-50"
+                        className="block px-4 py-2 text-sm text-gray-700 active:bg-[#F6E9D9]"
                         onClick={() => setIsDropdownOpen(false)}
                       >
                         Profile
@@ -821,7 +820,7 @@ export const StaggeredMenu = ({
           <div className="searchBar pt-5 mx-5 relative" ref={mobileSearchRef}>
             <search className="px-5 py-2.5 new-primary-text border-2 border-current rounded-xl flex items-center">
               <label htmlFor="search-mobile">
-                <Search size={20} color="#870D32" />
+                <Search size={20} color="#40200d" />
               </label>
               <input
                 type="search"
@@ -861,7 +860,7 @@ export const StaggeredMenu = ({
                       <h4 className="text-sm font-semibold text-gray-800 line-clamp-1">
                         {item.title}
                       </h4>
-                      <p className="text-xs font-bold text-[#870D32]">
+                      <p className="text-xs font-bold text-[#40200d]">
                         ₹{item.discountedPrice}
                       </p>
                     </div>
@@ -877,7 +876,7 @@ export const StaggeredMenu = ({
           ref={panelRef}
           className="staggered-menu-panel shadow-xl z-50 overflow-y-hidden! absolute top-0 right-0 h-screen! bg-white! flex flex-col p-[6em_2em_2em_2em] backdrop-blur-md pointer-events-auto"
           style={{ WebkitBackdropFilter: "blur(12px)" }}
-          // aria-hidden={!open}
+        // aria-hidden={!open}
         >
           <button
             className="absolute top-10 right-10 text-black/50 hover:text-black transition-colors cursor-pointer"
@@ -900,9 +899,8 @@ export const StaggeredMenu = ({
                   >
                     <NavLink
                       className={({ isActive }) =>
-                        `${
-                          isActive ? "text-pink-400!" : "text-black!"
-                        } sm-panel-item relative hover:text-pink-400! cursor-pointer leading-none tracking-[-2px] uppercase transition-[background,color] duration-150 ease-linear inline-block no-underline pr-[1.4em]`
+                        `${isActive ? "text-[#40200d]!" : "text-black!"
+                        } sm-panel-item relative hover:text-[#40200d]! cursor-pointer leading-none tracking-[-2px] uppercase transition-[background,color] duration-150 ease-linear inline-block no-underline pr-[1.4em]`
                       }
                       to={it.link}
                       aria-label={it.ariaLabel}
@@ -952,7 +950,7 @@ export const StaggeredMenu = ({
                         href={s.link}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="sm-socials-link text-[1.2rem] font-medium text-red! no-underline relative inline-block py-0.5 transition-[color,opacity] duration-300 ease-linear"
+                        className="sm-socials-link text-[1.2rem] font-medium text-[#40200d]! no-underline relative inline-block py-0.5 transition-[color,opacity] duration-300 ease-linear"
                       >
                         {s.label}
                       </a>
@@ -1000,23 +998,23 @@ export const StaggeredMenu = ({
 .sm-scope .sm-prelayer { position: absolute; top: 0; right: 0; height: 100%; width: 100%; transform: translateX(0); }
 .sm-scope .sm-panel-inner { flex: 1; display: flex; flex-direction: column; gap: 1.25rem; }
 .sm-scope .sm-socials { margin-top: auto; padding-top: 2rem; display: flex; flex-direction: column; gap: 0.75rem; }
-.sm-scope .sm-socials-title { margin: 0; font-weight: 500; color: var(--sm-accent, #ff0000); }
+.sm-scope .sm-socials-title { margin: 0; font-weight: 500; color: var(--sm-accent, #40200d); }
 .sm-scope .sm-socials-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: row; align-items: center; gap: 1rem; flex-wrap: wrap; }
 .sm-scope .sm-socials-list .sm-socials-link { opacity: 1; transition: opacity 0.3s ease; }
 .sm-scope .sm-socials-list:hover .sm-socials-link:not(:hover) { opacity: 0.35; }
 .sm-scope .sm-socials-list:focus-within .sm-socials-link:not(:focus-visible) { opacity: 0.35; }
 .sm-scope .sm-socials-list .sm-socials-link:hover,
 .sm-scope .sm-socials-list .sm-socials-link:focus-visible { opacity: 1; }
-.sm-scope .sm-socials-link:focus-visible { outline: 2px solid var(--sm-accent, #ff0000); outline-offset: 3px; }
+.sm-scope .sm-socials-link:focus-visible { outline: 2px solid var(--sm-accent, #40200d); outline-offset: 3px; }
 .sm-scope .sm-socials-link { font-weight: 500; color: #111; text-decoration: none; position: relative; padding: 2px 0; display: inline-block; transition: color 0.3s ease, opacity 0.3s ease; }
-.sm-scope .sm-socials-link:hover { color: var(--sm-accent, #ff0000); }
+.sm-scope .sm-socials-link:hover { color: var(--sm-accent, #40200d); }
 .sm-scope .sm-panel-title { margin: 0;  font-weight: 600; color: #fff; text-transform: uppercase; }
 .sm-scope .sm-panel-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.5rem; }
 .sm-scope .sm-panel-item { position: relative; color: #000; font-weight: 600; cursor: pointer; line-height: 1; letter-spacing: -2px; text-transform: uppercase; transition: background 0.25s, color 0.25s; display: inline-block; text-decoration: none; padding-right: 1.4em; }
 .sm-scope .sm-panel-itemLabel { display: inline-block; will-change: transform; transform-origin: 50% 100%; }
-.sm-scope .sm-panel-item:hover { color: var(--sm-accent, #ff0000); }
+.sm-scope .sm-panel-item:hover { color: var(--sm-accent, #40200d); }
 .sm-scope .sm-panel-list[data-numbering] { counter-reset: smItem; }
-.sm-scope .sm-panel-list[data-numbering] .sm-panel-item::after { counter-increment: smItem; content: counter(smItem, decimal-leading-zero); position: absolute; top: 0.1em; right: 3.2em; font-weight: 400; color: var(--sm-accent, #ff0000); letter-spacing: 0; pointer-events: none; user-select: none; opacity: var(--sm-num-opacity, 0); }
+.sm-scope .sm-panel-list[data-numbering] .sm-panel-item::after { counter-increment: smItem; content: counter(smItem, decimal-leading-zero); position: absolute; top: 0.1em; right: 3.2em; font-weight: 400; color: var(--sm-accent, #40200d); letter-spacing: 0; pointer-events: none; user-select: none; opacity: var(--sm-num-opacity, 0); }
 @media (max-width: 1024px) { .sm-scope .staggered-menu-panel { width: 100%; left: 0; right: 0; } .sm-scope .staggered-menu-wrapper[data-open] .sm-logo-img { filter: invert(100%); } }
 @media (max-width: 640px) { .sm-scope .staggered-menu-panel { width: 100%; left: 0; right: 0; } .sm-scope .staggered-menu-wrapper[data-open] .sm-logo-img { filter: invert(100%); } }
       `}</style>
