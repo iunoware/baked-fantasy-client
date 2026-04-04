@@ -3,13 +3,7 @@ import { Button } from "../ui/button";
 import api from "../../api";
 import toast from "react-hot-toast";
 
-export function ProfileHeader({
-  name,
-  email,
-  mobileNumber,
-  address,
-  onUpdate,
-}) {
+export function ProfileHeader({ name, email, mobileNumber, address, onUpdate }) {
   const [open, setOpen] = useState(false);
   const [form, setForm] = useState({
     name,
@@ -62,7 +56,9 @@ export function ProfileHeader({
       const stored = JSON.parse(localStorage.getItem("user") || "{}");
       const updated = { ...stored, ...form };
       localStorage.setItem("user", JSON.stringify(updated));
-    } catch (_) {}
+    } catch (error) {
+      console.error(error);
+    }
 
     setSaving(false);
     setOpen(false);
@@ -73,9 +69,7 @@ export function ProfileHeader({
     <>
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between bg-white rounded-xl shadow-sm border border-gray-100 p-6 sm:p-8 mb-6">
         <div className="flex flex-col gap-1 mb-4 sm:mb-0">
-          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">
-            {name}
-          </h1>
+          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">{name}</h1>
           <div className="flex flex-wrap items-center gap-3 text-gray-500 text-sm sm:text-base">
             <span>{mobileNumber}</span>
             <span className="w-1 h-1 rounded-full bg-gray-300 hidden sm:inline-block"></span>
@@ -169,9 +163,7 @@ export function ProfileHeader({
                 />
               </div> */}
 
-              {error && (
-                <p className="text-sm text-red-500 font-medium">{error}</p>
-              )}
+              {error && <p className="text-sm text-red-500 font-medium">{error}</p>}
             </div>
 
             {/* Actions */}

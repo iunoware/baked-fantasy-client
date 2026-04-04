@@ -25,6 +25,7 @@ import CoursePaymentPage from "./pages/CoursePaymentPage.jsx";
 import Profile from "./pages/Profile.jsx";
 import Dashboard from "./pages/adminPanel/Dashboard.jsx";
 import CourseAdmin from "./pages/adminPanel/CourseAdmin.jsx";
+import CourseDetailsAdmin from "./pages/adminPanel/courses/CourseDetailsAdmin.jsx";
 import Sidebar from "./components/Sidebar.jsx";
 import EssentialsAdmin from "./pages/adminPanel/essentials/EssentialsAdmin.jsx";
 import CakesAdmin from "./pages/adminPanel/cakes/CakesAdmin.jsx";
@@ -129,6 +130,14 @@ function AppContent() {
           element={
             <ProtectedAdminRoute>
               <CourseAdmin />
+            </ProtectedAdminRoute>
+          }
+        />
+        <Route
+          path="/admin/courses/:courseId"
+          element={
+            <ProtectedAdminRoute>
+              <CourseDetailsAdmin />
             </ProtectedAdminRoute>
           }
         />

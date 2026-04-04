@@ -62,6 +62,7 @@ function OnlineCourse() {
                     description={course.description}
                     rating={course.rating}
                     totalReviews={course.totalReviews}
+                    duration={course.duration}
                     ratingSum={course.ratingSum}
                     discountedPrice={course.discountedPrice}
                     originalPrice={course.originalPrice}

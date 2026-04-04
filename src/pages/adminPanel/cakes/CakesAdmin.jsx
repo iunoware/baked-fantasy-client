@@ -80,7 +80,7 @@ function CakesAdmin() {
   }
 
   return (
-    <div className="bg-white">
+    <div className="bg min-h-screen h-fit">
       {/* modal for post category */}
       <div
         className={`${

@@ -10,7 +10,7 @@ export function OrdersTab() {
     async function fetchOrders() {
       try {
         const response = await api.get("/my-orders");
-        setOrders(response.data);
+        setOrders(response.data.data || []);
       } catch (error) {
         console.error("Error fetching orders:", error);
       } finally {

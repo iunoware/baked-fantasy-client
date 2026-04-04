@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
-import { GraduationCap, Star } from "lucide-react";
+import { GraduationCap, Star, Clock } from "lucide-react";
 
 function StarRating({ rating }) {
   return (
@@ -18,9 +18,7 @@ function StarRating({ rating }) {
             <Star className="absolute text-gray-300 w-5 h-5 fill-gray-300" />
 
             {/* full star */}
-            {full && (
-              <Star className="absolute w-5 h-5 text-amber-500 fill-amber-500" />
-            )}
+            {full && <Star className="absolute w-5 h-5 text-amber-500 fill-amber-500" />}
 
             {/* half star */}
             {half && (
@@ -46,10 +44,12 @@ function OnlineCourseCard(props) {
         <div className="rounded-xl !m-2 translate-y-2 flex align-bottom overflow-hidden">
           <img
             src={
+              // props.image ? `http://localhost:5000/uploads/${props.image}` : "/images/cake-2.jpg"
               props.image
-                ? `http://localhost:5000${props.image}`
+                ? `http://localhost:5000/${props.thumbnail?.replace(/^\//, "")}`
                 : "/images/cake-2.jpg"
             }
+            // http://localhost:5000/uploads/${props.image}
             alt="course-img"
             onError={(e) => {
               e.target.onError = null;
@@ -62,6 +62,9 @@ function OnlineCourseCard(props) {
         <div className="p-5 w-full space-y-3">
           <h2 className="font-semibold text-2xl">{props.title}</h2>
           <p className="text-gray-700">{props.description}</p>
+          <p className="text-gray-700">
+            <Clock className="inline" size={15} /> {props.duration}
+          </p>
 
           <div className="flex gap-2 items-center">
             <p className="text-2xl font-semibold">{props.rating}</p>
@@ -87,7 +90,7 @@ function OnlineCourseCard(props) {
           <Link
             to={props.link}
             state={{ courseId: props.courseId }}
-            className=" text-center block mt-3 w-full rounded-xl transition-all bg-pbrown hover:bg-sbrown active:scale-98 shadow-md px-8 py-4 text-white"
+            className=" text-center block mt-3 w-full rounded-xl transition-all new-primary-bg active:scale-98 shadow-md px-8 py-4 text-white"
           >
             {isMyLearning ? "Watch Now" : "Buy Now"}
           </Link>
