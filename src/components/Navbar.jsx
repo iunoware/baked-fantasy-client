@@ -496,7 +496,12 @@ export const StaggeredMenu = ({
     localStorage.removeItem("user");
     sessionStorage.removeItem("token");
     setLoggedIn(false);
+    
+    // Reset Cart for Guest
+    window.dispatchEvent(new Event("loginStateChange"));
+
     setIsDropdownOpen(false);
+
     toast.success("Logged out successfully");
     window.location.href = "/";
   };

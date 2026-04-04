@@ -1,5 +1,11 @@
-import React, { createContext, useContext, useState, useEffect } from "react";
-import axios from "axios";
+import React, {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  useCallback,
+} from "react";
+import api from "../api";
 import toast from "react-hot-toast";
 
 const CartContext = createContext();
@@ -13,117 +19,278 @@ export const useCart = () => {
 };
 
 export const CartProvider = ({ children }) => {
-  const [cartItems, setCartItems] = useState(() => {
-    const savedCart = localStorage.getItem("cart");
-    return savedCart ? JSON.parse(savedCart) : [];
-  });
+  const [cartItems, setCartItems] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  // Helper to get userId
-  const getUserId = () => {
-    const savedUser = JSON.parse(localStorage.getItem("user") || "{}");
-    return savedUser._id || "670e2f1cf9a0b3142b12b70c"; // Default test ID if not logged in
-  };
+  // Helper to get active user info
+  const getUser = useCallback(() => {
+    try {
+      const savedUser = localStorage.getItem("user");
+      return savedUser ? JSON.parse(savedUser) : null;
+    } catch (error) {
+      console.error("Error parsing user from localStorage", error);
+      return null;
+    }
+  }, []);
 
+  const getGuestCart = useCallback(() => {
+    try {
+      const savedCart = localStorage.getItem("guest_cart");
+      return savedCart ? JSON.parse(savedCart) : [];
+    } catch (error) {
+      console.error("Error parsing guest cart", error);
+      return [];
+    }
+  }, []);
+
+  // Fetch Cart from Backend
+  const fetchBackendCart = useCallback(async (userId) => {
+    try {
+      const response = await api.get(`/cart/${userId}`);
+      if (response.data && response.data.items) {
+        // Transform backend structure to frontend structure if necessary
+        // Backend: { items: [ { productId: { _id, title, discountedPrice... }, quantity } ] }
+        // Frontend expectations: [ { id, title, price, quantity, images... } ]
+        const transformedItems = response.data.items
+          .filter((item) => item.productId) // Security check for null products
+          .map((item) => ({
+            id: item.productId._id,
+            title: item.productId.title,
+            price: item.productId.discountedPrice || item.productId.price,
+            quantity: item.quantity,
+            images: item.productId.images,
+            category: item.productId.category,
+          }));
+        return transformedItems;
+      }
+      return [];
+    } catch (error) {
+      if (error.response?.status === 404) return []; // Cart not found is empty cart
+      console.error("Failed to fetch backend cart:", error);
+      // toast.error("Could not load your saved cart.");
+      return [];
+    }
+  }, []);
+
+  // Sync / Merge Logic
+  const syncAndLoadCart = useCallback(async () => {
+    setLoading(true);
+    const user = getUser();
+    const guestCart = getGuestCart();
+
+    if (user && user._id) {
+      try {
+        if (guestCart.length > 0) {
+          // Merge guest cart with backend
+          const syncData = {
+            userId: user._id,
+            items: guestCart.map((item) => ({
+              productId: item.id,
+              quantity: item.quantity,
+            })),
+          };
+          const response = await api.post("/cart/sync", syncData);
+
+          // Clear guest cart after successful sync
+          localStorage.removeItem("guest_cart");
+          localStorage.removeItem("cart"); // Clear old legacy cart key too
+
+          // Transform synced cart
+          const transformedItems = response.data.cart.items
+            .filter((item) => item.productId)
+            .map((item) => ({
+              id: item.productId._id,
+              title: item.productId.title,
+              price: item.productId.discountedPrice || item.productId.price,
+              quantity: item.quantity,
+              images: item.productId.images,
+              category: item.productId.category,
+            }));
+          setCartItems(transformedItems);
+        } else {
+          // Just fetch backend cart
+          const items = await fetchBackendCart(user._id);
+          setCartItems(items);
+        }
+      } catch (error) {
+        console.error("Error during cart sync:", error);
+        toast.error("Failed to sync cart with server");
+      }
+    } else {
+      // GUEST FLOW
+      setCartItems(guestCart);
+    }
+    setLoading(false);
+  }, [getUser, getGuestCart, fetchBackendCart]);
+
+  // Initial load
   useEffect(() => {
-    localStorage.setItem("cart", JSON.stringify(cartItems));
-  }, [cartItems]);
+    syncAndLoadCart();
+  }, []); // Run once on mount
 
-  // DB Sync Helper
-  const syncToDatabase = async (productId, quantity, action = "update") => {
-    const userId = getUserId();
+  // Watch for login/logout (primitive approach since no AuthContext)
+  useEffect(() => {
+    const handleStorageChange = (e) => {
+      if (e.key === "token" || e.key === "user") {
+        syncAndLoadCart();
+      }
+    };
+    window.addEventListener("storage", handleStorageChange);
+    // Custom event for same-tab updates
+    window.addEventListener("loginStateChange", syncAndLoadCart);
+
+    return () => {
+      window.removeEventListener("storage", handleStorageChange);
+      window.removeEventListener("loginStateChange", syncAndLoadCart);
+    };
+  }, [syncAndLoadCart]);
+
+  // DB Sync Helper for single operations
+  const updateBackend = async (productId, quantity, action = "update") => {
+    const user = getUser();
+    if (!user || !user._id) return true; // Pretend success for guests, handled locally
+
     try {
       if (action === "delete") {
-        await axios.delete("http://localhost:5000/cart", {
-          data: { userId, productId },
-        });
+        await api.delete("/cart", { data: { userId: user._id, productId } });
       } else {
-        await axios.put("http://localhost:5000/cart", {
-          userId,
+        await api.put("/cart", {
+          userId: user._id,
           productId,
           quantity,
         });
       }
+      return true;
     } catch (error) {
       console.error(`Failed to sync cart ${action}:`, error);
-      const errorMsg =
-        error.response?.data?.msg || `Failed to sync cart with server`;
-      toast.error(errorMsg);
+      toast.error(
+        error.response?.data?.msg || `Failed to update cart on server`,
+      );
+      return false;
     }
   };
 
-  const addToCart = (product) => {
-    setCartItems((prevItems) => {
-      const existingItem = prevItems.find((item) => item.id === product.id);
-      let updatedItems;
-      if (existingItem) {
-        const newQty = existingItem.quantity + 1;
-        updatedItems = prevItems.map((item) =>
-          item.id === product.id ? { ...item, quantity: newQty } : item,
-        );
-        syncToDatabase(product.id, newQty);
-      } else {
-        updatedItems = [...prevItems, { ...product, quantity: 1 }];
-        syncToDatabase(product.id, 1);
+  const addToCart = async (product) => {
+    const user = getUser();
+    const existingItem = cartItems.find(
+      (item) => item.id === (product.id || product._id),
+    );
+    const newQty = existingItem ? existingItem.quantity + 1 : 1;
+    const productId = product.id || product._id;
+
+    if (user && user._id) {
+      // Backend first
+      const success = await updateBackend(productId, newQty);
+      if (success) {
+        setCartItems((prev) => {
+          if (existingItem) {
+            return prev.map((i) =>
+              i.id === productId ? { ...i, quantity: newQty } : i,
+            );
+          } else {
+            return [
+              ...prev,
+              {
+                id: productId,
+                title: product.title,
+                price: product.discountedPrice || product.price,
+                quantity: 1,
+                images: product.images,
+                category: product.category,
+              },
+            ];
+          }
+        });
       }
-      return updatedItems;
-    });
+    } else {
+      // Guest local storage
+      setCartItems((prev) => {
+        let updated;
+        if (existingItem) {
+          updated = prev.map((i) =>
+            i.id === productId ? { ...i, quantity: newQty } : i,
+          );
+        } else {
+          updated = [
+            ...prev,
+            {
+              id: productId,
+              title: product.title,
+              price: product.discountedPrice || product.price,
+              quantity: 1,
+              images: product.images,
+              category: product.category,
+            },
+          ];
+        }
+        localStorage.setItem("guest_cart", JSON.stringify(updated));
+        return updated;
+      });
+      toast.success("Added to cart");
+    }
   };
 
-  const removeFromCart = (productId) => {
-    setCartItems((prevItems) => {
-      const updatedItems = prevItems.filter((item) => item.id !== productId);
-      syncToDatabase(productId, 0, "delete");
-      return updatedItems;
-    });
+  const removeFromCart = async (productId) => {
+    const user = getUser();
+    if (user && user._id) {
+      const success = await updateBackend(productId, 0, "delete");
+      if (success) {
+        setCartItems((prev) => prev.filter((i) => i.id !== productId));
+      }
+    } else {
+      setCartItems((prev) => {
+        const updated = prev.filter((i) => i.id !== productId);
+        localStorage.setItem("guest_cart", JSON.stringify(updated));
+        return updated;
+      });
+    }
+  };
+
+  const updateQuantity = async (productId, quantity) => {
+    if (quantity < 1) {
+      return removeFromCart(productId);
+    }
+
+    const user = getUser();
+    if (user && user._id) {
+      const success = await updateBackend(productId, quantity);
+      if (success) {
+        setCartItems((prev) =>
+          prev.map((i) => (i.id === productId ? { ...i, quantity } : i)),
+        );
+      }
+    } else {
+      setCartItems((prev) => {
+        const updated = prev.map((i) =>
+          i.id === productId ? { ...i, quantity } : i,
+        );
+        localStorage.setItem("guest_cart", JSON.stringify(updated));
+        return updated;
+      });
+    }
   };
 
   const increaseQuantity = (productId) => {
-    setCartItems((prevItems) => {
-      const item = prevItems.find((i) => i.id === productId);
-      if (item) {
-        const newQty = item.quantity + 1;
-        syncToDatabase(productId, newQty);
-        return prevItems.map((i) =>
-          i.id === productId ? { ...i, quantity: newQty } : i,
-        );
-      }
-      return prevItems;
-    });
+    const item = cartItems.find((i) => i.id === productId);
+    if (item) updateQuantity(productId, item.quantity + 1);
   };
 
   const decreaseQuantity = (productId) => {
-    setCartItems((prevItems) => {
-      const item = prevItems.find((i) => i.id === productId);
-      if (!item) return prevItems;
-
-      if (item.quantity <= 1) {
-        // Remove item entirely and sync delete to DB
-        syncToDatabase(productId, 0, "delete");
-        return prevItems.filter((i) => i.id !== productId);
+    const item = cartItems.find((i) => i.id === productId);
+    if (item) {
+      if (item.quantity > 1) {
+        updateQuantity(productId, item.quantity - 1);
+      } else {
+        removeFromCart(productId);
       }
-
-      const newQty = item.quantity - 1;
-      syncToDatabase(productId, newQty);
-      return prevItems.map((i) =>
-        i.id === productId ? { ...i, quantity: newQty } : i,
-      );
-    });
-  };
-
-  const updateQuantity = (productId, quantity) => {
-    const newQty = Math.max(1, quantity);
-    setCartItems((prevItems) =>
-      prevItems.map((item) =>
-        item.id === productId ? { ...item, quantity: newQty } : item,
-      ),
-    );
-    syncToDatabase(productId, newQty);
+    }
   };
 
   const clearCart = () => {
     setCartItems([]);
-    // Optionally clear DB cart too?
-    // Backend doesn't have a clear all route yet, so we'd loop or just leave it.
+    localStorage.removeItem("guest_cart");
+    // If logged in, we should ideally have a clear-all backend route.
+    // For now, we'll just leave the backend cart as is or implement it if needed.
   };
 
   const cartCount = cartItems.reduce((total, item) => total + item.quantity, 0);
@@ -136,6 +303,7 @@ export const CartProvider = ({ children }) => {
     <CartContext.Provider
       value={{
         cartItems,
+        loading,
         addToCart,
         removeFromCart,
         increaseQuantity,
@@ -144,6 +312,7 @@ export const CartProvider = ({ children }) => {
         clearCart,
         cartCount,
         cartTotal,
+        refreshCart: syncAndLoadCart, // Expose for manual triggers
       }}
     >
       {children}

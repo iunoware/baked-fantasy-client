@@ -40,6 +40,8 @@ import AllProducts from "./pages/specifiCategories/AllProducts.jsx";
 import { Navigate } from "react-router-dom";
 import autoLogout from "./hooks/autoLogout.js";
 import { useNavigate } from "react-router-dom";
+import { LoadingProvider } from "./context/LoadingContext.jsx";
+import { GlobalLoader } from "./components/GlobalLoader.jsx";
 
 function ProtectedAdminRoute({ children }) {
   const token = sessionStorage.getItem("token");
@@ -64,6 +66,7 @@ function AppContent() {
 
   return (
     <>
+      <GlobalLoader />
       <Toaster position="top-center" reverseOrder={false} />
       <ScrollToTop />
 
@@ -202,9 +205,11 @@ import { CartProvider } from "./context/CartContext.jsx";
 function App() {
   return (
     <Router>
-      <CartProvider>
-        <AppContent />
-      </CartProvider>
+      <LoadingProvider>
+        <CartProvider>
+          <AppContent />
+        </CartProvider>
+      </LoadingProvider>
     </Router>
   );
 }

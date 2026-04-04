@@ -207,7 +207,7 @@ function Courses() {
         <div className="rounded-2xl h-fit bg-white shadow-xl m-12 mr-8 lg:ml-50">
           <div className="rounded-xl m-2 flex align-bottom overflow-hidden">
             <img
-              src="/images/online-course.png"
+              src="/images/online-course-1.png"
               alt="course-img"
               className="rounded-xl w-full h-100 object-cover object-center hover:scale-104 transition-all duration-200"
             />
@@ -251,7 +251,7 @@ function Courses() {
         <div className="rounded-2xl h-fit bg-white shadow-xl m-12 ml-8 lg:mr-50">
           <div className="rounded-xl m-2 flex align-bottom overflow-hidden">
             <img
-              src="/images/offline-course.png"
+              src="/images/offlice-course.png"
               alt="course-img"
               className="rounded-xl w-full h-100 object-cover object-center hover:scale-104 transition-all duration-200"
             />
