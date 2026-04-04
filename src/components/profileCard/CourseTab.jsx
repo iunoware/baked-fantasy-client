@@ -1,51 +1,47 @@
+/* eslint-disable no-unused-vars */
 import { motion } from "framer-motion";
 import { Button } from "../../components/ui/button";
 import { Progress } from "../../components/ui/progress";
-import { PlayCircle, BookOpen } from "lucide-react";
+import { PlayCircle, BookOpen, GraduationCap } from "lucide-react";
 import { useState, useEffect } from "react";
 import api from "../../api"; // Assuming the axios instance is correctly set up
 import { Link } from "react-router-dom";
+
+// import OnlineCourseCard from "../OnlineCourseCard.jsx";
+// import Loading from "../Loading.jsx";
 
 export function CoursesTab() {
   const [courses, setCourses] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchMyCourses = async () => {
+    async function fetchingPurchasedCourses() {
       try {
-        const response = await api.get("/courses/my-learning");
-        // Ensure we always have an array, even if the backend behaves unexpectedly
-        if (response.data && response.data.courses) {
-          setCourses(response.data.courses);
-        } else if (Array.isArray(response.data)) {
-          setCourses(response.data);
-        } else {
-          setCourses([]);
-        }
-      } catch (err) {
-        console.error("Failed to fetch courses:", err);
+        const response = await api.get(`/courses/my-learning`);
+        const coursesList = response.data.courses.map((c) => c.courseId);
+        setCourses(coursesList);
+      } catch (error) {
+        console.error("Error fetching courses:", error);
       } finally {
         setLoading(false);
       }
-    };
-
-    fetchMyCourses();
+    }
+    fetchingPurchasedCourses();
   }, []);
 
   if (loading) {
+    // return <Loading text="Loading your courses..." />;
     return (
-      <div className="flex justify-center p-8">
-        <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-pink-500"></div>
-      </div>
+      <div className="border-2 border-pink-700 border-t-gray-400 rounded-full w-6 h-6 animate-spin"></div>
     );
   }
 
   if (courses.length === 0) {
     return (
-      <div className="text-center py-16 text-gray-500 border-2 border-dashed border-gray-200 rounded-xl">
-        <BookOpen className="w-16 h-16 mx-auto text-gray-300 mb-4" />
-        <h3 className="text-lg font-bold text-gray-600">No Courses Enrolled</h3>
-        <p className="mt-1">Looks like you haven't bought any courses yet.</p>
+      <div className="flex flex-col items-center justify-center p-8 text-gray-500 min-h-[300px]">
+        <GraduationCap className="w-12 h-12 text-gray-200 mb-4" />
+        <h3 className="text-lg font-semibold text-gray-900 mb-1">No courses found</h3>
+        <p className="text-sm">You haven't purchased any courses yet.</p>
       </div>
     );
   }
@@ -125,7 +121,7 @@ export function CoursesTab() {
               whileTap={{ scale: 0.98 }}
               className="mt-2 md:mt-0 self-start md:self-auto w-full md:w-auto"
             >
-              <Link to={`/course/my-learning/${courseData._id}`}>
+              <Link to={`/course/my-learning/${purchasedCourse._id}`}>
                 <Button className="w-full md:w-auto rounded-lg gap-2 shadow-sm border border-pink-200 bg-pink-50 text-pink-700 hover:bg-pink-100 hover:text-pink-800 transition-colors">
                   <PlayCircle className="w-4 h-4" />
                   <span className="font-semibold">Continue</span>
@@ -136,5 +132,20 @@ export function CoursesTab() {
         );
       })}
     </div>
+
+    // <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+    //   {courses.map((course) => (
+    //     <OnlineCourseCard
+    //       key={course._id}
+    //       courseId={course._id}
+    //       title={course.title}
+    //       description={course.description}
+    //       rating={course.rating}
+    //       totalReviews={course.totalReviews}
+    //       ratingSum={course.ratingSum}
+    //       link={`/course/my-learning/${course._id}`}
+    //     />
+    //   ))}
+    // </div>
   );
 }

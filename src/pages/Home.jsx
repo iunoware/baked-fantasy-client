@@ -164,7 +164,7 @@ function Home() {
           </div>
 
           {/* Card 2 — Premium Ingredients (row 1, elevated) */}
-          <div className="group relative bg-[linear-gradient(160deg,#ffffff_60%,#fce8d0_100%)] rounded-[18px] pt-8 px-[26px] pb-7 shadow-[0_6px_28px_rgba(135,13,50,0.12)] hover:shadow-[0_12px_36px_rgba(100,50,20,0.15)] transition-all ease-in-out hover:-translate-y-[7px] cursor-default -mt-6 [@media(max-width:900px)]:!mt-0">
+          <div className="group relative bg-[linear-gradient(160deg,#ffffff_60%,#fce8d0_100%)] rounded-[18px] pt-8 px-[26px] pb-7 shadow-[0_6px_28px_rgba(135,13,50,0.12)] hover:shadow-[0_12px_36px_rgba(100,50,20,0.15)] transition-all ease-in-out hover:-translate-y-[7px] cursor-default [@media(max-width:900px)]:!mt-0">
             <div className="w-[58px] h-[58px] rounded-[14px] flex items-center justify-center mb-5 bg-[linear-gradient(135deg,#f5e0e8,#edcad7)]">
               <svg
                 width="28"
@@ -189,7 +189,7 @@ function Home() {
           </div>
 
           {/* Card 3 — Custom Cake Orders (row 1, low) */}
-          <div className="group relative bg-white rounded-[18px] pt-8 px-[26px] pb-7 shadow-[0_4px_18px_rgba(100,50,20,0.08)] hover:shadow-[0_12px_36px_rgba(100,50,20,0.15)] transition-all ease-in-out hover:-translate-y-[7px] cursor-default mt-9 [@media(max-width:900px)]:!mt-0">
+          <div className="group relative bg-white rounded-[18px] pt-8 px-[26px] pb-7 shadow-[0_4px_18px_rgba(100,50,20,0.08)] hover:shadow-[0_12px_36px_rgba(100,50,20,0.15)] transition-all ease-in-out hover:-translate-y-[7px] cursor-default [@media(max-width:900px)]:!mt-0">
             <div className="w-[58px] h-[58px] rounded-[14px] flex items-center justify-center mb-5 bg-[linear-gradient(135deg,#e8f0e0,#d5e8c8)]">
               <svg
                 width="28"
@@ -214,7 +214,7 @@ function Home() {
           </div>
 
           {/* Card 4 — Fast & Reliable Delivery (row 2, low) */}
-          <div className="group relative bg-white rounded-[18px] pt-8 px-[26px] pb-7 shadow-[0_4px_18px_rgba(100,50,20,0.08)] hover:shadow-[0_12px_36px_rgba(100,50,20,0.15)] transition-all ease-in-out hover:-translate-y-[7px] cursor-default mt-5 [@media(max-width:900px)]:!mt-0">
+          <div className="group relative bg-white rounded-[18px] pt-8 px-[26px] pb-7 shadow-[0_4px_18px_rgba(100,50,20,0.08)] hover:shadow-[0_12px_36px_rgba(100,50,20,0.15)] transition-all ease-in-out hover:-translate-y-[7px] cursor-default [@media(max-width:900px)]:!mt-0">
             <div className="w-[58px] h-[58px] rounded-[14px] flex items-center justify-center mb-5 bg-[linear-gradient(135deg,#dde8f5,#c8d9f0)]">
               <svg
                 width="28"
@@ -242,7 +242,7 @@ function Home() {
           </div>
 
           {/* Card 5 — Hygienic Preparation (row 2, normal) */}
-          <div className="group relative bg-white rounded-[18px] pt-8 px-[26px] pb-7 shadow-[0_4px_18px_rgba(100,50,20,0.08)] hover:shadow-[0_12px_36px_rgba(100,50,20,0.15)] transition-all ease-in-out hover:-translate-y-[7px] cursor-default -mt-2.5 [@media(max-width:900px)]:!mt-0">
+          <div className="group relative bg-white rounded-[18px] pt-8 px-[26px] pb-7 shadow-[0_4px_18px_rgba(100,50,20,0.08)] hover:shadow-[0_12px_36px_rgba(100,50,20,0.15)] transition-all ease-in-out hover:-translate-y-[7px] cursor-default  [@media(max-width:900px)]:!mt-0">
             <div className="w-[58px] h-[58px] rounded-[14px] flex items-center justify-center mb-5 bg-[linear-gradient(135deg,#fde8d0,#fbd5b5)]">
               <svg
                 width="28"
@@ -268,7 +268,7 @@ function Home() {
           </div>
 
           {/* Card 6 — Loved by Customers (row 2, elevated) */}
-          <div className="group relative bg-white rounded-[18px] pt-8 px-[26px] pb-7 shadow-[0_4px_18px_rgba(100,50,20,0.08)] hover:shadow-[0_12px_36px_rgba(100,50,20,0.15)] transition-all ease-in-out hover:-translate-y-[7px] cursor-default mt-[30px] [@media(max-width:900px)]:!mt-0">
+          <div className="group relative bg-white rounded-[18px] pt-8 px-[26px] pb-7 shadow-[0_4px_18px_rgba(100,50,20,0.08)] hover:shadow-[0_12px_36px_rgba(100,50,20,0.15)] transition-all ease-in-out hover:-translate-y-[7px] cursor-default  [@media(max-width:900px)]:!mt-0">
             <div className="w-[58px] h-[58px] rounded-[14px] flex items-center justify-center mb-5 bg-[linear-gradient(135deg,#f0e0f5,#e2c8ed)]">
               <svg
                 width="28"
@@ -1306,7 +1306,7 @@ function Home() {
                 <div className="block rounded-md p-4 new-primary-bg shadow-sm sm:p-6 hover:scale-102 transition-all duration-200 ease-in-out ">
                   <div className="sm:flex sm:justify-between sm:gap-4 lg:gap-6">
                     <div className="sm:order-last sm:shrink-0">
-                      <div className="size-16 rounded-full object-cover sm:size-[72px] bg-rose-300 flex justify-center items-center text-xl font-bold">
+                      <div className="size-16  rounded-full object-cover sm:size-[72px] bg-sbrown text-white flex justify-center items-center text-xl font-bold">
                         SM
                       </div>
                     </div>
@@ -1331,7 +1331,7 @@ function Home() {
                 <div className="block rounded-md p-4 shadow-sm sm:p-6 hover:scale-102 transition-all duration-200 ease-in-out new-primary-bg">
                   <div className="sm:flex sm:justify-between sm:gap-4 lg:gap-6">
                     <div className="sm:order-last sm:shrink-0">
-                      <div className="size-16 rounded-full object-cover sm:size-[72px] bg-rose-300 flex justify-center items-center text-xl font-bold">
+                      <div className="size-16 rounded-full object-cover sm:size-[72px] bg-sbrown text-white flex justify-center items-center text-xl font-bold">
                         RR
                       </div>
                     </div>
@@ -1355,7 +1355,7 @@ function Home() {
                 <div className="block rounded-md p-4 shadow-sm sm:p-6 hover:scale-102 transition-all duration-200 ease-in-out new-primary-bg">
                   <div className="sm:flex sm:justify-between sm:gap-4 lg:gap-6">
                     <div className="sm:order-last sm:shrink-0">
-                      <div className="size-16 rounded-full object-cover sm:size-[72px] bg-rose-300 flex justify-center items-center text-xl font-bold">
+                      <div className="size-16 rounded-full object-cover sm:size-[72px] bg-sbrown text-white flex justify-center items-center text-xl font-bold">
                         VM
                       </div>
                     </div>
@@ -1379,7 +1379,7 @@ function Home() {
                 <div className="block rounded-md p-4 shadow-sm sm:p-6 hover:scale-102 transition-all duration-200 ease-in-out new-primary-bg">
                   <div className="sm:flex sm:justify-between sm:gap-4 lg:gap-6">
                     <div className="sm:order-last sm:shrink-0">
-                      <div className="size-16 rounded-full object-cover sm:size-[72px] bg-rose-300 flex justify-center items-center text-xl font-bold">
+                      <div className="size-16 rounded-full object-cover sm:size-[72px] bg-sbrown text-white flex justify-center items-center text-xl font-bold">
                         HJ
                       </div>
                     </div>

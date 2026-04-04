@@ -1,15 +1,26 @@
 import { useState } from "react";
 import { Button } from "../ui/button";
 import api from "../../api";
+import toast from "react-hot-toast";
 
-export function ProfileHeader({ name, email, mobileNumber, onUpdate }) {
+export function ProfileHeader({ name, email, mobileNumber, address, onUpdate }) {
   const [open, setOpen] = useState(false);
-  const [form, setForm] = useState({ name, email, mobileNumber });
+  const [form, setForm] = useState({
+    name,
+    email,
+    mobileNumber,
+    address: address || "",
+  });
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
 
   const handleOpen = () => {
-    setForm({ name, email, mobileNumber });
+    setForm({
+      name,
+      email,
+      mobileNumber,
+      address: address || "",
+    });
     setError("");
     setOpen(true);
   };
@@ -27,11 +38,14 @@ export function ProfileHeader({ name, email, mobileNumber, onUpdate }) {
     setError("");
     try {
       // Try to update on backend; carry on if route doesn't exist yet
-      await api.put("/update-profile", {
+      await api.patch("/update-profile", {
         name: form.name,
         mobileNumber: form.mobileNumber,
         email: form.email,
+        address: form.address,
       });
+
+      toast.success("User details updated");
     } catch (err) {
       // Non-fatal — backend route may not exist yet
       console.warn("Profile update endpoint not available:", err.message);
@@ -42,7 +56,9 @@ export function ProfileHeader({ name, email, mobileNumber, onUpdate }) {
       const stored = JSON.parse(localStorage.getItem("user") || "{}");
       const updated = { ...stored, ...form };
       localStorage.setItem("user", JSON.stringify(updated));
-    } catch (_) { }
+    } catch (error) {
+      console.error(error);
+    }
 
     setSaving(false);
     setOpen(false);
@@ -54,10 +70,18 @@ export function ProfileHeader({ name, email, mobileNumber, onUpdate }) {
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between bg-white rounded-xl shadow-sm border border-gray-100 p-6 sm:p-8 mb-6">
         <div className="flex flex-col gap-1 mb-4 sm:mb-0">
           <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">{name}</h1>
-          <div className="flex items-center gap-4 text-gray-500 text-sm sm:text-base">
+          <div className="flex flex-wrap items-center gap-3 text-gray-500 text-sm sm:text-base">
             <span>{mobileNumber}</span>
-            <span className="w-1 h-1 rounded-full bg-gray-300"></span>
+            <span className="w-1 h-1 rounded-full bg-gray-300 hidden sm:inline-block"></span>
             <span>{email}</span>
+            {JSON.parse(localStorage.getItem("user") || "{}").address && (
+              <>
+                <span className="w-1 h-1 rounded-full bg-gray-300 hidden sm:inline-block"></span>
+                <span className="italic">
+                  {JSON.parse(localStorage.getItem("user") || "{}").address}
+                </span>
+              </>
+            )}
           </div>
         </div>
         <Button
@@ -111,7 +135,7 @@ export function ProfileHeader({ name, email, mobileNumber, onUpdate }) {
                 />
               </div>
 
-              <div>
+              {/* <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   Email Address
                 </label>
@@ -125,9 +149,21 @@ export function ProfileHeader({ name, email, mobileNumber, onUpdate }) {
                 />
               </div>
 
-              {error && (
-                <p className="text-sm text-red-500 font-medium">{error}</p>
-              )}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Full Address
+                </label>
+                <textarea
+                  name="address"
+                  value={form.address}
+                  onChange={handleChange}
+                  placeholder="Street, City, Pincode"
+                  rows="2"
+                  className="w-full border border-gray-200 rounded-lg px-4 py-2.5 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-pink-400 transition resize-none"
+                />
+              </div> */}
+
+              {error && <p className="text-sm text-red-500 font-medium">{error}</p>}
             </div>
 
             {/* Actions */}

@@ -74,6 +74,9 @@ h6 {
   /* for bg */
   --color-cream: #fff4d9;
   --color-cream2: #faf6eb;
+  /* brown theme */
+  --color-pbrown: #40200d;
+  --color-sbrown: #c08552;
   /* for active */
   --color-vibrant: #f9c7c2;
   --color-brown: #b16231;
@@ -200,7 +203,7 @@ body {
 }
 
 .new-primary-bg {
-  @apply bg-[#870D32];
+  @apply bg-[#40200d];
 }
 
 .new-primary-bg-dark {
