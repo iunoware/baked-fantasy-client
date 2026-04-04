@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { ChevronsDown } from "lucide-react";
+import { ChevronsDown, ContrastIcon } from "lucide-react";
 import OnlineCourseCard from "../components/OnlineCourseCard.jsx";
 import Modal from "../components/Modal.jsx";
 import Essentials from "../components/EssProduct.jsx";
@@ -16,6 +16,8 @@ function Home() {
   const [essentials, setEssentials] = useState([]);
   const [courses, setCourses] = useState([]);
   const [banner, setBanner] = useState({});
+
+  console.log(localStorage.getItem);
 
   useEffect(() => {
     // for fetching Bakery Products
@@ -43,7 +45,7 @@ function Home() {
     }
     fetchCourse();
 
-    // for fetching Banner
+    //  for fetching Banner
     const fetchBaner = async () => {
       try {
         const res = await axios.get("http://localhost:5000/banner");
@@ -102,6 +104,201 @@ function Home() {
           <ChevronsDown className=" animate-bounce" color="#ffffff" size={35} />
         </a>
       </div>
+
+      {/* online course section */}
+      <section className="py-20 mb-10">
+        <Heading title="Learn, Bake, and Grow with Sweet Dreams Academy" />
+        <div className="text-center text-lg !mt-5 mb-10">
+          <p>
+            Join our online courses to master baking skills, explore creative
+            recipes, and turn your passion into a thriving business—anytime,
+            anywhere.
+          </p>
+        </div>
+        <div className="grid grid-cols-1 px-10 md:grid-cols-2 lg:grid-cols-3 gap-10">
+          {courses.length > 0 ? (
+            courses.map((course, index) => {
+              return (
+                <div key={index}>
+                  <article className="bg-white overflow-hidden rounded-2xl shadow-xl hover:-translate-y-2 transition-all duration-200">
+                    <div className="relative p-2 h-66 w-full">
+                      <img
+                        alt="Cake"
+                        // src="/images/cake-2.jpg"
+                        src={`${
+                          course.ImageUrl
+                            ? "http://localhost:5000${course.ImageUrl}"
+                            : "/images/cake-2.jpg"
+                        }`}
+                        className="h-full w-full rounded-xl object-cover"
+                        onError={(e) => {
+                          e.target.onError = null;
+                          e.target.src = "/images/cake-2.jpg";
+                        }}
+                      />
+                    </div>
+
+                    {/* Bottom white content */}
+                    <div className=" p-4">
+                      <div className="text-black flex justify-between">
+                        <div className="flex items-center gap-2">
+                          <div>
+                            <h3 className="font-bold text-xl">
+                              {course.title}
+                            </h3>
+                            <p className="text-md pt-2">{course.description}</p>
+                          </div>
+                        </div>
+                        {/* <Link to="/courses" className="">
+                          <button className="new-primary-bg px-4 py-3 rounded-xl font-bold text-white cursor-pointer">
+                            Buy Now
+                          </button>
+                        </Link> */}
+                        <Link
+                          className="group relative inline-flex items-center overflow-hidden rounded-lg new-primary-bg px-8 py-3 text-white mr-3"
+                          to="/courses"
+                        >
+                          <span className="absolute -start-full transition-all group-hover:start-4">
+                            <svg
+                              className="size-5 rtl:rotate-180"
+                              version="1.1"
+                              xmlns="http://www.w3.org/2000/svg"
+                              xmlnsXlink="http://www.w3.org/1999/xlink"
+                              viewBox="0 0 512 512"
+                              xmlSpace="preserve"
+                              fill="#ffffff"
+                              style={{ transform: "rotate(90deg)" }}
+                            >
+                              <g>
+                                <path
+                                  style={{ fill: "#ffffff" }}
+                                  d="M408.387,512H159.603c-8.313,0-15.054-6.741-15.054-15.054v-71.829
+        c0-8.313,6.741-15.054,15.054-15.054h132.043c8.313,0,15.054,6.741,15.054,15.054c0,8.313-6.741,15.054-15.054,15.054H174.657
+        v41.722h218.676v-41.722h-28.605c-8.313,0-15.054-6.741-15.054-15.054c0-8.313,6.741-15.054,15.054-15.054h43.659
+        c8.313,0,15.054,6.741,15.054,15.054v71.829C423.441,505.26,416.7,512,408.387,512z"
+                                />
+                                <path
+                                  style={{ fill: "#ffffff" }}
+                                  d="M302.481,198.013v-15.951c0-15.948-13.009-29.53-29.728-30.096
+        c-17.553-0.595-31.979,12.793-31.979,29.391v17.213l-0.333-154.106c0-16.243-13.813-29.411-30.854-29.411H208.4
+        c-17.039,0-30.854,13.168-30.854,29.411v110.671v25.447v76.908l-30.02-73.097c-5.281-15.769-22.984-24.465-39.527-19.431
+        c-16.543,5.043-25.665,21.909-20.384,37.684l65.918,135.745c8.141,16.765,25.756,27.5,45.137,27.509l177.423,0.077
+        c27.491,0.012,49.783-21.226,49.786-47.432l0.018-116.556c0-16.243-13.813-29.411-30.854-29.411l0,0
+        c-17.039,0-30.854,13.168-30.854,29.411v-6.989c0-16.243-13.813-29.411-30.854-29.411l0,0c-17.039,0-30.854,13.168-30.854,29.411"
+                                />
+                                <path
+                                  style={{ fill: "#ffffff" }}
+                                  d="M376.115,381.032c-0.011,0-0.02,0-0.03,0l-177.421-0.077c-25.033-0.012-48.062-14.139-58.672-35.988
+        L74.073,209.223c-0.283-0.583-0.528-1.182-0.733-1.796c-3.788-11.308-2.854-23.391,2.625-34.022
+        c5.684-11.03,15.502-19.142,27.643-22.843c24.074-7.325,49.967,5.457,58.011,28.529l0.872,2.121V44.463
+        C162.492,19.946,183.087,0,208.4,0h1.186c25.313,0,45.907,19.946,45.907,44.464l0.206,95.206c5.564-1.993,11.525-2.958,17.56-2.75
+        c15.338,0.521,28.625,8.286,36.537,19.916c6.886-3.998,14.939-6.3,23.537-6.3c13.886,0,26.35,6,34.776,15.465
+        c7.569-5.329,16.88-8.475,26.933-8.475c25.313,0,45.908,19.946,45.908,44.464l-0.02,116.557
+        c-0.001,16.832-6.84,32.616-19.255,44.442C409.465,374.625,393.285,381.032,376.115,381.032z"
+                                />
+                              </g>
+                            </svg>
+                          </span>
+
+                          <span className="text-lg font-semibold transition-all group-hover:ms-4">
+                            Enroll Now
+                          </span>
+                        </Link>
+                      </div>
+                    </div>
+                  </article>
+                </div>
+              );
+            })
+          ) : (
+            // <div className="w-screen flex flex-col items-center justify-center">
+            //   <dotlottie-wc
+            //     src="https://lottie.host/eca676f3-586d-448f-bf3a-5d6a0c59ba6f/RDwRt4kKPP.lottie"
+            //     className="h-60 w-70"
+            //     autoplay
+            //     loop
+            //   ></dotlottie-wc>
+            //   <p className="text-3xl font-bold">Courses Coming Soon</p>
+            // </div>
+            <div className="w-full flex justify-start col-span-full items-center">
+              <Loading text={"Products are coming soon"} />
+            </div>
+          )}
+        </div>
+      </section>
+
+      {/* featured Bakery products */}
+      <section className="feature-section bg py-18 pb-12">
+        <Heading title="Featured Products" />
+        <p className="subHeading">
+          Handcrafted with love using premium ingredients and traditional
+          techniques
+        </p>
+        {/* products section */}
+        {products.length > 0 ? (
+          <div>
+            <div className="grid [@media(max-width:553px)]:!grid-cols-1 [@media(max-width:846px)]:grid-cols-2 [@media(max-width:1111px)]:grid-cols-3 [@media(min-width:1111px)]:grid-cols-4 gap-5 py-15 px-10">
+              {products.map((p) =>
+                p.isActive ? (
+                  <Product
+                    key={p._id}
+                    id={p._id}
+                    category={categoryName}
+                    img={`http://localhost:5000${p.images?.[0]}`}
+                    originalPrice={p.originalPrice}
+                    discountedPrice={p.discountedPrice}
+                    inStock={p.inStock}
+                    title={p.title}
+                    subject={p.subject}
+                  />
+                ) : (
+                  <div></div>
+                ),
+              )}
+            </div>
+            <div className="see-all-products flex justify-center">
+              <Link
+                className="group relative inline-flex items-center overflow-hidden rounded-lg px-3 py-3 new-primary-bg "
+                to={`/categories`}
+              >
+                <span className="absolute -start-full transition-all group-hover:start-1">
+                  <svg
+                    className="size-5 rtl:rotate-180"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="#ffffff"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M17 8l4 4m0 0l-4 4m4-4H3"
+                    />
+                  </svg>
+                </span>
+
+                <span className="text-lg text-white font-medium transition-all group-hover:ms-4">
+                  View All Products
+                </span>
+              </Link>
+            </div>
+          </div>
+        ) : (
+          // <div className="flex flex-col items-center justify-center">
+          //   <dotlottie-wc
+          //     src="https://lottie.host/eca676f3-586d-448f-bf3a-5d6a0c59ba6f/RDwRt4kKPP.lottie"
+          //     className="h-60 w-70"
+          //     autoplay
+          //     loop
+          //   ></dotlottie-wc>
+          //   <p className="text-3xl font-bold">Products Coming Soon</p>
+          // </div>
+          <div className="text-center">
+            <Loading text="Products coming soon" />
+          </div>
+        )}
+      </section>
 
       {/* Why Choose Us section */}
       <div
@@ -293,81 +490,8 @@ function Home() {
         </div>
       </div>
 
-      {/* featured Bakery products */}
-      <section className="feature-section bg-[#FFF8F0] py-8 pb-12">
-        <Heading title="Featured Products" />
-        <p className="subHeading">
-          Handcrafted with love using premium ingredients and traditional
-          techniques
-        </p>
-        {/* products section */}
-        {products.length > 0 ? (
-          <div>
-            <div className="grid [@media(max-width:553px)]:!grid-cols-1 [@media(max-width:846px)]:grid-cols-2 [@media(max-width:1111px)]:grid-cols-3 [@media(min-width:1111px)]:grid-cols-4 gap-5 py-15 px-10">
-              {products.map((p) =>
-                p.isActive ? (
-                  <Product
-                    key={p._id}
-                    id={p._id}
-                    category={categoryName}
-                    img={`http://localhost:5000${p.images?.[0]}`}
-                    originalPrice={p.originalPrice}
-                    discountedPrice={p.discountedPrice}
-                    inStock={p.inStock}
-                    title={p.title}
-                    subject={p.subject}
-                  />
-                ) : (
-                  <div></div>
-                ),
-              )}
-            </div>
-            <div className="see-all-products flex justify-center">
-              <Link
-                className="group relative inline-flex items-center overflow-hidden rounded-lg px-3 py-3 new-primary-bg "
-                to={`/categories`}
-              >
-                <span className="absolute -start-full transition-all group-hover:start-1">
-                  <svg
-                    className="size-5 rtl:rotate-180"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="#ffffff"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M17 8l4 4m0 0l-4 4m4-4H3"
-                    />
-                  </svg>
-                </span>
-
-                <span className="text-lg text-white font-medium transition-all group-hover:ms-4">
-                  View All Products
-                </span>
-              </Link>
-            </div>
-          </div>
-        ) : (
-          // <div className="flex flex-col items-center justify-center">
-          //   <dotlottie-wc
-          //     src="https://lottie.host/eca676f3-586d-448f-bf3a-5d6a0c59ba6f/RDwRt4kKPP.lottie"
-          //     className="h-60 w-70"
-          //     autoplay
-          //     loop
-          //   ></dotlottie-wc>
-          //   <p className="text-3xl font-bold">Products Coming Soon</p>
-          // </div>
-          <div className="text-center">
-            <Loading text="Products coming soon" />
-          </div>
-        )}
-      </section>
-
       {/* why choose us section */}
-      <section className="why-choose-us bg py-5 ">
+      {/* <section className="why-choose-us bg py-5 ">
         <Heading title="Why Choose Backed Fantasy?" />
         <p className="text-center text-xl py-5">
           Discover what makes us the premier choice for baking education and
@@ -381,9 +505,9 @@ function Home() {
               className="md:h-140 h-90 w-auto"
             />
           </div>
-          {/* main cards */}
+          
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 pt-5">
-            {/* card-1 */}
+            
             <div className="rounded-2xl bg-sbrown">
               <div className="group relative block h-64 lg:h-70">
                 <span className="absolute rounded-2xl inset-0"></span>
@@ -700,7 +824,7 @@ function Home() {
               </div>
             </div>
 
-            {/* card-2 */}
+            
             <div className="rounded-2xl bg-sbrown">
               <div className="group relative block h-64 sm:h-80 lg:h-70 ">
                 <span className="absolute rounded-2xl inset-0"></span>
@@ -783,8 +907,8 @@ function Home() {
               </div>
             </div>
 
-            {/* card-3 */}
-            <div className="rounded-2xl new-primary-light-bg">
+            
+            <div className="rounded-2xl bg-sbrown">
               <div className="group relative block h-64 sm:h-80 lg:h-70">
                 <span className="absolute rounded-2xl inset-0"></span>
 
@@ -851,8 +975,8 @@ function Home() {
               </div>
             </div>
 
-            {/* card-4 */}
-            <div className="rounded-2xl new-primary-light-bg">
+            
+            <div className="rounded-2xl bg-sbrown">
               <div className="group relative block h-64 sm:h-80 lg:h-70">
                 <span className="absolute rounded-2xl inset-0 "></span>
 
@@ -927,7 +1051,7 @@ function Home() {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* event section */}
       <section className="lg:grid lg:h-[80vh] md:h-[45vh] h-[42vh] lg:bg-cover lg:bg-center md:bg-center md:bg-cover relative md:bg-violet-300 bg-violet-300  lg:bg-[url('/images/bulk-orders.png')] mt-18 py-10">
@@ -1024,16 +1148,16 @@ function Home() {
             </p>
           </div>
           {/* Offline Course Popup */}
-          <div className="relative flex md:justify-end md:items-center justify-center pt-3 h-[60vh] md:pt-0 items-start lg:justify-end lg:pr-20 md:pr-10 bg-center bg-cover md:bg-[url('/images/popup.jpg')] bg-[url('/images/popup-mo.jpg')] rounded-2xl">
+          <div className="relative flex md:justify-end md:items-center justify-center pt-3 h-[60vh] md:pt-0 items-start lg:justify-end lg:pr-20 md:pr-10 bg-center bg-cover md:bg-[url('/images/baking-class.png')] bg-[url('/images/mobile-baking.png')] rounded-2xl">
             <div className="">
-              <h1 className="mansalva-regular drop-shadow-5xl sm:px-0 px-5 w-full text-white md:text-6xl text-4xl text-center">
+              <h1 className="mansalva-regular drop-shadow-5xl md:translate-x-10 sm:px-0 px-5 w-full text-pbrown md:text-6xl text-4xl text-center">
                 {banner?.title || "Titles not yet"}
               </h1>
-              <p className="luckyGuy pt-5 px-4 w-full text-white font-bold text-lg text-center">
+              <p className="luckyGuy pt-5 px-4 w-full text-pbrown font-bold text-lg text-center">
                 {banner?.subject || "Subjects not yet"}
               </p>
               <div className="w-full flex justify-center">
-                <button className="w-30 p-2 mt-5 new-primary-bg backdrop-blur-2xl hover:scale-108 transition-all ease-in text-white font-bold rounded-2xl">
+                <button className="w-30 p-2 mt-5 bg-sbrown backdrop-blur-2xl hover:scale-108 transition-all ease-in text-white font-bold rounded-2xl">
                   Enroll now
                 </button>
               </div>
@@ -1041,173 +1165,6 @@ function Home() {
           </div>
         </div>
       </section>
-
-      {/* online course section */}
-      <section className="!py-10 mb-10">
-        <Heading title="Learn, Bake, and Grow with Sweet Dreams Academy" />
-        <div className="text-center text-lg !mt-5 mb-10">
-          <p>
-            Join our online courses to master baking skills, explore creative
-            recipes, and turn your passion into a thriving business—anytime,
-            anywhere.
-          </p>
-        </div>
-        <div className="grid grid-cols-1 px-10 md:grid-cols-2 lg:grid-cols-3 gap-10">
-          {courses.length > 0 ? (
-            courses.map((course, index) => {
-              return (
-                <div key={index}>
-                  <article className="bg-white overflow-hidden rounded-2xl shadow-xl hover:-translate-y-2 transition-all duration-200">
-                    <div className="relative p-2 h-66 w-full">
-                      <img
-                        alt="Cake"
-                        // src="/images/cake-2.jpg"
-                        src={`${
-                          course.ImageUrl
-                            ? "http://localhost:5000${course.ImageUrl}"
-                            : "/images/cake-2.jpg"
-                        }`}
-                        className="h-full w-full rounded-xl object-cover"
-                        onError={(e) => {
-                          e.target.onError = null;
-                          e.target.src = "/images/cake-2.jpg";
-                        }}
-                      />
-                    </div>
-
-                    {/* Bottom white content */}
-                    <div className=" p-4">
-                      <div className="text-black flex justify-between">
-                        <div className="flex items-center gap-2">
-                          <div>
-                            <h3 className="font-bold text-xl">
-                              {course.title}
-                            </h3>
-                            <p className="text-md pt-2">{course.description}</p>
-                          </div>
-                        </div>
-                        {/* <Link to="/courses" className="">
-                          <button className="new-primary-bg px-4 py-3 rounded-xl font-bold text-white cursor-pointer">
-                            Buy Now
-                          </button>
-                        </Link> */}
-                        <Link
-                          className="group relative inline-flex items-center overflow-hidden rounded-lg new-primary-bg px-8 py-3 text-white mr-3"
-                          to="/courses"
-                        >
-                          <span className="absolute -start-full transition-all group-hover:start-4">
-                            <svg
-                              className="size-5 rtl:rotate-180"
-                              version="1.1"
-                              xmlns="http://www.w3.org/2000/svg"
-                              xmlnsXlink="http://www.w3.org/1999/xlink"
-                              viewBox="0 0 512 512"
-                              xmlSpace="preserve"
-                              fill="#ffffff"
-                              style={{ transform: "rotate(90deg)" }}
-                            >
-                              <g>
-                                <path
-                                  style={{ fill: "#ffffff" }}
-                                  d="M408.387,512H159.603c-8.313,0-15.054-6.741-15.054-15.054v-71.829
-        c0-8.313,6.741-15.054,15.054-15.054h132.043c8.313,0,15.054,6.741,15.054,15.054c0,8.313-6.741,15.054-15.054,15.054H174.657
-        v41.722h218.676v-41.722h-28.605c-8.313,0-15.054-6.741-15.054-15.054c0-8.313,6.741-15.054,15.054-15.054h43.659
-        c8.313,0,15.054,6.741,15.054,15.054v71.829C423.441,505.26,416.7,512,408.387,512z"
-                                />
-                                <path
-                                  style={{ fill: "#ffffff" }}
-                                  d="M302.481,198.013v-15.951c0-15.948-13.009-29.53-29.728-30.096
-        c-17.553-0.595-31.979,12.793-31.979,29.391v17.213l-0.333-154.106c0-16.243-13.813-29.411-30.854-29.411H208.4
-        c-17.039,0-30.854,13.168-30.854,29.411v110.671v25.447v76.908l-30.02-73.097c-5.281-15.769-22.984-24.465-39.527-19.431
-        c-16.543,5.043-25.665,21.909-20.384,37.684l65.918,135.745c8.141,16.765,25.756,27.5,45.137,27.509l177.423,0.077
-        c27.491,0.012,49.783-21.226,49.786-47.432l0.018-116.556c0-16.243-13.813-29.411-30.854-29.411l0,0
-        c-17.039,0-30.854,13.168-30.854,29.411v-6.989c0-16.243-13.813-29.411-30.854-29.411l0,0c-17.039,0-30.854,13.168-30.854,29.411"
-                                />
-                                <path
-                                  style={{ fill: "#ffffff" }}
-                                  d="M376.115,381.032c-0.011,0-0.02,0-0.03,0l-177.421-0.077c-25.033-0.012-48.062-14.139-58.672-35.988
-        L74.073,209.223c-0.283-0.583-0.528-1.182-0.733-1.796c-3.788-11.308-2.854-23.391,2.625-34.022
-        c5.684-11.03,15.502-19.142,27.643-22.843c24.074-7.325,49.967,5.457,58.011,28.529l0.872,2.121V44.463
-        C162.492,19.946,183.087,0,208.4,0h1.186c25.313,0,45.907,19.946,45.907,44.464l0.206,95.206c5.564-1.993,11.525-2.958,17.56-2.75
-        c15.338,0.521,28.625,8.286,36.537,19.916c6.886-3.998,14.939-6.3,23.537-6.3c13.886,0,26.35,6,34.776,15.465
-        c7.569-5.329,16.88-8.475,26.933-8.475c25.313,0,45.908,19.946,45.908,44.464l-0.02,116.557
-        c-0.001,16.832-6.84,32.616-19.255,44.442C409.465,374.625,393.285,381.032,376.115,381.032z"
-                                />
-                              </g>
-                            </svg>
-                          </span>
-
-                          <span className="text-lg font-semibold transition-all group-hover:ms-4">
-                            Enroll Now
-                          </span>
-                        </Link>
-                      </div>
-                    </div>
-                  </article>
-                </div>
-              );
-            })
-          ) : (
-            // <div className="w-screen flex flex-col items-center justify-center">
-            //   <dotlottie-wc
-            //     src="https://lottie.host/eca676f3-586d-448f-bf3a-5d6a0c59ba6f/RDwRt4kKPP.lottie"
-            //     className="h-60 w-70"
-            //     autoplay
-            //     loop
-            //   ></dotlottie-wc>
-            //   <p className="text-3xl font-bold">Courses Coming Soon</p>
-            // </div>
-            <div className="w-full flex justify-start col-span-full items-center">
-              <Loading text={"Products are coming soon"} />
-            </div>
-          )}
-        </div>
-      </section>
-
-      {/* banner */}
-      <div className="mx-auto text-center rounded-4xl shadow-2xl md:bg-[url('/images/banner.jpg')] bg-[url('/images/mobile-banner.jpg')] bg-center bg-cover w-[100vw] h-[100vh] md:w-[80vw] md:h-[70vh]">
-        <div className="flex flex-col items center w-full h-full justify-center">
-          <h1 className="flex mx-auto luckyGuy justify-center text-5xl/15 items-center text-sbrown font-bold">
-            Still thinking about dessert? <br />
-            Your cravings won’t wait!
-          </h1>
-          <div className="flex mx-auto pt-10">
-            <Link
-              className="group relative inline-flex items-center overflow-hidden rounded-lg new-primary-bg px-8 py-3 text-white focus:ring-3 focus:outline-hidden mr-3"
-              to="/categories"
-            >
-              <span className="absolute -start-full transition-all group-hover:start-4">
-                <svg
-                  className="size-5 rtl:rotate-180"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
-                  <g
-                    id="SVGRepo_tracerCarrier"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  ></g>
-                  <g id="SVGRepo_iconCarrier">
-                    <path
-                      d="M7.2998 5H22L20 12H8.37675M21 16H9L7 3H4M4 8H2M5 11H2M6 14H2M10 20C10 20.5523 9.55228 21 9 21C8.44772 21 8 20.5523 8 20C8 19.4477 8.44772 19 9 19C9.55228 19 10 19.4477 10 20ZM21 20C21 20.5523 20.5523 21 20 21C19.4477 21 19 20.5523 19 20C19 19.4477 19.4477 19 20 19C20.5523 19 21 19.4477 21 20Z"
-                      stroke="#fff"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    ></path>
-                  </g>
-                </svg>
-              </span>
-
-              <span className="text-lg font-medium transition-all group-hover:ms-4">
-                Order Now
-              </span>
-            </Link>
-          </div>
-        </div>
-      </div>
 
       {/* Featured Essentials */}
       <section className="feature-section bg py-8 pb-12">
@@ -1280,6 +1237,51 @@ function Home() {
           </div>
         )}
       </section>
+
+      {/* banner */}
+      <div className="mx-auto text-center rounded-4xl shadow-2xl md:bg-[url('/images/banner.jpg')] bg-[url('/images/mobile-banner.jpg')] bg-center bg-cover w-[100vw] h-[100vh] md:w-[80vw] md:h-[70vh]">
+        <div className="flex flex-col items center w-full h-full justify-center">
+          <h1 className="flex mx-auto luckyGuy justify-center text-5xl/15 items-center text-sbrown font-bold">
+            Still thinking about dessert? <br />
+            Your cravings won’t wait!
+          </h1>
+          <div className="flex mx-auto pt-10">
+            <Link
+              className="group relative inline-flex items-center overflow-hidden rounded-lg new-primary-bg px-8 py-3 text-white focus:ring-3 focus:outline-hidden mr-3"
+              to="/categories"
+            >
+              <span className="absolute -start-full transition-all group-hover:start-4">
+                <svg
+                  className="size-5 rtl:rotate-180"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+                  <g
+                    id="SVGRepo_tracerCarrier"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  ></g>
+                  <g id="SVGRepo_iconCarrier">
+                    <path
+                      d="M7.2998 5H22L20 12H8.37675M21 16H9L7 3H4M4 8H2M5 11H2M6 14H2M10 20C10 20.5523 9.55228 21 9 21C8.44772 21 8 20.5523 8 20C8 19.4477 8.44772 19 9 19C9.55228 19 10 19.4477 10 20ZM21 20C21 20.5523 20.5523 21 20 21C19.4477 21 19 20.5523 19 20C19 19.4477 19.4477 19 20 19C20.5523 19 21 19.4477 21 20Z"
+                      stroke="#fff"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    ></path>
+                  </g>
+                </svg>
+              </span>
+
+              <span className="text-lg font-medium transition-all group-hover:ms-4">
+                Order Now
+              </span>
+            </Link>
+          </div>
+        </div>
+      </div>
 
       {/* testimonial section */}
       <div className="bg">
