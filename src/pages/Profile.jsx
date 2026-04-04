@@ -5,7 +5,6 @@ import { ProfileHeader } from "../components/profile/ProfileHeader";
 import { AddressSection } from "../components/profile/AddressSection";
 import { OrdersTab } from "../components/profileCard/OrdersTab";
 import { CoursesTab } from "../components/profileCard/CourseTab";
-
 import {
   ShoppingBag,
   GraduationCap,

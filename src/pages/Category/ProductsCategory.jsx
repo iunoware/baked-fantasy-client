@@ -210,8 +210,8 @@ function Categories() {
 
           <img
             alt=""
-            src="/images/b-order.png"
-            className="h-full w-full object-cover sm:h-[calc(100%_-_2rem)] sm:self-end sm:rounded-ss-[30px] md:h-[calc(100%_-_4rem)] md:rounded-ss-[60px]"
+            src="/images/bulkorders.jpeg"
+            className="h-full w-full object-cover object-center sm:h-[calc(100%_-_2rem)] sm:self-end sm:rounded-ss-[30px] md:h-100 md:rounded-ss-[60px]"
           />
         </section>
       </div>

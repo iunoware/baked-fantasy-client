@@ -31,8 +31,12 @@ function Login({ isOpen, onClose, onOpenRegister, setLoggedIn }) {
 
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("user", JSON.stringify(res.data.user));
+      
+      // Trigger cart sync
+      window.dispatchEvent(new Event("loginStateChange"));
 
       toast.success("Login Successful! Welcome back 🍰");
+
       if (typeof setLoggedIn === "function") {
         setLoggedIn(true);
       }
@@ -66,7 +70,12 @@ function Login({ isOpen, onClose, onOpenRegister, setLoggedIn }) {
 
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("user", JSON.stringify(res.data.user));
+      
+      // Trigger cart sync
+      window.dispatchEvent(new Event("loginStateChange"));
+
       setMessage("");
+
       toast.success("Login Successful Welcome back 🍰");
       if (typeof setLoggedIn === "function") {
         setLoggedIn(true);

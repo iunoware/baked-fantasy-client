@@ -139,7 +139,7 @@ h6 {
 
 /* heading color */
 .heading-color {
-  @apply text-black;
+  @apply text-[#2e2e2e];
 }
 
 /* sub heading */
@@ -187,7 +187,8 @@ body {
 
 /* background color */
 .bg {
-  @apply bg-[#fef9ec];
+  /* @apply bg-[#fef9ec]; */
+  @apply bg-[#fff4e6];
 }
 
 .new-bg {
