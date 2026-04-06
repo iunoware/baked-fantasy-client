@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { ChevronsDown, ContrastIcon } from "lucide-react";
+import { ChevronsDown, ContrastIcon, Notebook } from "lucide-react";
 import OnlineCourseCard from "../components/OnlineCourseCard.jsx";
 import Modal from "../components/Modal.jsx";
 import Essentials from "../components/EssProduct.jsx";
@@ -100,13 +100,61 @@ function Home() {
             </p>
           </div>
         </div>
+        <div className="absolute gap-5 w-full flex items-center justify-center bottom-45">
+          <Link
+            className="group relative inline-flex items-center overflow-hidden rounded-lg bg-pbrown px-8 py-3 text-white focus:ring-3 focus:outline-hidden mr-3"
+            to="/categories"
+          >
+            <span className="absolute -start-full transition-all group-hover:start-4">
+              <svg
+                className="size-5 rtl:rotate-180"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+                <g
+                  id="SVGRepo_tracerCarrier"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                ></g>
+                <g id="SVGRepo_iconCarrier">
+                  <path
+                    d="M7.2998 5H22L20 12H8.37675M21 16H9L7 3H4M4 8H2M5 11H2M6 14H2M10 20C10 20.5523 9.55228 21 9 21C8.44772 21 8 20.5523 8 20C8 19.4477 8.44772 19 9 19C9.55228 19 10 19.4477 10 20ZM21 20C21 20.5523 20.5523 21 20 21C19.4477 21 19 20.5523 19 20C19 19.4477 19.4477 19 20 19C20.5523 19 21 19.4477 21 20Z"
+                    stroke="#fff"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  ></path>
+                </g>
+              </svg>
+            </span>
+
+            <span className="text-lg font-medium transition-all group-hover:ms-4">
+              Order Now
+            </span>
+          </Link>
+          <Link
+            to="/courses"
+            className="group relative inline-flex items-center overflow-hidden rounded-lg border border-[#fef9ec] px-3 py-2.5 text-[#fef9ec] focus:ring-3 focus:outline-hidden"
+          >
+            <span className="absolute -start-full transition-all group-hover:start-1">
+              <Notebook size={20} />
+            </span>
+
+            <span className="text-lg font-medium pl-1 transition-all group-hover:ms-4">
+              Browse Courses
+            </span>
+          </Link>
+        </div>
+
         <a href="#section-2" className="z-50 absolute bottom-5">
           <ChevronsDown className=" animate-bounce" color="#ffffff" size={35} />
         </a>
       </div>
 
       {/* online course section */}
-      <section className="py-20 mb-10">
+      <section className="py-20 mb-10" id="section-2">
         <Heading title="Learn, Bake, and Grow with Sweet Dreams Academy" />
         <div className="text-center text-lg !mt-5 mb-10">
           <p>
@@ -301,10 +349,7 @@ function Home() {
       </section>
 
       {/* Why Choose Us section */}
-      <div
-        id="section-2"
-        className="relative overflow-hidden bg py-[80px] pb-[90px] "
-      >
+      <div className="relative overflow-hidden bg py-[80px] pb-[90px] ">
         {/* Decorative background blobs */}
         <div className="absolute pointer-events-none rounded-full w-[320px] h-[320px] -top-[60px] -right-[80px] bg-[radial-gradient(circle,rgba(135,13,50,0.06)_0%,transparent_70%)]" />
         <div className="absolute pointer-events-none rounded-full w-[260px] h-[260px] -bottom-[40px] -left-[60px] bg-[radial-gradient(circle,rgba(180,100,40,0.07)_0%,transparent_70%)]" />

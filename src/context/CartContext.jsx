@@ -20,6 +20,8 @@ export const useCart = () => {
 
 export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
+  // const [bakeryItems, setBakeryItems] = useState([]);
+  // const [essentialItems, setEssentialItems] = useState([]);
   const [loading, setLoading] = useState(true);
 
   // Helper to get active user info
@@ -55,11 +57,15 @@ export const CartProvider = ({ children }) => {
           .filter((item) => item.productId) // Security check for null products
           .map((item) => ({
             id: item.productId._id,
-            title: item.productId.title,
+            name: item.productId.title,
             price: item.productId.discountedPrice || item.productId.price,
             quantity: item.quantity,
-            images: item.productId.images,
+            image: item.productId.images?.[0]
+              ? `http://localhost:5000${item.productId.images[0]}`
+              : "",
+            description: item.productId.subject,
             category: item.productId.category,
+            type: item.productId.itemType || "bakery", // Try to read from backend or default
           }));
         return transformedItems;
       }
@@ -100,11 +106,15 @@ export const CartProvider = ({ children }) => {
             .filter((item) => item.productId)
             .map((item) => ({
               id: item.productId._id,
-              title: item.productId.title,
+              name: item.productId.title,
               price: item.productId.discountedPrice || item.productId.price,
               quantity: item.quantity,
-              images: item.productId.images,
+              image: item.productId.images?.[0]
+                ? `http://localhost:5000${item.productId.images[0]}`
+                : "",
+              description: item.productId.subject,
               category: item.productId.category,
+              type: item.productId.itemType || "bakery",
             }));
           setCartItems(transformedItems);
         } else {
@@ -192,11 +202,13 @@ export const CartProvider = ({ children }) => {
               ...prev,
               {
                 id: productId,
-                title: product.title,
-                price: product.discountedPrice || product.price,
+                name: product.name,
+                price: product.price,
                 quantity: 1,
-                images: product.images,
+                image: product.image,
+                description: product.description || product.subject,
                 category: product.category,
+                type: product.type || "bakery",
               },
             ];
           }
@@ -215,11 +227,13 @@ export const CartProvider = ({ children }) => {
             ...prev,
             {
               id: productId,
-              title: product.title,
-              price: product.discountedPrice || product.price,
+              name: product.name,
+              price: product.price,
               quantity: 1,
-              images: product.images,
+              image: product.image,
+              description: product.description || product.subject,
               category: product.category,
+              type: product.type || "bakery",
             },
           ];
         }
