@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -24,6 +25,7 @@ export default function CourseDetailsAdmin() {
   const [isEditLessonOpen, setIsEditLessonOpen] = useState(false);
   const [isDeleteLessonOpen, setIsDeleteLessonOpen] = useState(false);
   const [lessonDeleteTimer, setLessonDeleteTimer] = useState(3);
+  const [removePdf, setRemovePdf] = useState(false);
 
   useEffect(() => {
     fetchCourseInfo();
@@ -177,7 +179,7 @@ export default function CourseDetailsAdmin() {
     formData.append("order", order);
     if (duration) formData.append("duration", duration);
     formData.append("video", video);
-    if (pdf) formData.append("pdfFile", pdf); // name matching expected backend convention, or standard
+    if (pdf) formData.append("pdf", pdf); // name matching expected backend convention, or standard
 
     try {
       const token = localStorage.getItem("token");
@@ -216,7 +218,8 @@ export default function CourseDetailsAdmin() {
     formData.append("order", order);
     if (duration) formData.append("duration", duration);
     if (video) formData.append("video", video);
-    if (pdf) formData.append("pdfFile", pdf);
+    if (pdf) formData.append("pdf", pdf);
+    if (removePdf) formData.append("removePdf", "true");
 
     try {
       const token = localStorage.getItem("token");
@@ -265,9 +268,10 @@ export default function CourseDetailsAdmin() {
   if (!course)
     return <div className="p-20 text-center font-medium">Loading course...</div>;
 
-  const sections = course.sections || [];
+  // const sections = course.sections || [];
   // Sort sections by order
-  sections.sort((a, b) => a.order - b.order);
+  // sections.sort((a, b) => a.order - b.order);
+  const sections = [...(course.sections || [])].sort((a, b) => a.order - b.order);
 
   return (
     <div className="bg-white lg:pl-28 pl-20 pt-10 pr-10 min-h-screen">
@@ -572,7 +576,10 @@ export default function CourseDetailsAdmin() {
           <div className="w-full max-w-md rounded-xl bg-white p-10 shadow-lg relative max-h-[90vh] overflow-y-auto">
             <X
               className="absolute top-4 right-4 cursor-pointer hover:rotate-90 transition text-gray-500 hover:text-black"
-              onClick={() => setIsEditLessonOpen(false)}
+              onClick={() => {
+                setIsEditLessonOpen(false);
+                setRemovePdf(false);
+              }}
             />
             <h2 className="text-2xl font-bold mb-5 new-primary-text">Edit Lesson</h2>
             <form onSubmit={handleEditLessonSubmit} className="flex flex-col gap-3">
@@ -615,6 +622,16 @@ export default function CourseDetailsAdmin() {
                 accept="application/pdf"
                 className="w-full h-20 border-2 border-dashed border-gray-500 text-black rounded-lg p-2 cursor-pointer"
               />
+              {selectedLesson?.pdfUrl && (
+                <label className="flex items-center gap-2 text-sm text-red-600 font-medium cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={removePdf}
+                    onChange={(e) => setRemovePdf(e.target.checked)}
+                  />
+                  Remove existing PDF
+                </label>
+              )}
               <button
                 type="submit"
                 className="new-primary-bg w-full font-semibold hover:scale-102 transition-all duration-200 text-white px-4 py-3 rounded-xl mt-3"
