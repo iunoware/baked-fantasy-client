@@ -46,6 +46,7 @@ const ProductCard = ({
       image: img,
       category,
       subject,
+      type,
     });
     toast.success(`${title} added to cart!`);
   };

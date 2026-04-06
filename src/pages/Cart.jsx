@@ -10,6 +10,7 @@ import { useCart } from "../context/CartContext.jsx";
 export default function App() {
   const [currentStep, setCurrentStep] = useState("cart");
   const [orderNumber, setOrderNumber] = useState("");
+  const [checkoutType, setCheckoutType] = useState(null); // 'bakery' or 'essential' or null
   const { cartItems, updateQuantity, removeFromCart } = useCart();
 
   const [promoCode, setPromoCode] = useState("");
@@ -26,7 +27,11 @@ export default function App() {
   });
 
   useEffect(() => {
-    const subtotal = cartItems.reduce(
+    const activeItems = checkoutType 
+      ? cartItems.filter(item => item.type === checkoutType)
+      : cartItems;
+
+    const subtotal = activeItems.reduce(
       (sum, item) => sum + item.price * item.quantity,
       0,
     );
@@ -38,9 +43,10 @@ export default function App() {
       subtotal,
       taxes,
       discount,
-      total: subtotal - discount + taxes + prev.deliveryFee,
+      total: subtotal - discount + taxes + (checkoutType === "bakery" ? 35 : checkoutType === "essential" ? 50 : 0),
+      deliveryFee: checkoutType === "bakery" ? 35 : checkoutType === "essential" ? 50 : 0
     }));
-  }, [cartItems, promoCode]);
+  }, [cartItems, promoCode, checkoutType]);
 
   const paymentMethods = [
     {
@@ -59,13 +65,13 @@ export default function App() {
     { id: "4", type: "cod", label: "Cash on Delivery" },
   ];
 
-  const handleNextStep = () => {
+  const handleNextStep = (type) => {
     if (currentStep === "cart") {
+      setCheckoutType(type);
       setCurrentStep("delivery");
     } else if (currentStep === "delivery") {
       setCurrentStep("payment");
     } else if (currentStep === "payment") {
-      // Generate order number
       const orderNum = "OD" + Date.now().toString().slice(-6);
       setOrderNumber(orderNum);
       setCurrentStep("confirmation");
@@ -74,6 +80,7 @@ export default function App() {
 
   const handlePreviousStep = () => {
     if (currentStep === "delivery") {
+      setCheckoutType(null);
       setCurrentStep("cart");
     } else if (currentStep === "payment") {
       setCurrentStep("delivery");

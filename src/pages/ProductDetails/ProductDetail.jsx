@@ -11,6 +11,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 
 import { Star, ShoppingCart, Heart, ArrowLeft, Plus, Minus } from "lucide-react";
+import { useCart } from "../../context/CartContext.jsx";
 
 import { useCart } from "../../context/CartContext.jsx";
 
@@ -133,9 +134,10 @@ function ProductDetailPage({ onNavigate, onAddToCart }) {
     addToCart({
       id: productId,
       name: product.title,
-      price: product.originalPrice,
+      price: product.discountedPrice || product.originalPrice,
       image: `http://localhost:5000${product.images?.[0]}`,
       description: product.description,
+      type: "bakery",
     });
     toast.success(`${product.title} added to cart!`);
   };

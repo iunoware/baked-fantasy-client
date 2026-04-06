@@ -11,16 +11,23 @@ import axios from "axios";
 import toast from "react-hot-toast";
 
 import { Star, ShoppingCart, Heart, ArrowLeft, Plus, Minus } from "lucide-react";
+import { useCart } from "../../context/CartContext.jsx";
 
 function ProductDetailPage({ onNavigate, onAddToCart }) {
+  const { cartItems, addToCart, increaseQuantity, decreaseQuantity } =
+    useCart();
   const [added, setAdded] = useState(false);
   const { productId } = useParams();
   const [product, setProduct] = useState(null);
   const [relatedProducts, setRelatedProducts] = useState([]);
   const [selectedImage, setSelectedImage] = useState(0);
-  const [quantity, setQuantity] = useState(1);
+  // const [quantity, setQuantity] = useState(1);
   const [isWishlisted, setIsWishlisted] = useState(false);
   const [loading, setLoading] = useState(true);
+
+  const cartItem = cartItems.find((item) => item.id === productId);
+  const isInCart = !!cartItem;
+  const quantity = cartItem ? cartItem.quantity : 1;
 
   // for fetching the product
   useEffect(() => {
@@ -89,8 +96,15 @@ function ProductDetailPage({ onNavigate, onAddToCart }) {
   };
 
   const handleCart = () => {
-    setAdded(true);
-    toast.success(`product added to cart!`);
+    addToCart({
+      id: productId,
+      name: product.title,
+      price: product.discountedPrice || product.originalPrice,
+      image: `http://localhost:5000${product.images?.[0]}`,
+      description: product.description,
+      type: "essential",
+    });
+    toast.success(`${product.title} added to cart!`);
   };
 
   // const handleAddToCart = () => {
@@ -217,7 +231,7 @@ function ProductDetailPage({ onNavigate, onAddToCart }) {
 
             {/* Actions */}
             <div className="flex space-x-3">
-              {!added ? (
+              {!isInCart ? (
                 <button
                   className="group relative inline-flex cursor-pointer items-center overflow-hidden rounded-lg new-primary-text px-8 py-3 border border-current mr-3"
                   onClick={handleCart}
