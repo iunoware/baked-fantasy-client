@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import { useParams, Link } from "react-router-dom";
@@ -25,11 +26,26 @@ function OnlineCourseDetails() {
     async function fetchCourse() {
       try {
         const res = await axios.get(`${url}/course/${courseId}`);
-        setCourse(res.data);
+        const data = res.data;
+        // setCourse(res.data);
+
+        const sorted = {
+          ...data,
+          sections: [...data.sections]
+            .sort((a, b) => a.order - b.order)
+            .map((section) => ({
+              ...section,
+              lessons: [...section.lessons].sort((a, b) => a.order - b.order),
+            })),
+        };
+        setCourse(sorted);
         setVisibleSection(0);
-        if (res.data.sections.length > 0) {
-          setCurrentLesson(res.data.sections[0].lessons[0]);
+        if (sorted.sections.length > 0 && sorted.sections[0].lessons.length > 0) {
+          setCurrentLesson(sorted.sections[0].lessons[0]);
         }
+        // if (res.data.sections.length > 0) {
+        //   setCurrentLesson(res.data.sections[0].lessons[0]);
+        // }
       } catch (err) {
         console.error(err.message);
       }
