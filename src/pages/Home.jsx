@@ -60,12 +60,10 @@ function Home() {
     // for fetching Baking Essentials
     const fetchEssentials = async () => {
       try {
-        await axios
-          .get(`http://localhost:5000/bakingEssentials`)
-          .then((res) => {
-            const shuffled = res.data.sort(() => 0.5 - Math.random());
-            setEssentials(shuffled.slice(0, 4));
-          });
+        await axios.get(`http://localhost:5000/bakingEssentials`).then((res) => {
+          const shuffled = res.data.sort(() => 0.5 - Math.random());
+          setEssentials(shuffled.slice(0, 4));
+        });
       } catch (err) {
         console.error("Error fetching Products:", err);
       }
@@ -95,8 +93,8 @@ function Home() {
               For Bakers. By Bakers.
             </h2>
             <p className="text-center max-w-3xl luckyGuy text-white text-lg px-2 md:text-xl">
-              From oven-fresh cakes to premium baking essentials, experience the
-              joy of baking — whether you’re buying or creating.
+              From oven-fresh cakes to premium baking essentials, experience the joy of
+              baking — whether you’re buying or creating.
             </p>
           </div>
         </div>
@@ -158,103 +156,108 @@ function Home() {
         <Heading title="Learn, Bake, and Grow with Sweet Dreams Academy" />
         <div className="text-center text-lg !mt-5 mb-10">
           <p>
-            Join our online courses to master baking skills, explore creative
-            recipes, and turn your passion into a thriving business—anytime,
-            anywhere.
+            Join our online courses to master baking skills, explore creative recipes, and
+            turn your passion into a thriving business—anytime, anywhere.
           </p>
         </div>
         <div className="grid grid-cols-1 px-10 md:grid-cols-2 lg:grid-cols-3 gap-10">
           {courses.length > 0 ? (
             courses.map((course, index) => {
               return (
+                //         <div key={index}>
+                //           <article className="bg-white overflow-hidden rounded-2xl shadow-xl hover:-translate-y-2 transition-all duration-200">
+                //             <div className="relative p-2 h-66 w-full">
+                //               <img
+                //                 alt="Cake"
+                //                 // src="/images/cake-2.jpg"
+                //                 src={`${
+                //                   course.ImageUrl
+                //                     ? "http://localhost:5000${course.ImageUrl}"
+                //                     : "/images/cake-2.jpg"
+                //                 }`}
+                //                 className="h-full w-full rounded-xl object-cover"
+                //                 onError={(e) => {
+                //                   e.target.onError = null;
+                //                   e.target.src = "/images/cake-2.jpg";
+                //                 }}
+                //               />
+                //             </div>
+
+                //             <div className=" p-4">
+                //               <div className="text-black flex justify-between">
+                //                 <div className="flex items-center gap-2">
+                //                   <div>
+                //                     <h3 className="font-bold text-xl">{course.title}</h3>
+                //                     <p className="text-md pt-2">{course.description}</p>
+                //                   </div>
+                //                 </div>
+                //                 <Link
+                //                   className="group relative inline-flex items-center overflow-hidden rounded-lg new-primary-bg px-8 py-3 text-white mr-3"
+                //                   to="/courses"
+                //                 >
+                //                   <span className="absolute -start-full transition-all group-hover:start-4">
+                //                     <svg
+                //                       className="size-5 rtl:rotate-180"
+                //                       version="1.1"
+                //                       xmlns="http://www.w3.org/2000/svg"
+                //                       xmlnsXlink="http://www.w3.org/1999/xlink"
+                //                       viewBox="0 0 512 512"
+                //                       xmlSpace="preserve"
+                //                       fill="#ffffff"
+                //                       style={{ transform: "rotate(90deg)" }}
+                //                     >
+                //                       <g>
+                //                         <path
+                //                           style={{ fill: "#ffffff" }}
+                //                           d="M408.387,512H159.603c-8.313,0-15.054-6.741-15.054-15.054v-71.829
+                // c0-8.313,6.741-15.054,15.054-15.054h132.043c8.313,0,15.054,6.741,15.054,15.054c0,8.313-6.741,15.054-15.054,15.054H174.657
+                // v41.722h218.676v-41.722h-28.605c-8.313,0-15.054-6.741-15.054-15.054c0-8.313,6.741-15.054,15.054-15.054h43.659
+                // c8.313,0,15.054,6.741,15.054,15.054v71.829C423.441,505.26,416.7,512,408.387,512z"
+                //                         />
+                //                         <path
+                //                           style={{ fill: "#ffffff" }}
+                //                           d="M302.481,198.013v-15.951c0-15.948-13.009-29.53-29.728-30.096
+                // c-17.553-0.595-31.979,12.793-31.979,29.391v17.213l-0.333-154.106c0-16.243-13.813-29.411-30.854-29.411H208.4
+                // c-17.039,0-30.854,13.168-30.854,29.411v110.671v25.447v76.908l-30.02-73.097c-5.281-15.769-22.984-24.465-39.527-19.431
+                // c-16.543,5.043-25.665,21.909-20.384,37.684l65.918,135.745c8.141,16.765,25.756,27.5,45.137,27.509l177.423,0.077
+                // c27.491,0.012,49.783-21.226,49.786-47.432l0.018-116.556c0-16.243-13.813-29.411-30.854-29.411l0,0
+                // c-17.039,0-30.854,13.168-30.854,29.411v-6.989c0-16.243-13.813-29.411-30.854-29.411l0,0c-17.039,0-30.854,13.168-30.854,29.411"
+                //                         />
+                //                         <path
+                //                           style={{ fill: "#ffffff" }}
+                //                           d="M376.115,381.032c-0.011,0-0.02,0-0.03,0l-177.421-0.077c-25.033-0.012-48.062-14.139-58.672-35.988
+                // L74.073,209.223c-0.283-0.583-0.528-1.182-0.733-1.796c-3.788-11.308-2.854-23.391,2.625-34.022
+                // c5.684-11.03,15.502-19.142,27.643-22.843c24.074-7.325,49.967,5.457,58.011,28.529l0.872,2.121V44.463
+                // C162.492,19.946,183.087,0,208.4,0h1.186c25.313,0,45.907,19.946,45.907,44.464l0.206,95.206c5.564-1.993,11.525-2.958,17.56-2.75
+                // c15.338,0.521,28.625,8.286,36.537,19.916c6.886-3.998,14.939-6.3,23.537-6.3c13.886,0,26.35,6,34.776,15.465
+                // c7.569-5.329,16.88-8.475,26.933-8.475c25.313,0,45.908,19.946,45.908,44.464l-0.02,116.557
+                // c-0.001,16.832-6.84,32.616-19.255,44.442C409.465,374.625,393.285,381.032,376.115,381.032z"
+                //                         />
+                //                       </g>
+                //                     </svg>
+                //                   </span>
+
+                //                   <span className="text-lg font-semibold transition-all group-hover:ms-4">
+                //                     Enroll Now
+                //                   </span>
+                //                 </Link>
+                //               </div>
+                //             </div>
+                //           </article>
+                //         </div>
                 <div key={index}>
-                  <article className="bg-white overflow-hidden rounded-2xl shadow-xl hover:-translate-y-2 transition-all duration-200">
-                    <div className="relative p-2 h-66 w-full">
-                      <img
-                        alt="Cake"
-                        // src="/images/cake-2.jpg"
-                        src={`${
-                          course.ImageUrl
-                            ? "http://localhost:5000${course.ImageUrl}"
-                            : "/images/cake-2.jpg"
-                        }`}
-                        className="h-full w-full rounded-xl object-cover"
-                        onError={(e) => {
-                          e.target.onError = null;
-                          e.target.src = "/images/cake-2.jpg";
-                        }}
-                      />
-                    </div>
-
-                    {/* Bottom white content */}
-                    <div className=" p-4">
-                      <div className="text-black flex justify-between">
-                        <div className="flex items-center gap-2">
-                          <div>
-                            <h3 className="font-bold text-xl">
-                              {course.title}
-                            </h3>
-                            <p className="text-md pt-2">{course.description}</p>
-                          </div>
-                        </div>
-                        {/* <Link to="/courses" className="">
-                          <button className="new-primary-bg px-4 py-3 rounded-xl font-bold text-white cursor-pointer">
-                            Buy Now
-                          </button>
-                        </Link> */}
-                        <Link
-                          className="group relative inline-flex items-center overflow-hidden rounded-lg new-primary-bg px-8 py-3 text-white mr-3"
-                          to="/courses"
-                        >
-                          <span className="absolute -start-full transition-all group-hover:start-4">
-                            <svg
-                              className="size-5 rtl:rotate-180"
-                              version="1.1"
-                              xmlns="http://www.w3.org/2000/svg"
-                              xmlnsXlink="http://www.w3.org/1999/xlink"
-                              viewBox="0 0 512 512"
-                              xmlSpace="preserve"
-                              fill="#ffffff"
-                              style={{ transform: "rotate(90deg)" }}
-                            >
-                              <g>
-                                <path
-                                  style={{ fill: "#ffffff" }}
-                                  d="M408.387,512H159.603c-8.313,0-15.054-6.741-15.054-15.054v-71.829
-        c0-8.313,6.741-15.054,15.054-15.054h132.043c8.313,0,15.054,6.741,15.054,15.054c0,8.313-6.741,15.054-15.054,15.054H174.657
-        v41.722h218.676v-41.722h-28.605c-8.313,0-15.054-6.741-15.054-15.054c0-8.313,6.741-15.054,15.054-15.054h43.659
-        c8.313,0,15.054,6.741,15.054,15.054v71.829C423.441,505.26,416.7,512,408.387,512z"
-                                />
-                                <path
-                                  style={{ fill: "#ffffff" }}
-                                  d="M302.481,198.013v-15.951c0-15.948-13.009-29.53-29.728-30.096
-        c-17.553-0.595-31.979,12.793-31.979,29.391v17.213l-0.333-154.106c0-16.243-13.813-29.411-30.854-29.411H208.4
-        c-17.039,0-30.854,13.168-30.854,29.411v110.671v25.447v76.908l-30.02-73.097c-5.281-15.769-22.984-24.465-39.527-19.431
-        c-16.543,5.043-25.665,21.909-20.384,37.684l65.918,135.745c8.141,16.765,25.756,27.5,45.137,27.509l177.423,0.077
-        c27.491,0.012,49.783-21.226,49.786-47.432l0.018-116.556c0-16.243-13.813-29.411-30.854-29.411l0,0
-        c-17.039,0-30.854,13.168-30.854,29.411v-6.989c0-16.243-13.813-29.411-30.854-29.411l0,0c-17.039,0-30.854,13.168-30.854,29.411"
-                                />
-                                <path
-                                  style={{ fill: "#ffffff" }}
-                                  d="M376.115,381.032c-0.011,0-0.02,0-0.03,0l-177.421-0.077c-25.033-0.012-48.062-14.139-58.672-35.988
-        L74.073,209.223c-0.283-0.583-0.528-1.182-0.733-1.796c-3.788-11.308-2.854-23.391,2.625-34.022
-        c5.684-11.03,15.502-19.142,27.643-22.843c24.074-7.325,49.967,5.457,58.011,28.529l0.872,2.121V44.463
-        C162.492,19.946,183.087,0,208.4,0h1.186c25.313,0,45.907,19.946,45.907,44.464l0.206,95.206c5.564-1.993,11.525-2.958,17.56-2.75
-        c15.338,0.521,28.625,8.286,36.537,19.916c6.886-3.998,14.939-6.3,23.537-6.3c13.886,0,26.35,6,34.776,15.465
-        c7.569-5.329,16.88-8.475,26.933-8.475c25.313,0,45.908,19.946,45.908,44.464l-0.02,116.557
-        c-0.001,16.832-6.84,32.616-19.255,44.442C409.465,374.625,393.285,381.032,376.115,381.032z"
-                                />
-                              </g>
-                            </svg>
-                          </span>
-
-                          <span className="text-lg font-semibold transition-all group-hover:ms-4">
-                            Enroll Now
-                          </span>
-                        </Link>
-                      </div>
-                    </div>
-                  </article>
+                  <div>
+                    <OnlineCourseCard
+                      title={course.title}
+                      description={course.description}
+                      rating={course.rating}
+                      totalReviews={course.totalReviews}
+                      duration={course.duration}
+                      ratingSum={course.ratingSum}
+                      discountedPrice={course.discountedPrice}
+                      originalPrice={course.originalPrice}
+                    />
+                  </div>
                 </div>
               );
             })
@@ -279,8 +282,7 @@ function Home() {
       <section className="feature-section bg py-18 pb-12">
         <Heading title="Featured Products" />
         <p className="subHeading">
-          Handcrafted with love using premium ingredients and traditional
-          techniques
+          Handcrafted with love using premium ingredients and traditional techniques
         </p>
         {/* products section */}
         {products.length > 0 ? (
@@ -369,8 +371,8 @@ function Home() {
             <div className="w-9 h-[2px] bg-[#870D32] rounded-[2px]" />
           </div>
           <p className="mt-4 text-base text-[#7a5c44] max-w-[480px] mx-auto leading-[1.65]">
-            We believe every bite should tell a story — crafted with care,
-            delivered with warmth.
+            We believe every bite should tell a story — crafted with care, delivered with
+            warmth.
           </p>
         </div>
 
@@ -400,8 +402,7 @@ function Home() {
               Freshly Baked Daily
             </h3>
             <p className="text-[14px] text-[#7a5c44] leading-[1.6] m-0">
-              Every item is made fresh each morning — no preservatives, no
-              shortcuts.
+              Every item is made fresh each morning — no preservatives, no shortcuts.
             </p>
           </div>
 
@@ -425,8 +426,8 @@ function Home() {
               Premium Ingredients
             </h3>
             <p className="text-[14px] text-[#7a5c44] leading-[1.6] m-0">
-              Sourced from trusted farms — rich butter, real chocolate, and
-              seasonal fruits.
+              Sourced from trusted farms — rich butter, real chocolate, and seasonal
+              fruits.
             </p>
           </div>
 
@@ -450,8 +451,7 @@ function Home() {
               Custom Cake Orders
             </h3>
             <p className="text-[14px] text-[#7a5c44] leading-[1.6] m-0">
-              Dream it, we bake it — personalised cakes for every occasion and
-              flavour.
+              Dream it, we bake it — personalised cakes for every occasion and flavour.
             </p>
           </div>
 
@@ -478,8 +478,7 @@ function Home() {
               Fast & Reliable Delivery
             </h3>
             <p className="text-[14px] text-[#7a5c44] leading-[1.6] m-0">
-              Hot and fresh at your door — timely delivery you can count on
-              every time.
+              Hot and fresh at your door — timely delivery you can count on every time.
             </p>
           </div>
 
@@ -504,8 +503,7 @@ function Home() {
               Hygienic Preparation
             </h3>
             <p className="text-[14px] text-[#7a5c44] leading-[1.6] m-0">
-              FSSAI-compliant kitchen with strict cleanliness protocols at every
-              step.
+              FSSAI-compliant kitchen with strict cleanliness protocols at every step.
             </p>
           </div>
 
@@ -1112,9 +1110,8 @@ function Home() {
               </h1>
 
               <p className="mt-4 text-base text-pretty text-white sm:text-lg/relaxed">
-                Order bulk cakes & desserts for birthdays, weddings, or events.
-                Fresh, delicious treats delivered to make every celebration
-                memorable.
+                Order bulk cakes & desserts for birthdays, weddings, or events. Fresh,
+                delicious treats delivered to make every celebration memorable.
               </p>
 
               <div className="mt-4 flex gap-4 sm:mt-6">
@@ -1188,8 +1185,8 @@ function Home() {
           <div className="text-center mb-16">
             <Heading title="Featured Courses" />
             <p className="subHeading">
-              Learn from industry experts with our comprehensive online and
-              offline baking courses
+              Learn from industry experts with our comprehensive online and offline baking
+              courses
             </p>
           </div>
           {/* Offline Course Popup */}
@@ -1215,8 +1212,7 @@ function Home() {
       <section className="feature-section bg py-8 pb-12">
         <Heading title="Featured Baking Essentials" />
         <p className="subHeading">
-          Premium-quality tools and ingredients for your everyday baking
-          journey.
+          Premium-quality tools and ingredients for your everyday baking journey.
         </p>
         {/* products section */}
         {essentials.length > 0 ? (
@@ -1333,8 +1329,7 @@ function Home() {
         <section className="mt-10 mx-15 pt-10">
           <Heading title="What Our Students Say" />
           <p className="subHeading">
-            Join thousands of satisfied students and customers who trust Sweet
-            Dreams
+            Join thousands of satisfied students and customers who trust Sweet Dreams
           </p>
           <div className="flex lg:flex-row flex-col gap-5 py-10 items-center">
             <div className="video flex justify-center lg:w-4/12 md:w-6/12 w-full">
@@ -1362,14 +1357,11 @@ function Home() {
                         <div className="star flex">⭐⭐⭐⭐⭐</div>
                       </h3>
 
-                      <p className="mt-1 text-lg font-bold text-white">
-                        Sujitha Mani
-                      </p>
+                      <p className="mt-1 text-lg font-bold text-white">Sujitha Mani</p>
 
                       <p className="mt-4 text-md text-pretty text-white">
-                        "I joined Baking class in baked fantasy best teaching I
-                        got from my mentor thank you mam I suggested to my
-                        friends"
+                        "I joined Baking class in baked fantasy best teaching I got from
+                        my mentor thank you mam I suggested to my friends"
                       </p>
                     </div>
                   </div>
@@ -1392,8 +1384,8 @@ function Home() {
                       </p>
 
                       <p className="mt-4 text-md text-pretty text-white">
-                        "The taste of the cakes and pastry were delicious.......
-                        Very tasty and also healthy"
+                        "The taste of the cakes and pastry were delicious....... Very
+                        tasty and also healthy"
                       </p>
                     </div>
                   </div>
@@ -1411,13 +1403,11 @@ function Home() {
                         <div className="stars">⭐⭐⭐⭐</div>
                       </h3>
 
-                      <p className="mt-1 text-lg font-bold text-white">
-                        Valar Mathi
-                      </p>
+                      <p className="mt-1 text-lg font-bold text-white">Valar Mathi</p>
 
                       <p className="mt-4 text-md text-pretty text-white">
-                        "Well equipped hands on practice and individual
-                        attention for all students"
+                        "Well equipped hands on practice and individual attention for all
+                        students"
                       </p>
                     </div>
                   </div>
@@ -1435,9 +1425,7 @@ function Home() {
                         <div className="stars">⭐⭐⭐⭐⭐</div>
                       </h3>
 
-                      <p className="mt-1 text-lg font-bold text-white">
-                        H.Jeyasudha 217
-                      </p>
+                      <p className="mt-1 text-lg font-bold text-white">H.Jeyasudha 217</p>
 
                       <p className="mt-4 text-md text-pretty text-white">
                         "The best shop and good quality."
@@ -1490,9 +1478,9 @@ function Home() {
             </h1>
 
             <p className="mt-4 text-base text-pretty text-white/80 sm:text-lg/relaxed">
-              Join our baking courses, shop eco-friendly products, or place bulk
-              orders with ease. From beginners to café owners, we have the
-              perfect baking solutions for you.
+              Join our baking courses, shop eco-friendly products, or place bulk orders
+              with ease. From beginners to café owners, we have the perfect baking
+              solutions for you.
             </p>
 
             <div className="mt-4 flex gap-4 sm:mt-6">

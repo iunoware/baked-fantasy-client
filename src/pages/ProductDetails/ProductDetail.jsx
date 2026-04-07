@@ -13,7 +13,7 @@ import axios from "axios";
 import { Star, ShoppingCart, Heart, ArrowLeft, Plus, Minus } from "lucide-react";
 import { useCart } from "../../context/CartContext.jsx";
 
-import { useCart } from "../../context/CartContext.jsx";
+// import { useCart } from "../../context/CartContext.jsx";
 
 function ProductDetailPage({ onNavigate, onAddToCart }) {
   const { cartItems, addToCart, increaseQuantity, decreaseQuantity } = useCart();
@@ -86,7 +86,7 @@ function ProductDetailPage({ onNavigate, onAddToCart }) {
     const fetchRelated = async () => {
       try {
         const res = await axios.get(
-          `http://localhost:5000/products/${productId}/related`
+          `http://localhost:5000/products/${productId}/related`,
         );
         setRelatedProducts(res.data);
       } catch (err) {
@@ -184,10 +184,11 @@ function ProductDetailPage({ onNavigate, onAddToCart }) {
                 <button
                   key={index}
                   onClick={() => setSelectedImage(index)}
-                  className={`p-2 rounded-lg ${selectedImage === index
-                    ? "ring-2 ring-[#870D32]"
-                    : "shadow hover:shadow-md"
-                    }`}
+                  className={`p-2 rounded-lg ${
+                    selectedImage === index
+                      ? "ring-2 ring-[#870D32]"
+                      : "shadow hover:shadow-md"
+                  }`}
                 >
                   <img
                     src={`http://localhost:5000${image}`}
@@ -221,7 +222,7 @@ function ProductDetailPage({ onNavigate, onAddToCart }) {
                   {Math.round(
                     ((product.originalPrice - product.discountedPrice) /
                       product.originalPrice) *
-                    100
+                      100,
                   )}
                   % OFF
                 </Badge>
@@ -308,7 +309,7 @@ function ProductDetailPage({ onNavigate, onAddToCart }) {
                     size="sm"
                     onClick={() => handleQuantityChange(-1)}
                     className="cursor-pointer"
-                  // disabled={quantity <= 1}
+                    // disabled={quantity <= 1}
                   >
                     <Minus className="h-4 w-4" />
                   </Button>
@@ -318,7 +319,7 @@ function ProductDetailPage({ onNavigate, onAddToCart }) {
                     size="sm"
                     onClick={() => handleQuantityChange(1)}
                     className="cursor-pointer"
-                  // disabled={quantity >= 10}
+                    // disabled={quantity >= 10}
                   >
                     <Plus className="h-4 w-4" />
                   </Button>
@@ -335,8 +336,9 @@ function ProductDetailPage({ onNavigate, onAddToCart }) {
                 variant="outline"
                 size="lg"
                 onClick={() => setIsWishlisted(!isWishlisted)}
-                className={`${isWishlisted ? "bg-red-50 text-red-600" : ""
-                  } cursor-pointer `}
+                className={`${
+                  isWishlisted ? "bg-red-50 text-red-600" : ""
+                } cursor-pointer `}
               >
                 <Heart className={isWishlisted ? "fill-current" : ""} />
               </button>

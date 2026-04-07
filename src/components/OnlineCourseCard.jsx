@@ -59,41 +59,45 @@ function OnlineCourseCard(props) {
           />
         </div>
 
-        <div className="p-5 w-full space-y-3">
-          <h2 className="font-semibold text-2xl">{props.title}</h2>
-          <p className="text-gray-700">{props.description}</p>
-          <p className="text-gray-700">
-            <Clock className="inline" size={15} /> {props.duration}
-          </p>
+        <div className="p-5 w-full flex flex-col justify-between h-80">
+          <div className="space-y-3">
+            <h2 className="font-semibold text-2xl">{props.title}</h2>
+            <p className="text-gray-700">{props.description}</p>
+            <p className="text-gray-700">
+              <Clock className="inline" size={15} /> {props.duration}
+            </p>
 
-          <div className="flex gap-2 items-center">
-            <p className="text-2xl font-semibold">{props.rating}</p>
-            <div>
-              <StarRating rating={props.rating} />
+            <div className="flex gap-2 items-center">
+              <p className="text-2xl font-semibold">{props.rating}</p>
+              <div>
+                <StarRating rating={props.rating} />
+              </div>
+              <p className="text-gray-400">({props.totalReviews})</p>
             </div>
-            <p className="text-gray-400">({props.totalReviews})</p>
+
+            <p className="text-2xl font-semibold new-primary-text">
+              {props.discountedPrice && props.originalPrice ? (
+                <>
+                  ₹{props.discountedPrice}{" "}
+                  <span className="line-through text-gray-600 ml-2 text-lg">
+                    ₹{props.originalPrice}
+                  </span>
+                </>
+              ) : (
+                <></>
+              )}
+            </p>
           </div>
 
-          <p className="text-2xl font-semibold new-primary-text">
-            {props.discountedPrice && props.originalPrice ? (
-              <>
-                ₹{props.discountedPrice}{" "}
-                <span className="line-through text-gray-600 ml-2 text-lg">
-                  ₹{props.originalPrice}
-                </span>
-              </>
-            ) : (
-              <></>
-            )}
-          </p>
-
-          <Link
-            to={props.link}
-            state={{ courseId: props.courseId }}
-            className=" text-center block mt-3 w-full rounded-xl transition-all new-primary-bg active:scale-98 shadow-md px-8 py-4 text-white"
-          >
-            {isMyLearning ? "Watch Now" : "Buy Now"}
-          </Link>
+          <div>
+            <Link
+              to={props.link}
+              state={{ courseId: props.courseId }}
+              className=" text-center block mt-3 w-full rounded-xl transition-all new-primary-bg active:scale-98 shadow-md px-8 py-4 text-white"
+            >
+              {isMyLearning ? "Watch Now" : "Buy Now"}
+            </Link>
+          </div>
         </div>
       </div>
     </div>
