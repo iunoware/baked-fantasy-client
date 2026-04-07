@@ -27,6 +27,7 @@ const ProductCard = ({
   discountedPrice,
   inStock,
   type = "bakery",
+  deliveryType = "local",
 }) => {
   const { cartItems, addToCart, increaseQuantity, decreaseQuantity } =
     useCart();
@@ -47,6 +48,7 @@ const ProductCard = ({
       category,
       subject,
       type,
+      deliveryType,
     });
     toast.success(`${title} added to cart!`);
   };
@@ -86,10 +88,14 @@ const ProductCard = ({
       >
         <div className="relative w-full h-full transition-transform duration-700 ease-out group-hover:scale-110">
           <img
-            src={img}
+            src={img || "/images/fallback.png"}
             alt={title}
             className={`object-cover object-center h-full w-full ${!inStock ? "opacity-60 grayscale-[0.5]" : ""}`}
             loading="lazy"
+            onError={(e) => {
+              e.target.onerror = null;
+              e.target.src = "/images/fallback.png";
+            }}
           />
         </div>
 
