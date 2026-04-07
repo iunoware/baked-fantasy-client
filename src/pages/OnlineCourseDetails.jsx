@@ -2,11 +2,266 @@
 import { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import { useParams, Link } from "react-router-dom";
-import { ArrowLeft, Users, Clock10, ChevronDown, FileDown, Star } from "lucide-react";
+import {
+  ArrowLeft,
+  Users,
+  Clock10,
+  ChevronDown,
+  FileDown,
+  Star,
+  Pencil,
+  Trash2,
+} from "lucide-react";
 import "plyr/dist/plyr.css";
 import Plyr from "plyr";
 
 const url = "http://localhost:5000";
+
+function StarPicker({ value, onChange }) {
+  const [hovered, setHovered] = useState(0);
+  return (
+    <div className="flex gap-1">
+      {[1, 2, 3, 4, 5].map((star) => (
+        <Star
+          key={star}
+          size={24}
+          className={`cursor-pointer transition ${
+            star <= (hovered || value) ? "text-amber-400 fill-amber-400" : "text-gray-300"
+          }`}
+          onMouseEnter={() => setHovered(star)}
+          onMouseLeave={() => setHovered(0)}
+          onClick={() => onChange(star)}
+        />
+      ))}
+    </div>
+  );
+}
+
+function ReviewSection({ courseId }) {
+  const token = localStorage.getItem("token");
+  const currentUserId = localStorage.getItem("userId");
+  // const userData = localStorage.getItem("user");
+
+  const [reviews, setReviews] = useState([]);
+  const [myReview, setMyReview] = useState(null);
+  const [rating, setRating] = useState(0);
+  const [comment, setComment] = useState("");
+  const [editing, setEditing] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    async function fetchReviews() {
+      try {
+        const res = await axios.get(`${url}/course/${courseId}`);
+        const allReviews = res.data.reviews || [];
+        setReviews(allReviews);
+        const mine = allReviews.find(
+          (r) => r.student === currentUserId || r.student?._id === currentUserId,
+        );
+        if (mine) {
+          setMyReview(mine);
+          setRating(mine.rating);
+          setComment(mine.comment);
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    }
+    fetchReviews();
+  }, [courseId]);
+
+  // useEffect(() => {
+  //   async function fetchUser() {
+  //     try {
+
+  //     } catch (error) {
+  //       console.error(error);
+  //     }
+  //   }
+
+  //   fetchUser();
+  // }, [currentUserId]);
+
+  async function submitReview() {
+    if (!rating) return setError("Please select a rating");
+    setLoading(true);
+    setError("");
+    try {
+      const res = await axios.post(
+        `${url}/course/${courseId}/review`,
+        { rating, comment },
+        { headers: { Authorization: `Bearer ${token}` } },
+      );
+      const updated = res.data.course.reviews;
+      setReviews(updated);
+      setMyReview(
+        updated.find(
+          (r) => r.student === currentUserId || r.student?._id === currentUserId,
+        ),
+      );
+    } catch (err) {
+      setError(err.response?.data?.msg || "Something went wrong");
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  async function updateReview() {
+    if (!rating) return setError("Please select a rating");
+    setLoading(true);
+    setError("");
+    try {
+      const res = await axios.patch(
+        `${url}/course/${courseId}/review/${myReview._id}`,
+        { rating, comment },
+        { headers: { Authorization: `Bearer ${token}` } },
+      );
+      const updated = res.data.course.reviews;
+      setReviews(updated);
+      setMyReview(
+        updated.find(
+          (r) => r.student === currentUserId || r.student?._id === currentUserId,
+        ),
+      );
+      setEditing(false);
+    } catch (err) {
+      setError(err.response?.data?.msg || "Something went wrong");
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  async function deleteReview() {
+    if (!window.confirm("Delete your review?")) return;
+    setLoading(true);
+    try {
+      await axios.delete(`${url}/course/${courseId}/review/${myReview._id}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      setReviews((prev) => prev.filter((r) => r._id !== myReview._id));
+      setMyReview(null);
+      setRating(0);
+      setComment("");
+    } catch (err) {
+      setError(err.response?.data?.msg || "Something went wrong");
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  const showForm = !myReview || editing;
+
+  return (
+    <div className="mt-10">
+      <h2 className="text-2xl font-bold mb-6">Student Reviews</h2>
+
+      {token && showForm && (
+        <div className="bg-white rounded-xl shadow p-5 mb-8">
+          <h3 className="font-semibold text-lg mb-3">
+            {editing ? "Edit your review" : "Leave a review"}
+          </h3>
+
+          <StarPicker value={rating} onChange={setRating} />
+
+          <textarea
+            className="w-full mt-3 p-3 border border-gray-200 rounded-lg resize-none text-sm focus:outline-none focus:ring-2 focus:ring-pink-300"
+            rows={3}
+            placeholder="Write your review... (optional)"
+            value={comment}
+            onChange={(e) => setComment(e.target.value)}
+          />
+
+          {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
+
+          <div className="flex gap-3 mt-3">
+            <button
+              onClick={editing ? updateReview : submitReview}
+              disabled={loading}
+              className="bg-pbrown text-white px-5 py-2 rounded-lg text-sm hover:opacity-95 active:opacity-90 disabled:opacity-50"
+            >
+              {loading ? "Saving..." : editing ? "Update" : "Submit"}
+            </button>
+            {editing && (
+              <button
+                onClick={() => {
+                  setEditing(false);
+                  setRating(myReview.rating);
+                  setComment(myReview.comment);
+                }}
+                className="px-5 py-2 rounded-lg text-sm border border-gray-300 hover:bg-gray-50"
+              >
+                Cancel
+              </button>
+            )}
+          </div>
+        </div>
+      )}
+
+      <div className="space-y-4">
+        {reviews.length === 0 && (
+          <p className="text-gray-500 text-sm">No reviews yet. Be the first!</p>
+        )}
+        {reviews.map((r) => {
+          const isOwn = r.student === currentUserId || r.student?._id === currentUserId;
+          return (
+            <div
+              key={r._id}
+              className={`bg-white rounded-xl shadow p-4 ${
+                isOwn ? "border-l-4 border-pink-500" : ""
+              }`}
+            >
+              <div className="flex justify-between items-start">
+                <div className="">
+                  <div className="flex justify-center items-center gap-3 mb-5">
+                    <div className="bg-gray-200 h-8 w-8 rounded-full"></div>
+                    <p>{r.student?.name || "Anonymous"}</p>
+                  </div>
+
+                  <div className="flex gap-0.5 mb-3">
+                    {[1, 2, 3, 4, 5].map((s) => (
+                      <Star
+                        key={s}
+                        size={16}
+                        className={
+                          s <= r.rating
+                            ? "text-amber-400 fill-amber-400"
+                            : "text-gray-200"
+                        }
+                      />
+                    ))}
+                  </div>
+
+                  {r.comment && <p className="text-gray-700 text-sm mt-1">{r.comment}</p>}
+
+                  <p className="text-xs text-gray-400 mt-2">
+                    {new Date(r.createdAt).toLocaleDateString()}
+                  </p>
+                </div>
+                {isOwn && !editing && (
+                  <div className="flex gap-2">
+                    <button
+                      onClick={() => setEditing(true)}
+                      className="text-gray-400 hover:text-pink-600"
+                    >
+                      <Pencil size={16} />
+                    </button>
+                    <button
+                      onClick={deleteReview}
+                      className="text-gray-400 hover:text-red-500"
+                    >
+                      <Trash2 size={16} />
+                    </button>
+                  </div>
+                )}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
 
 function OnlineCourseDetails() {
   const { courseId } = useParams();
@@ -241,6 +496,8 @@ function OnlineCourseDetails() {
             <h2 className="text-2xl font-bold">{currentLesson?.title}</h2>
             <p className="text-gray-600 mt-2">Duration: {currentLesson?.duration}</p>
           </div>
+
+          <ReviewSection courseId={courseId} />
         </div>
 
         {/* SIDEBAR */}
