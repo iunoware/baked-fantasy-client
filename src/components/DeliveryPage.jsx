@@ -9,6 +9,7 @@ import {
   Home,
   Building,
   Download,
+  X,
 } from "lucide-react";
 import { Button } from "../components/ui/button";
 import { Card, CardContent } from "../components/ui/card";
@@ -192,7 +193,9 @@ export function DeliveryPage({
         );
 
         if (!token || token === "null" || token === "undefined") {
-          console.warn("User is not logged in, skipping address fetch to prevent 401 error.");
+          console.warn(
+            "User is not logged in, skipping address fetch to prevent 401 error.",
+          );
           return;
         }
 
@@ -228,7 +231,7 @@ export function DeliveryPage({
       {/* Header */}
       <div className="mb-8 pt-12 md:pt-0">
         <div className="flex items-center gap-3 mb-2">
-          <MapPin className="h-8 w-8 text-pink-500" />
+          <MapPin className="h-8 w-8 text-sbrown" />
           <h1 className="text-3xl font-bold">Delivery Details</h1>
         </div>
         <p className="text-gray-600">
@@ -261,100 +264,116 @@ export function DeliveryPage({
                     Add New
                   </Button>
                   {/* </DialogTrigger> */}
-                   <DialogContent className="bg-pink-50">
-                     <DialogHeader>
-                       <DialogTitle>Add New Address</DialogTitle>
-                       <DialogDescription className="hidden">
-                         Enter the details for your new delivery address.
-                       </DialogDescription>
-                     </DialogHeader>
-                    <div className="space-y-4">
-                      <div>
-                        <Label htmlFor="type">Address Type</Label>
-                        <Input
-                          ref={inputRef}
-                          id="type"
-                          placeholder="Home, Work, etc."
-                          value={newAddress.type}
-                          onChange={(e) =>
-                            setNewAddress({
-                              ...newAddress,
-                              type: e.target.value,
-                            })
-                          }
-                          className="focus:ring-1 focus:ring-black/70 focus:border-none mt-2"
-                        />
-                      </div>
-                      <div>
-                        <Label htmlFor="type">Building / Floor</Label>
-                        <Input
-                          ref={inputRef}
-                          id="floor"
-                          placeholder="23/ A"
-                          value={newAddress.building}
-                          onChange={(e) =>
-                            setNewAddress({
-                              ...newAddress,
-                              building: e.target.value,
-                            })
-                          }
-                          className="focus:ring-1 focus:ring-black/70 focus:border-none mt-2"
-                        />
-                      </div>
-                      <div>
-                        <Label htmlFor="address">Complete Address</Label>
-                        {/* <Textarea
-                          id="address"
-                          placeholder="Enter your complete address"
-                          className="mt-2"
-                          value={newAddress.address}
-                          onChange={(e) =>
-                            setNewAddress({
-                              ...newAddress,
-                              address: e.target.value,
-                            })
-                          }
-                        /> */}
-                        <AddressAutocomplete
-                          setLocation={(location) =>
-                            setNewAddress({
-                              ...newAddress,
-                              address: location.address,
-                              place_id: location.place_id,
-                              lat: location.lat,
-                              lng: location.lng,
-                            })
-                          }
-                          className="mt-2"
-                        />
-                      </div>
-                      <div>
-                        <Label htmlFor="landmark">Landmark (Optional)</Label>
-                        <Input
-                          id="landmark"
-                          placeholder="Near landmark"
-                          value={newAddress.landmark}
-                          className="focus:ring-1 focus:ring-black/70 focus:border-none mt-2"
-                          onChange={(e) =>
-                            setNewAddress({
-                              ...newAddress,
-                              landmark: e.target.value,
-                            })
-                          }
-                        />
-                      </div>
+                  <DialogContent className="sm:max-w-[500px] p-0 overflow-hidden border-none shadow-3xl bg-white rounded-[2.5rem]">
+                    <div className="bg-pbrown p-5 text-white relative">
                       <button
-                        onClick={addAddress}
-                        className="group relative w-full cursor-pointer justify-center mt-6 inline-flex items-center overflow-hidden rounded-sm bg-cyan-500 px-8 py-3 text-white focus:ring-3 focus:outline-hidden mr-3"
+                        onClick={() => setIsAddingAddress(false)}
+                        className="absolute right-6 top-6 h-8 w-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-all active:scale-95 z-20"
                       >
-                        <span className="absolute -start-full transition-all group-hover:start-4">
-                          <Download size="15" />
-                        </span>
-
-                        <span className="text-sm font-medium text-center transition-all group-hover:ms-4">
-                          Save Address
-                        </span>
+                        <X size={18} className="text-white" />
                       </button>
+                      <DialogHeader className="relative text-left">
+                        <DialogTitle className="text-2xl font-black tracking-tighter">
+                          Add Address
+                        </DialogTitle>
+                        <DialogDescription className="text-pink-100/70 font-bold uppercase text-[10px] tracking-widest ">
+                          Save a new delivery location
+                        </DialogDescription>
+                      </DialogHeader>
+                    </div>
+
+                    <div className="p-8 space-y-8">
+                      {/* Address Type Selector */}
+                      <div>
+                        <Label className="text-[10px] font-black uppercase text-gray-800 tracking-widest block mb-4">
+                          Location Type
+                        </Label>
+                        <div className="flex gap-3">
+                          {[
+                            { id: "Home", icon: <Home size={16} /> },
+                            { id: "Work", icon: <Building size={16} /> },
+                            { id: "Other", icon: <MapPin size={16} /> },
+                          ].map((type) => (
+                            <button
+                              key={type.id}
+                              onClick={() =>
+                                setNewAddress({ ...newAddress, type: type.id })
+                              }
+                              className={`flex-1 flex flex-col items-center gap-2 p-3 rounded-2xl border-2 transition-all active:scale-95 ${
+                                newAddress.type === type.id
+                                  ? "bg border-pbrown text-pbrown shadow-sm"
+                                  : "bg-white border-gray-100 text-gray-400 hover:border-gray-200"
+                              }`}
+                            >
+                              {type.icon}
+                              <span className="text-[10px] font-black uppercase tracking-wider">
+                                {type.id}
+                              </span>
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+
+                      <div className="grid grid-cols-2 gap-6">
+                        <div className="col-span-2">
+                          <Label className="text-[10px] font-black uppercase text-gray-800 tracking-widest block mb-2">
+                            Google Address Search
+                          </Label>
+                          <AddressAutocomplete
+                            setLocation={(location) =>
+                              setNewAddress({
+                                ...newAddress,
+                                address: location.address,
+                                place_id: location.place_id,
+                                lat: location.lat,
+                                lng: location.lng,
+                              })
+                            }
+                          />
+                        </div>
+
+                        <div className="col-span-1">
+                          <Label className="text-[10px] font-black uppercase text-gray-800 tracking-widest block mb-2">
+                            Building / Flat
+                          </Label>
+                          <Input
+                            placeholder="e.g. 23/A, Green Apt."
+                            value={newAddress.building}
+                            onChange={(e) =>
+                              setNewAddress({
+                                ...newAddress,
+                                building: e.target.value,
+                              })
+                            }
+                            className="h-12 rounded-xl bg-gray-50 border-gray-100 focus:bg-white focus:ring-[#870D32]/10 focus:border-[#870D32]/20 font-bold text-sm"
+                          />
+                        </div>
+
+                        <div className="col-span-1">
+                          <Label className="text-[10px] font-black uppercase text-gray-800 tracking-widest block mb-2">
+                            Landmark
+                          </Label>
+                          <Input
+                            placeholder="e.g. Near Park"
+                            value={newAddress.landmark}
+                            onChange={(e) =>
+                              setNewAddress({
+                                ...newAddress,
+                                landmark: e.target.value,
+                              })
+                            }
+                            className="h-12 rounded-xl bg-gray-50 border-gray-100 focus:bg-white focus:ring-[#870D32]/10 focus:border-[#870D32]/20 font-bold text-sm"
+                          />
+                        </div>
+                      </div>
+
+                      <Button
+                        onClick={addAddress}
+                        className="w-full h-14 rounded-2xl bg-sbrown hover:bg-pbrown text-white font-black uppercase tracking-[0.2em] text-xs shadow-xl shadow-red-100 transition-all active:scale-[0.98] group"
+                      >
+                        Save location
+                        <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                      </Button>
                     </div>
                   </DialogContent>
                 </Dialog>
@@ -379,21 +398,21 @@ export function DeliveryPage({
                         key={address._id || address.id} // 🔥 use _id from Mongo
                         className={`p-4 border rounded-lg cursor-pointer transition-all duration-200 ${
                           isSelected
-                            ? "border-pink-600 bg-pink-50 ring-1 ring-pink-500 shadow-sm"
+                            ? "border-brown bg-pink-50 ring-1 ring-pbrown shadow-sm"
                             : "border-gray-200 hover:border-gray-300"
                         }`}
                         onClick={() => handleSelectAddress(address)}
                         // onClick={() => setActiveAddress(address.id)}
                       >
                         <div className="flex items-start gap-3">
-                          <IconComponent className="h-5 w-5 text-pink-400 mt-1" />
+                          <IconComponent className="h-5 w-5 text-brown mt-1" />
                           <div className="flex-1">
                             <div className="flex items-center gap-2 mb-1">
                               <span className="font-semibold text-lg">
                                 {displayType}
                               </span>
                               {isSelected && (
-                                <span className="text-xs bg-pink-500 text-white px-2.5 py-1 rounded-full font-semibold shadow-sm">
+                                <span className="text-xs bg-sbrown text-white px-2.5 py-1 rounded-full font-semibold shadow-sm">
                                   Deliver Here
                                 </span>
                               )}

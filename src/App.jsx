@@ -1,4 +1,9 @@
-import { useLocation, BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  useLocation,
+  BrowserRouter as Router,
+  Routes,
+  Route,
+} from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import EnquiryBtn from "./components/EnquiryBtn.jsx";
 import Home from "../src/pages/Home.jsx";
@@ -60,7 +65,7 @@ function AppContent() {
 
   const logout = () => {
     localStorage.removeItem("token");
-    navigate("/login");
+    navigate("/");
   };
 
   autoLogout(token, logout);
@@ -86,11 +91,17 @@ function AppContent() {
         {/* products */}
         <Route path="/products/:categoryName" element={<SpecificCategory />} />
         <Route path="/products/all-products" element={<AllProducts />} />
-        <Route path="/products/:categoryName/:productId" element={<ProductDetail />} />
+        <Route
+          path="/products/:categoryName/:productId"
+          element={<ProductDetail />}
+        />
         {/* products */}
 
         {/* essentials */}
-        <Route path="/essentials/:categoryName" element={<EssSpeciCategory />} />
+        <Route
+          path="/essentials/:categoryName"
+          element={<EssSpeciCategory />}
+        />
         <Route path="/essentials/all-products" element={<AllEssentials />} />
         <Route
           path="/essential/:categoryName/:productId"
@@ -101,7 +112,10 @@ function AppContent() {
         {/* courses */}
         <Route path="/courses" element={<Courses />} />
         <Route path="/courses/online-course" element={<OnlineCourse />} />
-        <Route path="/course/my-learning/:courseId" element={<OnlineCourseDetails />} />
+        <Route
+          path="/course/my-learning/:courseId"
+          element={<OnlineCourseDetails />}
+        />
         <Route path="/courses/offline-course" element={<OfflineCourse />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/courses/my-learning/" element={<MyLearning />} />

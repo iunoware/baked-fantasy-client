@@ -20,8 +20,6 @@ export const useCart = () => {
 
 export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
-  // const [bakeryItems, setBakeryItems] = useState([]);
-  // const [essentialItems, setEssentialItems] = useState([]);
   const [loading, setLoading] = useState(true);
 
   // Helper to get active user info
@@ -65,7 +63,8 @@ export const CartProvider = ({ children }) => {
               : "",
             description: item.productId.subject,
             category: item.productId.category,
-            type: item.productId.itemType || "bakery", // Try to read from backend or default
+            type: item.productId.productType === "Essential" ? "essential" : "bakery",
+            deliveryType: item.productId.deliveryType || "local",
           }));
         return transformedItems;
       }
@@ -93,6 +92,7 @@ export const CartProvider = ({ children }) => {
             items: guestCart.map((item) => ({
               productId: item.id,
               quantity: item.quantity,
+              onModel: item.type === "essential" ? "Essentials" : "Product",
             })),
           };
           const response = await api.post("/cart/sync", syncData);
@@ -114,7 +114,8 @@ export const CartProvider = ({ children }) => {
                 : "",
               description: item.productId.subject,
               category: item.productId.category,
-              type: item.productId.itemType || "bakery",
+              type: item.productId.productType === "Essential" ? "essential" : "bakery",
+              deliveryType: item.productId.deliveryType || "local",
             }));
           setCartItems(transformedItems);
         } else {
@@ -156,7 +157,12 @@ export const CartProvider = ({ children }) => {
   }, [syncAndLoadCart]);
 
   // DB Sync Helper for single operations
-  const updateBackend = async (productId, quantity, action = "update") => {
+  const updateBackend = async (
+    productId,
+    quantity,
+    action = "update",
+    onModel = "Product",
+  ) => {
     const user = getUser();
     if (!user || !user._id) return true; // Pretend success for guests, handled locally
 
@@ -168,6 +174,7 @@ export const CartProvider = ({ children }) => {
           userId: user._id,
           productId,
           quantity,
+          onModel,
         });
       }
       return true;
@@ -182,15 +189,16 @@ export const CartProvider = ({ children }) => {
 
   const addToCart = async (product) => {
     const user = getUser();
+    const productId = product.id || product._id;
     const existingItem = cartItems.find(
-      (item) => item.id === (product.id || product._id),
+      (item) => item.id === productId,
     );
     const newQty = existingItem ? existingItem.quantity + 1 : 1;
-    const productId = product.id || product._id;
+    const onModel = product.type === "essential" ? "Essentials" : "Product";
 
     if (user && user._id) {
       // Backend first
-      const success = await updateBackend(productId, newQty);
+      const success = await updateBackend(productId, newQty, "update", onModel);
       if (success) {
         setCartItems((prev) => {
           if (existingItem) {
@@ -209,6 +217,7 @@ export const CartProvider = ({ children }) => {
                 description: product.description || product.subject,
                 category: product.category,
                 type: product.type || "bakery",
+                deliveryType: product.deliveryType || "local",
               },
             ];
           }
@@ -234,6 +243,7 @@ export const CartProvider = ({ children }) => {
               description: product.description || product.subject,
               category: product.category,
               type: product.type || "bakery",
+              deliveryType: product.deliveryType || "local",
             },
           ];
         }
@@ -267,7 +277,9 @@ export const CartProvider = ({ children }) => {
 
     const user = getUser();
     if (user && user._id) {
-      const success = await updateBackend(productId, quantity);
+      const match = cartItems.find((i) => i.id === productId);
+      const onModel = match?.type === "essential" ? "Essentials" : "Product";
+      const success = await updateBackend(productId, quantity, "update", onModel);
       if (success) {
         setCartItems((prev) =>
           prev.map((i) => (i.id === productId ? { ...i, quantity } : i)),

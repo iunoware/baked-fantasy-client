@@ -4,7 +4,6 @@ import { DeliveryPage } from "../components/DeliveryPage.jsx";
 import { PaymentPage } from "../components/PaymentPage.jsx";
 import { ConfirmationPage } from "../components/ConfirmationPage.jsx";
 import axios from "axios";
-
 import { useCart } from "../context/CartContext.jsx";
 
 export default function App() {
@@ -23,12 +22,17 @@ export default function App() {
     taxes: 0,
     deliveryFee: 0,
     discount: 0,
-    total: 0
+    total: 0,
   });
 
   useEffect(() => {
-    const activeItems = checkoutType 
-      ? cartItems.filter(item => item.type === checkoutType)
+    const activeItems = checkoutType
+      ? cartItems.filter((item) => {
+          if (checkoutType === "essential") return item.type === "essential";
+          // For bakery items, they can be local, pickup, or state
+          const itemDeliveryType = item.deliveryType || "local";
+          return itemDeliveryType === checkoutType;
+        })
       : cartItems;
 
     const subtotal = activeItems.reduce(
@@ -37,14 +41,22 @@ export default function App() {
     );
     const discount = promoCode === "SAVE20" ? subtotal * 0.2 : 0;
     const taxes = (subtotal - discount) * 0.18; // 18% GST
-    
-    setOrderSummary(prev => ({
+
+    // Delivery fee logic based on the specific checkout type
+    let deliveryFee = 0;
+    if (checkoutType === "local") deliveryFee = subtotal > 500 ? 0 : 35;
+    else if (checkoutType === "pickup") deliveryFee = 0;
+    else if (checkoutType === "state") deliveryFee = subtotal > 1000 ? 0 : 60;
+    else if (checkoutType === "essential")
+      deliveryFee = subtotal > 1500 ? 0 : 80;
+
+    setOrderSummary((prev) => ({
       ...prev,
       subtotal,
       taxes,
       discount,
-      total: subtotal - discount + taxes + (checkoutType === "bakery" ? 35 : checkoutType === "essential" ? 50 : 0),
-      deliveryFee: checkoutType === "bakery" ? 35 : checkoutType === "essential" ? 50 : 0
+      total: subtotal - discount + taxes + deliveryFee,
+      deliveryFee,
     }));
   }, [cartItems, promoCode, checkoutType]);
 
