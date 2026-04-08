@@ -156,6 +156,7 @@ function ReviewSection({ courseId }) {
     <div className="mt-10">
       <h2 className="text-2xl font-bold mb-6">Student Reviews</h2>
 
+      {/* enter review box */}
       {token && showForm && (
         <div className="bg-white rounded-xl shadow p-5 mb-8">
           <h3 className="font-semibold text-lg mb-3">
@@ -198,7 +199,8 @@ function ReviewSection({ courseId }) {
         </div>
       )}
 
-      <div className="space-y-4">
+      {/* client review grid */}
+      <div className="grid md:grid-cols-2 grid-cols-1 gap-5">
         {reviews.length === 0 && (
           <p className="text-gray-500 text-sm">No reviews yet. Be the first!</p>
         )}
@@ -207,13 +209,13 @@ function ReviewSection({ courseId }) {
           return (
             <div
               key={r._id}
-              className={`bg-white rounded-xl shadow p-4 ${
+              className={`bg-white rounded-xl shadow-md p-4 ${
                 isOwn ? "border-l-4 border-pink-500" : ""
               }`}
             >
               <div className="flex justify-between items-start">
                 <div className="">
-                  <div className="flex justify-center items-center gap-3 mb-5">
+                  <div className="flex justify-start items-center gap-3 mb-5">
                     <div className="bg-gray-200 h-8 w-8 rounded-full"></div>
                     <p>{r.student?.name || "Anonymous"}</p>
                   </div>
@@ -439,7 +441,7 @@ function OnlineCourseDetails() {
   return (
     <div className="bg pt-20 relative">
       {/* HEADER */}
-      <div className="py-12 px-5 border-b border-gray-400">
+      <div className="py-12 px-5 border-b border-gray-400 ">
         <Link
           to="/courses/my-learning"
           className="flex items-center text-sm text-gray-600 hover:text-sky-500 mb-3"
@@ -463,11 +465,10 @@ function OnlineCourseDetails() {
       </div>
 
       {/* MAIN */}
-      <div className="grid lg:grid-cols-4 gap-6 px-8 py-10">
-        {/* <div className="flex gap-6 px-8 py-10"> */}
+      <div className="grid lg:grid-cols-4 gap-6 px-8 py-10 ">
         {/* VIDEO */}
-        <div className="lg:col-span-3">
-          {/* <div className="flex-1"> */}
+        <div className="lg:col-span-3 order-1 lg:order-1">
+          {/* current video */}
           {currentLesson ? (
             <div className="relative">
               {videoLoading && (
@@ -491,17 +492,15 @@ function OnlineCourseDetails() {
             <div className="w-6 h-6 border-3 border-pink-700 border-t-pink-300 rounded-full animate-spin"></div>
           )}
 
-          {/* LESSON DETAILS */}
+          {/* Lesson details */}
           <div className="mt-6">
             <h2 className="text-2xl font-bold">{currentLesson?.title}</h2>
             <p className="text-gray-600 mt-2">Duration: {currentLesson?.duration}</p>
           </div>
-
-          <ReviewSection courseId={courseId} />
         </div>
 
         {/* SIDEBAR */}
-        <div className="sticky top-20 h-fit">
+        <div className="sticky top-20 h-fit order-2 lg:order-2">
           {/* <div className="w-[320px] sticky top-20 h-fit max-h-[80vh] overflow-y-auto"> */}
           <h2 className="text-xl font-bold mb-4">Course content</h2>
 
@@ -559,8 +558,11 @@ function OnlineCourseDetails() {
             </div>
           ))}
         </div>
+
+        <div className="lg:col-span-3 order-3 lg:order-3">
+          <ReviewSection courseId={courseId} />
+        </div>
       </div>
-      {/* <div className="h-[2000px]"></div> */}
     </div>
   );
 }
