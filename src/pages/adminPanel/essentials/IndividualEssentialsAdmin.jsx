@@ -517,10 +517,9 @@ function IndividualEssentialAdmin() {
             </table>
           ) : (
             <div>
-              <h2 className="text-4xl h-40 flex justify-center items-center">
-                There are no products in the {categoryName} category. Please add some
-                products.
-              </h2>
+              <p className="text-xl text-center text-gray-600 h-40 flex justify-center items-center">
+                There are no products in the {categoryName} category.
+              </p>
             </div>
           )}
         </div>
