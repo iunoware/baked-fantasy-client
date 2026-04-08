@@ -216,7 +216,9 @@ function ReviewSection({ courseId }) {
               <div className="flex justify-between items-start">
                 <div className="">
                   <div className="flex justify-start items-center gap-3 mb-5">
-                    <div className="bg-gray-200 h-8 w-8 rounded-full"></div>
+                    <div className="bg-gray-200 h-8 w-8 rounded-full flex justify-center items-center">
+                      {r.student?.name.charAt(0)}
+                    </div>
                     <p>{r.student?.name || "Anonymous"}</p>
                   </div>
 
