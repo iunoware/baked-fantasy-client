@@ -58,6 +58,7 @@ function OnlineCourse() {
               <div key={index}>
                 <div>
                   <OnlineCourseCard
+                    thumbnail={course.thumbnail}
                     title={course.title}
                     description={course.description}
                     rating={course.rating}

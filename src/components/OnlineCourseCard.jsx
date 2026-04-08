@@ -41,21 +41,19 @@ function OnlineCourseCard(props) {
   return (
     <div className="">
       <div className="rounded-2xl bg-white shadow-lg m-10">
-        <div className="rounded-xl !m-2 translate-y-2 flex align-bottom overflow-hidden">
+        <div className="rounded-xl !m-2 h-60 w-auto translate-y-2 flex align-bottom overflow-hidden">
           <img
             src={
-              // props.image ? `http://localhost:5000/uploads/${props.image}` : "/images/cake-2.jpg"
-              props.image
-                ? `http://localhost:5000/${props.thumbnail?.replace(/^\//, "")}`
-                : "/images/cake-2.jpg"
+              props.thumbnail
+                ? `http://localhost:5000${props.thumbnail}`
+                : "/images/fallback.png"
             }
-            // http://localhost:5000/uploads/${props.image}
             alt="course-img"
             onError={(e) => {
               e.target.onError = null;
-              e.target.src = "/images/cake-2.jpg";
+              e.target.src = "/images/fallback.png";
             }}
-            className="rounded-xl hover:scale-104 transition-all duration-200"
+            className="rounded-xl hover:scale-104 transition-all object-cover object-center duration-200 w-full h-full"
           />
         </div>
 

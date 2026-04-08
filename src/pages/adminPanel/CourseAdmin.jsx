@@ -7,19 +7,22 @@ import { Trash2, SquarePen, X } from "lucide-react";
 function CourseCardAdmin({ course, onEdit, onDelete }) {
   return (
     <div className="bg-white rounded-xl shadow-md overflow-hidden relative group border border-gray-100">
-      <div className="absolute top-2 right-2 flex gap-2 z-10 bg-white/80 p-1.5 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity">
-        <SquarePen
-          className="cursor-pointer text-blue-600 hover:-translate-y-1 transition-all duration-200"
-          onClick={() => onEdit(course)}
-          size={20}
-        />
-        <Trash2
-          className="cursor-pointer text-red-600 hover:-translate-y-1 transition-all duration-200"
-          onClick={() => onDelete(course)}
-          size={20}
-        />
+      {/* <div className="absolute top-2 right-2 flex gap-2 z-10 bg-white/80 p-1.5 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity"> */}
+      <div>
+        <div className="absolute top-4 right-4 flex gap-2 z-10 bg-white/60 p-1.5 rounded-lg">
+          <SquarePen
+            className="cursor-pointer text-blue-600 hover:-translate-y-1 transition-all duration-200"
+            onClick={() => onEdit(course)}
+            size={20}
+          />
+          <Trash2
+            className="cursor-pointer text-red-600 hover:-translate-y-1 transition-all duration-200"
+            onClick={() => onDelete(course)}
+            size={20}
+          />
+        </div>
       </div>
-      <div className="relative">
+      <div className="relative p-2">
         {/* <div className="absolute flex justify-center items-center h-full w-full">
           <div className=" opacity-0 translate-y-10 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-200 bg-white rounded-full py-1 px-3">
             Visit Course
@@ -40,7 +43,7 @@ function CourseCardAdmin({ course, onEdit, onDelete }) {
               : `http://localhost:5000/${course.thumbnail?.replace(/^\//, "")}`
           }
           alt={course.title}
-          className="w-full h-48 object-cover"
+          className="w-full h-48 object-cover rounded-lg"
           onError={(e) => {
             e.target.src = "https://via.placeholder.com/400x200?text=No+Image";
           }}
@@ -140,7 +143,7 @@ export default function CourseAdmin() {
     formData.append("thumbnail", thumbnail);
 
     try {
-      const token = localStorage.getItem("token");
+      const token = sessionStorage.getItem("token");
       await axios.post("http://localhost:5000/course", formData, {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -188,13 +191,14 @@ export default function CourseAdmin() {
     }
 
     try {
-      const token = localStorage.getItem("token");
+      const token = sessionStorage.getItem("token");
       const courseId = selectedCourse._id || selectedCourse.id;
       await axios.patch(`http://localhost:5000/course/${courseId}`, formData, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
+      // await axios.patch(`http://localhost:5000/course/${courseId}`);
       toast.success("Course updated");
       setIsEditModalOpen(false);
       setTimeout(() => window.location.reload(), 1000);
@@ -206,7 +210,7 @@ export default function CourseAdmin() {
 
   const handleDeleteConfirm = async () => {
     try {
-      const token = localStorage.getItem("token");
+      const token = sessionStorage.getItem("token");
       const courseId = selectedCourse._id || selectedCourse.id;
       await axios.delete(`http://localhost:5000/course/${courseId}`, {
         headers: {
@@ -237,7 +241,7 @@ export default function CourseAdmin() {
         </button>
       </div>
 
-      <div className="bg-white shadow-md w-full p-5 my-10 rounded-xl">
+      <div className="bg shadow-md w-full p-5 my-10 rounded-xl">
         <p className="mb-4 font-medium text-gray-700">Total Courses: {courses.length}</p>
 
         {courses.length === 0 ? (
@@ -321,7 +325,7 @@ export default function CourseAdmin() {
               />
               <button
                 type="submit"
-                className="new-primary-bg w-full font-semibold hover:scale-102 transition-all duration-200 text-white px-4 py-3 rounded-xl mt-3"
+                className="new-primary-bg cursor-pointer w-full font-semibold hover:scale-102 transition-all duration-200 text-white px-4 py-3 rounded-xl mt-3"
               >
                 Submit
               </button>

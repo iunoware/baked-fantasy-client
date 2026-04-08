@@ -83,7 +83,7 @@ export default function CourseDetailsAdmin() {
     if (!order) return toast.error("Order is required");
 
     try {
-      const token = localStorage.getItem("token");
+      const token = sessionStorage.getItem("token");
       await axios.post(
         `http://localhost:5000/course/${courseId}/section`,
         { title, order: Number(order) },
@@ -113,7 +113,7 @@ export default function CourseDetailsAdmin() {
     if (!order) return toast.error("Order is required");
 
     try {
-      const token = localStorage.getItem("token");
+      const token = sessionStorage.getItem("token");
       const sectionId = selectedSection._id || selectedSection.id;
       await axios.patch(
         `http://localhost:5000/course/${courseId}/section/${sectionId}`,
@@ -136,7 +136,7 @@ export default function CourseDetailsAdmin() {
 
   const handleDeleteSectionConfirm = async () => {
     try {
-      const token = localStorage.getItem("token");
+      const token = sessionStorage.getItem("token");
       const sectionId = selectedSection._id || selectedSection.id;
       await axios.delete(
         `http://localhost:5000/course/${courseId}/section/${sectionId}`,
@@ -182,7 +182,7 @@ export default function CourseDetailsAdmin() {
     if (pdf) formData.append("pdf", pdf); // name matching expected backend convention, or standard
 
     try {
-      const token = localStorage.getItem("token");
+      const token = sessionStorage.getItem("token");
       await axios.post(
         `http://localhost:5000/course/${courseId}/section/${selectedSectionId}/lesson`,
         formData,
@@ -222,7 +222,7 @@ export default function CourseDetailsAdmin() {
     if (removePdf) formData.append("removePdf", "true");
 
     try {
-      const token = localStorage.getItem("token");
+      const token = sessionStorage.getItem("token");
       const lessonId = selectedLesson._id || selectedLesson.id;
       const sectionId = selectedSectionId; // Stored when edit button is clicked
       await axios.patch(
@@ -245,7 +245,7 @@ export default function CourseDetailsAdmin() {
 
   const handleDeleteLessonConfirm = async () => {
     try {
-      const token = localStorage.getItem("token");
+      const token = sessionStorage.getItem("token");
       const lessonId = selectedLesson._id || selectedLesson.id;
       const sectionId = selectedSectionId;
       await axios.delete(
