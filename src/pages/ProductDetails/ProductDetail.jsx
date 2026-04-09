@@ -18,11 +18,10 @@ import {
   Plus,
   Minus,
 } from "lucide-react";
-import { useCart } from "../../context/CartContext.jsx";
-
-import { useCart } from "../../context/CartContext.jsx";
+import { useAuth } from "../../context/AuthContext.jsx";
 
 function ProductDetailPage({ onNavigate, onAddToCart }) {
+  const { openLoginModal, isLoggedIn } = useAuth();
   const { cartItems, addToCart, increaseQuantity, decreaseQuantity } =
     useCart();
   const { productId } = useParams();
@@ -141,6 +140,11 @@ function ProductDetailPage({ onNavigate, onAddToCart }) {
   };
 
   const handleCart = () => {
+    if (!isLoggedIn) {
+      openLoginModal();
+      return;
+    }
+
     addToCart({
       id: productId,
       name: product.title,

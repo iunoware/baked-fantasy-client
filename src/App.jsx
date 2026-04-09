@@ -3,8 +3,12 @@ import {
   BrowserRouter as Router,
   Routes,
   Route,
+  NavLink,
+  Navigate,
+  useNavigate
 } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
+import { useState, useEffect } from "react";
 import EnquiryBtn from "./components/EnquiryBtn.jsx";
 import Home from "../src/pages/Home.jsx";
 import About from "../src/pages/About.jsx";
@@ -43,11 +47,11 @@ import IndividualEssentialAdmin from "./pages/adminPanel/essentials/IndividualEs
 import EssentialDetailsPage from "./pages/ProductDetails/EssentialDetail.jsx";
 import AllEssentials from "./pages/specifiCategories/AllEssentials.jsx";
 import AllProducts from "./pages/specifiCategories/AllProducts.jsx";
-import { Navigate } from "react-router-dom";
 import autoLogout from "./hooks/autoLogout.js";
-import { useNavigate } from "react-router-dom";
 import { LoadingProvider } from "./context/LoadingContext.jsx";
 import { GlobalLoader } from "./components/GlobalLoader.jsx";
+import CompleteProfileModal from "./components/CompleteProfileModal.jsx";
+import { useAuth } from "./context/AuthContext.jsx";
 
 function ProtectedAdminRoute({ children }) {
   const token = sessionStorage.getItem("token");
@@ -70,9 +74,50 @@ function AppContent() {
 
   autoLogout(token, logout);
 
+  const { isLoggedIn } = useAuth();
+  const [showProfileModal, setShowProfileModal] = useState(false);
+
+  useEffect(() => {
+    const checkProfileStatus = () => {
+      if (isLoggedIn) {
+        const storedUser = localStorage.getItem("user");
+        if (storedUser) {
+          try {
+            const user = JSON.parse(storedUser);
+            // Show modal if profile is not completed
+            if (!user.profileCompleted || !user.address1) {
+              setShowProfileModal(true);
+            } else {
+              setShowProfileModal(false);
+            }
+          } catch (e) {
+            console.error("Error parsing user for profile check", e);
+          }
+        }
+      } else {
+        setShowProfileModal(false);
+      }
+    };
+
+    checkProfileStatus();
+
+    // Listen for custom "profileCompleted" event or login state changes
+    window.addEventListener("profileCompleted", () => setShowProfileModal(false));
+    window.addEventListener("loginStateChange", checkProfileStatus);
+
+    return () => {
+      window.removeEventListener("profileCompleted", () => setShowProfileModal(false));
+      window.removeEventListener("loginStateChange", checkProfileStatus);
+    };
+  }, [isLoggedIn]);
+
   return (
     <>
       <GlobalLoader />
+      <CompleteProfileModal 
+        isOpen={showProfileModal} 
+        onClose={() => setShowProfileModal(false)} 
+      />
       <Toaster position="top-center" reverseOrder={false} />
       <ScrollToTop />
 
@@ -80,7 +125,7 @@ function AppContent() {
       {isAdmin ? <Sidebar /> : <Navbar />}
       <Routes>
         {/* root pages */}
-        <Route path="/login" element={<Login />} />
+        {/* <Route path="/login" element={<Login />} /> */}
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/profile" element={<Profile />} />
@@ -224,14 +269,17 @@ function AppContent() {
 }
 
 import { CartProvider } from "./context/CartContext.jsx";
+import { AuthProvider } from "./context/AuthContext.jsx";
 
 function App() {
   return (
     <Router>
       <LoadingProvider>
-        <CartProvider>
-          <AppContent />
-        </CartProvider>
+        <AuthProvider>
+          <CartProvider>
+            <AppContent />
+          </CartProvider>
+        </AuthProvider>
       </LoadingProvider>
     </Router>
   );

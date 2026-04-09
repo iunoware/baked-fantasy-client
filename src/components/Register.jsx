@@ -15,7 +15,7 @@ import toast from "react-hot-toast";
 //   signInWithPhoneNumber,
 // } from "../fireBaseConfig.js";
 
-function Register({ isOpen, onClose, onOpenLogin, setLoggedIn }) {
+function Register({ isOpen, onClose, onOpenLogin, onLoginSuccess }) {
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -92,8 +92,8 @@ function Register({ isOpen, onClose, onOpenLogin, setLoggedIn }) {
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("user", JSON.stringify(res.data.user));
       toast.success("User Registered Successfully 🍰");
-      if (typeof setLoggedIn === "function") {
-        setLoggedIn(true);
+      if (typeof onLoginSuccess === "function") {
+        onLoginSuccess();
       }
       onClose();
       
@@ -118,8 +118,8 @@ function Register({ isOpen, onClose, onOpenLogin, setLoggedIn }) {
       localStorage.setItem("user", JSON.stringify(res.data.user));
 
       toast.success("Logged in with Google 🎉");
-      if (typeof setLoggedIn === "function") {
-        setLoggedIn(true);
+      if (typeof onLoginSuccess === "function") {
+        onLoginSuccess();
       }
       onClose();
     } catch (err) {

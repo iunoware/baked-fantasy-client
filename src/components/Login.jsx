@@ -8,7 +8,7 @@ import { Eye, EyeOff, Mail, Lock, X } from "lucide-react";
 import axios from "axios";
 import toast from "react-hot-toast";
 
-function Login({ isOpen, onClose, onOpenRegister, setLoggedIn }) {
+function Login({ isOpen, onClose, onOpenRegister, onLoginSuccess }) {
   const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
@@ -31,14 +31,14 @@ function Login({ isOpen, onClose, onOpenRegister, setLoggedIn }) {
 
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("user", JSON.stringify(res.data.user));
-      
+
       // Trigger cart sync
       window.dispatchEvent(new Event("loginStateChange"));
 
       toast.success("Login Successful! Welcome back 🍰");
 
-      if (typeof setLoggedIn === "function") {
-        setLoggedIn(true);
+      if (typeof onLoginSuccess === "function") {
+        onLoginSuccess();
       }
       onClose();
     } catch (err) {
@@ -70,15 +70,15 @@ function Login({ isOpen, onClose, onOpenRegister, setLoggedIn }) {
 
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("user", JSON.stringify(res.data.user));
-      
+
       // Trigger cart sync
       window.dispatchEvent(new Event("loginStateChange"));
 
       setMessage("");
 
       toast.success("Login Successful Welcome back 🍰");
-      if (typeof setLoggedIn === "function") {
-        setLoggedIn(true);
+      if (typeof onLoginSuccess === "function") {
+        onLoginSuccess();
       }
       onClose();
     } catch (err) {
