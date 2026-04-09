@@ -443,11 +443,11 @@ const TabbedCart = ({
                 </div>
 
                 <div className="flex justify-between items-end mb-8 mt-10">
-                  <span className="text-lg font-black text-gray-900 tracking-tighter">
+                  <span className="text-lg font-bold text-gray-900 tracking-tighter">
                     Total Price
                   </span>
-                  <span className="text-4xl font-black text-gray-900 tracking-tighter tabular-nums leading-none">
-                    ₹{grandTotal.toLocaleString()}
+                  <span className="text-4xl font-bold text-gray-900 tracking-tighter tabular-nums leading-none">
+                    ₹ {grandTotal.toLocaleString()}
                   </span>
                 </div>
 

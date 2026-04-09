@@ -11,9 +11,10 @@ import axios from "axios";
 import toast from "react-hot-toast";
 
 import { Star, ShoppingCart, Heart, ArrowLeft, Plus, Minus } from "lucide-react";
-import { useCart } from "../../context/CartContext.jsx";
+import { useAuth } from "../../context/AuthContext.jsx";
 
 function ProductDetailPage({ onNavigate, onAddToCart }) {
+  const { openLoginModal, isLoggedIn } = useAuth();
   const { cartItems, addToCart, increaseQuantity, decreaseQuantity } =
     useCart();
   const [added, setAdded] = useState(false);
@@ -96,6 +97,11 @@ function ProductDetailPage({ onNavigate, onAddToCart }) {
   };
 
   const handleCart = () => {
+    if (!isLoggedIn) {
+      openLoginModal();
+      return;
+    }
+
     addToCart({
       id: productId,
       name: product.title,

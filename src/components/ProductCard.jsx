@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 import { Plus, Minus, ShoppingCart } from "lucide-react";
 import toast from "react-hot-toast";
 import { useCart } from "../context/CartContext.jsx";
+import { useState } from "react";
+import { useAuth } from "@/context/AuthContext.jsx";
 
 /**
  * A universal Product Card component used for both Bakery Products and Baking Essentials.
@@ -31,14 +33,25 @@ const ProductCard = ({
 }) => {
   const { cartItems, addToCart, increaseQuantity, decreaseQuantity } =
     useCart();
+
+  const { openLoginModal, isLoggedIn } = useAuth();
   const cartItem = cartItems.find((item) => item.id === id);
   const quantity = cartItem?.quantity || 0;
   const added = quantity > 0;
+
+  // Login validation
+
+  // const [userLoggedIn, setUserLoggedIn] = useState(false);
 
   // Add to cart handler
   const handleCart = (e) => {
     e.preventDefault();
     if (!inStock) return;
+
+    if (!isLoggedIn) {
+      openLoginModal();
+      return;
+    }
 
     addToCart({
       id,

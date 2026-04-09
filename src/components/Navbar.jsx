@@ -13,6 +13,7 @@ import Login from "./Login.jsx";
 import Register from "./Register.jsx";
 import { useCart } from "../context/CartContext.jsx";
 import { toast } from "react-hot-toast";
+import { useAuth } from "../context/AuthContext";
 
 export const StaggeredMenu = ({
   position = "right",
@@ -31,7 +32,7 @@ export const StaggeredMenu = ({
   onMenuClose,
 }) => {
   const [open, setOpen] = useState(false);
-  const [isLoggedIn, setLoggedIn] = useState(false);
+  // const [isLoggedIn, setLoggedIn] = useState(false);
   const [isLoginOpen, setLoginOpen] = useState(false);
   const [isRegisterOpen, setRegisterOpen] = useState(false);
   const [search, setSearch] = useState("");
@@ -41,10 +42,23 @@ export const StaggeredMenu = ({
   const mobileSearchRef = useRef(null);
   const openRef = useRef(false);
   const { cartCount } = useCart();
+  const {
+    isLoginModalOpen,
+    isRegisterModalOpen,
+    isLoggedIn,
+    openLoginModal,
+    closeLoginModal,
+    openRegisterModal,
+    closeRegisterModal,
+    openLoginFromRegister,
+    openRegisterFromLogin,
+    handleLoginSuccess,
+    handleLogout,
+  } = useAuth();
 
   // for disabling scroll when login or register is open
   useEffect(() => {
-    if (isLoginOpen || isRegisterOpen) {
+    if (isLoginModalOpen || isRegisterModalOpen) {
       document.body.style.setProperty("overflow", "hidden", "important");
       document.documentElement.style.setProperty(
         "overflow",
@@ -60,26 +74,26 @@ export const StaggeredMenu = ({
       document.body.style.removeProperty("overflow");
       document.documentElement.style.removeProperty("overflow");
     };
-  }, [isLoginOpen, isRegisterOpen]);
+  }, [isLoginModalOpen, isRegisterModalOpen]);
 
-  useEffect(() => {
-    const token = localStorage.getItem("token");
+  // useEffect(() => {
+  //   const token = localStorage.getItem("token");
 
-    if (!token) {
-      setLoggedIn(false);
-    } else {
-      setLoggedIn(true);
-    }
-  }, []);
+  //   if (!token) {
+  //     setLoggedIn(false);
+  //   } else {
+  //     setLoggedIn(true);
+  //   }
+  // }, []);
 
-  const openRegisterFromLogin = () => {
-    setLoginOpen(false);
-    setRegisterOpen(true);
-  };
-  const openLoginFromRegister = () => {
-    setLoginOpen(true);
-    setRegisterOpen(false);
-  };
+  // const openRegisterFromLogin = () => {
+  //   setLoginOpen(false);
+  //   setRegisterOpen(true);
+  // };
+  // const openLoginFromRegister = () => {
+  //   setLoginOpen(true);
+  //   setRegisterOpen(false);
+  // };
 
   // const textColor = chroma(menu ).luminance() < 0.5 ? "#FFFFFF" : "#000000";
 
@@ -491,21 +505,13 @@ export const StaggeredMenu = ({
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
-    sessionStorage.removeItem("token");
-    setLoggedIn(false);
-    
-    // Reset Cart for Guest
+  const handleLogoutClick = () => {
+    handleLogout(); // Uses context version
     window.dispatchEvent(new Event("loginStateChange"));
-
     setIsDropdownOpen(false);
-
     toast.success("Logged out successfully");
     window.location.href = "/";
   };
-
   const handleSearch = async (value) => {
     setSearch(value);
 
@@ -528,8 +534,9 @@ export const StaggeredMenu = ({
 
   return (
     <div
-      className={`overflow-x-clip fixed sm-scope z-40 pointer-events-none ${isFixed ? "fixed top-0 left-0 overflow-hidden" : "w-full h-full"
-        }`}
+      className={`overflow-x-clip fixed sm-scope z-40 pointer-events-none ${
+        isFixed ? "fixed top-0 left-0 overflow-hidden" : "w-full h-full"
+      }`}
     >
       <div
         className={
@@ -665,7 +672,7 @@ export const StaggeredMenu = ({
                       if (isLoggedIn) {
                         setIsDropdownOpen(!isDropdownOpen);
                       } else {
-                        setLoginOpen(true);
+                        openLoginModal();
                       }
                     }}
                   >
@@ -693,7 +700,7 @@ export const StaggeredMenu = ({
                       </Link>
                       <div className="h-px bg-[#F6E9D9] my-1"></div>
                       <button
-                        onClick={handleLogout}
+                        onClick={handleLogoutClick}
                         className="flex items-center gap-3 w-full px-4 py-3 text-sm text-red-600 hover:bg-red-50 transition-colors"
                       >
                         <LogOut size={16} />
@@ -881,7 +888,7 @@ export const StaggeredMenu = ({
           ref={panelRef}
           className="staggered-menu-panel shadow-xl z-50 overflow-y-hidden! absolute top-0 right-0 h-screen! bg-white! flex flex-col p-[6em_2em_2em_2em] backdrop-blur-md pointer-events-auto"
           style={{ WebkitBackdropFilter: "blur(12px)" }}
-        // aria-hidden={!open}
+          // aria-hidden={!open}
         >
           <button
             className="absolute top-10 right-10 text-black/50 hover:text-black transition-colors cursor-pointer"
@@ -904,7 +911,8 @@ export const StaggeredMenu = ({
                   >
                     <NavLink
                       className={({ isActive }) =>
-                        `${isActive ? "text-[#40200d]!" : "text-black!"
+                        `${
+                          isActive ? "text-[#40200d]!" : "text-black!"
                         } sm-panel-item relative hover:text-[#40200d]! cursor-pointer leading-none tracking-[-2px] uppercase transition-[background,color] duration-150 ease-linear inline-block no-underline pr-[1.4em]`
                       }
                       to={it.link}
@@ -968,16 +976,16 @@ export const StaggeredMenu = ({
         </aside>
       </div>
       <Login
-        isOpen={isLoginOpen}
-        onClose={() => setLoginOpen(false)}
+        isOpen={isLoginModalOpen}
+        onClose={closeLoginModal}
         onOpenRegister={openRegisterFromLogin}
-        setLoggedIn={setLoggedIn}
+        onLoginSuccess={handleLoginSuccess}
       />
       <Register
-        isOpen={isRegisterOpen}
-        onClose={() => setRegisterOpen(false)}
+        isOpen={isRegisterModalOpen}
+        onClose={closeRegisterModal}
         onOpenLogin={openLoginFromRegister}
-        setLoggedIn={setLoggedIn}
+        onLoginSuccess={handleLoginSuccess}
       />
 
       <style>{`
