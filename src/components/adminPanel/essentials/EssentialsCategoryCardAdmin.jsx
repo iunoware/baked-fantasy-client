@@ -11,7 +11,10 @@ function EssentialsCategoryCardAdmin(props) {
   const [isModal2Visible, setIsModal2Visible] = useState(false);
   const [isActive, setIsActive] = useState(props.activate);
   const [deleteModal, setDeleteModal] = useState(false);
-  const [isBtnVisible, setIsBtnVisible] = useState(false);
+  // const [isBtnVisible, setIsBtnVisible] = useState(false);
+
+  // new delete timer useState
+  const [deleteTimer, setDeleteTimer] = useState(3);
 
   const token = "";
 
@@ -64,11 +67,11 @@ function EssentialsCategoryCardAdmin(props) {
     }
   }
 
-  function deleteTimeout() {
-    setTimeout(() => {
-      setIsBtnVisible(true);
-    }, 3000);
-  }
+  // function deleteTimeout() {
+  //   setTimeout(() => {
+  //     setIsBtnVisible(true);
+  //   }, 3000);
+  // }
 
   async function deleteFunction() {
     try {
@@ -93,12 +96,23 @@ function EssentialsCategoryCardAdmin(props) {
     }
   }
 
-  // useEffect(() => {
-  //   props.isActive ? setIsActive(false) : setIsActive(true);
-  // }, []);
+  // new delete timer
+  useEffect(() => {
+    if (deleteModal) {
+      setDeleteTimer(3);
+      const timer1 = setTimeout(() => setDeleteTimer(2), 1000);
+      const timer2 = setTimeout(() => setDeleteTimer(1), 2000);
+      const timer3 = setTimeout(() => setDeleteTimer(0), 3000);
+      return () => {
+        clearTimeout(timer1);
+        clearTimeout(timer2);
+        clearTimeout(timer3);
+      };
+    }
+  }, [deleteModal]);
 
   return (
-    <div>
+    <div className="">
       {/* modal for patch category */}
       <div
         className={`${
@@ -214,7 +228,7 @@ function EssentialsCategoryCardAdmin(props) {
       </div>
 
       {/* modal for delete warning */}
-      <div
+      {/* <div
         className={`${
           deleteModal ? "block" : "hidden"
         } fixed inset-0 z-50 grid place-content-center bg-black/50 p-4`}
@@ -273,6 +287,37 @@ function EssentialsCategoryCardAdmin(props) {
             <div className="text-center">Loading please wait...</div>
           )}
         </div>
+      </div> */}
+      <div
+        className={`fixed inset-0 z-50 grid place-content-center bg-black/50 p-4 ${deleteModal ? "block" : "hidden"}`}
+      >
+        <div className="w-full max-w-md rounded-xl bg-white p-10 shadow-lg relative text-center">
+          <X
+            className="absolute top-4 right-4 cursor-pointer hover:rotate-90 transition text-gray-500 hover:text-black"
+            onClick={() => setDeleteModal(false)}
+          />
+          <h2 className="text-2xl font-bold mb-4 text-red-600">Warning</h2>
+          <p className="text-lg font-medium text-gray-700 mb-6">
+            Are you sure you want to delete{" "}
+            <span className="font-bold">"{props.title}"</span>? This action cannot be
+            undone.
+          </p>
+          {deleteTimer > 0 ? (
+            <button
+              disabled
+              className="bg-gray-400 w-full font-semibold text-white px-4 py-3 rounded-xl cursor-not-allowed"
+            >
+              Wait {deleteTimer}s to Confirm
+            </button>
+          ) : (
+            <button
+              onClick={deleteFunction}
+              className="bg-red-600 w-full font-semibold hover:scale-102 transition-all duration-200 text-white px-4 py-3 rounded-xl"
+            >
+              Yes, Delete Essential
+            </button>
+          )}
+        </div>
       </div>
 
       {/* <h1>hello world</h1> */}
@@ -280,15 +325,34 @@ function EssentialsCategoryCardAdmin(props) {
       <div
         className={`${
           props.activate ? "bg-white" : "bg-red-300"
-        } rounded-2xl min-h-75 shadow-xl m-2 group`}
+        } rounded-2xl min-h-75 shadow-xl m-2 group relative`}
       >
-        <div className="rounded-xl relative h-40 w-auto !m-2 translate-y-2 flex align-bottom overflow-hidden">
+        <div className="rounded-xl h-40 w-auto !m-2 translate-y-2 flex align-bottom overflow-hidden">
+          <div className="absolute top-2 right-2 flex gap-2 z-10 bg-white/80 p-1.5 rounded-lg">
+            <SquarePen
+              className="cursor-pointer text-blue-600 hover:-translate-y-1 transition-all duration-200"
+              onClick={() => setIsModal2Visible(true)}
+              size={20}
+            />
+
+            <Trash2
+              className="cursor-pointer text-red-600 hover:-translate-y-1 transition-all duration-200"
+              onClick={() => {
+                setDeleteModal(true);
+                // deleteTimeout();
+              }}
+              size={20}
+            />
+          </div>
           <img
-            src={`http://localhost:5000${props.image}`}
+            // src={`http://localhost:5000${props.image}`}
+            src={
+              props.image ? `http://localhost:5000${props.image}` : "/images/fallback.png"
+            }
             alt="course-img"
             onError={(e) => {
               e.target.onError = null;
-              e.target.src = "/images/cake-2.jpg";
+              e.target.src = "/images/fallback.png";
             }}
             className="rounded-xl w-full h-full object-center object-cover !z-0 hover:scale-104 transition-all duration-200"
           />
@@ -314,7 +378,7 @@ function EssentialsCategoryCardAdmin(props) {
 
           <div className="mt-4 flex justify-between">
             {/* <div className="text-3xl font-bold text-pink-500">₹{props.price}</div> */}
-            <div className="flex flex-row justify-end items-start gap-4">
+            {/* <div className="flex flex-row justify-end items-start gap-4">
               <div>
                 <SquarePen
                   color="#000000"
@@ -334,7 +398,7 @@ function EssentialsCategoryCardAdmin(props) {
                   className="hover:text-black hover:cursor-pointer hover:-translate-y-1 transition-all duration-200"
                 />
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
