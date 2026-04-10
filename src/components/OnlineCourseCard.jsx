@@ -62,7 +62,7 @@ function OnlineCourseCard(props) {
             <h2 className="font-semibold text-2xl">{props.title}</h2>
             <p className="text-gray-700 line-clamp-2">{props.description}</p>
             <p className="text-gray-700">
-              <Clock className="inline" size={15} /> {props.duration}
+              <Clock className="inline" size={15} /> {props.duration}• 100 students
             </p>
 
             <div className="flex gap-2 items-center">
