@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
-import { GraduationCap, Star, Clock } from "lucide-react";
+import { GraduationCap, Star, Clock, Users } from "lucide-react";
 
 function StarRating({ rating }) {
   return (
@@ -60,9 +60,11 @@ function OnlineCourseCard(props) {
         <div className="p-5 w-full flex flex-col justify-between h-80">
           <div className="space-y-3">
             <h2 className="font-semibold text-2xl">{props.title}</h2>
-            <p className="text-gray-700">{props.description}</p>
+            <p className="text-gray-700 line-clamp-2">{props.description}</p>
             <p className="text-gray-700">
-              <Clock className="inline" size={15} /> {props.duration}
+              <Clock className="inline" size={15} /> {props.duration} •{" "}
+              {/* <Users className="inline" size={15} />  */}
+              {props.totalStudents ? props.totalStudents : 0} students
             </p>
 
             <div className="flex gap-2 items-center">
