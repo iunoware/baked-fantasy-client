@@ -172,6 +172,7 @@ function Home() {
                       rating={course.rating}
                       totalReviews={course.totalReviews}
                       duration={course.duration}
+                      totalStudents={course.totalStudents}
                       ratingSum={course.ratingSum}
                       discountedPrice={course.discountedPrice}
                       originalPrice={course.originalPrice}

@@ -83,13 +83,11 @@ export default function MyLearning() {
                         title={course.title}
                         description={course.description}
                         rating={course.rating}
+                        duration={course.duration}
+                        totalStudents={course.totalStudents}
                         totalReviews={course.totalReviews}
                         ratingSum={course.ratingSum}
                         link={`/course/my-learning/${course._id}`}
-                        // link={`/courses/my-learning/${course.title}-${course._id}`}
-
-                        // discountedPrice={course.discountedPrice}
-                        // originalPrice={course.originalPrice}
                       />
                     </div>
                   </div>

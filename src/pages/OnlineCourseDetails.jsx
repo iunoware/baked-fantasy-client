@@ -206,6 +206,9 @@ function ReviewSection({ courseId }) {
         )}
         {reviews.map((r) => {
           const isOwn = r.student === currentUserId || r.student?._id === currentUserId;
+          const studentName =
+            typeof r.student === "object" ? r.student?.name : "Anonymous";
+          const studentInitial = studentName ? studentName.charAt(0) : "?";
           return (
             <div
               key={r._id}
@@ -217,7 +220,8 @@ function ReviewSection({ courseId }) {
                 <div className="">
                   <div className="flex justify-start items-center gap-3 mb-5">
                     <div className="bg-gray-200 h-8 w-8 rounded-full flex justify-center items-center">
-                      {r.student?.name.charAt(0)}
+                      {/* {r.student?.name.charAt(0)} */}
+                      {studentInitial}
                     </div>
                     <p>{r.student?.name || "Anonymous"}</p>
                   </div>
@@ -491,7 +495,9 @@ function OnlineCourseDetails() {
               </div>
             </div>
           ) : (
-            <div className="w-6 h-6 border-3 border-pink-700 border-t-pink-300 rounded-full animate-spin"></div>
+            <div className="w-full h-[400px] flex justify-center items-center bg-black rounded-xl overflow-hidden shadow-xl">
+              <div className="w-6 h-6 border-3 border-amber-700 border-t-amber-300 rounded-full animate-spin"></div>
+            </div>
           )}
 
           {/* Lesson details */}
