@@ -60,7 +60,7 @@ function OnlineCourseCard(props) {
         <div className="p-5 w-full flex flex-col justify-between h-80">
           <div className="space-y-3">
             <h2 className="font-semibold text-2xl">{props.title}</h2>
-            <p className="text-gray-700">{props.description}</p>
+            <p className="text-gray-700 line-clamp-2">{props.description}</p>
             <p className="text-gray-700">
               <Clock className="inline" size={15} /> {props.duration}
             </p>

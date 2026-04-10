@@ -12,20 +12,22 @@ import Loading from "../components/Loading.jsx";
 //   return coursePrices;
 // }
 
+const url = `http://localhost:5000`;
+
 function OnlineCourse() {
   let [courses, setCourses] = useState([]);
+  const [purchasedIds, setPurchasedIds] = useState(new Set());
 
   useEffect(() => {
-    // localStorage.setItem(
-    //   "token",
-    //   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4YTZlYTE3MTExZDA2NDFhZTg4ZmRjOCIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzU4NTI1NzQ5LCJleHAiOjE3NTg2MTIxNDl9.GBja9cx4geiFNk_xBf7xcTp8J8e5T0R44cZLfAxaQso"
-    // );
+    const user = JSON.parse(localStorage.getItem("user") || "null");
+    const ids = new Set(user?.purchasedCourses?.map((c) => c.courseId) || []);
+    setPurchasedIds(ids);
+    // console.log(user);
 
     async function fetchCourse() {
       try {
-        const response = await axios.get("http://localhost:5000/course");
+        const response = await axios.get(`${url}/course`);
         setCourses(response.data.courses);
-        // coursePrices = response.data.courses.map((c) => c.price);
       } catch (error) {
         console.error(error.message);
       }
@@ -34,7 +36,7 @@ function OnlineCourse() {
   }, []);
 
   return (
-    <div className="bg pt-20">
+    <div className="bg md:pt-20 pt-40">
       <Link
         to="/courses"
         className="flex pt-10 pl-10 w-fit items-center text-sm text-gray-600 hover:text-[#870D32] mb-3"
@@ -50,28 +52,29 @@ function OnlineCourse() {
         </p>
       </div>
 
-      {/* <div className="py-20 grid grid-cols-1 lg:grid-cols-2"> */}
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 lg:gap-8">
         {courses.length > 0 ? (
-          courses.map((course, index) => {
-            return (
-              <div key={index}>
-                <div>
-                  <OnlineCourseCard
-                    thumbnail={course.thumbnail}
-                    title={course.title}
-                    description={course.description}
-                    rating={course.rating}
-                    totalReviews={course.totalReviews}
-                    duration={course.duration}
-                    ratingSum={course.ratingSum}
-                    discountedPrice={course.discountedPrice}
-                    originalPrice={course.originalPrice}
-                  />
+          courses
+            .filter((course) => !purchasedIds.has(course._id))
+            .map((course, index) => {
+              return (
+                <div key={index}>
+                  <div>
+                    <OnlineCourseCard
+                      thumbnail={course.thumbnail}
+                      title={course.title}
+                      description={course.description}
+                      rating={course.rating}
+                      totalReviews={course.totalReviews}
+                      duration={course.duration}
+                      ratingSum={course.ratingSum}
+                      discountedPrice={course.discountedPrice}
+                      originalPrice={course.originalPrice}
+                    />
+                  </div>
                 </div>
-              </div>
-            );
-          })
+              );
+            })
         ) : (
           <div className="w-screen">
             <Loading text={"Online courses are coming soon"} />
