@@ -17,19 +17,22 @@ import {
   ArrowLeft,
   Plus,
   Minus,
+  Loader2,
 } from "lucide-react";
 import { useAuth } from "../../context/AuthContext.jsx";
 
 function ProductDetailPage({ onNavigate, onAddToCart }) {
-  const { openLoginModal, isLoggedIn } = useAuth();
   const { cartItems, addToCart, increaseQuantity, decreaseQuantity } =
     useCart();
+  const { handleProtectedAction } = useAuth();
   const { productId } = useParams();
+
   const [product, setProduct] = useState(null);
   const [relatedProducts, setRelatedProducts] = useState([]);
   const [selectedImage, setSelectedImage] = useState(0);
   const [isWishlisted, setIsWishlisted] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [isAdding, setIsAdding] = useState(false);
 
   const cartItem = cartItems.find((item) => item.id === productId);
   const isInCart = !!cartItem;
@@ -140,20 +143,26 @@ function ProductDetailPage({ onNavigate, onAddToCart }) {
   };
 
   const handleCart = () => {
-    if (!isLoggedIn) {
-      openLoginModal();
-      return;
-    }
+    if (isAdding) return;
 
-    addToCart({
-      id: productId,
-      name: product.title,
-      price: product.discountedPrice || product.originalPrice,
-      image: `http://localhost:5000${product.images?.[0]}`,
-      description: product.description,
-      type: "bakery",
+    handleProtectedAction(async () => {
+      try {
+        setIsAdding(true);
+        await addToCart({
+          id: productId,
+          name: product.title,
+          price: product.discountedPrice || product.originalPrice,
+          image: `http://localhost:5000${product.images?.[0]}`,
+          description: product.description,
+          type: "bakery",
+        });
+        toast.success(`${product.title} added to cart!`);
+      } catch (err) {
+        console.error("Cart action failed", err);
+      } finally {
+        setIsAdding(false);
+      }
     });
-    toast.success(`${product.title} added to cart!`);
   };
   // const sendToWhatsApp = () => {
 
@@ -198,11 +207,10 @@ function ProductDetailPage({ onNavigate, onAddToCart }) {
                 <button
                   key={index}
                   onClick={() => setSelectedImage(index)}
-                  className={`p-2 rounded-lg ${
-                    selectedImage === index
+                  className={`p-2 rounded-lg ${selectedImage === index
                       ? "ring-2 ring-[#870D32]"
                       : "shadow hover:shadow-md"
-                  }`}
+                    }`}
                 >
                   <img
                     src={`http://localhost:5000${image}`}
@@ -236,7 +244,7 @@ function ProductDetailPage({ onNavigate, onAddToCart }) {
                   {Math.round(
                     ((product.originalPrice - product.discountedPrice) /
                       product.originalPrice) *
-                      100,
+                    100,
                   )}
                   % OFF
                 </Badge>
@@ -280,37 +288,27 @@ function ProductDetailPage({ onNavigate, onAddToCart }) {
             <div className="flex space-x-3">
               {!isInCart ? (
                 <button
-                  className="group relative inline-flex cursor-pointer items-center overflow-hidden rounded-lg new-primary-text px-8 py-3 border border-current mr-3"
+                  className="group relative inline-flex cursor-pointer items-center overflow-hidden rounded-lg new-primary-text px-8 py-3 border border-current mr-3 disabled:opacity-50"
                   onClick={handleCart}
-                  size="lg"
+                  disabled={isAdding}
                 >
                   <span className="absolute -start-full transition-all group-hover:start-4">
-                    <svg
-                      className="size-5 rtl:rotate-180"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
-                      <g
-                        id="SVGRepo_tracerCarrier"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      ></g>
-                      <g id="SVGRepo_iconCarrier">
-                        <path
-                          d="M7.2998 5H22L20 12H8.37675M21 16H9L7 3H4M4 8H2M5 11H2M6 14H2M10 20C10 20.5523 9.55228 21 9 21C8.44772 21 8 20.5523 8 20C8 19.4477 8.44772 19 9 19C9.55228 19 10 19.4477 10 20ZM21 20C21 20.5523 20.5523 21 20 21C19.4477 21 19 20.5523 19 20C19 19.4477 19.4477 19 20 19C20.5523 19 21 19.4477 21 20Z"
-                          stroke="#870D32"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        ></path>
-                      </g>
-                    </svg>
+                    {isAdding ? (
+                      <Loader2 className="h-4 w-4 animate-spin" />
+                    ) : (
+                      <svg
+                        className="size-5 rtl:rotate-180"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                         <path d="M7.2998 5H22L20 12H8.37675M21 16H9L7 3H4M4 8H2M5 11H2M6 14H2M10 20C10 20.5523 9.55228 21 9 21C8.44772 21 8 20.5523 8 20C8 19.4477 8.44772 19 9 19C9.55228 19 10 19.4477 10 20ZM21 20C21 20.5523 20.5523 21 20 21C19.4477 21 19 20.5523 19 20C19 19.4477 19.4477 19 20 19C20.5523 19 21 19.4477 21 20Z" stroke="#870D32" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"></path>
+                      </svg>
+                    )}
                   </span>
 
                   <span className="text-sm font-medium transition-all group-hover:ms-4">
-                    Add to cart
+                    {isAdding ? "Adding..." : "Add to cart"}
                   </span>
                 </button>
               ) : (
@@ -323,7 +321,7 @@ function ProductDetailPage({ onNavigate, onAddToCart }) {
                     size="sm"
                     onClick={() => handleQuantityChange(-1)}
                     className="cursor-pointer"
-                    // disabled={quantity <= 1}
+                  // disabled={quantity <= 1}
                   >
                     <Minus className="h-4 w-4" />
                   </Button>
@@ -333,7 +331,7 @@ function ProductDetailPage({ onNavigate, onAddToCart }) {
                     size="sm"
                     onClick={() => handleQuantityChange(1)}
                     className="cursor-pointer"
-                    // disabled={quantity >= 10}
+                  // disabled={quantity >= 10}
                   >
                     <Plus className="h-4 w-4" />
                   </Button>
@@ -350,9 +348,8 @@ function ProductDetailPage({ onNavigate, onAddToCart }) {
                 variant="outline"
                 size="lg"
                 onClick={() => setIsWishlisted(!isWishlisted)}
-                className={`${
-                  isWishlisted ? "bg-red-50 text-red-600" : ""
-                } cursor-pointer `}
+                className={`${isWishlisted ? "bg-red-50 text-red-600" : ""
+                  } cursor-pointer `}
               >
                 <Heart className={isWishlisted ? "fill-current" : ""} />
               </button>

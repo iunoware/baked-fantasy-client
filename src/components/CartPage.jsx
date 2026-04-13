@@ -214,7 +214,20 @@ const TabbedCart = ({
   promoInput,
   setPromoInput,
 }) => {
+  const { handleProtectedAction } = useAuth();
+  const [isExecuting, setIsExecuting] = useState(false);
   const [activeTab, setActiveTab] = useState("bakery");
+
+  const handleCheckout = () => {
+    handleProtectedAction(async () => {
+      try {
+        setIsExecuting(true);
+        await onNext(getDeliveryTypeForCheckout());
+      } finally {
+        setIsExecuting(false);
+      }
+    });
+  };
 
   const filteredItems = useMemo(() => {
     return {
