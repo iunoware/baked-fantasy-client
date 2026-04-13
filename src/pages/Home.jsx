@@ -164,87 +164,6 @@ function Home() {
           {courses.length > 0 ? (
             courses.map((course, index) => {
               return (
-                //         <div key={index}>
-                //           <article className="bg-white overflow-hidden rounded-2xl shadow-xl hover:-translate-y-2 transition-all duration-200">
-                //             <div className="relative p-2 h-66 w-full">
-                //               <img
-                //                 alt="Cake"
-                //                 // src="/images/cake-2.jpg"
-                //                 src={`${
-                //                   course.ImageUrl
-                //                     ? "http://localhost:5000${course.ImageUrl}"
-                //                     : "/images/cake-2.jpg"
-                //                 }`}
-                //                 className="h-full w-full rounded-xl object-cover"
-                //                 onError={(e) => {
-                //                   e.target.onError = null;
-                //                   e.target.src = "/images/cake-2.jpg";
-                //                 }}
-                //               />
-                //             </div>
-
-                //             <div className=" p-4">
-                //               <div className="text-black flex justify-between">
-                //                 <div className="flex items-center gap-2">
-                //                   <div>
-                //                     <h3 className="font-bold text-xl">{course.title}</h3>
-                //                     <p className="text-md pt-2">{course.description}</p>
-                //                   </div>
-                //                 </div>
-                //                 <Link
-                //                   className="group relative inline-flex items-center overflow-hidden rounded-lg new-primary-bg px-8 py-3 text-white mr-3"
-                //                   to="/courses"
-                //                 >
-                //                   <span className="absolute -start-full transition-all group-hover:start-4">
-                //                     <svg
-                //                       className="size-5 rtl:rotate-180"
-                //                       version="1.1"
-                //                       xmlns="http://www.w3.org/2000/svg"
-                //                       xmlnsXlink="http://www.w3.org/1999/xlink"
-                //                       viewBox="0 0 512 512"
-                //                       xmlSpace="preserve"
-                //                       fill="#ffffff"
-                //                       style={{ transform: "rotate(90deg)" }}
-                //                     >
-                //                       <g>
-                //                         <path
-                //                           style={{ fill: "#ffffff" }}
-                //                           d="M408.387,512H159.603c-8.313,0-15.054-6.741-15.054-15.054v-71.829
-                // c0-8.313,6.741-15.054,15.054-15.054h132.043c8.313,0,15.054,6.741,15.054,15.054c0,8.313-6.741,15.054-15.054,15.054H174.657
-                // v41.722h218.676v-41.722h-28.605c-8.313,0-15.054-6.741-15.054-15.054c0-8.313,6.741-15.054,15.054-15.054h43.659
-                // c8.313,0,15.054,6.741,15.054,15.054v71.829C423.441,505.26,416.7,512,408.387,512z"
-                //                         />
-                //                         <path
-                //                           style={{ fill: "#ffffff" }}
-                //                           d="M302.481,198.013v-15.951c0-15.948-13.009-29.53-29.728-30.096
-                // c-17.553-0.595-31.979,12.793-31.979,29.391v17.213l-0.333-154.106c0-16.243-13.813-29.411-30.854-29.411H208.4
-                // c-17.039,0-30.854,13.168-30.854,29.411v110.671v25.447v76.908l-30.02-73.097c-5.281-15.769-22.984-24.465-39.527-19.431
-                // c-16.543,5.043-25.665,21.909-20.384,37.684l65.918,135.745c8.141,16.765,25.756,27.5,45.137,27.509l177.423,0.077
-                // c27.491,0.012,49.783-21.226,49.786-47.432l0.018-116.556c0-16.243-13.813-29.411-30.854-29.411l0,0
-                // c-17.039,0-30.854,13.168-30.854,29.411v-6.989c0-16.243-13.813-29.411-30.854-29.411l0,0c-17.039,0-30.854,13.168-30.854,29.411"
-                //                         />
-                //                         <path
-                //                           style={{ fill: "#ffffff" }}
-                //                           d="M376.115,381.032c-0.011,0-0.02,0-0.03,0l-177.421-0.077c-25.033-0.012-48.062-14.139-58.672-35.988
-                // L74.073,209.223c-0.283-0.583-0.528-1.182-0.733-1.796c-3.788-11.308-2.854-23.391,2.625-34.022
-                // c5.684-11.03,15.502-19.142,27.643-22.843c24.074-7.325,49.967,5.457,58.011,28.529l0.872,2.121V44.463
-                // C162.492,19.946,183.087,0,208.4,0h1.186c25.313,0,45.907,19.946,45.907,44.464l0.206,95.206c5.564-1.993,11.525-2.958,17.56-2.75
-                // c15.338,0.521,28.625,8.286,36.537,19.916c6.886-3.998,14.939-6.3,23.537-6.3c13.886,0,26.35,6,34.776,15.465
-                // c7.569-5.329,16.88-8.475,26.933-8.475c25.313,0,45.908,19.946,45.908,44.464l-0.02,116.557
-                // c-0.001,16.832-6.84,32.616-19.255,44.442C409.465,374.625,393.285,381.032,376.115,381.032z"
-                //                         />
-                //                       </g>
-                //                     </svg>
-                //                   </span>
-
-                //                   <span className="text-lg font-semibold transition-all group-hover:ms-4">
-                //                     Enroll Now
-                //                   </span>
-                //                 </Link>
-                //               </div>
-                //             </div>
-                //           </article>
-                //         </div>
                 <div key={index}>
                   <div>
                     <OnlineCourseCard
@@ -253,6 +172,7 @@ function Home() {
                       rating={course.rating}
                       totalReviews={course.totalReviews}
                       duration={course.duration}
+                      totalStudents={course.totalStudents}
                       ratingSum={course.ratingSum}
                       discountedPrice={course.discountedPrice}
                       originalPrice={course.originalPrice}
@@ -275,6 +195,14 @@ function Home() {
               <Loading text={"Products are coming soon"} />
             </div>
           )}
+        </div>
+        <div className="flex justify-center items-center">
+          <Link
+            to="/courses"
+            className="px-8 py-4 bg-pbrown text-white rounded-xl text-md font-medium hover:opacity-90 transition-opacity"
+          >
+            Browse courses
+          </Link>
         </div>
       </section>
 

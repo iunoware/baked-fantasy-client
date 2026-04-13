@@ -122,13 +122,13 @@ function AppContent() {
         {/* courses */}
         <Route path="/courses" element={<Courses />} />
         <Route path="/courses/online-course" element={<OnlineCourse />} />
+        <Route path="/courses/my-learning/" element={<MyLearning />} />
         <Route
           path="/course/my-learning/:courseId"
           element={<OnlineCourseDetails />}
         />
         <Route path="/courses/offline-course" element={<OfflineCourse />} />
         <Route path="/contact" element={<Contact />} />
-        <Route path="/courses/my-learning/" element={<MyLearning />} />
         <Route
           path="/courses/course-payment-page/:courseId"
           element={<CoursePaymentPage />}
