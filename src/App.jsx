@@ -5,7 +5,7 @@ import {
   Route,
   NavLink,
   Navigate,
-  useNavigate
+  useNavigate,
 } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import { useState, useEffect } from "react";
@@ -74,49 +74,14 @@ function AppContent() {
 
   autoLogout(token, logout);
 
-  const { isLoggedIn } = useAuth();
-  const [showProfileModal, setShowProfileModal] = useState(false);
-
-  useEffect(() => {
-    const checkProfileStatus = () => {
-      if (isLoggedIn) {
-        const storedUser = localStorage.getItem("user");
-        if (storedUser) {
-          try {
-            const user = JSON.parse(storedUser);
-            // Show modal if profile is not completed
-            if (!user.profileCompleted || !user.address1) {
-              setShowProfileModal(true);
-            } else {
-              setShowProfileModal(false);
-            }
-          } catch (e) {
-            console.error("Error parsing user for profile check", e);
-          }
-        }
-      } else {
-        setShowProfileModal(false);
-      }
-    };
-
-    checkProfileStatus();
-
-    // Listen for custom "profileCompleted" event or login state changes
-    window.addEventListener("profileCompleted", () => setShowProfileModal(false));
-    window.addEventListener("loginStateChange", checkProfileStatus);
-
-    return () => {
-      window.removeEventListener("profileCompleted", () => setShowProfileModal(false));
-      window.removeEventListener("loginStateChange", checkProfileStatus);
-    };
-  }, [isLoggedIn]);
+  const { isLoggedIn, showProfileModal, setShowProfileModal } = useAuth();
 
   return (
     <>
       <GlobalLoader />
-      <CompleteProfileModal 
-        isOpen={showProfileModal} 
-        onClose={() => setShowProfileModal(false)} 
+      <CompleteProfileModal
+        isOpen={showProfileModal}
+        onClose={() => setShowProfileModal(false)}
       />
       <Toaster position="top-center" reverseOrder={false} />
       <ScrollToTop />

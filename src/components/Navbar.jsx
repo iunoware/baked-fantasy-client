@@ -32,9 +32,6 @@ export const StaggeredMenu = ({
   onMenuClose,
 }) => {
   const [open, setOpen] = useState(false);
-  // const [isLoggedIn, setLoggedIn] = useState(false);
-  const [isLoginOpen, setLoginOpen] = useState(false);
-  const [isRegisterOpen, setRegisterOpen] = useState(false);
   const [search, setSearch] = useState("");
   const [suggestions, setSuggestions] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
@@ -46,6 +43,7 @@ export const StaggeredMenu = ({
     isLoginModalOpen,
     isRegisterModalOpen,
     isLoggedIn,
+    showProfileModal,
     openLoginModal,
     closeLoginModal,
     openRegisterModal,
@@ -56,9 +54,10 @@ export const StaggeredMenu = ({
     handleLogout,
   } = useAuth();
 
-  // for disabling scroll when login or register is open
+  // for disabling scroll when any modal is open
   useEffect(() => {
-    if (isLoginModalOpen || isRegisterModalOpen) {
+    const isAnyModalOpen = isLoginModalOpen || isRegisterModalOpen || showProfileModal;
+    if (isAnyModalOpen) {
       document.body.style.setProperty("overflow", "hidden", "important");
       document.documentElement.style.setProperty(
         "overflow",
@@ -74,7 +73,7 @@ export const StaggeredMenu = ({
       document.body.style.removeProperty("overflow");
       document.documentElement.style.removeProperty("overflow");
     };
-  }, [isLoginModalOpen, isRegisterModalOpen]);
+  }, [isLoginModalOpen, isRegisterModalOpen, showProfileModal]);
 
   // useEffect(() => {
   //   const token = localStorage.getItem("token");
@@ -794,7 +793,7 @@ export const StaggeredMenu = ({
                       if (isLoggedIn) {
                         setIsDropdownOpen(!isDropdownOpen);
                       } else {
-                        setLoginOpen(true);
+                        openLoginModal();
                       }
                     }}
                   >
