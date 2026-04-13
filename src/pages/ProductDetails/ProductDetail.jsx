@@ -20,6 +20,7 @@ import {
   Loader2,
 } from "lucide-react";
 import { useAuth } from "../../context/AuthContext.jsx";
+import { useCart } from "../../context/CartContext.jsx";
 
 function ProductDetailPage({ onNavigate, onAddToCart }) {
   const { cartItems, addToCart, increaseQuantity, decreaseQuantity } =
