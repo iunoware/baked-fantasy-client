@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Plus, Minus, ShoppingCart } from "lucide-react";
+import { Plus, Minus, ShoppingCart, Loader2 } from "lucide-react";
 import toast from "react-hot-toast";
 import { useCart } from "../context/CartContext.jsx";
 import { useState } from "react";
@@ -34,36 +34,37 @@ const ProductCard = ({
   const { cartItems, addToCart, increaseQuantity, decreaseQuantity } =
     useCart();
 
-  const { openLoginModal, isLoggedIn } = useAuth();
+  const { handleProtectedAction } = useAuth();
+  const [isAdding, setIsAdding] = useState(false);
   const cartItem = cartItems.find((item) => item.id === id);
   const quantity = cartItem?.quantity || 0;
   const added = quantity > 0;
 
-  // Login validation
-
-  // const [userLoggedIn, setUserLoggedIn] = useState(false);
-
   // Add to cart handler
-  const handleCart = (e) => {
+  const handleCart = async (e) => {
     e.preventDefault();
-    if (!inStock) return;
+    if (!inStock || isAdding) return;
 
-    if (!isLoggedIn) {
-      openLoginModal();
-      return;
-    }
-
-    addToCart({
-      id,
-      name: title,
-      price: discountedPrice,
-      image: img,
-      category,
-      subject,
-      type,
-      deliveryType,
+    handleProtectedAction(async () => {
+      try {
+        setIsAdding(true);
+        await addToCart({
+          id,
+          name: title,
+          price: discountedPrice,
+          image: img,
+          category,
+          subject,
+          type,
+          deliveryType,
+        });
+        toast.success(`${title} added to cart!`);
+      } catch (err) {
+        console.error("Cart action failed", err);
+      } finally {
+        setIsAdding(false);
+      }
     });
-    toast.success(`${title} added to cart!`);
   };
 
   // Quantity change handler
@@ -123,9 +124,8 @@ const ProductCard = ({
 
         {/* View Details Hover Overlay */}
         <div
-          className={`${
-            inStock ? "block" : "hidden"
-          } absolute inset-0 z-10 flex justify-center items-center translate-y-10 opacity-0 group-hover/card:translate-y-0 group-hover/card:opacity-100 transition-all duration-300`}
+          className={`${inStock ? "block" : "hidden"
+            } absolute inset-0 z-10 flex justify-center items-center translate-y-10 opacity-0 group-hover/card:translate-y-0 group-hover/card:opacity-100 transition-all duration-300`}
         >
           <div className="bg-white text-neutral-900 rounded-3xl px-5 py-2 font-bold shadow-lg group-hover:scale-105 transition-transform duration-300">
             View details
@@ -160,12 +160,16 @@ const ProductCard = ({
         <div>
           {/* Add to Cart Button (Only shown if not already added) */}
           <button
-            disabled={!inStock}
+            disabled={!inStock || isAdding}
             onClick={handleCart}
             className={`mt-auto ${added ? "hidden" : "flex"} z-10 w-full cursor-pointer bg-pbrown text-white font-bold py-3.5 rounded-xl items-center justify-center gap-2 hover:bg-sbrown transition-all duration-300 active:scale-95 shadow-sm disabled:opacity-50 disabled:grayscale disabled:cursor-not-allowed`}
           >
-            <ShoppingCart size={18} />
-            Add to Cart
+            {isAdding ? (
+              <Loader2 className="h-4 w-4 animate-spin" />
+            ) : (
+              <ShoppingCart size={18} />
+            )}
+            {isAdding ? "Adding..." : "Add to Cart"}
           </button>
 
           {/* Quantity Controls and Buy Now (Shown when added to cart) */}

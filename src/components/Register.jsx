@@ -1,7 +1,4 @@
-// for pushing issue
-// for pushing issue
-
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Button } from "./ui/button.jsx";
 import { Input } from "./ui/input.jsx";
 import { Card, CardContent } from "./ui/card.jsx";
@@ -9,13 +6,10 @@ import axios from "axios";
 import { Eye, EyeOff, Mail, Lock, User, X, Phone } from "lucide-react";
 import { GoogleLogin } from "@react-oauth/google";
 import toast from "react-hot-toast";
-// import {
-//   auth,
-//   RecaptchaVerifier,
-//   signInWithPhoneNumber,
-// } from "../fireBaseConfig.js";
+import { useAuth } from "@/context/AuthContext.jsx";
 
-function Register({ isOpen, onClose, onOpenLogin, onLoginSuccess }) {
+function Register({ isOpen, onClose, onOpenLogin }) {
+  const { handleLoginSuccess } = useAuth();
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -72,7 +66,7 @@ function Register({ isOpen, onClose, onOpenLogin, onLoginSuccess }) {
 
       await registerUser();
     } catch (error) {
-      toast.error(error.response?.data?.msg || "Invalid OTP");
+      toast.error(err.response?.data?.msg || "Something went wrong");
     } finally {
       setIsLoading(false);
     }
@@ -89,16 +83,11 @@ function Register({ isOpen, onClose, onOpenLogin, onLoginSuccess }) {
         password,
         mobileNumber: phoneNumber,
       });
-      localStorage.setItem("token", res.data.token);
-      localStorage.setItem("user", JSON.stringify(res.data.user));
-      toast.success("User Registered Successfully 🍰");
-      if (typeof onLoginSuccess === "function") {
-        onLoginSuccess();
-      }
-      onClose();
       
-      // Auto-redirect to home/shopping page
-      window.location.href = "/";
+      if (typeof handleLoginSuccess === "function") {
+        handleLoginSuccess(res.data.token, res.data.user);
+      }
+      toast.success("User Registered Successfully 🍰");
     } catch (err) {
       toast.error(err.response?.data?.msg || "Something went wrong");
     } finally {
@@ -114,14 +103,10 @@ function Register({ isOpen, onClose, onOpenLogin, onLoginSuccess }) {
         token: credentialResponse.credential,
       });
 
-      localStorage.setItem("token", res.data.token);
-      localStorage.setItem("user", JSON.stringify(res.data.user));
-
-      toast.success("Logged in with Google 🎉");
-      if (typeof onLoginSuccess === "function") {
-        onLoginSuccess();
+      if (typeof handleLoginSuccess === "function") {
+        handleLoginSuccess(res.data.token, res.data.user);
       }
-      onClose();
+      toast.success("Logged in with Google 🎉");
     } catch (err) {
       console.error("Google Login failed:", err);
       const errorMessage =

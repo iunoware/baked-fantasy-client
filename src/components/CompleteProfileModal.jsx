@@ -3,8 +3,10 @@ import { X, MapPin, Home, Building, ArrowRight, Loader2 } from "lucide-react";
 import AddressAutocomplete from "./AddressAutocomplete";
 import api from "../api";
 import toast from "react-hot-toast";
+import { useAuth } from "@/context/AuthContext.jsx";
 
 const CompleteProfileModal = ({ isOpen, onClose }) => {
+  const { onProfileSaved, user: currentUser } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
   const [newAddress, setNewAddress] = useState({
     type: "Home",
@@ -15,8 +17,19 @@ const CompleteProfileModal = ({ isOpen, onClose }) => {
     lng: null,
   });
 
+  useEffect(() => {
+    if (isOpen && currentUser) {
+      setNewAddress(prev => ({
+        ...prev,
+        building: currentUser.address1 || prev.building,
+        address: currentUser.fullAddress || prev.address,
+        landmark: currentUser.landmark || prev.landmark,
+      }));
+    }
+  }, [isOpen, currentUser]);
+
   const isFormValid = () => {
-    return newAddress.address && newAddress.building;
+    return !!(newAddress.address && newAddress.building);
   };
 
   const handleSubmit = async (e) => {
@@ -34,7 +47,7 @@ const CompleteProfileModal = ({ isOpen, onClose }) => {
         return;
       }
 
-      // 1. Save address to backend (matching DeliveryPage.jsx logic)
+      // 1. Save address to backend
       const res = await api.post("/address", {
         label: newAddress.type || "Home",
         fullAddress: newAddress.address,
@@ -45,24 +58,20 @@ const CompleteProfileModal = ({ isOpen, onClose }) => {
         isDefault: true,
       });
 
-      // 2. Update local user profile state
-      const storedUser = localStorage.getItem("user");
-      let user = storedUser ? JSON.parse(storedUser) : {};
-      
+      // 2. Construct updated user object for the architected state system
       const updatedUser = {
-        ...user,
+        ...currentUser,
         profileCompleted: true,
-        address1: newAddress.building, // Mapping for compatibility
-        city: "Madurai", // Default or extracted
-        pincode: "625001" // Default or extracted
+        address1: newAddress.building,
+        fullAddress: newAddress.address,
+        landmark: newAddress.landmark,
+        city: "Madurai",
+        pincode: "625001"
       };
-      
-      localStorage.setItem("user", JSON.stringify(updatedUser));
 
-      // 3. Dispatch event to update UI
-      window.dispatchEvent(new Event("profileCompleted"));
+      // 3. Delegate to Context to handle resume action and state updates
+      onProfileSaved(updatedUser);
       toast.success("Profile details saved successfully!");
-      onClose();
     } catch (err) {
       console.error(err);
       toast.error("Failed to save address. Please try again.");
@@ -77,10 +86,10 @@ const CompleteProfileModal = ({ isOpen, onClose }) => {
     <div className="fixed inset-0 z-[2000] flex items-center justify-center p-4">
       {/* Backdrop */}
       <div className="absolute inset-0 bg-slate-900/60 backdrop-blur-md animate-in fade-in duration-300" />
-      
+
       {/* Modal - Theme matching DeliveryPage Dialog */}
       <div className="relative w-full max-w-[500px] bg-white rounded-[2.5rem] shadow-3xl overflow-hidden flex flex-col animate-in zoom-in-95 duration-300">
-        
+
         {/* Header - Matching DeliveryPage style */}
         <div className="bg-pbrown p-6 text-white relative">
           <button
@@ -114,11 +123,10 @@ const CompleteProfileModal = ({ isOpen, onClose }) => {
                   key={type.id}
                   type="button"
                   onClick={() => setNewAddress({ ...newAddress, type: type.id })}
-                  className={`flex-1 flex flex-col items-center gap-2 p-3 rounded-2xl border-2 transition-all active:scale-95 ${
-                    newAddress.type === type.id
+                  className={`flex-1 flex flex-col items-center gap-2 p-3 rounded-2xl border-2 transition-all active:scale-95 ${newAddress.type === type.id
                       ? "bg-[#fff4d9] border-pbrown text-pbrown shadow-sm"
                       : "bg-white border-gray-100 text-gray-400 hover:border-gray-200"
-                  }`}
+                    }`}
                 >
                   {type.icon}
                   <span className="text-[10px] font-black uppercase tracking-wider">
@@ -202,9 +210,9 @@ const CompleteProfileModal = ({ isOpen, onClose }) => {
 
         {/* Footer Note */}
         <div className="p-4 bg-gray-50 text-center">
-            <p className="text-[10px] text-gray-400 font-bold uppercase tracking-widest">
-                Trusted by 10,000+ happy customers
-            </p>
+          <p className="text-[10px] text-gray-400 font-bold uppercase tracking-widest">
+            Trusted by 10,000+ happy customers
+          </p>
         </div>
       </div>
 

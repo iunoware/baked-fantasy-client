@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "./ui/button.jsx";
 import { Input } from "./ui/input.jsx";
 import { Card, CardContent } from "./ui/card.jsx";
@@ -7,8 +7,10 @@ import { GoogleLogin } from "@react-oauth/google";
 import { Eye, EyeOff, Mail, Lock, X } from "lucide-react";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { useAuth } from "@/context/AuthContext.jsx";
 
-function Login({ isOpen, onClose, onOpenRegister, onLoginSuccess }) {
+function Login({ isOpen, onClose, onOpenRegister }) {
+  const { handleLoginSuccess } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
@@ -29,18 +31,9 @@ function Login({ isOpen, onClose, onOpenRegister, onLoginSuccess }) {
         token: credentialResponse.credential,
       });
 
-      localStorage.setItem("token", res.data.token);
-      localStorage.setItem("user", JSON.stringify(res.data.user));
-
-      // Trigger cart sync
-      window.dispatchEvent(new Event("loginStateChange"));
-
-      toast.success("Login Successful! Welcome back 🍰");
-
-      if (typeof onLoginSuccess === "function") {
-        onLoginSuccess();
+      if (typeof handleLoginSuccess === "function") {
+        handleLoginSuccess(res.data.token, res.data.user);
       }
-      onClose();
     } catch (err) {
       console.error("Google Login failed:", err);
       const errorMessage =
@@ -71,16 +64,10 @@ function Login({ isOpen, onClose, onOpenRegister, onLoginSuccess }) {
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("user", JSON.stringify(res.data.user));
 
-      // Trigger cart sync
-      window.dispatchEvent(new Event("loginStateChange"));
-
-      setMessage("");
-
-      toast.success("Login Successful Welcome back 🍰");
-      if (typeof onLoginSuccess === "function") {
-        onLoginSuccess();
+      // Architect Choice: Direct data injection to avoid extra roundtrip immediately
+      if (typeof handleLoginSuccess === "function") {
+        handleLoginSuccess(res.data.token, res.data.user);
       }
-      onClose();
     } catch (err) {
       setMessage(err.response?.data?.msg || "Something went wrong");
       toast.error(err.response?.data?.msg || "Login failed");

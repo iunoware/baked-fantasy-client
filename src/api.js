@@ -1,5 +1,6 @@
 import axios from "axios";
 import { loadingManager } from "./utils/loadingManager";
+import { toast } from "react-hot-toast";
 
 const api = axios.create({
   baseURL: "http://localhost:5000",
@@ -42,11 +43,12 @@ api.interceptors.response.use(
   (error) => {
     loadingManager.stop();
     if (error.response && error.response.status === 401) {
-      // Handle 401 Unauthorized globally if needed
-      console.error("Authentication Error: Token missing or invalid.");
-      // optionally redirect to login or clear token
-      // localStorage.removeItem("token");
-      // window.location.href = "/login";
+      console.warn("Session expired or unauthorized. Logging out...");
+      localStorage.removeItem("token");
+      localStorage.removeItem("user");
+      window.dispatchEvent(new Event("loginStateChange"));
+      // Optional: window.location.href = "/"; // Only if we want aggressive redirect
+      toast.error("Session expired. Please login again.");
     }
     return Promise.reject(error);
   }
