@@ -7,6 +7,7 @@ import React, {
   useRef,
 } from "react";
 import axios from "axios";
+import api from "../api";
 import toast from "react-hot-toast";
 
 const AuthContext = createContext();
@@ -19,20 +20,18 @@ export const useAuth = () => {
   return context;
 };
 
-const BASE_URL = "http://localhost:5000";
-
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [isLoadingUser, setIsLoadingUser] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  
+
   // Modal States
   const [activeModal, setActiveModal] = useState(null); // 'login', 'register', 'profile' or null
 
   const pendingActionRef = useRef(null);
 
   // 1. Single Source of Truth: Fetch User from Backend
-  const fetchUser = useCallback(async () => {
+  const fetchUser = useCallback(async (showLoading = true) => {
     const token = localStorage.getItem("token");
     if (!token) {
       setUser(null);
@@ -42,12 +41,13 @@ export const AuthProvider = ({ children }) => {
     }
 
     try {
-      setIsLoadingUser(true);
-      const res = await axios.get(`${BASE_URL}/me`, {
+      if (showLoading) setIsLoadingUser(true);
+      const res = await api.get(`/me`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       const userData = res.data.user;
       setUser(userData);
+      // ✅ No localStorage write — state is the only source of truth
       setIsLoggedIn(true);
       return userData;
     } catch (err) {
@@ -55,7 +55,7 @@ export const AuthProvider = ({ children }) => {
       if (err.response?.status === 401) handleLogout();
       return null;
     } finally {
-      setIsLoadingUser(false);
+      if (showLoading) setIsLoadingUser(false);
     }
   }, []);
 
@@ -71,80 +71,80 @@ export const AuthProvider = ({ children }) => {
   }, [fetchUser]);
 
   // 2. THE PROTECTED ACTION SYSTEM (Built-in)
-  const handleProtectedAction = useCallback(async (action) => {
-    // 1. Check Auth
-    if (!localStorage.getItem("token")) {
-      pendingActionRef.current = action;
-      setActiveModal("login");
-      return;
-    }
-
-    // 2. Ensure user data is fetched
-    let currentUser = user;
-    if (!currentUser) {
-      currentUser = await fetchUser();
-    }
-
-    if (!currentUser) {
-      pendingActionRef.current = action;
-      setActiveModal("login");
-      return;
-    }
-
-    // 3. Check Address
-    if (!currentUser.address1 || !currentUser.profileCompleted) {
-      pendingActionRef.current = action;
-      setActiveModal("profile");
-      return;
-    }
-
-    // 4. All set -> Execute
-    try {
-      await action();
-    } catch (err) {
-      console.error("Action error:", err);
-    }
-  }, [user, fetchUser]);
-
-  // 4. Async Flow Handlers
-  const handleLoginSuccess = useCallback(async (token, userData) => {
-    localStorage.setItem("token", token);
-    setIsLoggedIn(true);
-    
-    // STRICT SEQUENCE: await fetch → await address check → execute
-    const freshUser = await fetchUser();
-    
-    if (pendingActionRef.current) {
-      if (freshUser?.address1 && freshUser?.profileCompleted) {
-        const action = pendingActionRef.current;
-        pendingActionRef.current = null; // Clear before execute
-        await action();
-        setActiveModal(null);
-      } else {
-        // Switch to profile modal without overlap
-        setActiveModal("profile");
+  const handleProtectedAction = useCallback(
+    async (action) => {
+      if (!localStorage.getItem("token")) {
+        pendingActionRef.current = action;
+        setActiveModal("login");
+        return;
       }
-    } else {
-      setActiveModal(null);
-    }
-    
-    window.dispatchEvent(new Event("loginStateChange"));
-  }, [fetchUser]);
+
+      const freshUser = await fetchUser(false);
+      console.log("freshUser fields:", freshUser);
+
+      if (!freshUser) {
+        pendingActionRef.current = action;
+        setActiveModal("login");
+        return;
+      }
+
+      if (!freshUser.address1 || !freshUser.profileCompleted) {
+        pendingActionRef.current = action;
+        setActiveModal("profile");
+        return;
+      }
+
+      try {
+        await action();
+      } catch (err) {
+        console.error("Action error:", err);
+      }
+    },
+    [fetchUser],
+  );
+
+  // 3. Async Flow Handlers
+  const handleLoginSuccess = useCallback(
+    async (token, userData) => {
+      localStorage.setItem("token", token);
+      // ✅ No localStorage write for user
+      setIsLoggedIn(true);
+
+      const freshUser = await fetchUser();
+
+      if (pendingActionRef.current) {
+        if (freshUser?.address1 && freshUser?.profileCompleted) {
+          const action = pendingActionRef.current;
+          pendingActionRef.current = null;
+          await action();
+          setActiveModal(null);
+        } else {
+          setActiveModal("profile");
+        }
+      } else {
+        setActiveModal(null);
+      }
+
+      window.dispatchEvent(new Event("loginStateChange"));
+    },
+    [fetchUser],
+  );
 
   const onProfileSaved = useCallback(async (updatedUser) => {
     setUser(updatedUser);
+    // ✅ No localStorage write for user
     setActiveModal(null);
-    
+
     if (pendingActionRef.current) {
       const action = pendingActionRef.current;
-      pendingActionRef.current = null; // Clear before execute
+      pendingActionRef.current = null;
       await action();
     }
   }, []);
 
   const handleLogout = useCallback(() => {
     localStorage.removeItem("token");
-    localStorage.removeItem("user");
+    // ✅ No localStorage.removeItem("user") needed anymore
     setUser(null);
     setIsLoggedIn(false);
     setActiveModal(null);
@@ -186,6 +186,3 @@ export const AuthProvider = ({ children }) => {
     </AuthContext.Provider>
   );
 };
-
-
-

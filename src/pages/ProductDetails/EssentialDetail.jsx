@@ -12,6 +12,7 @@ import toast from "react-hot-toast";
 
 import { Star, ShoppingCart, Heart, ArrowLeft, Plus, Minus } from "lucide-react";
 import { useAuth } from "../../context/AuthContext.jsx";
+import { useCart } from "../../context/CartContext.jsx";
 
 function ProductDetailPage({ onNavigate, onAddToCart }) {
   const { openLoginModal, isLoggedIn } = useAuth();
@@ -90,9 +91,10 @@ function ProductDetailPage({ onNavigate, onAddToCart }) {
   };
 
   const handleQuantityChange = (change) => {
-    const newQty = quantity + change;
-    if (newQty >= 1 && newQty <= 50) {
-      setQuantity(newQty);
+    if (change > 0) {
+      increaseQuantity(productId);
+    } else {
+      decreaseQuantity(productId);
     }
   };
 

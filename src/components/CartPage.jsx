@@ -22,6 +22,7 @@ import { Card, CardContent } from "./ui/card";
 import { Badge } from "./ui/badge";
 import { Separator } from "./ui/separator";
 import toast from "react-hot-toast";
+import { useAuth } from "@/context/AuthContext";
 
 // Delivery Section Definitions
 const DELIVERY_CONFIG = {
