@@ -74,12 +74,10 @@ export function ProfileHeader({ name, email, mobileNumber, address, onUpdate }) 
             <span>{mobileNumber}</span>
             <span className="w-1 h-1 rounded-full bg-gray-300 hidden sm:inline-block"></span>
             <span>{email}</span>
-            {JSON.parse(localStorage.getItem("user") || "{}").address && (
+            {address && (
               <>
                 <span className="w-1 h-1 rounded-full bg-gray-300 hidden sm:inline-block"></span>
-                <span className="italic">
-                  {JSON.parse(localStorage.getItem("user") || "{}").address}
-                </span>
+                <span className="italic">{address}</span>
               </>
             )}
           </div>
