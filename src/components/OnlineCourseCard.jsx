@@ -89,15 +89,35 @@ function OnlineCourseCard(props) {
             </p>
           </div>
 
+          {/* new link */}
           <div>
-            <Link
+            {isMyLearning ? (
+              <Link
+                to={props.link}
+                state={{ courseId: props.courseId }}
+                className=" text-center block mt-3 w-full rounded-xl transition-all new-primary-bg active:scale-98 shadow-md px-8 py-4 text-white"
+              >
+                Watch Now
+              </Link>
+            ) : (
+              <Link
+                to={props.link}
+                state={{ courseId: props.courseId }}
+                className="text-center block mt-3 w-full rounded-xl transition-all new-primary-bg active:scale-98 shadow-md px-8 py-4 text-white"
+              >
+                Buy Now
+              </Link>
+            )}
+          </div>
+
+          {/* old link */}
+          {/* <Link
               to={props.link}
               state={{ courseId: props.courseId }}
-              className=" text-center block mt-3 w-full rounded-xl transition-all new-primary-bg active:scale-98 shadow-md px-8 py-4 text-white"
+              className="text-center block mt-3 w-full rounded-xl transition-all new-primary-bg active:scale-98 shadow-md px-8 py-4 text-white"
             >
               {isMyLearning ? "Watch Now" : "Buy Now"}
-            </Link>
-          </div>
+            </Link> */}
         </div>
       </div>
     </div>

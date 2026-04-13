@@ -54,7 +54,7 @@ export default function MyLearning() {
   }, [token]);
 
   return (
-    <div className="bg md::pt-20 pt-45">
+    <div className="bg md:pt-20 pt-45">
       {/* <Link
         to="/courses"
         className="flex pt-10 pl-10 items-center w-fit text-sm text-gray-600 hover:text-sky-500 mb-3"

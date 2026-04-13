@@ -86,10 +86,17 @@ function IndividualEssentialAdmin() {
     const description = form.productDescription.value.trim();
     const info = form.productInfo.value.trim();
     // const isActive = form.productIsActive.value.trim();
-    if (files.length > 4) {
-      window.alert("You can only upload up to 4 images.");
+
+    if (files.length !== 4) {
+      toast.error("Please upload exactly 4 images");
       return;
     }
+
+    // if (files.length > 4) {
+    //   // window.alert("You can only upload up to 4 images.");
+    //   toast.error("You can only upload up to 4 images.");
+    //   return;
+    // }
 
     if (
       !form ||
@@ -198,6 +205,7 @@ function IndividualEssentialAdmin() {
                 accept="image/png, image/jpeg, image/webp, image/gif"
                 className="h-20 border-2 cursor-pointer border-dashed border-gray-500 text-black rounded-lg p-2 w-full"
               />
+              <p className="text-sm text-gray-500">Exactly 4 images required.</p>
             </div>
 
             {/* subject */}
@@ -265,7 +273,8 @@ function IndividualEssentialAdmin() {
                 type="checkbox"
                 checked={inStock}
                 id="inStockProduct"
-                onClick={() => setInStock((prev) => !prev)}
+                // onClick={() => setInStock((prev) => !prev)}
+                onChange={() => setInStock((prev) => !prev)}
                 className="h-6 w-6"
               />
 
@@ -287,30 +296,6 @@ function IndividualEssentialAdmin() {
                 </span>
               </label> */}
             </div>
-
-            {/* isActive */}
-            {/* <div className="flex gap-3 mt-5 justify-between items-center">
-              <div>
-                <h4>{isActive ? "🟢 Active" : "🔴 De-active"}</h4>
-              </div>
-              <label
-                htmlFor="isActiveProduct"
-                className="group hover:cursor-pointer relative block h-6 w-12 rounded-full bg-gray-300 transition-colors [-webkit-tap-highlight-color:_transparent] has-checked:bg-red-500"
-              >
-                <input
-                  type="checkbox"
-                  onClick={() => setIsActive((prev) => !prev)}
-                  id="isActiveProduct"
-                  className="peer sr-only"
-                />
-
-                <span className="absolute inset-y-0 start-0 m-1 grid size-4 place-content-center rounded-full bg-white text-gray-700 transition-[inset-inline-start] peer-checked:start-6 peer-checked:*:first:hidden *:last:hidden peer-checked:*:last:block">
-                  <Check size={10} />
-
-                  <X size={10} />
-                </span>
-              </label>
-            </div> */}
 
             <div className="flex justify-center items-center">
               <button
@@ -385,13 +370,13 @@ function IndividualEssentialAdmin() {
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     viewBox="0 0 24 24"
-                    stroke-width="1.5"
+                    strokeWidth="1.5"
                     stroke="currentColor"
-                    class="size-4"
+                    className="size-4"
                   >
                     <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
                       d="m19.5 8.25-7.5 7.5-7.5-7.5"
                     ></path>
                   </svg>

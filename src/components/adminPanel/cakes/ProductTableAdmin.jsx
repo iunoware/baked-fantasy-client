@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import axios from "axios";
 import { SquarePen, X, Check, Trash2 } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import toast from "react-hot-toast";
 
 function ProductAdmin(props) {
@@ -11,10 +11,13 @@ function ProductAdmin(props) {
   const [deleteModal, setDeleteModal] = useState(false);
   const [isBtnVisible, setIsBtnVisible] = useState(false);
 
+  // new delete timer useState
+  const [deleteTimer, setDeleteTimer] = useState(3);
+
   // const token = localStorage.getItem("token");
   const token =
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4YTk3ZDYxOTdlMjcxMDM0OWUwNmI0MyIsImlhdCI6MTc3MjUyNjIxNywiZXhwIjoxNzcyNjEyNjE3fQ.vWlcrqHvxh3Nb6pj8TuItnzBsjtfh21ahtuBp1w1_CE";
-  localStorage.setItem("token", token);
+  // localStorage.setItem("token", token);
 
   function deleteTimeout() {
     setTimeout(() => {
@@ -39,6 +42,21 @@ function ProductAdmin(props) {
       console.error(`can't delete ${props.title}`, error.message);
     }
   }
+
+  // new delete timer
+  useEffect(() => {
+    if (deleteModal) {
+      setDeleteTimer(3);
+      const timer1 = setTimeout(() => setDeleteTimer(2), 1000);
+      const timer2 = setTimeout(() => setDeleteTimer(1), 2000);
+      const timer3 = setTimeout(() => setDeleteTimer(0), 3000);
+      return () => {
+        clearTimeout(timer1);
+        clearTimeout(timer2);
+        clearTimeout(timer3);
+      };
+    }
+  }, [deleteModal]);
 
   async function patchProduct(e) {
     e.preventDefault();
@@ -277,7 +295,8 @@ function ProductAdmin(props) {
                   <input
                     type="checkbox"
                     checked={isActive}
-                    onClick={() => setIsActive((prev) => !prev)}
+                    // onClick={() => setIsActive((prev) => !prev)}
+                    onChange={() => setIsActive((prev) => !prev)}
                     id={props.title}
                     className="h-6 w-6"
                   />
@@ -309,7 +328,8 @@ function ProductAdmin(props) {
                   <input
                     type="checkbox"
                     checked={inStock}
-                    onClick={() => setInStock((prev) => !prev)}
+                    // onClick={() => setInStock((prev) => !prev)}
+                    onChange={() => setInStock((prev) => !prev)}
                     id={props._id}
                     className="h-6 w-6"
                   />
@@ -347,7 +367,7 @@ function ProductAdmin(props) {
           </div>
 
           {/* modal for delete warning */}
-          <div
+          {/* <div
             className={`${
               deleteModal ? "block" : "hidden"
             } fixed inset-0 z-50 grid place-content-center bg-black/50 p-4`}
@@ -404,6 +424,37 @@ function ProductAdmin(props) {
                 </div>
               ) : (
                 <div className="text-center">Loading please wait...</div>
+              )}
+            </div>
+          </div> */}
+          <div
+            className={`fixed inset-0 z-50 grid place-content-center bg-black/50 p-4 ${deleteModal ? "block" : "hidden"}`}
+          >
+            <div className="w-full max-w-md rounded-xl bg-white p-10 shadow-lg relative text-center">
+              <X
+                className="absolute top-4 right-4 cursor-pointer hover:rotate-90 transition text-gray-500 hover:text-black"
+                onClick={() => setDeleteModal(false)}
+              />
+              <h2 className="text-2xl font-bold mb-4 text-red-600">Warning</h2>
+              <p className="text-lg font-medium text-gray-700 mb-6">
+                Are you sure you want to delete{" "}
+                <span className="font-bold">"{props.title}"</span>? This action cannot be
+                undone.
+              </p>
+              {deleteTimer > 0 ? (
+                <button
+                  disabled
+                  className="bg-gray-400 w-full font-semibold text-white px-4 py-3 rounded-xl cursor-not-allowed"
+                >
+                  Wait {deleteTimer}s to Confirm
+                </button>
+              ) : (
+                <button
+                  onClick={deleteFunction}
+                  className="bg-red-600 w-full font-semibold hover:scale-102 transition-all duration-200 text-white px-4 py-3 rounded-xl"
+                >
+                  Yes, Delete Essential
+                </button>
               )}
             </div>
           </div>

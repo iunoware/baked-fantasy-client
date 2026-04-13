@@ -25,7 +25,7 @@ function Contact() {
     const subject = form.subject.value.trim();
     const message = form.message.value.trim();
 
-    const number = "919003710091";
+    const number = "918098621043";
 
     if (!name || !email || !subject || !message) {
       toast.error("Please fill all the details");

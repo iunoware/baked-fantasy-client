@@ -70,6 +70,7 @@ function OnlineCourse() {
                       ratingSum={course.ratingSum}
                       discountedPrice={course.discountedPrice}
                       originalPrice={course.originalPrice}
+                      link={`/cart`}
                     />
                   </div>
                 </div>
