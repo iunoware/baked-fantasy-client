@@ -213,6 +213,7 @@ function IndividualCakesAdmin() {
                 accept="image/png, image/jpeg, image/webp, image/gif"
                 className="h-20 border-2 cursor-pointer border-dashed border-gray-500 text-black rounded-lg p-2 w-full"
               />
+              <p className="text-sm text-gray-500">Exactly 4 images required.</p>
             </div>
 
             {/* subject */}
@@ -287,7 +288,8 @@ function IndividualCakesAdmin() {
                 type="checkbox"
                 checked={inStock}
                 id="inStockProduct"
-                onClick={() => setInStock((prev) => !prev)}
+                // onClick={() => setInStock((prev) => !prev)}
+                onChange={() => setInStock((prev) => !prev)}
                 className="h-6 w-6"
               />
               {/* <label
@@ -408,13 +410,13 @@ function IndividualCakesAdmin() {
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     viewBox="0 0 24 24"
-                    stroke-width="1.5"
+                    strokeWidth="1.5"
                     stroke="currentColor"
-                    class="size-4"
+                    className="size-4"
                   >
                     <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
                       d="m19.5 8.25-7.5 7.5-7.5-7.5"
                     ></path>
                   </svg>

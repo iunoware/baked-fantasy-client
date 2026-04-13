@@ -25,7 +25,8 @@ function CakesAdmin() {
     fetchProducts();
   }, []);
 
-  const token = "";
+  // const token = "";
+  const token = sessionStorage.getItem("token");
 
   async function postCategory(e) {
     e.preventDefault();

@@ -192,7 +192,8 @@ function EssentialsCategoryCardAdmin(props) {
                 type="checkbox"
                 checked={isActive}
                 id="inStockProduct"
-                onClick={() => setIsActive((prev) => !prev)}
+                // onClick={() => setIsActive((prev) => !prev)}
+                onChange={() => setIsActive((prev) => !prev)}
                 className="h-6 w-6"
               />
 
