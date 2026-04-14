@@ -3,7 +3,7 @@ import { Phone } from "lucide-react";
 function EnquiryBtn() {
   return (
     <>
-      <div className=" fixed top-[50%] -right-9 rounded-lg !shadow-sm rotate-270">
+      <div className=" fixed top-[50%] -right-9 rounded-lg rotate-270">
         <a
           className="group relative inline-flex items-center overflow-hidden rounded-full new-primary-bg px-8 py-3 text-white"
           href="tel:+916379240125"

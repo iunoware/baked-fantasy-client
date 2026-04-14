@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable react-refresh/only-export-components */
 import React, {
   createContext,
   useContext,
@@ -6,9 +8,7 @@ import React, {
   useEffect,
   useRef,
 } from "react";
-import axios from "axios";
 import api from "../api";
-import toast from "react-hot-toast";
 
 const AuthContext = createContext();
 
@@ -30,7 +30,6 @@ export const AuthProvider = ({ children }) => {
 
   const pendingActionRef = useRef(null);
 
-  // 1. Single Source of Truth: Fetch User from Backend
   const fetchUser = useCallback(async (showLoading = true) => {
     const token = localStorage.getItem("token");
     if (!token) {
@@ -42,12 +41,21 @@ export const AuthProvider = ({ children }) => {
 
     try {
       if (showLoading) setIsLoadingUser(true);
-      const res = await api.get(`/me`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      const userData = res.data.user;
+
+      // Fetch both in parallel
+      const [userRes, addressRes] = await Promise.all([
+        api.get("/me", { headers: { Authorization: `Bearer ${token}` } }),
+        api.get("/has-address", {
+          headers: { Authorization: `Bearer ${token}` },
+        }),
+      ]);
+
+      const userData = {
+        ...userRes.data.user,
+        hasAddress: addressRes.data.hasAddress, // ✅ attach to user object
+      };
+
       setUser(userData);
-      // ✅ No localStorage write — state is the only source of truth
       setIsLoggedIn(true);
       return userData;
     } catch (err) {
@@ -80,7 +88,8 @@ export const AuthProvider = ({ children }) => {
       }
 
       const freshUser = await fetchUser(false);
-      console.log("freshUser fields:", freshUser);
+      // console.log("hasAddress value:", freshUser?.hasAddress);
+      // console.log("addressRes raw:", freshUser);
 
       if (!freshUser) {
         pendingActionRef.current = action;
@@ -88,7 +97,7 @@ export const AuthProvider = ({ children }) => {
         return;
       }
 
-      if (!freshUser.address1 || !freshUser.profileCompleted) {
+      if (!freshUser.hasAddress) {
         pendingActionRef.current = action;
         setActiveModal("profile");
         return;
@@ -105,7 +114,7 @@ export const AuthProvider = ({ children }) => {
 
   // 3. Async Flow Handlers
   const handleLoginSuccess = useCallback(
-    async (token, userData) => {
+    async (token) => {
       localStorage.setItem("token", token);
       // ✅ No localStorage write for user
       setIsLoggedIn(true);
@@ -113,7 +122,7 @@ export const AuthProvider = ({ children }) => {
       const freshUser = await fetchUser();
 
       if (pendingActionRef.current) {
-        if (freshUser?.address1 && freshUser?.profileCompleted) {
+        if (freshUser?.hasAddress) {
           const action = pendingActionRef.current;
           pendingActionRef.current = null;
           await action();
@@ -130,9 +139,8 @@ export const AuthProvider = ({ children }) => {
     [fetchUser],
   );
 
-  const onProfileSaved = useCallback(async (updatedUser) => {
-    setUser(updatedUser);
-    // ✅ No localStorage write for user
+  const onProfileSaved = useCallback(async () => {
+    // const freshUser = await fetchUser(); // re-fetch so hasAddress is updated
     setActiveModal(null);
 
     if (pendingActionRef.current) {
@@ -140,7 +148,7 @@ export const AuthProvider = ({ children }) => {
       pendingActionRef.current = null;
       await action();
     }
-  }, []);
+  }, [fetchUser]);
 
   const handleLogout = useCallback(() => {
     localStorage.removeItem("token");

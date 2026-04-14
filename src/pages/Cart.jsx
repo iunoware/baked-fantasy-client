@@ -3,7 +3,6 @@ import { CartPage } from "../components/CartPage.jsx";
 import { DeliveryPage } from "../components/DeliveryPage.jsx";
 import { PaymentPage } from "../components/PaymentPage.jsx";
 import { ConfirmationPage } from "../components/ConfirmationPage.jsx";
-import axios from "axios";
 import { useCart } from "../context/CartContext.jsx";
 
 export default function App() {
@@ -116,6 +115,7 @@ export default function App() {
       {currentStep === "delivery" && (
         <DeliveryPage
           // addresses={addresses}
+          cartItems={cartItems}
           selectedAddress={selectedAddress}
           setSelectedAddress={setSelectedAddress}
           deliveryInstructions={deliveryInstructions}
