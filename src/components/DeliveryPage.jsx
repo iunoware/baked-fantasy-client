@@ -1,4 +1,5 @@
-import { useState, useRef, useEffect } from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useState, useEffect } from "react";
 import AddressAutocomplete from "./AddressAutocomplete";
 import {
   MapPin,
@@ -25,10 +26,10 @@ import {
   DialogDescription,
 } from "./ui/dialog";
 import { Label } from "./ui/label";
-import { data } from "react-router-dom";
 import api from "../api";
 
 export function DeliveryPage({
+  cartItems,
   selectedAddress,
   setSelectedAddress,
   deliveryInstructions,
@@ -38,10 +39,11 @@ export function DeliveryPage({
   onNext,
   onPrevious,
 }) {
-  const inputRef = useRef(null);
+  // const inputRef = useRef(null);
   const [isAddingAddress, setIsAddingAddress] = useState(false);
-  const [activeAddress, setActiveAddress] = useState(null);
+  // const [activeAddress, setActiveAddress] = useState(null);
   const [addresses, setAddresses] = useState([]);
+  const [distanceKm, setDistanceKm] = useState(null);
   const [newAddress, setNewAddress] = useState({
     type: "",
     building: "",
@@ -50,6 +52,28 @@ export function DeliveryPage({
     lat: null,
     lng: null,
   });
+
+  const filteredItems = cartItems.filter(
+    (item) => item.type !== "essential" && item.deliveryType === "local",
+  );
+  const itemsText = filteredItems
+    .map((item) => `${item.name} x${item.quantity}`)
+    .join(", ");
+
+  const message = `
+Hi 
+I want to place an order.
+
+Address: ${selectedAddress?.fullAddress}
+
+ Items: ${itemsText}
+
+Please assist with delivery.
+`;
+
+  const encodedMessage = encodeURIComponent(message);
+
+  const whatsappUrl = `https://wa.me/916379240125?text=${encodedMessage}`;
 
   const addAddress = async () => {
     try {
@@ -61,10 +85,10 @@ export function DeliveryPage({
       }
 
       const token = localStorage.getItem("token");
-      console.log(
-        "🚨 [Frontend] POST /address - Token from localStorage:",
-        token,
-      );
+      // console.log(
+      //   "🚨 [Frontend] POST /address - Token from localStorage:",
+      //   token,
+      // );
 
       if (!token || token === "null") {
         alert("Please login to save your address.");
@@ -106,7 +130,7 @@ export function DeliveryPage({
   };
 
   const handleSelectAddress = async (address) => {
-    setSelectedAddress(address); // Optmistic UI change immediately
+    setSelectedAddress(address);
 
     try {
       const token = localStorage.getItem("token");
@@ -169,6 +193,9 @@ export function DeliveryPage({
           } else {
             distanceMeters = data.distance;
           }
+
+          // ✅ Save distance in km
+          setDistanceKm(distanceMeters / 1000);
 
           const fee = calculateDeliveryFee(distanceMeters);
 
@@ -514,19 +541,42 @@ export function DeliveryPage({
 
                 {/* Action Buttons */}
                 <div className="space-y-3 mt-6">
-                  <button
-                    onClick={onNext}
-                    disabled={!selectedAddress}
-                    className="group relative w-full justify-center mt-6 inline-flex items-center overflow-hidden rounded-sm bg-cyan-500 px-8 py-3 text-white focus:ring-3 focus:outline-hidden mr-3"
-                  >
-                    <span className="absolute -start-full transition-all group-hover:start-4">
-                      <ArrowRight size={15} />
-                    </span>
-
-                    <span className="text-sm font-medium text-center transition-all group-hover:ms-4">
-                      Proceed to Payment
-                    </span>
-                  </button>
+                  {distanceKm !== null && distanceKm > 8 ? (
+                    // ✅ Outside 8km — show WhatsApp button
+                    <>
+                      <p className="text-sm text-amber-600 bg-amber-50 border border-amber-200 rounded-lg p-3 text-center">
+                        You're {distanceKm.toFixed(1)}km away. Online delivery
+                        isn't available. Contact us on WhatsApp to arrange
+                        delivery.
+                      </p>
+                      <a
+                        href={whatsappUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group relative w-full justify-center mt-2 inline-flex items-center overflow-hidden rounded-sm bg-green-500 px-8 py-3 text-white focus:ring-3 focus:outline-hidden"
+                      >
+                        <span className="text-sm font-medium text-center">
+                          Contact us on WhatsApp
+                        </span>
+                      </a>
+                    </>
+                  ) : (
+                    // ✅ Within 8km — show normal proceed button
+                    <button
+                      onClick={onNext}
+                      disabled={!selectedAddress || distanceKm === null}
+                      className="group relative w-full justify-center mt-6 inline-flex items-center overflow-hidden rounded-sm bg-cyan-500 px-8 py-3 text-white focus:ring-3 focus:outline-hidden mr-3 disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                      <span className="absolute -start-full transition-all group-hover:start-4">
+                        <ArrowRight size={15} />
+                      </span>
+                      <span className="text-sm font-medium text-center transition-all group-hover:ms-4">
+                        {distanceKm === null && selectedAddress
+                          ? "Calculating distance..."
+                          : "Proceed to Payment"}
+                      </span>
+                    </button>
+                  )}
 
                   <button
                     onClick={onPrevious}
@@ -535,7 +585,6 @@ export function DeliveryPage({
                     <span className="absolute -start-full transition-all group-hover:start-4">
                       <ArrowLeft size={15} />
                     </span>
-
                     <span className="text-sm font-medium text-center transition-all group-hover:ms-4">
                       Back to Cart
                     </span>
