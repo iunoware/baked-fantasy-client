@@ -102,13 +102,12 @@ function IndividualEssentialAdmin() {
       !form ||
       !name ||
       !subject ||
-      !files ||
+      // !files ||
       !originalPrice ||
       !discountedPrice ||
       !description ||
       !info
     ) {
-      // window.alert("Please fill all fields and select an image!");
       toast.error("Please fill all fields!");
       return;
     } else {

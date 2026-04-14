@@ -298,10 +298,11 @@ function CategoryCardAdmin(props) {
             onClick={() => setDeleteModal(false)}
           />
           <h2 className="text-2xl font-bold mb-4 text-red-600">Warning</h2>
-          <p className="text-lg font-medium text-gray-700 mb-6">
+          <p className="text-sm font-medium text-gray-700 mb-6">
             Are you sure you want to delete{" "}
-            <span className="font-bold">"{props.title}"</span>? This action cannot be
-            undone.
+            <span className="font-bold">"{props.title}"</span>? This will also{" "}
+            <span className="font-bold">delete all the products</span> inside this
+            category. This action cannot be undone.
           </p>
           {deleteTimer > 0 ? (
             <button

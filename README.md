@@ -66,16 +66,16 @@ npm run preview
 ### Product
 
 - CakesAdmin (page) => whole page category
-- CategoryCardAdmin (component) => category card
+- CategoryCardAdmin (component) => category card (category PATCH & DELETE)
 - IndividualCakesAdmin (page) => whole page products
-- ProductTableAdmin (component) => individual product table
+- ProductTableAdmin (component) => individual product table (product PATCH & DELETE)
 
 ### Essentials
 
 - EssentialsAdmin (page) => whole page category
-- EssentialsCategoryCardAdmin (component) => category card
+- EssentialsCategoryCardAdmin (component) => category card (category PATCH & DELETE)
 - IndividualEssentialsAdmin (page) => whole page essentials
-- EssentialsTableAdmin (component) => individual essentials table
+- EssentialsTableAdmin (component) => individual essentials table (product PATCH & DELETE)
 
 ---
 

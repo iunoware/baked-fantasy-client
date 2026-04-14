@@ -76,7 +76,8 @@ function ProductAdmin(props) {
     // }
 
     const formData = new FormData();
-    if (name) formData.append("title", name);
+    // if (name) formData.append("title", name);
+    if (name && name !== props.title) formData.append("title", name);
     if (subject) formData.append("subject", subject);
     if (originalPrice) formData.append("originalPrice", originalPrice);
     if (discountedPrice) formData.append("discountedPrice", discountedPrice);

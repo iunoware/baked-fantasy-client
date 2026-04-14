@@ -45,7 +45,8 @@ function CourseCardAdmin({ course, onEdit, onDelete }) {
           alt={course.title}
           className="w-full h-48 object-cover rounded-lg"
           onError={(e) => {
-            e.target.src = "https://via.placeholder.com/400x200?text=No+Image";
+            e.target.onError = null;
+            e.target.src = "/images/fallback.png";
           }}
         />
       </div>
@@ -424,10 +425,11 @@ export default function CourseAdmin() {
               onClick={() => setIsDeleteModalOpen(false)}
             />
             <h2 className="text-2xl font-bold mb-4 text-red-600">Warning</h2>
-            <p className="text-lg font-medium text-gray-700 mb-6">
+            <p className="text-sm font-medium text-gray-700 mb-6">
               Are you sure you want to delete{" "}
-              <span className="font-bold">"{selectedCourse.title}"</span>? This action
-              cannot be undone.
+              <span className="font-bold">"{selectedCourse.title}"</span>? This will also{" "}
+              <span className="font-bold">delete all the sections & lessons</span> inside
+              this course. This action cannot be undone.
             </p>
             {deleteTimer > 0 ? (
               <button
