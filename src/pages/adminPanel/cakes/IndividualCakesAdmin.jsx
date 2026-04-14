@@ -97,10 +97,11 @@ function IndividualCakesAdmin() {
     const originalPrice = form.productOriginalPrice.value.trim();
     const discountedPrice = form.productPrice.value.trim();
     const description = form.productDescription.value.trim();
+    const deliveryType = form.productDeliveryType.value;
     const info = form.productInfo.value.trim();
     // const isActive = form.productIsActive.value.trim();
-    if (files.length > 4) {
-      window.alert("You can only upload up to 4 images.");
+    if (files.length !== 4) {
+      toast.error("Please upload exactly 4 images");
       return;
     }
 
@@ -108,7 +109,7 @@ function IndividualCakesAdmin() {
       !form ||
       !name ||
       !subject ||
-      !files ||
+      // !files ||
       !originalPrice ||
       !discountedPrice ||
       !description ||
@@ -126,6 +127,7 @@ function IndividualCakesAdmin() {
       formData.append("description", description);
       formData.append("info", info);
       formData.append("category", categoryName);
+      formData.append("deliveryType", deliveryType);
       // formData.append("isActive", isActive);
       formData.append("inStock", inStock);
       for (let i = 0; i < files.length; i++) {
@@ -152,13 +154,14 @@ function IndividualCakesAdmin() {
       } catch (error) {
         toast.error("Can't add products");
         console.error("error message: ", error.message);
+        console.error("Full error response:", error.response?.data);
       }
     }
   }
 
   return (
     <div className="lg:pl-28 pl-20 pt-10 lg:pr-10 pr-5">
-      {/* modal for post category */}
+      {/* modal for POST category */}
       <div
         className={`${
           isModalVisible ? "block" : "hidden"
@@ -271,18 +274,25 @@ function IndividualCakesAdmin() {
               />
             </div>
 
+            {/* deliveryType */}
+            <div className="flex gap-3 justify-between items-center">
+              <p className="w-1/2">Delivery type:</p>
+              <select
+                name="productDeliveryType"
+                id="productDeliveryType"
+                className="ring ring-gray-500 text-black rounded-lg p-2 w-1/2"
+              >
+                <option value="local">Local</option>
+                <option value="pickup">Pickup</option>
+                <option value="national">National</option>
+              </select>
+            </div>
+
             {/* inStock */}
             <div className="flex gap-3 my-5 justify-between items-center">
               <div>
                 <h4>{inStock ? "🟢 In-stock" : "🔴 Not-in-stock"}</h4>
               </div>
-
-              {/* <input
-                type="checkbox"
-                onClick={() => setInStock((prev) => !prev)}
-                id="inStockProduct"
-                className="peer sr-only"
-              /> */}
 
               <input
                 type="checkbox"

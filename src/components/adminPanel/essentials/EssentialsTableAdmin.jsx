@@ -76,7 +76,7 @@ function EssentialsTableAdmin(props) {
     // }
 
     const formData = new FormData();
-    if (name) formData.append("title", name);
+    if (name && name !== props.title) formData.append("title", name); 
     if (subject) formData.append("subject", subject);
     if (originalPrice) formData.append("originalPrice", originalPrice);
     if (discountedPrice) formData.append("discountedPrice", discountedPrice);
@@ -110,7 +110,8 @@ function EssentialsTableAdmin(props) {
       }, 300);
     } catch (error) {
       toast.error("Can't add products");
-      console.error("error message: ", error.message);
+      // console.error("error message: ", error.message);
+      console.error("ful error log: ", error.response?.data);
     }
   }
 

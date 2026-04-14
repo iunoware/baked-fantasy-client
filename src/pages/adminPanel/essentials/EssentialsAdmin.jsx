@@ -36,7 +36,6 @@ function EssentialsAdmin() {
     const file = form.categoryFile.files[0];
 
     if (!name) {
-      // window.alert("Please fill all fields and select an image!");
       toast.error("Please enter a Name");
       return;
     } else if (!subject) {
@@ -75,6 +74,7 @@ function EssentialsAdmin() {
       } catch (error) {
         toast.error("Can't add Category");
         console.error("error message: ", error.message);
+        console.error("full error response", error.response?.data);
       }
     }
   }
