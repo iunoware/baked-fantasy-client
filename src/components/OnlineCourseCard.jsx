@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
 import { GraduationCap, Star, Clock, Users } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "@/context/AuthContext.jsx";
 
 function StarRating({ rating }) {
   return (
@@ -18,7 +20,9 @@ function StarRating({ rating }) {
             <Star className="absolute text-gray-300 w-5 h-5 fill-gray-300" />
 
             {/* full star */}
-            {full && <Star className="absolute w-5 h-5 text-amber-500 fill-amber-500" />}
+            {full && (
+              <Star className="absolute w-5 h-5 text-amber-500 fill-amber-500" />
+            )}
 
             {/* half star */}
             {half && (
@@ -35,9 +39,15 @@ function StarRating({ rating }) {
 
 function OnlineCourseCard(props) {
   const location = useLocation();
-  // console.log("path: ", location.pathname);
+  const navigate = useNavigate();
+  const { handleProtectedAction } = useAuth();
   const isMyLearning = location.pathname.startsWith("/courses/my-learning");
 
+  const handleBuyNow = () => {
+    handleProtectedAction(() => {
+      navigate(props.link, { state: { courseId: props.courseId } });
+    });
+  };
   return (
     <div className="">
       <div className="rounded-2xl bg-white shadow-lg m-10">
@@ -100,13 +110,14 @@ function OnlineCourseCard(props) {
                 Watch Now
               </Link>
             ) : (
-              <Link
-                to={props.link}
-                state={{ courseId: props.courseId }}
+              <button
+                // to={props.link}
+                // state={{ courseId: props.courseId }}
+                onClick={handleBuyNow}
                 className="text-center block mt-3 w-full rounded-xl transition-all new-primary-bg active:scale-98 shadow-md px-8 py-4 text-white"
               >
                 Buy Now
-              </Link>
+              </button>
             )}
           </div>
 
