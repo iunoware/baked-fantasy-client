@@ -69,14 +69,20 @@ function EssentialsTableAdmin(props) {
     const discountedPrice = form.productPrice.value.trim() || props.discountedPrice;
     const description = form.productDescription.value.trim() || props.description;
     const info = form.productInfo.value.trim() || props.info;
-    // const active = isActive;
-    // if (files.length > 4) {
-    //   window.alert("You can only upload up to 4 images.");
-    //   return;
-    // }
+
+    if (!name) return toast.error("Product title is required");
+    if (!subject) return toast.error("Subject is required");
+    if (!originalPrice) return toast.error("Original price is required");
+    if (isNaN(originalPrice)) return toast.error("Original price must be a number");
+    if (!discountedPrice) return toast.error("Discounted price is required");
+    if (isNaN(discountedPrice)) return toast.error("Discounted price must be a number");
+    if (Number(discountedPrice) > Number(originalPrice))
+      return toast.error("Discounted price can't be more than original price");
+    if (!description) return toast.error("Description is required");
+    if (!info) return toast.error("Info is required");
 
     const formData = new FormData();
-    if (name && name !== props.title) formData.append("title", name); 
+    if (name && name !== props.title) formData.append("title", name);
     if (subject) formData.append("subject", subject);
     if (originalPrice) formData.append("originalPrice", originalPrice);
     if (discountedPrice) formData.append("discountedPrice", discountedPrice);
@@ -162,7 +168,7 @@ function EssentialsTableAdmin(props) {
               <div className="flex items-start justify-between">
                 <h2
                   id="modalTitle"
-                  className="md:text-3xl text-center w-full mb-5 font-bold text-black text-2xl"
+                  className="md:text-3xl text-start w-full mb-5 font-bold text-black text-2xl"
                 >
                   Edit {props.title}
                 </h2>
@@ -182,6 +188,7 @@ function EssentialsTableAdmin(props) {
 
               <form onSubmit={patchProduct} className="mt-4 flex flex-col gap-3">
                 {/* title */}
+                <p className="text-sm text-gray-700">Title:</p>
                 <div className="flex gap-3 justify-between items-center">
                   <input
                     type="text"
@@ -195,15 +202,6 @@ function EssentialsTableAdmin(props) {
 
                 {/* file */}
                 <div className="flex flex-col gap-3 justify-between items-center">
-                  {/* <input
-                    type="file"
-                    id="productFile"
-                    name="productFile"
-                    multiple
-                    accept="image/png, image/jpeg, image/webp, image/gif"
-                    className="h-20 border-2 cursor-pointer border-dashed border-gray-500 text-black rounded-lg p-2 w-full"
-                  /> */}
-
                   <h2 className="font-semibold">Click an image to replace</h2>
                   <div className="flex gap-1 cursor-pointer">
                     {props.images.map((image, i) => (
@@ -226,6 +224,7 @@ function EssentialsTableAdmin(props) {
                 </div>
 
                 {/* subject */}
+                <p className="text-sm text-gray-700">Subject:</p>
                 <div className="flex gap-3 justify-between items-center">
                   <input
                     type="text"
@@ -238,6 +237,7 @@ function EssentialsTableAdmin(props) {
                 </div>
 
                 {/* discounted price */}
+                <p className="text-sm text-gray-700">Discounted price:</p>
                 <div className="flex gap-3 justify-between items-center">
                   <input
                     type="text"
@@ -250,6 +250,7 @@ function EssentialsTableAdmin(props) {
                 </div>
 
                 {/* original price */}
+                <p className="text-sm text-gray-700">Original price:</p>
                 <div className="flex gap-3 justify-between items-center">
                   <input
                     type="text"
@@ -262,6 +263,7 @@ function EssentialsTableAdmin(props) {
                 </div>
 
                 {/* description */}
+                <p className="text-sm text-gray-700">Description:</p>
                 <div className="flex gap-3 justify-between items-center">
                   <input
                     type="text"
@@ -274,6 +276,7 @@ function EssentialsTableAdmin(props) {
                 </div>
 
                 {/* info */}
+                <p className="text-sm text-gray-700">Info:</p>
                 <div className="flex gap-3 justify-between items-center">
                   <input
                     type="text"

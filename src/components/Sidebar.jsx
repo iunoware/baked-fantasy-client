@@ -36,11 +36,9 @@ function Sidebar() {
               <div className="py-4">
                 <NavLink
                   to={`/admin`}
-                  className={`flex items-center gap-3 rounded-md px-2 py-2 text-gray-700 hover:bg-pink-50 transition-colors`}
+                  className={`flex items-center gap-3 rounded-md px-2 py-2 text-gray-700 hover:bg-pbrown/10 transition-colors`}
                   // className={({ isActive }) =>
-                  //   `${
-                  //     isActive ? "bg-sky-50" : ""
-                  //   } flex items-center gap-3 rounded-md px-2 py-2 text-gray-700 hover:bg-pink-50 transition-colors`
+                  //   `${isActive ? "bg-pbrown/10" : ""} flex items-center gap-3 rounded-md px-2 py-2 text-gray-700 hover:bg-pbrown/10 transition-colors`
                   // }
                 >
                   {({ isActive }) => (
@@ -65,14 +63,15 @@ function Sidebar() {
               </div>
 
               <ul className="space-y-1 border-t border-gray-300 pt-4">
+                {/* courses */}
                 <li>
                   <NavLink
                     to={`/admin/courses`}
                     // className="flex items-center gap-3 rounded-md px-2 py-2 text-gray-700 hover:bg-pink-50 transition-colors"
                     className={({ isActive }) =>
                       `${
-                        isActive ? "bg-pink-50" : ""
-                      } flex items-center gap-3 rounded-md px-2 py-2 text-gray-700 hover:bg-pink-50 transition-colors`
+                        isActive ? "bg-pbrown/10" : ""
+                      } flex items-center gap-3 rounded-md px-2 py-2 text-gray-700 hover:bg-pbrown/10 transition-colors`
                     }
                   >
                     {({ isActive }) => (
@@ -95,14 +94,15 @@ function Sidebar() {
                   </NavLink>
                 </li>
 
+                {/* products */}
                 <li>
                   <NavLink
                     to={`/admin/essentials`}
                     // className="flex items-center gap-3 rounded-md px-2 py-2 text-gray-700 hover:bg-pink-50 transition-colors"
                     className={({ isActive }) =>
                       `${
-                        isActive ? "bg-pink-50" : ""
-                      } flex items-center gap-3 rounded-md px-2 py-2 text-gray-700 hover:bg-pink-50 transition-colors`
+                        isActive ? "bg-pbrown/10" : ""
+                      } flex items-center gap-3 rounded-md px-2 py-2 text-gray-700 hover:bg-pbrown/10 transition-colors`
                     }
                   >
                     {({ isActive }) => (
@@ -125,14 +125,15 @@ function Sidebar() {
                   </NavLink>
                 </li>
 
+                {/* cakes */}
                 <li>
                   <NavLink
                     to={`/admin/cakes`}
                     // className="flex items-center gap-3 rounded-md px-2 py-2 text-gray-700 hover:bg-pink-50 transition-colors"
                     className={({ isActive }) =>
                       `${
-                        isActive ? "bg-pink-50" : ""
-                      } flex items-center gap-3 rounded-md px-2 py-2 text-gray-700 hover:bg-pink-50 transition-colors`
+                        isActive ? "bg-pbrown/10" : ""
+                      } flex items-center gap-3 rounded-md px-2 py-2 text-gray-700 hover:bg-pbrown/10 transition-colors`
                     }
                   >
                     {({ isActive }) => (
@@ -155,14 +156,15 @@ function Sidebar() {
                   </NavLink>
                 </li>
 
+                {/* orders */}
                 <li>
                   <NavLink
                     to={`/admin/orders`}
                     // className="flex items-center gap-3 rounded-md px-2 py-2 text-gray-700 hover:bg-pink-50 transition-colors"
                     className={({ isActive }) =>
                       `${
-                        isActive ? "bg-pink-50" : ""
-                      } flex items-center gap-3 rounded-md px-2 py-2 text-gray-700 hover:bg-pink-50 transition-colors`
+                        isActive ? "bg-pbrown/10" : ""
+                      } flex items-center gap-3 rounded-md px-2 py-2 text-gray-700 hover:bg-pbrown/10 transition-colors`
                     }
                   >
                     {({ isActive }) => (
@@ -184,14 +186,16 @@ function Sidebar() {
                     )}
                   </NavLink>
                 </li>
+
+                {/* banner */}
                 <li>
                   <NavLink
                     to={`/admin/banner`}
                     // className="flex items-center gap-3 rounded-md px-2 py-2 text-gray-700 hover:bg-pink-50 transition-colors"
                     className={({ isActive }) =>
                       `${
-                        isActive ? "bg-pink-50" : ""
-                      } flex items-center gap-3 rounded-md px-2 py-2 text-gray-700 hover:bg-pink-50 transition-colors`
+                        isActive ? "bg-pbrown/10" : ""
+                      } flex items-center gap-3 rounded-md px-2 py-2 text-gray-700 hover:bg-pbrown/10 transition-colors`
                     }
                   >
                     {({ isActive }) => (
@@ -214,14 +218,15 @@ function Sidebar() {
                   </NavLink>
                 </li>
 
+                {/* settings */}
                 <li>
                   <NavLink
                     to={`/admin/settings`}
                     // className="flex items-center gap-3 rounded-md px-2 py-2 text-gray-700 hover:bg-pink-50 transition-colors"
                     className={({ isActive }) =>
                       `${
-                        isActive ? "bg-pink-50" : ""
-                      } flex items-center gap-3 rounded-md px-2 py-2 text-gray-700 hover:bg-pink-50 transition-colors`
+                        isActive ? "bg-pbrown/10" : ""
+                      } flex items-center gap-3 rounded-md px-2 py-2 text-gray-700 hover:bg-pbrown/10 transition-colors`
                     }
                   >
                     {({ isActive }) => (

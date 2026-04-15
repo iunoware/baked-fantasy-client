@@ -94,7 +94,7 @@ function EssentialsAdmin() {
           <div className="flex items-start justify-between">
             <h2
               id="modalTitle"
-              className="md:text-3xl text-center w-full mb-5 font-bold text-black text-2xl"
+              className="md:text-3xl text-start w-full mb-5 font-bold text-black text-2xl"
             >
               Add new Category
             </h2>
@@ -114,6 +114,7 @@ function EssentialsAdmin() {
 
           <form onSubmit={postCategory} className="mt-4 flex flex-col gap-3">
             {/* title */}
+            <p className="text-sm text-gray-700">Title:</p>
             <div className="flex gap-3 justify-between items-center">
               <input
                 type="text"
@@ -125,6 +126,7 @@ function EssentialsAdmin() {
             </div>
 
             {/* subject */}
+            <p className="text-sm text-gray-700">Subject:</p>
             <div className="flex gap-3 justify-between items-center">
               <input
                 type="text"
@@ -136,6 +138,7 @@ function EssentialsAdmin() {
             </div>
 
             {/* file */}
+            <p className="text-sm text-gray-700">Image:</p>
             <div className="flex gap-3 justify-between items-center">
               <input
                 type="file"

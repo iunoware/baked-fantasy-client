@@ -69,11 +69,24 @@ function ProductAdmin(props) {
     const discountedPrice = form.productPrice.value.trim() || props.discountedPrice;
     const description = form.productDescription.value.trim() || props.description;
     const info = form.productInfo.value.trim() || props.info;
+    const deliveryType = form.productDeliveryType.value;
     // const active = isActive;
     // if (files.length > 4) {
     //   window.alert("You can only upload up to 4 images.");
     //   return;
     // }
+
+    if (!name) return toast.error("Product title is required");
+    if (!subject) return toast.error("Subject is required");
+    if (!originalPrice) return toast.error("Original price is required");
+    if (isNaN(originalPrice)) return toast.error("Original price must be a number");
+    if (!discountedPrice) return toast.error("Discounted price is required");
+    if (isNaN(discountedPrice)) return toast.error("Discounted price must be a number");
+    if (Number(discountedPrice) > Number(originalPrice))
+      return toast.error("Discounted price can't be more than original price");
+    if (!description) return toast.error("Description is required");
+    if (!info) return toast.error("Info is required");
+    if (!deliveryType) return toast.error("Delivery type is required");
 
     const formData = new FormData();
     // if (name) formData.append("title", name);
@@ -83,7 +96,7 @@ function ProductAdmin(props) {
     if (discountedPrice) formData.append("discountedPrice", discountedPrice);
     if (description) formData.append("description", description);
     if (info) formData.append("info", info);
-    // if (props.categoryName) formData.append("category", props.categoryName);
+    if (deliveryType) formData.append("deliveryType", deliveryType);
     if (files && files.length > 0) {
       for (let i = 0; i < files.length; i++) {
         formData.append("images", files[i]);
@@ -163,7 +176,7 @@ function ProductAdmin(props) {
               <div className="flex items-start justify-between">
                 <h2
                   id="modalTitle"
-                  className="md:text-3xl text-center w-full mb-5 font-bold text-black text-2xl"
+                  className="md:text-3xl text-start w-full mb-5 font-bold text-black text-2xl"
                 >
                   Edit {props.title}
                 </h2>
@@ -183,6 +196,7 @@ function ProductAdmin(props) {
 
               <form onSubmit={patchProduct} className="mt-4 flex flex-col gap-3">
                 {/* title */}
+                <p className="text-sm text-gray-700">Title:</p>
                 <div className="flex gap-3 justify-between items-center">
                   <input
                     type="text"
@@ -227,6 +241,7 @@ function ProductAdmin(props) {
                 </div>
 
                 {/* subject */}
+                <p className="text-sm text-gray-700">Subject:</p>
                 <div className="flex gap-3 justify-between items-center">
                   <input
                     type="text"
@@ -239,6 +254,7 @@ function ProductAdmin(props) {
                 </div>
 
                 {/* discounted price */}
+                <p className="text-sm text-gray-700">Discounted price:</p>
                 <div className="flex gap-3 justify-between items-center">
                   <input
                     type="text"
@@ -251,6 +267,7 @@ function ProductAdmin(props) {
                 </div>
 
                 {/* original price */}
+                <p className="text-sm text-gray-700">Original price:</p>
                 <div className="flex gap-3 justify-between items-center">
                   <input
                     type="text"
@@ -263,6 +280,7 @@ function ProductAdmin(props) {
                 </div>
 
                 {/* description */}
+                <p className="text-sm text-gray-700">Description:</p>
                 <div className="flex gap-3 justify-between items-center">
                   <input
                     type="text"
@@ -275,6 +293,7 @@ function ProductAdmin(props) {
                 </div>
 
                 {/* info */}
+                <p className="text-sm text-gray-700">Info:</p>
                 <div className="flex gap-3 justify-between items-center">
                   <input
                     type="text"
@@ -284,6 +303,21 @@ function ProductAdmin(props) {
                     className="ring ring-gray-500 text-black rounded-lg p-2 w-full"
                     placeholder="Info"
                   />
+                </div>
+
+                {/* deliveryType */}
+                <div className="flex gap-3 justify-between items-center">
+                  <p className="w-1/2 text-gray-700">Delivery type:</p>
+                  <select
+                    name="productDeliveryType"
+                    id="productDeliveryType"
+                    defaultValue={props.delivery}
+                    className="ring ring-gray-500 text-black rounded-lg p-2 w-1/2"
+                  >
+                    <option value="local">Local</option>
+                    <option value="pickup">Pickup</option>
+                    <option value="national">National</option>
+                  </select>
                 </div>
 
                 {/* isActive */}
@@ -342,7 +376,8 @@ function ProductAdmin(props) {
                     <input
                       type="checkbox"
                       checked={inStock}
-                      onClick={() => setInStock((prev) => !prev)}
+                      // onClick={() => setInStock((prev) => !prev)}
+                      onChange={() => setInStock((prev) => !prev)}
                       id={props._id}
                       className="peer sr-only"
                     />
@@ -368,66 +403,6 @@ function ProductAdmin(props) {
           </div>
 
           {/* modal for delete warning */}
-          {/* <div
-            className={`${
-              deleteModal ? "block" : "hidden"
-            } fixed inset-0 z-50 grid place-content-center bg-black/50 p-4`}
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="modalTitle"
-          >
-            <div className="w-full max-w-md rounded-xl bg-white backdrop-blur-xl p-10 shadow-lg">
-              <div className="flex items-start justify-between">
-                <div>
-                  <h2
-                    id="modalTitle"
-                    className="md:text-3xl text-center w-full mb-5 font-bold text-black text-2xl"
-                  >
-                    Are you sure? Do you really want to{" "}
-                    <span className="text-red-600">delete</span>{" "}
-                    <span className="text-red-600">{props.title}</span>
-                  </h2>
-                  <p className=" text-center w-full mb-5 text-black">
-                    The product{" "}
-                    <span className="text-red-600 font-bold text-lg">{props.title}</span>{" "}
-                    will be{" "}
-                    <span className="text-red-600 font-bold">permanently deleted</span>,
-                    and can't be recovered back.
-                  </p>
-                </div>
-
-                <button
-                  type="button"
-                  onClick={() => {
-                    setDeleteModal(false);
-                    setIsBtnVisible(false);
-                  }}
-                  className="-me-4 -mt-4 rounded-full p-2 cursor-pointer transition-all hover:rotate-90 ease-in focus:outline-none"
-                  aria-label="Close"
-                >
-                  <X size={20} />
-                </button>
-              </div>
-
-              {isBtnVisible ? (
-                <div
-                  className={`${
-                    isBtnVisible ? "block" : "hidden"
-                  } flex justify-center items-center`}
-                >
-                  <button
-                    type="button"
-                    onClick={deleteFunction}
-                    className="bg-red-600 w-full font-semibold hover:cursor-pointer hover:bg-red-700 transition-all duration-200 text-white px-4 py-3 rounded-xl"
-                  >
-                    Delete {props.title}
-                  </button>
-                </div>
-              ) : (
-                <div className="text-center">Loading please wait...</div>
-              )}
-            </div>
-          </div> */}
           <div
             className={`fixed inset-0 z-50 grid place-content-center bg-black/50 p-4 ${deleteModal ? "block" : "hidden"}`}
           >
@@ -482,6 +457,7 @@ function ProductAdmin(props) {
         <td className="p-4">₹{props.discountedPrice}</td>
         <td className="p-4">{props.description}</td>
         <td className="p-4">{props.info}</td>
+        <td className="p-4">{props.delivery}</td>
         <td className="p-4 ">{props.inStock ? "🟢 Yes" : "🔴 No"}</td>
         <td className="p-4 text-center align-middle">
           <div className="flex gap-3 !h-full !w-full justify-center items-center">

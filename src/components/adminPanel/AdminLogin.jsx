@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useEffect, useState } from "react";
 import { Eye, EyeOff, Mail, Lock, X } from "lucide-react";
 import axios from "axios";
@@ -20,17 +21,17 @@ function AdminLogin() {
         password,
       });
 
-      // ✅ Save token in localStorage
+      // Save token in localStorage
       sessionStorage.setItem("token", response.data.token);
       // window.location.href = "/admin/dashboard";
 
-      toast.success("Welcome Back Admin 💜");
+      toast.success("Welcome Back Admin ");
       setTimeout(() => {
         window.location.href = "/admin";
       }, 1000);
     } catch (error) {
       console.error("Login error: ", error.message);
-      toast.error("Try Again 😑");
+      toast.error("Try Again ");
     }
   };
 
@@ -102,7 +103,7 @@ function AdminLogin() {
               <div className="flex justify-center items-center my-4">
                 <button
                   type="submit"
-                  className="bg-pink-600 font-semibold hover:cursor-pointer hover:bg-pink-500 transition-all duration-200 text-white px-4 py-3 rounded-xl"
+                  className="bg-pbrown font-semibold hover:cursor-pointer hover:opacity-90 transition-all duration-200 text-white px-4 py-3 rounded-xl"
                 >
                   Verify Admin
                 </button>

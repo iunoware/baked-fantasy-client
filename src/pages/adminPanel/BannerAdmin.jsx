@@ -24,30 +24,24 @@ function BannerAdmin() {
     if (title) formData.append("title", title);
     if (subject) formData.append("subject", subject);
     if (file) formData.append("image", file);
-    if (endDate) formData.append("endDate", endDate);
+    if (endDate) formData.append("endDate", endDate); // only send if not empty
     formData.append("active", active);
 
     try {
-      const postBanner = await axios.patch(
-        "http://localhost:5000/banner",
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-            Authorization: ` Bearer ${token}`,
-          },
-        }
-      );
-      toast.success("Banner Edited Successfully 🍰");
-      // console.log("Banner added: ", postBanner.data);
-      // console.log("Current toggle value:", isActive);
+      const postBanner = await axios.patch("http://localhost:5000/banner", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: ` Bearer ${token}`,
+        },
+      });
+      toast.success("Banner Edited Successfully ");
       setIsModalVisible(false);
       setTimeout(() => {
         window.location.reload();
       }, 2000);
     } catch (error) {
       console.error("error message: ", error.message);
-      toast.error("Try Again 😑");
+      toast.error("Try Again ");
     }
   }
 
@@ -56,13 +50,19 @@ function BannerAdmin() {
       try {
         const res = await axios.get("http://localhost:5000/banner");
         setBanner(res.data[0]);
-        // console.log(res.data);
       } catch (error) {
         console.error("Error Fetching Banner", error);
       }
     };
     fetchBaner();
   }, []);
+
+  useEffect(() => {
+    if (banner?.active !== undefined) {
+      console.log("banner.active value:", banner.active, "type:", typeof banner.active);
+      setActive(banner.active === true || banner.active === "true");
+    }
+  }, [banner]);
 
   useEffect(() => {
     if (!banner?.endDate) return;
@@ -96,7 +96,7 @@ function BannerAdmin() {
             <h2 className="text-2xl font-bold">Edit Banner</h2>
             <button
               onClick={() => {
-                setIsModalVisible(false), toast.error("No edit Saved");
+                (setIsModalVisible(false), toast.error("No edit Saved"));
               }}
               className="cursor-pointer hover:rotate-90 transition-all ease-in"
             >
@@ -104,7 +104,6 @@ function BannerAdmin() {
             </button>
           </div>
           <form className="mt-4 flex flex-col gap-3" onSubmit={postCategory}>
-            {/* <p className="text-pretty text-gray-700">this is a test run</p> */}
             {/* title */}
             <div className="flex gap-3 justify-between items-center">
               <input
@@ -115,6 +114,7 @@ function BannerAdmin() {
                 placeholder="Title"
               />
             </div>
+
             {/* Sub heading */}
             <div className="flex gap-3 justify-between items-center">
               <input
@@ -125,6 +125,7 @@ function BannerAdmin() {
                 placeholder="Subject"
               />
             </div>
+
             {/* Date */}
             <div className="flex gap-3 border-1 rounded-lg p-2 border-gray-500 justify-between items-center">
               <label htmlFor="lastDate">LastDate:</label>
@@ -136,6 +137,7 @@ function BannerAdmin() {
                 placeholder="Enter Last Date for the Banner"
               />
             </div>
+
             {/* image */}
             <div className="flex gap-3 justify-between items-center">
               <input
@@ -145,46 +147,16 @@ function BannerAdmin() {
                 className="ring h-20 ring-gray-500 text-black text-center rounded-lg p-2 w-full"
               />
             </div>
+
             {/* Active */}
-            {/* <label htmlFor="isActive">Active</label> */}
             <div className="flex items-center justify-between flex-row px-3">
-              <p>{isActive ? "Activate" : "De-activate"}</p>
-              {/* <label
-                htmlFor="AcceptConditions"
-                className="group relative block h-8 w-14 rounded-full bg-gray-300 transition-colors [-webkit-tap-highlight-color:_transparent] has-checked:bg-green-500"
-              >
-                <input
-                  onClick={() => setActive((prev) => !prev)}
-                  type="checkbox"
-                  id="AcceptConditions"
-                  className="peer sr-only"
-                />
-
-                <span className="absolute inset-y-0 start-0 m-1 grid size-4 place-content-center rounded-full bg-white text-gray-700 transition-[inset-inline-start] peer-checked:start-6 peer-checked:*:first:hidden *:last:hidden peer-checked:*:last:block">
-                  
-                  <Check size={10} />
-
-                  <X size={10} />
-                  
-                </span>
-              </label> */}
-              {/* new */}
-              <label
-                htmlFor="AcceptConditions"
-                className="group hover:cursor-pointer relative block h-6 w-12 rounded-full bg-gray-300 transition-colors [-webkit-tap-highlight-color:_transparent] has-checked:bg-green-500"
-              >
-                <input
-                  type="checkbox"
-                  onClick={() => setActive((prev) => !prev)}
-                  id="AcceptConditions"
-                  className="peer sr-only"
-                />
-
-                <span className="absolute inset-y-0 start-0 m-1 grid size-4 place-content-center rounded-full bg-white text-gray-700 transition-[inset-inline-start] peer-checked:start-6 peer-checked:*:first:hidden *:last:hidden peer-checked:*:last:block">
-                  <X size={10} />
-                  <Check size={10} />
-                </span>
-              </label>
+              <p>{isActive ? "Active" : "Inactive"}</p>
+              <input
+                type="checkbox"
+                checked={isActive}
+                onChange={() => setActive((prev) => !prev)}
+                className="h-6 w-6"
+              />
             </div>
 
             <div className="flex justify-center items-center my-4">
@@ -192,7 +164,7 @@ function BannerAdmin() {
                 type="submit"
                 className="new-primary-bg font-semibold hover:cursor-pointer hover:scale-102 transition-all duration-200 text-white px-4 py-3 rounded-xl"
               >
-                Add new category
+                Confirm Changes
               </button>
             </div>
           </form>
@@ -203,9 +175,7 @@ function BannerAdmin() {
         {/* heading */}
         <div className="flex flex-row gap-5 md:gap-0 justify-between">
           <div>
-            <h1 className="text-3xl new-primary-text font-semibold lora">
-              Banner
-            </h1>
+            <h1 className="text-3xl new-primary-text font-semibold lora">Banner</h1>
 
             <p className="text-md pt-1">Edit Banners</p>
           </div>
@@ -230,9 +200,7 @@ function BannerAdmin() {
             <div className="mt-7 flex flex-col space-y-5">
               <div className="">
                 <h2 className="font-bold text-black/90 text-xl">Heading</h2>
-                <p className="pl-4 text-lg pt-1">
-                  {banner?.title || "Titles not yet"}
-                </p>
+                <p className="pl-4 text-lg pt-1">{banner?.title || "Titles not yet"}</p>
               </div>
               <div className="">
                 <h2 className="font-bold text-black/90 text-xl">Sub Heading</h2>
@@ -246,14 +214,21 @@ function BannerAdmin() {
                   {banner?.active === true
                     ? "🟢 Active"
                     : banner?.active === false
-                    ? "🔴 Inactive"
-                    : "Status not defined"}
+                      ? "🔴 Inactive"
+                      : "Status not defined"}
                 </p>
               </div>
               <div className="">
                 <h2 className="font-bold text-black/90 text-xl">Active Till</h2>
                 <p className="pl-4 pt-1 text-lg">
-                  {banner?.endDate || "Last Date Not Found"}
+                  {/* {banner?.endDate || "Last Date Not Found"} */}
+                  {banner?.endDate
+                    ? new Date(banner.endDate).toLocaleDateString("en-IN", {
+                        day: "numeric",
+                        month: "long",
+                        year: "numeric",
+                      })
+                    : "Last Date not found"}
                 </p>
               </div>
             </div>
