@@ -60,10 +60,12 @@ function Home() {
     // for fetching Baking Essentials
     const fetchEssentials = async () => {
       try {
-        await axios.get(`http://localhost:5000/bakingEssentials`).then((res) => {
-          const shuffled = res.data.sort(() => 0.5 - Math.random());
-          setEssentials(shuffled.slice(0, 4));
-        });
+        await axios
+          .get(`http://localhost:5000/bakingEssentials`)
+          .then((res) => {
+            const shuffled = res.data.sort(() => 0.5 - Math.random());
+            setEssentials(shuffled.slice(0, 4));
+          });
       } catch (err) {
         console.error("Error fetching Products:", err);
       }
@@ -93,8 +95,8 @@ function Home() {
               For Bakers. By Bakers.
             </h2>
             <p className="text-center max-w-3xl luckyGuy text-white text-lg px-2 md:text-xl">
-              From oven-fresh cakes to premium baking essentials, experience the joy of
-              baking — whether you’re buying or creating.
+              From oven-fresh cakes to premium baking essentials, experience the
+              joy of baking — whether you’re buying or creating.
             </p>
           </div>
         </div>
@@ -156,8 +158,9 @@ function Home() {
         <Heading title="Learn, Bake, and Grow with Sweet Dreams Academy" />
         <div className="text-center text-lg !mt-5 mb-10">
           <p>
-            Join our online courses to master baking skills, explore creative recipes, and
-            turn your passion into a thriving business—anytime, anywhere.
+            Join our online courses to master baking skills, explore creative
+            recipes, and turn your passion into a thriving business—anytime,
+            anywhere.
           </p>
         </div>
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 lg:gap-8">
@@ -210,7 +213,8 @@ function Home() {
       <section className="feature-section bg py-18 pb-12">
         <Heading title="Featured Products" />
         <p className="subHeading">
-          Handcrafted with love using premium ingredients and traditional techniques
+          Handcrafted with love using premium ingredients and traditional
+          techniques
         </p>
         {/* products section */}
         {products.length > 0 ? (
@@ -299,13 +303,13 @@ function Home() {
             <div className="w-9 h-[2px] bg-[#870D32] rounded-[2px]" />
           </div>
           <p className="mt-4 text-base text-[#7a5c44] max-w-[480px] mx-auto leading-[1.65]">
-            We believe every bite should tell a story — crafted with care, delivered with
-            warmth.
+            We believe every bite should tell a story — crafted with care,
+            delivered with warmth.
           </p>
         </div>
 
         {/* Staggered Cards Grid */}
-        <div className="max-w-[1180px] mx-auto px-6 grid grid-cols-3 [@media(max-width:900px)]:grid-cols-2 [@media(max-width:560px)]:grid-cols-1 gap-7 items-start">
+        <div className="max-w-[90vw] mx-auto px-6 grid md:grid-cols-3 grid-cols-1  gap-7 items-start">
           {/* Card 1 — Freshly Baked Daily (row 1, normal) */}
           <div className="group transition-all relative bg-white rounded-[18px] pt-8 px-[26px] pb-7 shadow-[0_4px_18px_rgba(100,50,20,0.08)] hover:shadow-[0_12px_36px_rgba(100,50,20,0.15)] ease-in-out hover:-translate-y-[7px] cursor-default mt-0 [@media(max-width:900px)]:!mt-0">
             <div className="w-[58px] h-[58px] rounded-[14px] flex items-center justify-center mb-5 bg-[linear-gradient(135deg,#fce8d0,#f9d5b8)]">
@@ -330,7 +334,8 @@ function Home() {
               Freshly Baked Daily
             </h3>
             <p className="text-[14px] text-[#7a5c44] leading-[1.6] m-0">
-              Every item is made fresh each morning — no preservatives, no shortcuts.
+              Every item is made fresh each morning — no preservatives, no
+              shortcuts.
             </p>
           </div>
 
@@ -354,8 +359,8 @@ function Home() {
               Premium Ingredients
             </h3>
             <p className="text-[14px] text-[#7a5c44] leading-[1.6] m-0">
-              Sourced from trusted farms — rich butter, real chocolate, and seasonal
-              fruits.
+              Sourced from trusted farms — rich butter, real chocolate, and
+              seasonal fruits.
             </p>
           </div>
 
@@ -379,7 +384,8 @@ function Home() {
               Custom Cake Orders
             </h3>
             <p className="text-[14px] text-[#7a5c44] leading-[1.6] m-0">
-              Dream it, we bake it — personalised cakes for every occasion and flavour.
+              Dream it, we bake it — personalised cakes for every occasion and
+              flavour.
             </p>
           </div>
 
@@ -406,7 +412,8 @@ function Home() {
               Fast & Reliable Delivery
             </h3>
             <p className="text-[14px] text-[#7a5c44] leading-[1.6] m-0">
-              Hot and fresh at your door — timely delivery you can count on every time.
+              Hot and fresh at your door — timely delivery you can count on
+              every time.
             </p>
           </div>
 
@@ -431,7 +438,8 @@ function Home() {
               Hygienic Preparation
             </h3>
             <p className="text-[14px] text-[#7a5c44] leading-[1.6] m-0">
-              FSSAI-compliant kitchen with strict cleanliness protocols at every step.
+              FSSAI-compliant kitchen with strict cleanliness protocols at every
+              step.
             </p>
           </div>
 
@@ -1038,8 +1046,9 @@ function Home() {
               </h1>
 
               <p className="mt-4 text-base text-pretty text-white sm:text-lg/relaxed">
-                Order bulk cakes & desserts for birthdays, weddings, or events. Fresh,
-                delicious treats delivered to make every celebration memorable.
+                Order bulk cakes & desserts for birthdays, weddings, or events.
+                Fresh, delicious treats delivered to make every celebration
+                memorable.
               </p>
 
               <div className="mt-4 flex gap-4 sm:mt-6">
@@ -1113,8 +1122,8 @@ function Home() {
           <div className="text-center mb-16">
             <Heading title="Featured Courses" />
             <p className="subHeading">
-              Learn from industry experts with our comprehensive online and offline baking
-              courses
+              Learn from industry experts with our comprehensive online and
+              offline baking courses
             </p>
           </div>
           {/* Offline Course Popup */}
@@ -1140,7 +1149,8 @@ function Home() {
       <section className="feature-section bg py-8 pb-12">
         <Heading title="Featured Baking Essentials" />
         <p className="subHeading">
-          Premium-quality tools and ingredients for your everyday baking journey.
+          Premium-quality tools and ingredients for your everyday baking
+          journey.
         </p>
         {/* products section */}
         {essentials.length > 0 ? (
@@ -1257,7 +1267,8 @@ function Home() {
         <section className="mt-10 mx-15 pt-10">
           <Heading title="What Our Students Say" />
           <p className="subHeading">
-            Join thousands of satisfied students and customers who trust Sweet Dreams
+            Join thousands of satisfied students and customers who trust Sweet
+            Dreams
           </p>
           <div className="flex lg:flex-row flex-col gap-5 py-10 items-center">
             <div className="video flex justify-center lg:w-4/12 md:w-6/12 w-full">
@@ -1285,11 +1296,14 @@ function Home() {
                         <div className="star flex">⭐⭐⭐⭐⭐</div>
                       </h3>
 
-                      <p className="mt-1 text-lg font-bold text-white">Sujitha Mani</p>
+                      <p className="mt-1 text-lg font-bold text-white">
+                        Sujitha Mani
+                      </p>
 
                       <p className="mt-4 text-md text-pretty text-white">
-                        "I joined Baking class in baked fantasy best teaching I got from
-                        my mentor thank you mam I suggested to my friends"
+                        "I joined Baking class in baked fantasy best teaching I
+                        got from my mentor thank you mam I suggested to my
+                        friends"
                       </p>
                     </div>
                   </div>
@@ -1312,8 +1326,8 @@ function Home() {
                       </p>
 
                       <p className="mt-4 text-md text-pretty text-white">
-                        "The taste of the cakes and pastry were delicious....... Very
-                        tasty and also healthy"
+                        "The taste of the cakes and pastry were delicious.......
+                        Very tasty and also healthy"
                       </p>
                     </div>
                   </div>
@@ -1331,11 +1345,13 @@ function Home() {
                         <div className="stars">⭐⭐⭐⭐</div>
                       </h3>
 
-                      <p className="mt-1 text-lg font-bold text-white">Valar Mathi</p>
+                      <p className="mt-1 text-lg font-bold text-white">
+                        Valar Mathi
+                      </p>
 
                       <p className="mt-4 text-md text-pretty text-white">
-                        "Well equipped hands on practice and individual attention for all
-                        students"
+                        "Well equipped hands on practice and individual
+                        attention for all students"
                       </p>
                     </div>
                   </div>
@@ -1353,7 +1369,9 @@ function Home() {
                         <div className="stars">⭐⭐⭐⭐⭐</div>
                       </h3>
 
-                      <p className="mt-1 text-lg font-bold text-white">H.Jeyasudha 217</p>
+                      <p className="mt-1 text-lg font-bold text-white">
+                        H.Jeyasudha 217
+                      </p>
 
                       <p className="mt-4 text-md text-pretty text-white">
                         "The best shop and good quality."
@@ -1406,9 +1424,9 @@ function Home() {
             </h1>
 
             <p className="mt-4 text-base text-pretty text-white/80 sm:text-lg/relaxed">
-              Join our baking courses, shop eco-friendly products, or place bulk orders
-              with ease. From beginners to café owners, we have the perfect baking
-              solutions for you.
+              Join our baking courses, shop eco-friendly products, or place bulk
+              orders with ease. From beginners to café owners, we have the
+              perfect baking solutions for you.
             </p>
 
             <div className="mt-4 flex gap-4 sm:mt-6">

@@ -762,22 +762,22 @@ export const StaggeredMenu = ({
         </header>
 
         {/* mobile navbar */}
-        <nav className="block md:hidden shadow-lg fixed top-0 left-0 w-full h-fit pb-2 bg-white pointer-events-auto">
-          <div className="flex justify-between pt-4 pl-3">
-            <div className="logo pl-10 flex items-center">
+        <nav className="block md:hidden shadow-sm fixed top-0 left-0 w-full h-fit pb-1 bg-white/95 backdrop-blur-md z-[100] pointer-events-auto border-b border-gray-100">
+          <div className="flex justify-between items-center py-2 px-4 px-2">
+            <div className="logo flex items-center">
               <Link
                 to="/"
-                className="new-primary-text text-xl font-bold brand-name"
+                className="new-primary-text text-lg font-bold brand-name"
               >
                 <img
                   src="/images/baked-fantasy-logo.png"
-                  className="h-15 w-auto object-cover object-center"
+                  className="h-12 w-auto object-cover object-center"
                   alt=""
                 />
               </Link>
             </div>
-            <div className="links flex items-center gap-8 mr-5">
-              <div className="new-primary-bg flex items-center gap-6 rounded-2xl p-3 px-5">
+            <div className="links flex items-center gap-3">
+              <div className="new-primary-bg flex items-center gap-4 rounded-xl p-2 px-3">
                 <Link to="/cart" className="relative">
                   <ShoppingCart size={20} color="#F6E9D9" />
                   {cartCount > 0 && (
@@ -828,7 +828,7 @@ export const StaggeredMenu = ({
               </div>
             </div>
           </div>
-          <div className="searchBar pt-5 mx-5 relative" ref={mobileSearchRef}>
+          <div className="searchBar mt-2 mx-4 relative" ref={mobileSearchRef}>
             <search className="px-5 py-2.5 new-primary-text border-2 border-current rounded-xl flex items-center">
               <label htmlFor="search-mobile">
                 <Search size={20} color="#40200d" />
