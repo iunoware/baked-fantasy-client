@@ -5,13 +5,15 @@ import {
   Banknote,
   ArrowRight,
   ArrowLeft,
-  Shield,
+  ShieldCheck,
+  Lock,
 } from "lucide-react";
 import { Button } from "../components/ui/button";
-import { Card, CardContent } from "../components/ui/card";
+import { Card } from "../components/ui/card";
 import { Separator } from "../components/ui/separator";
 import { Input } from "../components/ui/input";
 import { Label } from "../components/ui/label";
+import { Badge } from "./ui/badge";
 
 export function PaymentPage({
   paymentMethods,
@@ -43,258 +45,259 @@ export function PaymentPage({
       case "upi":
         return "text-purple-500";
       case "wallet":
-        return "text-green-500";
+        return "text-emerald-500";
       case "cod":
-        return "text-orange-500";
+        return "text-amber-500";
       default:
         return "text-gray-500";
     }
   };
 
   return (
-    <div className="container mx-auto px-4 py-8 max-w-7xl">
-      {/* Header */}
-      <div className="mb-8 pt-12 md:pt-0">
-        <div className="flex items-center gap-3 mb-2">
-          <CreditCard className="h-8 w-8 text-pink-500" />
-          <h1 className="text-3xl font-bold">Payment</h1>
-        </div>
-        <p className="text-gray-600">Choose your preferred payment method</p>
-      </div>
+    <div className="min-h-screen bg-[#fafafa] pb-24">
+      {/* Background Decor */}
+      <div className="fixed top-0 left-0 w-full h-[60vh] bg-gradient-to-b from-[#FFF5E1] via-[#FAF9F6] to-[#fafafa] pointer-events-none -z-10"></div>
 
-      <div className="grid lg:grid-cols-3 gap-8">
-        {/* Payment Methods */}
-        <div className="lg:col-span-2 space-y-6">
-          {/* Payment Options */}
-          <Card>
-            <CardContent className="p-6">
-              <h3 className="font-semibold text-lg mb-4">
+      <div className="container mx-auto px-4 py-8">
+        {/* Header */}
+        <div className="mb-12 flex flex-col md:flex-row md:items-end justify-between items-start gap-4 px-2">
+          <div>
+            <div className="flex items-center gap-3 mb-4">
+              <span className="w-12 h-1.5 bg-sbrown rounded-full shadow-sm shadow-red-100"></span>
+              <span className="text-[11px] font-black text-pbrown uppercase tracking-[0.25em]">
+                Secure Checkout
+              </span>
+            </div>
+            <h1 className="text-5xl md:text-7xl font-black text-gray-900 tracking-tighter mb-4 flex items-center gap-6">
+              Payment
+            </h1>
+            <p className="text-gray-400 font-bold uppercase text-[10px] tracking-widest max-w-md leading-relaxed">
+              Choose your preferred payment method. All transactions are encrypted and 100% secure.
+            </p>
+          </div>
+        </div>
+
+        <div className="grid lg:grid-cols-12 gap-10">
+          {/* Main Content Area */}
+          <div className="lg:col-span-8 space-y-8">
+            {/* Payment Methods Section */}
+            <div>
+              <h3 className="font-black text-xl text-gray-900 tracking-tight flex items-center gap-3 mb-6 px-2">
+                <CreditCard className="text-sbrown" size={24} />
                 Select Payment Method
               </h3>
 
-              <div className="space-y-3">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {paymentMethods.map((method) => {
                   const IconComponent = getPaymentIcon(method.type);
                   const iconColor = getPaymentColor(method.type);
+                  const isSelected = selectedPayment?.id === method.id;
 
                   return (
                     <div
                       key={method.id}
-                      className={`p-4 border rounded-lg cursor-pointer transition-all duration-200 ${
-                        selectedPayment?.id === method.id
-                          ? "border-pink-500 bg-pink-50"
-                          : "border-gray-200 hover:border-gray-300"
+                      className={`group p-6 rounded-3xl border-2 transition-all duration-300 cursor-pointer flex items-center gap-4 relative overflow-hidden ${
+                        isSelected
+                          ? "bg-white border-sbrown shadow-lg scale-[1.02]"
+                          : "bg-white border-gray-100 hover:border-gray-200 hover:shadow-md"
                       }`}
                       onClick={() => setSelectedPayment(method)}
                     >
-                      <div className="flex items-center gap-3">
-                        <IconComponent className={`h-6 w-6 ${iconColor}`} />
-                        <div className="flex-1">
-                          <div className="flex items-center gap-2">
-                            <span className="font-medium">{method.label}</span>
-                            {selectedPayment?.id === method.id && (
-                              <span className="text-xs bg-pink-500 text-white px-2 py-1 rounded">
-                                Selected
-                              </span>
-                            )}
-                          </div>
-                          {method.details && (
-                            <p className="text-gray-500 text-sm mt-1">
-                              {method.details}
-                            </p>
+                      <div className={`w-14 h-14 rounded-2xl flex items-center justify-center shrink-0 transition-colors ${isSelected ? "bg-sbrown text-white" : "bg-gray-50 " + iconColor} shadow-sm border border-gray-50`}>
+                        <IconComponent size={28} />
+                      </div>
+                      <div className="flex-1">
+                        <div className="flex items-center gap-2 mb-0.5">
+                          <span className="font-black text-gray-900 uppercase text-xs tracking-wider">
+                            {method.label}
+                          </span>
+                          {isSelected && (
+                            <Badge className="bg-green-50 text-green-600 border-green-100 text-[8px] h-4 px-1.5 font-black uppercase tracking-widest">
+                              Active
+                            </Badge>
                           )}
                         </div>
+                        {method.details && (
+                          <p className="text-gray-400 text-[10px] font-bold uppercase tracking-wider leading-tight">
+                            {method.details}
+                          </p>
+                        )}
                       </div>
+                      {isSelected && (
+                        <div className="absolute top-0 right-0 w-12 h-12 bg-sbrown/5 rounded-bl-full -mr-6 -mt-6 pointer-events-none"></div>
+                      )}
                     </div>
                   );
                 })}
               </div>
-            </CardContent>
-          </Card>
+            </div>
 
-          {/* Card Details Form (shown only when card is selected) */}
-          {selectedPayment?.type === "card" && (
-            <Card className="mt-5">
-              <CardContent className="p-6">
-                <h3 className="font-semibold mb-4">Card Details</h3>
-                <div className="space-y-5">
-                  <div>
-                    <Label htmlFor="cardNumber" className="pb-1">
-                      Card Number
-                    </Label>
-                    <Input
-                      id="cardNumber"
-                      placeholder="1234 5678 9012 3456"
-                      className="mt-1 focus:ring-1 focus:ring-black/70 focus:border-none"
-                    />
+            {/* Conditional Sub-forms */}
+            <div className="animate-in fade-in slide-in-from-top-4 duration-500">
+              {/* Card Details Form */}
+              {selectedPayment?.type === "card" && (
+                <div className="bg-white rounded-[2.5rem] border border-gray-100 p-8 shadow-sm space-y-8">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center text-blue-500">
+                      <Lock size={20} />
+                    </div>
+                    <h3 className="font-black text-xl text-gray-900 tracking-tight">Card Information</h3>
                   </div>
-                  <div className="grid grid-cols-2 gap-4">
-                    <div>
-                      <Label htmlFor="expiry" className="pb-1">
-                        Expiry Date
-                      </Label>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div className="md:col-span-2">
+                      <Label className="text-[10px] font-black uppercase text-gray-800 tracking-widest block mb-2">Card Number</Label>
                       <Input
-                        id="expiry"
-                        placeholder="MM/YY"
-                        className="mt-1 focus:ring-1 focus:ring-black/70 focus:border-none"
+                        placeholder="0000 0000 0000 0000"
+                        className="h-14 rounded-2xl bg-gray-50 border-gray-100 focus:bg-white focus:ring-sbrown/10 focus:border-sbrown/20 font-black text-lg tracking-[0.2em] placeholder:tracking-normal placeholder:text-gray-300"
                       />
                     </div>
                     <div>
-                      <Label htmlFor="cvv">CVV</Label>
+                      <Label className="text-[10px] font-black uppercase text-gray-800 tracking-widest block mb-2">Expiry Date</Label>
                       <Input
-                        id="cvv"
+                        placeholder="MM / YY"
+                        className="h-14 rounded-2xl bg-gray-50 border-gray-100 focus:bg-white focus:ring-sbrown/10 focus:border-sbrown/20 font-black text-sm uppercase tracking-widest"
+                      />
+                    </div>
+                    <div>
+                      <Label className="text-[10px] font-black uppercase text-gray-800 tracking-widest block mb-2">CVV</Label>
+                      <Input
                         placeholder="123"
-                        className="mt-1 focus:ring-1 focus:ring-black/70 focus:border-none"
+                        type="password"
+                        className="h-14 rounded-2xl bg-gray-50 border-gray-100 focus:bg-white focus:ring-sbrown/10 focus:border-sbrown/20 font-black text-sm uppercase tracking-widest"
+                      />
+                    </div>
+                    <div className="md:col-span-2">
+                      <Label className="text-[10px] font-black uppercase text-gray-800 tracking-widest block mb-2">Cardholder Name</Label>
+                      <Input
+                        placeholder="ENTER FULL NAME"
+                        className="h-14 rounded-2xl bg-gray-50 border-gray-100 focus:bg-white focus:ring-sbrown/10 focus:border-sbrown/20 font-black text-sm uppercase tracking-widest"
                       />
                     </div>
                   </div>
+                </div>
+              )}
+
+              {/* UPI Form */}
+              {selectedPayment?.type === "upi" && (
+                <div className="bg-white rounded-[2.5rem] border border-gray-100 p-8 shadow-sm space-y-6">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-xl bg-purple-50 flex items-center justify-center text-purple-500">
+                      <Smartphone size={20} />
+                    </div>
+                    <h3 className="font-black text-xl text-gray-900 tracking-tight">UPI Verification</h3>
+                  </div>
                   <div>
-                    <Label htmlFor="cardName" className="pb-1">
-                      Cardholder Name
-                    </Label>
+                    <Label className="text-[10px] font-black uppercase text-gray-800 tracking-widest block mb-2">UPI ID</Label>
                     <Input
-                      id="cardName "
-                      placeholder="John Doe"
-                      className="mt-1 focus:ring-1 focus:ring-black/70 focus:border-none"
+                      placeholder="username@bank"
+                      className="h-14 rounded-2xl bg-gray-50 border-gray-100 focus:bg-white focus:ring-sbrown/10 focus:border-sbrown/20 font-black text-lg text-pbrown placeholder:text-gray-300 tracking-tight"
                     />
+                    <p className="mt-4 text-[9px] font-bold text-gray-400 uppercase tracking-widest leading-relaxed">
+                      Enter your VPA ID and you will receive a payment request on your mobile app.
+                    </p>
                   </div>
                 </div>
-              </CardContent>
-            </Card>
-          )}
+              )}
+            </div>
 
-          {/* UPI ID Form (shown only when UPI is selected) */}
-          {selectedPayment?.type === "upi" && (
-            <Card className="mt-5">
-              <CardContent className="p-6">
-                <h3 className="font-semibold mb-4">UPI Details</h3>
-                <div>
-                  <Label htmlFor="upiId" className="pb-1 ">
-                    UPI ID
-                  </Label>
-                  <Input
-                    id="upiId"
-                    placeholder="yourname@paytm"
-                    className="mt-1 focus:ring-1 focus:ring-black/60 focus:border-none"
-                  />
-                </div>
-              </CardContent>
-            </Card>
-          )}
-
-          {/* Security Info */}
-          <Card className="border-green-200 bg-green-50">
-            <CardContent className="p-4">
-              <div className="flex items-center gap-3">
-                <Shield className="h-5 w-5 text-green-600" />
-                <div>
-                  <p className="font-medium text-green-800">Secure Payment</p>
-                  <p className="text-green-600 text-sm">
-                    Your payment information is encrypted and secure
-                  </p>
-                </div>
+            {/* Trust & Security Info */}
+            <div className="bg-emerald-50 rounded-[2rem] border border-emerald-100 p-6 flex gap-4 items-center">
+              <div className="w-12 h-12 rounded-xl bg-white flex items-center justify-center text-emerald-500 shadow-sm border border-emerald-50">
+                <ShieldCheck size={24} />
               </div>
-            </CardContent>
-          </Card>
-        </div>
+              <div>
+                <p className="text-xs font-black text-emerald-900 uppercase tracking-widest">Enterprise Security</p>
+                <p className="text-[10px] text-emerald-600 font-bold uppercase tracking-wider leading-relaxed">
+                  Your payment information is processed securely with 256-bit SSL encryption.
+                </p>
+              </div>
+            </div>
+          </div>
 
-        {/* Order Summary - Sticky */}
-        <div className="lg:col-span-1">
-          <div className="sticky top-8">
-            <Card>
-              <CardContent className="p-6">
-                <h3 className="font-semibold text-lg mb-4">Order Summary</h3>
+          {/* Sticky Summary Sidebar */}
+          <div className="lg:col-span-4 lg:sticky lg:top-36 h-min">
+            <Card className="border-none shadow-2xl rounded-[2rem] md:rounded-[2.5rem] overflow-hidden bg-white border border-gray-100">
+              <div className="p-6 md:p-8">
+                <div className="flex items-center justify-between mb-8">
+                  <h3 className="font-black text-xl text-gray-900 tracking-tight">
+                    Order Summary
+                  </h3>
+                  <Badge variant="secondary" className="bg-gray-50 text-gray-400 font-black text-[10px] uppercase tracking-widest px-3">
+                    Final Step
+                  </Badge>
+                </div>
 
-                <div className="space-y-3">
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">Subtotal</span>
-                    <span>₹{orderSummary.subtotal.toLocaleString()}</span>
+                <div className="space-y-4 mb-8">
+                  <div className="flex justify-between items-center">
+                    <span className="text-[10px] font-black uppercase text-gray-400 tracking-widest">Subtotal</span>
+                    <span className="font-black text-gray-900">₹{orderSummary.subtotal.toLocaleString()}</span>
                   </div>
 
                   {orderSummary.discount > 0 && (
-                    <div className="flex justify-between text-green-600">
-                      <span>Discount</span>
+                    <div className="flex justify-between items-center text-green-600 font-black">
+                      <span className="text-[10px] uppercase tracking-widest">Discount</span>
                       <span>-₹{orderSummary.discount.toLocaleString()}</span>
                     </div>
                   )}
 
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">Taxes & Fees</span>
-                    <span>₹{orderSummary.taxes.toLocaleString()}</span>
+                  <div className="flex justify-between items-center">
+                    <span className="text-[10px] font-black uppercase text-gray-400 tracking-widest">Taxes & Fees</span>
+                    <span className="font-black text-gray-900">₹{orderSummary.taxes.toLocaleString()}</span>
                   </div>
 
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">Delivery Fee</span>
-                    <span
-                      className={
-                        orderSummary.deliveryFee === 0 ? "text-green-600" : ""
-                      }
-                    >
-                      {orderSummary.deliveryFee === 0
-                        ? "FREE"
-                        : `₹${orderSummary.deliveryFee}`}
+                  <div className="flex justify-between items-center">
+                    <span className="text-[10px] font-black uppercase text-gray-400 tracking-widest transition-colors">Delivery Fee</span>
+                    <span className={`font-black ${orderSummary.deliveryFee === 0 ? "text-green-600" : "text-gray-900"}`}>
+                      {orderSummary.deliveryFee === 0 ? "FREE" : `₹${orderSummary.deliveryFee.toLocaleString()}`}
                     </span>
                   </div>
 
-                  <Separator />
+                  <Separator className="bg-gray-100" />
 
-                  <div className="flex justify-between font-semibold text-lg">
-                    <span>Total Amount</span>
-                    <span className="text-sky-500">
-                      ₹{orderSummary.total.toLocaleString()}
+                  <div className="flex justify-between items-end mb-8 mt-10">
+                    <span className="text-base md:text-lg font-bold text-gray-900 tracking-tighter">Total Amount</span>
+                    <span className="text-3xl md:text-4xl font-bold text-gray-900 tracking-tighter tabular-nums leading-none">
+                      ₹ {orderSummary.total.toLocaleString()}
                     </span>
                   </div>
-                </div>
 
-                {/* Action Buttons */}
-                <div className="space-y-3 mt-6">
-                  <button
-                    onClick={onNext}
+                  <Button
                     disabled={!selectedPayment}
-                    className="group relative w-full justify-center mt-6 inline-flex items-center overflow-hidden rounded-sm bg-cyan-500 px-8 py-3 text-white focus:ring-3 focus:outline-hidden mr-3"
+                    onClick={onNext}
+                    className="w-full h-14 md:h-16 rounded-2xl bg-sbrown hover:bg-pbrown text-white font-black uppercase tracking-[0.15em] text-[10px] md:text-xs transition-all hover:-translate-y-1 active:scale-[0.98] disabled:opacity-30 flex items-center justify-center gap-3 shadow-xl shadow-brown/10"
                   >
-                    <span className="absolute -start-full transition-all group-hover:start-4">
-                      <ArrowRight size={15} />
-                    </span>
-
-                    <span className="text-sm font-medium text-center transition-all group-hover:ms-4">
-                      Place Order ₹{orderSummary.total.toLocaleString()}
-                    </span>
-                  </button>
+                    Place Order
+                    <ArrowRight size={18} />
+                  </Button>
 
                   <button
                     onClick={onPrevious}
-                    className="group relative w-full justify-center mt-2 inline-flex items-center overflow-hidden rounded-sm border-1 border-sky-500 px-8 py-3 text-sky-500 focus:ring-3 focus:outline-hidden mr-3"
+                    className="w-full h-12 rounded-xl border-2 border-gray-100 text-gray-400 font-black uppercase tracking-widest text-[9px] hover:bg-gray-50 transition-all flex items-center justify-center gap-2"
                   >
-                    <span className="absolute -start-full transition-all group-hover:start-4">
-                      <ArrowLeft size={15} />
-                    </span>
-
-                    <span className="text-sm font-medium text-center transition-all group-hover:ms-4">
-                      Back to Delivery
-                    </span>
+                    <ArrowLeft size={14} strokeWidth={3} />
+                    Back to Delivery
                   </button>
                 </div>
 
-                {!selectedPayment && (
-                  <p className="text-sm text-red-500 text-center mt-2">
-                    Please select a payment method to continue
-                  </p>
-                )}
-
-                {/* Payment Benefits */}
-                <div className="mt-6 p-3 bg-gray-50 rounded-lg">
-                  <p className="text-sm text-gray-600 mb-2">
-                    Payment Benefits:
-                  </p>
-                  <ul className="text-xs text-gray-500 space-y-1">
-                    <li>• 100% secure transactions</li>
-                    <li>• Instant payment confirmation</li>
-                    <li>• Easy refunds & cancellations</li>
+                <div className="bg-gray-50 rounded-2xl p-4 mt-6 border border-gray-100">
+                  <p className="text-[9px] font-black text-gray-400 uppercase tracking-widest mb-3">Payment Benefits</p>
+                  <ul className="space-y-2">
+                    {["100% Secure Checkout", "Instant Confirmation", "Buyer Protection"].map((benefit, i) => (
+                      <li key={i} className="flex items-center gap-2 text-[9px] font-bold text-gray-500 uppercase tracking-wider">
+                        <div className="w-1 h-1 rounded-full bg-sbrown"></div>
+                        {benefit}
+                      </li>
+                    ))}
                   </ul>
                 </div>
-              </CardContent>
+              </div>
             </Card>
+            {!selectedPayment && (
+              <p className="text-[10px] font-black text-red-500 uppercase tracking-widest text-center mt-4">
+                Please select a payment method to continue
+              </p>
+            )}
           </div>
         </div>
       </div>

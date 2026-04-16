@@ -110,13 +110,12 @@ h6 {
   }
 }
 
-.hide-scrollbar {
-  overflow-y: scroll;
+.no-scrollbar {
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
 
-.hide-scrollbar::-webkit-scrollbar {
+.no-scrollbar::-webkit-scrollbar {
   display: none; /* Chrome, Safari */
 }
 .hover-content {
