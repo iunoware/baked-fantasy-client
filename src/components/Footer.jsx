@@ -1,5 +1,5 @@
 // import { FaFacebookF, FaInstagram, FaPinterestP } from "react-icons/fa";
-import { Ban, Pipette, FlaskConical, TestTube } from "lucide-react";
+import { Ban, Pipette, FlaskConical, TestTube, MapPin, Phone, Mail } from "lucide-react";
 import { Link } from "react-router-dom";
 
 function ColorPicker() {
@@ -88,7 +88,7 @@ export default function Footer() {
 
         {/* CENTER - QUICK LINKS */}
         <div className="flex flex-col gap-10">
-          <div className="grid grid-cols-2 place-items-start">
+          <div className="grid md:grid-cols-2 grid-cols-1 gap-8 md:gap-0 place-items-start">
             <div>
               <h3 className="font-semibold mb-4 uppercase text-md tracking-wide">
                 Quick Links
@@ -118,24 +118,53 @@ export default function Footer() {
             {/* RIGHT LINKS */}
             <div>
               <h3 className="font-semibold mb-4 uppercase text-md tracking-wide">
-                Customer Support
+                Contact
               </h3>
-              <ul className="space-y-2 text-white/80">
-                <Link to="/contact" className="hover:text-white block cursor-pointer">
-                  Contact Us
-                </Link>
-                <Link to="/profile" className="hover:text-white block cursor-pointer">
-                  My Profile
-                </Link>
-                <Link to="/cart" className="hover:text-white block cursor-pointer">
-                  My Cart
-                </Link>
-                <Link
+              <ul className="space-y-3 text-white/80">
+                <a
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-white cursor-pointer flex gap-2"
+                >
+                  <div>
+                    <MapPin className="inline" size={18} />
+                  </div>
+                  <div>
+                    Jeevana school road, Jai nagar 2nd street, Bypass Rd, Ponmeni,
+                    Madurai, Tamil Nadu 625016
+                  </div>
+                </a>
+
+                <a
+                  href="tel:+916379240125"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-white cursor-pointer flex gap-2"
+                >
+                  <div>
+                    <Phone className="inline" size={18} />
+                  </div>
+                  <div>+91 6379 240 125</div>
+                </a>
+
+                <a
+                  href="https://mail.google.com/mail/?view=cm&fs=1&to=thebakedfantasy.6@gmail.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-white cursor-pointer flex gap-2"
+                >
+                  <div>
+                    <Mail className="inline" size={18} />
+                  </div>
+                  <div>thebakedfantasy.6@gmail.com</div>
+                </a>
+
+                {/* <Link
                   to="/courses/my-learning"
                   className="hover:text-white block cursor-pointer"
                 >
                   My Learning
-                </Link>
+                </Link> */}
               </ul>
             </div>
           </div>
@@ -170,7 +199,7 @@ export default function Footer() {
       {/* BOTTOM SECTION */}
       <div className="flex flex-col md:flex-row justify-between items-center pt-6 text-sm text-white/70 gap-4">
         {/* LEFT */}
-        <div className="flex flex-wrap gap-4">
+        <div className="flex flex-wrap gap-4 md:order-1 order-1">
           <span className="hover:text-white cursor-pointer">Privacy Policy</span>
           <span className="hover:text-white cursor-pointer">Terms & Conditions</span>
           {/* <span className="hover:text-white cursor-pointer">Cookie Policy</span> */}
@@ -179,7 +208,7 @@ export default function Footer() {
         </div>
 
         {/* CENTER */}
-        <div className="text-center">
+        <div className="text-center md:order-2 order-3">
           Design by{" "}
           <a
             className="font-bold"
@@ -193,7 +222,7 @@ export default function Footer() {
         </div>
 
         {/* RIGHT - SOCIAL */}
-        <div className="flex flex-col gap-4 text-lg">
+        <div className="flex flex-col gap-4 text-lg md:order-3 order-2">
           <a
             target="_blank"
             rel="noopener noreferrer"
@@ -210,13 +239,13 @@ export default function Footer() {
             Instagram
           </a>
 
-          <a
+          {/* <a
             target="_blank"
             rel="noopener noreferrer"
             href="https://mail.google.com/mail/?view=cm&fs=1&to=thebakedfantasy.6@gmail.com"
           >
             Mail
-          </a>
+          </a> */}
         </div>
       </div>
     </footer>

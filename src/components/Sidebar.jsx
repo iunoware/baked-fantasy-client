@@ -16,7 +16,7 @@ function Sidebar() {
 
   return (
     <>
-      <div className="fixed z-50 flex h-screen w-16 flex-col group hover:w-45 justify-between shadow-xl border-r border-gray-300 bg-white transition-all duration-300">
+      <div className="fixed z-50 flex h-screen w-16 flex-col group hover:w-55 justify-between shadow-xl border-r border-gray-300 bg-white transition-all duration-300">
         <div>
           <div className="inline-flex size-16 items-center justify-center">
             {/* <span className="grid size-10 place-content-center rounded-lg bg-gray-100 text-xs text-gray-600">
@@ -190,7 +190,7 @@ function Sidebar() {
                 {/* banner */}
                 <li>
                   <NavLink
-                    to={`/admin/banner`}
+                    to={`/admin/announcements`}
                     // className="flex items-center gap-3 rounded-md px-2 py-2 text-gray-700 hover:bg-pink-50 transition-colors"
                     className={({ isActive }) =>
                       `${
@@ -211,7 +211,8 @@ function Sidebar() {
                             isActive ? "new-primary-text" : "text-gray-800"
                           }`}
                         >
-                          Banner
+                          {/* Banner */}
+                          Announcements
                         </span>
                       </>
                     )}

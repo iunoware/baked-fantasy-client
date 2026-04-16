@@ -2,6 +2,8 @@ import { X } from "lucide-react";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
+const url = "http://localhost:5000";
+
 function Modal() {
   const [close, setClose] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
@@ -30,7 +32,7 @@ function Modal() {
 
     const fetchModal = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/banner/active");
+        const res = await axios.get(`${url}/banner/active`);
         if (!cancelled) setModal(res.data);
         console.log("Modal fetched:", res.data);
       } catch (error) {
