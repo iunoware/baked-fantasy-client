@@ -100,10 +100,22 @@ function IndividualCakesAdmin() {
     const deliveryType = form.productDeliveryType.value;
     const info = form.productInfo.value.trim();
     // const isActive = form.productIsActive.value.trim();
-    if (files.length !== 4) {
-      toast.error("Please upload exactly 4 images");
-      return;
-    }
+    // if (files.length !== 4) {
+    //   toast.error("Please upload exactly 4 images");
+    //   return;
+    // }
+
+    if (!name) return toast.error("Product title is required");
+    if (files.length !== 4) return toast.error("Please upload exactly 4 images");
+    if (!subject) return toast.error("Subject is required");
+    if (!discountedPrice) return toast.error("Discounted price is required");
+    if (isNaN(discountedPrice)) return toast.error("Discounted price must be a number");
+    if (!originalPrice) return toast.error("Original price is required");
+    if (isNaN(originalPrice)) return toast.error("Original price must be a number");
+    if (Number(discountedPrice) > Number(originalPrice))
+      return toast.error("Discounted price can't be more than original price");
+    if (!description) return toast.error("Description is required");
+    if (!info) return toast.error("Info is required");
 
     if (
       !form ||
@@ -170,11 +182,11 @@ function IndividualCakesAdmin() {
         aria-modal="true"
         aria-labelledby="modalTitle"
       >
-        <div className="w-full max-w-md rounded-xl bg-white backdrop-blur-xl p-10 shadow-lg">
+        <div className="w-full max-w-md rounded-xl edit-modal overflow-auto h-150 bg-white backdrop-blur-xl p-10 shadow-lg">
           <div className="flex items-start justify-between">
             <h2
               id="modalTitle"
-              className="md:text-3xl text-center w-full mb-5 font-bold text-black text-2xl"
+              className="md:text-3xl text-start w-full mb-5 font-bold text-black text-2xl"
             >
               Add new Product
             </h2>
@@ -194,6 +206,7 @@ function IndividualCakesAdmin() {
 
           <form onSubmit={postCategory} className="mt-4 flex flex-col gap-3">
             {/* title */}
+            <p className="text-sm text-gray-700">Title:</p>
             <div className="flex gap-3 justify-between items-center">
               <input
                 type="text"
@@ -220,6 +233,7 @@ function IndividualCakesAdmin() {
             </div>
 
             {/* subject */}
+            <p className="text-sm text-gray-700">Subject:</p>
             <div className="flex gap-3 justify-between items-center">
               <input
                 type="text"
@@ -231,6 +245,7 @@ function IndividualCakesAdmin() {
             </div>
 
             {/* discounted price */}
+            <p className="text-sm text-gray-700">Discounted price:</p>
             <div className="flex gap-3 justify-between items-center">
               <input
                 type="text"
@@ -242,6 +257,7 @@ function IndividualCakesAdmin() {
             </div>
 
             {/* original price */}
+            <p className="text-sm text-gray-700">Original price:</p>
             <div className="flex gap-3 justify-between items-center">
               <input
                 type="text"
@@ -253,6 +269,7 @@ function IndividualCakesAdmin() {
             </div>
 
             {/* description */}
+            <p className="text-sm text-gray-700">Description:</p>
             <div className="flex gap-3 justify-between items-center">
               <input
                 type="text"
@@ -264,6 +281,7 @@ function IndividualCakesAdmin() {
             </div>
 
             {/* info */}
+            <p className="text-sm text-gray-700">Info:</p>
             <div className="flex gap-3 justify-between items-center">
               <input
                 type="text"
@@ -276,7 +294,7 @@ function IndividualCakesAdmin() {
 
             {/* deliveryType */}
             <div className="flex gap-3 justify-between items-center">
-              <p className="w-1/2">Delivery type:</p>
+              <p className="w-1/2 text-gray-700">Delivery type:</p>
               <select
                 name="productDeliveryType"
                 id="productDeliveryType"
@@ -526,6 +544,7 @@ function IndividualCakesAdmin() {
                   <th className="p-4 text-start">Discounted Price</th>
                   <th className="p-4 text-start">description</th>
                   <th className="p-4 text-start">info</th>
+                  <th className="p-4 text-start">Delivery</th>
                   <th className="p-4 text-start">InStock</th>
                   <th className="p-4 text-start">Actions</th>
                 </tr>
@@ -543,6 +562,7 @@ function IndividualCakesAdmin() {
                     discountedPrice={product.discountedPrice}
                     description={product.description}
                     info={product.info}
+                    delivery={product.deliveryType}
                     isActive={product.isActive}
                     inStock={product.inStock}
                     categoryName={categoryName}

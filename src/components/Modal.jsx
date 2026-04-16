@@ -7,6 +7,11 @@ function Modal() {
   const [showPopup, setShowPopup] = useState(false);
   const [modal, setModal] = useState(null);
 
+  const phone = "916379240125";
+  const message = encodeURIComponent(
+    `Hi ma'am, I would like to enroll for the baking course`,
+  );
+
   // 1) Scroll listener - always registered
   useEffect(() => {
     const handleScroll = () => {
@@ -68,9 +73,17 @@ function Modal() {
             {modal?.subject ?? ""}
           </p>
           <div className="w-full flex justify-center">
-            <button className="w-30 p-2 mt-5 new-primary-bg backdrop-blur-2xl hover:scale-108 transition-all ease-in text-white font-bold rounded-2xl">
+            {/* <button className="w-30 p-2 mt-5 new-primary-bg backdrop-blur-2xl hover:scale-108 transition-all ease-in text-white font-bold rounded-2xl">
               Enroll now
-            </button>
+            </button> */}
+            <a
+              href={`https://wa.me/${phone}?text=${message}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-30 p-2 mt-5 text-center bg-pbrown backdrop-blur-2xl hover:scale-108 transition-all ease-in text-white font-bold rounded-2xl"
+            >
+              Enroll now
+            </a>
           </div>
         </div>
       </div>
