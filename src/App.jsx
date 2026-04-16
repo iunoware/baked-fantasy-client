@@ -39,6 +39,8 @@ import Sidebar from "./components/Sidebar.jsx";
 import EssentialsAdmin from "./pages/adminPanel/essentials/EssentialsAdmin.jsx";
 import CakesAdmin from "./pages/adminPanel/cakes/CakesAdmin.jsx";
 import OrdersAdmin from "./pages/adminPanel/OrdersAdmin.jsx";
+import PromoCode from "./pages/adminPanel/PromoCode.jsx";
+import Announcements from "./pages/adminPanel/Announcements.jsx";
 import BannerAdmin from "./pages/adminPanel/BannerAdmin.jsx";
 import IndividualCakesAdmin from "./pages/adminPanel/cakes/IndividualCakesAdmin.jsx";
 import SettingsAdmin from "./pages/adminPanel/SettingsAdmin.jsx";
@@ -180,11 +182,19 @@ function AppContent() {
             </ProtectedAdminRoute>
           }
         />
-        <Route
+        {/* <Route
           path="/admin/banner"
           element={
             <ProtectedAdminRoute>
               <BannerAdmin />
+            </ProtectedAdminRoute>
+          }
+        /> */}
+        <Route
+          path="/admin/announcements"
+          element={
+            <ProtectedAdminRoute>
+              <Announcements />
             </ProtectedAdminRoute>
           }
         />

@@ -237,8 +237,11 @@ function CakesAdmin() {
               ))}
             </div>
           ) : (
-            <div className="h-[60vh] flex flex-col space-y-3 items-center justify-center">
-              <h1 className="text-2xl font-bold">No Products Added</h1>
+            // <div className="h-[60vh] flex flex-col space-y-3 items-center justify-center">
+            //   <h1 className="text-xl text-gray-700">No Products Added</h1>
+            // </div>
+            <div className="text-center w-full py-10 mt-10 text-gray-500 font-medium text-lg">
+              No Products Added
             </div>
           )}
         </div>
