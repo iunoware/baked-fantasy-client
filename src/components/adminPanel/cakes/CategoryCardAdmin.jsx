@@ -38,6 +38,10 @@ function CategoryCardAdmin(props) {
 
     formData.append("isActive", active);
 
+    // individual toast error
+    if (!name) return toast.error("Category title is required");
+    if (!subject) return toast.error("Subject is required");
+
     if (!name && !subject && !file) {
       toast.error("Please enter any one information");
     }
@@ -146,6 +150,7 @@ function CategoryCardAdmin(props) {
 
           <form onSubmit={patchCategory} className="mt-4 flex flex-col gap-3">
             {/* title */}
+            <p className="text-sm text-gray-700">Title:</p>
             <div className="flex gap-3 justify-between items-center">
               <input
                 type="text"
@@ -159,6 +164,7 @@ function CategoryCardAdmin(props) {
             </div>
 
             {/* subject */}
+            <p className="text-sm text-gray-700">Subject:</p>
             <div className="flex gap-3 justify-between items-center">
               <input
                 type="text"
@@ -172,6 +178,7 @@ function CategoryCardAdmin(props) {
             </div>
 
             {/* file */}
+            <p className="text-sm text-gray-700">File:</p>
             <div className="flex gap-3 justify-between items-center">
               <input
                 type="file"

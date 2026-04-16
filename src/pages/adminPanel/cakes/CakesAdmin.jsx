@@ -115,6 +115,7 @@ function CakesAdmin() {
 
           <form onSubmit={postCategory} className="mt-4 flex flex-col gap-3">
             {/* title */}
+            <p className="text-sm text-gray-700">Title:</p>
             <div className="flex gap-3 justify-between items-center">
               <input
                 type="text"
@@ -126,6 +127,7 @@ function CakesAdmin() {
             </div>
 
             {/* subject */}
+            <p className="text-sm text-gray-700">Subject:</p>
             <div className="flex gap-3 justify-between items-center">
               <input
                 type="text"
@@ -137,6 +139,7 @@ function CakesAdmin() {
             </div>
 
             {/* file */}
+            <p className="text-sm text-gray-700">File:</p>
             <div className="flex gap-3 justify-between items-center">
               <input
                 type="file"
