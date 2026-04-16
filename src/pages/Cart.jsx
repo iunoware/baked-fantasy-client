@@ -98,6 +98,10 @@ export default function App() {
     }
   };
 
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "instant" });
+  }, [currentStep]);
+
   return (
     <div className="min-h-screen bg">
       <div className="pt-20"></div>

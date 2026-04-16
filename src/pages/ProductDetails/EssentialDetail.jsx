@@ -91,10 +91,9 @@ function ProductDetailPage({ onNavigate, onAddToCart }) {
   };
 
   const handleQuantityChange = (change) => {
-    if (change > 0) {
-      increaseQuantity(productId);
-    } else {
-      decreaseQuantity(productId);
+    const newQty = quantity + change;
+    if (newQty >= 1 && newQty <= 50) {
+      setQuantity(newQty);
     }
   };
 

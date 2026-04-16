@@ -22,7 +22,7 @@ import { Card, CardContent } from "./ui/card";
 import { Badge } from "./ui/badge";
 import { Separator } from "./ui/separator";
 import toast from "react-hot-toast";
-import { useAuth } from "@/context/AuthContext";
+// import { useAuth } from "@/context/AuthContext";
 
 // Delivery Section Definitions
 const DELIVERY_CONFIG = {
@@ -80,13 +80,13 @@ const CartItemCard = ({ item, updateQuantity, removeCartItem }) => {
   const config = DELIVERY_CONFIG[dType] || DELIVERY_CONFIG.local;
 
   return (
-    <div className="group relative flex items-center gap-4 p-5 mb-4 bg-white rounded-2xl border border-gray-100 hover:border-gray-200 hover:shadow-lg transition-all duration-500 overflow-hidden">
+    <div className="group w-[80%] md:w-full relative flex items-start gap-4 p-4 mb-4 bg-white rounded-2xl border border-gray-100 hover:border-gray-200 transition-all duration-300">
       {/* Product Image */}
-      <div className="relative w-24 h-24 sm:w-32 sm:h-32 flex-shrink-0">
+      <div className="relative w-20 h-20 md:w-32 md:h-32 flex-shrink-0">
         <img
           src={item.image || "/images/fallback.png"}
           alt={item.name}
-          className="w-full h-full object-cover rounded-xl shadow-sm border border-gray-50 transform group-hover:scale-105 transition-transform duration-700"
+          className="w-full h-full object-cover rounded-xl shadow-sm border border-gray-50 transition-transform duration-700"
           onError={(e) => {
             e.target.onerror = null;
             e.target.src = "/images/fallback.png";
@@ -95,19 +95,19 @@ const CartItemCard = ({ item, updateQuantity, removeCartItem }) => {
       </div>
 
       {/* Item Info (Middle) */}
-      <div className="flex-1 min-w-0 pr-4">
-        <div className="flex flex-col gap-1">
-          <h3 className="text-lg font-black text-gray-900 truncate tracking-tight">
+      <div className="flex-1 min-w-0 pr-1">
+        <div className="flex flex-col gap-0.5">
+          <h3 className="text-sm md:text-lg font-bold text-gray-900 truncate tracking-tight">
             {item.name}
           </h3>
-          <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest">
+          <p className="text-[9px] md:text-[10px] font-bold text-gray-400 uppercase tracking-widest">
             {item.category ||
               (item.type === "essential" ? "Essential" : "Bakery Product")}
           </p>
-          <div className="mt-2 text-left">
+          <div className="mt-1.5 text-left">
             <Badge
               variant="outline"
-              className={`text-[9px] px-2 py-0.5 h-auto font-black uppercase tracking-widest border-2 shadow-sm ${config.badgeClass}`}
+              className={`hidden md:block text-[8px] md:text-[9px] px-1.5 py-0.5 h-auto font-black uppercase tracking-widest border-2 shadow-sm ${config.badgeClass}`}
             >
               {config.badgeText}
             </Badge>
@@ -116,31 +116,32 @@ const CartItemCard = ({ item, updateQuantity, removeCartItem }) => {
       </div>
 
       {/* Item Controls (Right) */}
-      <div className="flex flex-col items-end gap-3 shrink-0">
+      {/* <div className="flex flex-col items-end justify-between gap-2 shrink-0 h-20 md:h-32"> */}
+      <div className="flex flex-col items-end justify-between gap-2 shrink-0">
         <div className="text-right">
-          <p className="text-xl font-black text-gray-900 leading-none tracking-tighter">
+          <p className="text-base md:text-xl font-black text-gray-900 leading-none tracking-tighter">
             ₹{(item.price * item.quantity).toLocaleString()}
           </p>
-          <p className="text-[10px] text-gray-400 font-black mt-1 uppercase tracking-widest">
-            ₹{item.price} / unit
+          <p className="text-[9px] text-gray-400 font-bold mt-1 uppercase tracking-widest">
+            ₹{item.price}
           </p>
         </div>
 
-        <div className="flex items-center gap-4">
-          <div className="flex items-center bg-gray-50 rounded-xl border border-gray-100 p-1 shadow-inner">
+        <div className="flex items-center gap-2">
+          <div className="flex items-center bg-gray-50 rounded-lg border border-gray-100 p-0.5 shadow-inner">
             <button
               onClick={() => updateQuantity(item.id, item.quantity - 1)}
               disabled={item.quantity <= 1}
-              className="w-8 h-8 flex items-center justify-center text-gray-500 hover:text-red-600 disabled:opacity-30 disabled:cursor-not-allowed hover:bg-white rounded-lg transition-all shadow-sm"
+              className="w-8 h-8 flex items-center justify-center text-gray-500 hover:text-red-600 disabled:opacity-30 disabled:cursor-not-allowed transition-all"
             >
               <Minus size={14} strokeWidth={3} />
             </button>
-            <span className="w-8 text-center text-sm font-black text-gray-900">
+            <span className="w-6 text-center text-xs font-black text-gray-900">
               {item.quantity}
             </span>
             <button
               onClick={() => updateQuantity(item.id, item.quantity + 1)}
-              className="w-8 h-8 flex items-center justify-center text-gray-500 hover:text-green-600 hover:bg-white rounded-lg transition-all shadow-sm"
+              className="w-8 h-8 flex items-center justify-center text-gray-500 hover:text-green-600 transition-all font-black text-lg"
             >
               <Plus size={14} strokeWidth={3} />
             </button>
@@ -149,11 +150,11 @@ const CartItemCard = ({ item, updateQuantity, removeCartItem }) => {
           <button
             onClick={() => {
               removeCartItem(item.id);
-              toast.success("Item removed from cart");
+              toast.success("Removed from cart");
             }}
-            className="p-2 text-gray-300 hover:text-red-500 hover:bg-red-50 rounded-xl transition-all border border-transparent hover:border-red-100 active:scale-95"
+            className="w-8 h-8 flex items-center justify-center text-gray-300 hover:text-red-500 transition-all"
           >
-            <Trash2 className="w-5 h-5" />
+            <Trash2 size={18} />
           </button>
         </div>
       </div>
@@ -215,30 +216,32 @@ const TabbedCart = ({
   promoInput,
   setPromoInput,
 }) => {
-  const { handleProtectedAction } = useAuth();
-  const [isExecuting, setIsExecuting] = useState(false);
+  // const { handleProtectedAction } = useAuth();
+  // const [isExecuting, setIsExecuting] = useState(false);
   const [activeTab, setActiveTab] = useState("bakery");
 
-  const handleCheckout = () => {
-    handleProtectedAction(async () => {
-      try {
-        setIsExecuting(true);
-        await onNext(getDeliveryTypeForCheckout());
-      } finally {
-        setIsExecuting(false);
-      }
-    });
-  };
+  // const handleCheckout = () => {
+  //   handleProtectedAction(async () => {
+  //     try {
+  //       setIsExecuting(true);
+  //       await onNext(getDeliveryTypeForCheckout());
+  //     } finally {
+  //       setIsExecuting(false);
+  //     }
+  //   });
+  // };
+  console.log("this is the cart items", cartItems);
 
   const filteredItems = useMemo(() => {
     return {
       bakery: cartItems.filter(
-        (item) =>
-          item.type !== "essential" &&
-          (item.deliveryType === "pickup" || item.deliveryType === "state"),
+        (item) => item.type !== "essential" && item.deliveryType === "national",
       ),
       quick: cartItems.filter(
         (item) => item.type !== "essential" && item.deliveryType === "local",
+      ),
+      pickup: cartItems.filter(
+        (item) => item.type !== "essential" && item.deliveryType === "pickup",
       ),
       essential: cartItems.filter((item) => item.type === "essential"),
     };
@@ -258,7 +261,7 @@ const TabbedCart = ({
       ? DELIVERY_CONFIG.national
       : activeTab === "quick"
         ? DELIVERY_CONFIG.local
-        : activeTabData.some((i) => i.deliveryType === "state")
+        : activeTabData.some((i) => i.deliveryType === "nation")
           ? DELIVERY_CONFIG.state
           : DELIVERY_CONFIG.pickup;
 
@@ -269,66 +272,90 @@ const TabbedCart = ({
   const grandTotal = subtotal - discount + deliveryFee;
 
   const getCtaLabel = () => {
-    if (activeTab === "bakery") return "Proceed (Pickup / TN Delivery)";
-    if (activeTab === "quick") return "Deliver Now";
-    return "Ship Across India";
+    if (activeTab === "bakery") return "Add delivery details";
+    if (activeTab === "quick") return "Add delivery details";
+    return "Add delivery details";
   };
 
   const getDeliveryTypeForCheckout = () => {
     if (activeTab === "essential") return "essential";
     if (activeTab === "quick") return "local";
+    if (activeTab === "pickup") return "pickup";
+    if (activeTab === "bakery") return "national";
     // For bakery, it could be pickup or state. Default to pickup if any pickup item exists, else state
-    if (activeTabData.some((i) => i.deliveryType === "pickup")) return "pickup";
+    // if (activeTabData.some((i) => i.deliveryType === "pickup")) return "pickup";
     return "state";
   };
 
   const tabs = [
     {
       id: "bakery",
-      label: "Bakery",
-      // icon: "🧁",
+      label: "Nationwide Delivery",
+      mobileLabel: "Nation",
       count: filteredItems.bakery.length,
     },
     {
       id: "quick",
-      label: "Quick Delivery",
-      // icon: "⚡",
+      label: "Express Delivery",
+      mobileLabel: "Express",
       count: filteredItems.quick.length,
     },
     {
+      id: "pickup",
+      label: "Store Pickup",
+      mobileLabel: "Pickup",
+      count: filteredItems.pickup.length,
+    },
+    {
       id: "essential",
-      label: "Essentials",
-      // icon: "🛍",
+      label: "Baking Essentials",
+      mobileLabel: "Essentials",
       count: filteredItems.essential.length,
     },
   ];
 
   return (
-    <div className="grid lg:grid-cols-12 gap-10 items-start">
+    // <div className="grid md:grid-cols-12 gap-6 lg:gap-10 items-start">
+    <div className="flex flex-col md:grid md:grid-cols-12 gap-6 lg:gap-10 items-start">
       {/* Tab Selection (Main Content Area) */}
-      <div className="lg:col-span-8">
-        {/* Sticky Tab Bar */}
-        <div className="sticky top-[80px] md:top-[112px] z-30 bg-white/80 backdrop-blur-xl border-b border-gray-100 rounded-b-3xl shadow-sm mb-8 overflow-x-auto no-scrollbar">
-          <div className="flex px-4">
+      <div className="md:col-span-7 lg:col-span-8">
+        {/* Responsive Tab Grid */}
+        <div className="sticky w-[80%] md:w-full top-[80px] md:top-[112px] z-30 bg-white/80 backdrop-blur-xl border-b border-gray-100 rounded-b-3xl mb-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-1 md:p-2">
+            {/* <div className="flex flex-nowrap overflow-x-auto gap-2 px-2 py-2"> */}
             {tabs.map((tab) => (
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
-                className={`relative cursor-pointer flex items-center gap-2 px-6 py-5 whitespace-nowrap group transition-all duration-300`}
+                className={`relative md:w-fit w-full whitespace-nowrap cursor-pointer flex md:items-center md:justify-center items-center justify-center gap-2 md:px-4 px-2 md:py-2 py-2 rounded-xl ${
+                  activeTab === tab.id ? "bg-white " : "hover:bg-gray-50/50"
+                }`}
               >
-                {/* <span className="text-lg">{tab.icon}</span> */}
                 <span
-                  className={`text-[11px] font-black uppercase tracking-[0.15em] ${activeTab === tab.id ? "text-gray-900" : "text-gray-400 group-hover:text-gray-600"}`}
+                  className={`text-[10px] md:text-[11px] font-black uppercase tracking-[0.1em] text-center ${
+                    activeTab === tab.id
+                      ? "text-gray-900"
+                      : "text-gray-400 group-hover:text-gray-600"
+                  }`}
                 >
-                  {tab.label}
+                  {/* Show short label on mobile, full label on md+ if needed, or just let it wrap/shrink */}
+                  <span className="md:hidden">{tab.mobileLabel}</span>
+                  <span className="hidden md:inline">{tab.label}</span>
+
                   {tab.count > 0 && (
-                    <span className="ml-2 text-[10px] font-black text-[#870D32] bg-pink-50 px-1.5 py-0.5 rounded-md">
+                    <span
+                      className={`ml-1.5 text-[10px] font-black px-1.5 py-0.5 rounded-md ${
+                        activeTab === tab.id
+                          ? "text-[#870D32] bg-pink-50"
+                          : "text-gray-400 bg-gray-100"
+                      }`}
+                    >
                       {tab.count}
                     </span>
                   )}
                 </span>
                 {activeTab === tab.id && (
-                  <div className="absolute bottom-0 left-0 w-full h-1 bg-sbrown rounded-t-full shadow-[0_-4px_10px_rgba(135,13,50,0.3)] animate-in slide-in-from-left duration-300"></div>
+                  <div className="absolute bottom-0 left-1/2 -translate-x-1/2 md:w-8 md:h-1 bg-sbrown rounded-full opacity-40" />
                 )}
               </button>
             ))}
@@ -337,15 +364,15 @@ const TabbedCart = ({
 
         {/* Dynamic Highlight Banner */}
         {activeTab === "quick" && activeTabData.length > 0 && (
-          <div className="mb-6 p-4 bg-amber-50 rounded-2xl border border-amber-100 flex items-center gap-3 animate-in fade-in slide-in-from-top-2 duration-500">
-            <div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center text-amber-500 shadow-sm border border-amber-100">
-              <Zap size={20} />
+          <div className="w-[80%] md:w-full mb-6 p-3 md:p-4 bg-amber-50 rounded-2xl border border-amber-100 flex items-center gap-2 md:gap-3 animate-in fade-in slide-in-from-top-2 duration-500">
+            <div className="w-8 h-8 md:w-10 md:h-10 rounded-xl bg-white flex items-center justify-center text-amber-500 shadow-sm border border-amber-100 shrink-0">
+              <Zap size={18} />
             </div>
             <div>
-              <p className="text-xs font-black text-amber-900 uppercase tracking-wider">
+              <p className="text-[10px] md:text-xs font-black text-amber-900 uppercase tracking-wider">
                 ⚡ Super Fast Delivery
               </p>
-              <p className="text-[10px] text-amber-700 font-bold leading-relaxed">
+              <p className="text-[9px] md:text-[10px] text-amber-700 font-bold leading-relaxed">
                 {DELIVERY_CONFIG.local.subtitle}
               </p>
             </div>
@@ -374,6 +401,16 @@ const TabbedCart = ({
               emptyIcon={<Zap size={40} />}
             />
           )}
+          {activeTab === "pickup" && (
+            <TabContent
+              items={filteredItems.pickup}
+              updateQuantity={updateCartItem}
+              removeCartItem={removeCartItem}
+              emptyMessage="No Bakery Items Found"
+              emptySub="Sweet treats are waiting to be added"
+              emptyIcon={<Cake size={40} />}
+            />
+          )}
           {activeTab === "essential" && (
             <TabContent
               items={filteredItems.essential}
@@ -388,24 +425,25 @@ const TabbedCart = ({
       </div>
 
       {/* Dynamic Summary Sidebar */}
-      <div className="lg:col-span-4 sticky top-36">
-        <Card className="border-none shadow-2xl rounded-[2.5rem] overflow-hidden bg-white border border-gray-100">
-          <div className="p-8">
-            <div className="flex items-center justify-between mb-8">
-              <h3 className="font-black text-xl text-gray-900 tracking-tight">
+      {/* <div className="md:col-span-5 lg:col-span-4 md:sticky md:top-16 mt-4 md:mt-0"> */}
+      <div className="w-full md:col-span-5 lg:col-span-4 mt-6 md:mt-0 md:sticky md:top-16">
+        <Card className="w-full border-none shadow-xl rounded-2xl md:rounded-[2.5rem] overflow-hidden bg-white border border-gray-100">
+          <div className="p-4 md:p-8">
+            <div className="flex items-center justify-between mb-4 md:mb-8">
+              <h3 className="font-black text-base md:text-xl text-gray-900 tracking-tight">
                 Order Summary
               </h3>
               <Badge
                 variant="secondary"
-                className="bg-gray-50 text-gray-400 font-black text-[10px] uppercase tracking-widest px-3"
+                className="bg-gray-50 text-gray-400 font-black text-[8px] md:text-[10px] uppercase tracking-widest px-2"
               >
                 {activeTab}
               </Badge>
             </div>
 
-            <div className="space-y-4 mb-8">
-              <div className="flex justify-between items-center">
-                <span className="text-[10px] font-black uppercase text-gray-400 tracking-widest">
+            <div className="space-y-2 md:space-y-4 mb-4 md:mb-8">
+              <div className="flex justify-between items-center text-[10px] md:text-[11px]">
+                <span className="font-bold uppercase text-gray-400 tracking-widest">
                   Subtotal
                 </span>
                 <span className="font-black text-gray-900">
@@ -413,9 +451,9 @@ const TabbedCart = ({
                 </span>
               </div>
 
-              <div className="flex justify-between items-center">
-                <span className="text-[10px] font-black uppercase text-gray-400 tracking-widest transition-colors">
-                  {deliveryConfig.title} Fee
+              <div className="flex justify-between items-center text-[10px] md:text-[11px]">
+                <span className="font-bold uppercase text-gray-400 tracking-widest">
+                  Delivery Fee
                 </span>
                 <span
                   className={`font-black ${deliveryFee === 0 ? "text-green-600" : "text-gray-900"}`}
@@ -427,10 +465,8 @@ const TabbedCart = ({
               </div>
 
               {promoCode === "SAVE20" && subtotal > 0 && (
-                <div className="flex justify-between items-center text-green-600 font-black">
-                  <span className="text-[10px] uppercase tracking-widest">
-                    20% Discount
-                  </span>
+                <div className="flex justify-between items-center text-green-600 font-black text-[10px] md:text-[11px]">
+                  <span className="uppercase tracking-widest">Discount</span>
                   <span>-₹{discount.toLocaleString()}</span>
                 </div>
               )}
@@ -441,49 +477,45 @@ const TabbedCart = ({
                 <div className="flex items-center gap-2 mb-4">
                   <input
                     type="text"
-                    placeholder="COUPON CODE"
+                    placeholder="COUPON"
                     value={promoInput}
                     onChange={(e) =>
                       setPromoInput(e.target.value.toUpperCase())
                     }
-                    className="flex-1 h-12 bg-gray-50 border border-gray-100 rounded-xl px-4 text-xs font-black uppercase tracking-widest focus:ring-2 focus:ring-[#870D32]/10 outline-none transition-all placeholder:text-gray-300"
+                    className="flex-1 h-10 bg-gray-50 border border-gray-100 rounded-xl px-4 text-[9px] md:text-[10px] font-black uppercase tracking-widest outline-none placeholder:text-gray-300"
                   />
                   <button
                     onClick={() => applyPromo(subtotal)}
-                    className="h-12 px-6 bg-gray-900 text-white rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-black active:scale-95 transition-all shadow-md"
+                    className="h-10 px-4 md:px-6 bg-gray-900 text-white rounded-xl text-[8px] md:text-[9px] font-black uppercase tracking-widest hover:bg-black transition-all"
                   >
                     Apply
                   </button>
                 </div>
 
-                <div className="flex justify-between items-end mb-8 mt-10">
-                  <span className="text-lg font-bold text-gray-900 tracking-tighter">
-                    Total Price
+                <div className="flex justify-between items-end mb-4 md:mb-8 mt-4 md:mt-10">
+                  <span className="text-sm md:text-lg font-bold text-gray-900 tracking-tighter">
+                    Total
                   </span>
-                  <span className="text-4xl font-bold text-gray-900 tracking-tighter tabular-nums leading-none">
-                    ₹ {grandTotal.toLocaleString()}
+                  <span className="text-2xl md:text-4xl font-bold text-gray-900 tracking-tighter leading-none">
+                    ₹{grandTotal.toLocaleString()}
                   </span>
                 </div>
 
                 <Button
                   disabled={activeTabData.length === 0}
                   onClick={() => onNext(getDeliveryTypeForCheckout())}
-                  className="w-full h-16 rounded-2xl bg-sbrown hover:bg-pbrown text-white font-black uppercase tracking-[0.15em] text-xs  transition-all hover:-translate-y-1 active:scale-[0.98] disabled:opacity-30 disabled:translate-y-0"
+                  className="w-full h-12 md:h-16 rounded-xl md:rounded-2xl bg-sbrown hover:bg-pbrown text-white font-black uppercase tracking-[0.1em] md:tracking-[0.15em] text-[10px] md:text-xs shadow-lg shadow-sbrown/20"
                 >
                   {getCtaLabel()}
-                  <ArrowRight
-                    size={18}
-                    className="ml-3 group-hover:translate-x-1 transition-transform"
-                  />
+                  <ArrowRight size={16} className="ml-2" />
                 </Button>
               </div>
             </div>
 
-            <div className="bg-gray-50 rounded-2xl p-4 flex gap-3 border border-gray-100">
-              <ShieldCheck size={18} className="text-gray-400 shrink-0" />
-              <p className="text-[9px] font-bold text-gray-500 uppercase leading-relaxed tracking-wider">
-                Shop securely. Your data is encrypted with enterprise-grade SSL
-                protection.
+            <div className="bg-gray-50 rounded-xl p-3 flex gap-2 border border-gray-100 mt-4">
+              <ShieldCheck size={14} className="text-gray-400 shrink-0" />
+              <p className="text-[8px] font-bold text-gray-500 uppercase leading-tight tracking-wider">
+                Secure SSL Protection.
               </p>
             </div>
           </div>
@@ -559,9 +591,9 @@ export function CartPage({
       {/* Background Decor */}
       <div className="fixed top-0 left-0 w-full h-[60vh] bg-gradient-to-b from-[#FFF5E1] via-[#FAF9F6] to-[#fafafa] pointer-events-none -z-10"></div>
 
-      <div className="container mx-auto px-4 py-8 max-w-7xl">
+      <div className="container mx-auto px-4 py-3 md:py-8 max-w-7xl">
         {/* Simplified Header */}
-        <div className="mb-12 flex flex-col md:flex-row md:items-end justify-between items-start gap-4 px-2">
+        <div className="mb-6 md:mb-12 flex flex-col md:flex-row md:items-end justify-between items-start gap-4 px-1 md:px-2">
           <div>
             <div className="flex items-center gap-3 mb-4">
               <span className="w-12 h-1.5 bg-sbrown rounded-full shadow-sm shadow-red-100"></span>
@@ -569,9 +601,9 @@ export function CartPage({
                 Checkout Essentials
               </span>
             </div>
-            <h1 className="text-6xl md:text-8xl font-black text-gray-900 tracking-tighter mb-4 flex items-center gap-6">
+            <h1 className="text-3xl md:text-8xl font-black text-gray-900 tracking-tighter mb-3 md:mb-4 flex items-center gap-3 md:gap-6">
               Cart
-              <span className="text-lg md:text-xl font-black text-gray-300 bg-white border border-gray-100 px-4 py-1 rounded-2xl shadow-sm tracking-widest align-middle flex items-center h-min translate-y-2 md:translate-y-4">
+              <span className="text-sm md:text-xl font-black text-gray-300 bg-white border border-gray-100 px-2.5 md:px-4 py-0.5 md:py-1 rounded-xl md:rounded-2xl shadow-sm tracking-widest align-middle flex items-center h-min translate-y-0.5 md:translate-y-4">
                 {cartItems.length}
               </span>
             </h1>

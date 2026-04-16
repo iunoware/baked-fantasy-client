@@ -9,11 +9,12 @@ import {
   ArrowLeft,
   Home,
   Building,
-  Download,
   X,
+  Info,
+  ShieldCheck,
 } from "lucide-react";
 import { Button } from "../components/ui/button";
-import { Card, CardContent } from "../components/ui/card";
+import { Card } from "../components/ui/card";
 import { Textarea } from "../components/ui/textarea";
 import { Input } from "../components/ui/input";
 import { Separator } from "../components/ui/separator";
@@ -22,10 +23,10 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
   DialogDescription,
 } from "./ui/dialog";
 import { Label } from "./ui/label";
+import { Badge } from "./ui/badge";
 import api from "../api";
 
 export function DeliveryPage({
@@ -39,9 +40,7 @@ export function DeliveryPage({
   onNext,
   onPrevious,
 }) {
-  // const inputRef = useRef(null);
   const [isAddingAddress, setIsAddingAddress] = useState(false);
-  // const [activeAddress, setActiveAddress] = useState(null);
   const [addresses, setAddresses] = useState([]);
   const [distanceKm, setDistanceKm] = useState(null);
   const [newAddress, setNewAddress] = useState({
@@ -72,7 +71,6 @@ Please assist with delivery.
 `;
 
   const encodedMessage = encodeURIComponent(message);
-
   const whatsappUrl = `https://wa.me/916379240125?text=${encodedMessage}`;
 
   const addAddress = async () => {
@@ -85,11 +83,6 @@ Please assist with delivery.
       }
 
       const token = localStorage.getItem("token");
-      // console.log(
-      //   "🚨 [Frontend] POST /address - Token from localStorage:",
-      //   token,
-      // );
-
       if (!token || token === "null") {
         alert("Please login to save your address.");
         return;
@@ -102,7 +95,7 @@ Please assist with delivery.
         lat: newAddress.lat,
         lng: newAddress.lng,
         building: newAddress.building,
-        isDefault: true, // Mark as default so backend removes other defaults
+        isDefault: true,
       });
 
       const savedDoc = res.data;
@@ -113,8 +106,8 @@ Please assist with delivery.
               .concat({ ...savedDoc, isDefault: true })
           : [savedDoc],
       );
-      setSelectedAddress({ ...savedDoc, isDefault: true }); // Auto-select to instantly calculate delivery fee!
-      setIsAddingAddress(false); // Close the modal
+      setSelectedAddress({ ...savedDoc, isDefault: true });
+      setIsAddingAddress(false);
       setNewAddress({
         type: "",
         building: "",
@@ -122,7 +115,7 @@ Please assist with delivery.
         landmark: "",
         lat: null,
         lng: null,
-      }); // Reset form
+      });
     } catch (err) {
       console.error(err.response?.data || err.message);
       alert("Failed to save address. Please try again.");
@@ -156,7 +149,7 @@ Please assist with delivery.
     try {
       const res = await api.post("/distance", {
         origin: {
-          lat: 9.922198052373819, // 🔥 YOUR SHOP LOCATION
+          lat: 9.922198052373819,
           lng: 78.08955095041708,
         },
         destination: {
@@ -165,13 +158,12 @@ Please assist with delivery.
         },
       });
 
-      return res.data; // ✅ axios gives data directly
+      return res.data;
     } catch (error) {
       console.error(
         "Frontend distance error:",
         error.response?.data || error.message,
       );
-      // Return a safe fallback rather than crashing
       return { success: false, error: "Failed", distance: 5000 };
     }
   };
@@ -185,7 +177,7 @@ Please assist with delivery.
     if (selectedAddress?.lat && selectedAddress?.lng) {
       getDistanceFromBackend(selectedAddress.lat, selectedAddress.lng).then(
         (data) => {
-          let distanceMeters = 3000; // Default 3km if failed
+          let distanceMeters = 3000;
           if (!data || !data.success || data.distance === undefined) {
             console.error(
               "Could not calculate distance gracefully. Using default distance (3km).",
@@ -194,7 +186,6 @@ Please assist with delivery.
             distanceMeters = data.distance;
           }
 
-          // ✅ Save distance in km
           setDistanceKm(distanceMeters / 1000);
 
           const fee = calculateDeliveryFee(distanceMeters);
@@ -209,29 +200,17 @@ Please assist with delivery.
     }
   }, [selectedAddress, setOrderSummary]);
 
-  // fetching address from DB
   useEffect(() => {
     const fetchAddress = async () => {
       try {
         const token = localStorage.getItem("token");
-        console.log(
-          "🚨 [Frontend] GET /address - Token from localStorage:",
-          token,
-        );
-
-        if (!token || token === "null" || token === "undefined") {
-          console.warn(
-            "User is not logged in, skipping address fetch to prevent 401 error.",
-          );
-          return;
-        }
+        if (!token || token === "null" || token === "undefined") return;
 
         const res = await api.get("/address");
         const fetchedAddresses = res.data;
         if (Array.isArray(fetchedAddresses)) {
           setAddresses(fetchedAddresses);
 
-          // Auto-select Default if parent prop is currently null
           if (!selectedAddress && fetchedAddresses.length > 0) {
             const defaultAddr =
               fetchedAddresses.find((addr) => addr.isDefault) ||
@@ -250,49 +229,57 @@ Please assist with delivery.
 
   function calculateDeliveryFee(meters) {
     const km = meters / 1000;
-    return Math.round(10 * km); // ₹10 per km, rounded cleanly
+    return Math.round(10 * km);
   }
 
   return (
-    <div className="container mx-auto px-4 py-8 max-w-7xl">
-      {/* Header */}
-      <div className="mb-8 pt-12 md:pt-0">
-        <div className="flex items-center gap-3 mb-2">
-          <MapPin className="h-8 w-8 text-sbrown" />
-          <h1 className="text-3xl font-bold">Delivery Details</h1>
-        </div>
-        <p className="text-gray-600">
-          Choose your delivery address and preferences
-        </p>
-      </div>
+    <div className="min-h-screen bg-[#fafafa] pb-24">
+      {/* Background Decor */}
+      <div className="fixed top-0 left-0 w-full h-[60vh] bg-gradient-to-b from-[#FFF5E1] via-[#FAF9F6] to-[#fafafa] pointer-events-none -z-10"></div>
 
-      <div className="grid lg:grid-cols-3 gap-8">
-        {/* Delivery Details */}
-        <div className="lg:col-span-2 space-y-6">
-          {/* Delivery Address */}
-          <Card>
-            <CardContent className="p-6">
-              <div className="flex items-center justify-between mb-4 ">
-                <h3 className="font-semibold text-lg">Delivery Address</h3>
+      <div className="container mx-auto px-4 py-8">
+        {/* Header */}
+        <div className="mb-12 flex flex-col md:flex-row md:items-end justify-between items-start gap-4 px-2">
+          <div>
+            <div className="flex items-center gap-3 mb-4">
+              <span className="w-12 h-1.5 bg-sbrown rounded-full shadow-sm shadow-red-100"></span>
+              <span className="text-[11px] font-black text-pbrown uppercase tracking-[0.25em]">
+                Secure Shipping
+              </span>
+            </div>
+            <h1 className="text-5xl md:text-7xl font-black text-gray-900 tracking-tighter mb-4 flex items-center gap-6">
+              Delivery
+            </h1>
+            <p className="text-gray-400 font-bold uppercase text-[10px] tracking-widest max-w-md leading-relaxed">
+              Items are grouped based on delivery type. Please ensure your
+              address is accurate for timely delivery.
+            </p>
+          </div>
+        </div>
+
+        <div className="grid lg:grid-cols-12 gap-10">
+          {/* Main Content Area */}
+          <div className="lg:col-span-8 space-y-8">
+            {/* Address List Section */}
+            <div>
+              <div className="flex items-center justify-between mb-6 px-2">
+                <h3 className="font-black text-xl text-gray-900 tracking-tight flex items-center gap-3">
+                  <MapPin className="text-sbrown" size={24} />
+                  Saved Addresses
+                </h3>
                 <Dialog
                   open={isAddingAddress}
                   onOpenChange={setIsAddingAddress}
                 >
-                  {/* <DialogTrigger asChild> */}
                   <Button
-                    variant="outline"
-                    size="sm"
-                    className="cursor-pointer"
-                    onClick={() => {
-                      setIsAddingAddress(true);
-                    }}
+                    onClick={() => setIsAddingAddress(true)}
+                    className="h-10 px-6 rounded-xl bg-gray-900 text-white text-[10px] font-black uppercase tracking-widest hover:bg-black transition-all active:scale-95 shadow-md flex items-center gap-2"
                   >
-                    <Plus className="h-4 w-4 mr-2" />
+                    <Plus size={14} strokeWidth={3} />
                     Add New
                   </Button>
-                  {/* </DialogTrigger> */}
                   <DialogContent className="sm:max-w-[500px] p-0 overflow-hidden border-none shadow-3xl bg-white rounded-[2.5rem]">
-                    <div className="bg-pbrown p-5 text-white relative">
+                    <div className="bg-pbrown p-6 text-white relative">
                       <button
                         onClick={() => setIsAddingAddress(false)}
                         className="absolute right-6 top-6 h-8 w-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-all active:scale-95 z-20"
@@ -310,7 +297,6 @@ Please assist with delivery.
                     </div>
 
                     <div className="p-8 space-y-8">
-                      {/* Address Type Selector */}
                       <div>
                         <Label className="text-[10px] font-black uppercase text-gray-800 tracking-widest block mb-4">
                           Location Type
@@ -328,7 +314,7 @@ Please assist with delivery.
                               }
                               className={`flex-1 flex flex-col items-center gap-2 p-3 rounded-2xl border-2 transition-all active:scale-95 ${
                                 newAddress.type === type.id
-                                  ? "bg border-pbrown text-pbrown shadow-sm"
+                                  ? "bg-white border-pbrown text-pbrown shadow-sm"
                                   : "bg-white border-gray-100 text-gray-400 hover:border-gray-200"
                               }`}
                             >
@@ -341,8 +327,8 @@ Please assist with delivery.
                         </div>
                       </div>
 
-                      <div className="grid grid-cols-2 gap-6">
-                        <div className="col-span-2">
+                      <div className="space-y-6">
+                        <div>
                           <Label className="text-[10px] font-black uppercase text-gray-800 tracking-widest block mb-2">
                             Google Address Search
                           </Label>
@@ -359,38 +345,39 @@ Please assist with delivery.
                           />
                         </div>
 
-                        <div className="col-span-1">
-                          <Label className="text-[10px] font-black uppercase text-gray-800 tracking-widest block mb-2">
-                            Building / Flat
-                          </Label>
-                          <Input
-                            placeholder="e.g. 23/A, Green Apt."
-                            value={newAddress.building}
-                            onChange={(e) =>
-                              setNewAddress({
-                                ...newAddress,
-                                building: e.target.value,
-                              })
-                            }
-                            className="h-12 rounded-xl bg-gray-50 border-gray-100 focus:bg-white focus:ring-[#870D32]/10 focus:border-[#870D32]/20 font-bold text-sm"
-                          />
-                        </div>
-
-                        <div className="col-span-1">
-                          <Label className="text-[10px] font-black uppercase text-gray-800 tracking-widest block mb-2">
-                            Landmark
-                          </Label>
-                          <Input
-                            placeholder="e.g. Near Park"
-                            value={newAddress.landmark}
-                            onChange={(e) =>
-                              setNewAddress({
-                                ...newAddress,
-                                landmark: e.target.value,
-                              })
-                            }
-                            className="h-12 rounded-xl bg-gray-50 border-gray-100 focus:bg-white focus:ring-[#870D32]/10 focus:border-[#870D32]/20 font-bold text-sm"
-                          />
+                        <div className="grid grid-cols-2 gap-4">
+                          <div>
+                            <Label className="text-[10px] font-black uppercase text-gray-800 tracking-widest block mb-2">
+                              Building / Flat
+                            </Label>
+                            <Input
+                              placeholder="House No., Unit"
+                              value={newAddress.building}
+                              onChange={(e) =>
+                                setNewAddress({
+                                  ...newAddress,
+                                  building: e.target.value,
+                                })
+                              }
+                              className="h-12 rounded-xl bg-gray-50 border-gray-100 focus:bg-white focus:ring-sbrown/10 focus:border-sbrown/20 font-bold text-sm"
+                            />
+                          </div>
+                          <div>
+                            <Label className="text-[10px] font-black uppercase text-gray-800 tracking-widest block mb-2">
+                              Landmark
+                            </Label>
+                            <Input
+                              placeholder="Nearby place"
+                              value={newAddress.landmark}
+                              onChange={(e) =>
+                                setNewAddress({
+                                  ...newAddress,
+                                  landmark: e.target.value,
+                                })
+                              }
+                              className="h-12 rounded-xl bg-gray-50 border-gray-100 focus:bg-white focus:ring-sbrown/10 focus:border-sbrown/20 font-bold text-sm"
+                            />
+                          </div>
                         </div>
                       </div>
 
@@ -406,10 +393,10 @@ Please assist with delivery.
                 </Dialog>
               </div>
 
-              <div className="space-y-3">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-left">
                 {addresses.length > 0 ? (
                   addresses.map((address) => {
-                    const displayType = address.label || address.type || "";
+                    const displayType = address.label || address.type || "Home";
                     const displayAddress = [
                       address.building,
                       address.fullAddress || address.address,
@@ -422,182 +409,210 @@ Please assist with delivery.
 
                     return (
                       <div
-                        key={address._id || address.id} // 🔥 use _id from Mongo
-                        className={`p-4 border rounded-lg cursor-pointer transition-all duration-200 ${
+                        key={address._id || address.id}
+                        className={`group p-5 rounded-2xl border-2 transition-all duration-300 cursor-pointer flex flex-col gap-3 relative overflow-hidden ${
                           isSelected
-                            ? "border-brown bg-pink-50 ring-1 ring-pbrown shadow-sm"
-                            : "border-gray-200 hover:border-gray-300"
+                            ? "bg-white border-sbrown shadow-lg scale-[1.02]"
+                            : "bg-white border-gray-100 hover:border-gray-200 hover:shadow-md"
                         }`}
                         onClick={() => handleSelectAddress(address)}
-                        // onClick={() => setActiveAddress(address.id)}
                       >
-                        <div className="flex items-start gap-3">
-                          <IconComponent className="h-5 w-5 text-brown mt-1" />
-                          <div className="flex-1">
-                            <div className="flex items-center gap-2 mb-1">
-                              <span className="font-semibold text-lg">
-                                {displayType}
-                              </span>
-                              {isSelected && (
-                                <span className="text-xs bg-sbrown text-white px-2.5 py-1 rounded-full font-semibold shadow-sm">
-                                  Deliver Here
-                                </span>
-                              )}
-                            </div>
-                            <p className="text-gray-600 text-sm mt-1">
-                              {displayAddress}
-                            </p>
+                        <div className="flex items-start justify-between">
+                          <div
+                            className={`p-2 rounded-xl ${isSelected ? "bg-sbrown text-white" : "bg-gray-50 text-gray-400 group-hover:bg-gray-100"} transition-colors`}
+                          >
+                            <IconComponent size={20} />
                           </div>
+                          {isSelected && (
+                            <span className="text-[9px] font-black uppercase tracking-widest bg-green-50 text-green-600 px-2 py-1 rounded-md border border-green-100">
+                              Selected
+                            </span>
+                          )}
                         </div>
+                        <div>
+                          <h4 className="font-black text-gray-900 uppercase text-xs tracking-wider mb-1 text-left">
+                            {displayType}
+                          </h4>
+                          <p className="text-gray-500 text-[11px] font-bold leading-relaxed line-clamp-2 text-left">
+                            {displayAddress}
+                          </p>
+                        </div>
+                        {isSelected && (
+                          <div className="absolute top-0 right-0 w-16 h-16 bg-sbrown/5 rounded-bl-full -mr-8 -mt-8 pointer-events-none"></div>
+                        )}
                       </div>
                     );
                   })
                 ) : (
-                  <h2>No Address added</h2>
+                  <div className="col-span-1 md:col-span-2 py-12 text-center bg-white rounded-3xl border border-dashed border-gray-200">
+                    <MapPin
+                      className="mx-auto text-gray-200 mb-4"
+                      size={48}
+                      strokeWidth={1}
+                    />
+                    <p className="text-gray-400 font-bold uppercase text-[10px] tracking-widest">
+                      No addresses found
+                    </p>
+                  </div>
                 )}
               </div>
-            </CardContent>
-          </Card>
+            </div>
 
-          {/* Delivery Time */}
-          <Card>
-            <CardContent className="p-6">
-              <div className="flex items-center gap-3 mb-4">
-                <Clock className="h-5 w-5 text-pink-500" />
-                <h3 className="font-semibold">Estimated Delivery Time</h3>
+            {/* Estimated Delivery Highlight */}
+            {/* <div className="p-6 bg-emerald-50 rounded-[2rem] border border-emerald-100 flex flex-col md:flex-row items-center gap-6 animate-in fade-in slide-in-from-top-4 duration-700">
+              <div className="w-16 h-16 rounded-2xl bg-white flex items-center justify-center text-emerald-500 shadow-sm border border-emerald-100 shrink-0">
+                <Clock size={32} />
               </div>
-              <div className="bg-green-50 border border-green-200 rounded-lg p-4">
-                <p className="font-medium text-green-800">25-30 minutes</p>
-                <p className="text-green-600 text-sm">
-                  Your order will be delivered by 8:45 PM
+              <div className="text-center md:text-left">
+                <p className="text-xs font-black text-emerald-900 uppercase tracking-widest mb-1">
+                  Estimated Delivery Time
                 </p>
+                <div className="flex items-baseline gap-2 justify-center md:justify-start">
+                  <span className="text-2xl font-black text-emerald-600 tracking-tighter text-left">25-30 Minutes</span>
+                  <span className="text-[10px] text-emerald-500 font-bold uppercase tracking-wider text-left">Arriving by 8:45 PM</span>
+                </div>
               </div>
-            </CardContent>
-          </Card>
+            </div> */}
 
-          {/* Delivery Instructions */}
-          <Card>
-            <CardContent className="p-6">
-              <h3 className="font-semibold mb-4">
-                Delivery Instructions (Optional)
+            {/* Delivery Instructions */}
+            <div className="bg-white rounded-3xl border border-gray-100 p-8 shadow-sm">
+              <h3 className="font-black text-xl text-gray-900 tracking-tight mb-6">
+                Delivery Instructions{" "}
+                <span className="text-gray-300 font-bold text-sm ml-2 uppercase tracking-widest leading-loose">
+                  (Optional)
+                </span>
               </h3>
               <Textarea
-                placeholder="Add any specific instructions for the delivery person..."
+                placeholder="Ex: Ring the bell, Leave at the gate..."
                 value={deliveryInstructions}
                 onChange={(e) => setDeliveryInstructions(e.target.value)}
-                rows={3}
+                className="min-h-[120px] rounded-2xl bg-gray-50 border-gray-100 focus:bg-white focus:ring-sbrown/10 focus:border-sbrown/20 font-bold text-sm resize-none p-4"
               />
-            </CardContent>
-          </Card>
-        </div>
+            </div>
+          </div>
 
-        {/* Order Summary - Sticky */}
-        <div className="lg:col-span-1">
-          <div className="sticky top-8">
-            <Card>
-              <CardContent className="p-6">
-                <h3 className="font-semibold text-lg mb-4">Order Summary</h3>
+          {/* Sticky Summary Sidebar */}
+          <div className="lg:col-span-4 lg:sticky lg:top-36 h-min">
+            <Card className="border-none shadow-2xl rounded-[2rem] md:rounded-[2.5rem] overflow-hidden bg-white border border-gray-100">
+              <div className="p-6 md:p-8">
+                <div className="flex items-center justify-between mb-8">
+                  <h3 className="font-black text-xl text-gray-900 tracking-tight">
+                    Order Summary
+                  </h3>
+                  <Badge
+                    variant="secondary"
+                    className="bg-gray-50 text-gray-400 font-black text-[10px] uppercase tracking-widest px-3"
+                  >
+                    Step 2/3
+                  </Badge>
+                </div>
 
-                <div className="space-y-3">
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">Subtotal</span>
-                    <span>₹{orderSummary.subtotal.toLocaleString()}</span>
+                <div className="space-y-4 mb-8">
+                  <div className="flex justify-between items-center">
+                    <span className="text-[10px] font-black uppercase text-gray-400 tracking-widest">
+                      Subtotal
+                    </span>
+                    <span className="font-black text-gray-900">
+                      ₹{orderSummary.subtotal.toLocaleString()}
+                    </span>
                   </div>
 
                   {orderSummary.discount > 0 && (
-                    <div className="flex justify-between text-green-600">
-                      <span>Discount</span>
+                    <div className="flex justify-between items-center text-green-600 font-black">
+                      <span className="text-[10px] uppercase tracking-widest">
+                        Discount
+                      </span>
                       <span>-₹{orderSummary.discount.toLocaleString()}</span>
                     </div>
                   )}
 
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">Taxes & Fees</span>
-                    <span>₹{orderSummary.taxes.toLocaleString()}</span>
+                  <div className="flex justify-between items-center">
+                    <span className="text-[10px] font-black uppercase text-gray-400 tracking-widest">
+                      Taxes & Fees
+                    </span>
+                    <span className="font-black text-gray-900">
+                      ₹{orderSummary.taxes.toLocaleString()}
+                    </span>
                   </div>
 
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">Delivery Fee</span>
+                  <div className="flex justify-between items-center">
+                    <span className="text-[10px] font-black uppercase text-gray-400 tracking-widest transition-colors">
+                      Delivery Fee
+                    </span>
                     <span
-                      className={
-                        orderSummary.deliveryFee === 0 ? "text-green-600" : ""
-                      }
+                      className={`font-black ${orderSummary.deliveryFee === 0 ? "text-green-600" : "text-gray-900"}`}
                     >
                       {orderSummary.deliveryFee === 0
                         ? "FREE"
-                        : `₹${orderSummary.deliveryFee}`}
+                        : `₹${orderSummary.deliveryFee.toLocaleString()}`}
                     </span>
                   </div>
 
-                  <Separator />
+                  <Separator className="bg-gray-100" />
 
-                  <div className="flex justify-between font-semibold text-lg">
-                    <span>Total</span>
-                    <span className="text-blue-600">
-                      ₹{orderSummary.total.toLocaleString()}
+                  <div className="flex justify-between items-end mb-8 mt-10">
+                    <span className="text-base md:text-lg font-bold text-gray-900 tracking-tighter">
+                      Total Price
+                    </span>
+                    <span className="text-3xl md:text-4xl font-bold text-gray-900 tracking-tighter tabular-nums leading-none">
+                      ₹ {orderSummary.total.toLocaleString()}
                     </span>
                   </div>
-                </div>
 
-                {/* Action Buttons */}
-                <div className="space-y-3 mt-6">
                   {distanceKm !== null && distanceKm > 8 ? (
-                    // ✅ Outside 8km — show WhatsApp button
-                    <>
-                      <p className="text-sm text-amber-600 bg-amber-50 border border-amber-200 rounded-lg p-3 text-center">
-                        You're {distanceKm.toFixed(1)}km away. Online delivery
-                        isn't available. Contact us on WhatsApp to arrange
-                        delivery.
-                      </p>
+                    <div className="space-y-4">
+                      <div className="bg-amber-50 rounded-2xl p-4 flex gap-3 border border-amber-100">
+                        <Info size={18} className="text-amber-500 shrink-0" />
+                        <p className="text-[10px] font-bold text-amber-700 uppercase leading-relaxed tracking-wider">
+                          You're {distanceKm.toFixed(1)}km away. Contact us on
+                          WhatsApp to arrange special delivery.
+                        </p>
+                      </div>
                       <a
                         href={whatsappUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="group relative w-full justify-center mt-2 inline-flex items-center overflow-hidden rounded-sm bg-green-500 px-8 py-3 text-white focus:ring-3 focus:outline-hidden"
+                        className="w-full h-14 rounded-2xl bg-green-500 hover:bg-green-600 text-white font-black uppercase tracking-[0.15em] text-[10px] md:text-xs transition-all flex items-center justify-center shadow-lg shadow-green-100"
                       >
-                        <span className="text-sm font-medium text-center">
-                          Contact us on WhatsApp
-                        </span>
+                        Contact on WhatsApp
                       </a>
-                    </>
+                    </div>
                   ) : (
-                    // ✅ Within 8km — show normal proceed button
-                    <button
-                      onClick={onNext}
+                    <Button
                       disabled={!selectedAddress || distanceKm === null}
-                      className="group relative w-full justify-center mt-6 inline-flex items-center overflow-hidden rounded-sm bg-cyan-500 px-8 py-3 text-white focus:ring-3 focus:outline-hidden mr-3 disabled:opacity-50 disabled:cursor-not-allowed"
+                      onClick={onNext}
+                      className="w-full h-14 md:h-16 rounded-2xl bg-sbrown hover:bg-pbrown text-white font-black uppercase tracking-[0.15em] text-[10px] md:text-xs transition-all hover:-translate-y-1 active:scale-[0.98] disabled:opacity-30 flex items-center justify-center gap-3"
                     >
-                      <span className="absolute -start-full transition-all group-hover:start-4">
-                        <ArrowRight size={15} />
-                      </span>
-                      <span className="text-sm font-medium text-center transition-all group-hover:ms-4">
-                        {distanceKm === null && selectedAddress
-                          ? "Calculating distance..."
-                          : "Proceed to Payment"}
-                      </span>
-                    </button>
+                      {distanceKm === null && selectedAddress
+                        ? "Calculating distance..."
+                        : "Proceed to Payment"}
+                      <ArrowRight size={18} />
+                    </Button>
                   )}
 
                   <button
                     onClick={onPrevious}
-                    className="group relative w-full justify-center mt-2 inline-flex items-center overflow-hidden rounded-sm border-1 border-sky-500 px-8 py-3 text-sky-500 focus:ring-3 focus:outline-hidden mr-3"
+                    className="w-full h-12 rounded-xl border-2 border-gray-100 text-gray-400 font-black uppercase tracking-widest text-[9px] hover:bg-gray-50 transition-all flex items-center justify-center gap-2"
                   >
-                    <span className="absolute -start-full transition-all group-hover:start-4">
-                      <ArrowLeft size={15} />
-                    </span>
-                    <span className="text-sm font-medium text-center transition-all group-hover:ms-4">
-                      Back to Cart
-                    </span>
+                    <ArrowLeft size={14} strokeWidth={3} />
+                    Back to Cart
                   </button>
                 </div>
 
-                {!selectedAddress && (
-                  <p className="text-sm text-red-500 text-center mt-2">
-                    Please select a delivery address to continue
+                <div className="bg-gray-50 rounded-2xl p-4 flex gap-3 border border-gray-100 mt-6">
+                  <ShieldCheck size={18} className="text-gray-400 shrink-0" />
+                  <p className="text-[9px] font-bold text-gray-500 uppercase leading-relaxed tracking-wider">
+                    Your location data is used only for calculating local
+                    delivery availability.
                   </p>
-                )}
-              </CardContent>
+                </div>
+              </div>
             </Card>
+            {!selectedAddress && (
+              <p className="text-[10px] font-black text-red-500 uppercase tracking-widest text-center mt-4">
+                Please select a delivery address to continue
+              </p>
+            )}
           </div>
         </div>
       </div>
