@@ -41,10 +41,12 @@ const ProductCard = ({
   const added = quantity > 0;
 
   // Add to cart handler
+  // Add to cart handler
   const handleCart = async (e) => {
     e.preventDefault();
     if (!inStock || isAdding) return;
 
+    // ✅ Removed async wrapper - handleProtectedAction already handles auth
     handleProtectedAction(async () => {
       try {
         setIsAdding(true);
@@ -61,6 +63,7 @@ const ProductCard = ({
         toast.success(`${title} added to cart!`);
       } catch (err) {
         console.error("Cart action failed", err);
+        toast.error("Failed to add to cart");
       } finally {
         setIsAdding(false);
       }
@@ -124,8 +127,9 @@ const ProductCard = ({
 
         {/* View Details Hover Overlay */}
         <div
-          className={`${inStock ? "block" : "hidden"
-            } absolute inset-0 z-10 flex justify-center items-center translate-y-10 opacity-0 group-hover/card:translate-y-0 group-hover/card:opacity-100 transition-all duration-300`}
+          className={`${
+            inStock ? "block" : "hidden"
+          } absolute inset-0 z-10 flex justify-center items-center translate-y-10 opacity-0 group-hover/card:translate-y-0 group-hover/card:opacity-100 transition-all duration-300`}
         >
           <div className="bg-white text-neutral-900 rounded-3xl px-5 py-2 font-bold shadow-lg group-hover:scale-105 transition-transform duration-300">
             View details

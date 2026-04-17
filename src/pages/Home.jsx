@@ -23,7 +23,7 @@ function Home() {
     `Hi ma'am, I would like to enroll for the baking course`,
   );
 
-  console.log(localStorage.getItem);
+
 
   useEffect(() => {
     // for fetching Bakery Products

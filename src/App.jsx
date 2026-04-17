@@ -8,6 +8,7 @@ import {
   Navigate,
   useNavigate,
 } from "react-router-dom";
+import { useEffect } from "react";
 import { Toaster } from "react-hot-toast";
 import EnquiryBtn from "./components/EnquiryBtn.jsx";
 import Home from "../src/pages/Home.jsx";
@@ -55,9 +56,11 @@ import { GlobalLoader } from "./components/GlobalLoader.jsx";
 import CompleteProfileModal from "./components/CompleteProfileModal.jsx";
 import { useAuth } from "./context/AuthContext.jsx";
 
+import { getCookie, removeCookie } from "./utils/cookieUtils";
+
 function ProtectedAdminRoute({ children }) {
-  const token = sessionStorage.getItem("token");
-  if (!token) {
+  const isAdmin = getCookie("isAdmin") === "true";
+  if (!isAdmin) {
     return <Navigate to="/admin-login" replace />;
   }
   return children;
@@ -67,14 +70,9 @@ function AppContent() {
   const location = useLocation();
   const isAdmin = location.pathname.startsWith("/admin");
   const navigate = useNavigate();
-  const token = localStorage.getItem("token");
-
   const logout = () => {
-    localStorage.removeItem("token");
     navigate("/");
   };
-
-  autoLogout(token, logout);
 
   const { isLoggedIn, showProfileModal, setShowProfileModal } = useAuth();
 
@@ -103,11 +101,17 @@ function AppContent() {
         {/* products */}
         <Route path="/products/:categoryName" element={<SpecificCategory />} />
         <Route path="/products/all-products" element={<AllProducts />} />
-        <Route path="/products/:categoryName/:productId" element={<ProductDetail />} />
+        <Route
+          path="/products/:categoryName/:productId"
+          element={<ProductDetail />}
+        />
         {/* products */}
 
         {/* essentials */}
-        <Route path="/essentials/:categoryName" element={<EssSpeciCategory />} />
+        <Route
+          path="/essentials/:categoryName"
+          element={<EssSpeciCategory />}
+        />
         <Route path="/essentials/all-products" element={<AllEssentials />} />
         <Route
           path="/essential/:categoryName/:productId"
@@ -119,7 +123,10 @@ function AppContent() {
         <Route path="/courses" element={<Courses />} />
         <Route path="/courses/online-course" element={<OnlineCourse />} />
         <Route path="/courses/my-learning/" element={<MyLearning />} />
-        <Route path="/course/my-learning/:courseId" element={<OnlineCourseDetails />} />
+        <Route
+          path="/course/my-learning/:courseId"
+          element={<OnlineCourseDetails />}
+        />
         <Route path="/courses/offline-course" element={<OfflineCourse />} />
         <Route path="/contact" element={<Contact />} />
         <Route

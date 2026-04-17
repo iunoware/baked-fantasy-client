@@ -51,15 +51,6 @@ export function ProfileHeader({ name, email, mobileNumber, address, onUpdate }) 
       console.warn("Profile update endpoint not available:", err.message);
     }
 
-    // Always update localStorage so changes show immediately
-    try {
-      const stored = JSON.parse(localStorage.getItem("user") || "{}");
-      const updated = { ...stored, ...form };
-      localStorage.setItem("user", JSON.stringify(updated));
-    } catch (error) {
-      console.error(error);
-    }
-
     setSaving(false);
     setOpen(false);
     if (onUpdate) onUpdate(form);
