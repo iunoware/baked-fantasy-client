@@ -10,6 +10,9 @@ export function OrdersTab() {
     async function fetchOrders() {
       try {
         const response = await api.get("/my-orders");
+        console.log(response.data.data);
+
+        if (!response || response === undefined) return;
         setOrders(response.data.data || []);
       } catch (error) {
         console.error("Error fetching orders:", error);
@@ -32,7 +35,9 @@ export function OrdersTab() {
     return (
       <div className="flex flex-col items-center justify-center p-12 text-gray-400 bg-gray-50/50 rounded-2xl border border-dashed border-gray-200">
         <ShoppingBag className="w-12 h-12 mb-3 opacity-20" />
-        <h3 className="text-lg font-medium text-gray-900 mb-1">No orders yet</h3>
+        <h3 className="text-lg font-medium text-gray-900 mb-1">
+          No orders yet
+        </h3>
         <p className="text-sm">When you buy something, it will appear here.</p>
       </div>
     );
@@ -86,7 +91,9 @@ export function OrdersTab() {
             </div>
             <div className="text-right">
               <p className="text-xs text-gray-500">Total Amount</p>
-              <p className="text-lg font-bold text-gray-900">₹{order.totalAmount}</p>
+              <p className="text-lg font-bold text-gray-900">
+                ₹{order.totalAmount}
+              </p>
             </div>
           </div>
         </div>

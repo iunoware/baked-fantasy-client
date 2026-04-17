@@ -67,7 +67,8 @@ function About() {
     {
       year: "2022",
       title: "Signature Cakes Launched",
-      description: "Introduced our signature customized cakes and special dessert menu.",
+      description:
+        "Introduced our signature customized cakes and special dessert menu.",
       icon: <Cake color="#ffffff" size={27} />,
       image: "cake-dot-3.png",
     },
@@ -124,14 +125,14 @@ function About() {
         <div className="p-8 md:p-12 lg:px-16 lg:py-24 mt-38">
           <div className="text-start ltr:sm:text-left rtl:sm:text-right">
             <h2 className="text-2xl font-bold lora text-black sm:text-3xl md:text-5xl">
-              From <span className="text-pbrown">Oven to Heart</span> - and From Us to
-              Your Kitchen.
+              From <span className="text-pbrown">Oven to Heart</span> - and From
+              Us to Your Kitchen.
             </h2>
 
             <p className="hidden max-w-lg text-black/90 md:mt-6 md:block md:text-lg md:leading-relaxed">
-              The Baked Fantasy brings you fresh cakes, pastries, and desserts made with
-              love. Celebrate life’s moments with us-or join our baking courses to create
-              your own oven-fresh treats at home.
+              The Baked Fantasy brings you fresh cakes, pastries, and desserts
+              made with love. Celebrate life’s moments with us-or join our
+              baking courses to create your own oven-fresh treats at home.
             </p>
             <div className="flex gap-10 items-center">
               <div className="mt-4 sm:mt-8">
@@ -242,16 +243,16 @@ function About() {
       </section>
 
       {/* time line section */}
-      <section className="pt-16 bg-white bg-[url('/images/swirl.png')]">
+      <section className="py-16 bg-white bg-[url('/images/swirl.png')]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl lora text-black font-bold mb-4">
               Our Journey
             </h2>
             <p className="text-lg text-black/70 max-w-3xl mx-auto">
-              From a passionate home baker to a skilled academy instructor and a thriving
-              large-scale home bakery, our journey is driven by love for the craft and
-              dedication to sharing it with others.
+              From a passionate home baker to a skilled academy instructor and a
+              thriving large-scale home bakery, our journey is driven by love
+              for the craft and dedication to sharing it with others.
             </p>
           </div>
 
@@ -317,18 +318,207 @@ function About() {
         </div>
       </section>
 
+      {/* Why Choose Us section */}
+      <div className="relative overflow-hidden bg py-[80px] pb-[90px] ">
+        {/* Decorative background blobs */}
+        <div className="absolute pointer-events-none rounded-full w-[320px] h-[320px] -top-[60px] -right-[80px] bg-[radial-gradient(circle,rgba(135,13,50,0.06)_0%,transparent_70%)]" />
+        <div className="absolute pointer-events-none rounded-full w-[260px] h-[260px] -bottom-[40px] -left-[60px] bg-[radial-gradient(circle,rgba(180,100,40,0.07)_0%,transparent_70%)]" />
+
+        {/* Section heading */}
+        <div className="text-center mb-14 px-5">
+          <p className="text-[13px] font-semibold tracking-[3px] uppercase text-[#870D32] mb-3">
+            Our Promise
+          </p>
+          <h2 className="text-[clamp(28px,5vw,46px)] font-extrabold text-[#2c1a0e] leading-[1.15] mx-auto mb-3.5 font-serif">
+            Why Choose Us
+          </h2>
+          {/* Decorative accent */}
+          <div className="flex justify-center gap-1.5 items-center">
+            <div className="w-9 h-[2px] bg-[#870D32] rounded-[2px]" />
+            <div className="w-2 h-2 rounded-full bg-[#870D32]" />
+            <div className="w-9 h-[2px] bg-[#870D32] rounded-[2px]" />
+          </div>
+          <p className="mt-4 text-base text-[#7a5c44] max-w-[480px] mx-auto leading-[1.65]">
+            We believe every bite should tell a story — crafted with care,
+            delivered with warmth.
+          </p>
+        </div>
+
+        {/* Staggered Cards Grid */}
+        <div className="max-w-[90vw] mx-auto px-6 grid md:grid-cols-3 grid-cols-1  gap-7 items-start">
+          {/* Card 1 — Freshly Baked Daily (row 1, normal) */}
+          <div className="group transition-all relative bg-white rounded-[18px] pt-8 px-[26px] pb-7 shadow-[0_4px_18px_rgba(100,50,20,0.08)] hover:shadow-[0_12px_36px_rgba(100,50,20,0.15)] ease-in-out hover:-translate-y-[7px] cursor-default mt-0 [@media(max-width:900px)]:!mt-0">
+            <div className="w-[58px] h-[58px] rounded-[14px] flex items-center justify-center mb-5 bg-[linear-gradient(135deg,#fce8d0,#f9d5b8)]">
+              <svg
+                width="28"
+                height="28"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#870D32"
+                strokeWidth="1.8"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M18 8h1a4 4 0 0 1 0 8h-1" />
+                <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z" />
+                <line x1="6" y1="1" x2="6" y2="4" />
+                <line x1="10" y1="1" x2="10" y2="4" />
+                <line x1="14" y1="1" x2="14" y2="4" />
+              </svg>
+            </div>
+            <h3 className="text-[17px] font-bold text-black mb-2 tracking-[-0.2px] font-serif">
+              Freshly Baked Daily
+            </h3>
+            <p className="text-[14px] text-[#7a5c44] leading-[1.6] m-0">
+              Every item is made fresh each morning — no preservatives, no
+              shortcuts.
+            </p>
+          </div>
+
+          {/* Card 2 — Premium Ingredients (row 1, elevated) */}
+          <div className="group relative bg-[linear-gradient(160deg,#ffffff_60%,#fce8d0_100%)] rounded-[18px] pt-8 px-[26px] pb-7 shadow-[0_6px_28px_rgba(135,13,50,0.12)] hover:shadow-[0_12px_36px_rgba(100,50,20,0.15)] transition-all ease-in-out hover:-translate-y-[7px] cursor-default [@media(max-width:900px)]:!mt-0">
+            <div className="w-[58px] h-[58px] rounded-[14px] flex items-center justify-center mb-5 bg-[linear-gradient(135deg,#f5e0e8,#edcad7)]">
+              <svg
+                width="28"
+                height="28"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#870D32"
+                strokeWidth="1.8"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+              </svg>
+            </div>
+            <h3 className="text-[17px] font-bold text-[#2c1a0e] mb-2 tracking-[-0.2px] font-serif">
+              Premium Ingredients
+            </h3>
+            <p className="text-[14px] text-[#7a5c44] leading-[1.6] m-0">
+              Sourced from trusted farms — rich butter, real chocolate, and
+              seasonal fruits.
+            </p>
+          </div>
+
+          {/* Card 3 — Custom Cake Orders (row 1, low) */}
+          <div className="group relative bg-white rounded-[18px] pt-8 px-[26px] pb-7 shadow-[0_4px_18px_rgba(100,50,20,0.08)] hover:shadow-[0_12px_36px_rgba(100,50,20,0.15)] transition-all ease-in-out hover:-translate-y-[7px] cursor-default [@media(max-width:900px)]:!mt-0">
+            <div className="w-[58px] h-[58px] rounded-[14px] flex items-center justify-center mb-5 bg-[linear-gradient(135deg,#e8f0e0,#d5e8c8)]">
+              <svg
+                width="28"
+                height="28"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#4a7c3f"
+                strokeWidth="1.8"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+              </svg>
+            </div>
+            <h3 className="text-[17px] font-bold text-[#2c1a0e] mb-2 tracking-[-0.2px] font-serif">
+              Custom Cake Orders
+            </h3>
+            <p className="text-[14px] text-[#7a5c44] leading-[1.6] m-0">
+              Dream it, we bake it — personalised cakes for every occasion and
+              flavour.
+            </p>
+          </div>
+
+          {/* Card 4 — Fast & Reliable Delivery (row 2, low) */}
+          <div className="group relative bg-white rounded-[18px] pt-8 px-[26px] pb-7 shadow-[0_4px_18px_rgba(100,50,20,0.08)] hover:shadow-[0_12px_36px_rgba(100,50,20,0.15)] transition-all ease-in-out hover:-translate-y-[7px] cursor-default [@media(max-width:900px)]:!mt-0">
+            <div className="w-[58px] h-[58px] rounded-[14px] flex items-center justify-center mb-5 bg-[linear-gradient(135deg,#dde8f5,#c8d9f0)]">
+              <svg
+                width="28"
+                height="28"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#2a5fa0"
+                strokeWidth="1.8"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <rect x="1" y="3" width="15" height="13" />
+                <polygon points="16 8 20 8 23 11 23 16 16 16 16 8" />
+                <circle cx="5.5" cy="18.5" r="2.5" />
+                <circle cx="18.5" cy="18.5" r="2.5" />
+              </svg>
+            </div>
+            <h3 className="text-[17px] font-bold text-[#2c1a0e] mb-2 tracking-[-0.2px] font-serif">
+              Fast & Reliable Delivery
+            </h3>
+            <p className="text-[14px] text-[#7a5c44] leading-[1.6] m-0">
+              Hot and fresh at your door — timely delivery you can count on
+              every time.
+            </p>
+          </div>
+
+          {/* Card 5 — Hygienic Preparation (row 2, normal) */}
+          <div className="group relative bg-white rounded-[18px] pt-8 px-[26px] pb-7 shadow-[0_4px_18px_rgba(100,50,20,0.08)] hover:shadow-[0_12px_36px_rgba(100,50,20,0.15)] transition-all ease-in-out hover:-translate-y-[7px] cursor-default  [@media(max-width:900px)]:!mt-0">
+            <div className="w-[58px] h-[58px] rounded-[14px] flex items-center justify-center mb-5 bg-[linear-gradient(135deg,#fde8d0,#fbd5b5)]">
+              <svg
+                width="28"
+                height="28"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#a05c20"
+                strokeWidth="1.8"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                <polyline points="9 22 9 12 15 12 15 22" />
+              </svg>
+            </div>
+            <h3 className="text-[17px] font-bold text-[#2c1a0e] mb-2 tracking-[-0.2px] font-serif">
+              Hygienic Preparation
+            </h3>
+            <p className="text-[14px] text-[#7a5c44] leading-[1.6] m-0">
+              FSSAI-compliant kitchen with strict cleanliness protocols at every
+              step.
+            </p>
+          </div>
+
+          {/* Card 6 — Loved by Customers (row 2, elevated) */}
+          <div className="group relative bg-white rounded-[18px] pt-8 px-[26px] pb-7 shadow-[0_4px_18px_rgba(100,50,20,0.08)] hover:shadow-[0_12px_36px_rgba(100,50,20,0.15)] transition-all ease-in-out hover:-translate-y-[7px] cursor-default  [@media(max-width:900px)]:!mt-0">
+            <div className="w-[58px] h-[58px] rounded-[14px] flex items-center justify-center mb-5 bg-[linear-gradient(135deg,#f0e0f5,#e2c8ed)]">
+              <svg
+                width="28"
+                height="28"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#7a3a9a"
+                strokeWidth="1.8"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+              </svg>
+            </div>
+            <h3 className="text-[17px] font-bold text-[#2c1a0e] mb-2 tracking-[-0.2px] font-serif">
+              Loved by Customers
+            </h3>
+            <p className="text-[14px] text-[#7a5c44] leading-[1.6] m-0">
+              Over 500+ happy reviews — our regulars keep coming back for more.
+            </p>
+          </div>
+        </div>
+      </div>
+
       {/* CTA section */}
       <section className="bg-white bg-[url('/images/swirl.png')]">
         <section className="overflow-hidden bg-[url(/images/cta-cake-bg-3.png)] pt-40 bg-center sm:grid sm:grid-cols-2 sm:items-center">
           <div className="p-8 md:p-12 lg:px-16 lg:py-24">
             <div className="mx-auto max-w-xl text-center ltr:sm:text-left rtl:sm:text-right">
               <h2 className="!text-4xl font-semibold mb-5 text-gray-900 pt-60 md:text-3xl">
-                Turn Your Passion for <span className="text-pbrown">Baking</span> Into{" "}
+                Turn Your Passion for{" "}
+                <span className="text-pbrown">Baking</span> Into{" "}
                 <span className="text-pbrown">Perfection</span>
               </h2>
 
               <p className="hidden text-xl mb-5 lg:w-100 text-gray-800 md:mt-4 md:block">
-                Join our academy to turn your home baking into professional mastery!
+                Join our academy to turn your home baking into professional
+                mastery!
               </p>
 
               <div className="mt-4 flex md:justify-start justify-center items-center md:mt-8">
@@ -401,17 +591,21 @@ function About() {
                 Recognized Excellence
               </h3>
               <p className="text-lg text-black/80 leading-relaxed">
-                Our commitment to quality craftsmanship and exceptional customer service
-                has been recognized by industry leaders and our community. These awards
-                reflect our dedication to traditional baking methods and innovative
-                approaches to creating memorable experiences.
+                Our commitment to quality craftsmanship and exceptional customer
+                service has been recognized by industry leaders and our
+                community. These awards reflect our dedication to traditional
+                baking methods and innovative approaches to creating memorable
+                experiences.
               </p>
 
               <div className="space-y-4 mt-7 transition-all duration-200">
                 <div className="bg-white shadow-lg rounded-lg p-4 flex items-start gap-4">
                   {/* Award icon */}
                   <div className="w-8 h-8 new-primary-text flex items-center justify-center flex-shrink-0 mt-1">
-                    <svg className="w-full h-full fill-sbrown" viewBox="0 0 24 24">
+                    <svg
+                      className="w-full h-full fill-sbrown"
+                      viewBox="0 0 24 24"
+                    >
                       <path d="M12 2L15.09 8.26L22 9L17 14L18.18 21L12 17.77L5.82 21L7 14L2 9L8.91 8.26L12 2Z" />
                     </svg>
                   </div>
@@ -435,8 +629,8 @@ function About() {
             Sweet words from our customers
           </h2>
           <p className="text-xl text-gray-800/80 text-center">
-            Discover what makes our bakery special through the heartfelt stories of our
-            beloved customers
+            Discover what makes our bakery special through the heartfelt stories
+            of our beloved customers
           </p>
         </div>
 

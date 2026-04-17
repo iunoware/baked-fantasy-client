@@ -146,6 +146,10 @@ export const AuthProvider = ({ children }) => {
   // Modal Shortcuts
   const openLoginModal = useCallback(() => setActiveModal("login"), []);
   const openRegisterModal = useCallback(() => setActiveModal("register"), []);
+
+  const openRegisterFromLogin = useCallback(() => setActiveModal("register"), []);
+  const openLoginFromRegister = useCallback(() => setActiveModal("login"), []);
+
   const closeModals = useCallback(() => {
     setActiveModal(null);
     pendingActionRef.current = null;
@@ -163,6 +167,8 @@ export const AuthProvider = ({ children }) => {
         showProfileModal: activeModal === "profile",
         openLoginModal,
         openRegisterModal,
+        openLoginFromRegister,
+        openRegisterFromLogin,
         closeLoginModal: closeModals,
         closeRegisterModal: closeModals,
         setShowProfileModal: (val) => setActiveModal(val ? "profile" : null),

@@ -8,7 +8,6 @@ import {
   Navigate,
   useNavigate,
 } from "react-router-dom";
-import { useEffect } from "react";
 import { Toaster } from "react-hot-toast";
 import EnquiryBtn from "./components/EnquiryBtn.jsx";
 import Home from "../src/pages/Home.jsx";
@@ -40,8 +39,6 @@ import Sidebar from "./components/Sidebar.jsx";
 import EssentialsAdmin from "./pages/adminPanel/essentials/EssentialsAdmin.jsx";
 import CakesAdmin from "./pages/adminPanel/cakes/CakesAdmin.jsx";
 import OrdersAdmin from "./pages/adminPanel/OrdersAdmin.jsx";
-import PromoCode from "./pages/adminPanel/PromoCode.jsx";
-import Announcements from "./pages/adminPanel/Announcements.jsx";
 import BannerAdmin from "./pages/adminPanel/BannerAdmin.jsx";
 import IndividualCakesAdmin from "./pages/adminPanel/cakes/IndividualCakesAdmin.jsx";
 import SettingsAdmin from "./pages/adminPanel/SettingsAdmin.jsx";
@@ -101,17 +98,11 @@ function AppContent() {
         {/* products */}
         <Route path="/products/:categoryName" element={<SpecificCategory />} />
         <Route path="/products/all-products" element={<AllProducts />} />
-        <Route
-          path="/products/:categoryName/:productId"
-          element={<ProductDetail />}
-        />
+        <Route path="/products/:categoryName/:productId" element={<ProductDetail />} />
         {/* products */}
 
         {/* essentials */}
-        <Route
-          path="/essentials/:categoryName"
-          element={<EssSpeciCategory />}
-        />
+        <Route path="/essentials/:categoryName" element={<EssSpeciCategory />} />
         <Route path="/essentials/all-products" element={<AllEssentials />} />
         <Route
           path="/essential/:categoryName/:productId"
@@ -123,10 +114,7 @@ function AppContent() {
         <Route path="/courses" element={<Courses />} />
         <Route path="/courses/online-course" element={<OnlineCourse />} />
         <Route path="/courses/my-learning/" element={<MyLearning />} />
-        <Route
-          path="/course/my-learning/:courseId"
-          element={<OnlineCourseDetails />}
-        />
+        <Route path="/course/my-learning/:courseId" element={<OnlineCourseDetails />} />
         <Route path="/courses/offline-course" element={<OfflineCourse />} />
         <Route path="/contact" element={<Contact />} />
         <Route
@@ -189,19 +177,11 @@ function AppContent() {
             </ProtectedAdminRoute>
           }
         />
-        {/* <Route
+        <Route
           path="/admin/banner"
           element={
             <ProtectedAdminRoute>
               <BannerAdmin />
-            </ProtectedAdminRoute>
-          }
-        /> */}
-        <Route
-          path="/admin/announcements"
-          element={
-            <ProtectedAdminRoute>
-              <Announcements />
             </ProtectedAdminRoute>
           }
         />
