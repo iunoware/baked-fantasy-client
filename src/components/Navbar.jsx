@@ -1,10 +1,5 @@
-import React, {
-  useCallback,
-  useLayoutEffect,
-  useRef,
-  useState,
-  useEffect,
-} from "react";
+/* eslint-disable no-unused-vars */
+import React, { useCallback, useLayoutEffect, useRef, useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { Menu, X, Search, ShoppingCart, User, LogOut } from "lucide-react";
 import { gsap } from "gsap";
@@ -59,11 +54,7 @@ export const StaggeredMenu = ({
     const isAnyModalOpen = isLoginModalOpen || isRegisterModalOpen || showProfileModal;
     if (isAnyModalOpen) {
       document.body.style.setProperty("overflow", "hidden", "important");
-      document.documentElement.style.setProperty(
-        "overflow",
-        "hidden",
-        "important",
-      );
+      document.documentElement.style.setProperty("overflow", "hidden", "important");
     } else {
       document.body.style.removeProperty("overflow");
       document.documentElement.style.removeProperty("overflow");
@@ -95,6 +86,8 @@ export const StaggeredMenu = ({
   // };
 
   // const textColor = chroma(menu ).luminance() < 0.5 ? "#FFFFFF" : "#000000";
+
+  const dropdownRef = useRef(null);
 
   const panelRef = useRef(null);
   const preLayersRef = useRef(null);
@@ -169,15 +162,7 @@ export const StaggeredMenu = ({
       const icon = iconRef.current;
       const textInner = textInnerRef.current;
 
-      if (
-        !panel ||
-        !topLine ||
-        !middleLine ||
-        !bottomLine ||
-        !icon ||
-        !textInner
-      )
-        return;
+      if (!panel || !topLine || !middleLine || !bottomLine || !icon || !textInner) return;
 
       let preLayers = [];
       if (preContainer) {
@@ -351,22 +336,16 @@ export const StaggeredMenu = ({
       ease: "power3.in",
       overwrite: "auto",
       onComplete: () => {
-        const itemEls = Array.from(
-          panel.querySelectorAll(".sm-panel-itemLabel"),
-        );
+        const itemEls = Array.from(panel.querySelectorAll(".sm-panel-itemLabel"));
         if (itemEls.length) gsap.set(itemEls, { yPercent: 140, rotate: 10 });
 
         const numberEls = Array.from(
-          panel.querySelectorAll(
-            ".sm-panel-list[data-numbering] .sm-panel-item",
-          ),
+          panel.querySelectorAll(".sm-panel-list[data-numbering] .sm-panel-item"),
         );
         if (numberEls.length) gsap.set(numberEls, { ["--sm-num-opacity"]: 0 });
 
         const socialTitle = panel.querySelector(".sm-socials-title");
-        const socialLinks = Array.from(
-          panel.querySelectorAll(".sm-socials-link"),
-        );
+        const socialLinks = Array.from(panel.querySelectorAll(".sm-socials-link"));
         if (socialTitle) gsap.set(socialTitle, { opacity: 0 });
         if (socialLinks.length) gsap.set(socialLinks, { y: 25, opacity: 0 });
 
@@ -424,9 +403,7 @@ export const StaggeredMenu = ({
   React.useEffect(() => {
     if (toggleBtnRef.current) {
       if (changeMenuColorOnOpen) {
-        const targetColor = openRef.current
-          ? openMenuButtonColor
-          : menuButtonColor;
+        const targetColor = openRef.current ? openMenuButtonColor : menuButtonColor;
         gsap.set(toggleBtnRef.current, { color: targetColor });
       } else {
         gsap.set(toggleBtnRef.current, { color: menuButtonColor });
@@ -502,6 +479,21 @@ export const StaggeredMenu = ({
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  // profile dropdown closes while clicking somewhere else
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsDropdownOpen(false);
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const handleLogoutClick = () => {
@@ -553,9 +545,7 @@ export const StaggeredMenu = ({
         >
           {(() => {
             const raw =
-              colors && colors.length
-                ? colors.slice(0, 4)
-                : ["#003153", "#fc3500"];
+              colors && colors.length ? colors.slice(0, 4) : ["#003153", "#fc3500"];
             let arr = [...raw];
             if (arr.length >= 3) {
               const mid = Math.floor(arr.length / 2);
@@ -664,7 +654,7 @@ export const StaggeredMenu = ({
                     )}
                   </Link>
                 </div>
-                <div className="relative">
+                <div className="relative" ref={dropdownRef}>
                   <button
                     className=" px-5 py-2.5 cursor-pointer text-sm font-medium text-[#40200d] flex items-center gap-2"
                     onClick={() => {
@@ -729,10 +719,7 @@ export const StaggeredMenu = ({
                   className="sm-toggle-textInner flex flex-col leading-none"
                 >
                   {textLines.map((l, i) => (
-                    <span
-                      className="sm-toggle-line menu block leading-none"
-                      key={i}
-                    >
+                    <span className="sm-toggle-line menu block leading-none" key={i}>
                       {l}
                     </span>
                   ))}
@@ -763,12 +750,9 @@ export const StaggeredMenu = ({
 
         {/* mobile navbar */}
         <nav className="block md:hidden shadow-sm fixed top-0 left-0 w-full h-fit pb-1 bg-white/95 backdrop-blur-md z-[100] pointer-events-auto border-b border-gray-100">
-          <div className="flex justify-between items-center py-2 px-4 px-2">
+          <div className="flex justify-between items-center py-2 px-4">
             <div className="logo flex items-center">
-              <Link
-                to="/"
-                className="new-primary-text text-lg font-bold brand-name"
-              >
+              <Link to="/" className="new-primary-text text-lg font-bold brand-name">
                 <img
                   src="/images/baked-fantasy-logo.png"
                   className="h-12 w-auto object-cover object-center"

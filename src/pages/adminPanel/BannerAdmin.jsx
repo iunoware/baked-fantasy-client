@@ -45,11 +45,13 @@ function BannerAdmin() {
     }
   }
 
+  // get banner
   useEffect(() => {
     const fetchBaner = async () => {
       try {
         const res = await axios.get("http://localhost:5000/banner");
         setBanner(res.data[0]);
+        console.log("banner data: ", res.data[0]);
       } catch (error) {
         console.error("Error Fetching Banner", error);
       }
@@ -59,11 +61,12 @@ function BannerAdmin() {
 
   useEffect(() => {
     if (banner?.active !== undefined) {
-      console.log("banner.active value:", banner.active, "type:", typeof banner.active);
+      // console.log("banner.active value:", banner.active, "type:", typeof banner.active);
       setActive(banner.active === true || banner.active === "true");
     }
   }, [banner]);
 
+  // patch banner
   useEffect(() => {
     if (!banner?.endDate) return;
 
@@ -105,40 +108,50 @@ function BannerAdmin() {
           </div>
           <form className="mt-4 flex flex-col gap-3" onSubmit={postCategory}>
             {/* title */}
+            <p className="text-sm text-gray-700">Title:</p>
             <div className="flex gap-3 justify-between items-center">
               <input
                 type="text"
                 name="bannerTitle"
                 // id="bannerTitle"
-                className="ring ring-gray-500 placeholder:text-black text-black rounded-lg p-2 w-full"
-                placeholder="Title"
+                className="ring ring-gray-500 text-black rounded-lg p-2 w-full"
+                placeholder={"title"}
+                defaultValue={banner?.title || ""}
               />
             </div>
 
             {/* Sub heading */}
+            <p className="text-sm text-gray-700">Sub heading:</p>
             <div className="flex gap-3 justify-between items-center">
               <input
                 type="text"
                 name="bannerSubject"
                 // id="bannerSubject"
-                className="ring ring-gray-500 placeholder:text-black text-black rounded-lg p-2 w-full"
+                className="ring ring-gray-500 ext-black rounded-lg p-2 w-full"
                 placeholder="Subject"
+                defaultValue={banner?.subject || ""}
               />
             </div>
 
             {/* Date */}
+            <p className="text-sm text-gray-700">Date:</p>
             <div className="flex gap-3 border-1 rounded-lg p-2 border-gray-500 justify-between items-center">
-              <label htmlFor="lastDate">LastDate:</label>
+              {/* <label className="text-gray-400" htmlFor="lastDate">
+                LastDate:
+              </label> */}
               <input
                 type="date"
                 name="lastDate"
                 id="lastDate"
                 className=""
                 placeholder="Enter Last Date for the Banner"
+                defaultValue={banner?.endDate ? banner.endDate.split("T")[0] : ""}
+                min={new Date().toISOString().split("T")[0]}
               />
             </div>
 
             {/* image */}
+            <p className="text-sm text-gray-700">Image:</p>
             <div className="flex gap-3 justify-between items-center">
               <input
                 type="file"
@@ -171,7 +184,7 @@ function BannerAdmin() {
         </div>
       </div>
 
-      <div className="lg:pl-30 pl-20 pt-10 pr-10">
+      <div className="lg:pl-30 pl-20 pt-10 pr-5">
         {/* heading */}
         <div className="flex flex-row gap-5 md:gap-0 justify-between">
           <div>
