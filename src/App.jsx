@@ -59,8 +59,8 @@ import { useAuth } from "./context/AuthContext.jsx";
 import { getCookie, removeCookie } from "./utils/cookieUtils";
 
 function ProtectedAdminRoute({ children }) {
-  const isAdmin = getCookie("isAdmin") === "true";
-  if (!isAdmin) {
+  const token = sessionStorage.getItem("token");
+  if (!token) {
     return <Navigate to="/admin-login" replace />;
   }
   return children;
