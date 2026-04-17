@@ -1,7 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+// /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState, useRef } from "react";
-import axios from "axios";
 import { useParams, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
   ArrowLeft,
   Users,
@@ -14,6 +15,8 @@ import {
 } from "lucide-react";
 import "plyr/dist/plyr.css";
 import Plyr from "plyr";
+import { useAuth } from "../context/AuthContext";
+import api from "../api";
 
 const url = "http://localhost:5000";
 
@@ -38,9 +41,8 @@ function StarPicker({ value, onChange }) {
 }
 
 function ReviewSection({ courseId }) {
-  const token = localStorage.getItem("token");
-  const currentUserId = localStorage.getItem("userId");
-  // const userData = localStorage.getItem("user");
+  const { user, isLoggedIn } = useAuth();
+  const currentUserId = user?._id;
 
   const [reviews, setReviews] = useState([]);
   const [myReview, setMyReview] = useState(null);
@@ -53,7 +55,9 @@ function ReviewSection({ courseId }) {
   useEffect(() => {
     async function fetchReviews() {
       try {
-        const res = await axios.get(`${url}/course/${courseId}`);
+        // const res = await api.get(`${url}/course/${courseId}`);
+        const res = await api.get(`/course/${courseId}`);
+
         const allReviews = res.data.reviews || [];
         setReviews(allReviews);
         const mine = allReviews.find(
@@ -69,30 +73,21 @@ function ReviewSection({ courseId }) {
       }
     }
     fetchReviews();
-  }, [courseId]);
-
-  // useEffect(() => {
-  //   async function fetchUser() {
-  //     try {
-
-  //     } catch (error) {
-  //       console.error(error);
-  //     }
-  //   }
-
-  //   fetchUser();
-  // }, [currentUserId]);
+  }, [courseId, currentUserId]);
 
   async function submitReview() {
     if (!rating) return setError("Please select a rating");
     setLoading(true);
     setError("");
     try {
-      const res = await axios.post(
-        `${url}/course/${courseId}/review`,
-        { rating, comment },
-        { headers: { Authorization: `Bearer ${token}` } },
-      );
+      // const res = await api.post(`${url}/course/${courseId}/review`, {
+      //   rating,
+      //   comment,
+      // });
+      const res = await api.post(`/course/${courseId}/review`, {
+        rating,
+        comment,
+      });
       const updated = res.data.course.reviews;
       setReviews(updated);
       setMyReview(
@@ -100,6 +95,7 @@ function ReviewSection({ courseId }) {
           (r) => r.student === currentUserId || r.student?._id === currentUserId,
         ),
       );
+      window.location.reload();
     } catch (err) {
       setError(err.response?.data?.msg || "Something went wrong");
     } finally {
@@ -112,11 +108,14 @@ function ReviewSection({ courseId }) {
     setLoading(true);
     setError("");
     try {
-      const res = await axios.patch(
-        `${url}/course/${courseId}/review/${myReview._id}`,
-        { rating, comment },
-        { headers: { Authorization: `Bearer ${token}` } },
-      );
+      // const res = await api.patch(`${url}/course/${courseId}/review/${myReview._id}`, {
+      //   rating,
+      //   comment,
+      // });
+      const res = await api.patch(`/course/${courseId}/review/${myReview._id}`, {
+        rating,
+        comment,
+      });
       const updated = res.data.course.reviews;
       setReviews(updated);
       setMyReview(
@@ -125,6 +124,7 @@ function ReviewSection({ courseId }) {
         ),
       );
       setEditing(false);
+      window.location.reload();
     } catch (err) {
       setError(err.response?.data?.msg || "Something went wrong");
     } finally {
@@ -136,13 +136,14 @@ function ReviewSection({ courseId }) {
     if (!window.confirm("Delete your review?")) return;
     setLoading(true);
     try {
-      await axios.delete(`${url}/course/${courseId}/review/${myReview._id}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      // await api.delete(`${url}/course/${courseId}/review/${myReview._id}`);
+      await api.delete(`/course/${courseId}/review/${myReview._id}`);
+
       setReviews((prev) => prev.filter((r) => r._id !== myReview._id));
       setMyReview(null);
       setRating(0);
       setComment("");
+      window.location.reload();
     } catch (err) {
       setError(err.response?.data?.msg || "Something went wrong");
     } finally {
@@ -156,8 +157,7 @@ function ReviewSection({ courseId }) {
     <div className="mt-10">
       <h2 className="text-2xl font-bold mb-6">Student Reviews</h2>
 
-      {/* enter review box */}
-      {token && showForm && (
+      {isLoggedIn && showForm && (
         <div className="bg-white rounded-xl shadow p-5 mb-8">
           <h3 className="font-semibold text-lg mb-3">
             {editing ? "Edit your review" : "Leave a review"}
@@ -213,14 +213,13 @@ function ReviewSection({ courseId }) {
             <div
               key={r._id}
               className={`bg-white rounded-xl shadow-md p-4 ${
-                isOwn ? "border-l-4 border-pink-500" : ""
+                isOwn ? "border-l-4 border-amber-800" : ""
               }`}
             >
               <div className="flex justify-between items-start">
                 <div className="">
                   <div className="flex justify-start items-center gap-3 mb-5">
                     <div className="bg-gray-200 h-8 w-8 rounded-full flex justify-center items-center">
-                      {/* {r.student?.name.charAt(0)} */}
                       {studentInitial}
                     </div>
                     <p>{r.student?.name || "Anonymous"}</p>
@@ -243,7 +242,11 @@ function ReviewSection({ courseId }) {
                   {r.comment && <p className="text-gray-700 text-sm mt-1">{r.comment}</p>}
 
                   <p className="text-xs text-gray-400 mt-2">
-                    {new Date(r.createdAt).toLocaleDateString()}
+                    {new Date(r.createdAt).toLocaleDateString("en-GB", {
+                      day: "2-digit",
+                      month: "2-digit",
+                      year: "numeric",
+                    })}
                   </p>
                 </div>
                 {isOwn && !editing && (
@@ -273,8 +276,8 @@ function ReviewSection({ courseId }) {
 
 function OnlineCourseDetails() {
   const { courseId } = useParams();
-
-  const token = localStorage.getItem("token");
+  const { user, isLoggedIn, isLoadingUser } = useAuth();
+  const navigate = useNavigate();
 
   const [course, setCourse] = useState(null);
   const [visibleSection, setVisibleSection] = useState(null);
@@ -284,13 +287,32 @@ function OnlineCourseDetails() {
   const videoRef = useRef(null);
   const playerRef = useRef(null);
 
+  // Guard: check if user has purchased this course
+  useEffect(() => {
+    if (isLoadingUser) return;
+
+    if (!isLoggedIn) {
+      navigate("/login");
+      return;
+    }
+
+    const hasPurchased = user?.purchasedCourses?.some(
+      (c) => c.courseId?.toString() === courseId,
+    );
+
+    if (!hasPurchased) {
+      navigate("/courses"); // redirect if not purchased
+    }
+  }, [user, isLoggedIn, courseId, isLoadingUser]);
+
   // fetch course
   useEffect(() => {
     async function fetchCourse() {
       try {
-        const res = await axios.get(`${url}/course/${courseId}`);
+        // const res = await api.get(`${url}/course/${courseId}`);
+        const res = await api.get(`/course/${courseId}`);
+
         const data = res.data;
-        // setCourse(res.data);
 
         const sorted = {
           ...data,
@@ -306,9 +328,6 @@ function OnlineCourseDetails() {
         if (sorted.sections.length > 0 && sorted.sections[0].lessons.length > 0) {
           setCurrentLesson(sorted.sections[0].lessons[0]);
         }
-        // if (res.data.sections.length > 0) {
-        //   setCurrentLesson(res.data.sections[0].lessons[0]);
-        // }
       } catch (err) {
         console.error(err.message);
       }
@@ -316,52 +335,70 @@ function OnlineCourseDetails() {
     fetchCourse();
   }, [courseId]);
 
-  // scroll to active lesson
-  // useEffect(() => {
-  //   const active = document.getElementById(currentLesson?._id);
-  //   active?.scrollIntoView({ behavior: "smooth", block: "center" });
-  // }, [currentLesson]);
-
+  // old video revoke code
   // useEffect(() => {
   //   if (!videoRef.current || !currentLesson) return;
 
-  //   if (!playerRef.current) {
-  //     // First time: initialize Plyr
-  //     playerRef.current = new Plyr(videoRef.current, {
-  //       ratio: "16:9",
-  //       controls: [
-  //         "play-large",
-  //         "play",
-  //         "progress",
-  //         "current-time",
-  //         "mute",
-  //         "volume",
-  //         "settings",
-  //         "fullscreen",
-  //       ],
-  //     });
-  //   } else {
-  //     // Subsequent times: just swap the source
-  //     playerRef.current.source = {
-  //       type: "video",
-  //       // sources: [{ src: `${url}${currentLesson.videoUrl}`, type: "video/mp4" }],
-  //       sources: [
-  //         {
-  //           src: `${url}/video/${currentLesson.videoUrl}?token=${token}`,
-  //           type: "video/mp4",
+  //   let blobUrl = null;
+
+  //   async function loadVideo() {
+  //     setVideoLoading(true);
+  //     try {
+  //       const res = await fetch(`${url}/video/${currentLesson.videoUrl}`, {
+  //         credentials: "include",
+  //       });
+
+  //       if (!res.ok) throw new Error("Unauthorized");
+
+  //       const blob = await res.blob();
+  //       blobUrl = URL.createObjectURL(blob);
+
+  //       if (!playerRef.current) {
+  //         playerRef.current = new Plyr(videoRef.current, {
+  //           ratio: "16:9",
+  //           controls: [
+  //             "play-large",
+  //             "play",
+  //             "progress",
+  //             "current-time",
+  //             "mute",
+  //             "volume",
+  //             "settings",
+  //             "fullscreen",
+  //           ],
+  //         });
+  //       }
+
+  //       playerRef.current.source = {
+  //         type: "video",
+  //         sources: [{ src: blobUrl, type: "video/mp4" }],
+  //       };
+
+  //       videoRef.current.addEventListener(
+  //         "loadeddata",
+  //         () => {
+  //           if (blobUrl) {
+  //             URL.revokeObjectURL(blobUrl);
+  //             blobUrl = null;
+  //           }
   //         },
-  //       ],
-  //     };
+  //         { once: true },
+  //       );
+  //     } catch (err) {
+  //       console.error("Video load error:", err);
+  //     } finally {
+  //       setVideoLoading(false);
+  //     }
   //   }
 
+  //   loadVideo();
+
   //   return () => {
-  //     // Only destroy when the component fully unmounts
-  //     // (don't destroy on every lesson change)
+  //     if (blobUrl) URL.revokeObjectURL(blobUrl);
   //   };
   // }, [currentLesson]);
 
-  // OnlineCourseDetails.jsx
-
+  // new video revoke code - only revoke when the lesson changes or component unmounts
   useEffect(() => {
     if (!videoRef.current || !currentLesson) return;
 
@@ -371,9 +408,7 @@ function OnlineCourseDetails() {
       setVideoLoading(true);
       try {
         const res = await fetch(`${url}/video/${currentLesson.videoUrl}`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+          credentials: "include",
         });
 
         if (!res.ok) throw new Error("Unauthorized");
@@ -401,21 +436,6 @@ function OnlineCourseDetails() {
           type: "video",
           sources: [{ src: blobUrl, type: "video/mp4" }],
         };
-
-        // URL.revokeObjectURL(blobUrl);
-        // blobUrl = null;
-
-        // ✅ Wait for the video to actually load, THEN revoke
-        videoRef.current.addEventListener(
-          "loadeddata",
-          () => {
-            if (blobUrl) {
-              URL.revokeObjectURL(blobUrl);
-              blobUrl = null;
-            }
-          },
-          { once: true },
-        );
       } catch (err) {
         console.error("Video load error:", err);
       } finally {
@@ -425,13 +445,29 @@ function OnlineCourseDetails() {
 
     loadVideo();
 
-    // Revoke previous blob URL to free memory
+    // return () => {
+    //   if (blobUrl) {
+    //     URL.revokeObjectURL(blobUrl);
+    //     blobUrl = null;
+    //   }
+    // };
+
+    const revokeTimer = setTimeout(() => {
+      if (blobUrl) {
+        URL.revokeObjectURL(blobUrl);
+        blobUrl = null;
+      }
+    }, 10000);
+
     return () => {
-      if (blobUrl) URL.revokeObjectURL(blobUrl);
+      clearTimeout(revokeTimer);
+      if (blobUrl) {
+        URL.revokeObjectURL(blobUrl);
+        blobUrl = null;
+      }
     };
   }, [currentLesson]);
 
-  // Cleanup Plyr only on unmount
   useEffect(() => {
     return () => {
       playerRef.current?.destroy();
@@ -446,7 +482,6 @@ function OnlineCourseDetails() {
 
   return (
     <div className="bg pt-20 relative">
-      {/* HEADER */}
       <div className="py-12 px-5 border-b border-gray-400 ">
         <Link
           to="/courses/my-learning"
@@ -470,11 +505,9 @@ function OnlineCourseDetails() {
         </div>
       </div>
 
-      {/* MAIN */}
       <div className="grid lg:grid-cols-4 gap-6 px-8 py-10 ">
-        {/* VIDEO */}
+        {/* video */}
         <div className="lg:col-span-3 order-1 lg:order-1">
-          {/* current video */}
           {currentLesson ? (
             <div className="relative">
               {videoLoading && (
@@ -483,7 +516,10 @@ function OnlineCourseDetails() {
                 </div>
               )}
 
-              <div className="relative rounded-xl overflow-hidden shadow-xl bg-black">
+              <div
+                className="relative rounded-xl overflow-hidden shadow-xl bg-black"
+                onContextMenu={(e) => e.preventDefault()}
+              >
                 <video
                   ref={videoRef}
                   className="w-full h-[400px] plyr-react plyr--full-ui"
@@ -500,16 +536,13 @@ function OnlineCourseDetails() {
             </div>
           )}
 
-          {/* Lesson details */}
           <div className="mt-6">
             <h2 className="text-2xl font-bold">{currentLesson?.title}</h2>
             <p className="text-gray-600 mt-2">Duration: {currentLesson?.duration}</p>
           </div>
         </div>
 
-        {/* SIDEBAR */}
         <div className="sticky top-20 h-fit order-2 lg:order-2">
-          {/* <div className="w-[320px] sticky top-20 h-fit max-h-[80vh] overflow-y-auto"> */}
           <h2 className="text-xl font-bold mb-4">Course content</h2>
 
           {course.sections.map((section, index) => (
@@ -519,7 +552,6 @@ function OnlineCourseDetails() {
               onClick={() => setVisibleSection(visibleSection === index ? null : index)}
             >
               <div className="flex justify-between items-center">
-                {/* <h3>Section {index + 1}:</h3> */}
                 <h3 className="font-semibold">{section.title}</h3>
                 <p className="text-sm text-gray-500">{section.lessons.length} lessons</p>
                 <ChevronDown

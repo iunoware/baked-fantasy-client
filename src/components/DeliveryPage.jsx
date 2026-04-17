@@ -82,12 +82,6 @@ Please assist with delivery.
         return;
       }
 
-      const token = localStorage.getItem("token");
-      if (!token || token === "null") {
-        alert("Please login to save your address.");
-        return;
-      }
-
       const res = await api.post("/address", {
         label: newAddress.type || "Home",
         fullAddress: newAddress.address,
@@ -126,9 +120,6 @@ Please assist with delivery.
     setSelectedAddress(address);
 
     try {
-      const token = localStorage.getItem("token");
-      if (!token || token === "null") return;
-
       const addressId = address._id || address.id;
       if (!addressId) return;
 
@@ -203,9 +194,6 @@ Please assist with delivery.
   useEffect(() => {
     const fetchAddress = async () => {
       try {
-        const token = localStorage.getItem("token");
-        if (!token || token === "null" || token === "undefined") return;
-
         const res = await api.get("/address");
         const fetchedAddresses = res.data;
         if (Array.isArray(fetchedAddresses)) {

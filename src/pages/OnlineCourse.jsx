@@ -1,39 +1,56 @@
 import OnlineCourseCard from "@/components/OnlineCourseCard";
-import axios from "axios";
+// import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import Heading from "../components/Heading.jsx";
 import Loading from "../components/Loading.jsx";
+import { useAuth } from "../context/AuthContext";
+import api from "@/api.js";
 
-// let coursePrices = [];
-
-// export function getCoursePrices() {
-//   return coursePrices;
-// }
-
-const url = `http://localhost:5000`;
+// const url = `http://localhost:5000`;
 
 function OnlineCourse() {
   let [courses, setCourses] = useState([]);
-  const [purchasedIds, setPurchasedIds] = useState(new Set());
+  // const [purchasedIds, setPurchasedIds] = useState(new Set());
+  const { user } = useAuth();
+
+  // old code
+  // useEffect(() => {
+  //   // const ids = new Set(user?.purchasedCourses?.map((c) => c._id || c.courseId) || []);
+  //   // const ids = new Set(user?.purchasedCourses?.map((c) => c.courseId) || []);
+  //   const ids = new Set(user?.purchasedCourses?.map((c) => c.courseId?.toString()) || []);
+
+  //   setPurchasedIds(ids);
+
+  //   async function fetchCourse() {
+  //     try {
+  //       // const response = await axios.get(`${url}/course`);
+  //       const response = await api.get("/course");
+  //       setCourses(response.data.courses);
+  //     } catch (error) {
+  //       console.error(error.message);
+  //     }
+  //   }
+  //   fetchCourse();
+  // }, []);
+
+  // new code:
+  const purchasedIds = new Set(
+    user?.purchasedCourses?.map((c) => c.courseId?.toString()) || [],
+  );
 
   useEffect(() => {
-    const user = JSON.parse(localStorage.getItem("user") || "null");
-    const ids = new Set(user?.purchasedCourses?.map((c) => c.courseId) || []);
-    setPurchasedIds(ids);
-    // console.log(user);
-
     async function fetchCourse() {
       try {
-        const response = await axios.get(`${url}/course`);
+        const response = await api.get("/course");
         setCourses(response.data.courses);
       } catch (error) {
         console.error(error.message);
       }
     }
     fetchCourse();
-  }, []);
+  }, []); // runs once
 
   return (
     <div className="bg md:pt-20 pt-40">
@@ -55,7 +72,7 @@ function OnlineCourse() {
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 lg:gap-8">
         {courses.length > 0 ? (
           courses
-            .filter((course) => !purchasedIds.has(course._id))
+            .filter((course) => !purchasedIds.has(course._id?.toString()))
             .map((course, index) => {
               return (
                 <div key={index}>

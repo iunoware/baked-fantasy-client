@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+// import axios from "axios";
 import { toast } from "react-hot-toast";
 import { Link } from "react-router-dom";
 import { Trash2, SquarePen, X } from "lucide-react";
+import api from "@/api";
 
 function CourseCardAdmin({ course, onEdit, onDelete }) {
   return (
@@ -94,7 +95,8 @@ export default function CourseAdmin() {
 
   const fetchCourses = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/course");
+      // const response = await axios.get("http://localhost:5000/course");
+      const response = await api.get("/course");
       setCourses(response.data?.courses || response.data || []);
     } catch (error) {
       console.error(error);
@@ -144,12 +146,13 @@ export default function CourseAdmin() {
     formData.append("thumbnail", thumbnail);
 
     try {
-      const token = sessionStorage.getItem("token");
-      await axios.post("http://localhost:5000/course", formData, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      // const token = sessionStorage.getItem("token");
+      // await axios.post("http://localhost:5000/course", formData, {
+      //   headers: {
+      //     Authorization: `Bearer ${token}`,
+      //   },
+      // });
+      await api.post("/course", formData);
       toast.success("Course added");
       setIsAddModalOpen(false);
       setTimeout(() => window.location.reload(), 1000);
@@ -192,13 +195,14 @@ export default function CourseAdmin() {
     }
 
     try {
-      const token = sessionStorage.getItem("token");
+      // const token = sessionStorage.getItem("token");
       const courseId = selectedCourse._id || selectedCourse.id;
-      await axios.patch(`http://localhost:5000/course/${courseId}`, formData, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      // await axios.patch(`http://localhost:5000/course/${courseId}`, formData, {
+      //   headers: {
+      //     Authorization: `Bearer ${token}`,
+      //   },
+      // });
+      await api.patch(`/course/${courseId}`, formData);
       // await axios.patch(`http://localhost:5000/course/${courseId}`);
       toast.success("Course updated");
       setIsEditModalOpen(false);
@@ -211,13 +215,14 @@ export default function CourseAdmin() {
 
   const handleDeleteConfirm = async () => {
     try {
-      const token = sessionStorage.getItem("token");
+      // const token = sessionStorage.getItem("token");
       const courseId = selectedCourse._id || selectedCourse.id;
-      await axios.delete(`http://localhost:5000/course/${courseId}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      // await axios.delete(`http://localhost:5000/course/${courseId}`, {
+      //   headers: {
+      //     Authorization: `Bearer ${token}`,
+      //   },
+      // });
+      await api.delete(`/course/${courseId}`);
       toast.success("Course deleted");
       setIsDeleteModalOpen(false);
       setTimeout(() => window.location.reload(), 1000);

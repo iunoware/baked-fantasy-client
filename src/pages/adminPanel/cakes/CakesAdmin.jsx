@@ -164,10 +164,10 @@ function CakesAdmin() {
                   id="category"
                   className="peer sr-only"
                 />
-
+ 
                 <span className="absolute inset-y-0 start-0 m-1 grid size-4 place-content-center rounded-full bg-white text-gray-700 transition-[inset-inline-start] peer-checked:start-6 peer-checked:*:first:hidden *:last:hidden peer-checked:*:last:block">
                   <Check size={10} />
-
+ 
                   <X size={10} />
                 </span>
               </label>
@@ -192,7 +192,9 @@ function CakesAdmin() {
               Cakes and Cookies Categories
             </h1>
 
-            <p className="text-md pt-1">Manage your bakery products' category</p>
+            <p className="text-md pt-1">
+              Manage your bakery products' category
+            </p>
           </div>
           <div>
             <button

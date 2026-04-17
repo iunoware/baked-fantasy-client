@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from "react";
 import { Button } from "./ui/button.jsx";
 import { Input } from "./ui/input.jsx";
@@ -5,15 +6,16 @@ import { Card, CardContent } from "./ui/card.jsx";
 import { useNavigate } from "react-router-dom";
 import { GoogleLogin } from "@react-oauth/google";
 import { Eye, EyeOff, Mail, Lock, X } from "lucide-react";
-import axios from "axios";
+// import axios from "axios";
 import toast from "react-hot-toast";
 import { useAuth } from "@/context/AuthContext.jsx";
+import api from "@/api.js";
 
 function Login({ isOpen, onClose, onOpenRegister }) {
   const { handleLoginSuccess } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [form, setForm] = useState({ email: "", password: "" });
   const [message, setMessage] = useState("");
 
@@ -27,12 +29,13 @@ function Login({ isOpen, onClose, onOpenRegister }) {
   const handleSuccess = async (credentialResponse) => {
     try {
       setIsLoading(true);
-      const res = await axios.post("http://localhost:5000/google-login", {
+
+      const res = await api.post("/google-login", {
         token: credentialResponse.credential,
       });
 
       if (typeof handleLoginSuccess === "function") {
-        handleLoginSuccess(res.data.token, res.data.user);
+        handleLoginSuccess();
       }
     } catch (err) {
       console.error("Google Login failed:", err);
@@ -56,17 +59,17 @@ function Login({ isOpen, onClose, onOpenRegister }) {
     try {
       const { email, password } = form;
 
-      const res = await axios.post("http://localhost:5000/login", {
+      const res = await api.post("/login", {
         email,
         password,
       });
 
-      localStorage.setItem("token", res.data.token);
-      localStorage.setItem("user", JSON.stringify(res.data.user));
+      // localStorage.setItem("token", res.data.token);
+      // localStorage.setItem("user", JSON.stringify(res.data.user));
 
       // Architect Choice: Direct data injection to avoid extra roundtrip immediately
       if (typeof handleLoginSuccess === "function") {
-        handleLoginSuccess(res.data.token, res.data.user);
+        handleLoginSuccess();
       }
     } catch (err) {
       setMessage(err.response?.data?.msg || "Something went wrong");
@@ -83,7 +86,7 @@ function Login({ isOpen, onClose, onOpenRegister }) {
 
     setIsLoading(true);
     try {
-      const res = await axios.post("http://localhost:5000/send-otp", {
+      const res = await api.post("/send-otp", {
         email: forgotEmail,
         type: "reset",
       });
@@ -103,7 +106,7 @@ function Login({ isOpen, onClose, onOpenRegister }) {
 
     setIsLoading(true);
     try {
-      await axios.post("http://localhost:5000/verify-otp", {
+      await api.post("/verify-otp", {
         email: forgotEmail,
         otp,
         type: "reset",
@@ -126,7 +129,7 @@ function Login({ isOpen, onClose, onOpenRegister }) {
 
     setIsLoading(true);
     try {
-      await axios.post("http://localhost:5000/reset-password", {
+      await api.post("/reset-password", {
         email: forgotEmail,
         newPassword,
       });

@@ -1,11 +1,16 @@
-import { motion } from "framer-motion";
+import api from "@/api";
 import { LogOut } from "lucide-react";
 
 export function Sidebar({ tabs, activeTab, setActiveTab }) {
-  const handleLogout = () => {
-    sessionStorage.removeItem("token");
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
+  const handleLogout = async () => {
+    // sessionStorage.removeItem("token");
+    // localStorage.removeItem("token");
+    // localStorage.removeItem("user");
+    try {
+      await api.post("/logout");
+    } catch (err) {
+      console.error("Logout error:", err);
+    }
     window.location.href = "/";
   };
 
@@ -27,7 +32,9 @@ export function Sidebar({ tabs, activeTab, setActiveTab }) {
                       : "text-gray-500 hover:bg-gray-50 font-medium"
                   }`}
                 >
-                  <Icon className={`w-5 h-5 ${isActive ? "text-pink-500" : "text-gray-400"}`} />
+                  <Icon
+                    className={`w-5 h-5 ${isActive ? "text-pink-500" : "text-gray-400"}`}
+                  />
                   {tab.label}
                 </button>
               </li>

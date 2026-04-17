@@ -5,8 +5,8 @@ import React, {
   useContext,
   useState,
   useCallback,
-  useEffect,
   useRef,
+  useEffect,
 } from "react";
 import api from "../api";
 
@@ -31,23 +31,13 @@ export const AuthProvider = ({ children }) => {
   const pendingActionRef = useRef(null);
 
   const fetchUser = useCallback(async (showLoading = true) => {
-    const token = localStorage.getItem("token");
-    if (!token) {
-      setUser(null);
-      setIsLoggedIn(false);
-      setIsLoadingUser(false);
-      return null;
-    }
-
     try {
       if (showLoading) setIsLoadingUser(true);
 
       // Fetch both in parallel
       const [userRes, addressRes] = await Promise.all([
-        api.get("/me", { headers: { Authorization: `Bearer ${token}` } }),
-        api.get("/has-address", {
-          headers: { Authorization: `Bearer ${token}` },
-        }),
+        api.get("/me"),
+        api.get("/has-address"),
       ]);
 
       const userData = {
@@ -69,19 +59,13 @@ export const AuthProvider = ({ children }) => {
 
   // Initialize Auth on Mount
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      setIsLoggedIn(true);
-      fetchUser();
-    } else {
-      setIsLoadingUser(false);
-    }
+    fetchUser();
   }, [fetchUser]);
 
   // 2. THE PROTECTED ACTION SYSTEM (Built-in)
   const handleProtectedAction = useCallback(
     async (action) => {
-      if (!localStorage.getItem("token")) {
+      if (!isLoggedIn) {
         pendingActionRef.current = action;
         setActiveModal("login");
         return;
@@ -109,35 +93,30 @@ export const AuthProvider = ({ children }) => {
         console.error("Action error:", err);
       }
     },
-    [fetchUser],
+    [fetchUser, isLoggedIn],
   );
 
   // 3. Async Flow Handlers
-  const handleLoginSuccess = useCallback(
-    async (token) => {
-      localStorage.setItem("token", token);
-      // ✅ No localStorage write for user
-      setIsLoggedIn(true);
+  const handleLoginSuccess = useCallback(async () => {
+    setIsLoggedIn(true);
 
-      const freshUser = await fetchUser();
+    const freshUser = await fetchUser();
 
-      if (pendingActionRef.current) {
-        if (freshUser?.hasAddress) {
-          const action = pendingActionRef.current;
-          pendingActionRef.current = null;
-          await action();
-          setActiveModal(null);
-        } else {
-          setActiveModal("profile");
-        }
-      } else {
+    if (pendingActionRef.current) {
+      if (freshUser?.hasAddress) {
+        const action = pendingActionRef.current;
+        pendingActionRef.current = null;
+        await action();
         setActiveModal(null);
+      } else {
+        setActiveModal("profile");
       }
+    } else {
+      setActiveModal(null);
+    }
 
-      window.dispatchEvent(new Event("loginStateChange"));
-    },
-    [fetchUser],
-  );
+    window.dispatchEvent(new Event("loginStateChange"));
+  }, [fetchUser]);
 
   const onProfileSaved = useCallback(async () => {
     // const freshUser = await fetchUser(); // re-fetch so hasAddress is updated
@@ -150,9 +129,13 @@ export const AuthProvider = ({ children }) => {
     }
   }, [fetchUser]);
 
-  const handleLogout = useCallback(() => {
-    localStorage.removeItem("token");
-    // ✅ No localStorage.removeItem("user") needed anymore
+  const handleLogout = useCallback(async () => {
+    try {
+      // ✅ Call backend logout to clear cookie
+      await api.post("/logout");
+    } catch (err) {
+      console.error("Logout error:", err);
+    }
     setUser(null);
     setIsLoggedIn(false);
     setActiveModal(null);

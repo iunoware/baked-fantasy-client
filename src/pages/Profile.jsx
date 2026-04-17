@@ -16,12 +16,8 @@ import {
 
 export default function Profile() {
   const [activeTab, setActiveTab] = useState("orders");
-  // const [userData, setUserData] = useState(null);
-  const { user, isLoadingUser, fetchUser } = useAuth();
 
-  // const handleProfileUpdate = (updated) => {
-  //   setUserData((prev) => ({ ...prev, ...updated }));
-  // };
+  const { user, isLoadingUser, fetchUser } = useAuth();
 
   const handleProfileUpdate = () => {
     fetchUser();
@@ -29,34 +25,13 @@ export default function Profile() {
 
   useEffect(() => {
     fetchUser();
-  }, []);
+  }, [fetchUser]);
 
   useEffect(() => {
     if (!isLoadingUser && !user) {
       window.location.href = "/";
     }
   }, [isLoadingUser, user]);
-
-  // useEffect(() => {
-  //   try {
-  //     const data = localStorage.getItem("user");
-  //     if (data) {
-  //       const parsedData = JSON.parse(data);
-  //       setUserData({
-  //         ...parsedData,
-  //         name: parsedData.name || "User",
-  //         email: parsedData.email || "user@example.com",
-  //         mobileNumber: parsedData.mobileNumber || "Add your Mobile Number",
-  //         joinedDate: parsedData.joinedDate || "",
-  //       });
-  //     } else {
-  //       window.location.href = "/";
-  //     }
-  //   } catch (err) {
-  //     console.error("Error parsing user data:", err);
-  //     window.location.href = "/";
-  //   }
-  // }, []);
 
   if (isLoadingUser || !user) {
     return (
