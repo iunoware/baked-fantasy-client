@@ -4,22 +4,28 @@ import { toast } from "react-hot-toast";
 
 const api = axios.create({
   baseURL: "http://localhost:5000",
+  withCredentials: true,
 });
+
+// Set global default as well
+axios.defaults.withCredentials = true;
 
 api.interceptors.request.use(
   (config) => {
     loadingManager.start();
-    const token = localStorage.getItem("token");
-    if (token && token !== "null" && token !== "undefined") {
-      const actualToken = token.startsWith("Bearer ") ? token.split(" ")[1] : token;
-      config.headers.Authorization = `Bearer ${actualToken}`;
-    }
+    // const token = localStorage.getItem("token");
+    // if (token && token !== "null" && token !== "undefined") {
+    //   const actualToken = token.startsWith("Bearer ")
+    //     ? token.split(" ")[1]
+    //     : token;
+    //   config.headers.Authorization = `Bearer ${actualToken}`;
+    // }
     return config;
   },
   (error) => {
     loadingManager.stop();
     return Promise.reject(error);
-  }
+  },
 );
 
 // Also apply to global axios if used directly in components
@@ -31,9 +37,8 @@ axios.interceptors.request.use(
   (error) => {
     loadingManager.stop();
     return Promise.reject(error);
-  }
+  },
 );
-
 
 api.interceptors.response.use(
   (response) => {
@@ -44,14 +49,12 @@ api.interceptors.response.use(
     loadingManager.stop();
     if (error.response && error.response.status === 401) {
       console.warn("Session expired or unauthorized. Logging out...");
-      localStorage.removeItem("token");
-      localStorage.removeItem("user");
       window.dispatchEvent(new Event("loginStateChange"));
       // Optional: window.location.href = "/"; // Only if we want aggressive redirect
       toast.error("Session expired. Please login again.");
     }
     return Promise.reject(error);
-  }
+  },
 );
 
 axios.interceptors.response.use(
@@ -62,8 +65,7 @@ axios.interceptors.response.use(
   (error) => {
     loadingManager.stop();
     return Promise.reject(error);
-  }
+  },
 );
-
 
 export default api;

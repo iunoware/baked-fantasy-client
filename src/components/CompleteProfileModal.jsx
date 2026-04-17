@@ -41,13 +41,7 @@ const CompleteProfileModal = ({ isOpen, onClose }) => {
 
     setIsLoading(true);
     try {
-      const token = localStorage.getItem("token");
-      if (!token) {
-        toast.error("Please login to save your address.");
-        return;
-      }
-
-      // 1. Save address to backend
+      // 1. Save address to backend (Auth managed via cookies)
       const res = await api.post("/address", {
         label: newAddress.type || "Home",
         fullAddress: newAddress.address,

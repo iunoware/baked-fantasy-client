@@ -63,7 +63,9 @@ export default function CourseDetailsAdmin() {
 
   const fetchCourseInfo = async () => {
     try {
-      const response = await axios.get(`http://localhost:5000/course/${courseId}`);
+      const response = await axios.get(
+        `http://localhost:5000/course/${courseId}`,
+      );
       // Usually backend returns { course: ... } or just the object
       setCourse(response.data?.course || response.data);
     } catch (error) {
@@ -266,12 +268,16 @@ export default function CourseDetailsAdmin() {
   };
 
   if (!course)
-    return <div className="p-20 text-center font-medium">Loading course...</div>;
+    return (
+      <div className="p-20 text-center font-medium">Loading course...</div>
+    );
 
   // const sections = course.sections || [];
   // Sort sections by order
   // sections.sort((a, b) => a.order - b.order);
-  const sections = [...(course.sections || [])].sort((a, b) => a.order - b.order);
+  const sections = [...(course.sections || [])].sort(
+    (a, b) => a.order - b.order,
+  );
 
   return (
     <div className="bg-white lg:pl-28 pl-20 pt-10 pr-10 min-h-screen">
@@ -289,7 +295,9 @@ export default function CourseDetailsAdmin() {
           <h1 className="text-3xl lora new-primary-text font-semibold">
             {course.title || "Course Details"}
           </h1>
-          <p className="text-md pt-1 text-gray-600">Manage sections & lessons</p>
+          <p className="text-md pt-1 text-gray-600">
+            Manage sections & lessons
+          </p>
         </div>
         <button
           onClick={() => setIsAddSectionOpen(true)}
@@ -322,11 +330,14 @@ export default function CourseDetailsAdmin() {
                   <div className="flex justify-between items-center border-b border-gray-200 pb-3 mb-3">
                     <div>
                       <h2 className="text-xl font-bold text-black">
-                        <span className="text-gray-500 mr-2">#{section.order}</span>
+                        <span className="text-gray-500 mr-2">
+                          #{section.order}
+                        </span>
                         {section.title}
                       </h2>
                       <p className="text-sm text-gray-600 mt-1">
-                        {lessons.length} {lessons.length === 1 ? "Lesson" : "Lessons"}
+                        {lessons.length}{" "}
+                        {lessons.length === 1 ? "Lesson" : "Lessons"}
                       </p>
                     </div>
                     <div className="flex gap-3">
@@ -400,7 +411,9 @@ export default function CourseDetailsAdmin() {
                     ))}
 
                     <button
-                      onClick={() => openAddLessonModal(section._id || section.id)}
+                      onClick={() =>
+                        openAddLessonModal(section._id || section.id)
+                      }
                       className="mt-2 text-sm font-semibold text-blue-600 hover:text-blue-800 transition-colors w-max"
                     >
                       + Add Lesson
@@ -421,14 +434,22 @@ export default function CourseDetailsAdmin() {
               className="absolute top-4 right-4 cursor-pointer hover:rotate-90 transition text-gray-500 hover:text-black"
               onClick={() => setIsAddSectionOpen(false)}
             />
-            <h2 className="text-2xl font-bold mb-5 new-primary-text">Add Section</h2>
-            <form onSubmit={handleAddSectionSubmit} className="flex flex-col gap-3">
+            <h2 className="text-2xl font-bold mb-5 new-primary-text">
+              Add Section
+            </h2>
+            <form
+              onSubmit={handleAddSectionSubmit}
+              className="flex flex-col gap-3"
+            >
+              <p className="text-sm text-gray-700">Section title:</p>
               <input
                 type="text"
                 name="title"
                 placeholder="Section Title"
                 className="ring ring-gray-500 text-black rounded-lg p-2 w-full outline-none focus:ring-black"
               />
+
+              <p className="text-sm text-gray-700">Order:</p>
               <input
                 type="number"
                 min={0}
@@ -455,8 +476,14 @@ export default function CourseDetailsAdmin() {
               className="absolute top-4 right-4 cursor-pointer hover:rotate-90 transition text-gray-500 hover:text-black"
               onClick={() => setIsEditSectionOpen(false)}
             />
-            <h2 className="text-2xl font-bold mb-5 new-primary-text">Edit Section</h2>
-            <form onSubmit={handleEditSectionSubmit} className="flex flex-col gap-3">
+            <h2 className="text-2xl font-bold mb-5 new-primary-text">
+              Edit Section
+            </h2>
+            <form
+              onSubmit={handleEditSectionSubmit}
+              className="flex flex-col gap-3"
+            >
+              <p className="text-sm text-gray-700">Title:</p>
               <input
                 type="text"
                 name="title"
@@ -464,6 +491,8 @@ export default function CourseDetailsAdmin() {
                 placeholder="Section Title"
                 className="ring ring-gray-500 text-black rounded-lg p-2 w-full outline-none focus:ring-black"
               />
+
+              <p className="text-sm text-gray-700">Order:</p>
               <input
                 type="number"
                 min={0}
@@ -494,8 +523,8 @@ export default function CourseDetailsAdmin() {
             <h2 className="text-2xl font-bold mb-4 text-red-600">Warning</h2>
             <p className="text-lg font-medium text-gray-700 mb-6">
               Are you sure you want to delete{" "}
-              <span className="font-bold">"{selectedSection.title}"</span>? This will also
-              remove all lessons inside it.
+              <span className="font-bold">"{selectedSection.title}"</span>? This
+              will also remove all lessons inside it.
             </p>
             {sectionDeleteTimer > 0 ? (
               <button
@@ -519,25 +548,35 @@ export default function CourseDetailsAdmin() {
       {/* ADD LESSON MODAL */}
       {isAddLessonOpen && (
         <div className="fixed inset-0 z-50 grid place-content-center bg-black/50 p-4">
-          <div className="w-full max-w-md rounded-xl bg-white p-10 shadow-lg relative max-h-[90vh] overflow-y-auto">
+          <div className="w-full max-w-md edit-modal overflow-auto rounded-xl bg-white p-10 shadow-lg relative max-h-[90vh] overflow-y-auto">
             <X
               className="absolute top-4 right-4 cursor-pointer hover:rotate-90 transition text-gray-500 hover:text-black"
               onClick={() => setIsAddLessonOpen(false)}
             />
-            <h2 className="text-2xl font-bold mb-5 new-primary-text">Add Lesson</h2>
-            <form onSubmit={handleAddLessonSubmit} className="flex flex-col gap-3">
+            <h2 className="text-2xl font-bold mb-5 new-primary-text">
+              Add Lesson
+            </h2>
+            <form
+              onSubmit={handleAddLessonSubmit}
+              className="flex flex-col gap-3"
+            >
+              <p className="text-sm text-gray-700">Title:</p>
               <input
                 type="text"
                 name="title"
                 placeholder="Title"
                 className="ring ring-gray-500 text-black rounded-lg p-2 w-full outline-none focus:ring-black"
               />
+
+              <p className="text-sm text-gray-700">Duration:</p>
               <input
                 type="text"
                 name="duration"
                 placeholder="Duration (e.g. 10:30)"
                 className="ring ring-gray-500 text-black rounded-lg p-2 w-full outline-none focus:ring-black"
               />
+
+              <p className="text-sm text-gray-700">Order number:</p>
               <input
                 type="number"
                 min={0}
@@ -545,6 +584,7 @@ export default function CourseDetailsAdmin() {
                 placeholder="Order Number (e.g. 1)"
                 className="ring ring-gray-500 text-black rounded-lg p-2 w-full outline-none focus:ring-black"
               />
+
               <div className="text-sm font-semibold mt-2">Video (Required)</div>
               <input
                 type="file"
@@ -552,7 +592,9 @@ export default function CourseDetailsAdmin() {
                 accept="video/*"
                 className="w-full h-20 border-2 border-dashed border-gray-500 text-black rounded-lg p-2 cursor-pointer"
               />
-              <div className="text-sm font-semibold mt-2">PDF Document (Optional)</div>
+              <div className="text-sm font-semibold mt-2">
+                PDF Document (Optional)
+              </div>
               <input
                 type="file"
                 name="pdfFile"
@@ -581,8 +623,13 @@ export default function CourseDetailsAdmin() {
                 setRemovePdf(false);
               }}
             />
-            <h2 className="text-2xl font-bold mb-5 new-primary-text">Edit Lesson</h2>
-            <form onSubmit={handleEditLessonSubmit} className="flex flex-col gap-3">
+            <h2 className="text-2xl font-bold mb-5 new-primary-text">
+              Edit Lesson
+            </h2>
+            <form
+              onSubmit={handleEditLessonSubmit}
+              className="flex flex-col gap-3"
+            >
               <input
                 type="text"
                 name="title"
@@ -608,14 +655,18 @@ export default function CourseDetailsAdmin() {
               <p className="text-xs text-gray-500 mt-2 font-medium">
                 Pick a new video/PDF only if you want to replace it
               </p>
-              <div className="text-sm font-semibold mt-1">New Video (Optional)</div>
+              <div className="text-sm font-semibold mt-1">
+                New Video (Optional)
+              </div>
               <input
                 type="file"
                 name="video"
                 accept="video/*"
                 className="w-full h-20 border-2 border-dashed border-gray-500 text-black rounded-lg p-2 cursor-pointer"
               />
-              <div className="text-sm font-semibold mt-2">New PDF (Optional)</div>
+              <div className="text-sm font-semibold mt-2">
+                New PDF (Optional)
+              </div>
               <input
                 type="file"
                 name="pdfFile"
@@ -654,8 +705,8 @@ export default function CourseDetailsAdmin() {
             <h2 className="text-2xl font-bold mb-4 text-red-600">Warning</h2>
             <p className="text-lg font-medium text-gray-700 mb-6">
               Are you sure you want to delete{" "}
-              <span className="font-bold">"{selectedLesson.title}"</span>? This action
-              cannot be undone.
+              <span className="font-bold">"{selectedLesson.title}"</span>? This
+              action cannot be undone.
             </p>
             {lessonDeleteTimer > 0 ? (
               <button

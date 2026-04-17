@@ -5,24 +5,18 @@ import { Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import Heading from "../components/Heading.jsx";
 import Loading from "../components/Loading.jsx";
-
-// let coursePrices = [];
-
-// export function getCoursePrices() {
-//   return coursePrices;
-// }
+import { useAuth } from "../context/AuthContext";
 
 const url = `http://localhost:5000`;
 
 function OnlineCourse() {
   let [courses, setCourses] = useState([]);
   const [purchasedIds, setPurchasedIds] = useState(new Set());
+  const { user } = useAuth();
 
   useEffect(() => {
-    const user = JSON.parse(localStorage.getItem("user") || "null");
-    const ids = new Set(user?.purchasedCourses?.map((c) => c.courseId) || []);
+    const ids = new Set(user?.purchasedCourses?.map((c) => c._id || c.courseId) || []);
     setPurchasedIds(ids);
-    // console.log(user);
 
     async function fetchCourse() {
       try {

@@ -43,9 +43,8 @@ function AdminLogin() {
       >
         {/* login form */}
         <div
-          className={`${
-            isModalVisible ? "block" : "hidden"
-          } fixed inset-0 grid place-content-center bg p-4`}
+          className={`${isModalVisible ? "block" : "hidden"
+            } fixed inset-0 grid place-content-center bg p-4`}
           role="dialog"
           style={{ zIndex: "99" }}
           aria-modal="true"

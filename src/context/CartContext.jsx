@@ -10,6 +10,8 @@ import api from "../api";
 import toast from "react-hot-toast";
 import { useAuth } from "./AuthContext.jsx";
 
+import { getCookie, setCookie, removeCookie } from "../utils/cookieUtils";
+
 const CartContext = createContext();
 
 export const useCart = () => {
@@ -28,8 +30,8 @@ export const CartProvider = ({ children }) => {
   // Single Source of Truth for Guest Cart (Internal helper)
   const getLocalGuestCart = useCallback(() => {
     try {
-      const saved = localStorage.getItem("guest_cart");
-      return saved ? JSON.parse(saved) : [];
+      const saved = getCookie("guest_cart");
+      return saved ? JSON.parse(decodeURIComponent(saved)) : [];
     } catch {
       return [];
     }
@@ -85,7 +87,7 @@ export const CartProvider = ({ children }) => {
             })),
           };
           const response = await api.post("/cart/sync", syncData);
-          localStorage.removeItem("guest_cart");
+          removeCookie("guest_cart");
 
           const items = response.data.cart.items
             .filter((i) => i.productId)
@@ -197,7 +199,7 @@ export const CartProvider = ({ children }) => {
             i.id === productId ? { ...i, quantity: newQty } : i,
           )
         : [...guestCart, { ...product, id: productId, quantity: 1 }];
-      localStorage.setItem("guest_cart", JSON.stringify(updated));
+      setCookie("guest_cart", encodeURIComponent(JSON.stringify(updated)));
     }
   };
 
@@ -210,7 +212,7 @@ export const CartProvider = ({ children }) => {
       if (!success) setCartItems(previousItems);
     } else {
       const updated = getLocalGuestCart().filter((i) => i.id !== productId);
-      localStorage.setItem("guest_cart", JSON.stringify(updated));
+      setCookie("guest_cart", encodeURIComponent(JSON.stringify(updated)));
     }
   };
 
@@ -236,7 +238,7 @@ export const CartProvider = ({ children }) => {
       const updated = getLocalGuestCart().map((i) =>
         i.id === productId ? { ...i, quantity } : i,
       );
-      localStorage.setItem("guest_cart", JSON.stringify(updated));
+      setCookie("guest_cart", encodeURIComponent(JSON.stringify(updated)));
     }
   };
 
@@ -253,7 +255,7 @@ export const CartProvider = ({ children }) => {
 
   const clearCart = () => {
     setCartItems([]);
-    localStorage.removeItem("guest_cart");
+    removeCookie("guest_cart");
   };
 
   const cartCount = cartItems.reduce((total, item) => total + item.quantity, 0);
