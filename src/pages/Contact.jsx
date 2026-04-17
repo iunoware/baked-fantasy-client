@@ -39,7 +39,7 @@ function Contact() {
     formData.append("message", message);
 
     const text =
-      `*New Inquiry Received*\n\n` +
+      // `*New Inquiry Received*\n\n` +
       `Name: ${name}\n` +
       `Email: ${email}\n` +
       `Subject: ${subject}\n` +
