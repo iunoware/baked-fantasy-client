@@ -1,6 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+// /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState, useRef } from "react";
 import { useParams, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
   ArrowLeft,
   Users,
@@ -53,7 +55,9 @@ function ReviewSection({ courseId }) {
   useEffect(() => {
     async function fetchReviews() {
       try {
-        const res = await api.get(`${url}/course/${courseId}`);
+        // const res = await api.get(`${url}/course/${courseId}`);
+        const res = await api.get(`/course/${courseId}`);
+
         const allReviews = res.data.reviews || [];
         setReviews(allReviews);
         const mine = allReviews.find(
@@ -76,7 +80,11 @@ function ReviewSection({ courseId }) {
     setLoading(true);
     setError("");
     try {
-      const res = await api.post(`${url}/course/${courseId}/review`, {
+      // const res = await api.post(`${url}/course/${courseId}/review`, {
+      //   rating,
+      //   comment,
+      // });
+      const res = await api.post(`/course/${courseId}/review`, {
         rating,
         comment,
       });
@@ -87,6 +95,7 @@ function ReviewSection({ courseId }) {
           (r) => r.student === currentUserId || r.student?._id === currentUserId,
         ),
       );
+      window.location.reload();
     } catch (err) {
       setError(err.response?.data?.msg || "Something went wrong");
     } finally {
@@ -99,10 +108,14 @@ function ReviewSection({ courseId }) {
     setLoading(true);
     setError("");
     try {
-      const res = await api.patch(
-        `${url}/course/${courseId}/review/${myReview._id}`,
-        { rating, comment },
-      );
+      // const res = await api.patch(`${url}/course/${courseId}/review/${myReview._id}`, {
+      //   rating,
+      //   comment,
+      // });
+      const res = await api.patch(`/course/${courseId}/review/${myReview._id}`, {
+        rating,
+        comment,
+      });
       const updated = res.data.course.reviews;
       setReviews(updated);
       setMyReview(
@@ -111,6 +124,7 @@ function ReviewSection({ courseId }) {
         ),
       );
       setEditing(false);
+      window.location.reload();
     } catch (err) {
       setError(err.response?.data?.msg || "Something went wrong");
     } finally {
@@ -122,11 +136,14 @@ function ReviewSection({ courseId }) {
     if (!window.confirm("Delete your review?")) return;
     setLoading(true);
     try {
-      await api.delete(`${url}/course/${courseId}/review/${myReview._id}`);
+      // await api.delete(`${url}/course/${courseId}/review/${myReview._id}`);
+      await api.delete(`/course/${courseId}/review/${myReview._id}`);
+
       setReviews((prev) => prev.filter((r) => r._id !== myReview._id));
       setMyReview(null);
       setRating(0);
       setComment("");
+      window.location.reload();
     } catch (err) {
       setError(err.response?.data?.msg || "Something went wrong");
     } finally {
@@ -196,7 +213,7 @@ function ReviewSection({ courseId }) {
             <div
               key={r._id}
               className={`bg-white rounded-xl shadow-md p-4 ${
-                isOwn ? "border-l-4 border-pink-500" : ""
+                isOwn ? "border-l-4 border-amber-800" : ""
               }`}
             >
               <div className="flex justify-between items-start">
@@ -225,7 +242,11 @@ function ReviewSection({ courseId }) {
                   {r.comment && <p className="text-gray-700 text-sm mt-1">{r.comment}</p>}
 
                   <p className="text-xs text-gray-400 mt-2">
-                    {new Date(r.createdAt).toLocaleDateString()}
+                    {new Date(r.createdAt).toLocaleDateString("en-GB", {
+                      day: "2-digit",
+                      month: "2-digit",
+                      year: "numeric",
+                    })}
                   </p>
                 </div>
                 {isOwn && !editing && (
@@ -255,7 +276,8 @@ function ReviewSection({ courseId }) {
 
 function OnlineCourseDetails() {
   const { courseId } = useParams();
-  const { isLoggedIn } = useAuth();
+  const { user, isLoggedIn, isLoadingUser } = useAuth();
+  const navigate = useNavigate();
 
   const [course, setCourse] = useState(null);
   const [visibleSection, setVisibleSection] = useState(null);
@@ -265,11 +287,31 @@ function OnlineCourseDetails() {
   const videoRef = useRef(null);
   const playerRef = useRef(null);
 
+  // Guard: check if user has purchased this course
+  useEffect(() => {
+    if (isLoadingUser) return;
+
+    if (!isLoggedIn) {
+      navigate("/login");
+      return;
+    }
+
+    const hasPurchased = user?.purchasedCourses?.some(
+      (c) => c.courseId?.toString() === courseId,
+    );
+
+    if (!hasPurchased) {
+      navigate("/courses"); // redirect if not purchased
+    }
+  }, [user, isLoggedIn, courseId, isLoadingUser]);
+
   // fetch course
   useEffect(() => {
     async function fetchCourse() {
       try {
-        const res = await api.get(`${url}/course/${courseId}`);
+        // const res = await api.get(`${url}/course/${courseId}`);
+        const res = await api.get(`/course/${courseId}`);
+
         const data = res.data;
 
         const sorted = {
@@ -293,6 +335,70 @@ function OnlineCourseDetails() {
     fetchCourse();
   }, [courseId]);
 
+  // old video revoke code
+  // useEffect(() => {
+  //   if (!videoRef.current || !currentLesson) return;
+
+  //   let blobUrl = null;
+
+  //   async function loadVideo() {
+  //     setVideoLoading(true);
+  //     try {
+  //       const res = await fetch(`${url}/video/${currentLesson.videoUrl}`, {
+  //         credentials: "include",
+  //       });
+
+  //       if (!res.ok) throw new Error("Unauthorized");
+
+  //       const blob = await res.blob();
+  //       blobUrl = URL.createObjectURL(blob);
+
+  //       if (!playerRef.current) {
+  //         playerRef.current = new Plyr(videoRef.current, {
+  //           ratio: "16:9",
+  //           controls: [
+  //             "play-large",
+  //             "play",
+  //             "progress",
+  //             "current-time",
+  //             "mute",
+  //             "volume",
+  //             "settings",
+  //             "fullscreen",
+  //           ],
+  //         });
+  //       }
+
+  //       playerRef.current.source = {
+  //         type: "video",
+  //         sources: [{ src: blobUrl, type: "video/mp4" }],
+  //       };
+
+  //       videoRef.current.addEventListener(
+  //         "loadeddata",
+  //         () => {
+  //           if (blobUrl) {
+  //             URL.revokeObjectURL(blobUrl);
+  //             blobUrl = null;
+  //           }
+  //         },
+  //         { once: true },
+  //       );
+  //     } catch (err) {
+  //       console.error("Video load error:", err);
+  //     } finally {
+  //       setVideoLoading(false);
+  //     }
+  //   }
+
+  //   loadVideo();
+
+  //   return () => {
+  //     if (blobUrl) URL.revokeObjectURL(blobUrl);
+  //   };
+  // }, [currentLesson]);
+
+  // new video revoke code - only revoke when the lesson changes or component unmounts
   useEffect(() => {
     if (!videoRef.current || !currentLesson) return;
 
@@ -330,17 +436,6 @@ function OnlineCourseDetails() {
           type: "video",
           sources: [{ src: blobUrl, type: "video/mp4" }],
         };
-
-        videoRef.current.addEventListener(
-          "loadeddata",
-          () => {
-            if (blobUrl) {
-              URL.revokeObjectURL(blobUrl);
-              blobUrl = null;
-            }
-          },
-          { once: true },
-        );
       } catch (err) {
         console.error("Video load error:", err);
       } finally {
@@ -350,8 +445,26 @@ function OnlineCourseDetails() {
 
     loadVideo();
 
+    // return () => {
+    //   if (blobUrl) {
+    //     URL.revokeObjectURL(blobUrl);
+    //     blobUrl = null;
+    //   }
+    // };
+
+    const revokeTimer = setTimeout(() => {
+      if (blobUrl) {
+        URL.revokeObjectURL(blobUrl);
+        blobUrl = null;
+      }
+    }, 10000);
+
     return () => {
-      if (blobUrl) URL.revokeObjectURL(blobUrl);
+      clearTimeout(revokeTimer);
+      if (blobUrl) {
+        URL.revokeObjectURL(blobUrl);
+        blobUrl = null;
+      }
     };
   }, [currentLesson]);
 
@@ -393,6 +506,7 @@ function OnlineCourseDetails() {
       </div>
 
       <div className="grid lg:grid-cols-4 gap-6 px-8 py-10 ">
+        {/* video */}
         <div className="lg:col-span-3 order-1 lg:order-1">
           {currentLesson ? (
             <div className="relative">
@@ -402,7 +516,10 @@ function OnlineCourseDetails() {
                 </div>
               )}
 
-              <div className="relative rounded-xl overflow-hidden shadow-xl bg-black">
+              <div
+                className="relative rounded-xl overflow-hidden shadow-xl bg-black"
+                onContextMenu={(e) => e.preventDefault()}
+              >
                 <video
                   ref={videoRef}
                   className="w-full h-[400px] plyr-react plyr--full-ui"

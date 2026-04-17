@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+// import axios from "axios";
 import { toast } from "react-hot-toast";
 import { Link } from "react-router-dom";
 import { Trash2, SquarePen, X } from "lucide-react";
+import api from "@/api";
 
 function CourseCardAdmin({ course, onEdit, onDelete }) {
   return (
@@ -51,16 +52,12 @@ function CourseCardAdmin({ course, onEdit, onDelete }) {
         />
       </div>
       <div className="p-4 flex flex-col gap-2">
-        <h3 className="font-bold text-lg leading-tight line-clamp-2">
-          {course.title}
-        </h3>
+        <h3 className="font-bold text-lg leading-tight line-clamp-2">{course.title}</h3>
         <p className="text-sm text-gray-500 font-medium whitespace-nowrap overflow-hidden text-ellipsis">
           {course.category} • {course.language} • {course.duration}
         </p>
         <div className="flex items-center gap-2 mt-1">
-          <span className="font-bold text-xl text-black">
-            ₹{course.discountedPrice}
-          </span>
+          <span className="font-bold text-xl text-black">₹{course.discountedPrice}</span>
           <span className="text-gray-400 line-through text-sm">
             ₹{course.originalPrice}
           </span>
@@ -98,7 +95,8 @@ export default function CourseAdmin() {
 
   const fetchCourses = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/course");
+      // const response = await axios.get("http://localhost:5000/course");
+      const response = await api.get("/course");
       setCourses(response.data?.courses || response.data || []);
     } catch (error) {
       console.error(error);
@@ -148,12 +146,13 @@ export default function CourseAdmin() {
     formData.append("thumbnail", thumbnail);
 
     try {
-      const token = sessionStorage.getItem("token");
-      await axios.post("http://localhost:5000/course", formData, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      // const token = sessionStorage.getItem("token");
+      // await axios.post("http://localhost:5000/course", formData, {
+      //   headers: {
+      //     Authorization: `Bearer ${token}`,
+      //   },
+      // });
+      await api.post("/course", formData);
       toast.success("Course added");
       setIsAddModalOpen(false);
       setTimeout(() => window.location.reload(), 1000);
@@ -196,13 +195,14 @@ export default function CourseAdmin() {
     }
 
     try {
-      const token = sessionStorage.getItem("token");
+      // const token = sessionStorage.getItem("token");
       const courseId = selectedCourse._id || selectedCourse.id;
-      await axios.patch(`http://localhost:5000/course/${courseId}`, formData, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      // await axios.patch(`http://localhost:5000/course/${courseId}`, formData, {
+      //   headers: {
+      //     Authorization: `Bearer ${token}`,
+      //   },
+      // });
+      await api.patch(`/course/${courseId}`, formData);
       // await axios.patch(`http://localhost:5000/course/${courseId}`);
       toast.success("Course updated");
       setIsEditModalOpen(false);
@@ -215,13 +215,14 @@ export default function CourseAdmin() {
 
   const handleDeleteConfirm = async () => {
     try {
-      const token = sessionStorage.getItem("token");
+      // const token = sessionStorage.getItem("token");
       const courseId = selectedCourse._id || selectedCourse.id;
-      await axios.delete(`http://localhost:5000/course/${courseId}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      // await axios.delete(`http://localhost:5000/course/${courseId}`, {
+      //   headers: {
+      //     Authorization: `Bearer ${token}`,
+      //   },
+      // });
+      await api.delete(`/course/${courseId}`);
       toast.success("Course deleted");
       setIsDeleteModalOpen(false);
       setTimeout(() => window.location.reload(), 1000);
@@ -235,9 +236,7 @@ export default function CourseAdmin() {
     <div className="bg lg:pl-28 pl-20 pt-10 pr-10 min-h-screen">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
-          <h1 className="text-3xl lora new-primary-text font-semibold">
-            Courses
-          </h1>
+          <h1 className="text-3xl lora new-primary-text font-semibold">Courses</h1>
           <p className="text-md pt-1 text-gray-600">Manage your courses</p>
         </div>
         <button
@@ -249,9 +248,7 @@ export default function CourseAdmin() {
       </div>
 
       <div className="bg shadow-md w-full p-5 my-10 rounded-xl">
-        <p className="mb-4 font-medium text-gray-700">
-          Total Courses: {courses.length}
-        </p>
+        <p className="mb-4 font-medium text-gray-700">Total Courses: {courses.length}</p>
 
         {courses.length === 0 ? (
           <div className="text-center w-full py-10 mt-10 text-gray-500 font-medium text-lg">
@@ -279,9 +276,7 @@ export default function CourseAdmin() {
               className="absolute top-4 right-4 cursor-pointer hover:rotate-90 transition text-gray-500 hover:text-black"
               onClick={() => setIsAddModalOpen(false)}
             />
-            <h2 className="text-2xl font-bold mb-5 new-primary-text">
-              Add Course
-            </h2>
+            <h2 className="text-2xl font-bold mb-5 new-primary-text">Add Course</h2>
             <form onSubmit={handleAddSubmit} className="flex flex-col gap-3">
               <p className="text-sm text-gray-700">Title:</p>
               <input
@@ -368,9 +363,7 @@ export default function CourseAdmin() {
               className="absolute top-4 right-4 cursor-pointer hover:rotate-90 transition text-gray-500 hover:text-black"
               onClick={() => setIsEditModalOpen(false)}
             />
-            <h2 className="text-2xl font-bold mb-5 new-primary-text">
-              Edit Course
-            </h2>
+            <h2 className="text-2xl font-bold mb-5 new-primary-text">Edit Course</h2>
             <form onSubmit={handleEditSubmit} className="flex flex-col gap-3">
               <p className="text-sm text-gray-700">Title:</p>
               <input
@@ -467,12 +460,9 @@ export default function CourseAdmin() {
             <h2 className="text-2xl font-bold mb-4 text-red-600">Warning</h2>
             <p className="text-sm font-medium text-gray-700 mb-6">
               Are you sure you want to delete{" "}
-              <span className="font-bold">"{selectedCourse.title}"</span>? This
-              will also{" "}
-              <span className="font-bold">
-                delete all the sections & lessons
-              </span>{" "}
-              inside this course. This action cannot be undone.
+              <span className="font-bold">"{selectedCourse.title}"</span>? This will also{" "}
+              <span className="font-bold">delete all the sections & lessons</span> inside
+              this course. This action cannot be undone.
             </p>
             {deleteTimer > 0 ? (
               <button

@@ -20,9 +20,7 @@ function StarRating({ rating }) {
             <Star className="absolute text-gray-300 w-5 h-5 fill-gray-300" />
 
             {/* full star */}
-            {full && (
-              <Star className="absolute w-5 h-5 text-amber-500 fill-amber-500" />
-            )}
+            {full && <Star className="absolute w-5 h-5 text-amber-500 fill-amber-500" />}
 
             {/* half star */}
             {half && (
@@ -82,7 +80,7 @@ function OnlineCourseCard(props) {
               <div>
                 <StarRating rating={props.rating} />
               </div>
-              <p className="text-gray-400">({props.totalReviews})</p>
+              <p className="text-gray-400">{Number(props.totalReviews).toFixed(1)}</p>
             </div>
 
             <p className="text-2xl font-semibold new-primary-text">

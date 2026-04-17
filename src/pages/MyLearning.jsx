@@ -32,7 +32,7 @@ export default function MyLearning() {
   useEffect(() => {
     async function fetchingPurchasedCourses() {
       try {
-        const response = await api.get(`http://localhost:5000/courses/my-learning`);
+        const response = await api.get(`/courses/my-learning`);
         let coursesList = response.data.courses.map((c) => c.courseId);
         setCourses(coursesList);
       } catch (error) {
