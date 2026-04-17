@@ -1,9 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import axios from "axios";
+// import axios from "axios";
 import { toast } from "react-hot-toast";
 import { Trash2, SquarePen, X, ArrowLeft } from "lucide-react";
+import api from "@/api";
+
+// const url = `http://localhost:5000`;
 
 export default function CourseDetailsAdmin() {
   const { courseId } = useParams();
@@ -63,9 +66,8 @@ export default function CourseDetailsAdmin() {
 
   const fetchCourseInfo = async () => {
     try {
-      const response = await axios.get(
-        `http://localhost:5000/course/${courseId}`,
-      );
+      // const response = await axios.get(`${url}/course/${courseId}`);
+      const response = await api.get(`/course/${courseId}`);
       // Usually backend returns { course: ... } or just the object
       setCourse(response.data?.course || response.data);
     } catch (error) {
@@ -85,17 +87,18 @@ export default function CourseDetailsAdmin() {
     if (!order) return toast.error("Order is required");
 
     try {
-      const token = sessionStorage.getItem("token");
-      await axios.post(
-        `http://localhost:5000/course/${courseId}/section`,
-        { title, order: Number(order) },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-        },
-      );
+      // const token = sessionStorage.getItem("token");
+      // await axios.post(
+      //   `${url}/course/${courseId}/section`,
+      //   { title, order: Number(order) },
+      //   {
+      //     headers: {
+      //       Authorization: `Bearer ${token}`,
+      //       "Content-Type": "application/json",
+      //     },
+      //   },
+      // );
+      await api.post(`/course/${courseId}/section`, { title, order: Number(order) });
       toast.success("Section added");
       setIsAddSectionOpen(false);
       setTimeout(() => window.location.reload(), 1000);
@@ -115,18 +118,23 @@ export default function CourseDetailsAdmin() {
     if (!order) return toast.error("Order is required");
 
     try {
-      const token = sessionStorage.getItem("token");
+      // const token = sessionStorage.getItem("token");
       const sectionId = selectedSection._id || selectedSection.id;
-      await axios.patch(
-        `http://localhost:5000/course/${courseId}/section/${sectionId}`,
-        { title, order: Number(order) },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-        },
-      );
+      // await axios.patch(
+      //   `${url}/course/${courseId}/section/${sectionId}`,
+      //   { title, order: Number(order) },
+      //   {
+      //     headers: {
+      //       Authorization: `Bearer ${token}`,
+      //       "Content-Type": "application/json",
+      //     },
+      //   },
+      // );
+      await api.patch(`/course/${courseId}/section/${sectionId}`, {
+        title,
+        order: Number(order),
+      });
+
       toast.success("Section updated");
       setIsEditSectionOpen(false);
       setTimeout(() => window.location.reload(), 1000);
@@ -138,16 +146,15 @@ export default function CourseDetailsAdmin() {
 
   const handleDeleteSectionConfirm = async () => {
     try {
-      const token = sessionStorage.getItem("token");
+      // const token = sessionStorage.getItem("token");
       const sectionId = selectedSection._id || selectedSection.id;
-      await axios.delete(
-        `http://localhost:5000/course/${courseId}/section/${sectionId}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        },
-      );
+      // await axios.delete(`${url}/course/${courseId}/section/${sectionId}`, {
+      //   headers: {
+      //     Authorization: `Bearer ${token}`,
+      //   },
+      // });
+      await api.delete(`/course/${courseId}/section/${sectionId}`);
+
       toast.success("Section deleted");
       setIsDeleteSectionOpen(false);
       setTimeout(() => window.location.reload(), 1000);
@@ -173,6 +180,7 @@ export default function CourseDetailsAdmin() {
     const pdf = form.pdfFile.files[0];
 
     if (!title) return toast.error("Title is required");
+    if (!duration) return toast.error("Duration is required");
     if (!order) return toast.error("Order is required");
     if (!video) return toast.error("Video file is required");
 
@@ -184,16 +192,18 @@ export default function CourseDetailsAdmin() {
     if (pdf) formData.append("pdf", pdf); // name matching expected backend convention, or standard
 
     try {
-      const token = sessionStorage.getItem("token");
-      await axios.post(
-        `http://localhost:5000/course/${courseId}/section/${selectedSectionId}/lesson`,
-        formData,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        },
-      );
+      // const token = sessionStorage.getItem("token");
+      // await axios.post(
+      //   `${url}/course/${courseId}/section/${selectedSectionId}/lesson`,
+      //   formData,
+      //   {
+      //     headers: {
+      //       Authorization: `Bearer ${token}`,
+      //     },
+      //   },
+      // );
+      await api.post(`/course/${courseId}/section/${selectedSectionId}/lesson`, formData);
+
       toast.success("Lesson added");
       setIsAddLessonOpen(false);
       setTimeout(() => window.location.reload(), 1000);
@@ -224,18 +234,23 @@ export default function CourseDetailsAdmin() {
     if (removePdf) formData.append("removePdf", "true");
 
     try {
-      const token = sessionStorage.getItem("token");
+      // const token = sessionStorage.getItem("token");
       const lessonId = selectedLesson._id || selectedLesson.id;
       const sectionId = selectedSectionId; // Stored when edit button is clicked
-      await axios.patch(
-        `http://localhost:5000/course/${courseId}/section/${sectionId}/lesson/${lessonId}`,
+      // await axios.patch(
+      //   `${url}/course/${courseId}/section/${sectionId}/lesson/${lessonId}`,
+      //   formData,
+      //   {
+      //     headers: {
+      //       Authorization: `Bearer ${token}`,
+      //     },
+      //   },
+      // );
+      await api.patch(
+        `/course/${courseId}/section/${sectionId}/lesson/${lessonId}`,
         formData,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        },
       );
+
       toast.success("Lesson updated");
       setIsEditLessonOpen(false);
       setTimeout(() => window.location.reload(), 1000);
@@ -247,17 +262,19 @@ export default function CourseDetailsAdmin() {
 
   const handleDeleteLessonConfirm = async () => {
     try {
-      const token = sessionStorage.getItem("token");
+      // const token = sessionStorage.getItem("token");
       const lessonId = selectedLesson._id || selectedLesson.id;
       const sectionId = selectedSectionId;
-      await axios.delete(
-        `http://localhost:5000/course/${courseId}/section/${sectionId}/lesson/${lessonId}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        },
-      );
+      // await axios.delete(
+      //   `${url}/course/${courseId}/section/${sectionId}/lesson/${lessonId}`,
+      //   {
+      //     headers: {
+      //       Authorization: `Bearer ${token}`,
+      //     },
+      //   },
+      // );
+      await api.delete(`/course/${courseId}/section/${sectionId}/lesson/${lessonId}`);
+
       toast.success("Lesson deleted");
       setIsDeleteLessonOpen(false);
       setTimeout(() => window.location.reload(), 1000);
@@ -268,16 +285,12 @@ export default function CourseDetailsAdmin() {
   };
 
   if (!course)
-    return (
-      <div className="p-20 text-center font-medium">Loading course...</div>
-    );
+    return <div className="p-20 text-center font-medium">Loading course...</div>;
 
   // const sections = course.sections || [];
   // Sort sections by order
   // sections.sort((a, b) => a.order - b.order);
-  const sections = [...(course.sections || [])].sort(
-    (a, b) => a.order - b.order,
-  );
+  const sections = [...(course.sections || [])].sort((a, b) => a.order - b.order);
 
   return (
     <div className="bg-white lg:pl-28 pl-20 pt-10 pr-10 min-h-screen">
@@ -295,9 +308,7 @@ export default function CourseDetailsAdmin() {
           <h1 className="text-3xl lora new-primary-text font-semibold">
             {course.title || "Course Details"}
           </h1>
-          <p className="text-md pt-1 text-gray-600">
-            Manage sections & lessons
-          </p>
+          <p className="text-md pt-1 text-gray-600">Manage sections & lessons</p>
         </div>
         <button
           onClick={() => setIsAddSectionOpen(true)}
@@ -330,14 +341,11 @@ export default function CourseDetailsAdmin() {
                   <div className="flex justify-between items-center border-b border-gray-200 pb-3 mb-3">
                     <div>
                       <h2 className="text-xl font-bold text-black">
-                        <span className="text-gray-500 mr-2">
-                          #{section.order}
-                        </span>
+                        <span className="text-gray-500 mr-2">#{section.order}</span>
                         {section.title}
                       </h2>
                       <p className="text-sm text-gray-600 mt-1">
-                        {lessons.length}{" "}
-                        {lessons.length === 1 ? "Lesson" : "Lessons"}
+                        {lessons.length} {lessons.length === 1 ? "Lesson" : "Lessons"}
                       </p>
                     </div>
                     <div className="flex gap-3">
@@ -411,9 +419,7 @@ export default function CourseDetailsAdmin() {
                     ))}
 
                     <button
-                      onClick={() =>
-                        openAddLessonModal(section._id || section.id)
-                      }
+                      onClick={() => openAddLessonModal(section._id || section.id)}
                       className="mt-2 text-sm font-semibold text-blue-600 hover:text-blue-800 transition-colors w-max"
                     >
                       + Add Lesson
@@ -434,13 +440,8 @@ export default function CourseDetailsAdmin() {
               className="absolute top-4 right-4 cursor-pointer hover:rotate-90 transition text-gray-500 hover:text-black"
               onClick={() => setIsAddSectionOpen(false)}
             />
-            <h2 className="text-2xl font-bold mb-5 new-primary-text">
-              Add Section
-            </h2>
-            <form
-              onSubmit={handleAddSectionSubmit}
-              className="flex flex-col gap-3"
-            >
+            <h2 className="text-2xl font-bold mb-5 new-primary-text">Add Section</h2>
+            <form onSubmit={handleAddSectionSubmit} className="flex flex-col gap-3">
               <p className="text-sm text-gray-700">Section title:</p>
               <input
                 type="text"
@@ -476,13 +477,8 @@ export default function CourseDetailsAdmin() {
               className="absolute top-4 right-4 cursor-pointer hover:rotate-90 transition text-gray-500 hover:text-black"
               onClick={() => setIsEditSectionOpen(false)}
             />
-            <h2 className="text-2xl font-bold mb-5 new-primary-text">
-              Edit Section
-            </h2>
-            <form
-              onSubmit={handleEditSectionSubmit}
-              className="flex flex-col gap-3"
-            >
+            <h2 className="text-2xl font-bold mb-5 new-primary-text">Edit Section</h2>
+            <form onSubmit={handleEditSectionSubmit} className="flex flex-col gap-3">
               <p className="text-sm text-gray-700">Title:</p>
               <input
                 type="text"
@@ -523,8 +519,8 @@ export default function CourseDetailsAdmin() {
             <h2 className="text-2xl font-bold mb-4 text-red-600">Warning</h2>
             <p className="text-lg font-medium text-gray-700 mb-6">
               Are you sure you want to delete{" "}
-              <span className="font-bold">"{selectedSection.title}"</span>? This
-              will also remove all lessons inside it.
+              <span className="font-bold">"{selectedSection.title}"</span>? This will also
+              remove all lessons inside it.
             </p>
             {sectionDeleteTimer > 0 ? (
               <button
@@ -553,13 +549,8 @@ export default function CourseDetailsAdmin() {
               className="absolute top-4 right-4 cursor-pointer hover:rotate-90 transition text-gray-500 hover:text-black"
               onClick={() => setIsAddLessonOpen(false)}
             />
-            <h2 className="text-2xl font-bold mb-5 new-primary-text">
-              Add Lesson
-            </h2>
-            <form
-              onSubmit={handleAddLessonSubmit}
-              className="flex flex-col gap-3"
-            >
+            <h2 className="text-2xl font-bold mb-5 new-primary-text">Add Lesson</h2>
+            <form onSubmit={handleAddLessonSubmit} className="flex flex-col gap-3">
               <p className="text-sm text-gray-700">Title:</p>
               <input
                 type="text"
@@ -569,6 +560,7 @@ export default function CourseDetailsAdmin() {
               />
 
               <p className="text-sm text-gray-700">Duration:</p>
+
               <input
                 type="text"
                 name="duration"
@@ -592,9 +584,7 @@ export default function CourseDetailsAdmin() {
                 accept="video/*"
                 className="w-full h-20 border-2 border-dashed border-gray-500 text-black rounded-lg p-2 cursor-pointer"
               />
-              <div className="text-sm font-semibold mt-2">
-                PDF Document (Optional)
-              </div>
+              <div className="text-sm font-semibold mt-2">PDF Document (Optional)</div>
               <input
                 type="file"
                 name="pdfFile"
@@ -615,7 +605,7 @@ export default function CourseDetailsAdmin() {
       {/* edit lesson model */}
       {isEditLessonOpen && selectedLesson && (
         <div className="fixed inset-0 z-50 grid place-content-center bg-black/50 p-4">
-          <div className="w-full max-w-md rounded-xl bg-white p-10 shadow-lg relative max-h-[90vh] overflow-y-auto">
+          <div className="w-full max-w-md rounded-xl edit-modal overflow-auto bg-white p-10 shadow-lg relative max-h-[90vh] overflow-y-auto">
             <X
               className="absolute top-4 right-4 cursor-pointer hover:rotate-90 transition text-gray-500 hover:text-black"
               onClick={() => {
@@ -623,13 +613,9 @@ export default function CourseDetailsAdmin() {
                 setRemovePdf(false);
               }}
             />
-            <h2 className="text-2xl font-bold mb-5 new-primary-text">
-              Edit Lesson
-            </h2>
-            <form
-              onSubmit={handleEditLessonSubmit}
-              className="flex flex-col gap-3"
-            >
+            <h2 className="text-2xl font-bold mb-5 new-primary-text">Edit Lesson</h2>
+            <form onSubmit={handleEditLessonSubmit} className="flex flex-col gap-3">
+              <p className="text-sm text-gray-700">Title:</p>
               <input
                 type="text"
                 name="title"
@@ -637,6 +623,8 @@ export default function CourseDetailsAdmin() {
                 placeholder="Title"
                 className="ring ring-gray-500 text-black rounded-lg p-2 w-full outline-none focus:ring-black"
               />
+
+              <p className="text-sm text-gray-700">Duration:</p>
               <input
                 type="text"
                 name="duration"
@@ -644,6 +632,8 @@ export default function CourseDetailsAdmin() {
                 placeholder="Duration (e.g. 10:30)"
                 className="ring ring-gray-500 text-black rounded-lg p-2 w-full outline-none focus:ring-black"
               />
+
+              <p className="text-sm text-gray-700">Order:</p>
               <input
                 type="number"
                 min={0}
@@ -655,18 +645,14 @@ export default function CourseDetailsAdmin() {
               <p className="text-xs text-gray-500 mt-2 font-medium">
                 Pick a new video/PDF only if you want to replace it
               </p>
-              <div className="text-sm font-semibold mt-1">
-                New Video (Optional)
-              </div>
+              <div className="text-sm font-semibold mt-1">New Video (Optional)</div>
               <input
                 type="file"
                 name="video"
                 accept="video/*"
                 className="w-full h-20 border-2 border-dashed border-gray-500 text-black rounded-lg p-2 cursor-pointer"
               />
-              <div className="text-sm font-semibold mt-2">
-                New PDF (Optional)
-              </div>
+              <div className="text-sm font-semibold mt-2">New PDF (Optional)</div>
               <input
                 type="file"
                 name="pdfFile"
@@ -705,8 +691,8 @@ export default function CourseDetailsAdmin() {
             <h2 className="text-2xl font-bold mb-4 text-red-600">Warning</h2>
             <p className="text-lg font-medium text-gray-700 mb-6">
               Are you sure you want to delete{" "}
-              <span className="font-bold">"{selectedLesson.title}"</span>? This
-              action cannot be undone.
+              <span className="font-bold">"{selectedLesson.title}"</span>? This action
+              cannot be undone.
             </p>
             {lessonDeleteTimer > 0 ? (
               <button
