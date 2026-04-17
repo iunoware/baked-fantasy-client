@@ -265,32 +265,39 @@ export default function CourseAdmin() {
 
       {/* Add Modal */}
       {isAddModalOpen && (
-        <div className="fixed inset-0 z-50 grid place-content-center bg-black/50 p-4">
-          <div className="w-full max-w-md rounded-xl bg-white p-10 shadow-lg relative max-h-[90vh] overflow-y-auto">
+        <div className="fixed inset-0  z-50 grid place-content-center bg-black/50 p-4 no-scroll-bar">
+          <div className="w-full max-w-md edit-modal overflow-auto rounded-xl bg-white p-10 shadow-lg relative max-h-[90vh] overflow-y-auto">
             <X
               className="absolute top-4 right-4 cursor-pointer hover:rotate-90 transition text-gray-500 hover:text-black"
               onClick={() => setIsAddModalOpen(false)}
             />
             <h2 className="text-2xl font-bold mb-5 new-primary-text">Add Course</h2>
             <form onSubmit={handleAddSubmit} className="flex flex-col gap-3">
+              <p className="text-sm text-gray-700">Title:</p>
               <input
                 type="text"
                 name="title"
                 placeholder="Title"
                 className="ring ring-gray-500 text-black rounded-lg p-2 w-full outline-none focus:ring-black"
               />
+
+              <p className="text-sm text-gray-700">Description:</p>
               <textarea
                 name="description"
                 placeholder="Description"
                 rows="3"
                 className="ring ring-gray-500 text-black rounded-lg p-2 w-full outline-none focus:ring-black resize-none"
               />
+
+              <p className="text-sm text-gray-700">Category:</p>
               <input
                 type="text"
                 name="category"
                 placeholder="Category"
                 className="ring ring-gray-500 text-black rounded-lg p-2 w-full outline-none focus:ring-black"
               />
+
+              <p className="text-sm text-gray-700">Language:</p>
               <input
                 type="text"
                 name="language"
@@ -298,6 +305,8 @@ export default function CourseAdmin() {
                 defaultValue="Tamil"
                 className="ring ring-gray-500 text-black rounded-lg p-2 w-full outline-none focus:ring-black"
               />
+
+              <p className="text-sm text-gray-700">Original price:</p>
               <input
                 type="number"
                 min={0}
@@ -305,6 +314,8 @@ export default function CourseAdmin() {
                 placeholder="Original Price"
                 className="ring ring-gray-500 text-black rounded-lg p-2 w-full outline-none focus:ring-black"
               />
+
+              <p className="text-sm text-gray-700">Discounted price:</p>
               <input
                 type="number"
                 min={0}
@@ -312,12 +323,16 @@ export default function CourseAdmin() {
                 placeholder="Discounted Price"
                 className="ring ring-gray-500 text-black rounded-lg p-2 w-full outline-none focus:ring-black"
               />
+
+              <p className="text-sm text-gray-700">Duration:</p>
               <input
                 type="text"
                 name="duration"
                 placeholder="Duration (e.g. 5 Hours)"
                 className="ring ring-gray-500 text-black rounded-lg p-2 w-full outline-none focus:ring-black"
               />
+
+              <p className="text-sm text-gray-700">Thumbnail image:</p>
               <input
                 type="file"
                 name="thumbnail"
@@ -338,13 +353,14 @@ export default function CourseAdmin() {
       {/* Edit Modal */}
       {isEditModalOpen && selectedCourse && (
         <div className="fixed inset-0 z-50 grid place-content-center bg-black/50 p-4">
-          <div className="w-full max-w-md rounded-xl bg-white p-10 shadow-lg relative max-h-[90vh] overflow-y-auto">
+          <div className="w-full max-w-md edit-modal overflow-auto rounded-xl bg-white p-10 shadow-lg relative max-h-[90vh] overflow-y-auto">
             <X
               className="absolute top-4 right-4 cursor-pointer hover:rotate-90 transition text-gray-500 hover:text-black"
               onClick={() => setIsEditModalOpen(false)}
             />
             <h2 className="text-2xl font-bold mb-5 new-primary-text">Edit Course</h2>
             <form onSubmit={handleEditSubmit} className="flex flex-col gap-3">
+              <p className="text-sm text-gray-700">Title:</p>
               <input
                 type="text"
                 name="title"
@@ -352,6 +368,8 @@ export default function CourseAdmin() {
                 placeholder="Title"
                 className="ring ring-gray-500 text-black rounded-lg p-2 w-full outline-none focus:ring-black"
               />
+
+              <p className="text-sm text-gray-700">Description:</p>
               <textarea
                 name="description"
                 defaultValue={selectedCourse.description}
@@ -359,6 +377,8 @@ export default function CourseAdmin() {
                 rows="3"
                 className="ring ring-gray-500 text-black rounded-lg p-2 w-full outline-none focus:ring-black resize-none"
               />
+
+              <p className="text-sm text-gray-700">Category:</p>
               <input
                 type="text"
                 name="category"
@@ -366,6 +386,8 @@ export default function CourseAdmin() {
                 placeholder="Category"
                 className="ring ring-gray-500 text-black rounded-lg p-2 w-full outline-none focus:ring-black"
               />
+
+              <p className="text-sm text-gray-700">Language:</p>
               <input
                 type="text"
                 name="language"
@@ -373,6 +395,8 @@ export default function CourseAdmin() {
                 placeholder="Language"
                 className="ring ring-gray-500 text-black rounded-lg p-2 w-full outline-none focus:ring-black"
               />
+
+              <p className="text-sm text-gray-700">Original price:</p>
               <input
                 type="number"
                 min={0}
@@ -381,6 +405,8 @@ export default function CourseAdmin() {
                 placeholder="Original Price"
                 className="ring ring-gray-500 text-black rounded-lg p-2 w-full outline-none focus:ring-black"
               />
+
+              <p className="text-sm text-gray-700">Discounted price:</p>
               <input
                 type="number"
                 min={0}
@@ -389,6 +415,8 @@ export default function CourseAdmin() {
                 placeholder="Discounted Price"
                 className="ring ring-gray-500 text-black rounded-lg p-2 w-full outline-none focus:ring-black"
               />
+
+              <p className="text-sm text-gray-700">Duration:</p>
               <input
                 type="text"
                 name="duration"
@@ -396,7 +424,7 @@ export default function CourseAdmin() {
                 placeholder="Duration"
                 className="ring ring-gray-500 text-black rounded-lg p-2 w-full outline-none focus:ring-black"
               />
-              <div className="text-sm text-gray-500 pt-1">
+              <div className="text-sm text-gray-700 pt-1">
                 Pick a new thumbnail only if you want to change it.
               </div>
               <input

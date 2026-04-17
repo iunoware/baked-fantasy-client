@@ -5,6 +5,8 @@ import axios from "axios";
 import { toast } from "react-hot-toast";
 import { Trash2, SquarePen, X, ArrowLeft } from "lucide-react";
 
+const url = `http://localhost:5000`;
+
 export default function CourseDetailsAdmin() {
   const { courseId } = useParams();
   const navigate = useNavigate();
@@ -63,7 +65,7 @@ export default function CourseDetailsAdmin() {
 
   const fetchCourseInfo = async () => {
     try {
-      const response = await axios.get(`http://localhost:5000/course/${courseId}`);
+      const response = await axios.get(`${url}/course/${courseId}`);
       // Usually backend returns { course: ... } or just the object
       setCourse(response.data?.course || response.data);
     } catch (error) {
@@ -85,7 +87,7 @@ export default function CourseDetailsAdmin() {
     try {
       const token = sessionStorage.getItem("token");
       await axios.post(
-        `http://localhost:5000/course/${courseId}/section`,
+        `${url}/course/${courseId}/section`,
         { title, order: Number(order) },
         {
           headers: {
@@ -116,7 +118,7 @@ export default function CourseDetailsAdmin() {
       const token = sessionStorage.getItem("token");
       const sectionId = selectedSection._id || selectedSection.id;
       await axios.patch(
-        `http://localhost:5000/course/${courseId}/section/${sectionId}`,
+        `${url}/course/${courseId}/section/${sectionId}`,
         { title, order: Number(order) },
         {
           headers: {
@@ -138,14 +140,11 @@ export default function CourseDetailsAdmin() {
     try {
       const token = sessionStorage.getItem("token");
       const sectionId = selectedSection._id || selectedSection.id;
-      await axios.delete(
-        `http://localhost:5000/course/${courseId}/section/${sectionId}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+      await axios.delete(`${url}/course/${courseId}/section/${sectionId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
         },
-      );
+      });
       toast.success("Section deleted");
       setIsDeleteSectionOpen(false);
       setTimeout(() => window.location.reload(), 1000);
@@ -184,7 +183,7 @@ export default function CourseDetailsAdmin() {
     try {
       const token = sessionStorage.getItem("token");
       await axios.post(
-        `http://localhost:5000/course/${courseId}/section/${selectedSectionId}/lesson`,
+        `${url}/course/${courseId}/section/${selectedSectionId}/lesson`,
         formData,
         {
           headers: {
@@ -226,7 +225,7 @@ export default function CourseDetailsAdmin() {
       const lessonId = selectedLesson._id || selectedLesson.id;
       const sectionId = selectedSectionId; // Stored when edit button is clicked
       await axios.patch(
-        `http://localhost:5000/course/${courseId}/section/${sectionId}/lesson/${lessonId}`,
+        `${url}/course/${courseId}/section/${sectionId}/lesson/${lessonId}`,
         formData,
         {
           headers: {
@@ -249,7 +248,7 @@ export default function CourseDetailsAdmin() {
       const lessonId = selectedLesson._id || selectedLesson.id;
       const sectionId = selectedSectionId;
       await axios.delete(
-        `http://localhost:5000/course/${courseId}/section/${sectionId}/lesson/${lessonId}`,
+        `${url}/course/${courseId}/section/${sectionId}/lesson/${lessonId}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -423,12 +422,15 @@ export default function CourseDetailsAdmin() {
             />
             <h2 className="text-2xl font-bold mb-5 new-primary-text">Add Section</h2>
             <form onSubmit={handleAddSectionSubmit} className="flex flex-col gap-3">
+              <p className="text-sm text-gray-700">Section title:</p>
               <input
                 type="text"
                 name="title"
                 placeholder="Section Title"
                 className="ring ring-gray-500 text-black rounded-lg p-2 w-full outline-none focus:ring-black"
               />
+
+              <p className="text-sm text-gray-700">Order:</p>
               <input
                 type="number"
                 min={0}
@@ -457,6 +459,7 @@ export default function CourseDetailsAdmin() {
             />
             <h2 className="text-2xl font-bold mb-5 new-primary-text">Edit Section</h2>
             <form onSubmit={handleEditSectionSubmit} className="flex flex-col gap-3">
+              <p className="text-sm text-gray-700">Title:</p>
               <input
                 type="text"
                 name="title"
@@ -464,6 +467,8 @@ export default function CourseDetailsAdmin() {
                 placeholder="Section Title"
                 className="ring ring-gray-500 text-black rounded-lg p-2 w-full outline-none focus:ring-black"
               />
+
+              <p className="text-sm text-gray-700">Order:</p>
               <input
                 type="number"
                 min={0}
@@ -519,25 +524,30 @@ export default function CourseDetailsAdmin() {
       {/* ADD LESSON MODAL */}
       {isAddLessonOpen && (
         <div className="fixed inset-0 z-50 grid place-content-center bg-black/50 p-4">
-          <div className="w-full max-w-md rounded-xl bg-white p-10 shadow-lg relative max-h-[90vh] overflow-y-auto">
+          <div className="w-full max-w-md edit-modal overflow-auto rounded-xl bg-white p-10 shadow-lg relative max-h-[90vh] overflow-y-auto">
             <X
               className="absolute top-4 right-4 cursor-pointer hover:rotate-90 transition text-gray-500 hover:text-black"
               onClick={() => setIsAddLessonOpen(false)}
             />
             <h2 className="text-2xl font-bold mb-5 new-primary-text">Add Lesson</h2>
             <form onSubmit={handleAddLessonSubmit} className="flex flex-col gap-3">
+              <p className="text-sm text-gray-700">Title:</p>
               <input
                 type="text"
                 name="title"
                 placeholder="Title"
                 className="ring ring-gray-500 text-black rounded-lg p-2 w-full outline-none focus:ring-black"
               />
+
+              <p className="text-sm text-gray-700">Duration:</p>
               <input
                 type="text"
                 name="duration"
                 placeholder="Duration (e.g. 10:30)"
                 className="ring ring-gray-500 text-black rounded-lg p-2 w-full outline-none focus:ring-black"
               />
+
+              <p className="text-sm text-gray-700">Order number:</p>
               <input
                 type="number"
                 min={0}
@@ -545,6 +555,7 @@ export default function CourseDetailsAdmin() {
                 placeholder="Order Number (e.g. 1)"
                 className="ring ring-gray-500 text-black rounded-lg p-2 w-full outline-none focus:ring-black"
               />
+
               <div className="text-sm font-semibold mt-2">Video (Required)</div>
               <input
                 type="file"
