@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Button } from "./ui/button.jsx";
 import { Input } from "./ui/input.jsx";
 import { Card, CardContent } from "./ui/card.jsx";
-import axios from "axios";
+import api from "@/api.js";
 import { Eye, EyeOff, Mail, Lock, User, X, Phone } from "lucide-react";
 import { GoogleLogin } from "@react-oauth/google";
 import toast from "react-hot-toast";
@@ -38,7 +38,7 @@ function Register({ isOpen, onClose, onOpenLogin }) {
 
     try {
       setIsLoading(true);
-      const res = await axios.post("http://localhost:5000/send-otp", {
+      const res = await api.post("/send-otp", {
         email: form.email,
         type: "register",
       });
@@ -54,18 +54,16 @@ function Register({ isOpen, onClose, onOpenLogin }) {
   const verifyOtp = async () => {
     try {
       setIsLoading(true);
-
-      const res = await axios.post("http://localhost:5000/verify-otp", {
+      const res = await api.post("/verify-otp", {
         email: form.email,
         otp: otp.trim(),
         type: "register",
       });
-
       setOtpVerified(true);
       toast.success("OTP verified!");
-
       await registerUser();
-    } catch (error) {
+    } catch (err) {
+      // ← was "error" in catch but used "err" inside — fix to match
       toast.error(err.response?.data?.msg || "Something went wrong");
     } finally {
       setIsLoading(false);
@@ -77,17 +75,17 @@ function Register({ isOpen, onClose, onOpenLogin }) {
       const { name, email, password, phoneNumber } = form;
 
       setIsLoading(true);
-      const res = await axios.post("http://localhost:5000/register", {
+      const res = await api.post("/register", {
         name,
         email,
         password,
         mobileNumber: phoneNumber,
       });
-      
+
       if (typeof handleLoginSuccess === "function") {
         handleLoginSuccess(res.data.token, res.data.user);
       }
-      toast.success("User Registered Successfully 🍰");
+      toast.success("User Registered Successfully");
     } catch (err) {
       toast.error(err.response?.data?.msg || "Something went wrong");
     } finally {
@@ -99,7 +97,7 @@ function Register({ isOpen, onClose, onOpenLogin }) {
   const handleSuccess = async (credentialResponse) => {
     try {
       setIsLoading(true);
-      const res = await axios.post("http://localhost:5000/google-login", {
+      const res = await api.post("/google-login", {
         token: credentialResponse.credential,
       });
 
@@ -182,8 +180,6 @@ function Register({ isOpen, onClose, onOpenLogin }) {
               </div>
             </div>
 
-            {/* Email Address Field */}
-
             {/* Password Field */}
             <div className="space-y-1">
               <label
@@ -199,6 +195,7 @@ function Register({ isOpen, onClose, onOpenLogin }) {
                   name="password"
                   type={showPassword ? "text" : "password"}
                   placeholder=""
+                  autoComplete="current-password"
                   pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{6,}$"
                   title="At least 6 chars (A, a, 1)"
                   onChange={handleChange}
@@ -228,6 +225,7 @@ function Register({ isOpen, onClose, onOpenLogin }) {
                 <Input
                   id="phoneNumber"
                   name="phoneNumber"
+                  autoComplete="tel"
                   type="tel"
                   placeholder="10-digit number"
                   onChange={handleChange}
@@ -249,12 +247,16 @@ function Register({ isOpen, onClose, onOpenLogin }) {
                   id="email"
                   type="email"
                   name="email"
+                  autoComplete="email"
                   placeholder="name@example.com"
                   onChange={handleChange}
                   className="pl-10 h-10.5 bg-slate-50 border-slate-200 rounded-xl focus-visible:ring-1 focus-visible:ring-[#ec4174] focus-visible:border-[#ec4174] transition-all"
                   required
                 />
               </div>
+              <p className="text-[10px] text-slate-400 mt-1 ml-1 font-medium italic">
+                You will receive a 6-digit verification code on this email
+              </p>
             </div>
 
             {/* OTP Section (Conditional) */}
@@ -270,6 +272,7 @@ function Register({ isOpen, onClose, onOpenLogin }) {
                   <Phone className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-green-500" />
                   <Input
                     id="otp"
+                    autoComplete="one-time-code"
                     name="otp"
                     type="text"
                     placeholder="Enter 6 Digit OTP"

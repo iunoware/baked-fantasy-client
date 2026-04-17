@@ -215,6 +215,7 @@ function Login({ isOpen, onClose, onOpenRegister }) {
                       name="email"
                       id="email"
                       type="email"
+                      autoComplete="email"
                       placeholder="name@example.com"
                       onChange={handleChange}
                       className="pl-10 h-11 bg-slate-50 border-slate-200 rounded-xl focus-visible:ring-1 focus-visible:ring-[#ec4174] focus-visible:border-[#ec4174] transition-all"
@@ -247,6 +248,7 @@ function Login({ isOpen, onClose, onOpenRegister }) {
                       id="password"
                       type={showPassword ? "text" : "password"}
                       placeholder=""
+                      autoComplete="current-password"
                       onChange={handleChange}
                       className="pl-10 pr-10 h-11 bg-slate-50 border-slate-200 rounded-xl focus-visible:ring-1 focus-visible:ring-[#ec4174] focus-visible:border-[#ec4174] transition-all"
                       required
@@ -312,7 +314,10 @@ function Login({ isOpen, onClose, onOpenRegister }) {
                 <p className="text-slate-500">
                   Don't have an account?{" "}
                   <button
-                    onClick={onOpenRegister}
+                    onClick={() => {
+                      onClose(); // ← add this to close login first
+                      onOpenRegister();
+                    }}
                     className="text-[#ec4174] font-bold hover:underline transition-all cursor-pointer"
                   >
                     Sign up

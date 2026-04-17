@@ -44,7 +44,7 @@ export default function Profile() {
   const TABS = [
     { id: "orders", label: "Orders", icon: ShoppingBag },
     { id: "courses", label: "My Courses", icon: GraduationCap },
-    { id: "payments", label: "Payments", icon: CreditCard },
+    // { id: "payments", label: "Payments", icon: CreditCard },
     { id: "addresses", label: "Addresses", icon: MapPin },
     { id: "settings", label: "Settings", icon: Settings },
   ];
@@ -69,16 +69,16 @@ export default function Profile() {
         );
       case "addresses":
         return <AddressSection />;
-      case "payments":
-        return (
-          <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-8 flex flex-col items-center justify-center text-gray-500 min-h-[400px]">
-            <CreditCard className="w-12 h-12 text-gray-200 mb-4" />
-            <h3 className="text-xl font-semibold text-gray-900 mb-2">
-              Payment Methods
-            </h3>
-            <p>No saved payment methods found.</p>
-          </div>
-        );
+      // case "payments":
+      //   return (
+      //     <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-8 flex flex-col items-center justify-center text-gray-500 min-h-[400px]">
+      //       <CreditCard className="w-12 h-12 text-gray-200 mb-4" />
+      //       <h3 className="text-xl font-semibold text-gray-900 mb-2">
+      //         Payment Methods
+      //       </h3>
+      //       <p>No saved payment methods found.</p>
+      //     </div>
+      //   );
       case "settings":
         return (
           <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-8 flex flex-col items-center justify-center text-gray-500 min-h-[400px]">

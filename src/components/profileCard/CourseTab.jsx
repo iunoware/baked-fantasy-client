@@ -4,7 +4,7 @@ import { Button } from "../../components/ui/button";
 import { Progress } from "../../components/ui/progress";
 import { PlayCircle, BookOpen, GraduationCap } from "lucide-react";
 import { useState, useEffect } from "react";
-import api from "../../api"; // Assuming the axios instance is correctly set up
+import api from "@/api";
 import { Link } from "react-router-dom";
 
 // import OnlineCourseCard from "../OnlineCourseCard.jsx";
@@ -14,20 +14,42 @@ export function CoursesTab() {
   const [courses, setCourses] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  // clade testing
   useEffect(() => {
     async function fetchingPurchasedCourses() {
+      console.log("🍪 All cookies:", document.cookie);
+
       try {
         const response = await api.get(`/courses/my-learning`);
+        console.log("✅ Response:", response.data);
         const coursesList = response.data.courses.map((c) => c.courseId);
         setCourses(coursesList);
       } catch (error) {
-        console.error("Error fetching courses:", error);
+        console.error("❌ Error:", error.response?.status);
+        console.error("❌ Error data:", error.response?.data);
+        console.error("❌ Request headers:", error.config?.headers);
       } finally {
         setLoading(false);
       }
     }
     fetchingPurchasedCourses();
   }, []);
+
+  // real one
+  // useEffect(() => {
+  //   async function fetchingPurchasedCourses() {
+  //     try {
+  //       const response = await api.get(`/courses/my-learning`);
+  //       const coursesList = response.data.courses.map((c) => c.courseId);
+  //       setCourses(coursesList);
+  //     } catch (error) {
+  //       console.error("Error fetching courses:", error);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   }
+  //   fetchingPurchasedCourses();
+  // }, []);
 
   if (loading) {
     // return <Loading text="Loading your courses..." />;
@@ -40,7 +62,9 @@ export function CoursesTab() {
     return (
       <div className="flex flex-col items-center justify-center p-8 text-gray-500 min-h-[300px]">
         <GraduationCap className="w-12 h-12 text-gray-200 mb-4" />
-        <h3 className="text-lg font-semibold text-gray-900 mb-1">No courses found</h3>
+        <h3 className="text-lg font-semibold text-gray-900 mb-1">
+          No courses found
+        </h3>
         <p className="text-sm">You haven't purchased any courses yet.</p>
       </div>
     );
@@ -96,7 +120,9 @@ export function CoursesTab() {
                   <span className="text-xs font-semibold text-gray-500 uppercase tracking-wider">
                     Course Progress
                   </span>
-                  <span className="text-xs font-bold text-pink-600">{progress}%</span>
+                  <span className="text-xs font-bold text-pink-600">
+                    {progress}%
+                  </span>
                 </div>
                 <motion.div
                   initial={{ width: 0 }}
