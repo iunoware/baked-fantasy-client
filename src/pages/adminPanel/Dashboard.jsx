@@ -457,7 +457,7 @@ function Dashboard() {
             </div>
 
             {/* date range picker */}
-            <div className="flex items-center gap-2 bg-white rounded-xl p-2 shadow-sm">
+            {/* <div className="flex md:flex-row flex-col items-center gap-2 bg-white rounded-xl p-2 shadow-sm">
               <input
                 type="date"
                 value={dateRange.from}
@@ -489,6 +489,46 @@ function Dashboard() {
               >
                 Apply
               </button>
+            </div> */}
+            <div className="flex flex-col sm:flex-row sm:items-center gap-2 bg-white rounded-xl p-2 shadow-sm w-fit">
+              {/* dates row — always side by side even on mobile */}
+              <div className="flex items-center gap-2">
+                <input
+                  type="date"
+                  value={dateRange.from}
+                  max={dateRange.to || undefined}
+                  onChange={(e) =>
+                    setDateRange((prev) => ({ ...prev, from: e.target.value }))
+                  }
+                  className="border border-gray-200 rounded-lg p-1.5 text-sm focus:outline-none focus:ring-1 w-32 focus:ring-amber-700 "
+                />
+                <span className="text-gray-400 text-xs shrink-0">to</span>
+                <input
+                  type="date"
+                  value={dateRange.to}
+                  min={dateRange.from || undefined}
+                  onChange={(e) =>
+                    setDateRange((prev) => ({ ...prev, to: e.target.value }))
+                  }
+                  className="border border-gray-200 rounded-lg p-1.5 text-sm focus:outline-none focus:ring-1 w-32 focus:ring-amber-700 "
+                />
+              </div>
+
+              {/* apply button — full width on mobile, auto on larger */}
+              <div className="flex justify-center">
+                <button
+                  onClick={() => {
+                    if (dateRange.from && dateRange.to) {
+                      setChartFilter("dateRange");
+                      dateRangeSalesFunc();
+                    }
+                  }}
+                  disabled={!dateRange.from || !dateRange.to}
+                  className="bg-pbrown hover:opacity-95 text-white px-3 py-1.5 rounded-lg text-sm disabled:opacity-40 disabled:cursor-not-allowed w-fit sm:w-auto"
+                >
+                  Apply
+                </button>
+              </div>
             </div>
           </div>
 

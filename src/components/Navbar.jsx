@@ -904,8 +904,9 @@ export const StaggeredMenu = ({
                     <NavLink
                       className={({ isActive }) =>
                         `${
-                          isActive ? "text-[#40200d]!" : "text-black!"
-                        } sm-panel-item relative hover:text-[#40200d]! cursor-pointer leading-none tracking-[-2px] uppercase transition-[background,color] duration-150 ease-linear inline-block no-underline pr-[1.4em]`
+                          // isActive ? "text-[#40200d]!" : "text-black!"
+                          isActive ? "text-sbrown!" : "text-black!"
+                        } sm-panel-item relative hover:text-sbrown! cursor-pointer leading-none tracking-[-2px] uppercase transition-[background,color] duration-150 ease-linear inline-block no-underline pr-[1.4em]`
                       }
                       to={it.link}
                       aria-label={it.ariaLabel}
