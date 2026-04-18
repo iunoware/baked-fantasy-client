@@ -67,8 +67,7 @@ function About() {
     {
       year: "2022",
       title: "Signature Cakes Launched",
-      description:
-        "Introduced our signature customized cakes and special dessert menu.",
+      description: "Introduced our signature customized cakes and special dessert menu.",
       icon: <Cake color="#ffffff" size={27} />,
       image: "cake-dot-3.png",
     },
@@ -125,16 +124,16 @@ function About() {
         <div className="p-8 md:p-12 lg:px-16 lg:py-24 mt-38">
           <div className="text-start ltr:sm:text-left rtl:sm:text-right">
             <h2 className="text-2xl font-bold lora text-black sm:text-3xl md:text-5xl">
-              From <span className="text-pbrown">Oven to Heart</span> - and From
-              Us to Your Kitchen.
+              From <span className="text-pbrown">Oven to Heart</span> - and From Us to
+              Your Kitchen.
             </h2>
 
             <p className="hidden max-w-lg text-black/90 md:mt-6 md:block md:text-lg md:leading-relaxed">
-              The Baked Fantasy brings you fresh cakes, pastries, and desserts
-              made with love. Celebrate life’s moments with us-or join our
-              baking courses to create your own oven-fresh treats at home.
+              The Baked Fantasy brings you fresh cakes, pastries, and desserts made with
+              love. Celebrate life’s moments with us-or join our baking courses to create
+              your own oven-fresh treats at home.
             </p>
-            <div className="flex gap-10 items-center">
+            <div className="flex md:flex-row flex-col md:gap-10 gap-0 md:items-center items-start">
               <div className="mt-4 sm:mt-8">
                 <Link
                   className="group relative inline-flex items-center overflow-hidden rounded-lg bg-pbrown px-8 py-3 text-white mr-3"
@@ -187,6 +186,7 @@ function About() {
                   </span>
                 </Link>
               </div>
+
               <div className="mt-4 sm:mt-8">
                 {/* <Link
                   to={`/courses`}
@@ -250,9 +250,9 @@ function About() {
               Our Journey
             </h2>
             <p className="text-lg text-black/70 max-w-3xl mx-auto">
-              From a passionate home baker to a skilled academy instructor and a
-              thriving large-scale home bakery, our journey is driven by love
-              for the craft and dedication to sharing it with others.
+              From a passionate home baker to a skilled academy instructor and a thriving
+              large-scale home bakery, our journey is driven by love for the craft and
+              dedication to sharing it with others.
             </p>
           </div>
 
@@ -339,8 +339,8 @@ function About() {
             <div className="w-9 h-[2px] bg-[#870D32] rounded-[2px]" />
           </div>
           <p className="mt-4 text-base text-[#7a5c44] max-w-[480px] mx-auto leading-[1.65]">
-            We believe every bite should tell a story — crafted with care,
-            delivered with warmth.
+            We believe every bite should tell a story — crafted with care, delivered with
+            warmth.
           </p>
         </div>
 
@@ -370,8 +370,7 @@ function About() {
               Freshly Baked Daily
             </h3>
             <p className="text-[14px] text-[#7a5c44] leading-[1.6] m-0">
-              Every item is made fresh each morning — no preservatives, no
-              shortcuts.
+              Every item is made fresh each morning — no preservatives, no shortcuts.
             </p>
           </div>
 
@@ -395,8 +394,8 @@ function About() {
               Premium Ingredients
             </h3>
             <p className="text-[14px] text-[#7a5c44] leading-[1.6] m-0">
-              Sourced from trusted farms — rich butter, real chocolate, and
-              seasonal fruits.
+              Sourced from trusted farms — rich butter, real chocolate, and seasonal
+              fruits.
             </p>
           </div>
 
@@ -420,8 +419,7 @@ function About() {
               Custom Cake Orders
             </h3>
             <p className="text-[14px] text-[#7a5c44] leading-[1.6] m-0">
-              Dream it, we bake it — personalised cakes for every occasion and
-              flavour.
+              Dream it, we bake it — personalised cakes for every occasion and flavour.
             </p>
           </div>
 
@@ -448,8 +446,7 @@ function About() {
               Fast & Reliable Delivery
             </h3>
             <p className="text-[14px] text-[#7a5c44] leading-[1.6] m-0">
-              Hot and fresh at your door — timely delivery you can count on
-              every time.
+              Hot and fresh at your door — timely delivery you can count on every time.
             </p>
           </div>
 
@@ -474,8 +471,7 @@ function About() {
               Hygienic Preparation
             </h3>
             <p className="text-[14px] text-[#7a5c44] leading-[1.6] m-0">
-              FSSAI-compliant kitchen with strict cleanliness protocols at every
-              step.
+              FSSAI-compliant kitchen with strict cleanliness protocols at every step.
             </p>
           </div>
 
@@ -511,14 +507,12 @@ function About() {
           <div className="p-8 md:p-12 lg:px-16 lg:py-24">
             <div className="mx-auto max-w-xl text-center ltr:sm:text-left rtl:sm:text-right">
               <h2 className="!text-4xl font-semibold mb-5 text-gray-900 pt-60 md:text-3xl">
-                Turn Your Passion for{" "}
-                <span className="text-pbrown">Baking</span> Into{" "}
+                Turn Your Passion for <span className="text-pbrown">Baking</span> Into{" "}
                 <span className="text-pbrown">Perfection</span>
               </h2>
 
               <p className="hidden text-xl mb-5 lg:w-100 text-gray-800 md:mt-4 md:block">
-                Join our academy to turn your home baking into professional
-                mastery!
+                Join our academy to turn your home baking into professional mastery!
               </p>
 
               <div className="mt-4 flex md:justify-start justify-center items-center md:mt-8">
@@ -591,21 +585,17 @@ function About() {
                 Recognized Excellence
               </h3>
               <p className="text-lg text-black/80 leading-relaxed">
-                Our commitment to quality craftsmanship and exceptional customer
-                service has been recognized by industry leaders and our
-                community. These awards reflect our dedication to traditional
-                baking methods and innovative approaches to creating memorable
-                experiences.
+                Our commitment to quality craftsmanship and exceptional customer service
+                has been recognized by industry leaders and our community. These awards
+                reflect our dedication to traditional baking methods and innovative
+                approaches to creating memorable experiences.
               </p>
 
               <div className="space-y-4 mt-7 transition-all duration-200">
                 <div className="bg-white shadow-lg rounded-lg p-4 flex items-start gap-4">
                   {/* Award icon */}
                   <div className="w-8 h-8 new-primary-text flex items-center justify-center flex-shrink-0 mt-1">
-                    <svg
-                      className="w-full h-full fill-sbrown"
-                      viewBox="0 0 24 24"
-                    >
+                    <svg className="w-full h-full fill-sbrown" viewBox="0 0 24 24">
                       <path d="M12 2L15.09 8.26L22 9L17 14L18.18 21L12 17.77L5.82 21L7 14L2 9L8.91 8.26L12 2Z" />
                     </svg>
                   </div>
@@ -629,8 +619,8 @@ function About() {
             Sweet words from our customers
           </h2>
           <p className="text-xl text-gray-800/80 text-center">
-            Discover what makes our bakery special through the heartfelt stories
-            of our beloved customers
+            Discover what makes our bakery special through the heartfelt stories of our
+            beloved customers
           </p>
         </div>
 
