@@ -8,6 +8,7 @@ import {
   Cake,
   Users,
   LogOut,
+  ShoppingBag,
 } from "lucide-react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import api from "../api";
@@ -38,21 +39,23 @@ function Sidebar() {
                 <NavLink
                   to={`/admin`}
                   className={`flex items-center gap-3 rounded-md px-2 py-2 text-gray-700 hover:bg-pbrown/10 transition-colors`}
-                // className={({ isActive }) =>
-                //   `${isActive ? "bg-pbrown/10" : ""} flex items-center gap-3 rounded-md px-2 py-2 text-gray-700 hover:bg-pbrown/10 transition-colors`
-                // }
+                  // className={({ isActive }) =>
+                  //   `${isActive ? "bg-pbrown/10" : ""} flex items-center gap-3 rounded-md px-2 py-2 text-gray-700 hover:bg-pbrown/10 transition-colors`
+                  // }
                 >
                   {({ isActive }) => (
                     <>
                       <ChartColumn
                         size={20}
-                        className={`shrink-0 ${isActive ? "new-primary-text" : "text-gray-500"
-                          }`}
+                        className={`shrink-0 ${
+                          isActive ? "new-primary-text" : "text-gray-500"
+                        }`}
                         strokeWidth={`${isActive ? 2 : 3}`}
                       />
                       <span
-                        className={`text-lg pointer-events-none font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap ${isActive ? "new-primary-text" : "text-gray-800"
-                          }`}
+                        className={`text-lg pointer-events-none font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap ${
+                          isActive ? "new-primary-text" : "text-gray-800"
+                        }`}
                       >
                         Dashboard
                       </span>
@@ -68,7 +71,8 @@ function Sidebar() {
                     to={`/admin/courses`}
                     // className="flex items-center gap-3 rounded-md px-2 py-2 text-gray-700 hover:bg-pink-50 transition-colors"
                     className={({ isActive }) =>
-                      `${isActive ? "bg-pbrown/10" : ""
+                      `${
+                        isActive ? "bg-pbrown/10" : ""
                       } flex items-center gap-3 rounded-md px-2 py-2 text-gray-700 hover:bg-pbrown/10 transition-colors`
                     }
                   >
@@ -76,12 +80,14 @@ function Sidebar() {
                       <>
                         <GraduationCap
                           size={20}
-                          className={`shrink-0 ${isActive ? "new-primary-text" : "text-gray-500"
-                            }`}
+                          className={`shrink-0 ${
+                            isActive ? "new-primary-text" : "text-gray-500"
+                          }`}
                         />
                         <span
-                          className={`text-lg pointer-events-none font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap ${isActive ? "new-primary-text" : "text-gray-800"
-                            }`}
+                          className={`text-lg pointer-events-none font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap ${
+                            isActive ? "new-primary-text" : "text-gray-800"
+                          }`}
                         >
                           Courses
                         </span>
@@ -96,7 +102,8 @@ function Sidebar() {
                     to={`/admin/essentials`}
                     // className="flex items-center gap-3 rounded-md px-2 py-2 text-gray-700 hover:bg-pink-50 transition-colors"
                     className={({ isActive }) =>
-                      `${isActive ? "bg-pbrown/10" : ""
+                      `${
+                        isActive ? "bg-pbrown/10" : ""
                       } flex items-center gap-3 rounded-md px-2 py-2 text-gray-700 hover:bg-pbrown/10 transition-colors`
                     }
                   >
@@ -104,12 +111,14 @@ function Sidebar() {
                       <>
                         <ShoppingCart
                           size={20}
-                          className={`shrink-0 ${isActive ? "new-primary-text" : "text-gray-500"
-                            }`}
+                          className={`shrink-0 ${
+                            isActive ? "new-primary-text" : "text-gray-500"
+                          }`}
                         />
                         <span
-                          className={`text-lg pointer-events-none font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap ${isActive ? "new-primary-text" : "text-gray-800"
-                            }`}
+                          className={`text-lg pointer-events-none font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap ${
+                            isActive ? "new-primary-text" : "text-gray-800"
+                          }`}
                         >
                           Products
                         </span>
@@ -124,7 +133,8 @@ function Sidebar() {
                     to={`/admin/cakes`}
                     // className="flex items-center gap-3 rounded-md px-2 py-2 text-gray-700 hover:bg-pink-50 transition-colors"
                     className={({ isActive }) =>
-                      `${isActive ? "bg-pbrown/10" : ""
+                      `${
+                        isActive ? "bg-pbrown/10" : ""
                       } flex items-center gap-3 rounded-md px-2 py-2 text-gray-700 hover:bg-pbrown/10 transition-colors`
                     }
                   >
@@ -132,12 +142,14 @@ function Sidebar() {
                       <>
                         <Cake
                           size={20}
-                          className={`shrink-0 ${isActive ? "new-primary-text" : "text-gray-500"
-                            }`}
+                          className={`shrink-0 ${
+                            isActive ? "new-primary-text" : "text-gray-500"
+                          }`}
                         />
                         <span
-                          className={`text-lg pointer-events-none font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap ${isActive ? "new-primary-text" : "text-gray-800"
-                            }`}
+                          className={`text-lg pointer-events-none font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap ${
+                            isActive ? "new-primary-text" : "text-gray-800"
+                          }`}
                         >
                           Cakes
                         </span>
@@ -152,20 +164,23 @@ function Sidebar() {
                     to={`/admin/orders`}
                     // className="flex items-center gap-3 rounded-md px-2 py-2 text-gray-700 hover:bg-pink-50 transition-colors"
                     className={({ isActive }) =>
-                      `${isActive ? "bg-pbrown/10" : ""
+                      `${
+                        isActive ? "bg-pbrown/10" : ""
                       } flex items-center gap-3 rounded-md px-2 py-2 text-gray-700 hover:bg-pbrown/10 transition-colors`
                     }
                   >
                     {({ isActive }) => (
                       <>
-                        <Users
+                        <ShoppingBag
                           size={20}
-                          className={`shrink-0 ${isActive ? "new-primary-text" : "text-gray-500"
-                            }`}
+                          className={`shrink-0 ${
+                            isActive ? "new-primary-text" : "text-gray-500"
+                          }`}
                         />
                         <span
-                          className={`text-lg pointer-events-none font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap ${isActive ? "new-primary-text" : "text-gray-800"
-                            }`}
+                          className={`text-lg pointer-events-none font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap ${
+                            isActive ? "new-primary-text" : "text-gray-800"
+                          }`}
                         >
                           Orders
                         </span>
@@ -180,7 +195,8 @@ function Sidebar() {
                     to={`/admin/announcements`}
                     // className="flex items-center gap-3 rounded-md px-2 py-2 text-gray-700 hover:bg-pink-50 transition-colors"
                     className={({ isActive }) =>
-                      `${isActive ? "bg-pbrown/10" : ""
+                      `${
+                        isActive ? "bg-pbrown/10" : ""
                       } flex items-center gap-3 rounded-md px-2 py-2 text-gray-700 hover:bg-pbrown/10 transition-colors`
                     }
                   >
@@ -188,15 +204,48 @@ function Sidebar() {
                       <>
                         <Megaphone
                           size={20}
-                          className={`shrink-0 ${isActive ? "new-primary-text" : "text-gray-500"
-                            }`}
+                          className={`shrink-0 ${
+                            isActive ? "new-primary-text" : "text-gray-500"
+                          }`}
                         />
                         <span
-                          className={`text-lg pointer-events-none font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap ${isActive ? "new-primary-text" : "text-gray-800"
-                            }`}
+                          className={`text-lg pointer-events-none font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap ${
+                            isActive ? "new-primary-text" : "text-gray-800"
+                          }`}
                         >
                           {/* Banner */}
                           Announcements
+                        </span>
+                      </>
+                    )}
+                  </NavLink>
+                </li>
+
+                {/* Users */}
+                <li>
+                  <NavLink
+                    to={`/admin/users`}
+                    // className="flex items-center gap-3 rounded-md px-2 py-2 text-gray-700 hover:bg-pink-50 transition-colors"
+                    className={({ isActive }) =>
+                      `${
+                        isActive ? "bg-pbrown/10" : ""
+                      } flex items-center gap-3 rounded-md px-2 py-2 text-gray-700 hover:bg-pbrown/10 transition-colors`
+                    }
+                  >
+                    {({ isActive }) => (
+                      <>
+                        <Users
+                          size={20}
+                          className={`shrink-0 ${
+                            isActive ? "new-primary-text" : "text-gray-500"
+                          }`}
+                        />
+                        <span
+                          className={`text-lg pointer-events-none font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap ${
+                            isActive ? "new-primary-text" : "text-gray-800"
+                          }`}
+                        >
+                          Users
                         </span>
                       </>
                     )}
@@ -209,7 +258,8 @@ function Sidebar() {
                     to={`/admin/settings`}
                     // className="flex items-center gap-3 rounded-md px-2 py-2 text-gray-700 hover:bg-pink-50 transition-colors"
                     className={({ isActive }) =>
-                      `${isActive ? "bg-pbrown/10" : ""
+                      `${
+                        isActive ? "bg-pbrown/10" : ""
                       } flex items-center gap-3 rounded-md px-2 py-2 text-gray-700 hover:bg-pbrown/10 transition-colors`
                     }
                   >
@@ -217,12 +267,14 @@ function Sidebar() {
                       <>
                         <Settings
                           size={20}
-                          className={`shrink-0 ${isActive ? "new-primary-text" : "text-gray-500"
-                            }`}
+                          className={`shrink-0 ${
+                            isActive ? "new-primary-text" : "text-gray-500"
+                          }`}
                         />
                         <span
-                          className={`text-lg pointer-events-none font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap ${isActive ? "new-primary-text" : "text-gray-800"
-                            }`}
+                          className={`text-lg pointer-events-none font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap ${
+                            isActive ? "new-primary-text" : "text-gray-800"
+                          }`}
                         >
                           Settings
                         </span>
