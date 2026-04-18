@@ -803,12 +803,21 @@ export const StaggeredMenu = ({
                 </div>
               </div>
               <div className="menu">
-                <Menu
-                  className="cursor-pointer"
-                  size={24}
-                  onClick={toggleMenu}
-                  color="#472823"
-                />
+                {open ? (
+                  <X
+                    className="cursor-pointer"
+                    size={24}
+                    onClick={toggleMenu}
+                    color="#472823"
+                  />
+                ) : (
+                  <Menu
+                    className="cursor-pointer"
+                    size={24}
+                    onClick={toggleMenu}
+                    color="#472823"
+                  />
+                )}
               </div>
             </div>
           </div>
