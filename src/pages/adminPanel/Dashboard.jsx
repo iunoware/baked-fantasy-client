@@ -18,6 +18,16 @@ import RecentOrders from "./components/RecentOrders";
 const url = "http://localhost:5000";
 
 function Dashboard() {
+  // custom date filter
+  const [dateRange, setDateRange] = useState({ from: "", to: "" });
+  const [dateRangeSales, setDateRangeSales] = useState({
+    essentialSales: 0,
+    cakeSales: 0,
+    courseSales: 0,
+  });
+  const [dateRangeRevenue, setDateRangeRevenue] = useState(0);
+  // custom date filter
+
   const [todaySales, setTodaySales] = useState({
     essentialSales: 0,
     cakeSales: 0,
@@ -80,7 +90,9 @@ function Dashboard() {
             ? revenue.week
             : chartFilter === "30days"
               ? revenue.month
-              : revenue.overall,
+              : chartFilter === "dateRange"
+                ? dateRangeRevenue
+                : revenue.overall,
     },
     {
       icon: <CakeSlice className="text-blue-600" />,
@@ -141,6 +153,17 @@ function Dashboard() {
     },
   ];
 
+  const seriesDateRange = [
+    {
+      name: "Sales",
+      data: [
+        dateRangeSales.essentialSales,
+        dateRangeSales.cakeSales,
+        dateRangeSales.courseSales,
+      ],
+    },
+  ];
+
   const options = {
     chart: {
       id: "sales-chart",
@@ -184,8 +207,29 @@ function Dashboard() {
     thisMonthSales.courseSales,
   ];
 
+  const seriesPieDateRange = [
+    dateRangeSales.essentialSales,
+    dateRangeSales.cakeSales,
+    dateRangeSales.courseSales,
+  ];
+
   const seriesPie = [overall.essentialSales, overall.cakeSales, overall.courseSales];
   // pie chart data
+
+  // custom date filter
+  async function dateRangeSalesFunc() {
+    if (!dateRange.from || !dateRange.to) return;
+    try {
+      const response = await axios.get(`${url}/orders/dateRange`, {
+        params: { from: dateRange.from, to: dateRange.to },
+      });
+      setDateRangeSales(response.data);
+      setDateRangeRevenue(response.data.revenue);
+      setCardFilter(response.data);
+    } catch (error) {
+      console.error(error.message);
+    }
+  }
 
   // sales for today
   async function todaySalesFunc() {
@@ -329,7 +373,7 @@ function Dashboard() {
           </div>
 
           {/* filter button */}
-          <div className="flex text-sm md:text-md gap-2 my-10 bg-white w-fit rounded-xl p-1 shadow-sm">
+          {/* <div className="flex text-sm md:text-md gap-2 my-10 bg-white w-fit rounded-xl p-1 shadow-sm">
             <div
               onClick={() => {
                 setChartFilter("today");
@@ -370,6 +414,82 @@ function Dashboard() {
             >
               Overall
             </div>
+          </div> */}
+          <div className="flex flex-wrap items-center text-sm md:text-md gap-2 my-10">
+            {/* existing time filter pills */}
+            <div className="flex bg-white w-fit rounded-xl p-1 shadow-sm">
+              <div
+                onClick={() => {
+                  setChartFilter("today");
+                  setCardFilter(todaySales);
+                }}
+                className={`${chartFilter === "today" ? "new-primary-bg text-white" : "hover:bg-gray-200"} p-2 cursor-pointer rounded-lg`}
+              >
+                Today
+              </div>
+              <div
+                onClick={() => {
+                  setChartFilter("7days");
+                  setCardFilter(thisWeekSales);
+                }}
+                className={`${chartFilter === "7days" ? "new-primary-bg text-white" : "hover:bg-gray-200"} p-2 cursor-pointer rounded-lg`}
+              >
+                Week
+              </div>
+              <div
+                onClick={() => {
+                  setChartFilter("30days");
+                  setCardFilter(thisMonthSales);
+                }}
+                className={`${chartFilter === "30days" ? "new-primary-bg text-white" : "hover:bg-gray-200"} p-2 cursor-pointer rounded-lg`}
+              >
+                Month
+              </div>
+              <div
+                onClick={() => {
+                  setChartFilter("overall");
+                  setCardFilter(overall);
+                }}
+                className={`${chartFilter === "overall" ? "new-primary-bg text-white" : "hover:bg-gray-200"} p-2 cursor-pointer rounded-lg`}
+              >
+                Overall
+              </div>
+            </div>
+
+            {/* date range picker */}
+            <div className="flex items-center gap-2 bg-white rounded-xl p-2 shadow-sm">
+              <input
+                type="date"
+                value={dateRange.from}
+                max={dateRange.to || undefined}
+                onChange={(e) =>
+                  setDateRange((prev) => ({ ...prev, from: e.target.value }))
+                }
+                className="border border-gray-200 rounded-lg p-1.5 text-sm focus:outline-none focus:ring-1 focus:ring-pink-300"
+              />
+              <span className="text-gray-400 text-xs">to</span>
+              <input
+                type="date"
+                value={dateRange.to}
+                min={dateRange.from || undefined}
+                onChange={(e) =>
+                  setDateRange((prev) => ({ ...prev, to: e.target.value }))
+                }
+                className="border border-gray-200 rounded-lg p-1.5 text-sm focus:outline-none focus:ring-1 focus:ring-pink-300"
+              />
+              <button
+                onClick={() => {
+                  if (dateRange.from && dateRange.to) {
+                    setChartFilter("dateRange");
+                    dateRangeSalesFunc();
+                  }
+                }}
+                disabled={!dateRange.from || !dateRange.to}
+                className="bg-pbrown hover:opacity-95 text-white px-3 py-1.5 rounded-lg text-sm disabled:opacity-40 disabled:cursor-not-allowed"
+              >
+                Apply
+              </button>
+            </div>
           </div>
 
           {/* top 4 cards */}
@@ -407,12 +527,6 @@ function Dashboard() {
               <div className="lg:col-span-3">
                 <div className={`${chartFilter === "today" ? "block" : "hidden"}`}>
                   <Chart options={options} series={seriesToday} type="bar" height={350} />
-                  {/* <Chart
-                  options={options}
-                  series={barSeries[chartFilter]}
-                  type="bar"
-                  height={350}
-                /> */}
                 </div>
 
                 <div className={`${chartFilter === "7days" ? "block" : "hidden"}`}>
@@ -435,6 +549,16 @@ function Dashboard() {
 
                 <div className={`${chartFilter === "overall" ? "block" : "hidden"}`}>
                   <Chart options={options} series={series} type="bar" height={350} />
+                </div>
+
+                {/* for date filter */}
+                <div className={`${chartFilter === "dateRange" ? "block" : "hidden"}`}>
+                  <Chart
+                    options={options}
+                    series={seriesDateRange}
+                    type="bar"
+                    height={350}
+                  />
                 </div>
               </div>
 
@@ -471,6 +595,16 @@ function Dashboard() {
                   <Chart
                     options={optionsPie}
                     series={seriesPie}
+                    type="pie"
+                    height={350}
+                  />
+                </div>
+
+                {/* for date filter */}
+                <div className={`${chartFilter === "dateRange" ? "block" : "hidden"}`}>
+                  <Chart
+                    options={optionsPie}
+                    series={seriesPieDateRange}
                     type="pie"
                     height={350}
                   />
