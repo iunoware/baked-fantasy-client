@@ -52,6 +52,7 @@ import { LoadingProvider } from "./context/LoadingContext.jsx";
 import { GlobalLoader } from "./components/GlobalLoader.jsx";
 import CompleteProfileModal from "./components/CompleteProfileModal.jsx";
 import { useAuth } from "./context/AuthContext.jsx";
+import Announcements from "./pages/adminPanel/Announcements.jsx";
 
 import { getCookie, removeCookie } from "./utils/cookieUtils";
 
@@ -174,6 +175,14 @@ function AppContent() {
           element={
             <ProtectedAdminRoute>
               <OrdersAdmin />
+            </ProtectedAdminRoute>
+          }
+        />
+        <Route
+          path="/admin/announcements"
+          element={
+            <ProtectedAdminRoute>
+              <Announcements />
             </ProtectedAdminRoute>
           }
         />

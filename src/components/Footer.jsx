@@ -122,6 +122,7 @@ export default function Footer() {
               </h3>
               <ul className="space-y-3 text-white/80">
                 <a
+                  href="https://maps.app.goo.gl/LTWYRQ9R5etirRqYA"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:text-white cursor-pointer flex gap-2"
