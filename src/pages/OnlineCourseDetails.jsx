@@ -155,7 +155,7 @@ function ReviewSection({ courseId }) {
 
   return (
     <div className="mt-10">
-      <h2 className="text-2xl font-bold mb-6">Student Reviews</h2>
+      <h2 className="text-2xl font-bold mb-6">Reviews</h2>
 
       {isLoggedIn && showForm && (
         <div className="bg-white rounded-xl shadow p-5 mb-8">
@@ -481,7 +481,7 @@ function OnlineCourseDetails() {
     );
 
   return (
-    <div className="bg pt-20 relative">
+    <div className="bg pt-20 relative" onContextMenu={(e) => e.preventDefault()}>
       <div className="py-12 px-5 border-b border-gray-400 ">
         <Link
           to="/courses/my-learning"

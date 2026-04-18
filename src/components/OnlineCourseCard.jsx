@@ -65,22 +65,23 @@ function OnlineCourseCard(props) {
           />
         </div>
 
-        <div className="p-5 w-full flex flex-col justify-between h-80">
+        <div className="p-5 w-full flex flex-col justify-between min-h-70 max-h-80">
           <div className="space-y-3">
             <h2 className="font-semibold text-2xl">{props.title}</h2>
             <p className="text-gray-700 line-clamp-2">{props.description}</p>
             <p className="text-gray-700">
-              <Clock className="inline" size={15} /> {props.duration} •{" "}
+              <Clock className="inline mb-0.5" size={15} /> {props.duration} •{" "}
               {/* <Users className="inline" size={15} />  */}
               {props.totalStudents ? props.totalStudents : 0} students
             </p>
 
             <div className="flex gap-2 items-center">
-              <p className="text-2xl font-semibold">{props.rating}</p>
+              <p className="text-2xl font-semibold">{Number(props.rating).toFixed(1)}</p>
               <div>
                 <StarRating rating={props.rating} />
               </div>
-              <p className="text-gray-400">{Number(props.totalReviews).toFixed(1)}</p>
+              {/* <p className="text-gray-400">{Number(props.totalReviews).toFixed(1)}</p> */}
+              <p className="text-gray-400">{props.totalReviews}</p>
             </div>
 
             <p className="text-2xl font-semibold new-primary-text">
