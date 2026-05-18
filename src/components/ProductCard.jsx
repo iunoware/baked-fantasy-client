@@ -41,7 +41,6 @@ const ProductCard = ({
   const added = quantity > 0;
 
   // Add to cart handler
-  // Add to cart handler
   const handleCart = async (e) => {
     e.preventDefault();
     if (!inStock || isAdding) return;
