@@ -41,6 +41,7 @@ export function DeliveryPage({
   onPrevious,
 }) {
   const [isAddingAddress, setIsAddingAddress] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [addresses, setAddresses] = useState([]);
   const [distanceKm, setDistanceKm] = useState(null);
   const [newAddress, setNewAddress] = useState({
@@ -51,6 +52,7 @@ export function DeliveryPage({
     lat: null,
     lng: null,
   });
+  const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
 
   const filteredItems = cartItems.filter(
     (item) => item.type !== "essential" && item.deliveryType === "local",
@@ -219,6 +221,145 @@ Please assist with delivery.
     const km = meters / 1000;
     return Math.round(10 * km);
   }
+
+  const loadRazorpayScript = () => {
+    return new Promise((resolve) => {
+      const script = document.createElement("script");
+      script.src = "https://checkout.razorpay.com/v1/checkout.js";
+      script.onload = () => resolve(true);
+      script.onerror = () => resolve(false);
+      document.body.appendChild(script);
+    });
+  };
+
+  const handlePayment = async () => {
+    console.log("Order Summary:", orderSummary);
+    console.log("Amount:", orderSummary.total * 100);
+
+    try {
+      setLoading(true);
+      const res = await loadRazorpayScript();
+
+      if (!res) {
+        alert("Razorpay SDK failed to load. Are you online?");
+        setLoading(false);
+        return;
+      }
+
+      // Create order
+      const response = await fetch(`${API_URL}/api/create-order`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          amount: orderSummary.total * 100, // amount in paise
+          currency: "INR",
+          receipt: `receipt_${Date.now()}`,
+        }),
+      });
+
+      if (!response.ok) {
+        let errorMessage = "Failed to create order";
+        try {
+          const errData = await response.json();
+          if (errData.error) errorMessage = errData.error;
+        } catch (e) {
+          // Ignore JSON parse errors
+        }
+        throw new Error(errorMessage);
+      }
+
+      const orderData = await response.json();
+      console.log("ORDER DATA:", orderData);
+
+      const options = {
+        key: import.meta.env.VITE_RAZORPAY_KEY_ID,
+        amount: orderData.amount,
+        currency: orderData.currency,
+        name: "The Baked Fantasy",
+        description: "Order Payment",
+        order_id: orderData.order_id,
+        handler: async function (response) {
+          try {
+            // Verify payment signature
+            const verifyRes = await fetch(`${API_URL}/api/verify-payment`, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                razorpay_order_id: response.razorpay_order_id,
+                razorpay_payment_id: response.razorpay_payment_id,
+                razorpay_signature: response.razorpay_signature,
+              }),
+            });
+
+            if (verifyRes.ok) {
+              const result = await verifyRes.json();
+              if (result.success) {
+                onNext(); // Proceed to ConfirmationPage
+              }
+            } else {
+              alert("Payment verification failed. Please contact support.");
+              setLoading(false);
+            }
+          } catch (error) {
+            console.error("Verification error:", error);
+            alert("Payment verification failed. Please contact support.");
+            setLoading(false);
+          }
+        },
+        prefill: {
+          name: "Customer",
+          email: "customer@example.com",
+          contact: "9999999999",
+        },
+        notes: {
+          subtotal: orderSummary.subtotal,
+          taxes: orderSummary.taxes,
+          deliveryFee: orderSummary.deliveryFee,
+          // paymentMethod: selectedPayment.type,
+        },
+        theme: {
+          color: "#8B4513",
+        },
+        modal: {
+          ondismiss: function () {
+            setLoading(false);
+          },
+        },
+      };
+
+      console.log("OPTIONS:", options);
+      console.log("Razorpay Exists:", window.Razorpay);
+
+      const paymentObject = new window.Razorpay(options);
+
+      paymentObject.on("payment.failed", function (response) {
+        console.error("Payment Failed", response.error);
+        alert(`Payment failed: ${response.error.description}`);
+        setLoading(false);
+      });
+
+      paymentObject.open();
+    } catch (error) {
+      console.error("FULL PAYMENT ERROR:", error);
+
+      if (error.response) {
+        console.error("Response Data:", error.response.data);
+        console.error("Response Status:", error.response.status);
+      }
+
+      alert(
+        error?.message ||
+          error?.response?.data?.error ||
+          "Error initiating checkout.",
+      );
+
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-[#fafafa] pb-24">
@@ -566,15 +707,23 @@ Please assist with delivery.
                       </a>
                     </div>
                   ) : (
+                    // <Button
+                    //   disabled={!selectedAddress || distanceKm === null}
+                    //   onClick={onNext}
+                    //   className="w-full h-14 md:h-16 rounded-2xl bg-sbrown hover:bg-pbrown text-white font-black uppercase tracking-[0.15em] text-[10px] md:text-xs transition-all hover:-translate-y-1 active:scale-[0.98] disabled:opacity-30 flex items-center justify-center gap-3"
+                    // >
+                    //   {distanceKm === null && selectedAddress
+                    //     ? "Calculating distance..."
+                    //     : "Proceed to Payment"}
+                    //   <ArrowRight size={18} />
+                    // </Button>
                     <Button
-                      disabled={!selectedAddress || distanceKm === null}
-                      onClick={onNext}
-                      className="w-full h-14 md:h-16 rounded-2xl bg-sbrown hover:bg-pbrown text-white font-black uppercase tracking-[0.15em] text-[10px] md:text-xs transition-all hover:-translate-y-1 active:scale-[0.98] disabled:opacity-30 flex items-center justify-center gap-3"
+                      // disabled={!selectedPayment || loading}
+                      onClick={handlePayment}
+                      className="w-full h-14 md:h-16 rounded-2xl bg-sbrown hover:bg-pbrown text-white font-black uppercase tracking-[0.15em] text-[10px] md:text-xs transition-all hover:-translate-y-1 active:scale-[0.98] disabled:opacity-30 flex items-center justify-center gap-3 shadow-xl shadow-brown/10"
                     >
-                      {distanceKm === null && selectedAddress
-                        ? "Calculating distance..."
-                        : "Proceed to Payment"}
-                      <ArrowRight size={18} />
+                      {loading ? "Processing Payment..." : "Place Order"}
+                      {!loading && <ArrowRight size={18} />}
                     </Button>
                   )}
 
