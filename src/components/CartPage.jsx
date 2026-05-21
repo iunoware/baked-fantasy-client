@@ -230,7 +230,7 @@ const TabbedCart = ({
   //     }
   //   });
   // };
-  console.log("this is the cart items", cartItems);
+  // console.log("this is the cart items", cartItems);
 
   const filteredItems = useMemo(() => {
     return {
