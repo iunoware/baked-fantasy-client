@@ -13,7 +13,7 @@ export default function App() {
 
   const [promoCode, setPromoCode] = useState("");
   const [selectedAddress, setSelectedAddress] = useState(null);
-  const [selectedPayment, setSelectedPayment] = useState(null);
+  // const [selectedPayment, setSelectedPayment] = useState(null);
   const [deliveryInstructions, setDeliveryInstructions] = useState("");
 
   const [orderSummary, setOrderSummary] = useState({
@@ -59,22 +59,22 @@ export default function App() {
     }));
   }, [cartItems, promoCode, checkoutType]);
 
-  const paymentMethods = [
-    {
-      id: "1",
-      type: "card",
-      label: "Credit/Debit Card",
-      details: "**** **** **** 1234",
-    },
-    { id: "2", type: "upi", label: "UPI", details: "user@paytm" },
-    {
-      id: "3",
-      type: "wallet",
-      label: "Paytm Wallet",
-      details: "₹2,450 available",
-    },
-    { id: "4", type: "cod", label: "Cash on Delivery" },
-  ];
+  // const paymentMethods = [
+  //   {
+  //     id: "1",
+  //     type: "card",
+  //     label: "Credit/Debit Card",
+  //     details: "**** **** **** 1234",
+  //   },
+  //   { id: "2", type: "upi", label: "UPI", details: "user@paytm" },
+  //   {
+  //     id: "3",
+  //     type: "wallet",
+  //     label: "Paytm Wallet",
+  //     details: "₹2,450 available",
+  //   },
+  //   { id: "4", type: "cod", label: "Cash on Delivery" },
+  // ];
 
   const handleNextStep = (type) => {
     if (currentStep === "cart") {
@@ -130,7 +130,7 @@ export default function App() {
           onPrevious={handlePreviousStep}
         />
       )}
-      {currentStep === "payment" && (
+      {/* {currentStep === "payment" && (
         <PaymentPage
           paymentMethods={paymentMethods}
           selectedPayment={selectedPayment}
@@ -139,7 +139,7 @@ export default function App() {
           onNext={handleNextStep}
           onPrevious={handlePreviousStep}
         />
-      )}
+      )} */}
       {currentStep === "confirmation" && (
         <ConfirmationPage
           orderNumber={orderNumber}

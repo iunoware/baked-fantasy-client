@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { X, MapPin, Home, Building, ArrowRight, Loader2 } from "lucide-react";
-import AddressAutocomplete from "./AddressAutocomplete";
+import AddressAutocomplete from "../components/AddressAutoComplete.jsx";
 import api from "../api";
 import toast from "react-hot-toast";
 import { useAuth } from "@/context/AuthContext.jsx";
@@ -19,7 +19,7 @@ const CompleteProfileModal = ({ isOpen, onClose }) => {
 
   useEffect(() => {
     if (isOpen && currentUser) {
-      setNewAddress(prev => ({
+      setNewAddress((prev) => ({
         ...prev,
         building: currentUser.address1 || prev.building,
         address: currentUser.fullAddress || prev.address,
@@ -60,7 +60,7 @@ const CompleteProfileModal = ({ isOpen, onClose }) => {
         fullAddress: newAddress.address,
         landmark: newAddress.landmark,
         city: "Madurai",
-        pincode: "625001"
+        pincode: "625001",
       };
 
       // 3. Delegate to Context to handle resume action and state updates
@@ -83,7 +83,6 @@ const CompleteProfileModal = ({ isOpen, onClose }) => {
 
       {/* Modal - Theme matching DeliveryPage Dialog */}
       <div className="relative w-full max-w-[500px] bg-white rounded-[2.5rem] shadow-3xl overflow-hidden flex flex-col animate-in zoom-in-95 duration-300">
-
         {/* Header - Matching DeliveryPage style */}
         <div className="bg-pbrown p-6 text-white relative">
           <button
@@ -93,7 +92,9 @@ const CompleteProfileModal = ({ isOpen, onClose }) => {
             <X size={18} className="text-white" />
           </button>
           <div className="relative text-left">
-            <h2 className="text-2xl font-black tracking-tighter">Enter Delivery Details</h2>
+            <h2 className="text-2xl font-black tracking-tighter">
+              Enter Delivery Details
+            </h2>
             <p className="text-pink-100/70 font-bold uppercase text-[10px] tracking-widest mt-1">
               Complete your profile to continue shopping
             </p>
@@ -116,11 +117,14 @@ const CompleteProfileModal = ({ isOpen, onClose }) => {
                 <button
                   key={type.id}
                   type="button"
-                  onClick={() => setNewAddress({ ...newAddress, type: type.id })}
-                  className={`flex-1 flex flex-col items-center gap-2 p-3 rounded-2xl border-2 transition-all active:scale-95 ${newAddress.type === type.id
+                  onClick={() =>
+                    setNewAddress({ ...newAddress, type: type.id })
+                  }
+                  className={`flex-1 flex flex-col items-center gap-2 p-3 rounded-2xl border-2 transition-all active:scale-95 ${
+                    newAddress.type === type.id
                       ? "bg-[#fff4d9] border-pbrown text-pbrown shadow-sm"
                       : "bg-white border-gray-100 text-gray-400 hover:border-gray-200"
-                    }`}
+                  }`}
                 >
                   {type.icon}
                   <span className="text-[10px] font-black uppercase tracking-wider">
