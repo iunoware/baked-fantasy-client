@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { X, MapPin, Home, Building, ArrowRight, Loader2 } from "lucide-react";
-import AddressAutocomplete from "../components/AddressAutoComplete.jsx";
+// import AddressAutocomplete from "../components/AddressAutoComplete";
+import AddressAutocomplete from "./AddressAutoComplete";
 import api from "../api";
 import toast from "react-hot-toast";
 import { useAuth } from "@/context/AuthContext.jsx";
