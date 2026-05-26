@@ -77,7 +77,7 @@ export function OrdersTab() {
                   className="w-10 h-10 rounded-lg border-2 border-white bg-gray-100 overflow-hidden shadow-sm"
                 >
                   <img
-                    src={`http://localhost:5000${item.image}`}
+                    src={`${import.meta.env.VITE_API_URL}${item.image}`}
                     alt=""
                     className="w-full h-full object-cover"
                   />

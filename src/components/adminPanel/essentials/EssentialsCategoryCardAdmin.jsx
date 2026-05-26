@@ -50,7 +50,7 @@ function EssentialsCategoryCardAdmin(props) {
 
     try {
       const response = await axios.patch(
-        `http://localhost:5000/ess-categories/${props.categoryId}`,
+        `${import.meta.env.VITE_API_URL}/ess-categories/${props.categoryId}`,
         formData,
         {
           headers: {
@@ -80,7 +80,7 @@ function EssentialsCategoryCardAdmin(props) {
   async function deleteFunction() {
     try {
       const response = await axios.delete(
-        `http://localhost:5000/ess-categories/${props.categoryId}`,
+        `${import.meta.env.VITE_API_URL}/ess-categories/${props.categoryId}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -354,9 +354,9 @@ function EssentialsCategoryCardAdmin(props) {
             />
           </div>
           <img
-            // src={`http://localhost:5000${props.image}`}
+            // src={`${import.meta.env.VITE_API_URL}${props.image}`}
             src={
-              props.image ? `http://localhost:5000${props.image}` : "/images/fallback.png"
+              props.image ? `${import.meta.env.VITE_API_URL}${props.image}` : "/images/fallback.png"
             }
             alt="course-img"
             onError={(e) => {

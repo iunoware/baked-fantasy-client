@@ -53,7 +53,7 @@ function OnlineCourseCard(props) {
           <img
             src={
               props.thumbnail
-                ? `http://localhost:5000${props.thumbnail}`
+                ? `${import.meta.env.VITE_API_URL}${props.thumbnail}`
                 : "/images/fallback.png"
             }
             alt="course-img"

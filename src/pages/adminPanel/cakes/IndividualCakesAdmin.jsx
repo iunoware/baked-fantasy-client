@@ -52,7 +52,7 @@ function IndividualCakesAdmin() {
   async function fetchProducts() {
     try {
       const response = await axios.get(
-        `http://localhost:5000/products/category/${categoryName}`,
+        `${import.meta.env.VITE_API_URL}/products/category/${categoryName}`,
       );
       // console.log("products id: ", response.data[1]._id, response.data[1].title);
       setProducts(response.data);
@@ -148,7 +148,7 @@ function IndividualCakesAdmin() {
 
       try {
         const postResponse = await axios.post(
-          `http://localhost:5000/products`,
+          `${import.meta.env.VITE_API_URL}/products`,
           formData,
           {
             headers: {

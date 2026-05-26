@@ -28,7 +28,7 @@ function BannerAdmin() {
     formData.append("active", active);
 
     try {
-      const postBanner = await axios.patch("http://localhost:5000/banner", formData, {
+      const postBanner = await axios.patch(`${import.meta.env.VITE_API_URL}/banner`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
           Authorization: ` Bearer ${token}`,
@@ -49,7 +49,7 @@ function BannerAdmin() {
   useEffect(() => {
     const fetchBaner = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/banner");
+        const res = await axios.get(`${import.meta.env.VITE_API_URL}/banner`);
         setBanner(res.data[0]);
         console.log("banner data: ", res.data[0]);
       } catch (error) {
@@ -77,7 +77,7 @@ function BannerAdmin() {
       setActive(false);
 
       axios
-        .patch("http://localhost:5000/banner", { active: false })
+        .patch(`${import.meta.env.VITE_API_URL}/banner`, { active: false })
         .then(() => toast.success("Banner automatically deactivated 🔴"))
         .catch((err) => console.error("Auto deactivate error:", err));
     }

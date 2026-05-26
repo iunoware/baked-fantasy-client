@@ -14,7 +14,7 @@ function SpecificCategory() {
     const fetchProducts = async () => {
       try {
         const res = await axios.get(
-          `http://localhost:5000/essentials/category/${categoryName}`
+          `${import.meta.env.VITE_API_URL}/essentials/category/${categoryName}`
         );
         setProducts(res.data);
       } catch (err) {
@@ -52,7 +52,7 @@ function SpecificCategory() {
                 key={p._id}
                 id={p._id} // ✅ pass id
                 category={categoryName}
-                img={`http://localhost:5000${p.images?.[0]}`}
+                img={`${import.meta.env.VITE_API_URL}${p.images?.[0]}`}
                 originalPrice={p.originalPrice}
                 discountedPrice={p.discountedPrice}
                 title={p.title}

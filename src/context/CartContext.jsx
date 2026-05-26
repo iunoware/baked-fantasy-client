@@ -50,7 +50,7 @@ export const CartProvider = ({ children }) => {
             price: item.productId.discountedPrice || item.productId.price,
             quantity: item.quantity,
             image: item.productId.images?.[0]
-              ? `http://localhost:5000${item.productId.images[0]}`
+              ? `${import.meta.env.VITE_API_URL}${item.productId.images[0]}`
               : "",
             description: item.productId.subject,
             category: item.productId.category,
@@ -97,7 +97,7 @@ export const CartProvider = ({ children }) => {
               price: i.productId.discountedPrice || i.productId.price,
               quantity: i.quantity,
               image: i.productId.images?.[0]
-                ? `http://localhost:5000${i.productId.images[0]}`
+                ? `${import.meta.env.VITE_API_URL}${i.productId.images[0]}`
                 : "",
               type:
                 i.productId.productType === "Essential"

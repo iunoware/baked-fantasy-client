@@ -54,7 +54,7 @@ function IndividualEssentialAdmin() {
     async function fetchProducts() {
       try {
         const response = await axios.get(
-          `http://localhost:5000/essentials/category/${categoryName}`,
+          `${import.meta.env.VITE_API_URL}/essentials/category/${categoryName}`,
         );
         // console.log("products id: ", response.data[1]._id, response.data[1].title);
         setProducts(response.data);
@@ -133,7 +133,7 @@ function IndividualEssentialAdmin() {
 
       try {
         const postResponse = await axios.post(
-          `http://localhost:5000/bakingEssentials`,
+          `${import.meta.env.VITE_API_URL}/bakingEssentials`,
           formData,
           {
             headers: {

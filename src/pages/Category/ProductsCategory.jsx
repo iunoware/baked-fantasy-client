@@ -11,7 +11,7 @@ function Categories() {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/categories");
+        const res = await axios.get(`${import.meta.env.VITE_API_URL}/categories`);
         setProducts(res.data);
       } catch (err) {
         console.error("Error fetching products:", err);

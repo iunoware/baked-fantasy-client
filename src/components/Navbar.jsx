@@ -513,7 +513,7 @@ export const StaggeredMenu = ({
     }
 
     try {
-      const res = await fetch(`http://localhost:5000/search?q=${value}`);
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/search?q=${value}`);
       const data = await res.json();
       setSuggestions(data);
       setShowSuggestions(true);
@@ -612,7 +612,7 @@ export const StaggeredMenu = ({
                         <img
                           src={
                             item.images?.[0]
-                              ? `http://localhost:5000${item.images[0]}`
+                              ? `${import.meta.env.VITE_API_URL}${item.images[0]}`
                               : "/images/placeholder.png"
                           }
                           alt={item.title}
@@ -853,7 +853,7 @@ export const StaggeredMenu = ({
                       <img
                         src={
                           item.images?.[0]
-                            ? `http://localhost:5000${item.images[0]}`
+                            ? `${import.meta.env.VITE_API_URL}${item.images[0]}`
                             : "/images/placeholder.png"
                         }
                         alt={item.title}

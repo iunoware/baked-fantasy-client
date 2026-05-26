@@ -36,7 +36,7 @@ function ProductDetailPage({ onNavigate, onAddToCart }) {
     const fetchProduct = async () => {
       try {
         const res = await axios.get(
-          `http://localhost:5000/bakingEssentials/${productId}`
+          `${import.meta.env.VITE_API_URL}/bakingEssentials/${productId}`
         );
         setProduct(res.data);
       } catch (err) {
@@ -54,7 +54,7 @@ function ProductDetailPage({ onNavigate, onAddToCart }) {
     const fetchRelated = async () => {
       try {
         const res = await axios.get(
-          `http://localhost:5000/essential/${productId}/related`
+          `${import.meta.env.VITE_API_URL}/essential/${productId}/related`
         );
         setRelatedProducts(res.data);
       } catch (err) {
@@ -107,7 +107,7 @@ function ProductDetailPage({ onNavigate, onAddToCart }) {
       id: productId,
       name: product.title,
       price: product.discountedPrice || product.originalPrice,
-      image: `http://localhost:5000${product.images?.[0]}`,
+      image: `${import.meta.env.VITE_API_URL}${product.images?.[0]}`,
       description: product.description,
       type: "essential",
     });
@@ -145,7 +145,7 @@ function ProductDetailPage({ onNavigate, onAddToCart }) {
           <div className="space-y-4">
             <div className="relative bg-white rounded-2xl p-4 shadow-card">
               <img
-                src={`http://localhost:5000${product.images?.[selectedImage]}`}
+                src={`${import.meta.env.VITE_API_URL}${product.images?.[selectedImage]}`}
                 alt={product.title}
                 className="w-full h-96 object-cover rounded-xl"
               />
@@ -164,7 +164,7 @@ function ProductDetailPage({ onNavigate, onAddToCart }) {
                   }`}
                 >
                   <img
-                    src={`http://localhost:5000${image}`}
+                    src={`${import.meta.env.VITE_API_URL}${image}`}
                     alt={`${product.title} view ${index + 1}`}
                     className="w-full h-20 object-cover rounded"
                   />
@@ -345,7 +345,7 @@ function ProductDetailPage({ onNavigate, onAddToCart }) {
               key={related._id}
               id={related._id}
               category={related.category?.title}
-              img={`http://localhost:5000${related.images?.[0]}`}
+              img={`${import.meta.env.VITE_API_URL}${related.images?.[0]}`}
               // price={related.price}
               originalPrice={related.originalPrice}
               discountedPrice={related.discountedPrice}

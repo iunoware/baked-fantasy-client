@@ -8,7 +8,7 @@ import Loading from "../components/Loading.jsx";
 import { useAuth } from "../context/AuthContext";
 import api from "@/api.js";
 
-// const url = `http://localhost:5000`;
+// const url = import.meta.env.VITE_API_URL;
 
 function OnlineCourse() {
   let [courses, setCourses] = useState([]);

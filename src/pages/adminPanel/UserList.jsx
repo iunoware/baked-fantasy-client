@@ -34,7 +34,7 @@ const UserList = () => {
     const fetchUsers = async () => {
       try {
         setLoading(true);
-        const res = await axios.get("http://localhost:5000/users");
+        const res = await axios.get(`${import.meta.env.VITE_API_URL}/users`);
         setUsers(res.data.users);
       } catch (err) {
         console.error("Error fetching users", err);

@@ -15,7 +15,7 @@ function SettingsAdmin() {
   useEffect(() => {
     const FetchAdmin = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/admin/user");
+        const res = await axios.get(`${import.meta.env.VITE_API_URL}/admin/user`);
         setAdmin(res.data);
       } catch (error) {
         console.error("Error fetching admins", error);
@@ -41,7 +41,7 @@ function SettingsAdmin() {
 
     try {
       await axios.post(
-        `http://localhost:5000/admin/delete/${selectedAdminId}`,
+        `${import.meta.env.VITE_API_URL}/admin/delete/${selectedAdminId}`,
         {
           masterName,
           masterPassword,
@@ -73,7 +73,7 @@ function SettingsAdmin() {
     }
 
     try {
-      const res = await axios.post("http://localhost:5000/admin/newUser", {
+      const res = await axios.post(`${import.meta.env.VITE_API_URL}/admin/newUser`, {
         name,
         password,
         confirmPass,
