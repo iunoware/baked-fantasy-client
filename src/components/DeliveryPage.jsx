@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from "react";
 // import AddressAutocomplete from "./AddressAutocomplete";
-import AddressAutocomplete from "src/components/AddressAutoComplete.jsx";
+import AddressAutocomplete from "./AddressAutoComplete";
 import {
   MapPin,
   Plus,
@@ -55,11 +55,11 @@ export function DeliveryPage({
     lat: null,
     lng: null,
   });
-  const [userDetails, setUserDetails] = useState({
+  const userDetails = {
     name: user.name,
     email: user.email,
     phone: user.mobileNumber,
-  });
+  };
   const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
 
   const filteredItems = cartItems.filter(
