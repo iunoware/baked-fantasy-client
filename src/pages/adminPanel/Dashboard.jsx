@@ -15,7 +15,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import RecentOrders from "./components/RecentOrders";
 
-const url = "http://localhost:5000";
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
 
 function Dashboard() {
   // custom date filter
@@ -116,7 +116,11 @@ function Dashboard() {
   const seriesToday = [
     {
       name: "Sales",
-      data: [todaySales.essentialSales, todaySales.cakeSales, todaySales.courseSales],
+      data: [
+        todaySales.essentialSales,
+        todaySales.cakeSales,
+        todaySales.courseSales,
+      ],
       // data: [15, 80, 77],
     },
   ];
@@ -213,14 +217,18 @@ function Dashboard() {
     dateRangeSales.courseSales,
   ];
 
-  const seriesPie = [overall.essentialSales, overall.cakeSales, overall.courseSales];
+  const seriesPie = [
+    overall.essentialSales,
+    overall.cakeSales,
+    overall.courseSales,
+  ];
   // pie chart data
 
   // custom date filter
   async function dateRangeSalesFunc() {
     if (!dateRange.from || !dateRange.to) return;
     try {
-      const response = await axios.get(`${url}/orders/dateRange`, {
+      const response = await axios.get(`${API_URL}/orders/dateRange`, {
         params: { from: dateRange.from, to: dateRange.to },
       });
       setDateRangeSales(response.data);
@@ -234,7 +242,7 @@ function Dashboard() {
   // sales for today
   async function todaySalesFunc() {
     try {
-      const response = await axios.get(`${url}/orders/today`);
+      const response = await axios.get(`${API_URL}/orders/today`);
       setTodaySales(response.data);
       // setCardFilter(response.data);
       setCardFilter((prev) => ({
@@ -249,7 +257,7 @@ function Dashboard() {
   // sales for the week
   async function weekSalesFunc() {
     try {
-      const response = await axios.get(`${url}/orders/thisWeek`);
+      const response = await axios.get(`${API_URL}/orders/thisWeek`);
       setThisWeekSales(response.data);
       // setCardFilter(response.data);
       setCardFilter((prev) => ({
@@ -264,7 +272,7 @@ function Dashboard() {
   // sales for current month
   async function thisMonthSalesFunc() {
     try {
-      const response = await axios.get(`${url}/orders/thisMonth`);
+      const response = await axios.get(`${API_URL}/orders/thisMonth`);
       setThisMonthSales(response.data);
       // setCardFilter(response.data);
       setCardFilter((prev) => ({
@@ -279,7 +287,7 @@ function Dashboard() {
   // overall sales
   async function overAllSalesFunc() {
     try {
-      const response = await axios.get(`${url}/orders/overall`);
+      const response = await axios.get(`${API_URL}/orders/overall`);
       setOverall(response.data);
       setCardFilter((prev) => ({
         ...prev,
@@ -293,7 +301,7 @@ function Dashboard() {
   // today revenue
   async function todayRevenueFunc() {
     try {
-      const response = await axios.get(`${url}/orders/todayRevenue`);
+      const response = await axios.get(`${API_URL}/orders/todayRevenue`);
       // setCardFilter(response.data);
       // setTodayRevenue(response.data.totalRevenue);
       setRevenue((prev) => ({
@@ -308,7 +316,7 @@ function Dashboard() {
   // this week revenue
   async function thisWeekRevenue() {
     try {
-      const response = await axios.get(`${url}/orders/thisWeekRevenue`);
+      const response = await axios.get(`${API_URL}/orders/thisWeekRevenue`);
       // setCardFilter(response.data.totalRevenue);
       // setWeekRevenue(response.data.totalRevenue);
       setRevenue((prev) => ({
@@ -323,7 +331,7 @@ function Dashboard() {
   // this month revenue
   async function thisMonthRevenue() {
     try {
-      const response = await axios.get(`${url}/orders/thisMonthRevenue`);
+      const response = await axios.get(`${API_URL}/orders/thisMonthRevenue`);
       // setCardFilter(response.data.totalRevenue);
       // setMonthRevenue(response.data.totalRevenue);
       setRevenue((prev) => ({
@@ -338,7 +346,7 @@ function Dashboard() {
   // grand total revenue
   async function revenueFunc() {
     try {
-      const response = await axios.get(`${url}/orders/revenue`);
+      const response = await axios.get(`${API_URL}/orders/revenue`);
       // setTotalRevenue(response.data.totalRevenue);
       setRevenue((prev) => ({
         ...prev,
@@ -367,7 +375,9 @@ function Dashboard() {
         <div className="lg:pl-28 pl-20 pt-10 pr-10">
           <div className="flex flex-col md:flex-row gap-5 md:gap-0 justify-between">
             <div>
-              <h1 className="text-3xl lora new-primary-text font-semibold">Dashboard</h1>
+              <h1 className="text-3xl lora new-primary-text font-semibold">
+                Dashboard
+              </h1>
               <p className="text-md pt-1">Welcome Back Admin</p>
             </div>
           </div>
@@ -541,7 +551,9 @@ function Dashboard() {
               >
                 <div className="flex justify-between">
                   {/* svg icon */}
-                  <div className={`${card.color} w-fit p-3 rounded-lg`}>{card.icon}</div>
+                  <div className={`${card.color} w-fit p-3 rounded-lg`}>
+                    {card.icon}
+                  </div>
 
                   {/* percentage number */}
                   <p className="my-2 text-black text-xl">{card.type}</p>
@@ -565,11 +577,20 @@ function Dashboard() {
             <div className="grid lg:grid-cols-4 grid-cols-1">
               {/* line chart */}
               <div className="lg:col-span-3">
-                <div className={`${chartFilter === "today" ? "block" : "hidden"}`}>
-                  <Chart options={options} series={seriesToday} type="bar" height={350} />
+                <div
+                  className={`${chartFilter === "today" ? "block" : "hidden"}`}
+                >
+                  <Chart
+                    options={options}
+                    series={seriesToday}
+                    type="bar"
+                    height={350}
+                  />
                 </div>
 
-                <div className={`${chartFilter === "7days" ? "block" : "hidden"}`}>
+                <div
+                  className={`${chartFilter === "7days" ? "block" : "hidden"}`}
+                >
                   <Chart
                     options={options}
                     series={seriesThisWeek}
@@ -578,7 +599,9 @@ function Dashboard() {
                   />
                 </div>
 
-                <div className={`${chartFilter === "30days" ? "block" : "hidden"}`}>
+                <div
+                  className={`${chartFilter === "30days" ? "block" : "hidden"}`}
+                >
                   <Chart
                     options={options}
                     series={seriesThisMonth}
@@ -587,12 +610,21 @@ function Dashboard() {
                   />
                 </div>
 
-                <div className={`${chartFilter === "overall" ? "block" : "hidden"}`}>
-                  <Chart options={options} series={series} type="bar" height={350} />
+                <div
+                  className={`${chartFilter === "overall" ? "block" : "hidden"}`}
+                >
+                  <Chart
+                    options={options}
+                    series={series}
+                    type="bar"
+                    height={350}
+                  />
                 </div>
 
                 {/* for date filter */}
-                <div className={`${chartFilter === "dateRange" ? "block" : "hidden"}`}>
+                <div
+                  className={`${chartFilter === "dateRange" ? "block" : "hidden"}`}
+                >
                   <Chart
                     options={options}
                     series={seriesDateRange}
@@ -604,7 +636,9 @@ function Dashboard() {
 
               {/* pie chart */}
               <div className="lg:col-span-1">
-                <div className={`${chartFilter === "today" ? "block" : "hidden"}`}>
+                <div
+                  className={`${chartFilter === "today" ? "block" : "hidden"}`}
+                >
                   <Chart
                     options={optionsPie}
                     series={seriesPieToday}
@@ -613,7 +647,9 @@ function Dashboard() {
                   />
                 </div>
 
-                <div className={`${chartFilter === "7days" ? "block" : "hidden"}`}>
+                <div
+                  className={`${chartFilter === "7days" ? "block" : "hidden"}`}
+                >
                   <Chart
                     options={optionsPie}
                     series={seriesPieWeek}
@@ -622,7 +658,9 @@ function Dashboard() {
                   />
                 </div>
 
-                <div className={`${chartFilter === "30days" ? "block" : "hidden"}`}>
+                <div
+                  className={`${chartFilter === "30days" ? "block" : "hidden"}`}
+                >
                   <Chart
                     options={optionsPie}
                     series={seriesPieMonth}
@@ -631,7 +669,9 @@ function Dashboard() {
                   />
                 </div>
 
-                <div className={`${chartFilter === "overall" ? "block" : "hidden"}`}>
+                <div
+                  className={`${chartFilter === "overall" ? "block" : "hidden"}`}
+                >
                   <Chart
                     options={optionsPie}
                     series={seriesPie}
@@ -641,7 +681,9 @@ function Dashboard() {
                 </div>
 
                 {/* for date filter */}
-                <div className={`${chartFilter === "dateRange" ? "block" : "hidden"}`}>
+                <div
+                  className={`${chartFilter === "dateRange" ? "block" : "hidden"}`}
+                >
                   <Chart
                     options={optionsPie}
                     series={seriesPieDateRange}
