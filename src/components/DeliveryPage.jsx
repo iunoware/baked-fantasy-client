@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from "react";
-import AddressAutocomplete from "./AddressAutocomplete";
+// import AddressAutocomplete from "./AddressAutocomplete";
+import AddressAutocomplete from "src/components/AddressAutoComplete.jsx";
 import {
   MapPin,
   Plus,
@@ -28,9 +29,11 @@ import {
 import { Label } from "./ui/label";
 import { Badge } from "./ui/badge";
 import api from "../api";
+import toast from "react-hot-toast";
 
 export function DeliveryPage({
   cartItems,
+  user,
   selectedAddress,
   setSelectedAddress,
   deliveryInstructions,
@@ -51,6 +54,11 @@ export function DeliveryPage({
     landmark: "",
     lat: null,
     lng: null,
+  });
+  const [userDetails, setUserDetails] = useState({
+    name: user.name,
+    email: user.email,
+    phone: user.mobileNumber,
   });
   const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
 
@@ -241,7 +249,7 @@ Please assist with delivery.
       const res = await loadRazorpayScript();
 
       if (!res) {
-        alert("Razorpay SDK failed to load. Are you online?");
+        toast.error("Razorpay SDK failed to load. Are you online?");
         setLoading(false);
         return;
       }
@@ -256,6 +264,32 @@ Please assist with delivery.
           amount: orderSummary.total * 100, // amount in paise
           currency: "INR",
           receipt: `receipt_${Date.now()}`,
+          user: {
+            userId: user?._id,
+            name: userDetails.name || selectedAddress?.building || "Customer",
+            email: userDetails.email || "customer@example.com",
+            phone: userDetails.phone || "9999999999",
+          },
+          products: cartItems.map((item) => ({
+            productId: item._id || item.id,
+            title: item.name || item.title,
+            price: item.price,
+            productType:
+              item.type === "cake"
+                ? "Cake"
+                : item.type === "course"
+                  ? "Course"
+                  : "Essential",
+            quantity: item.quantity,
+          })),
+          shippingAddress: {
+            name: userDetails.name || selectedAddress?.building || "Customer",
+            phone: userDetails.phone || "9999999999",
+            address: selectedAddress?.fullAddress || "",
+            city: "Salem",
+            pincode: selectedAddress?.pincode || "",
+          },
+          paymentMethod: "card",
         }),
       });
 
@@ -298,6 +332,7 @@ Please assist with delivery.
             if (verifyRes.ok) {
               const result = await verifyRes.json();
               if (result.success) {
+                sessionStorage.setItem("orderId", result.orderId);
                 onNext(); // Proceed to ConfirmationPage
               }
             } else {
@@ -311,9 +346,9 @@ Please assist with delivery.
           }
         },
         prefill: {
-          name: "Customer",
-          email: "customer@example.com",
-          contact: "9999999999",
+          name: userDetails.name || "Customer",
+          email: userDetails.email || "customer@example.com",
+          contact: userDetails.phone || "9999999999",
         },
         notes: {
           subtotal: orderSummary.subtotal,
@@ -389,6 +424,77 @@ Please assist with delivery.
         <div className="grid lg:grid-cols-12 gap-10">
           {/* Main Content Area */}
           <div className="lg:col-span-8 space-y-8">
+            {/* Contact Information Section */}
+            {/* <div className="bg-white rounded-3xl border border-gray-100 p-8 shadow-sm">
+              <h3 className="font-black text-xl text-gray-900 tracking-tight mb-6">
+                Contact Information
+              </h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <Label
+                    htmlFor="contact-name"
+                    className="text-[10px] font-black uppercase text-gray-800 tracking-widest block mb-2"
+                  >
+                    Full Name
+                  </Label>
+                  <Input
+                    id="contact-name"
+                    placeholder="Enter your full name"
+                    value={userDetails.name}
+                    onChange={(e) =>
+                      setUserDetails({
+                        ...userDetails,
+                        name: e.target.value,
+                      })
+                    }
+                    className="h-12 rounded-xl bg-gray-50 border-gray-100 focus:bg-white focus:ring-sbrown/10 focus:border-sbrown/20 font-bold text-sm"
+                  />
+                </div>
+                <div>
+                  <Label
+                    htmlFor="contact-phone"
+                    className="text-[10px] font-black uppercase text-gray-800 tracking-widest block mb-2"
+                  >
+                    Phone Number
+                  </Label>
+                  <Input
+                    id="contact-phone"
+                    type="tel"
+                    placeholder="10-digit mobile number"
+                    value={userDetails.phone}
+                    onChange={(e) =>
+                      setUserDetails({
+                        ...userDetails,
+                        phone: e.target.value,
+                      })
+                    }
+                    className="h-12 rounded-xl bg-gray-50 border-gray-100 focus:bg-white focus:ring-sbrown/10 focus:border-sbrown/20 font-bold text-sm"
+                  />
+                </div>
+                <div className="md:col-span-2">
+                  <Label
+                    htmlFor="contact-email"
+                    className="text-[10px] font-black uppercase text-gray-800 tracking-widest block mb-2"
+                  >
+                    Email Address
+                  </Label>
+                  <Input
+                    id="contact-email"
+                    type="email"
+                    placeholder="Enter your email address"
+                    value={userDetails.email}
+                    onChange={(e) =>
+                      setUserDetails({
+                        ...userDetails,
+                        email: e.target.value,
+                      })
+                    }
+                    className="h-12 rounded-xl bg-gray-50 border-gray-100 focus:bg-white focus:ring-sbrown/10 focus:border-sbrown/20 font-bold text-sm"
+                  />
+                </div>
+              </div>
+            </div> */}
+
             {/* Address List Section */}
             <div>
               <div className="flex items-center justify-between mb-6 px-2">
@@ -588,7 +694,7 @@ Please assist with delivery.
             </div>
 
             {/* Estimated Delivery Highlight */}
-            {/* <div className="p-6 bg-emerald-50 rounded-[2rem] border border-emerald-100 flex flex-col md:flex-row items-center gap-6 animate-in fade-in slide-in-from-top-4 duration-700">
+            <div className="p-6 bg-emerald-50 rounded-[2rem] border border-emerald-100 flex flex-col md:flex-row items-center gap-6 animate-in fade-in slide-in-from-top-4 duration-700">
               <div className="w-16 h-16 rounded-2xl bg-white flex items-center justify-center text-emerald-500 shadow-sm border border-emerald-100 shrink-0">
                 <Clock size={32} />
               </div>
@@ -597,11 +703,15 @@ Please assist with delivery.
                   Estimated Delivery Time
                 </p>
                 <div className="flex items-baseline gap-2 justify-center md:justify-start">
-                  <span className="text-2xl font-black text-emerald-600 tracking-tighter text-left">25-30 Minutes</span>
-                  <span className="text-[10px] text-emerald-500 font-bold uppercase tracking-wider text-left">Arriving by 8:45 PM</span>
+                  <span className="text-2xl font-black text-emerald-600 tracking-tighter text-left">
+                    25-30 Minutes
+                  </span>
+                  <span className="text-[10px] text-emerald-500 font-bold uppercase tracking-wider text-left">
+                    Arriving by 8:45 PM
+                  </span>
                 </div>
               </div>
-            </div> */}
+            </div>
 
             {/* Delivery Instructions */}
             <div className="bg-white rounded-3xl border border-gray-100 p-8 shadow-sm">
@@ -717,14 +827,30 @@ Please assist with delivery.
                     //     : "Proceed to Payment"}
                     //   <ArrowRight size={18} />
                     // </Button>
-                    <Button
-                      // disabled={!selectedPayment || loading}
-                      onClick={handlePayment}
-                      className="w-full h-14 md:h-16 rounded-2xl bg-sbrown hover:bg-pbrown text-white font-black uppercase tracking-[0.15em] text-[10px] md:text-xs transition-all hover:-translate-y-1 active:scale-[0.98] disabled:opacity-30 flex items-center justify-center gap-3 shadow-xl shadow-brown/10"
-                    >
-                      {loading ? "Processing Payment..." : "Place Order"}
-                      {!loading && <ArrowRight size={18} />}
-                    </Button>
+                    <>
+                      <Button
+                        disabled={
+                          !selectedAddress ||
+                          distanceKm === null ||
+                          !userDetails.name ||
+                          !userDetails.email ||
+                          !userDetails.phone ||
+                          loading
+                        }
+                        onClick={handlePayment}
+                        className="w-full h-14 md:h-16 rounded-2xl bg-sbrown hover:bg-pbrown text-white font-black uppercase tracking-[0.15em] text-[10px] md:text-xs transition-all hover:-translate-y-1 active:scale-[0.98] disabled:opacity-30 flex items-center justify-center gap-3 shadow-xl shadow-brown/10"
+                      >
+                        {loading ? "Processing Payment..." : "Place Order"}
+                        {!loading && <ArrowRight size={18} />}
+                      </Button>
+                      {(!userDetails.name ||
+                        !userDetails.email ||
+                        !userDetails.phone) && (
+                        <p className="text-[10px] font-black text-red-500 uppercase tracking-widest text-center mt-2">
+                          Please fill in your contact information
+                        </p>
+                      )}
+                    </>
                   )}
 
                   <button
