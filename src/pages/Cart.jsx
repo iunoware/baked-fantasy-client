@@ -4,12 +4,18 @@ import { DeliveryPage } from "../components/DeliveryPage.jsx";
 import { PaymentPage } from "../components/PaymentPage.jsx";
 import { ConfirmationPage } from "../components/ConfirmationPage.jsx";
 import { useCart } from "../context/CartContext.jsx";
+import { useAuth } from "@/context/AuthContext";
 
 export default function App() {
   const [currentStep, setCurrentStep] = useState("cart");
   const [orderNumber, setOrderNumber] = useState("");
   const [checkoutType, setCheckoutType] = useState(null); // 'bakery' or 'essential' or null
   const { cartItems, updateQuantity, removeFromCart } = useCart();
+  const { user, fetchUser } = useAuth();
+
+  useEffect(() => {
+    fetchUser();
+  }, [fetchUser]);
 
   const [promoCode, setPromoCode] = useState("");
   const [selectedAddress, setSelectedAddress] = useState(null);
@@ -119,6 +125,7 @@ export default function App() {
       {currentStep === "delivery" && (
         <DeliveryPage
           // addresses={addresses}
+          user={user}
           cartItems={cartItems}
           selectedAddress={selectedAddress}
           setSelectedAddress={setSelectedAddress}
