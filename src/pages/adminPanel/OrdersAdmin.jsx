@@ -64,7 +64,7 @@ function OrdersAdmin() {
   async function fetchOrders() {
     try {
       setLoading(true);
-      let res = await axios.get(`http://localhost:5000/orders`);
+      let res = await axios.get(`${import.meta.env.VITE_API_URL}/orders`);
       setOrders(res.data.orders);
     } catch (err) {
       console.error("Error fetching Orders:", err);
@@ -82,7 +82,7 @@ function OrdersAdmin() {
         updateData.deliveryPartner = deliveryPartner;
       }
 
-      await axios.patch(`http://localhost:5000/orders/${orderId}`, updateData);
+      await axios.patch(`${import.meta.env.VITE_API_URL}/orders/${orderId}`, updateData);
 
       setOrders((prev) =>
         prev.map((order) =>

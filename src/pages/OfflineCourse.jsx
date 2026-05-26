@@ -16,7 +16,7 @@ function OfflineCourse() {
 
     async function fetchCourse() {
       try {
-        const response = await axios.get("http://localhost:5000/offline-course");
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/offline-course`);
         // console.log(response.data.courses);
 
         setCourses(response.data.courses);

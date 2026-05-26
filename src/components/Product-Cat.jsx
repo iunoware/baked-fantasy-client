@@ -8,7 +8,7 @@ function Category(props) {
     //     <div className="relative h-56 p-2 bg-white">
     //       <img
     //         alt={props.title}
-    //         src={`http://localhost:5000${props.img}`}
+    //         src={`${import.meta.env.VITE_API_URL}${props.img}`}
     //         className="h-full w-full object-cover rounded-lg cat-img"
     //       />
 
@@ -31,7 +31,7 @@ function Category(props) {
         <div className="relative h-full w-full p-2 bg-white">
           <img
             alt={props.title}
-            src={`http://localhost:5000${props.img}`}
+            src={`${import.meta.env.VITE_API_URL}${props.img}`}
             className="h-full w-full rounded-[50%] object-cover cat-img"
           />
 

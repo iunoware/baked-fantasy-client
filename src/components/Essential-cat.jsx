@@ -33,7 +33,7 @@ function EssCategory(props) {
     //     <div className="relative bg-white h-56">
     //       <img
     //         alt={props.title}
-    //         src={`http://localhost:5000${props.img}`}
+    //         src={`${import.meta.env.VITE_API_URL}${props.img}`}
     //         className="h-full w-full p-2 rounded-2xl object-cover cat-img"
     //       />
 
@@ -56,7 +56,7 @@ function EssCategory(props) {
         <div className="relative h-full w-full p-2 bg-white">
           <img
             alt={props.title}
-            src={`http://localhost:5000${props.img}`}
+            src={`${import.meta.env.VITE_API_URL}${props.img}`}
             className="h-full w-full rounded-[50%] object-cover cat-img"
           />
 

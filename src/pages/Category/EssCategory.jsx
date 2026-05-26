@@ -13,7 +13,7 @@ function EssCategories() {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/ess-categories");
+        const res = await axios.get(`${import.meta.env.VITE_API_URL}/ess-categories`);
         setProducts(res.data);
       } catch (err) {
         console.error("Error Fetching Products", err);
@@ -24,7 +24,7 @@ function EssCategories() {
     async function fetchAllEssentials() {
       try {
         const allProducts = await axios.get(
-          `http://localhost:5000/bakingEssentials`,
+          `${import.meta.env.VITE_API_URL}/bakingEssentials`,
         );
         console.log("all products: ", allProducts.data);
         setAllProducts(allProducts.data);

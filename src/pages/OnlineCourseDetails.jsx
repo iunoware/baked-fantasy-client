@@ -18,9 +18,9 @@ import Plyr from "plyr";
 import { useAuth } from "../context/AuthContext";
 import api from "../api";
 
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+const API_URL = import.meta.env.VITE_API_URL;
 
-// const url = "http://localhost:5000";
+// const url = import.meta.env.VITE_API_URL;
 
 function StarPicker({ value, onChange }) {
   const [hovered, setHovered] = useState(0);

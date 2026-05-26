@@ -28,7 +28,7 @@ function Home() {
     // for fetching Bakery Products
     const fetchProducts = async () => {
       try {
-        await axios.get(`http://localhost:5000/products`).then((res) => {
+        await axios.get(`${import.meta.env.VITE_API_URL}/products`).then((res) => {
           const shuffled = res.data.sort(() => 0.5 - Math.random());
           setProducts(shuffled.slice(0, 4));
         });
@@ -41,7 +41,7 @@ function Home() {
     // for fetching courses
     async function fetchCourse() {
       try {
-        let response = await axios.get(`http://localhost:5000/course`);
+        let response = await axios.get(`${import.meta.env.VITE_API_URL}/course`);
         // console.log("all response: ", response.data.courses);
         setCourses(response.data.courses?.slice(0, 3));
       } catch (error) {
@@ -53,7 +53,7 @@ function Home() {
     //  for fetching Banner
     const fetchBaner = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/banner");
+        const res = await axios.get(`${import.meta.env.VITE_API_URL}/banner`);
         setBanner(res.data[0]);
         // console.log(res.data);
       } catch (error) {
@@ -66,7 +66,7 @@ function Home() {
     const fetchEssentials = async () => {
       try {
         await axios
-          .get(`http://localhost:5000/bakingEssentials`)
+          .get(`${import.meta.env.VITE_API_URL}/bakingEssentials`)
           .then((res) => {
             const shuffled = res.data.sort(() => 0.5 - Math.random());
             setEssentials(shuffled.slice(0, 4));
@@ -177,7 +177,7 @@ function Home() {
                     key={p._id}
                     id={p._id}
                     category={categoryName}
-                    img={`http://localhost:5000${p.images?.[0]}`}
+                    img={`${import.meta.env.VITE_API_URL}${p.images?.[0]}`}
                     originalPrice={p.originalPrice}
                     discountedPrice={p.discountedPrice}
                     inStock={p.inStock}
@@ -249,7 +249,7 @@ function Home() {
                   key={p._id}
                   id={p._id}
                   category={categoryName}
-                  img={`http://localhost:5000${p.images?.[0]}`}
+                  img={`${import.meta.env.VITE_API_URL}${p.images?.[0]}`}
                   originalPrice={p.originalPrice}
                   discountedPrice={p.discountedPrice}
                   inStock={p.inStock}

@@ -41,7 +41,7 @@ function CourseCardAdmin({ course, onEdit, onDelete }) {
           src={
             course.thumbnail?.includes("http")
               ? course.thumbnail
-              : `http://localhost:5000/${course.thumbnail?.replace(/^\//, "")}`
+              : `${import.meta.env.VITE_API_URL}/${course.thumbnail?.replace(/^\//, "")}`
           }
           alt={course.title}
           className="w-full h-48 object-cover rounded-lg"
@@ -95,7 +95,7 @@ export default function CourseAdmin() {
 
   const fetchCourses = async () => {
     try {
-      // const response = await axios.get("http://localhost:5000/course");
+      // const response = await axios.get(`${import.meta.env.VITE_API_URL}/course`);
       const response = await api.get("/course");
       setCourses(response.data?.courses || response.data || []);
     } catch (error) {
@@ -147,7 +147,7 @@ export default function CourseAdmin() {
 
     try {
       // const token = sessionStorage.getItem("token");
-      // await axios.post("http://localhost:5000/course", formData, {
+      // await axios.post(`${import.meta.env.VITE_API_URL}/course`, formData, {
       //   headers: {
       //     Authorization: `Bearer ${token}`,
       //   },
@@ -197,13 +197,13 @@ export default function CourseAdmin() {
     try {
       // const token = sessionStorage.getItem("token");
       const courseId = selectedCourse._id || selectedCourse.id;
-      // await axios.patch(`http://localhost:5000/course/${courseId}`, formData, {
+      // await axios.patch(`${import.meta.env.VITE_API_URL}/course/${courseId}`, formData, {
       //   headers: {
       //     Authorization: `Bearer ${token}`,
       //   },
       // });
       await api.patch(`/course/${courseId}`, formData);
-      // await axios.patch(`http://localhost:5000/course/${courseId}`);
+      // await axios.patch(`${import.meta.env.VITE_API_URL}/course/${courseId}`);
       toast.success("Course updated");
       setIsEditModalOpen(false);
       setTimeout(() => window.location.reload(), 1000);
@@ -217,7 +217,7 @@ export default function CourseAdmin() {
     try {
       // const token = sessionStorage.getItem("token");
       const courseId = selectedCourse._id || selectedCourse.id;
-      // await axios.delete(`http://localhost:5000/course/${courseId}`, {
+      // await axios.delete(`${import.meta.env.VITE_API_URL}/course/${courseId}`, {
       //   headers: {
       //     Authorization: `Bearer ${token}`,
       //   },

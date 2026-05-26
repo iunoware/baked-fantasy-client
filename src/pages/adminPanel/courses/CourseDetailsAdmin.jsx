@@ -6,7 +6,7 @@ import { toast } from "react-hot-toast";
 import { Trash2, SquarePen, X, ArrowLeft } from "lucide-react";
 import api from "@/api";
 
-// const url = `http://localhost:5000`;
+// const url = import.meta.env.VITE_API_URL;
 
 export default function CourseDetailsAdmin() {
   const { courseId } = useParams();

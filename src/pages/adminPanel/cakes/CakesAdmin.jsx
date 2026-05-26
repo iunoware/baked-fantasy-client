@@ -13,7 +13,7 @@ function CakesAdmin() {
   useEffect(() => {
     async function fetchProducts() {
       try {
-        const response = await axios.get(`http://localhost:5000/categories`);
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/categories`);
         // console.log(response.data);
         setProducts(response.data);
         // console.log("products: ", products);
@@ -54,7 +54,7 @@ function CakesAdmin() {
 
       try {
         const postResponse = await axios.post(
-          `http://localhost:5000/categories`,
+          `${import.meta.env.VITE_API_URL}/categories`,
           formData,
           {
             headers: {
@@ -65,7 +65,7 @@ function CakesAdmin() {
         );
         // setProducts((prev) => [...prev, postResponse.data]);
 
-        // const newResponse = await axios.get(`http://localhost:5000/categories`);
+        // const newResponse = await axios.get(`${import.meta.env.VITE_API_URL}/categories`);
         // setProducts(newResponse.data);
         console.log("category added: ", postResponse.data);
         toast.success("Category added");

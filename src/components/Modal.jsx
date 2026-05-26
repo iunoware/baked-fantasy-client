@@ -2,9 +2,9 @@ import { X } from "lucide-react";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+const API_URL = import.meta.env.VITE_API_URL;
 
-// const url = "http://localhost:5000";
+// const url = import.meta.env.VITE_API_URL;
 
 function Modal() {
   const [close, setClose] = useState(false);

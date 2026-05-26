@@ -9,7 +9,7 @@ function CategoryCardAdmin(props) {
   const [isActive, setIsActive] = useState(props.activate);
   const [deleteModal, setDeleteModal] = useState(false);
   // const [isBtnVisible, setIsBtnVisible] = useState(false);
-  const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+  const API_URL = import.meta.env.VITE_API_URL;
 
   // new delete timer useState
   const [deleteTimer, setDeleteTimer] = useState(3);
@@ -354,7 +354,7 @@ function CategoryCardAdmin(props) {
         </div>
         <div className="rounded-xl relative h-40 w-auto !m-2 translate-y-2 flex align-bottom overflow-hidden">
           <img
-            // src={`http://localhost:5000${props.image}`}
+            // src={`${import.meta.env.VITE_API_URL}${props.image}`}
             src={
               props.image ? `${API_URL}${props.image}` : "/images/fallback.png"
             }

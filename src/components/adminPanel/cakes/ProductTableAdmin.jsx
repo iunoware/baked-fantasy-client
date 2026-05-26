@@ -28,7 +28,7 @@ function ProductAdmin(props) {
   async function deleteFunction() {
     try {
       const response = await axios.delete(
-        `http://localhost:5000/products/${props.productId}`,
+        `${import.meta.env.VITE_API_URL}/products/${props.productId}`,
       );
       // console.log(response.data);
       toast.success(`${props.title} deleted successfully`);
@@ -107,7 +107,7 @@ function ProductAdmin(props) {
 
     try {
       const postResponse = await axios.patch(
-        `http://localhost:5000/products/${props.productId}`,
+        `${import.meta.env.VITE_API_URL}/products/${props.productId}`,
         formData,
         {
           headers: {
@@ -144,7 +144,7 @@ function ProductAdmin(props) {
 
       try {
         const res = await axios.patch(
-          `http://localhost:5000/products/${props.productId}/replace-image`,
+          `${import.meta.env.VITE_API_URL}/products/${props.productId}/replace-image`,
           formData,
           { headers: { "Content-Type": "multipart/form-data" } },
         );
@@ -224,7 +224,7 @@ function ProductAdmin(props) {
                     {props.images.map((image, i) => (
                       <div key={i} className="relative group">
                         <img
-                          src={`http://localhost:5000${image}`}
+                          src={`${import.meta.env.VITE_API_URL}${image}`}
                           alt={`product image ${i} `}
                           className="h-20 w-20 object-center object-cover rounded-lg"
                         />
@@ -444,7 +444,7 @@ function ProductAdmin(props) {
         <td className="p-4">{props.i + 1}</td>
         <td className="p-4">
           <img
-            src={`http://localhost:5000${props.images[0]}`}
+            src={`${import.meta.env.VITE_API_URL}${props.images[0]}`}
             alt="Product Image"
             className="h-20 rounded-lg object-center object-cover w-20"
           />

@@ -14,7 +14,7 @@ function AllEssentials() {
     async function fetchAllProducts() {
       try {
         const response = await axios.get(
-          `http://localhost:5000/bakingEssentials`,
+          `${import.meta.env.VITE_API_URL}/bakingEssentials`,
         );
         // console.log("all products: ", response.data);
         // console.log("category name: ", response.data[0].category.title);
@@ -51,7 +51,7 @@ function AllEssentials() {
                 key={p._id}
                 id={p._id} // ✅ pass id
                 category={p.category?.title || "Uncategorized"}
-                img={`http://localhost:5000${p.images?.[0]}`}
+                img={`${import.meta.env.VITE_API_URL}${p.images?.[0]}`}
                 originalPrice={p.originalPrice}
                 discountedPrice={p.discountedPrice}
                 title={p.title}

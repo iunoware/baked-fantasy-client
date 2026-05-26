@@ -23,7 +23,7 @@ export function PaymentPage({
   onPrevious,
 }) {
   const [loading, setLoading] = useState(false);
-  const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+  const API_URL = import.meta.env.VITE_API_URL;
 
   const loadRazorpayScript = () => {
     return new Promise((resolve) => {
@@ -57,7 +57,7 @@ export function PaymentPage({
       }
 
       // Create order
-      const response = await fetch("http://localhost:5000/api/create-order", {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/create-order`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -94,7 +94,7 @@ export function PaymentPage({
           try {
             // Verify payment signature
             const verifyRes = await fetch(
-              "http://localhost:5000/api/verify-payment",
+              `${import.meta.env.VITE_API_URL}/api/verify-payment`,
               {
                 method: "POST",
                 headers: {

@@ -28,7 +28,7 @@ function EssentialsTableAdmin(props) {
   async function deleteFunction() {
     try {
       const response = await axios.delete(
-        `http://localhost:5000/essentials/${props.productId}`,
+        `${import.meta.env.VITE_API_URL}/essentials/${props.productId}`,
       );
       // console.log(response.data);
       toast.success(`${props.title} deleted successfully`);
@@ -99,7 +99,7 @@ function EssentialsTableAdmin(props) {
 
     try {
       const postResponse = await axios.patch(
-        `http://localhost:5000/essentials/${props.productId}`,
+        `${import.meta.env.VITE_API_URL}/essentials/${props.productId}`,
         formData,
         {
           headers: {
@@ -136,7 +136,7 @@ function EssentialsTableAdmin(props) {
 
       try {
         const res = await axios.patch(
-          `http://localhost:5000/essentials/${props.productId}/replace-image`,
+          `${import.meta.env.VITE_API_URL}/essentials/${props.productId}/replace-image`,
           formData,
           { headers: { "Content-Type": "multipart/form-data" } },
         );
@@ -207,7 +207,7 @@ function EssentialsTableAdmin(props) {
                     {props.images.map((image, i) => (
                       <div key={i} className="relative group">
                         <img
-                          src={`http://localhost:5000${image}`}
+                          src={`${import.meta.env.VITE_API_URL}${image}`}
                           alt={`product image ${i} `}
                           className="h-20 w-20 object-center object-cover rounded-lg"
                         />
@@ -471,7 +471,7 @@ function EssentialsTableAdmin(props) {
         <td className="p-4">{props.i + 1}</td>
         <td className="p-4">
           <img
-            src={`http://localhost:5000${props.images[0]}`}
+            src={`${import.meta.env.VITE_API_URL}${props.images[0]}`}
             alt="Product Image"
             className="h-20 rounded-lg object-center object-cover w-20"
           />

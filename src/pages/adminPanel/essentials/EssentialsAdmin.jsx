@@ -14,7 +14,7 @@ function EssentialsAdmin() {
   useEffect(() => {
     async function fetchCourses() {
       try {
-        const response = await axios.get(`http://localhost:5000/ess-categories`);
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/ess-categories`);
         // console.log(response.data);
         setEssentialCategories(response.data);
         // console.log("essentialCategories: ", essentialCategories);
@@ -52,7 +52,7 @@ function EssentialsAdmin() {
 
       try {
         const postResponse = await axios.post(
-          `http://localhost:5000/ess-categories`,
+          `${import.meta.env.VITE_API_URL}/ess-categories`,
           formData,
           {
             headers: {
@@ -63,7 +63,7 @@ function EssentialsAdmin() {
         );
         // setEssentialCategories((prev) => [...prev, postResponse.data]);
 
-        // const newResponse = await axios.get(`http://localhost:5000/categories`);
+        // const newResponse = await axios.get(`${import.meta.env.VITE_API_URL}/categories`);
         // setEssentialCategories(newResponse.data);
         console.log("category added: ", postResponse.data);
         toast.success("Category added");
