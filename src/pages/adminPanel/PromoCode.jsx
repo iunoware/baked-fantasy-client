@@ -4,7 +4,7 @@ import { Trash2, Plus, X, Tag } from "lucide-react";
 import toast from "react-hot-toast";
 import axios from "axios";
 
-const url = "http://localhost:5000";
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
 
 export default function PromoCode() {
   const [promos, setPromos] = useState([]);
@@ -18,12 +18,14 @@ export default function PromoCode() {
   }, []);
 
   useEffect(() => {
-    document.querySelector("body").style.overflow = isModalVisible ? "hidden" : "auto";
+    document.querySelector("body").style.overflow = isModalVisible
+      ? "hidden"
+      : "auto";
   }, [isModalVisible]);
 
   async function fetchPromos() {
     try {
-      const res = await axios.get(`${url}/promocode`, {
+      const res = await axios.get(`${API_URL}/promocode`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setPromos(res.data);
@@ -68,8 +70,11 @@ export default function PromoCode() {
     setLoading(true);
     try {
       await axios.post(
-        `${url}/promocode`,
-        { code: form.code.toUpperCase().trim(), discount: Number(form.discount) },
+        `${API_URL}/promocode`,
+        {
+          code: form.code.toUpperCase().trim(),
+          discount: Number(form.discount),
+        },
         { headers: { Authorization: `Bearer ${token}` } },
       );
       toast.success("Promo code created!");
@@ -78,7 +83,9 @@ export default function PromoCode() {
       setTimeout(() => fetchPromos(), 500);
     } catch (error) {
       console.error("Error creating promo:", error.message);
-      toast.error(error.response?.data?.message || "Failed to create promo code");
+      toast.error(
+        error.response?.data?.message || "Failed to create promo code",
+      );
     } finally {
       setLoading(false);
     }
@@ -87,7 +94,7 @@ export default function PromoCode() {
   async function handleDelete(id) {
     if (!confirm("Delete this promo code?")) return;
     try {
-      await axios.delete(`${url}/promocode/${id}`, {
+      await axios.delete(`${API_URL}/promocode/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       toast.success("Promo code deleted");
@@ -133,7 +140,9 @@ export default function PromoCode() {
 
           <form className="mt-4 flex flex-col gap-3" onSubmit={handleSubmit}>
             {/* Code */}
-            <p className="text-sm text-gray-700">Promo Code (6–8 chars, A–Z / 0–9):</p>
+            <p className="text-sm text-gray-700">
+              Promo Code (6–8 chars, A–Z / 0–9):
+            </p>
             <input
               type="text"
               value={form.code}
@@ -141,7 +150,9 @@ export default function PromoCode() {
               placeholder="e.g. SAVE20"
               className="ring ring-gray-500 text-black rounded-lg p-2 w-full tracking-widest text-lg uppercase"
             />
-            <p className="text-xs text-gray-400 text-right -mt-1">{form.code.length}/8</p>
+            <p className="text-xs text-gray-400 text-right -mt-1">
+              {form.code.length}/8
+            </p>
 
             {/* Discount */}
             <p className="text-sm text-gray-700">Discount (%):</p>
@@ -180,7 +191,9 @@ export default function PromoCode() {
         {/* Header */}
         <div className="flex flex-row gap-5 md:gap-0 justify-between">
           <div>
-            <h1 className="text-3xl new-primary-text font-semibold lora">Promo Codes</h1>
+            <h1 className="text-3xl new-primary-text font-semibold lora">
+              Promo Codes
+            </h1>
             <p className="text-md pt-1">
               {promos.length} code{promos.length !== 1 ? "s" : ""} active
             </p>
@@ -239,11 +252,14 @@ export default function PromoCode() {
                           </span>
                         </td>
                         <td className="px-4 sm:px-6 py-4 text-gray-400 hidden sm:table-cell">
-                          {new Date(promo.createdAt).toLocaleDateString("en-IN", {
-                            day: "numeric",
-                            month: "short",
-                            year: "numeric",
-                          })}
+                          {new Date(promo.createdAt).toLocaleDateString(
+                            "en-IN",
+                            {
+                              day: "numeric",
+                              month: "short",
+                              year: "numeric",
+                            },
+                          )}
                         </td>
                         <td className="px-4 sm:px-6 py-4 text-right">
                           <button

@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from "react";
 // import AddressAutocomplete from "./AddressAutocomplete";
-import AddressAutocomplete from "./AddressAutoComplete";
+import AddressAutocomplete from "./AddressAutoComplete.jsx";
 import {
   MapPin,
   Plus,

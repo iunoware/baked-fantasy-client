@@ -3,7 +3,7 @@ import axios from "axios";
 import { Clock, MapPin, Phone, Package, ChevronDown } from "lucide-react";
 import { Link } from "react-router-dom";
 
-const url = "http://localhost:5000";
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
 
 export default function RecentOrders() {
   const [orders, setOrders] = useState([]);
@@ -12,7 +12,7 @@ export default function RecentOrders() {
   // to fetch the today's orders in detail
   async function fetchOrders() {
     try {
-      const response = await axios.get(`${url}/orders/todayDetail`);
+      const response = await axios.get(`${API_URL}/orders/todayDetail`);
       setOrders(response.data.orders);
     } catch (error) {
       console.log(error.message);
@@ -83,13 +83,19 @@ export default function RecentOrders() {
                     {/* Customer Info */}
                     <div className="space-y-3 mb-6 border-l-2 border-pink-50 pl-4 relative z-10">
                       <div className="flex items-center gap-2.5">
-                        <Phone size={13} className="text-[#870D32]/60 shrink-0" />
+                        <Phone
+                          size={13}
+                          className="text-[#870D32]/60 shrink-0"
+                        />
                         <span className="text-xs font-bold text-gray-600">
                           {order.user.phone || "No phone"}
                         </span>
                       </div>
                       <div className="flex items-start gap-2.5">
-                        <MapPin size={13} className="text-[#870D32]/60 shrink-0 mt-0.5" />
+                        <MapPin
+                          size={13}
+                          className="text-[#870D32]/60 shrink-0 mt-0.5"
+                        />
                         <span className="text-xs font-medium text-gray-500 leading-snug line-clamp-2">
                           {order.billingAddress}
                         </span>
@@ -178,7 +184,9 @@ export default function RecentOrders() {
               alt="No orders found"
               className="h-auto grayscale-75 w-full md:w-150"
             />
-            <h3 className="text-2xl font-bold new-primary-text">No Orders found</h3>
+            <h3 className="text-2xl font-bold new-primary-text">
+              No Orders found
+            </h3>
           </div>
         )}
       </div>

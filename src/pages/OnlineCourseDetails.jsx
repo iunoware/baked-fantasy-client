@@ -18,7 +18,9 @@ import Plyr from "plyr";
 import { useAuth } from "../context/AuthContext";
 import api from "../api";
 
-const url = "http://localhost:5000";
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+
+// const url = "http://localhost:5000";
 
 function StarPicker({ value, onChange }) {
   const [hovered, setHovered] = useState(0);
@@ -29,7 +31,9 @@ function StarPicker({ value, onChange }) {
           key={star}
           size={24}
           className={`cursor-pointer transition ${
-            star <= (hovered || value) ? "text-amber-400 fill-amber-400" : "text-gray-300"
+            star <= (hovered || value)
+              ? "text-amber-400 fill-amber-400"
+              : "text-gray-300"
           }`}
           onMouseEnter={() => setHovered(star)}
           onMouseLeave={() => setHovered(0)}
@@ -61,7 +65,8 @@ function ReviewSection({ courseId }) {
         const allReviews = res.data.reviews || [];
         setReviews(allReviews);
         const mine = allReviews.find(
-          (r) => r.student === currentUserId || r.student?._id === currentUserId,
+          (r) =>
+            r.student === currentUserId || r.student?._id === currentUserId,
         );
         if (mine) {
           setMyReview(mine);
@@ -92,7 +97,8 @@ function ReviewSection({ courseId }) {
       setReviews(updated);
       setMyReview(
         updated.find(
-          (r) => r.student === currentUserId || r.student?._id === currentUserId,
+          (r) =>
+            r.student === currentUserId || r.student?._id === currentUserId,
         ),
       );
       window.location.reload();
@@ -112,15 +118,19 @@ function ReviewSection({ courseId }) {
       //   rating,
       //   comment,
       // });
-      const res = await api.patch(`/course/${courseId}/review/${myReview._id}`, {
-        rating,
-        comment,
-      });
+      const res = await api.patch(
+        `/course/${courseId}/review/${myReview._id}`,
+        {
+          rating,
+          comment,
+        },
+      );
       const updated = res.data.course.reviews;
       setReviews(updated);
       setMyReview(
         updated.find(
-          (r) => r.student === currentUserId || r.student?._id === currentUserId,
+          (r) =>
+            r.student === currentUserId || r.student?._id === currentUserId,
         ),
       );
       setEditing(false);
@@ -205,7 +215,8 @@ function ReviewSection({ courseId }) {
           <p className="text-gray-500 text-sm">No reviews yet. Be the first!</p>
         )}
         {reviews.map((r) => {
-          const isOwn = r.student === currentUserId || r.student?._id === currentUserId;
+          const isOwn =
+            r.student === currentUserId || r.student?._id === currentUserId;
           const studentName =
             typeof r.student === "object" ? r.student?.name : "Anonymous";
           const studentInitial = studentName ? studentName.charAt(0) : "?";
@@ -239,7 +250,9 @@ function ReviewSection({ courseId }) {
                     ))}
                   </div>
 
-                  {r.comment && <p className="text-gray-700 text-sm mt-1">{r.comment}</p>}
+                  {r.comment && (
+                    <p className="text-gray-700 text-sm mt-1">{r.comment}</p>
+                  )}
 
                   <p className="text-xs text-gray-400 mt-2">
                     {new Date(r.createdAt).toLocaleDateString("en-GB", {
@@ -325,7 +338,10 @@ function OnlineCourseDetails() {
         };
         setCourse(sorted);
         setVisibleSection(0);
-        if (sorted.sections.length > 0 && sorted.sections[0].lessons.length > 0) {
+        if (
+          sorted.sections.length > 0 &&
+          sorted.sections[0].lessons.length > 0
+        ) {
           setCurrentLesson(sorted.sections[0].lessons[0]);
         }
       } catch (err) {
@@ -407,7 +423,7 @@ function OnlineCourseDetails() {
     async function loadVideo() {
       setVideoLoading(true);
       try {
-        const res = await fetch(`${url}/video/${currentLesson.videoUrl}`, {
+        const res = await fetch(`${API_URL}/video/${currentLesson.videoUrl}`, {
           credentials: "include",
         });
 
@@ -481,7 +497,10 @@ function OnlineCourseDetails() {
     );
 
   return (
-    <div className="bg pt-20 relative" onContextMenu={(e) => e.preventDefault()}>
+    <div
+      className="bg pt-20 relative"
+      onContextMenu={(e) => e.preventDefault()}
+    >
       <div className="py-12 px-5 border-b border-gray-400 ">
         <Link
           to="/courses/my-learning"
@@ -495,7 +514,10 @@ function OnlineCourseDetails() {
 
         <div className="mt-4 inline-flex justify-center items-center gap-5 text-gray-600">
           <p>
-            <Star className="inline mb-1 text-amber-500 fill-amber-500" size={20} />{" "}
+            <Star
+              className="inline mb-1 text-amber-500 fill-amber-500"
+              size={20}
+            />{" "}
             {course.rating}
           </p>
           <p>{course.totalReviews} reviews</p>
@@ -538,7 +560,9 @@ function OnlineCourseDetails() {
 
           <div className="mt-6">
             <h2 className="text-2xl font-bold">{currentLesson?.title}</h2>
-            <p className="text-gray-600 mt-2">Duration: {currentLesson?.duration}</p>
+            <p className="text-gray-600 mt-2">
+              Duration: {currentLesson?.duration}
+            </p>
           </div>
         </div>
 
@@ -549,11 +573,15 @@ function OnlineCourseDetails() {
             <div
               key={section._id}
               className="mb-4 bg-white p-4 rounded-xl shadow cursor-pointer"
-              onClick={() => setVisibleSection(visibleSection === index ? null : index)}
+              onClick={() =>
+                setVisibleSection(visibleSection === index ? null : index)
+              }
             >
               <div className="flex justify-between items-center">
                 <h3 className="font-semibold">{section.title}</h3>
-                <p className="text-sm text-gray-500">{section.lessons.length} lessons</p>
+                <p className="text-sm text-gray-500">
+                  {section.lessons.length} lessons
+                </p>
                 <ChevronDown
                   className={`transition ${visibleSection === index ? "rotate-180" : ""}`}
                 />
@@ -584,7 +612,7 @@ function OnlineCourseDetails() {
 
                       {lesson.pdfUrl && (
                         <a
-                          href={`${url}/download?file=${lesson.pdfUrl}`}
+                          href={`${API_URL}/download?file=${lesson.pdfUrl}`}
                           download
                           className="text-gray-600 hover:text-gray-900"
                         >

@@ -2,7 +2,9 @@ import { X } from "lucide-react";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-const url = "http://localhost:5000";
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+
+// const url = "http://localhost:5000";
 
 function Modal() {
   const [close, setClose] = useState(false);
@@ -32,7 +34,7 @@ function Modal() {
 
     const fetchModal = async () => {
       try {
-        const res = await axios.get(`${url}/banner/active`);
+        const res = await axios.get(`${API_URL}/banner/active`);
         if (!cancelled) setModal(res.data);
         console.log("Modal fetched:", res.data);
       } catch (error) {

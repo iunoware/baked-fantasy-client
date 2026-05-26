@@ -9,6 +9,7 @@ function CategoryCardAdmin(props) {
   const [isActive, setIsActive] = useState(props.activate);
   const [deleteModal, setDeleteModal] = useState(false);
   // const [isBtnVisible, setIsBtnVisible] = useState(false);
+  const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
 
   // new delete timer useState
   const [deleteTimer, setDeleteTimer] = useState(3);
@@ -48,7 +49,7 @@ function CategoryCardAdmin(props) {
 
     try {
       const response = await axios.patch(
-        `http://localhost:5000/categories/${props.categoryId}`,
+        `${API_URL}/categories/${props.categoryId}`,
         formData,
         {
           headers: {
@@ -80,7 +81,7 @@ function CategoryCardAdmin(props) {
   async function deleteFunction() {
     try {
       const response = await axios.delete(
-        `http://localhost:5000/categories/${props.categoryId}`,
+        `${API_URL}/categories/${props.categoryId}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -308,8 +309,8 @@ function CategoryCardAdmin(props) {
           <p className="text-sm font-medium text-gray-700 mb-6">
             Are you sure you want to delete{" "}
             <span className="font-bold">"{props.title}"</span>? This will also{" "}
-            <span className="font-bold">delete all the products</span> inside this
-            category. This action cannot be undone.
+            <span className="font-bold">delete all the products</span> inside
+            this category. This action cannot be undone.
           </p>
           {deleteTimer > 0 ? (
             <button
@@ -355,7 +356,7 @@ function CategoryCardAdmin(props) {
           <img
             // src={`http://localhost:5000${props.image}`}
             src={
-              props.image ? `http://localhost:5000${props.image}` : "/images/fallback.png"
+              props.image ? `${API_URL}${props.image}` : "/images/fallback.png"
             }
             alt="course-img"
             onError={(e) => {
