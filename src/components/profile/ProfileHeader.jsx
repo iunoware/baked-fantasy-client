@@ -6,9 +6,9 @@ import toast from "react-hot-toast";
 export function ProfileHeader({ name, email, mobileNumber, address, onUpdate }) {
   const [open, setOpen] = useState(false);
   const [form, setForm] = useState({
-    name,
-    email,
-    mobileNumber,
+    name: name || "",
+    email: email || "",
+    mobileNumber: mobileNumber || "",
     address: address || "",
   });
   const [saving, setSaving] = useState(false);

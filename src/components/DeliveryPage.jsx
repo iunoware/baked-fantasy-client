@@ -56,9 +56,9 @@ export function DeliveryPage({
     lng: null,
   });
   const userDetails = {
-    name: user.name,
-    email: user.email,
-    phone: user.mobileNumber,
+    name: user?.name,
+    email: user?.email,
+    phone: user?.mobileNumber,
   };
   const API_URL = import.meta.env.VITE_API_URL;
 

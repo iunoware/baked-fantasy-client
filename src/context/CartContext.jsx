@@ -23,7 +23,7 @@ export const useCart = () => {
 };
 
 export const CartProvider = ({ children }) => {
-  const { user, isLoggedIn } = useAuth();
+  const { user, isLoggedIn, clearAuthState } = useAuth();
   const [cartItems, setCartItems] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -63,11 +63,14 @@ export const CartProvider = ({ children }) => {
       }
       return [];
     } catch (error) {
+      if (error.response?.status === 401) {
+        clearAuthState();
+      }
       if (error.response?.status === 404) return [];
       console.error("Backend fetch error:", error);
       return [];
     }
-  }, []);
+  }, [clearAuthState]);
 
   // Unified Sync Logic
   const syncAndLoadCart = useCallback(async () => {
@@ -79,7 +82,7 @@ export const CartProvider = ({ children }) => {
         if (guestCart.length > 0) {
           // Architect Choice: Direct Merge on Sync
           const syncData = {
-            userId: user._id,
+            userId: user?._id,
             items: guestCart.map((item) => ({
               productId: item.id,
               quantity: item.quantity,
@@ -106,17 +109,21 @@ export const CartProvider = ({ children }) => {
             }));
           setCartItems(items);
         } else {
-          const items = await fetchBackendCart(user._id);
+          const items = await fetchBackendCart(user?._id);
           setCartItems(items);
         }
-      } catch {
-        toast.error("Cloud failed to sync cart state.");
+      } catch (error) {
+        if (error.response?.status === 401) {
+          clearAuthState();
+        } else {
+          toast.error("Cloud failed to sync cart state.");
+        }
       }
     } else {
       setCartItems(guestCart);
     }
     setLoading(false);
-  }, [isLoggedIn, user, fetchBackendCart, getLocalGuestCart]);
+  }, [isLoggedIn, user, fetchBackendCart, getLocalGuestCart, clearAuthState]);
 
   useEffect(() => {
     syncAndLoadCart();
@@ -135,10 +142,10 @@ export const CartProvider = ({ children }) => {
     for (let i = 0; i < retries; i++) {
       try {
         if (action === "delete") {
-          await api.delete("/cart", { data: { userId: user._id, productId } });
+          await api.delete("/cart", { data: { userId: user?._id, productId } });
         } else {
           await api.put("/cart", {
-            userId: user._id,
+            userId: user?._id,
             productId,
             quantity,
             onModel,
@@ -146,6 +153,10 @@ export const CartProvider = ({ children }) => {
         }
         return true;
       } catch (error) {
+        if (error.response?.status === 401) {
+          clearAuthState();
+          return false;
+        }
         if (i === retries - 1) {
           console.error("Cart sync failed after retries:", error);
           return false;

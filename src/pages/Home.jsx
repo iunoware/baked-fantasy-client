@@ -80,7 +80,7 @@ function Home() {
 
   return (
     <div className="bg">
-      {banner.active == true ? <Modal /> : ""}
+      {banner?.active == true ? <Modal /> : ""}
 
       {/* hero section */}
       <div className="pt-35 z-51 md:pt-15 h-screen w-screen relative bg-pink-100 flex justify-center items-center">
@@ -493,11 +493,11 @@ function Home() {
             <div className="">
               <h1 className="mansalva-regular drop-shadow-5xl md:translate-x-10 sm:px-0 px-5 w-full text-pbrown md:text-6xl text-4xl text-center">
                 {/* {banner?.title || "Titles not yet"} */}
-                {banner.active ? banner?.title : "Join our offline classes"}
+                {banner?.active ? banner?.title : "Join our offline classes"}
               </h1>
               <p className="luckyGuy pt-5 px-4 w-full text-pbrown font-bold text-lg text-center">
                 {/* {banner?.subject || "Subjects not yet"} */}
-                {banner.active
+                {banner?.active
                   ? banner?.subject
                   : "Contact us to know more about the courses"}
               </p>

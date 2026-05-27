@@ -30,32 +30,58 @@ export const AuthProvider = ({ children }) => {
 
   const pendingActionRef = useRef(null);
 
+  const clearAuthState = useCallback(() => {
+    setUser(null);
+    setIsLoggedIn(false);
+    setActiveModal(null);
+    pendingActionRef.current = null;
+  }, []);
+
   const fetchUser = useCallback(async (showLoading = true) => {
     try {
       if (showLoading) setIsLoadingUser(true);
 
-      // Fetch both in parallel
-      const [userRes, addressRes] = await Promise.all([
-        api.get("/me"),
-        api.get("/has-address"),
-      ]);
+      let userRes;
+      try {
+        userRes = await api.get("/me");
+      } catch (err) {
+        if (err.response?.status === 401) {
+          clearAuthState();
+          return null;
+        }
+        throw err;
+      }
+
+      let hasAddress = false;
+      try {
+        const addressRes = await api.get("/has-address");
+        hasAddress = addressRes.data?.hasAddress || false;
+      } catch (err) {
+        if (err.response?.status === 401) {
+          clearAuthState();
+          return null;
+        }
+        console.warn("Failed to check address status:", err);
+      }
 
       const userData = {
         ...userRes.data.user,
-        hasAddress: addressRes.data.hasAddress, // ✅ attach to user object
+        hasAddress,
       };
 
       setUser(userData);
       setIsLoggedIn(true);
       return userData;
     } catch (err) {
-      console.error("Failed to fetch user:", err);
-      if (err.response?.status === 401) handleLogout();
+      if (err.response?.status !== 401) {
+        console.error("Failed to fetch user:", err);
+      }
+      clearAuthState();
       return null;
     } finally {
       if (showLoading) setIsLoadingUser(false);
     }
-  }, []);
+  }, [clearAuthState]);
 
   // Initialize Auth on Mount
   useEffect(() => {
@@ -136,12 +162,9 @@ export const AuthProvider = ({ children }) => {
     } catch (err) {
       console.error("Logout error:", err);
     }
-    setUser(null);
-    setIsLoggedIn(false);
-    setActiveModal(null);
-    pendingActionRef.current = null;
+    clearAuthState();
     window.dispatchEvent(new Event("loginStateChange"));
-  }, []);
+  }, [clearAuthState]);
 
   // Modal Shortcuts
   const openLoginModal = useCallback(() => setActiveModal("login"), []);
@@ -174,6 +197,7 @@ export const AuthProvider = ({ children }) => {
         setShowProfileModal: (val) => setActiveModal(val ? "profile" : null),
         handleLoginSuccess,
         handleLogout,
+        clearAuthState,
         onProfileSaved,
         fetchUser,
         handleProtectedAction,
