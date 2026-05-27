@@ -110,10 +110,10 @@ export default function Profile() {
           {/* Main Content Area */}
           <div className="flex-grow w-full min-w-0">
             <ProfileHeader
-              name={user.name}
-              email={user.email}
-              mobileNumber={user.mobileNumber}
-              address={user.address}
+              name={user?.name}
+              email={user?.email}
+              mobileNumber={user?.mobileNumber}
+              address={user?.address}
               onUpdate={handleProfileUpdate}
             />
 

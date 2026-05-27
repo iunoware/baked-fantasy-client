@@ -50,7 +50,11 @@ api.interceptors.response.use(
   (error) => {
     loadingManager.stop();
     if (error.response && error.response.status === 401) {
-      console.warn("Session expired or unauthorized. Logging out...");
+      const url = error.config?.url || "";
+      const isInitialAuthCheck = url.includes("/me") || url.includes("/has-address");
+      if (!isInitialAuthCheck) {
+        console.warn("Session expired or unauthorized. Logging out...");
+      }
       window.dispatchEvent(new Event("loginStateChange"));
       // Optional: window.location.href = "/"; // Only if we want aggressive redirect
       // toast.error("Session expired. Please login again.");
